@@ -1,0 +1,315 @@
+'GCBASIC/GCGB Chip Data File
+'Chip: 16C662
+'Main Format last revised:   14/07/2017
+'Header Format last revised: 22/05/2021
+
+[ChipData]
+';All items in the ChipData section are available to user programs as constants
+';The constants have the prefix of Chip: See the examples below
+
+'This constant is exposed as ChipWORDS
+Prog=4096
+
+'This constant is exposed as ChipEEPROM
+EEPROM=0
+
+'This constant is exposed as ChipRAM
+RAM=176
+
+'This constant is exposed as ChipIO
+I/O=33
+
+'This constant is exposed as ChipADC
+ADC=0
+
+'This constant is exposed as ChipMhz
+MaxMHz=20
+
+'This constant is exposed with only the first parameter (if more than one)
+IntOsc=0
+
+'This constant is exposed as ChipPins
+Pins=40
+
+'This constant is exposed as ChipFamily
+Family=14
+
+'This constant is exposed as ChipSubFamily
+SubFamily=14000
+
+'This constant is exposed as ChipConfWords
+ConfigWords=1
+
+'This constant is exposed as ChipPSP
+PSP=1
+
+'This constant is exposed as ChipUSART
+USART=0
+
+'This constant is exposed as ChipMaxAddress
+MaxAddress=255
+
+';Microcontroller specific configuration Constants used in specific libraries, compiler or user programs
+';This section of constants is specific to a microcontroller, so the constants may not be present for all microcontrollers
+
+'ChipStacks constant can be used in user programs and provides the available stack depth
+Stacks=8
+
+'ChipSelfWrite constant is used within the compiler to indicate the chip is self write capable
+SelfWrite=0
+
+[Interrupts]
+'For specific details of the interrupts see the microcontroller datasheet
+'The first parameter is the Great Cow BASIC identifier used in user code to expose the specific interrupt
+Comp1Change:CMIE,CMIF
+ExtInt0:INTE,INTF
+PORTBChange:RBIE,RBIF
+PSPReady:PSPIE,PSPIF
+PortChange:RBIE,RBIF
+Timer0Overflow:T0IE,T0IF
+
+[Registers]
+'For specific details of the registers see the microcontroller datasheet
+'The first parameter is the Great Cow BASIC register name used in user code to expose the specific register
+INDF,0
+TMR0,1
+PCL,2
+STATUS,3
+FSR,4
+PORTA,5
+PORTB,6
+PORTC,7
+PORTD,8
+PORTE,9
+PCLATH,10
+INTCON,11
+PIR1,12
+CMCON,31
+OPTION_REG,129
+TRISA,133
+TRISB,134
+TRISC,135
+TRISD,136
+TRISE,137
+PIE1,140
+PCON,142
+VRCON,159
+
+[Bits]
+'For details of the bits (relative to a register in terms of registerbits) see the microcontroller datasheet
+'The first parameter is the Great Cow BASIC bit name used in user code to expose the specific registerbit
+C,STATUS,0
+DC,STATUS,1
+Z,STATUS,2
+NOT_PD,STATUS,3
+NOT_TO,STATUS,4
+IRP,STATUS,7
+RP0,STATUS,5
+RP1,STATUS,6
+RA0,PORTA,0
+RA1,PORTA,1
+RA2,PORTA,2
+RA3,PORTA,3
+RA4,PORTA,4
+RA5,PORTA,5
+RB0,PORTB,0
+RB1,PORTB,1
+RB2,PORTB,2
+RB3,PORTB,3
+RB4,PORTB,4
+RB5,PORTB,5
+RB6,PORTB,6
+RB7,PORTB,7
+RC0,PORTC,0
+RC1,PORTC,1
+RC2,PORTC,2
+RC3,PORTC,3
+RC4,PORTC,4
+RC5,PORTC,5
+RC6,PORTC,6
+RC7,PORTC,7
+RD0,PORTD,0
+RD1,PORTD,1
+RD2,PORTD,2
+RD3,PORTD,3
+RD4,PORTD,4
+RD5,PORTD,5
+RD6,PORTD,6
+RD7,PORTD,7
+RE0,PORTE,0
+RE1,PORTE,1
+RE2,PORTE,2
+RBIF,INTCON,0
+INTF,INTCON,1
+T0IF,INTCON,2
+RBIE,INTCON,3
+INTE,INTCON,4
+T0IE,INTCON,5
+PEIE,INTCON,6
+GIE,INTCON,7
+CMIF,PIR1,6
+PSPIF,PIR1,7
+CIS,CMCON,3
+C1OUT,CMCON,6
+C2OUT,CMCON,7
+CM0,CMCON,0
+CM1,CMCON,1
+CM2,CMCON,2
+PSA,OPTION_REG,3
+T0SE,OPTION_REG,4
+T0CS,OPTION_REG,5
+INTEDG,OPTION_REG,6
+NOT_RBPU,OPTION_REG,7
+PS0,OPTION_REG,0
+PS1,OPTION_REG,1
+PS2,OPTION_REG,2
+TRISA0,TRISA,0
+TRISA1,TRISA,1
+TRISA2,TRISA,2
+TRISA3,TRISA,3
+TRISA4,TRISA,4
+TRISA5,TRISA,5
+TRISB0,TRISB,0
+TRISB1,TRISB,1
+TRISB2,TRISB,2
+TRISB3,TRISB,3
+TRISB4,TRISB,4
+TRISB5,TRISB,5
+TRISB6,TRISB,6
+TRISB7,TRISB,7
+TRISC0,TRISC,0
+TRISC1,TRISC,1
+TRISC2,TRISC,2
+TRISC3,TRISC,3
+TRISC4,TRISC,4
+TRISC5,TRISC,5
+TRISC6,TRISC,6
+TRISC7,TRISC,7
+TRISD0,TRISD,0
+TRISD1,TRISD,1
+TRISD2,TRISD,2
+TRISD3,TRISD,3
+TRISD4,TRISD,4
+TRISD5,TRISD,5
+TRISD6,TRISD,6
+TRISD7,TRISD,7
+TRISE0,TRISE,0
+TRISE1,TRISE,1
+TRISE2,TRISE,2
+PSPMODE,TRISE,4
+IBOV,TRISE,5
+OBF,TRISE,6
+IBF,TRISE,7
+CMIE,PIE1,6
+PSPIE,PIE1,7
+NOT_BOR,PCON,0
+NOT_POR,PCON,1
+NOT_PER,PCON,2
+MPEEN,PCON,7
+NOT_BO,PCON,0
+VRR,VRCON,5
+VROE,VRCON,6
+VREN,VRCON,7
+VR0,VRCON,0
+VR1,VRCON,1
+VR2,VRCON,2
+VR3,VRCON,3
+
+[FreeRAM]
+20:7F
+A0:EF
+
+[NoBankRAM]
+'NoBankRAM is somewhat misnamed - it is used for the defintion of (any) access bank locations
+'If a memory location is defined in both NoBankRAM and FreeRAM, then the compiler knows that it is access bank RAM.
+'If an SFR location is in one of the NoBankRAM ranges, then the compiler knows not to do any bank selection when accessing that register.
+
+'The NoBankRAM section must include two ranges, one for access bank RAM, one for access bank SFRs, or there will be issues.
+'The first range MUST be the ACCESS RAM range
+'The first range is the FAST SFR range
+
+'If there are no ranges defined in NoBankRAM, the compiler will try to guess them.
+'On 18Fs, it will guess based on where the lowest SFR is, and from what the total RAM on the chip is. If there's only one range defined
+'in the NoBankRAM locations, the compiler will assume that is the range for the RAM, and then will guess where the range for the access bank SFRs is.
+70:7F
+
+[Pins-DIP]
+2,RA0(IO),C1INN(I)
+3,RA1(IO),C2INN(I)
+4,RA2(IO),C2INP(I)
+5,RA3(IO),C1INP(I),C1OUT(IO)
+6,RA4(IO),C2OUT(IO),T0CKI(I)
+7,RA5(IO)
+33,RB0(IO)
+34,RB1(IO)
+35,RB2(IO)
+36,RB3(IO)
+37,RB4(IO)
+38,RB5(IO)
+39,RB6(IO)
+40,RB7(IO)
+15,RC0(IO)
+16,RC1(IO)
+17,RC2(IO)
+18,RC3(IO)
+23,RC4(IO)
+24,RC5(IO)
+25,RC6(IO)
+26,RC7(IO)
+19,RD0(IO)
+20,RD1(IO)
+21,RD2(IO)
+22,RD3(IO)
+27,RD4(IO)
+28,RD5(IO)
+29,RD6(IO)
+30,RD7(IO)
+8,RE0(IO)
+9,RE1(IO)
+10,RE2(IO)
+1,MCLR
+13,OSC1
+14,OSC2
+12,Vss
+11,Vdd
+31,Vss
+32,Vdd
+
+[ConfigOps]
+'For details of the config options see the microcontroller datasheet
+'The first parameter is the configuration field that can be used to expose specific configuration bits
+'The other parameters are the configuration field options that can be set
+OSC=LP,XT,HS,RC
+WDTE=OFF,ON
+PWRTE=ON,OFF
+CP=ALL,75,50,OFF
+BOREN=OFF,ON
+MPEEN=OFF,ON
+
+[Config]
+'For details of the config addresses see the microcontroller datasheet
+FOSC_LP,1,16380
+LP_OSC,1,16380
+FOSC_XT,1,16381
+XT_OSC,1,16381
+FOSC_HS,1,16382
+HS_OSC,1,16382
+FOSC_RC,1,16383
+RC_OSC,1,16383
+WDTE_OFF,1,16379
+WDTE_ON,1,16383
+PWRTE_ON,1,16375
+PWRTE_OFF,1,16383
+CP_ALL,1,207
+CP_75,1,5599
+CP_50,1,10991
+CP_OFF,1,16383
+BOREN_OFF,1,16319
+BOREN_ON,1,16383
+MPEEN_OFF,1,16255
+MPEEN_ON,1,16383
+IDLOC0,1,8192
+IDLOC1,1,8193
+IDLOC2,1,8194
+IDLOC3,1,8195
+

@@ -1,0 +1,174 @@
+'GCBASIC/GCGB Chip Data File
+'Chip: 10F206
+'Main Format last revised:   14/07/2017
+'Header Format last revised: 22/05/2021
+
+[ChipData]
+';All items in the ChipData section are available to user programs as constants
+';The constants have the prefix of Chip: See the examples below
+
+'This constant is exposed as ChipWORDS
+Prog=512
+
+'This constant is exposed as ChipEEPROM
+EEPROM=0
+
+'This constant is exposed as ChipRAM
+RAM=24
+
+'This constant is exposed as ChipIO
+I/O=4
+
+'This constant is exposed as ChipADC
+ADC=0
+
+'This constant is exposed as ChipMhz
+MaxMHz=4
+
+'This constant is exposed with only the first parameter (if more than one)
+IntOsc=4
+
+'This constant is exposed as ChipPins
+Pins=8
+
+'This constant is exposed as ChipFamily
+Family=12
+
+'This constant is exposed as ChipSubFamily
+SubFamily=12000
+
+'This constant is exposed as ChipConfWords
+ConfigWords=1
+
+'This constant is exposed as ChipPSP
+PSP=0
+
+'This constant is exposed as ChipUSART
+USART=0
+
+'This constant is exposed as ChipMaxAddress
+MaxAddress=31
+
+';Microcontroller specific configuration Constants used in specific libraries, compiler or user programs
+';This section of constants is specific to a microcontroller, so the constants may not be present for all microcontrollers
+
+'ChipStacks constant can be used in user programs and provides the available stack depth
+Stacks=2
+
+'ChipUserIDAddress constant is used in user programs and provides the User ID address
+UserIDAddress=512
+
+'ChipUserIDLength constant is used in user programs to provide the length of the UserID (in words)
+UserIDLength=4
+
+'ChipSelfWrite constant is used within the compiler to indicate the chip is self write capable
+SelfWrite=0
+
+[Interrupts]
+'For specific details of the interrupts see the microcontroller datasheet
+'The first parameter is the Great Cow BASIC identifier used in user code to expose the specific interrupt
+
+[Registers]
+'For specific details of the registers see the microcontroller datasheet
+'The first parameter is the Great Cow BASIC register name used in user code to expose the specific register
+INDF,0
+TMR0,1
+PCL,2
+STATUS,3
+FSR,4
+OSCCAL,5
+GPIO,6
+CMCON0,7
+
+[Bits]
+'For details of the bits (relative to a register in terms of registerbits) see the microcontroller datasheet
+'The first parameter is the Great Cow BASIC bit name used in user code to expose the specific registerbit
+C,STATUS,0
+DC,STATUS,1
+Z,STATUS,2
+NOT_PD,STATUS,3
+NOT_TO,STATUS,4
+CWUF,STATUS,6
+GPWUF,STATUS,7
+FOSC4,OSCCAL,0
+CAL0,OSCCAL,1
+CAL1,OSCCAL,2
+CAL2,OSCCAL,3
+CAL3,OSCCAL,4
+CAL4,OSCCAL,5
+CAL5,OSCCAL,6
+CAL6,OSCCAL,7
+GP0,GPIO,0
+GP1,GPIO,1
+GP2,GPIO,2
+GP3,GPIO,3
+NOT_CWU,CMCON0,0
+CPREF,CMCON0,1
+CNREF,CMCON0,2
+CMPON,CMCON0,3
+NOT_CMPT0CS,CMCON0,4
+POL,CMCON0,5
+NOT_COUTEN,CMCON0,6
+CMPOUT,CMCON0,7
+PSA,OPTION_REG,3
+T0SE,OPTION_REG,4
+T0CS,OPTION_REG,5
+NOT_GPPU,OPTION_REG,6
+NOT_GPWU,OPTION_REG,7
+PS0,OPTION_REG,0
+PS1,OPTION_REG,1
+PS2,OPTION_REG,2
+TRISIO0,TRISIO,0
+TRISIO1,TRISIO,1
+TRISIO2,TRISIO,2
+TRISIO3,TRISIO,3
+
+[FreeRAM]
+08:1F
+
+[NoBankRAM]
+'NoBankRAM is somewhat misnamed - it is used for the defintion of (any) access bank locations
+'If a memory location is defined in both NoBankRAM and FreeRAM, then the compiler knows that it is access bank RAM.
+'If an SFR location is in one of the NoBankRAM ranges, then the compiler knows not to do any bank selection when accessing that register.
+
+'The NoBankRAM section must include two ranges, one for access bank RAM, one for access bank SFRs, or there will be issues.
+'The first range MUST be the ACCESS RAM range
+'The first range is the FAST SFR range
+
+'If there are no ranges defined in NoBankRAM, the compiler will try to guess them.
+'On 18Fs, it will guess based on where the lowest SFR is, and from what the total RAM on the chip is. If there's only one range defined
+'in the NoBankRAM locations, the compiler will assume that is the range for the RAM, and then will guess where the range for the access bank SFRs is.
+08:1F
+
+[Pins-DIP]
+5,GP0(IO)
+4,GP1(IO)
+3,GP2(IO)
+8,GP3(I)
+7,Vss
+2,Vdd
+
+[ConfigOps]
+'For details of the config options see the microcontroller datasheet
+'The first parameter is the configuration field that can be used to expose specific configuration bits
+'The other parameters are the configuration field options that can be set
+OSC=INTRC
+WDTE=OFF,ON
+CP=ON,OFF
+MCLRE=OFF,ON
+
+[Config]
+'For details of the config addresses see the microcontroller datasheet
+OSC_IntRC,1,4095
+IntRC_OSC,1,4095
+WDTE_OFF,1,4091
+WDTE_ON,1,4095
+CP_ON,1,4087
+CP_OFF,1,4095
+MCLRE_OFF,1,4079
+MCLRE_ON,1,4095
+IDLOC0,1,512
+IDLOC1,1,513
+IDLOC2,1,514
+IDLOC3,1,515
+

@@ -1,0 +1,365 @@
+'GCBASIC/GCGB Chip Data File
+'Chip: 16F636
+'Main Format last revised:   14/07/2017
+'Header Format last revised: 22/05/2021
+
+[ChipData]
+';All items in the ChipData section are available to user programs as constants
+';The constants have the prefix of Chip: See the examples below
+
+'This constant is exposed as ChipWORDS
+Prog=2048
+
+'This constant is exposed as ChipEEPROM
+EEPROM=256
+
+'This constant is exposed as ChipRAM
+RAM=128
+
+'This constant is exposed as ChipIO
+I/O=12
+
+'This constant is exposed as ChipADC
+ADC=0
+
+'This constant is exposed as ChipMhz
+MaxMHz=20
+
+'This constant is exposed with only the first parameter (if more than one)
+IntOsc=8, 4, 2, 1, 0.5, 0.25, 0.125
+
+'This constant is exposed as ChipPins
+Pins=14
+
+'This constant is exposed as ChipFamily
+Family=14
+
+'This constant is exposed as ChipSubFamily
+SubFamily=14000
+
+'This constant is exposed as ChipConfWords
+ConfigWords=1
+
+'This constant is exposed as ChipPSP
+PSP=0
+
+'This constant is exposed as ChipUSART
+USART=0
+
+'This constant is exposed as ChipMaxAddress
+MaxAddress=511
+
+';Microcontroller specific configuration Constants used in specific libraries, compiler or user programs
+';This section of constants is specific to a microcontroller, so the constants may not be present for all microcontrollers
+
+'ChipStacks constant can be used in user programs and provides the available stack depth
+Stacks=8
+
+'ChipUserIDAddress constant is used in user programs and provides the User ID address
+UserIDAddress=8192
+
+'ChipUserIDLength constant is used in user programs to provide the length of the UserID (in words)
+UserIDLength=4
+
+'ChipSelfWrite constant is used within the compiler to indicate the chip is self write capable
+SelfWrite=0
+
+[Interrupts]
+'For specific details of the interrupts see the microcontroller datasheet
+'The first parameter is the Great Cow BASIC identifier used in user code to expose the specific interrupt
+Comp1Change:C1IE,C1IF
+Comp2Change:C2IE,C2IF
+Crypto:CRIE,CRIF
+EEPROMReady:EEIE,EEIF
+ExtInt0:INTE,INTF
+OscillatorFail:OSFIE,OSFIF
+PORTAChange:RAIE,RAIF
+PortChange:RAIE,RAIF
+Timer0Overflow:T0IE,T0IF
+Timer1Overflow:TMR1IE,TMR1IF
+VoltageFail:LVDIE,LVDIF
+
+[Registers]
+'For specific details of the registers see the microcontroller datasheet
+'The first parameter is the Great Cow BASIC register name used in user code to expose the specific register
+INDF,0
+TMR0,1
+PCL,2
+STATUS,3
+FSR,4
+PORTA,5
+PORTC,7
+PCLATH,10
+INTCON,11
+PIR1,12
+TMR1,14
+TMR1L,14
+TMR1H,15
+T1CON,16
+WDTCON,24
+CMCON0,25
+CMCON1,26
+OPTION_REG,129
+TRISA,133
+TRISC,135
+PIE1,140
+PCON,142
+OSCCON,143
+OSCTUNE,144
+LVDCON,148
+WPUDA,149
+IOCA,150
+WDA,151
+VRCON,153
+EEDAT,154
+EEDATA,154
+EEADR,155
+EECON1,156
+EECON2,157
+CRCON,272
+CRDAT0,273
+CRDAT1,274
+CRDAT2,275
+CRDAT3,276
+
+[Bits]
+'For details of the bits (relative to a register in terms of registerbits) see the microcontroller datasheet
+'The first parameter is the Great Cow BASIC bit name used in user code to expose the specific registerbit
+C,STATUS,0
+DC,STATUS,1
+Z,STATUS,2
+NOT_PD,STATUS,3
+NOT_TO,STATUS,4
+IRP,STATUS,7
+RP0,STATUS,5
+RP1,STATUS,6
+RA0,PORTA,0
+RA1,PORTA,1
+RA2,PORTA,2
+RA3,PORTA,3
+RA4,PORTA,4
+RA5,PORTA,5
+RC0,PORTC,0
+RC1,PORTC,1
+RC2,PORTC,2
+RC3,PORTC,3
+RC4,PORTC,4
+RC5,PORTC,5
+RAIF,INTCON,0
+INTF,INTCON,1
+T0IF,INTCON,2
+RAIE,INTCON,3
+INTE,INTCON,4
+T0IE,INTCON,5
+PEIE,INTCON,6
+GIE,INTCON,7
+TMR1IF,PIR1,0
+OSFIF,PIR1,2
+C1IF,PIR1,3
+C2IF,PIR1,4
+CRIF,PIR1,5
+LVDIF,PIR1,6
+EEIF,PIR1,7
+TMR1ON,T1CON,0
+TMR1CS,T1CON,1
+NOT_T1SYNC,T1CON,2
+T1OSCEN,T1CON,3
+TMR1GE,T1CON,6
+T1GINV,T1CON,7
+T1CKPS0,T1CON,4
+T1CKPS1,T1CON,5
+SWDTEN,WDTCON,0
+WDTPS0,WDTCON,1
+WDTPS1,WDTCON,2
+WDTPS2,WDTCON,3
+WDTPS3,WDTCON,4
+CIS,CMCON0,3
+C1INV,CMCON0,4
+C2INV,CMCON0,5
+C1OUT,CMCON0,6
+C2OUT,CMCON0,7
+CM0,CMCON0,0
+CM1,CMCON0,1
+CM2,CMCON0,2
+C2SYNC,CMCON1,0
+T1GSS,CMCON1,1
+PSA,OPTION_REG,3
+T0SE,OPTION_REG,4
+T0CS,OPTION_REG,5
+INTEDG,OPTION_REG,6
+NOT_RAPU,OPTION_REG,7
+PS0,OPTION_REG,0
+PS1,OPTION_REG,1
+PS2,OPTION_REG,2
+TRISA0,TRISA,0
+TRISA1,TRISA,1
+TRISA2,TRISA,2
+TRISA3,TRISA,3
+TRISA4,TRISA,4
+TRISA5,TRISA,5
+TRISC0,TRISC,0
+TRISC1,TRISC,1
+TRISC2,TRISC,2
+TRISC3,TRISC,3
+TRISC4,TRISC,4
+TRISC5,TRISC,5
+TMR1IE,PIE1,0
+OSFIE,PIE1,2
+C1IE,PIE1,3
+C2IE,PIE1,4
+CRIE,PIE1,5
+LVDIE,PIE1,6
+EEIE,PIE1,7
+NOT_BOR,PCON,0
+NOT_POR,PCON,1
+NOT_WUR,PCON,3
+SBOREN,PCON,4
+ULPWUE,PCON,5
+NOT_BOD,PCON,0
+SBODEN,PCON,4
+SCS,OSCCON,0
+LTS,OSCCON,1
+HTS,OSCCON,2
+OSTS,OSCCON,3
+IRCF0,OSCCON,4
+IRCF1,OSCCON,5
+IRCF2,OSCCON,6
+TUN0,OSCTUNE,0
+TUN1,OSCTUNE,1
+TUN2,OSCTUNE,2
+TUN3,OSCTUNE,3
+TUN4,OSCTUNE,4
+LVDEN,LVDCON,4
+IRVST,LVDCON,5
+LVDL0,LVDCON,0
+LVDL1,LVDCON,1
+LVDL2,LVDCON,2
+WPUDA0,WPUDA,0
+WPUDA1,WPUDA,1
+WPUDA2,WPUDA,2
+WPUDA4,WPUDA,4
+WPUDA5,WPUDA,5
+IOCA0,IOCA,0
+IOCA1,IOCA,1
+IOCA2,IOCA,2
+IOCA3,IOCA,3
+IOCA4,IOCA,4
+IOCA5,IOCA,5
+WDA0,WDA,0
+WDA1,WDA,1
+WDA2,WDA,2
+WDA4,WDA,4
+WDA5,WDA,5
+VRR,VRCON,5
+VREN,VRCON,7
+VR0,VRCON,0
+VR1,VRCON,1
+VR2,VRCON,2
+VR3,VRCON,3
+RD,EECON1,0
+WR,EECON1,1
+WREN,EECON1,2
+WRERR,EECON1,3
+ENC_NOT_DEC,CRCON,6
+GO_NOT_DONE,CRCON,7
+CRREG0,CRCON,0
+CRREG1,CRCON,1
+ENC_DEC,CRCON,6
+GO,CRCON,7
+
+[FreeRAM]
+20:7F
+A0:BF
+
+[NoBankRAM]
+'NoBankRAM is somewhat misnamed - it is used for the defintion of (any) access bank locations
+'If a memory location is defined in both NoBankRAM and FreeRAM, then the compiler knows that it is access bank RAM.
+'If an SFR location is in one of the NoBankRAM ranges, then the compiler knows not to do any bank selection when accessing that register.
+
+'The NoBankRAM section must include two ranges, one for access bank RAM, one for access bank SFRs, or there will be issues.
+'The first range MUST be the ACCESS RAM range
+'The first range is the FAST SFR range
+
+'If there are no ranges defined in NoBankRAM, the compiler will try to guess them.
+'On 18Fs, it will guess based on where the lowest SFR is, and from what the total RAM on the chip is. If there's only one range defined
+'in the NoBankRAM locations, the compiler will assume that is the range for the RAM, and then will guess where the range for the access bank SFRs is.
+70:7F
+
+[Pins-DIP]
+13,RA0(IO),C1INP(I)
+12,RA1(IO),C1INN(I)
+11,RA2(IO),T0CKI(I),C1OUT(IO)
+4,RA3(I),MCLR(I)
+3,RA4(IO),T1G(I),OSC2(O)
+2,RA5(IO),T1CKI(I),OSC1(I)
+10,RC0(IO),C2INP(I)
+9,RC1(IO),C2INN(I)
+8,RC2(IO)
+7,RC3(IO)
+6,RC4(IO),C2OUT(IO)
+5,RC5(IO)
+14,Vss
+1,Vdd
+
+[ConfigOps]
+'For details of the config options see the microcontroller datasheet
+'The first parameter is the configuration field that can be used to expose specific configuration bits
+'The other parameters are the configuration field options that can be set
+OSC=LP,XT,HS,EC,INTOSCIO,INTRC_OSC_NOCLKOUT,INTOSCCLK,INTRC_OSC_CLKOUT,EXTRCIO,EXTRC_OSC_NOCLKOUT,EXTRCCLK,EXTRC_OSC_CLKOUT
+WDTE=OFF,ON
+PWRTE=ON,OFF
+MCLRE=OFF,ON
+CP=ON,OFF
+CPD=ON,OFF
+BOREN=OFF,SBODEN,NSLEEP,ON
+IESO=OFF,ON
+FCMEN=OFF,ON
+WURE=ON,OFF
+WUREN=ON,OFF
+
+[Config]
+'For details of the config addresses see the microcontroller datasheet
+FOSC_LP,1,16376
+LP_OSC,1,16376
+FOSC_XT,1,16377
+XT_OSC,1,16377
+FOSC_HS,1,16378
+HS_OSC,1,16378
+FOSC_EC,1,16379
+EC_OSC,1,16379
+FOSC_INTOSCIO,1,16380
+INTRC_OSC_NOCLKOUT,1,16380
+FOSC_INTOSCCLK,1,16381
+INTRC_OSC_CLKOUT,1,16381
+FOSC_EXTRCIO,1,16382
+EXTRC_OSC_NOCLKOUT,1,16382
+FOSC_EXTRCCLK,1,16383
+EXTRC_OSC_CLKOUT,1,16383
+WDTE_OFF,1,16375
+WDTE_ON,1,16383
+PWRTE_ON,1,16367
+PWRTE_OFF,1,16383
+MCLRE_OFF,1,16351
+MCLRE_ON,1,16383
+CP_ON,1,16319
+CP_OFF,1,16383
+CPD_ON,1,16255
+CPD_OFF,1,16383
+BOREN_OFF,1,15615
+BOREN_SBODEN,1,15871
+BOREN_NSLEEP,1,16127
+BOREN_ON,1,16383
+IESO_OFF,1,15359
+IESO_ON,1,16383
+FCMEN_OFF,1,14335
+FCMEN_ON,1,16383
+WURE_ON,1,12287
+WUREN_ON,1,12287
+WURE_OFF,1,16383
+WUREN_OFF,1,16383
+DEVID1,1,8198
+IDLOC0,1,8192
+IDLOC1,1,8193
+IDLOC2,1,8194
+IDLOC3,1,8195
+
