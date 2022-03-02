@@ -1,0 +1,74 @@
+'Store:
+'Config options
+'Ram size, other specs
+'Chip family
+'Registers and locations
+'Bits and locations
+
+'example using 16F819
+
+[ChipData]
+Prog=2048
+EEPROM=256
+RAM=256
+I/O=16
+ADC=5
+MaxMHz=20
+IntOsc=8
+Pins=18
+Family=14
+ConfigWords=1
+PSP=0
+
+'For PWMTimerVariant  to be set in the .dat the following rule applies:
+'      When CCPTMRS or CCPTMRSX has PTxSEL  a value of 0x00 =Timer 2 and where PTxSEL=0x11 is reserved  then PWMTimerVariant = 1:  Normally we expect PTxSEL as value=0x01 = Timer2 and PTxSEL=0xoo to be reserved
+
+
+[Registers]
+INDF,0
+TMR0,1
+PCL,2
+etc ...
+
+[Bits]
+IRP,STATUS,7
+RP1,STATUS,6
+etc ...
+
+[FreeRAM]
+'start:end (inclusive)
+32:127
+96:255
+etc
+
+[Pins]
+Type:DIP
+1:RA2(IO),AN2(I),Vref-(I)
+2:RA3(IO),AN3(I),Vref+(I)
+3:RA4(IO),AN4(I),T0CKI(I)
+4:RA5(I),MCLR,Vpp
+5:Vss
+6:RB0(IO),INT(I)
+etc
+
+[Interrupts]
+'On PIC
+Name:Enable,Flag
+'On AVR
+Name:Vector,VectorLoc,Enable,Flag
+
+'18F only:
+'Assembler default config
+[ASMConfig]
+MCLRE=ON
+etc
+
+[DisplayConfig]
+CP=ALL,OFF
+OSC=HS,XT,EC,INT
+etc
+
+[Config]
+CP_ALL,1,value
+CP_OFF,1,value
+etc
