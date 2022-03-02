@@ -1,0 +1,13 @@
+Original location of files:
+
+Partdescriptionfiles
+From AVR Studio 4
+Was at C:\Program Files (x86)\Atmel\AVR Tools\Partdescriptionfiles
+
+devices
+From Atmel Studio 6.1
+Was at C:\Program Files (x86)\Atmel\Atmel Studio 6.1\devices
+
+avrassembler
+From Atmel Studio 6.2
+Was at C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR Assembler\Native\2.1.1175\avrassembler
