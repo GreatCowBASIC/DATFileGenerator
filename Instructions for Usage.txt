@@ -1,0 +1,27 @@
+PIC
+    1a.  if required: Update the Incfiles\original folder with the latest inc files from MPLAB-X.
+    1b.  if requried: Update the Incfiles\original folder with the latest inc files generated from Xc8 converter(s).
+    2.  Execute PreProcess.bat. This will update the inc files in the incfiles folder.  This process sorts/arranges the INC into a consistent format.
+    3.  if required: Update CriticalChanges.txt
+    4.  if required for 18f: Update 18FDefaultASMConfig.txt.  18FDefaultASMConfig.txt is the default setting for config items on chip that have the specfic config item.
+    4.  Update the CSV file with the correct chip data
+    5a. for a single chips: Execute 'getchipdata.exe chipname'
+    5b. for all PICs: Execute 'slowprocess.bat'
+    6.  Copy to chipfiles to GCB distribution
+    7.  Update SVN:DAT
+    8.  Update change log
+
+Tools used for PIC
+    1. Source inc files that have been processed/sorted
+    2. 18FDefaultASMConfig.txt - the default settings
+    3. CriticalChanges.txt - items that need to be changed
+    4. CSV file - the details
+    5. The exe.
+
+
+
+PIC Details
+
+  ConfigBaseLoc is basically the last location for the config, minus 15
+  On the 18F67J50, the last location is 0x1FFFF, so the ConfigBaseLoc is 0x1FFFF - 15 = 0x1FFF0
+  Normal location for an 18F is from 0x300000.

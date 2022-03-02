@@ -1,0 +1,109 @@
+;
+;This is the working speficication ~ 6th Jan 2017
+;
+;filename,Append (new line) | Replace, find, replace
+; command delimited
+; fsp,A|R,text,text
+;
+;spaces are NOT critical
+;
+;this will find a partial line and replace the whole line.
+p16f18877.inc,R,ZCDDIS EQU H'8007', _CONFIG1           EQU  H'8007'
+p16lf18877.inc,R,ZCDDIS EQU H'8007', _CONFIG1           EQU  H'8007'
+p16f1619.inc,R,OSCFIE           EQU  H'0007',OSFIE           EQU  H'0007'
+p16lf1619.inc,R,OSCFIE          EQU  H'0007',OSFIE           EQU  H'0007'
+p16f1615.inc,R,OSCFIE           EQU  H'0007',OSFIE           EQU  H'0007'
+p16lf1615.inc,R,OSCFIE          EQU  H'0007',OSFIE           EQU  H'0007'
+
+p16f1764.inc,R,COGIE            EQU  H'0005',COG1IE            EQU  H'0005'
+p16f1765.inc,R,COGIE            EQU  H'0005',COG1IE            EQU  H'0005'
+p16f1768.inc,R,COGIE            EQU  H'0005',COG1IE            EQU  H'0005'
+p16f1769.inc,R,COGIE            EQU  H'0005',COG1IE            EQU  H'0005'
+p16lf1764.inc,R,COGIE            EQU  H'0005',COG1IE            EQU  H'0005'
+p16lf1765.inc,R,COGIE            EQU  H'0005',COG1IE            EQU  H'0005'
+p16lf1768.inc,R,COGIE            EQU  H'0005',COG1IE            EQU  H'0005'
+p16lf1769.inc,R,COGIE            EQU  H'0005',COG1IE            EQU  H'0005'
+
+p16f1773.inc,R,COGIE            EQU  H'0004',COG1IE            EQU  H'0004'
+p16f1776.inc,R,COGIE            EQU  H'0004',COG1IE            EQU  H'0004'
+p16f1777.inc,R,COGIE            EQU  H'0004',COG1IE            EQU  H'0004'
+P16f1777.inc,R,Reserved         EQU  H'0002',
+p16f1778.inc,R,COGIE            EQU  H'0004',COG1IE            EQU  H'0004'
+p16f1779.inc,R,COGIE            EQU  H'0004',COG1IE            EQU  H'0004'
+
+p16lf1773.inc,R,COGIE            EQU  H'0004',COG1IE            EQU  H'0004'
+p16lf1776.inc,R,COGIE            EQU  H'0004',COG1IE            EQU  H'0004'
+p16lf1777.inc,R,COGIE            EQU  H'0004',COG1IE            EQU  H'0004'
+P16lf1777.inc,R,Reserved         EQU  H'0002',
+
+p16lf1778.inc,R,COGIE            EQU  H'0004',COG1IE            EQU  H'0004'
+p16lf1779.inc,R,COGIE            EQU  H'0004',COG1IE            EQU  H'0004'
+
+
+
+p16f15313.inc,R,;_RSTOSC_Reserved     EQU  H'3FCF'; Reserved,
+p16f15323.inc,R,;_RSTOSC_Reserved     EQU  H'3FCF'; Reserved,
+p16f15324.inc,R,;_RSTOSC_Reserved     EQU  H'3FCF'; Reserved,
+p16f15344.inc,R,;_RSTOSC_Reserved     EQU  H'3FCF'; Reserved,
+p16lf15313.inc,R,;_RSTOSC_Reserved     EQU  H'3FCF'; Reserved,
+p16lf15323.inc,R,;_RSTOSC_Reserved     EQU  H'3FCF'; Reserved,
+p16lf15324.inc,R,;_RSTOSC_Reserved     EQU  H'3FCF'; Reserved,
+p16lf15344.inc,R,;_RSTOSC_Reserved     EQU  H'3FCF'; Reserved,
+
+
+;Product not released
+p12F520.inc,A,Bank0,Product_Not_Released_Legacy             EQU  H'0000'
+p18F66J99.inc,A,Bank0,Product_Not_Released_Legacy             EQU  H'0000'
+p18F86J99.inc,A,Bank0,Product_Not_Released_Legacy             EQU  H'0000'
+p18F96J72.inc,A,Bank0,Product_Not_Released_Legacy             EQU  H'0000'
+p18F96J99.inc,A,Bank0,Product_Not_Released_Legacy             EQU  H'0000'
+p18F97J72.inc,A,Bank0,Product_Not_Released_Legacy             EQU  H'0000'
+;
+; Old and legacy.
+p16CR926.inc,A,Bank0,Old_and_Legacy             EQU  H'0000'
+p16F19197.inc,A,Bank0,Old_and_Legacy             EQU  H'0000'
+p18F242.inc,A,Bank0,Old_and_Legacy             EQU  H'0000'
+p18F2439.inc,A,Bank0,Old_and_Legacy             EQU  H'0000'
+p18F248.inc,A,Bank0,Old_and_Legacy             EQU  H'0000'
+p18F252.inc,A,Bank0,Old_and_Legacy             EQU  H'0000'
+p18F2539.inc,A,Bank0,Old_and_Legacy             EQU  H'0000'
+p18F258.inc,A,Bank0,Old_and_Legacy             EQU  H'0000'
+p18F442.inc,A,Bank0,Old_and_Legacy             EQU  H'0000'
+p18F4439.inc,A,Bank0,Old_and_Legacy             EQU  H'0000'
+p18F448.inc,A,Bank0,Old_and_Legacy             EQU  H'0000'
+p18F452.inc,A,Bank0,Old_and_Legacy             EQU  H'0000'
+p18F4539.inc,A,Bank0,Old_and_Legacy             EQU  H'0000'
+p18F458.inc,A,Bank0,Old_and_Legacy             EQU  H'0000'
+p18LF46j53.inc,A,Bank0,Old_and_Legacy             EQU  H'0000'
+p18F6525.inc,A,Bank0,Old_and_Legacy             EQU  H'0000'
+p18F6620.inc,A,Bank0,Old_and_Legacy             EQU  H'0000'
+p18F6621.inc,A,Bank0,Old_and_Legacy             EQU  H'0000'
+p18F8525.inc,A,Bank0,Old_and_Legacy             EQU  H'0000'
+p18F8620.inc,A,Bank0,Old_and_Legacy             EQU  H'0000'
+p18F8621.inc,A,Bank0,Old_and_Legacy             EQU  H'0000'
+p18F8720.inc,A,Bank0,Old_and_Legacy             EQU  H'0000'
+p12p16F19197.inc,A,Bank0,Old_and_Legacy             EQU  H'0000'
+
+
+
+p16f627.inc,R,DATA_CP_ON           EQU  H'3EFF'; Data memory code protected,'DATA_CP_ON           EQU  H'3EFF'; Data memory code protected
+p16f627a.inc,R,DATA_CP_ON           EQU  H'3EFF'; Data memory code-protected,'DATA_CP_ON           EQU  H'3EFF'; Data memory code protected
+p16f628.inc,R,DATA_CP_ON           EQU  H'3EFF'; Data memory code protected,'DATA_CP_ON           EQU  H'3EFF'; Data memory code protected
+p16f628a.inc,R,DATA_CP_ON           EQU  H'3EFF'; Data memory code-protected,'DATA_CP_ON           EQU  H'3EFF'; Data memory code-protected
+p16f648a.inc,R,DATA_CP_ON           EQU  H'3EFF'; Data memory code protected,'DATA_CP_ON           EQU  H'3EFF'; Data memory code protected
+p16lf627.inc,R,DATA_CP_ON           EQU  H'3EFF'; Data memory code protected,'DATA_CP_ON           EQU  H'3EFF'; Data memory code protected
+p16lf627a.inc,R,DATA_CP_ON           EQU  H'3EFF'; Data memory code protected,'DATA_CP_ON           EQU  H'3EFF'; Data memory code protected
+p16lf628.inc,R,DATA_CP_ON           EQU  H'3EFF'; Data memory code protected,'DATA_CP_ON           EQU  H'3EFF'; Data memory code protected
+p16lf628a.inc,R,DATA_CP_ON           EQU  H'3EFF'; Data memory code-protected,'DATA_CP_ON           EQU  H'3EFF'; Data memory code-protected
+p16lf648a.inc,R,DATA_CP_ON           EQU  H'3EFF'; Data memory code protected,'DATA_CP_ON           EQU  H'3EFF'; Data memory code protected
+
+p16f627.inc,R,DATA_CP_OFF          EQU  H'3FFF'; Data memory code protection off,'DATA_CP_OFF          EQU  H'3FFF'; Data memory code protection off
+p16f627a.inc,R,DATA_CP_OFF          EQU  H'3FFF'; Data memory code protection off,'DATA_CP_OFF          EQU  H'3FFF'; Data memory code protection off
+p16f628.inc,R,DATA_CP_OFF          EQU  H'3FFF'; Data memory code protection off,'DATA_CP_OFF          EQU  H'3FFF'; Data memory code protection off
+p16f628a.inc,R,DATA_CP_OFF          EQU  H'3FFF'; Data memory code protection off,'DATA_CP_OFF          EQU  H'3FFF'; Data memory code protection off
+p16f648a.inc,R,DATA_CP_OFF          EQU  H'3FFF'; Data memory code protection off,'DATA_CP_OFF          EQU  H'3FFF'; Data memory code protection off
+p16lf627.inc,R,DATA_CP_OFF          EQU  H'3FFF'; Data memory code protection off,'DATA_CP_OFF          EQU  H'3FFF'; Data memory code protection off
+p16lf627a.inc,R,DATA_CP_OFF          EQU  H'3FFF'; Data memory code protection off,'DATA_CP_OFF          EQU  H'3FFF'; Data memory code protection off
+p16lf628.inc,R,DATA_CP_OFF          EQU  H'3FFF'; Data memory code protection off,'DATA_CP_OFF          EQU  H'3FFF'; Data memory code protection off
+p16lf628a.inc,R,DATA_CP_OFF          EQU  H'3FFF'; Data memory code protection off,'DATA_CP_OFF          EQU  H'3FFF'; Data memory code protection off
+p16lf648a.inc,R,DATA_CP_OFF          EQU  H'3FFF'; Data memory code protection off,'DATA_CP_OFF          EQU  H'3FFF'; Data memory code protection off

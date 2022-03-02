@@ -1,0 +1,43 @@
+'Contains extra data that is missing from the .xml files
+'Syntax:
+'info item value
+'reg loc, name, bit7, ..., bit0 (- for unimplemented bits)
+'bit name, reg, loc 
+
+[mega16, mega32]
+info MaxMHz 16
+
+[mega1281, mega2561]
+reg 136, UDR3
+reg 135, UBRR3H
+reg 134, UBRR3L
+reg 132, UCSR3C, UMSEL31, UMSEL30, UPM31, UPM30, USBS3, UCSZ31, UCSZ30, UCPOL3
+reg 131, UCSR3B, RXCIE3, TXCIE3, UDRIE3, RXEN3, TXEN3, UCSZ32, RXB83, TXB83
+reg 130, UCSR3A, RXC3, TXC3, UDRE3, FE3, DOR3, UPE3, U2X3, MPCM3
+reg D6, UDR2
+reg D5, UBRR2H
+reg D4, UBRR2L
+reg D2, UCSR2C, UMSEL21, UMSEL20, UPM21, UPM20, USBS2, UCSZ21, UCSZ20, UCPOL2
+reg D1, UCSR2B, RXCIE2, TXCIE2, UDRIE2, RXEN2, TXEN2, UCSZ22, RXB82, TXB82
+reg D0, UCSR2A, RXC2, TXC2, UDRE2, FE2, DOR2, UPE2, U2X2, MPCM2
+
+[90PWM*]
+reg A2, PIFR1, -, -, PSEI1, PEV1B, PEV1A, PRN11, PRN10, PEOP1
+reg A3, PIM1, -, -, PSEIE1, PEVE1B, PEVE1A, -, -, PEOPE1
+bit INT3, EIMSK, 3
+bit INTF3, EIFR, 3
+
+[mega323]
+bit SPMIE, SPMCSR, 7
+
+[tiny22]
+reg 39, GIMSK, -, INT0, -, -, -, -, -, -
+reg 38, GIFR, -, INTF0, -, -, -, -, -, -
+
+[tiny2313a, tiny4313]
+bit PCIE0, GIMSK, 5
+bit PCIE1, GIMSK, 3
+bit PCIE2, GIMSK, 4
+bit PCIF0, GIFR, 5
+bit PCIF1, GIFR, 3
+bit PCIF2, GIFR, 4
