@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE featureDefinitions SYSTEM "../featureDefinitions.dtd">
+
+<featureDefinitions name="Comparator" iconName="Comparator" helpIndex="">
+
+<userControlGroup name="none" caption="none">
+<userControlSubGroup name="none" caption="none">
+
+<userControl name="applyButton">
+<dialogConfig type="applyButton" caption="none"></dialogConfig>
+<userAction name="apply">
+</userAction>
+</userControl>
+
+</userControlSubGroup>
+</userControlGroup>
+
+<userControlGroup name="none" caption="none">
+<userControlSubGroup name="none" caption="none">
+
+<userControl name="enable">
+<dialogConfig type="CK" caption="Enable on Startup"></dialogConfig>
+<userAction name="enable">
+</userAction>
+<userAction name="disable">
+</userAction>
+</userControl>
+
+<userControl name="InvertComp1">
+<dialogConfig type="CK" caption="Invert Comparator1 Output"></dialogConfig>
+<userAction name="enable">
+<claimResource type="register" registerField="C1INV" value="1"></claimResource>
+</userAction>
+<userAction name="disable">
+<claimResource type="register" registerField="C1INV" value="0"></claimResource>
+</userAction>
+</userControl>
+
+<userControl name="InvertComp2">
+<dialogConfig type="CK" caption="Invert Comparator2 Output"></dialogConfig>
+<userAction name="enable">
+<claimResource type="register" registerField="C2INV" value="1"></claimResource>
+</userAction>
+<userAction name="disable">
+<claimResource type="register" registerField="C2INV" value="0"></claimResource>
+</userAction>
+</userControl>
+
+<userControl name="inputSwitch">
+<dialogConfig type="CB" caption="Input Switch">
+	<selection name="AN11AN9" value="C1 Vin- to AN11, C2 Vin- to AN9"></selection> 
+	<selection name="AN10AN8" value="CI Vin- to AN10, C2 Vin- to AN8"></selection> 
+</dialogConfig>
+<userAction name="AN10AN8">
+	<claimResource type="register" registerField="CIS" value="1"></claimResource>
+</userAction>
+<userAction name="AN11AN9">
+	<claimResource type="register" registerField="CIS" value="0"></claimResource>
+</userAction>
+</userControl>
+
+<userControl name="mode">
+<dialogConfig type="CB" caption="Mode">
+	<selection name="reset" value="Comparators Reset"></selection> 
+	<selection name="1indepwOut" value="1 Independent Comparator with Output"></selection> 
+	<selection name="2indep" value="2 Independent Comparators"></selection> 
+	<selection name="2indepwOut" value="2 Independent Comparators with Outputs"></selection> 
+	<selection name="2comRef" value="2 Common Reference Comparators"></selection> 
+	<selection name="2comRefwOut" value="2 Common Reference Comparators with Outputs"></selection> 
+	<selection name="4mux" value="4 Inputs Multiplexed to 2 Comparators"></selection> 
+	<selection name="off" value="Comparators Off"></selection> 
+</dialogConfig>
+<userAction name="off">
+	<claimResource type="register" registerField="CM2" value="1"></claimResource>
+	<claimResource type="register" registerField="CM1" value="1"></claimResource>
+	<claimResource type="register" registerField="CM0" value="1"></claimResource>
+</userAction>
+<userAction name="4mux">
+	<claimResource type="register" registerField="CM2" value="1"></claimResource>
+	<claimResource type="register" registerField="CM1" value="1"></claimResource>
+	<claimResource type="register" registerField="CM0" value="0"></claimResource>
+	<claimResource type="pin" pin="AN11" polarity="Inp"></claimResource>
+	<claimResource type="pin" pin="AN10" polarity="Inp"></claimResource>
+	<claimResource type="pin" pin="AN9" polarity="Inp"></claimResource>
+	<claimResource type="pin" pin="AN8" polarity="Inp"></claimResource>
+</userAction>
+
+<userAction name="2comRefwout">
+	<claimResource type="register" registerField="CM2" value="1"></claimResource>
+	<claimResource type="register" registerField="CM1" value="0"></claimResource>
+	<claimResource type="register" registerField="CM0" value="1"></claimResource>
+	<claimResource type="pin" pin="AN11" polarity="Inp"></claimResource>
+	<claimResource type="pin" pin="AN10" polarity="Inp"></claimResource>
+	<claimResource type="pin" pin="AN9" polarity="Inp"></claimResource>
+	<claimResource type="pin" pin="AN7" polarity="Inp"></claimResource>
+	<claimResource type="pin" pin="AN6" polarity="Inp"></claimResource>
+</userAction>
+<userAction name="2comRef">
+	<claimResource type="register" registerField="CM2" value="1"></claimResource>
+	<claimResource type="register" registerField="CM1" value="0"></claimResource>
+	<claimResource type="register" registerField="CM0" value="0"></claimResource>
+	<claimResource type="pin" pin="AN11" polarity="Inp"></claimResource>
+	<claimResource type="pin" pin="AN10" polarity="Inp"></claimResource>
+	<claimResource type="pin" pin="AN9" polarity="Inp"></claimResource>
+</userAction>
+<userAction name="2indepwOut">
+	<claimResource type="register" registerField="CM2" value="0"></claimResource>
+	<claimResource type="register" registerField="CM1" value="1"></claimResource>
+	<claimResource type="register" registerField="CM0" value="1"></claimResource>
+	<claimResource type="pin" pin="AN11" polarity="Inp"></claimResource>
+	<claimResource type="pin" pin="AN10" polarity="Inp"></claimResource>
+	<claimResource type="pin" pin="AN9" polarity="Inp"></claimResource>
+	<claimResource type="pin" pin="AN8" polarity="Inp"></claimResource>
+	<claimResource type="pin" pin="AN7" polarity="Inp"></claimResource>
+	<claimResource type="pin" pin="AN6" polarity="Inp"></claimResource>
+</userAction>
+<userAction name="2indep">
+	<claimResource type="register" registerField="CM2" value="0"></claimResource>
+	<claimResource type="register" registerField="CM1" value="1"></claimResource>
+	<claimResource type="register" registerField="CM0" value="0"></claimResource>
+	<claimResource type="pin" pin="AN11" polarity="Inp"></claimResource>
+	<claimResource type="pin" pin="AN10" polarity="Inp"></claimResource>
+	<claimResource type="pin" pin="AN9" polarity="Inp"></claimResource>
+	<claimResource type="pin" pin="AN8" polarity="Inp"></claimResource>
+</userAction>
+<userAction name="1indepwOut">
+	<claimResource type="register" registerField="CM2" value="0"></claimResource>
+	<claimResource type="register" registerField="CM1" value="0"></claimResource>
+	<claimResource type="register" registerField="CM0" value="1"></claimResource>
+	<claimResource type="pin" pin="AN11" polarity="Inp"></claimResource>
+	<claimResource type="pin" pin="AN10" polarity="Inp"></claimResource>
+	<claimResource type="pin" pin="AN7" polarity="Inp"></claimResource>
+</userAction>
+<userAction name="reset">
+	<claimResource type="register" registerField="CM2" value="0"></claimResource>
+	<claimResource type="register" registerField="CM1" value="0"></claimResource>
+	<claimResource type="register" registerField="CM0" value="0"></claimResource>
+	<claimResource type="pin" pin="AN11" polarity="Inp"></claimResource>
+	<claimResource type="pin" pin="AN12" polarity="Inp"></claimResource>
+	<claimResource type="pin" pin="AN9" polarity="Inp"></claimResource>
+	<claimResource type="pin" pin="AN8" polarity="Inp"></claimResource>
+</userAction>
+</userControl>
+
+<userControl name="interruptEnable" enableForInt="CM">
+<dialogConfig type="CK" caption="Enable Interrupt on Startup"></dialogConfig>
+<userAction name="enable">
+	<claimResource type="register" registerField="CMIE" value="1"></claimResource>
+</userAction>
+<userAction name="disable">
+	<claimResource type="register" registerField="CMIE" value="0"></claimResource>
+</userAction>
+</userControl>
+
+<userControl name="interruptPriority" priorityForInt="CM">		
+<!--  <dialogConfig type="CB" range="7" caption="Interrupt Priority">
+		<selection name="txPriorityLevelTo%index%" value="%index%"></selection>
+		</dialogConfig>
+		<userAction>
+			<claimResource type="register" registerField="CMIP" method="priorityLevel3Bit"></claimResource>
+		</userAction> -->
+		
+	<dialogConfig type="CB" caption="Interrupt Priority">
+		<selection name="PriorityLevelToHigh" value="High" />
+		<selection name="PriorityLevelToLow" value="Low" />
+	</dialogConfig>
+	<userAction name="PriorityLevelToLow">
+		<claimResource type="register" registerField="CMIP" value="0" />
+	</userAction>
+	<userAction name="PriorityLevelToHigh">
+		<claimResource type="register" registerField="CMIP" value="1" />
+	</userAction>		
+</userControl>
+
+</userControlSubGroup>
+</userControlGroup>
+
+</featureDefinitions>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE featureDefinitions SYSTEM "../featureDefinitions.dtd">
+<featureDefinitions name="CCPPWM" iconName="PWM" helpIndex="">
+
+  <userControlGroup name="none" caption="none">
+    <userControlSubGroup name="none" caption="none">
+
+      <userControl name="applyButton">
+        <dialogConfig type="applyButton" caption="none"></dialogConfig>
+        <userAction name="apply">
+          <claimResource type="register" registerField="OWN_CCP%instance%" value="11"></claimResource>
+        </userAction>
+      </userControl>
+
+    </userControlSubGroup>
+  </userControlGroup>
+
+  <userControlGroup name="none" caption="none">
+    <userControlSubGroup name="none" caption="none">
+
+      <userControl name="enable">
+        <dialogConfig type="CK" caption="Enable on Startup"></dialogConfig>
+        <userAction name="enable">
+          <claimResource type="register" registerField="CCP%instance%M3" value="1"></claimResource>
+          <claimResource type="register" registerField="CCP%instance%M2" value="1"></claimResource>
+          <claimResource type="register" registerField="CCP%instance%M1" value="0"></claimResource>
+          <claimResource type="register" registerField="CCP%instance%M0" value="0"></claimResource>
+        </userAction>
+        <userAction name="disable">
+        </userAction>
+      </userControl>
+
+      <userControl name="alternatePinMX">
+        <dialogConfig type="CK" caption="Alternate Pin MX"></dialogConfig>
+        <userAction name="enable">
+          <claimResource type="register" registerField="CCP%instance%MX" value="0"></claimResource>
+          <claimResource type="pin" pin="CCP%instance%MX" polarity="Shared"></claimResource>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="CCP%instance%MX" value="1"></claimResource>
+          <claimResource type="pin" pin="CCP%instance%" polarity="Shared"></claimResource>
+        </userAction>
+      </userControl>
+
+      <userControl name="timeBase">
+        <dialogConfig type="CB" caption="Time base">
+          <selection name="timer2" value="Timer 2"></selection> 
+        </dialogConfig>
+        <userAction name="timer2">
+</userAction>
+      </userControl>
+
+      <userControl type="readOnly" name="period">
+        <dialogConfig type="general" caption="Period"></dialogConfig>
+        <userAction>
+	<!-- TAD=TCY*(0.5*(ADCS[5:0]+1)) -->
+	<!-- min=TCY/2, max=32*TCY -->
+        </userAction>
+      </userControl>
+
+      <userControl type="readOnly" name="desiredDuty">
+        <dialogConfig type="general" caption="Desired duty"></dialogConfig>
+        <userAction>
+	<!-- TAD=TCY*(0.5*(ADCS[5:0]+1)) -->
+	<!-- min=TCY/2, max=32*TCY -->
+        </userAction>
+      </userControl>
+
+      <userControl type="readOnly" name="dutyError">
+        <dialogConfig type="general" caption="Duty error"></dialogConfig>
+        <userAction>
+	<!-- TAD=TCY*(0.5*(ADCS[5:0]+1)) -->
+	<!-- min=TCY/2, max=32*TCY -->
+        </userAction>
+      </userControl>
+
+      <userControl name="interruptEnable">
+        <dialogConfig type="CK" caption="Enable Interrupt on Startup"/>
+        <userAction name="enable">
+          <claimResource type="register" registerField="CCP%instance%IE" value="1"/>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="CCP%instance%IE" value="0"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="interruptPriority">
+        <dialogConfig type="CB" caption="Interrupt Priority">
+          <selection name="txPriorityLevelToHigh" value="High"/>
+          <selection name="txPriorityLevelToLow" value="Low"/>
+        </dialogConfig>
+        <userAction>
+          <claimResource type="register" registerField="CCP%instance%IP" value="0"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="CCP%instance%IP" value="1"/>
+        </userAction>
+      </userControl>
+
+    </userControlSubGroup>
+  </userControlGroup>
+</featureDefinitions>

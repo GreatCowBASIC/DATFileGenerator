@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?> 
+<!DOCTYPE interrupts SYSTEM "../interrupts.dtd">
+
+<interrupts>
+
+  <interrupt intNumber="0" vectorNumber="" source="INT" ISRName="External Interrupt" type="extern" instance="1" initAddress="0x0"/>
+  <interrupt intNumber="1" vectorNumber="" source="T0" ISRName="Timer 0" type="periph" feature="Timer" instance="0" initAddress="0x0"/>
+  <interrupt intNumber="2" vectorNumber="" source="T1" ISRName="Timer 1" type="periph" feature="Timer" instance="1" initAddress="0x0"/>
+  <interrupt intNumber="3" vectorNumber="" source="T2" ISRName="Timer 2" type="periph" feature="Timer" instance="2" initAddress="0x0"/>
+  <interrupt intNumber="4" vectorNumber="" source="AD" ISRName="A to D Converter Done" type="periph" feature="A2D" instance="1" initAddress="0x0"/>
+  <interrupt intNumber="5" vectorNumber="" source="CCP1" ISRName="CCP 1" type="periph" feature="CCP" instance="1" initAddress="0x0"/>
+  <interrupt intNumber="6" vectorNumber="" source="CM1" ISRName="Comparator 1" type="periph" feature="Comparator" instance="1" initAddress="0x0"/>
+  <interrupt intNumber="7" vectorNumber="" source="CM2" ISRName="Comparator 2" type="periph" feature="Comparator" instance="2" initAddress="0x0"/>
+  <interrupt intNumber="8" vectorNumber="" source="EE" ISRName="Data EEPROM/Flash Write" type="periph" feature="" instance="1" initAddress="0x0"/>
+  <interrupt intNumber="9" vectorNumber="" source="RA" ISRName="PORTA Interrupt-on-Change" type="periph" feature="RA" instance="1" initAddress="0x0"/>
+  <interrupt intNumber="10" vectorNumber="" source="OSCF" ISRName="Oscillator Failure" type="periph" feature="" instance="1" initAddress="0x0"/>
+
+</interrupts>

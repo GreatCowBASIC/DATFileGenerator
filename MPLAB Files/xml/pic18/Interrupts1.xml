@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE featureDefinitions SYSTEM "../featureDefinitions.dtd">
+
+<featureDefinitions name="Interrupts18" iconName="interrupts-18" helpIndex="">
+
+  <userControlGroup name="none" caption="none">
+    <userControlSubGroup name="none" caption="none">
+      <userControl name="applyButton">
+        <dialogConfig type="applyButton" caption="none"/>
+        <userAction name="apply"/>
+      </userControl>
+    </userControlSubGroup>
+  </userControlGroup>
+
+  <userControlGroup name="General" caption="General Interrupt Properties">
+    <userControlSubGroup name="none" caption="none">
+
+      <userControl name="GlobalInterruptEnable">
+        <dialogConfig type="CK" caption="Assign the global interrupt enable"/>
+        <userAction name="enable">
+          <claimResource type="register" registerField="GIE" value="1"/>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="GIE" value="0"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="PeripheralInterruptEnable">
+        <dialogConfig type="CK" caption="Assign the peripheral interrupt enable"/>
+        <userAction name="enable">
+          <claimResource type="register" registerField="PEIE" value="1"/>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="PEIE" value="0"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="EnableInterruptPriority">
+        <dialogConfig type="CK" caption="Discern between high- and low-priority interrupts"/>
+        <userAction name="enable">
+          <claimResource type="register" registerField="IPEN" value="1"/>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="IPEN" value="0"/>
+        </userAction>
+      </userControl>
+
+    </userControlSubGroup>
+  </userControlGroup>
+
+  <userControlGroup name="Garbage" caption="This doesn't belong here!">
+    <userControlSubGroup name="none" caption="none">
+
+      <userControl name="MCLREnable">
+        <dialogConfig type="CK" caption="Enable MCLR pin"/>
+        <userAction name="enable">
+          <claimResource type="register" registerField="MCLREN" value="1"/>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="MCLREN" value="0"/>
+        </userAction>
+      </userControl>
+
+    </userControlSubGroup>
+  </userControlGroup>
+
+  <userControlGroup name="ExternalInterrupts" caption="External Interrupts">
+    <userControlSubGroup name="none" caption="none">
+
+      <userControl name="ExtIntEnable%indexControl%" range="3" enableForInt="INT%indexControl%">
+        <dialogConfig type="CK" caption="Enable external interrupt %indexControl%"/>
+        <userAction name="enable">
+          <claimResource type="pin" pin="INT%indexControl%" polarity="Inp"/>
+          <claimResource type="register" registerField="INT%indexControl%IE" value="1"/>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="INT%indexControl%IE" value="0"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="ExtIntEdge%indexControl%" range="3" edgeForInt="INT%indexControl%">
+        <dialogConfig type="CB" caption="Select triggering edge for external interrupt %indexControl%">
+          <selection name="TriggerOnRisingEdge" value="Rising"/>
+          <selection name="TriggerOnFallingEdge" value="Falling"/>
+        </dialogConfig>
+        <userAction>
+          <claimResource type="register" registerField="INTEDG%indexControl%" value="0"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="INTEDG%indexControl%" value="1"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="ExtIntPriority1" priorityForInt="INT1">
+        <dialogConfig type="CB" caption="Select priority for external interrupt 1">
+          <selection name="SetExtInt1ToPriorityHigh" value="High"/>
+          <selection name="SetExtInt1ToPriorityLow" value="Low"/>
+        </dialogConfig>
+        <userAction>
+          <claimResource type="register" registerField="INT1IP" value="0"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="INT1IP" value="1"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="ExtIntPriority2" priorityForInt="INT2">
+        <dialogConfig type="CB" caption="Select priority for external interrupt 2">
+          <selection name="SetExtInt2ToPriorityHigh" value="High"/>
+          <selection name="SetExtInt2ToPriorityLow" value="Low"/>
+        </dialogConfig>
+        <userAction>
+          <claimResource type="register" registerField="INT2IP" value="0"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="INT2IP" value="1"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="ExtIntPriority3" priorityForInt="INT3">
+        <dialogConfig type="CB" caption="Select priority for external interrupt 3">
+          <selection name="SetExtInt3ToPriorityHigh" value="High"/>
+          <selection name="SetExtInt3ToPriorityLow" value="Low"/>
+        </dialogConfig>
+        <userAction>
+          <claimResource type="register" registerField="INT3IP" value="0"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="INT3IP" value="1"/>
+        </userAction>
+      </userControl>
+
+    </userControlSubGroup>
+  </userControlGroup>
+
+</featureDefinitions>

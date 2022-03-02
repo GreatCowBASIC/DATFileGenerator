@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE featureDefinitions SYSTEM "../featureDefinitions.dtd">
+
+<featureDefinitions name="WDT" iconName="WDT" helpIndex="">
+
+<userControlGroup name="none" caption="none">
+<userControlSubGroup name="none" caption="none">
+
+<userControl name="applyButton">
+<dialogConfig type="applyButton" caption="none"></dialogConfig>
+<userAction name="apply">
+</userAction>
+</userControl>
+
+</userControlSubGroup>
+</userControlGroup>
+
+<userControlGroup name="none" caption="none">
+<userControlSubGroup name="none" caption="none">
+
+<userControl name="programEnable">
+<dialogConfig type="CB" caption="Program enable">
+	<selection name="enableSW" value="WDT SW control/Enable on startup"></selection>
+	<selection name="disableSW" value="WDT SW control/Disable on startup"></selection>
+	<selection name="enableHW" value="WDT HW control/Enable on startup"></selection>
+	<selection name="disableHW" value="WDT HW control/Disable on startup"></selection>
+</dialogConfig>
+<userAction name="disableHW">
+	<claimResource type="register" registerField="SWDTEN" value="0"></claimResource>
+	<claimResource type="register" registerField="WDTEN" value="0"></claimResource>
+</userAction>
+<userAction name="enableHW">
+	<claimResource type="register" registerField="SWDTEN" value="0"></claimResource>
+	<claimResource type="register" registerField="WDTEN" value="1"></claimResource>
+</userAction>
+<userAction name="disableSW">
+	<claimResource type="register" registerField="SWDTEN" value="0"></claimResource>
+	<claimResource type="register" registerField="WDTEN" value="0"></claimResource>
+</userAction>
+<userAction name="enableSW">
+	<claimResource type="register" registerField="SWDTEN" value="1"></claimResource>
+	<claimResource type="register" registerField="WDTEN" value="0"></claimResource>
+</userAction>
+</userControl>
+
+<userControl type="readOnly" name="period">
+<dialogConfig type="general" caption="WDT Period"></dialogConfig>
+<userAction>
+</userAction>
+</userControl>
+
+<userControl name="postscale">
+<dialogConfig type="CB" caption="WDT Postscale">
+	<selection name="setTo1" value="1:1"/>
+	<selection name="setTo2" value="1:2"/>
+	<selection name="setTo4" value="1:4"/>
+	<selection name="setTo8" value="1:8"/>
+	<selection name="setTo16" value="1:16"/>
+	<selection name="setTo32" value="1:32"/>
+	<selection name="setTo64" value="1:64"/>
+	<selection name="setTo128" value="1:128"/>
+	<selection name="setTo256" value="1:256"/>
+	<selection name="setTo512" value="1:512"/>
+	<selection name="setTo1024" value="1:1024"/>
+	<selection name="setTo2048" value="1:2048"/>
+	<selection name="setTo4096" value="1:4096"/>
+	<selection name="setTo8192" value="1:8192"/>
+	<selection name="setTo16384" value="1:16384"/>
+	<selection name="setTo32768" value="1:32768"/>
+</dialogConfig>
+<userAction name="setTo32768">
+	<claimResource type="register" registerField="WDTPS" value="1111"/>
+</userAction>
+<userAction name="setTo16384">
+	<claimResource type="register" registerField="WDTPS" value="1110"/>
+</userAction>
+<userAction name="setTo8192">
+	<claimResource type="register" registerField="WDTPS" value="1101"/>
+</userAction>
+<userAction name="setTo4096">
+	<claimResource type="register" registerField="WDTPS" value="1100"/>
+</userAction>
+<userAction name="setTo2048">
+	<claimResource type="register" registerField="WDTPS" value="1011"/>
+</userAction>
+<userAction name="setTo1024">
+	<claimResource type="register" registerField="WDTPS" value="1010"/>
+</userAction>
+<userAction name="setTo512">
+	<claimResource type="register" registerField="WDTPS" value="1001"/>
+</userAction>
+<userAction name="setTo256">
+	<claimResource type="register" registerField="WDTPS" value="1000"/>
+</userAction>
+<userAction name="setTo128">
+	<claimResource type="register" registerField="WDTPS" value="0111"/>
+</userAction>
+<userAction name="setTo64">
+	<claimResource type="register" registerField="WDTPS" value="0110"/>
+</userAction>
+<userAction name="setTo32">
+	<claimResource type="register" registerField="WDTPS" value="0101"/>
+</userAction>
+<userAction name="setTo16">
+	<claimResource type="register" registerField="WDTPS" value="0100"/>
+</userAction>
+<userAction name="setTo8">
+	<claimResource type="register" registerField="WDTPS" value="0011"/>
+</userAction>
+<userAction name="setTo4">
+	<claimResource type="register" registerField="WDTPS" value="0010"/>
+</userAction>
+<userAction name="setTo2">
+	<claimResource type="register" registerField="WDTPS" value="0001"/>
+</userAction>
+<userAction name="setTo1">
+	<claimResource type="register" registerField="WDTPS" value="0000"/>
+</userAction>
+</userControl>
+
+<userControl name="extendedPostscale">
+<dialogConfig type="CB" caption="WDT Extended Postscale">
+	<selection name="setTo1" value="PostscaleX1"></selection>
+</dialogConfig>
+<userAction name="setTo1">
+</userAction>
+</userControl>
+
+<userControl name="wdtPeriod">
+<dialogConfig type="CB" caption="WDT Prescale A:">
+	<selection name="setTo18" value="18"></selection>
+</dialogConfig>
+<userAction name="setTo18">
+</userAction>
+</userControl>
+
+</userControlSubGroup>
+</userControlGroup>
+
+</featureDefinitions>

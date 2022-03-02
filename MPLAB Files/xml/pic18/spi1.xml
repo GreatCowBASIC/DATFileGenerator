@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE featureDefinitions SYSTEM "../featureDefinitions.dtd">
+<featureDefinitions name="SPI" iconName="SPI" helpIndex="">
+
+  <userControlGroup name="none" caption="none">
+    <userControlSubGroup name="none" caption="none">
+
+      <userControl name="applyButton">
+        <dialogConfig type="applyButton" caption="none"/>
+        <userAction name="apply">
+          <claimResource type="register" registerField="OWN_MSSP%instance%" value="0"/>
+          <claimResource type="pin" pin="SDI%instance%" polarity="Inp"/>
+        </userAction>
+      </userControl>
+
+    </userControlSubGroup>
+  </userControlGroup>
+
+  <userControlGroup name="communicationSettings" caption="Communication Settings">
+    <userControlSubGroup name="none" caption="none">
+
+      <userControl name="enable">
+        <dialogConfig type="CK" caption="Enable on Startup"/>
+        <userAction name="enable">
+          <claimResource type="register" registerField="SSPEN" value="1"/>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="SSPEN" value="0"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="enableSDOx">
+        <dialogConfig type="CK" caption="Enable Data Out on SDO pin"/>
+        <userAction name="disable">
+        </userAction>
+        <userAction name="enable">
+          <claimResource type="pin" pin="SDO%instance%" polarity="Out"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="interruptEnable" enableForInt="SPI1">
+        <dialogConfig type="CK" caption="Enable Interrupt on Startup"/>
+        <userAction name="enable">
+          <claimResource type="register" registerField="SSPIE" value="1"/>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="SSPIE" value="0"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="interruptPriority" priorityForInt="SPI1">
+        <dialogConfig type="CB" caption="Interrupt Priority">
+          <selection name="priorityLevelToHigh" value="High"/>
+          <selection name="priorityLevelToLow" value="Low"/>
+        </dialogConfig>
+        <userAction>
+          <claimResource type="register" registerField="SSPIP" value="0"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="SSPIP" value="1"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="idleClockState">
+        <dialogConfig type="CB" caption="Idle Clock State">
+          <selection name="low" value="IDLE state is low"/> 
+          <selection name="high" value="IDLE state is high"/> 
+        </dialogConfig>
+        <userAction name="high">
+          <claimResource type="register" registerField="CKP" value="1"/>
+        </userAction>
+        <userAction name="low">
+          <claimResource type="register" registerField="CKP" value="0"/>
+        </userAction>
+      </userControl>
+ 
+      <userControl name="transmitClockEdge">
+        <dialogConfig type="CB" caption="Transmit Clock Edge">
+          <selection name="low" value="Idle clock to Active"/> 
+          <selection name="high" value="Active clock to Idle"/> 
+        </dialogConfig>
+        <userAction name="high">
+          <claimResource type="register" registerField="CKE" value="1"/>
+        </userAction>
+        <userAction name="low">
+          <claimResource type="register" registerField="CKE" value="0"/>
+        </userAction>
+      </userControl>
+ 
+      <userControl name="SPIMode">
+        <dialogConfig type="CB" caption="Mode">
+          <selection name="Master" value="Master"/> 
+          <selection name="Slave" value="Slave, slave select disabled"/> 
+          <selection name="SlaveSlaveSel" value="Slave, slave select enabled"/> 
+        </dialogConfig>
+        <userAction name="SlaveSlaveSel">
+          <claimResource type="register" registerField="SSPM3" value="0"/>
+          <claimResource type="register" registerField="SSPM2" value="0"/>
+          <claimResource type="register" registerField="SSPM1" value="0"/>
+          <claimResource type="register" registerField="SSPM0" value="0"/>
+          <claimResource type="pin" pin="SCK%instance%" polarity="Inp"/>
+        </userAction>
+        <userAction name="Slave">
+          <claimResource type="register" registerField="SSPM3" value="0"/>
+          <claimResource type="register" registerField="SSPM2" value="0"/>
+          <claimResource type="register" registerField="SSPM1" value="0"/>
+          <claimResource type="register" registerField="SSPM0" value="0"/>
+          <claimResource type="pin" pin="SCK%instance%" polarity="Inp"/>
+          <claimResource type="pin" pin="SS%instance%-L" polarity="Inp"/>
+        </userAction>
+        <userAction name="Master">
+          <claimResource type="register" registerField="SSPM3" value="0"/>
+          <claimResource type="register" registerField="SSPM2" value="0"/>
+          <claimResource type="pin" pin="SCK%instance%" polarity="Out"/>
+        </userAction>
+      </userControl>
+ 
+    </userControlSubGroup>
+
+    <userControlSubGroup name="masterSettings" caption="Master Settings">
+
+      <userControl name="dataInputPhase">
+        <dialogConfig type="CB" caption="Data Input Sample Instant">
+          <selection name="middle" value="Middle of data output time"/> 
+          <selection name="end" value="End of data output time"/> 
+        </dialogConfig>
+        <userAction name="end">
+          <claimResource type="register" registerField="SMP" value="1"/>
+        </userAction>
+        <userAction name="middle">
+          <claimResource type="register" registerField="SMP" value="0"/>
+        </userAction>
+      </userControl>
+ 
+      <userControl type="readOnly" name="baudRate">
+        <dialogConfig type="general" caption="Baud Rate"/>
+        <userAction>
+        </userAction>
+      </userControl>
+
+      <userControl name="prescaleA">
+        <dialogConfig type="CB" caption="Primary Prescaler">
+          <selection name="setTo64" value="1:64"/>
+          <selection name="setTo16" value="1:16"/>
+          <selection name="setTo4" value="1:4"/>
+          <selection name="setTo1" value="1:1"/>
+        </dialogConfig>
+        <userAction name="setTo1">
+          <claimResource type="register" registerField="SSPM1" value="1"/>
+          <claimResource type="register" registerField="SSPM0" value="1"/>
+        </userAction>
+        <userAction name="setTo4">
+          <claimResource type="register" registerField="SSPM1" value="0"/>
+          <claimResource type="register" registerField="SSPM0" value="0"/>
+        </userAction>
+        <userAction name="setTo16">
+          <claimResource type="register" registerField="SSPM1" value="0"/>
+          <claimResource type="register" registerField="SSPM0" value="1"/>
+        </userAction>
+        <userAction name="setTo64">
+          <claimResource type="register" registerField="SSPM1" value="1"/>
+          <claimResource type="register" registerField="SSPM0" value="0"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="prescaleB">
+        <dialogConfig type="CB" caption="Secondary Prescaler">
+          <selection name="setTo1" value="1:1"/>
+        </dialogConfig>
+        <userAction name="setTo1">
+        </userAction>
+      </userControl>
+
+    </userControlSubGroup>
+  </userControlGroup>
+
+</featureDefinitions>

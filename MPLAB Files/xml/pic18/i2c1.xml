@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE featureDefinitions SYSTEM "../featureDefinitions.dtd">
+<featureDefinitions name="I2C" iconName="I2C" helpIndex="">
+
+  <userControlGroup name="none" caption="none">
+    <userControlSubGroup name="none" caption="none">
+
+      <userControl name="applyButton">
+        <dialogConfig type="applyButton" caption="none"/>
+        <userAction name="apply">
+          <claimResource type="register" registerField="OWN_MSSP1" value="1"/>
+          <claimResource type="pin" pin="SCL" polarity="Out"/>
+          <claimResource type="pin" pin="SDA" polarity="Out"/>
+          <claimResource type="register" registerField="RCEN" value="1"/>
+        </userAction>
+      </userControl>
+
+    </userControlSubGroup>
+  </userControlGroup>
+
+  <userControlGroup name="operationalSettings" caption="Operational Settings">
+    <userControlSubGroup name="none" caption="none">
+
+      <userControl name="enable">
+        <dialogConfig type="CK" caption="Enable on Startup"/>
+        <userAction name="enable">
+          <claimResource type="register" registerField="SSPEN" value="1"/>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="SSPEN" value="0"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="enableSlew">
+        <dialogConfig type="CK" caption="Enable Slew Rate Control"/>
+        <userAction name="disable">
+          <claimResource type="register" registerField="SMP" value="1"/>
+        </userAction>
+        <userAction name="enable">
+          <claimResource type="register" registerField="SMP" value="0"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="enableSMBus">
+        <dialogConfig type="CK" caption="Enable SMBus"/>
+        <userAction name="disable">
+          <claimResource type="register" registerField="CKE" value="0"/>
+        </userAction>
+        <userAction name="enable">
+          <claimResource type="register" registerField="CKE" value="1"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="mode">
+        <dialogConfig type="CB" caption="Mode">
+          <selection name="slave7bit" value="Slave, 7bit, address match cause interrupt"/> 
+          <selection name="slave10bit" value="Slave, 10bit, address match cause interrupt"/> 
+          <selection name="slave7bitSS" value="Slave, 7bit, START-STOP cause interrupt"/> 
+          <selection name="slave10bitSS" value="Slave, 10bit, START-STOP cause interrupt"/> 
+          <selection name="masterFcy" value="Master, Fcy clock"/> 
+          <selection name="masterFirm" value="Master, Firmware controlled, Slave IDLE"/> 
+        </dialogConfig>
+        <userAction name="masterFirm">
+          <claimResource type="register" registerField="SSPM3" value="1"/>
+          <claimResource type="register" registerField="SSPM2" value="0"/>
+          <claimResource type="register" registerField="SSPM1" value="1"/>
+          <claimResource type="register" registerField="SSPM0" value="1"/>
+        </userAction>
+        <userAction name="masterFcy">
+          <claimResource type="register" registerField="SSPM3" value="1"/>
+          <claimResource type="register" registerField="SSPM2" value="0"/>
+          <claimResource type="register" registerField="SSPM1" value="0"/>
+          <claimResource type="register" registerField="SSPM0" value="0"/>
+        </userAction>
+        <userAction name="slave10bitSS">
+          <claimResource type="register" registerField="SSPM3" value="1"/>
+          <claimResource type="register" registerField="SSPM2" value="1"/>
+          <claimResource type="register" registerField="SSPM1" value="1"/>
+          <claimResource type="register" registerField="SSPM0" value="1"/>
+        </userAction>
+        <userAction name="slave7bitSS">
+          <claimResource type="register" registerField="SSPM3" value="1"/>
+          <claimResource type="register" registerField="SSPM2" value="1"/>
+          <claimResource type="register" registerField="SSPM1" value="1"/>
+          <claimResource type="register" registerField="SSPM0" value="0"/>
+        </userAction>
+        <userAction name="slave10bit">
+          <claimResource type="register" registerField="SSPM3" value="0"/>
+          <claimResource type="register" registerField="SSPM2" value="1"/>
+          <claimResource type="register" registerField="SSPM1" value="1"/>
+          <claimResource type="register" registerField="SSPM0" value="1"/>
+        </userAction>
+        <userAction name="slave7bit">
+          <claimResource type="register" registerField="SSPM3" value="0"/>
+          <claimResource type="register" registerField="SSPM2" value="1"/>
+          <claimResource type="register" registerField="SSPM1" value="1"/>
+          <claimResource type="register" registerField="SSPM0" value="0"/>
+        </userAction>
+      </userControl>
+
+      
+      <userControl name="interruptEnable">
+        <dialogConfig type="CK" caption="Enable Interrupt on Startup"/>
+        <userAction name="enable">
+          <claimResource type="register" registerField="SSPIE" value="1"/>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="SSPIE" value="0"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="interruptPriority">
+        <dialogConfig type="CB" caption="Interrupt Priority">
+          <selection name="priorityLevelToHigh" value="High"/>
+          <selection name="priorityLevelToLow" value="Low"/>
+        </dialogConfig>
+        <userAction>
+          <claimResource type="register" registerField="SSPIP" value="0"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="SSPIP" value="1"/>
+        </userAction>
+      </userControl>
+
+    </userControlSubGroup>
+  </userControlGroup>
+
+  <userControlGroup name="slaveSettings" caption="none">
+    <userControlSubGroup name="slaveSettings" caption="Slave Settings">
+
+      <userControl name="nodeAddr">
+        <dialogConfig type="TB" caption="Node Address"/>
+        <userAction>
+	<!-- what to do here - and set GCEN dependency? -->
+        </userAction>
+      </userControl>
+
+      <userControl name="enableSWStretch">
+        <dialogConfig type="CK" caption="Enable Sw-controlled clock stretching during reception"/>
+        <userAction name="enable">
+          <claimResource type="register" registerField="SEN" value="1"/>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="SEN" value="0"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="enableGCADetect">
+        <dialogConfig type="CK" caption="Enable General Call Address Detect"/>
+        <userAction name="enable">
+          <claimResource type="register" registerField="GCEN" value="1"/>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="GCEN" value="0"/>
+        </userAction>
+      </userControl>
+
+    </userControlSubGroup>
+  </userControlGroup>
+
+  <userControlGroup name="masterSettings" caption="none">
+    <userControlSubGroup name="masterSettings" caption="Master Settings">
+
+      <userControl name="baudRate">
+        <dialogConfig type="TB" caption="Baud Rate"/>
+        <userAction>
+        </userAction>
+      </userControl>
+
+      <userControl name="baudRateUnits">
+        <dialogConfig type="CB" caption="none">
+          <selection name="setToBps" value="bps"/>
+          <selection name="setToKbps" value="kbps"/>
+        </dialogConfig>
+        <userAction name="setToBps">
+        </userAction>
+        <userAction name="setToKbps">
+        </userAction>
+      </userControl>
+
+      <userControl type="readOnly" name="baudRateError">
+        <dialogConfig type="general" caption="Baud Rate Error (%)"/>
+        <userAction>
+        </userAction>
+      </userControl>
+
+    </userControlSubGroup>
+  </userControlGroup>
+
+</featureDefinitions>

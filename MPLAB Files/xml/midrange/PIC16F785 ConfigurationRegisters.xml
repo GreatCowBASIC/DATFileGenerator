@@ -1,0 +1,377 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE configurationRegisters SYSTEM "../configurationRegisters.dtd">
+<configurationRegisters>
+  <specialFunctionRegisters>
+    <CPUCore>
+      <sfr key="WREG" addr="0x0FFF" por="xxxxxxxx" mclr="uuuuuuuu">
+			</sfr>
+      <sfr key="PR2" addr="0x0092" por="11111111" mclr="11111111">
+        <field key="PR2" instance="1" mask="0x00ff" desc="Timer2/PWM Period Register Bits"/>
+        <!-- PR2<7:0> -->
+      </sfr>
+      <sfr key="STATUS" addr="0x0003" por="00011xxx" mclr="000qquuu">
+        <field key="IRP" instance="1" mask="0x0080" desc="Register Bank Select Bit Indirect Addressing"/>
+        <field key="RP1" instance="1" mask="0x0040" desc="Register Bank Select Bit 1 Direct Addressing"/>
+        <field key="RP0" instance="1" mask="0x0020" desc="Register Bank Select Bit 0 Direct Addressing"/>
+        <field key="TO-L" instance="1" mask="0x0010" desc="Time-out Flag Bit"/>
+        <field key="PD->" instance="1" mask="0x0008" desc="Power-down Flag Bit"/>
+        <field key="Z" instance="1" mask="0x0004" desc="Zero Flag Bit"/>
+        <field key="DC" instance="1" mask="0x0002" desc="Digit Carry Not_borrow Flag Bit"/>
+        <field key="C" instance="1" mask="0x0001" desc="Carry Not_borrow Flag Bit"/>
+      </sfr>
+      <sfr key="FSR" addr="0x0004" por="xxxxxxxx" mclr="uuuuuuuu">
+        <!-- <field key="FSR" instance="1" mask="0x0080" desc="Register Bank Select Bit 0 Indirect Addressing"/> -->
+        <field key="FSR" instance="1" mask="0x003F" desc="Indirect Addressing Register FSR"/>
+        <!-- FSR<6:0> -->
+      </sfr>
+    </CPUCore>
+    <reset>
+      <sfr key="WDTCON" addr="0x0018" por="---01000" mclr="---01000">
+        <field key="WDTPS" instance="1" mask="0x001E" desc="Watchdog Timer Period Select Bits"/>
+        <!-- WDTPS<3:0> -->
+        <field key="SWDTEN" instance="1" mask="0x0001" desc="Software Enable or Disable the Watchdog Timer Bit"/>
+      </sfr>
+      <sfr key="PCON" addr="0x008E" por="---1--0x" mclr="---u--uq">
+        <field key="SBOREN" instance="1" mask="0x0010" desc="Software BOR Enable Bit"/>
+        <field key="POR-L" instance="1" mask="0x0002" desc="Power-on Reset Status Bit"/>
+        <field key="BOR-L" instance="1" mask="0x0001" desc="Brown-out Reset Status Bit"/>
+      </sfr>
+    </reset>
+    <oscillator>
+      <sfr key="OSCCON" addr="0x008F" por="-110x000" mclr="-110x000">
+        <field key="IRCF" instance="1" mask="0x0070" desc="Internal Oscillator Frequency Select Bits"/>
+        <!-- IRCF<2:0> -->
+        <field key="OSTS" instance="1" mask="0x0008" desc="Oscillator Start-up Time-out Status Bit"/>
+        <field key="HTS" instance="1" mask="0x0004" desc="HFINTOSC High Frequency 8MHz to 125kHz Status Bit"/>
+        <field key="LTS" instance="1" mask="0x0002" desc="LFINTOSC Low Frequency 31kHz Status Bit"/>
+        <field key="SCS" instance="1" mask="0x0001" desc="System Clock Select Bit"/>
+      </sfr>
+      <sfr key="OSCTUNE" addr="0x0090" por="---00000" mclr="---uuuuu">
+        <field key="TUN" instance="1" mask="0x001F" desc="Frequency Tuning Bits"/>
+        <!-- TUN<4:0> -->
+      </sfr>
+    </oscillator>
+    <InterruptControl>
+      <sfr key="INTCON" addr="0x000B" por="00000000" mclr="00000000">
+        <field key="GIE" instance="1" mask="0x0080" desc="Global Interrupt Enable Bit"/>
+        <field key="PEIE" instance="1" mask="0x0040" desc="Peripheral Interrupt Enable Bit"/>
+        <field key="T0IE" instance="1" mask="0x0020" desc="TMR0 Overflow Interrupt Enable Bit"/>
+        <field key="INTE" instance="1" mask="0x0010" desc="External Interrupt Enable Bit"/>
+        <field key="RAIE" instance="1" mask="0x0008" desc="PORTA Change Interrupt Enable Bit"/>
+        <field key="T0IF" instance="1" mask="0x0004" desc="TMR0 Overflow Interrupt Flag Bit"/>
+        <field key="INTF" instance="1" mask="0x0002" desc="External Interrupt Flag Bit"/>
+        <field key="RAIF" instance="1" mask="0x0001" desc="PORTA Change Interrupt Flag Bit"/>
+      </sfr>
+      <sfr key="OPTION_REG" addr="0x0081" por="11111111" mclr="11111111">
+        <field key="RAPU-L" instance="1" mask="0x0080" desc="PORTA Pull-up Enable Bit"/>
+        <field key="INTEDG" instance="1" mask="0x0040" desc="Interrupt Edge Select Bit"/>
+        <field key="T0CS" instance="1" mask="0x0020" desc="TMR0 Clock Source Select Bit"/>
+        <field key="T0SE" instance="1" mask="0x0010" desc="TMR0 Source Edge Select Bit"/>
+        <field key="PSA" instance="1" mask="0x0008" desc="Prescaler Assignment Bit"/>
+        <field key="PS" instance="1" mask="0x0007" desc="Prescaler Rate Select Bits"/>
+      </sfr>
+      <sfr key="PIR1" addr="0x000C" por="00000000" mclr="00000000">
+        <field key="EEIF" instance="1" mask="0x0080" desc="EEPROM Write Operation Interrupt Flag Bit"/>
+        <field key="ADIF" instance="1" mask="0x0040" desc="A/D Interrupt Flag Bit"/>
+        <field key="CCP1IF" instance="1" mask="0x0020" desc="CCP1 Interrupt Flag Bit"/>
+        <field key="C2IF" instance="1" mask="0x0010" desc="Comparator2 Interrupt Flag Bit"/>
+        <field key="C1IF" instance="1" mask="0x0008" desc="Comparator1 Interrupt Flag Bit"/>
+        <field key="OSFIF" instance="1" mask="0x0004" desc="Oscillator Fail Interrupt Flag Bit"/>
+        <field key="TMR2IF" instance="1" mask="0x0002" desc="Timer2 to PR2 Match Interrupt Flag Bit"/>
+        <field key="TMR1IF" instance="1" mask="0x0001" desc="Timer1 Overflow Interrupt Flag Bit"/>
+      </sfr>
+      <sfr key="PIE1" addr="0x008C" por="00000000" mclr="00000000">
+        <field key="EEIE" instance="1" mask="0x0080" desc="EEPROM Write Complete Interrupt Enable Bit"/>
+        <field key="ADIE" instance="1" mask="0x0040" desc="A/D Converter Interrupt Enable Bit"/>
+        <field key="CCP1IE" instance="1" mask="0x0020" desc="CCP1 Interrupt Enable Bit"/>
+        <field key="C2IE" instance="1" mask="0x0010" desc="Comparator2 Interrupt Enable Bit"/>
+        <field key="C1IE" instance="1" mask="0x0008" desc="Comparator1 Interrupt Enable Bit"/>
+        <field key="OSFIE" instance="1" mask="0x0004" desc="Oscillator Fail Interrupt Enable Bit"/>
+        <field key="TMR2IE" instance="1" mask="0x0002" desc="Timer2 to PR2 Match Interrupt Enable Bit"/>
+        <field key="TMR1IE" instance="1" mask="0x0001" desc="Timer1 Overflow Interrupt Enable Bit"/>
+      </sfr>
+      <sfr key="IOCA" addr="0x0096" por="--000000" mclr="--000000">
+        <field key="IOCA5" instance="1" mask="0x0020" desc="Interrupt-On-Change PORTA Pin 5 Enable Bits"/>
+        <field key="IOCA4" instance="1" mask="0x0010" desc="Interrupt-On-Change PORTA Pin 4 Enable Bits"/>
+        <field key="IOCA3" instance="1" mask="0x0008" desc="Interrupt-On-Change PORTA Pin 3 Enable Bits"/>
+        <field key="IOCA2" instance="1" mask="0x0004" desc="Interrupt-On-Change PORTA Pin 2 Enable Bits"/>
+        <field key="IOCA1" instance="1" mask="0x0002" desc="Interrupt-On-Change PORTA Pin 1 Enable Bits"/>
+        <field key="IOCA0" instance="1" mask="0x0001" desc="Interrupt-On-Change PORTA Pin 0 Enable Bits"/>
+      </sfr>
+    </InterruptControl>
+    <IOPort>
+      <sfr key="TRISA" addr="0x0085" por="--111111" mclr="--111111">
+        <field key="TRISA5" instance="1" mask="0x0020" desc="PORTA Pin 5 Tri-State Control Bit"/>
+        <field key="TRISA4" instance="1" mask="0x0010" desc="PORTA Pin 4 Tri-State Control Bit"/>
+        <field key="TRISA3" instance="1" mask="0x0008" desc="PORTA Pin 3 Tri-State Control Bit"/>
+        <field key="TRISA2" instance="1" mask="0x0004" desc="PORTA Pin 2 Tri-State Control Bit"/>
+        <field key="TRISA1" instance="1" mask="0x0002" desc="PORTA Pin 1 Tri-State Control Bit"/>
+        <field key="TRISA0" instance="1" mask="0x0001" desc="PORTA Pin 0 Tri-State Control Bit"/>
+      </sfr>
+      <sfr key="PORTA" addr="0x0005" por="--x0x000" mclr="--u0u000">
+        <field key="PORTA5" instance="1" mask="0x0020" desc="PORTA Pin 5 I/O Pin"/>
+        <field key="PORTA4" instance="1" mask="0x0010" desc="PORTA Pin 4 I/O Pin"/>
+        <field key="PORTA3" instance="1" mask="0x0008" desc="PORTA Pin 3 I/O Pin"/>
+        <field key="PORTA2" instance="1" mask="0x0004" desc="PORTA Pin 2 I/O Pin"/>
+        <field key="PORTA1" instance="1" mask="0x0002" desc="PORTA Pin 1 I/O Pin"/>
+        <field key="PORTA0" instance="1" mask="0x0001" desc="PORTA Pin 0 I/O Pin"/>
+      </sfr>
+      <sfr key="WPUA" addr="0x0095" por="--111111" mclr="--111111">
+        <field key="WPUA5" instance="1" mask="0x0020" desc="PORTA Pin 5 Weak Pull-Up Control Bit"/>
+        <field key="WPUA4" instance="1" mask="0x0010" desc="PORTA Pin 4 Weak Pull-Up Control Bit"/>
+        <field key="WPUA3" instance="1" mask="0x0008" desc="PORTA Pin 3 Weak Pull-Up Control Bit"/>
+        <field key="WPUA2" instance="1" mask="0x0004" desc="PORTA Pin 2 Weak Pull-Up Control Bit"/>
+        <field key="WPUA1" instance="1" mask="0x0002" desc="PORTA Pin 1 Weak Pull-Up Control Bit"/>
+        <field key="WPUA0" instance="1" mask="0x0001" desc="PORTA Pin 0 Weak Pull-Up Control Bit"/>
+      </sfr>
+      <sfr key="TRISB" addr="0x0086" por="1111----" mclr="1111----">
+        <field key="TRISB7" instance="1" mask="0x0080" desc="PORTB Pin 7 Tri-State Control Bit"/>
+        <field key="TRISB6" instance="1" mask="0x0040" desc="PORTB Pin 6 Tri-State Control Bit"/>
+        <field key="TRISB5" instance="1" mask="0x0020" desc="PORTB Pin 5 Tri-State Control Bit"/>
+        <field key="TRISB4" instance="1" mask="0x0010" desc="PORTB Pin 4 Tri-State Control Bit"/>
+      </sfr>
+      <sfr key="PORTB" addr="0x0006" por="xx00----" mclr="uu00----">
+        <field key="PORTB7" instance="1" mask="0x0080" desc="PORTB Pin 7 I/O Pin"/>
+        <field key="PORTB6" instance="1" mask="0x0040" desc="PORTB Pin 6 I/O Pin"/>
+        <field key="PORTB5" instance="1" mask="0x0020" desc="PORTB Pin 5 I/O Pin"/>
+        <field key="PORTB4" instance="1" mask="0x0010" desc="PORTB Pin 4 I/O Pin"/>
+      </sfr>
+      <sfr key="TRISC" addr="0x0087" por="11111111" mclr="11111111">
+        <field key="TRISC7" instance="1" mask="0x0080" desc="PORTC Pin 7 Tri-State Control Bit"/>
+        <field key="TRISC6" instance="1" mask="0x0040" desc="PORTC Pin 6 Tri-State Control Bit"/>
+        <field key="TRISC5" instance="1" mask="0x0020" desc="PORTC Pin 5 Tri-State Control Bit"/>
+        <field key="TRISC4" instance="1" mask="0x0010" desc="PORTC Pin 4 Tri-State Control Bit"/>
+        <field key="TRISC3" instance="1" mask="0x0008" desc="PORTC Pin 3 Tri-State Control Bit"/>
+        <field key="TRISC2" instance="1" mask="0x0004" desc="PORTC Pin 2 Tri-State Control Bit"/>
+        <field key="TRISC1" instance="1" mask="0x0002" desc="PORTC Pin 1 Tri-State Control Bit"/>
+        <field key="TRISC0" instance="1" mask="0x0001" desc="PORTC Pin 0 Tri-State Control Bit"/>
+      </sfr>
+      <sfr key="PORTC" addr="0x0007" por="00xx0000" mclr="00uuuuuu">
+        <field key="PORTC7" instance="1" mask="0x0080" desc="PORTC Pin 7 I/O Pin"/>
+        <field key="PORTC6" instance="1" mask="0x0040" desc="PORTC Pin 6 I/O Pin"/>
+        <field key="PORTC5" instance="1" mask="0x0020" desc="PORTC Pin 5 I/O Pin"/>
+        <field key="PORTC4" instance="1" mask="0x0010" desc="PORTC Pin 4 I/O Pin"/>
+        <field key="PORTC3" instance="1" mask="0x0008" desc="PORTC Pin 3 I/O Pin"/>
+        <field key="PORTC2" instance="1" mask="0x0004" desc="PORTC Pin 2 I/O Pin"/>
+        <field key="PORTC1" instance="1" mask="0x0002" desc="PORTC Pin 1 I/O Pin"/>
+        <field key="PORTC0" instance="1" mask="0x0001" desc="PORTC Pin 0 I/O Pin"/>
+      </sfr>
+    </IOPort>
+    <Timers>
+      <sfr key="TMR0" addr="0x0001" por="xxxxxxxx" mclr="uuuuuuuu">
+        <field key="TMR0" instance="1" mask="0x00ff" desc="Timer0 Register Bits"/>
+        <!-- TMR0<7:0> -->
+      </sfr>
+      <sfr key="TMR1L" addr="0x000E" por="xxxxxxxx" mclr="uuuuuuuu">
+        <field key="TMR1L" instance="1" mask="0x00ff" desc="Timer1 Low Register Bits"/>
+        <!-- TMR1L<7:0> -->
+      </sfr>
+      <sfr key="TMR1H" addr="0x000F" por="xxxxxxxx" mclr="uuuuuuuu">
+        <field key="TMR1H" instance="1" mask="0x00ff" desc="Timer1 High Register Bits"/>
+        <!-- TMR1H<7:0> -->
+      </sfr>
+      <sfr key="T1CON" addr="0x0010" por="00000000" mclr="uuuuuuuu">
+        <field key="T1GINV" instance="1" mask="0x0080" desc="Timer1 Gate Invert Bit"/>
+        <field key="TMR1GE" instance="1" mask="0x0040" desc="Timer1 Gate Enable Bit"/>
+        <field key="T1CKPS" instance="1" mask="0x0030" desc="Timer1 Input Clock Prescale Select Bits"/>
+        <!-- T1CKPS<1:0> -->
+        <field key="T1OSCEN" instance="1" mask="0x0008" desc="LP Oscillator Enable Bit"/>
+        <field key="T1SYNC-L" instance="1" mask="0x0004" desc="Timer1 External Clock Input Synchronization Control Bit"/>
+        <field key="TMR1CS" instance="1" mask="0x0002" desc="Timer1 Clock Source Select Bit"/>
+        <field key="TMR1ON" instance="1" mask="0x0001" desc="Timer1 On Bit"/>
+      </sfr>
+      <sfr key="TMR2" addr="0x0011" por="00000000" mclr="00000000">
+        <field key="TMR2" instance="1" mask="0x00ff" desc="Timer2 Register Bits"/>
+        <!-- TMR2<7:0> -->
+      </sfr>
+      <sfr key="T2CON" addr="0x0012" por="-0000000" mclr="-0000000">
+        <field key="TOUTPS" instance="1" mask="0x0078" desc="Timer2 Output Postscale Select Bits"/>
+        <!-- TOUTPS<3:0> -->
+        <field key="TMR2ON" instance="1" mask="0x0004" desc="Timer2 On Bit"/>
+        <field key="T2CKPS" instance="1" mask="0x0003" desc="Timer2 Clock Prescale Select Bits"/>
+        <!-- T2CKPS<1:0> -->
+      </sfr>
+    </Timers>
+    <A2D>
+      <sfr key="ADRESH" addr="0x001E" por="xxxxxxxx" mclr="uuuuuuuu">
+        <field key="ADRESH" instance="1" mask="0x00FF" desc="A/D Result Bits"/>
+        <!-- ADRESH<7:0> -->
+      </sfr>
+      <sfr key="ADCON0" addr="0x001F" por="00000000" mclr="00000000">
+        <field key="ADFM" instance="1" mask="0x0080" desc="A/D Result Formed Select Bit"/>
+        <field key="VCFG" instance="1" mask="0x0040" desc="A/D Voltage Reference Select Bit"/>
+        <field key="CHS" instance="1" mask="0x003C" desc="Analog Channel Select Bits"/>
+        <!-- CHS<3:0> -->
+        <field key="GO" instance="1" mask="0x0002" desc="A/D Conversion Status Bit"/>
+        <field key="DONE-L" instance="1" mask="0x0002" desc="A/D Conversion Status Bit"/>
+        <field key="ADON" instance="1" mask="0x0001" desc="A/D Enable Bit"/>
+      </sfr>
+      <sfr key="ANSEL0" addr="0x0091" por="11111111" mclr="11111111">
+        <field key="ANS7" instance="1" mask="0x0080" desc="Analog Channel 7 Select Bit"/>
+        <field key="ANS6" instance="1" mask="0x0040" desc="Analog Channel 6 Select Bit"/>
+        <field key="ANS5" instance="1" mask="0x0020" desc="Analog Channel 5 Select Bit"/>
+        <field key="ANS4" instance="1" mask="0x0010" desc="Analog Channel 4 Select Bit"/>
+        <field key="ANS3" instance="1" mask="0x0008" desc="Analog Channel 3 Select Bit"/>
+        <field key="ANS2" instance="1" mask="0x0004" desc="Analog Channel 2 Select Bit"/>
+        <field key="ANS1" instance="1" mask="0x0002" desc="Analog Channel 1 Select Bit"/>
+        <field key="ANS0" instance="1" mask="0x0001" desc="Analog Channel 0 Select Bit"/>
+      </sfr>
+      <sfr key="ANSEL1" addr="0x0093" por="----1111" mclr="----1111">
+        <field key="ANS11" instance="1" mask="0x0008" desc="Analog Channel 11 Select Bit"/>
+        <field key="ANS10" instance="1" mask="0x0004" desc="Analog Channel 10 Select Bit"/>
+        <field key="ANS9" instance="1" mask="0x0002" desc="Analog Channel 9 Select Bit"/>
+        <field key="ANS8" instance="1" mask="0x0001" desc="Analog Channel 8 Select Bit"/>
+      </sfr>
+      <sfr key="ADRESL" addr="0x009E" por="xxxxxxxx" mclr="uuuuuuuu">
+        <field key="ADRESL" instance="1" mask="0x00FF" desc="A/D Result Bits"/>
+      </sfr>
+      <sfr key="ADCON1" addr="0x009F" por="-000----" mclr="-000----">
+        <field key="ADCS" instance="1" mask="0x0070" desc="A/D Conversion Clock Select Bits"/>
+        <!-- ADCS<2:0> -->
+      </sfr>
+    </A2D>
+    <Comparator>
+      <sfr key="CM1CON0" addr="0x0119" por="00000000" mclr="00000000">
+        <field key="C1ON" instance="1" mask="0x0080" desc="Comparator C1 Enable Bit"/>
+        <field key="C1OUT" instance="1" mask="0x0040" desc="Comparator C1 Output Bit"/>
+        <field key="C1OE" instance="1" mask="0x0020" desc="Comparator C1 Output Enable Bit"/>
+        <field key="C1POL" instance="1" mask="0x0010" desc="Comparator C1 Output Polarity Select Bit"/>
+        <field key="C1SP" instance="1" mask="0x0008" desc="Comparator C1 Speed Select Bit"/>
+        <field key="C1R" instance="1" mask="0x0004" desc="Comparator C1 Reference Select Bit Non-inverting Input"/>
+        <field key="C1CH" instance="1" mask="0x0003" desc="Comparator C1 Channel Select Bits"/>
+        <!-- C1CH<1:0> -->
+      </sfr>
+      <sfr key="CM2CON0" addr="0x011A" por="00000000" mclr="00000000">
+        <field key="C2ON" instance="1" mask="0x0080" desc="Comparator C2 Enable Bit"/>
+        <field key="C2OUT" instance="1" mask="0x0040" desc="Comparator C2 Output Bit"/>
+        <field key="C2OE" instance="1" mask="0x0020" desc="Comparator C2 Output Enable Bit"/>
+        <field key="C2POL" instance="1" mask="0x0010" desc="Comparator C2 Output Polarity Select Bit"/>
+        <field key="C2SP" instance="1" mask="0x0008" desc="Comparator C2 Speed Select Bit"/>
+        <field key="C2R" instance="1" mask="0x0004" desc="Comparator C2 Reference Select Bit Non-inverting Input"/>
+        <field key="C2CH" instance="1" mask="0x0003" desc="Comparator C2 Channel Select Bits"/>
+        <!-- C2CH<1:0> -->
+      </sfr>
+      <sfr key="CM2CON1" addr="0x011B" por="00----10" mclr="00----10">
+        <field key="MC1OUT" instance="1" mask="0x0080" desc="Mirror Copy of C1OUT Bit"/>
+        <field key="MC2OUT" instance="1" mask="0x0040" desc="Mirror Copy of C2OUT Bit"/>
+        <field key="T1GSS" instance="1" mask="0x0002" desc="Timer1 Gate Source Select Bit"/>
+        <field key="C2SYNC" instance="1" mask="0x0001" desc="C2 Output Synchronous Mode Bit"/>
+      </sfr>
+    </Comparator>
+    <VoltageRef>
+      <sfr key="REFCON" addr="0x0098" por="--00000-" mclr="--00000-">
+        <field key="BGST" instance="1" mask="0x0020" desc="Band Gap Reference Voltage Stable Flag Bit"/>
+        <field key="VRBB" instance="1" mask="0x0010" desc="Voltage Reference Buffer Bypass Select Bit"/>
+        <field key="VREN" instance="1" mask="0x0008" desc="Voltage Reference Enable Bit VR=1.2V Nominal"/>
+        <field key="VROE" instance="1" mask="0x0004" desc="Voltage Reference Output Enable Bit"/>
+        <field key="CVROE" instance="1" mask="0x0002" desc="Comparator Voltage Reference Output Enabel Bit"/>
+      </sfr>
+      <sfr key="VRCON" addr="0x0099" por="000-0000" mclr="000-0000">
+        <field key="C1VREN" instance="1" mask="0x0080" desc="Comparator C1 Voltage Reference Enable Bit"/>
+        <field key="C2VREN" instance="1" mask="0x0040" desc="Comparator C2 Voltage Reference Enable Bit"/>
+        <field key="VRR" instance="1" mask="0x0020" desc="Comparator Voltage Reference CVREF Range Selection Bit"/>
+        <field key="VR" instance="1" mask="0x000F" desc="Comparator Voltage Reference CVREF Value Selection Bits"/>
+        <!-- VR<3:0> -->
+      </sfr>
+    </VoltageRef>
+    <CCP>
+      <sfr key="CCPR1H" addr="0x0014" por="xxxxxxxx" mclr="uuuuuuuu">
+        <field key="CCPR1H" instance="1" mask="0x00FF" desc="Capture Compare Register 1 High"/>
+        <!-- CCPR1H<7:0> -->
+      </sfr>
+      <sfr key="CCPR1L" addr="0x0013" por="xxxxxxxx" mclr="uuuuuuuu">
+        <field key="CCPR1L" instance="1" mask="0x00FF" desc="Capture Compare Register 1 Low"/>
+        <!-- CCPR1L<7:0> -->
+      </sfr>
+      <sfr key="CCP1CON" addr="0x0015" por="--000000" mclr="--000000">
+        <field key="reserved" instance="1" mask="0x0080" desc=""/>
+        <field key="reserved" instance="1" mask="0x0040" desc=""/>
+        <field key="DC1B" instance="1" mask="0x0030" desc="PWM Duty Cycle LSB's"/>
+        <!-- DC1B<1:0> -->
+        <field key="CCP1M3" instance="1" mask="0x0008" desc="CCP Mode Select Bit 3"/>
+        <field key="CCP1M2" instance="1" mask="0x0004" desc="CCP Mode Select Bit 2"/>
+        <field key="CCP1M1" instance="1" mask="0x0002" desc="CCP Mode Select Bit 1"/>
+        <field key="CCP1M0" instance="1" mask="0x0001" desc="CCP Mode Select Bit 0"/>
+      </sfr>
+    </CCP>
+    <TwoPhasePWM>
+      <sfr key="PWMCON0" addr="0x0111" por="00000000" mclr="00000000">
+        <field key="PRSEN" instance="1" mask="0x0080" desc="PWM Restart Enable Bit"/>
+        <field key="PASEN" instance="1" mask="0x0040" desc="PWM Auto-Shutdown Enable Bit"/>
+        <field key="BLANK2" instance="1" mask="0x0020" desc="PH2 Blanking Bit"/>
+        <field key="BLANK1" instance="1" mask="0x0010" desc="PH1 Blanking Bit"/>
+        <field key="SYNC1" instance="1" mask="0x0008" desc="SYNC Pin Function Bit 1"/>
+        <field key="SYNC0" instance="1" mask="0x0004" desc="SYNC Pin Function Bit 0"/>
+        <field key="PH2EN" instance="1" mask="0x0002" desc="PH2 Pin Enable Bit"/>
+        <field key="PH1EN" instance="1" mask="0x0001" desc="PH1 Pin Enable Bit"/>
+      </sfr>
+      <sfr key="PWMCON1" addr="0x0110" por="-0000000" mclr="-0000000">
+        <field key="COMOD" instance="1" mask="0x0060" desc="Complimentary Mode Select"/>
+        <field key="CMDLY" instance="1" mask="0x001F" desc="Complimentary Drive Dead Time"/>
+        <!-- CMDLY<4:0> -->
+      </sfr>
+      <sfr key="PWMCLK" addr="0x0112" por="00000000" mclr="00000000">
+        <field key="PWMASE" instance="1" mask="0x0080" desc="PWM Auto-Shutdown Event Status Bit"/>
+        <field key="PWMP" instance="1" mask="0x0060" desc="PWM Clock Prescaler Bits"/>
+        <!-- PWMP<1:0> -->
+        <field key="PER" instance="1" mask="0x001F" desc="PWM Period Bits"/>
+        <!-- PER<4:0> -->
+      </sfr>
+      <sfr key="PWMPH1" addr="0x0113" por="00000000" mclr="00000000">
+        <field key="POL" instance="1" mask="0x0080" desc="PH1 Output Polarity Bit"/>
+        <field key="C2EN" instance="1" mask="0x0040" desc="Comparator 2 Enable Bit"/>
+        <field key="C1EN" instance="1" mask="0x0020" desc="Comparator 2 Enable Bit"/>
+        <field key="PH" instance="1" mask="0x001F" desc="PWM Phase Bits"/>
+        <!-- PH<4:0> -->
+      </sfr>
+      <sfr key="PWMPH2" addr="0x0114" por="00000000" mclr="00000000">
+        <field key="POL" instance="2" mask="0x0080" desc="PH1 Output Polarity Bit"/>
+        <field key="C2EN" instance="2" mask="0x0040" desc="Comparator 2 Enable Bit"/>
+        <field key="C1EN" instance="2" mask="0x0020" desc="Comparator 2 Enable Bit"/>
+        <field key="PH" instance="2" mask="0x001F" desc="PWM Phase Bits"/>
+        <!-- PH<4:0> -->
+      </sfr>
+    </TwoPhasePWM>
+    <EEPROM>
+      <sfr key="EECON1" addr="0x009C" por="----x000" mclr="----q000">
+        <field key="WRERR" instance="1" mask="0x0008" desc="EEPROM Error Flag Bit "/>
+        <field key="WREN" instance="1" mask="0x0004" desc="EEPROM Write Enable Bit"/>
+        <field key="WR" instance="1" mask="0x0002" desc="Write Control Bit"/>
+        <field key="RD" instance="1" mask="0x0001" desc="Read Control Bit"/>
+      </sfr>
+      <sfr key="EECON2" addr="0x009D" por="--------" mclr="--------">
+        <field key="EECON2" instance="1" mask="0x00FF" desc="EEPROM Write Sequence Dedicated Register"/>
+        <!-- EECON2<7:0> -->
+      </sfr>
+      <sfr key="EEDAT" addr="0x009A" por="00000000" mclr="00000000">
+        <field key="EEDAT" instance="1" mask="0x00FF" desc="EEPROM Data Register"/>
+        <!-- EEDAT<7:0> -->
+      </sfr>
+      <sfr key="EEADR" addr="0x009B" por="00000000" mclr="00000000">
+        <field key="EEADR" instance="1" mask="0x00FF" desc="EEPROM Address Register"/>
+        <!-- EEADR<7:0> -->
+      </sfr>
+    </EEPROM>
+    <OpAmp>
+      <sfr key="OPA1CON" addr="0x011C" por="0-------" mclr="0-------">
+        <field key="OPAON" instance="1" mask="0x0080" desc="OpAmp Enable Bit"/>
+      </sfr>
+      <sfr key="OPA2CON" addr="0x011D" por="0-------" mclr="0-------">
+        <field key="OPAON" instance="2" mask="0x0080" desc="OpAmp Enable Bit"/>
+      </sfr>
+    </OpAmp>
+  </specialFunctionRegisters>
+  <deviceConfigurationRegisters>
+    <cfgbits key="CONFIG" addr="0x2007" unused="0x0000" por="11111111111111">
+      <field key="FCMEN" instance="1" mask="0x0800" desc="Fail Clock Monitor Enable"/>
+      <field key="IESO" instance="1" mask="0x0400" desc="Internal External Switchover Enable"/>
+      <field key="BOREN" instance="1" mask="0x0300" desc="Brown-out Reset Selection"/>
+      <field key="CPD-L" instance="1" mask="0x0080" desc="Data Code Protect"/>
+      <field key="CP-L" instance="1" mask="0x0040" desc="Code Protect"/>
+      <field key="MCLREN" instance="1" mask="0x0020" desc="MLCR Enable"/>
+      <field key="PWRTE-L" instance="1" mask="0x0010" desc="Power-up Timer Enable"/>
+      <field key="WDTE" instance="1" mask="0x0008" desc="Watchdog Timer Enable"/>
+      <field key="FOSC" instance="1" mask="0x0007" desc="Oscillator Selection"/>
+    </cfgbits>
+  </deviceConfigurationRegisters>
+</configurationRegisters>

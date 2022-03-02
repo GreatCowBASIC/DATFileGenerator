@@ -1,0 +1,238 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE codeDefinitions SYSTEM "../codeDefinitions.dtd">
+<codeDefinitions>
+	<codeBlock>
+		<code name="fuses" caption="fuses (Configuration Word)">
+			<line comment="B11=FCMEN B10=IESO B9:8=BOREN1:0 B7=CPD-L B6=CP-L"/>
+			<line comment="B5=MCLRE B4=PWRTE-L B3=WDTE B2:0=FOSC2:0"/>
+			<line register="CONFIG" action="WCFG" mask="0xFFF" comment=""/>
+		</code>
+		<code name="Oscillator" caption="Osctune configuration">
+			<line comment="B4:0=Tun4:0"/>
+			<line register="OSCTUNE" action="WREG" mask="0x001F" comment="TUN4:0"/>
+		</code>
+		<code name="Oscillator" caption="Oscillator configuration">
+			<line comment="B6:4=IRCF2:0 B3=OSTS B2=HTS B1=LTS B0=SCS"/>
+			<line register="OSCCON" action="WREG" mask="0x007F" comment="set IRCF2:0 OSTS HTS LTS SCS"/>
+		</code>
+		<code name="Brown-Out" caption="Brown-Out configuration">
+			<line comment="B4=SBOREN"/>
+			<line register="PCON" action="WREG" mask="0x0010" comment="set SBOREN"/>
+		</code>
+		<code name="A2D" caption="A2D channel configuration">
+			<line comment="set pins for analog or digital"/>
+			<line comment="B7:0=ANS7:0 Analog Select for Channels 7:0"/>
+			<line register="ANSEL0" action="WREG" mask="0x00FF" comment="ANS7:0"/>
+			<line comment="B3:0=ANS11:8 Analog Select for Channels 11:8"/>
+			<line register="ANSEL1" action="WREG" mask="0x000F" comment="ANS11:8"/>
+		</code>
+		<code name="Interrupts" caption="Turn off GIE and PIE">
+			<line comment="B7=GIE B6=PEIE"/>
+			<line register="INTCON" action="W" value="0x0000" mask="0x00C0" comment="clear GIE &amp; PEIE for configuration"/>
+		</code>
+		<code name="Interrupts" caption="Clear All Interrupt Flags">
+			<line comment="B2=T0IF B1=INTF B0=RAIF"/>
+			<line register="INTCON" action="W" value="0x0000" mask="0x0007" comment="clear T0IF INTF RAIF"/>
+			<line comment="B7=EEIF B6=ADIF B5=CCP1IF B4=C2IF B3=C1IF B2=OSFIF B1=TMR2IF B0=TMR1IF"/>
+			<line register="PIR1" action="W" value="0x0000" mask="0x00FF" comment="clear EEIF ADIF CCP1IF C2IF C1IF OSFIF TMR2IF TMR1IF"/>
+		</code>
+		<code name="Interrupts" caption="Setup Interrupts with GIE and PEIE turned off">
+			<line comment="B5=T0IE B4=INTE B3=RAIE"/>
+			<line register="INTCON" action="WREG" mask="0x0038" comment="set T0IE INTE RAIE"/>
+			<line comment="B7=EEIE B6=ADIE B5=CCP1IE B4=C2IE B3=C1IE B2=OSFIE B1=TMR2IE B0=TMR1IE"/>
+			<line register="PIE1" action="WREG" mask="0x00FF" comment="set EEIE ADIE CCP1IE C2IE C1IE OSFIE TMR2IE TMR1IE"/>
+			<line comment="setup interrupt on change PORTA"/>
+			<line comment="B5:0=IOCA5:0"/>
+			<line register="IOCA" action="WREG" mask="0x003F" comment="set IOCA5:0"/>
+		</code>
+		<code name="Option" caption="Setup Option_Reg">
+			<line comment="B7=NOT_RAPU B6=INTEDG B5=T0CS B4=T0SE B3=PSA B2:0=PS2:0"/>
+			<line register="OPTION_REG" action="WREG" mask="0x00FF" comment="set NOT_RAPU ITEDG T0CS T0SE PSA PS2:0"/>
+		</code>
+		<code name="EnhancedIOPortA" caption="IO Ports configuration">
+			<line comment="port A is 6 bits wide"/>
+			<line comment="setup weak pullups PORTA"/>
+			<line comment="B5:0=WPUA5:0"/>
+			<line register="WPUA" action="WREG" mask="0x003F" comment="set WPUA"/>
+			<line comment="set TRIS to all inputs before setting initial value"/>
+			<line comment="RA0:5 TRISA0:5"/>
+			<line register="TRISA" action="W" value="0x003F" mask="0x003F" comment="TRISA"/>
+			<line register="PORTA" action="WREG" mask="0x003F" comment="PORTA"/>
+			<line comment="set port bit as input (1) or output (0)"/>
+			<line register="TRISA" action="WREG" mask="0x003F" comment="TRISA"/>
+			<line comment="set ANSEL0 for digital ports"/>
+			<line comment="B3:0=ANS3:0"/>
+			<line register="ANSEL0" action="WREG" mask="0x000F" comment="ANS3:0"/>
+		</code>
+		<code name="IOPortB" caption="IO Ports configuration">
+			<line comment="port B is 4 bits wide"/>
+			<line comment="set TRIS to all inputs before setting initial value"/>
+			<line comment="RB4:7 TRISB4:7"/>
+			<line register="TRISB" action="W" value="0x00F0" mask="0x00F0" comment="TRISB"/>
+			<line register="PORTB" action="WREG" mask="0x00F0" comment="PORTB"/>
+			<line comment="set port bit as input (1) or output (0)"/>
+			<line register="TRISB" action="WREG" mask="0x00F0" comment="TRISB"/>
+			<line comment="set ANSEL1 for digital ports"/>
+			<line comment="B7:6=ANS11:10"/>
+			<line register="ANSEL1" action="WREG" mask="0x00C0" comment="ANS11:10"/>
+		</code>
+		<code name="IOPortC" caption="IO Ports configuration">
+			<line comment="port C is 8 bits wide"/>
+			<line comment="set TRIS to all inputs before setting initial value"/>
+			<line comment="RC7:0 TRISC7:0"/>
+			<line register="TRISC" action="W" value="0x00FF" mask="0x00FF" comment="TRISC"/>
+			<line register="PORTC" action="WREG" mask="0x00FF" comment="PORTC"/>
+			<line comment="set port bit as input (1) or output (0)"/>
+			<line register="TRISC" action="WREG" mask="0x00FF" comment="TRISC"/>
+		</code>
+		<code name="Timer0" caption="Timer0 configuration">
+			<line register="OPTION_REG" action="WREG" mask="0x003F" comment="OPTION_REG"/>
+			<line comment="set ANSEL0 for T0CKI"/>
+			<line comment="B2=ANS2"/>
+			<line register="ANSEL0" action="WREG" mask="0x0004" comment="ANS2"/>
+		</code>
+		<code name="Timer1" caption="Timer1 configuration">
+			<line comment="disable TMR1 while changing control bits"/>
+			<line comment="B0=TMR1ON"/>
+			<line register="T1CON" action="W" value="0x0000" mask="0x0001" comment="TMR1ON"/>
+			<line comment="B7=T1GINV B6=TMR1GE B5:4=T1CKPS1:0 B3=T1OSCEN B2=NOT_T1SYNC B1=TMR1CS"/>
+			<line register="T1CON" action="WREG" mask="0x00FE" comment="set options with timer1 off"/>
+			<line comment="enable TMR1 if needed"/>
+			<line comment="B0=TMR1ON"/>
+			<line register="T1CON" action="WREG" mask="0x0001" comment="TMR1ON"/>
+			<line comment="set ANSEL0 for T1G"/>
+			<line comment="B3=ANS3"/>
+			<line register="ANSEL0" action="WREG" mask="0x0008" comment="ANS3"/>
+		</code>
+		<code name="Timer2" caption="Timer2 configuration">
+			<line comment="disable TMR2 while changing control bits"/>
+			<line comment="B2=TMR2ON"/>
+			<line register="T2CON" action="W" value="0x0000" mask="0x0004" comment="TMR2ON"/>
+			<line comment="B6:3=TOUTPS3:0 B1:0=T2CKPS"/>
+			<line register="T2CON" action="WREG" mask="0x007B" comment="set options with timer2 off"/>
+			<line comment="enable TMR2 if needed"/>
+			<line comment="B2=TMR2ON"/>
+			<line register="T2CON" action="WREG" mask="0x0004" comment="TMR2ON"/>
+		</code>
+		<code name="WDT" caption="Watch Dog Timer configuration">
+			<line comment="disable WDT while changing control bits"/>
+			<line comment="B0=SWDTEN"/>
+			<line register="WDTCON" action="W" value="0x0000" mask="0x0001" comment="SWDTEN"/>
+			<line comment="B4:1=WDTPS3:0"/>
+			<line register="WDTCON" action="WREG" mask="0x001E" comment="set options with WDT off"/>
+			<line comment="enable WDT if needed"/>
+			<line comment="B0=SWDTEN"/>
+			<line register="WDTCON" action="WREG" mask="0x0001" comment="SWDTEN"/>
+		</code>
+		<code name="A2D" caption="A2D configuration">
+			<line comment="disable ADC while changing control bits"/>
+			<line comment="B0=ADON"/>
+			<line register="ADCON0" action="W" value="0x0000" mask="0x0001" comment="ADON"/>
+			<line comment="B7=ADFM B6=VCFG B5:2=CHS3:0 B1=GO/NOT_DONE"/>
+			<line register="ADCON0" action="WREG" mask="0x00FE" comment="ADFM VCFG CHS3:0 GO/NOT_DONE"/>
+			<line comment="ADCON1 setup"/>
+			<line comment="B6:4=ADCS2:0"/>
+			<line register="ADCON1" action="WREG" mask="0x0070" comment="ADCS2:0"/>
+			<line comment="enable ADC if needed"/>
+			<line comment="B0=ADON"/>
+			<line register="ADCON0" action="WREG" mask="0x0001" comment="ADON"/>
+			<line comment="set ANSEL0 for ADC"/>
+			<line comment="B7:0=ANS7:0"/>
+			<line register="ANSEL0" action="WREG" mask="0x00FF" comment="ANS7:0"/>
+			<line comment="set ANSEL1 for ADC"/>
+			<line comment="B3:0=ANS11:8"/>
+			<line register="ANSEL1" action="WREG" mask="0x000F" comment="ANS11:8"/>
+		</code>
+		<code name="Comparator1" caption="Comparator 1 configuration">
+			<line comment="Comparator"/>
+			<line comment="disable comparator1 while changing control bits"/>
+			<line comment="B7=C1ON"/>
+			<line register="CM1CON0" action="W" value="0x0000" mask="0x0080" comment="C1ON"/>
+			<line comment="B6=C1OUT B5=C1OE B4=C1POL B3=C1SP B2=C1R B1:0=C1CH1:0"/>
+			<line register="CM1CON0" action="WREG" mask="0x007F" comment="C1OUT C1OE C1POL C1SP C1R C1CH1:0"/>
+			<line comment="setup REFCON control bits"/>
+			<line comment="B5=BGST B4=VRBB B3=VREN B2=VROE B1=CVROE"/>
+			<line register="REFCON" action="WREG" mask="0x003F" comment="BGST VRBB VREN VROE CVROE"/>
+			<line comment="setup VRCON control bits"/>
+			<line comment="B7=C1VREN B6=C2VREN B5=VRR B3:0=VR3:0"/>
+			<line register="VRCON" action="WREG" mask="0x00EF" comment="C1VREN C2VREN VRR VR3:0"/>
+			<line comment="enable comparator1 if needed"/>
+			<line comment="B7=C1ON"/>
+			<line register="CM1CON0" action="WREG" mask="0x0080" comment="C1ON"/>
+		</code>
+                <code name="Comparator2" caption="Comparator 2 configuration">
+			<line comment="disable comparator2 while changing control bits"/>
+			<line comment="B7=C2ON"/>
+			<line register="CM2CON0" action="W" value="0x0000" mask="0x0080" comment="C2ON"/>
+			<line comment="B6=C2OUT B5=C2OE B4=C2POL B3=C2SP B2=C2R B1:0=C2CH1:0"/>
+			<line register="CM2CON0" action="WREG" mask="0x007F" comment="C2OUT C2OE C2POL C2SP C2R C2CH1:0"/>
+			<line comment="setup CM2CON1 control bits"/>
+			<line comment="B7=MC1OUT B6=MC2OUT B1=T1GSS B0=C2SYNC"/>
+			<line register="CM2CON1" action="WREG" mask="0x00C3" comment="M1COUT M2COUT T1GSS C2SYNC"/>
+			<line comment="setup REFCON control bits"/>
+			<line comment="B5=BGST B4=VRBB B3=VREN B2=VROE B1=CVROE"/>
+			<line register="REFCON" action="WREG" mask="0x003F" comment="BGST VRBB VREN VROE CVROE"/>
+			<line comment="setup VRCON control bits"/>
+			<line comment="B7=C1VREN B6=C2VREN B5=VRR B3:0=VR3:0"/>
+			<line register="VRCON" action="WREG" mask="0x00EF" comment="C1VREN C2VREN VRR VR3:0"/>
+			<line comment="enable comparator2 if needed"/>
+			<line comment="B7=C2ON"/>
+			<line register="CM2CON0" action="WREG" mask="0x0080" comment="C2ON"/>
+                </code>
+		<code name="VoltageRef" caption="Voltage Reference configuration">
+			<line comment="setup REFCON control bits"/>
+			<line comment="B5=BGST B4=VRBB B3=VREN B2=VROE B1=CVROE"/>
+			<line register="REFCON" action="WREG" mask="0x003F" comment="BGST VRBB VREN VROE CVROE"/>
+			<line comment="setup VRCON control bits"/>
+			<line comment="B7=C1VREN B6=C2VREN B5=VRR B3:0=VR3:0"/>
+			<line register="VRCON" action="WREG" mask="0x00EF" comment="C1VREN C2VREN VRR VR3:0"/>
+		</code>
+		<code name="CCP1" caption="CCP1 configuration">
+			<line comment="CCP1CON setup"/>
+			<line comment="B5:4=DC1B1:0 B3:0=CCP1M3:0"/>
+			<line register="CCP1CON" action="WREG" mask="0x001F" comment="DC1B1:0 CCP1M3:0"/>
+			<line comment="PWM setup"/>
+			<line comment="B7=PRSEN B6=PASEN B5=BLANK2 B4=BLANK1 B3:2=SYNC1:0 B1=PH2EN B0=PH1EN"/>
+			<line register="PWMCON0" action="WREG" mask="0x00FF" comment="PRSEN PASEN BLANK2 BLANK1 SYNC1:0 PH2EN PH1EN"/>
+			<line comment="B6:5=COMOD1:0  B4:0=CMDLY4:0"/>
+			<line register="PWMCON1" action="WREG" mask="0x007F" comment="COMOD1:0 CMDLY4:0"/>
+			<line comment="B7=PWMASE B6:5=PWMP1:0 B4:0=PER4:0"/>
+			<line register="PWMCLK" action="WREG" mask="0x00FF" comment="PWMASE PWMP1:0 PER4:0"/>
+			<line comment="B7=POL B6=C2EN B5=C1EN B4:0=PH4:0"/>
+			<line register="PWMPH1" action="WREG" mask="0x00FF" comment="POL C2EN C1EN PH4:0"/>
+			<line comment="B7=POL B6=C2EN B5=C1EN B4:0=PH4:0"/>
+			<line register="PWMPH2" action="WREG" mask="0x00FF" comment="POL C2EN C1EN PH4:0"/>
+			<line comment="set ANSEL1 for PH1"/>
+			<line comment="B5=ANS5"/>
+			<line register="ANSEL0" action="WREG" mask="0x0020" comment="ANS5"/>
+			<line comment="set TRISC for PH1 &amp; PH2"/>
+			<line comment="B7:0=TRISC7:0"/>
+			<line register="TRISC" action="WREG" mask="0x00FF" comment="TRISC"/>
+			<line comment="set TRISB for sync master"/>
+			<line comment="B7:4=TRISB7:4"/>
+			<line register="TRISB" action="WREG" mask="0x00F0" comment="TRISB"/>
+		</code>
+		<code name="OpAmp1" caption="OpAmp1 configuration">
+			<line comment="OPA1CON setup"/>
+			<line comment="B7=OPAON"/>
+			<line register="OPA1CON" action="WREG" mask="0x0080" comment="OPAON"/>
+                </code>
+                <code name="OpAmp2" caption="OpAmp2 configuration">
+			<line comment="OPA2CON setup"/>
+			<line comment="B7=OPAON"/>
+			<line register="OPA2CON" action="WREG" mask="0x0080" comment="OPAON"/>
+		</code>
+		<code name="DATAEE" caption="DATAEE configuration">
+			<line comment="DATAEE setup"/>
+			<line comment="B3=WRERR B2=WREN B1=WR B0=RD"/>
+			<line register="EECON1" action="WREG" mask="0x000F" comment="WRERR WREN WR RD"/>
+		</code>
+		<code name="Interrupts" caption="Turn on GIE and PIE if needed">
+			<line comment="B7=GIE B6=PEIE"/>
+			<line register="INTCON" action="WREG" mask="0x00C0" comment="setup GIE &amp; PEIE"/>
+		</code>
+	</codeBlock>
+</codeDefinitions>
+
+
+		<!-- <line code="banksel xxxx" comment="set bank bits"/>  -->

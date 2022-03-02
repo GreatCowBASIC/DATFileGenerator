@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE featureDefinitions SYSTEM "../featureDefinitions.dtd">
+
+<featureDefinitions name="BOR" iconName="BOR" helpIndex="">
+
+<userControlGroup name="none" caption="none">
+<userControlSubGroup name="none" caption="none">
+
+<userControl name="applyButton">
+<dialogConfig type="applyButton" caption="none"></dialogConfig>
+<userAction name="apply">
+</userAction>
+</userControl>
+
+</userControlSubGroup>
+</userControlGroup>
+
+<userControlGroup name="thresholdSettings" caption="Threshold Settings">
+<userControlSubGroup name="none" caption="none">
+
+<userControl name="clearBits">
+<dialogConfig type="CK" caption="Clear BOR and POR bits at startup"></dialogConfig>
+<userAction name="enable">
+	<claimResource type="register" registerField="BOR-L" value="1"></claimResource>
+	<claimResource type="register" registerField="POR-L" value="1"></claimResource>
+</userAction>
+<userAction name="disable">
+</userAction>
+</userControl>
+
+<userControl name="enableBOR">
+<dialogConfig type="CK" caption="Enable on Startup"></dialogConfig>
+<userAction name="enable">
+	<claimResource type="register" registerField="BOREN" value="1"></claimResource>
+</userAction>
+<userAction name="disable">
+	<claimResource type="register" registerField="BOREN" value="0"></claimResource>
+</userAction>
+</userControl>
+
+<userControl name="BORThreshold">
+<dialogConfig type="CB" caption="BOR Threshold">
+	<selection name="25V" value="2.5V"></selection> 
+	<selection name="27V" value="2.7V"></selection> 
+	<selection name="42V" value="4.2V"></selection> 
+	<selection name="45V" value="4.5V"></selection> 
+</dialogConfig>
+<userAction name="45V">
+	<claimResource type="register" registerField="BORV" value="00"></claimResource>
+</userAction>
+<userAction name="42V">
+	<claimResource type="register" registerField="BORV" value="01"></claimResource>
+</userAction>
+<userAction name="27V">
+	<claimResource type="register" registerField="BORV" value="10"></claimResource>
+</userAction>
+<userAction name="25V">
+	<claimResource type="register" registerField="BORV" value="11"></claimResource>
+</userAction>
+</userControl>
+
+<userControl name="PORTimerDelay">
+<dialogConfig type="CB" caption="POR Timer Delay">
+	<selection name="2ms" value="72ms(BOR/POR) + 2ms"></selection> 
+	<selection name="disabled" value="Disabled"></selection> 
+</dialogConfig>
+<userAction name="disabled">
+	<claimResource type="register" registerField="PWRTEN-L" value="1"></claimResource>
+</userAction>
+<userAction name="2ms">
+	<claimResource type="register" registerField="PWRTEN-L" value="0"></claimResource>
+</userAction>
+</userControl>
+
+<userControl name="opcodeOrWreg">
+<dialogConfig type="BoxCK" caption="Illegal opcode or unitialized W register reset"></dialogConfig>
+<userAction name="enable">
+</userAction>
+<userAction name="disable">
+</userAction>
+</userControl>
+
+<userControl name="trap">
+<dialogConfig type="BoxCK" caption="Trap conflict reset"></dialogConfig>
+<userAction name="enable">
+</userAction>
+<userAction name="disable">
+</userAction>
+</userControl>
+
+<userControl name="WDTReset">
+<dialogConfig type="BoxCK" caption="WDT timeout reset"></dialogConfig>
+<userAction name="enable">
+	<claimResource type="register" registerField="TO-L" value="0"></claimResource>
+</userAction>
+<userAction name="disable">
+	<claimResource type="register" registerField="TO-L" value="1"></claimResource>
+</userAction>
+</userControl>
+
+<userControl name="externalReset">
+<dialogConfig type="BoxCK" caption="External reset"></dialogConfig>
+<userAction name="enable">
+	<claimResource type="register" registerField="PD-L" value="0"></claimResource>
+</userAction>
+<userAction name="disable">
+	<claimResource type="register" registerField="PD-L" value="1"></claimResource>
+</userAction>
+</userControl>
+
+<userControl name="softwareReset">
+<dialogConfig type="BoxCK" caption="Software reset"></dialogConfig>
+<userAction name="enable">
+	<claimResource type="register" registerField="RI-L" value="0"></claimResource>
+</userAction>
+<userAction name="disable">
+	<claimResource type="register" registerField="RI-L" value="1"></claimResource>
+</userAction>
+</userControl>
+
+</userControlSubGroup>
+</userControlGroup>
+
+</featureDefinitions>

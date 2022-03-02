@@ -1,0 +1,408 @@
+# Device file info: $Id: PIC16C65B.dev,v 1.34 2006/08/04 20:16:13 nairnj Exp $
+# Macro file info: $Id: 16macro.dev,v 1.4 2006/08/04 20:16:11 nairnj Exp $
+
+format=0.1
+
+#device=PIC16C65B
+
+vpp (range=12.750-13.250  dflt=13.000)
+vdd (range=2.500-5.500  dfltrange=4.500-5.500  nominal=5.000)
+
+pgming (memtech=eprom ovrpgm=3 tries=25)
+    wait (pgm=100 cfg=100 userid=100)
+
+pgmmem (region=0x00-0xFFF)
+cfgmem (region=0x2007-0x2007)
+testmem (region=0x2000-0x20FF)
+userid (region=0x2000-0x2003)
+
+
+NumBanks=2
+MirrorRegs (0x0-0x0 0x80-0x80)
+MirrorRegs (0x02-0x04 0x82-0x84)
+MirrorRegs (0x0a-0x0b 0x8a-0x8b)
+UnusedRegs (0x8f-0x91)
+UnusedRegs (0x95-0x97)
+UnusedRegs (0x9a-0x9e)
+
+
+sfr (key=INDF addr=0x0 size=1 flags=i access='u u u u u u u u')
+    reset (por='--------' mclr='--------')
+    bit (names='INDF' width='8')
+sfr (key=TMR0 addr=0x1 size=1 access='rw rw rw rw rw rw rw rw')
+    reset (por='xxxxxxxx' mclr='uuuuuuuu')
+    bit (names='TMR0' width='8')
+    stimulus (scl=rwb type=int regfiles=w pcfiles=w)
+sfr (key=PCL addr=0x2 size=1 access='rw rw rw rw rw rw rw rw')
+    reset (por='00000000' mclr='00000000')
+    bit (names='PCL' width='8')
+    stimulus (scl=rwb regfiles=w pcfiles=rw)
+sfr (key=STATUS addr=0x3 size=1 access='r r rw r r rw rw rw')
+    reset (por='00011xxx' mclr='000qquuu')
+    bit (names='IRP RP nTO nPD Z DC C' width='1 2 1 1 1 1 1')
+
+sfr (key=FSR addr=0x4 size=1 access='rw rw rw rw rw rw rw rw')
+    reset (por='xxxxxxxx' mclr='uuuuuuuu')
+    bit (names='FSR' width='8')
+    stimulus (scl=rwb type=int regfiles=w pcfiles=rw)
+sfr (key=PORTA addr=0x5 size=1 access='u u rw rw rw rw rw rw')
+    reset (por='--0x0000' mclr='--0u0000')
+    bit (names='- - RA5 RA4 RA3 RA2 RA1 RA0')
+    bit (tag=scl names='RA' width='8')
+    stimulus (scl=rwb regfiles=rw pcfiles=rw)
+sfr (key=PORTB addr=0x6 size=1 access='rw rw rw rw rw rw rw rw')
+    reset (por='xxxxxxxx' mclr='uuuuuuuu')
+    bit (names='RB7 RB6 RB5 RB4 RB3 RB2 RB1 RB0')
+    bit (tag=scl names='RB' width='8')
+    stimulus (scl=rwb regfiles=rw pcfiles=rw)
+sfr (key=PORTC addr=0x7 size=1 access='rw rw rw rw rw rw rw rw')
+    reset (por='xxxxxxxx' mclr='uuuuuuuu')
+    bit (names='RC7 RC6 RC5 RC4 RC3 RC2 RC1 RC0')
+    bit (tag=scl names='RC' width='8')
+    stimulus (scl=rwb regfiles=rw pcfiles=rw)
+sfr (key=PORTD addr=0x8 size=1 access='rw rw rw rw rw rw rw rw')
+    reset (por='xxxxxxxx' mclr='uuuuuuuu')
+    bit (names='RD7 RD6 RD5 RD4 RD3 RD2 RD1 RD0')
+    bit (tag=scl names='RD' width='8')
+    stimulus (scl=rwb regfiles=rw pcfiles=rw)
+sfr (key=PORTE addr=0x9 size=1 access='u u u u u rw rw rw')
+    reset (por='-----xxx' mclr='-----uuu')
+    bit (names='- - - - - RE2 RE1 RE0')
+    bit (tag=scl names='RE' width='8')
+    stimulus (scl=rwb regfiles=rw pcfiles=rw)
+
+sfr (key=PCLATH addr=0xA size=1 access='u u u rw rw rw rw rw')
+    reset (por='---00000' mclr='---00000')
+    bit (names='- - - PCLATH' width='1 1 1 5')
+    stimulus (scl=rwb type=int regfiles=w pcfiles=rw)
+sfr (key=INTCON addr=0xB size=1 access='rw rw rw rw rw rw rw rw')
+    reset (por='0000000x' mclr='0000000u')
+    bit (names='GIE PEIE TMR0IE INTE RBIE TMR0IF INTF RBIF')
+    stimulus (scl=rwb regfiles=w pcfiles=rw)
+sfr (key=PIR1 addr=0xC size=1 access='rw u r r rw rw rw rw')
+    reset (por='0-000000' mclr='0-000000')
+    bit (names='PSPIF - RCIF TXIF SSPIF CCP1IF TMR2IF TMR1IF')
+    bit (tag=scl names='PSPIF - - - SSPIF CCP1IF TMR2IF TMR1IF')
+    stimulus (scl=rwb regfiles=w pcfiles=rw)
+sfr (key=PIR2 addr=0xD size=1 access='u u u u u u u rw')
+    reset (por='-------0' mclr='-------0')
+    bit (names='- - - - - - - CCP2IF')
+    stimulus (scl=rwb regfiles=w pcfiles=rw)
+sfr (key=TMR1 addr=0xE size=2 flags=j)
+# The j flag means all these registers together form one larger register
+    bit (names='TMR1' width='16')
+    stimulus (scl=rwb type=int regfiles=w)
+sfr (key=TMR1L addr=0xE size=1 access='rw rw rw rw rw rw rw rw')
+    reset (por='xxxxxxxx' mclr='uuuuuuuu')
+    bit (names='TMR1L' width='8')
+    stimulus (scl=rwb type=int regfiles=w pcfiles=w)
+sfr (key=TMR1H addr=0xF size=1 access='rw rw rw rw rw rw rw rw')
+    reset (por='xxxxxxxx' mclr='uuuuuuuu')
+    bit (names='TMR1H' width='8')
+    stimulus (scl=rwb type=int regfiles=w pcfiles=w)
+sfr (key=T1CON addr=0x10 size=1 access='u u rw rw rw rw rw rw')
+    reset (por='--000000' mclr='--uuuuuu')
+    bit (names='- - T1CKPS T1OSCEN nT1SYNC TMR1CS TMR1ON' width='1 1 2 1 1 1 1')
+    stimulus (scl=rwb regfiles=w)
+sfr (key=TMR2 addr=0x11 size=1 access='rw rw rw rw rw rw rw rw')
+    reset (por='00000000' mclr='00000000')
+    bit (names='TMR2' width='8')
+    stimulus (scl=rwb type=int regfiles=w pcfiles=w)
+sfr (key=T2CON addr=0x12 size=1 access='u rw rw rw rw rw rw rw')
+    reset (por='-0000000' mclr='-0000000')
+    bit (names='- TOUTPS TMR2ON T2CKPS' width='1 4 1 2')
+    stimulus (scl=rwb regfiles=w)
+
+sfr (key=SSPBUF addr=0x13 size=1 access='rw rw rw rw rw rw rw rw')
+    reset (por='xxxxxxxx' mclr='uuuuuuuu')
+    bit (names='SSPBUF' width='8')
+    stimulus (scl=rwb type=int regfiles=rw pcfiles=rw)
+sfr (key=SSPCON addr=0x14 size=1 access='rw rw rw rw rw rw rw rw')
+    reset (por='00000000' mclr='00000000')
+    bit (names='WCOL SSPOV SSPEN CKP SSPM' width='1 1 1 1 4')
+    stimulus (scl=rwb regfiles=w pcfiles=rw)
+sfr (key=CCPR1 addr=0x15 size=2 flags=j)
+# The j flag means all these registers together form one larger register
+    bit (names='CCPR1' width='16')
+    stimulus (scl=rwb type=int regfiles=w)
+sfr (key=CCPR1L addr=0x15 size=1 access='rw rw rw rw rw rw rw rw')
+    reset (por='xxxxxxxx' mclr='uuuuuuuu')
+    bit (names='CCPR1L' width='8')
+    stimulus (scl=rwb type=int regfiles=w)
+sfr (key=CCPR1H addr=0x16 size=1 access='rw rw rw rw rw rw rw rw')
+    reset (por='xxxxxxxx' mclr='uuuuuuuu')
+    bit (names='CCPR1H' width='8')
+    stimulus (scl=rwb type=int regfiles=w)
+sfr (key=CCP1CON addr=0x17 size=1 access='u u rw rw rw rw rw rw')
+    reset (por='--000000' mclr='--000000')
+    bit (names='- - DC1B CCP1M' width='1 1 2 4')
+    stimulus (scl=rwb regfiles=w)
+sfr (key=RCSTA addr=0x18 size=1 access='rw rw rw rw u r r r')
+    reset (por='0000-00x' mclr='0000-00x')
+    bit (names='SPEN RX9 SREN CREN - FERR OERR RX9D')
+    stimulus (scl=rwb regfiles=w)
+sfr (key=TXREG addr=0x19 size=1 access='rw rw rw rw rw rw rw rw')
+    reset (por='00000000' mclr='00000000')
+    bit (names='TXREG' width='8')
+    stimulus (scl=rwb regfiles=w)
+sfr (key=RCREG addr=0x1A size=1 access='r r r r r r r r')
+    reset (por='00000000' mclr='00000000')
+    bit (names='RCREG' width='8')
+    stimulus (scl=rb regfiles=rp)
+sfr (key=CCPR2 addr=0x1B size=2 flags=j)
+# The j flag means all these registers together form one larger register
+    bit (names='CCPR2' width='16')
+    stimulus (scl=rwb type=int regfiles=w)
+sfr (key=CCPR2L addr=0x1B size=1 access='rw rw rw rw rw rw rw rw')
+    reset (por='xxxxxxxx' mclr='uuuuuuuu')
+    bit (names='CCPR2L' width='8')
+    stimulus (scl=rwb type=int regfiles=w)
+sfr (key=CCPR2H addr=0x1C size=1 access='rw rw rw rw rw rw rw rw')
+    reset (por='xxxxxxxx' mclr='uuuuuuuu')
+    bit (names='CCPR2H' width='8')
+    stimulus (scl=rwb type=int regfiles=w)
+sfr (key=CCP2CON addr=0x1D size=1 access='u u rw rw rw rw rw rw')
+    reset (por='--000000' mclr='--000000')
+    bit (names='- - DC2B CCP2M' width='1 1 2 4')
+    stimulus (scl=rwb regfiles=w)
+
+sfr (key=OPTION_REG addr=0x81 size=1 access='rw rw rw rw rw rw rw rw')
+    reset (por='11111111' mclr='11111111')
+    bit (names='nRBPU INTEDG T0CS T0SE PSA PS' width='1 1 1 1 1 3')
+    stimulus (scl=rwb regfiles=w)
+
+sfr (key=TRISA addr=0x85 size=1 access='u u rw rw rw rw rw rw')
+    reset (por='--111111' mclr='--111111')
+    bit (names='- - TRISA5 TRISA4 TRISA3 TRISA2 TRISA1 TRISA0')
+    bit (tag=scl names='TRISA' width='8')
+    stimulus (scl=rwb regfiles=w)    
+sfr (key=TRISB addr=0x86 size=1 access='rw rw rw rw rw rw rw rw')
+    reset (por='11111111' mclr='11111111')
+    bit (names='TRISB7 TRISB6 TRISB5 TRISB4 TRISB3 TRISB2 TRISB1 TRISB0')
+    bit (tag=scl names='TRISB' width='8')
+    stimulus (scl=rwb regfiles=w)    
+sfr (key=TRISC addr=0x87 size=1 access='rw rw rw rw rw rw rw rw')
+    reset (por='11111111' mclr='11111111')
+    bit (names='TRISC7 TRISC6 TRISC5 TRISC4 TRISC3 TRISC2 TRISC1 TRISC0')
+    bit (tag=scl names='TRISC' width='8')
+    stimulus (scl=rwb regfiles=w)
+sfr (key=TRISD addr=0x88 size=1 access='rw rw rw rw rw rw rw rw')
+    reset (por='11111111' mclr='11111111')
+    bit (names='TRISD7 TRISD6 TRISD5 TRISD4 TRISD3 TRISD2 TRISD1 TRISD0')
+    bit (tag=scl names='TRISD' width='8')
+    stimulus (scl=rwb regfiles=w)
+sfr (key=TRISE addr=0x89 size=1 access='r r rw rw u rw rw rw')
+    reset (por='0000-111' mclr='0000-111')
+    bit (names='IBF OBF IBOV PSPMODE - TRISE2 TRISE1 TRISE0')
+    bit (tag=scl names='TRISE' width='8')
+    stimulus (scl=rwb regfiles=w)
+
+sfr (key=PIE1 addr=0x8C size=1 access='rw u rw rw rw rw rw rw')
+    reset (por='0-000000' mclr='0-000000')
+    bit (names='PSPIE - RCIE TXIE SSPIE CCP1IE TMR2IE TMR1IE')
+    stimulus (scl=rwb regfiles=w pcfiles=rw)
+sfr (key=PIE2 addr=0x8D size=1 access='u u u u u u u rw')
+    reset (por='-------0' mclr='-------0')
+    bit (names='- - - - - - - CCP2IE')
+    stimulus (scl=rwb regfiles=w pcfiles=rw)
+sfr (key=PCON addr=0x8E size=1 access='u u u u u u rw rw')
+    reset (por='------qq' mclr='------uu')
+    bit (names='- - - - - - nPOR nBOR')
+    stimulus (scl=rwb regfiles=w)
+
+sfr (key=PR2 addr=0x92 size=1 access='rw rw rw rw rw rw rw rw')
+    reset (por='11111111' mclr='11111111')
+    bit (names='PR2' width='8')
+    stimulus (scl=rwb type=int regfiles=w)
+sfr (key=SSPADD addr=0x93 size=1 access='rw rw rw rw rw rw rw rw')
+    reset (por='00000000' mclr='00000000')
+    bit (names='SSPADD' width='8')
+    stimulus (scl=rwb type=int regfiles=w pcfiles=rw)
+# Bits are rw so they can be simulated
+# sfr (key=SSPSTAT addr=0x94 size=1 access='u u r r r r r r')
+sfr (key=SSPSTAT addr=0x94 size=1 access='u u rw rw rw rw rw rw')
+    reset (por='--000000' mclr='--000000')
+    bit (names='- - D/nA P S R/nW UA BF')
+
+sfr (key=TXSTA addr=0x98 size=1 access='rw rw rw rw u rw r rw')
+    reset (por='0000-010' mclr='0000-010')
+    bit (names='CSRC TX9 TXEN SYNC - BRGH TRMT TX9D')
+    stimulus (scl=rwb regfiles=w)
+sfr (key=SPBRG addr=0x99 size=1 access='rw rw rw rw rw rw rw rw')
+    reset (por='00000000' mclr='00000000')
+    bit (names='SPBRG' width='8')
+    stimulus (scl=rwb regfiles=w)
+
+
+                               # -------------------#
+#------------------------------# Configuration Bits #------------------------------------#
+                               # -------------------#
+
+cfgbits (key=CONFIG addr=0x2007 unused=0x80)
+    field (key=OSC mask=0x3 desc="Oscillator")
+        setting (req=0x3 value=0x3 desc="RC")
+        setting (req=0x3 value=0x0 desc="LP")
+        setting (req=0x3 value=0x1 desc="XT")
+        setting (req=0x3 value=0x2 desc="HS")
+    field (key=WDT mask=0x4 desc="Watchdog Timer")
+        setting (req=0x4 value=0x4 desc="On")
+        setting (req=0x4 value=0x0 desc="Off")
+    field (key=PUT mask=0x8 desc="Power Up Timer")
+        setting (req=0x8 value=0x8 desc="Off")
+	    conflict (addr=0x2007 mask=0x40 value=0x40 cfmsg=2)
+        setting (req=0x8 value=0x0 desc="On")
+    field (key=BODEN mask=0x40 desc="Brown Out Detect")
+        setting (req=0x40 value=0x40 desc="On")
+	    conflict (addr=0x2007 mask=0x08 value=0x08 cfmsg=2)
+        setting (req=0x40 value=0x0 desc="Off")
+    field (key=CP mask=0x3F30 desc="Code Protect")
+        setting (req=0x3F30 value=0x3F30 desc="Off")
+            checksum (type=0x0 protregion=0x00-0x00)
+        setting (req=0x3F30 value=0x2A20 desc="800:FFF")
+            checksum (type=0x20 protregion=0x800-0xFFF)
+        setting (req=0x3F30 value=0x1510 desc="400:FFF")
+            checksum (type=0x20 protregion=0x400-0xFFF)
+        setting (req=0x3F30 value=0x0 desc="All")
+            checksum (type=0x20 protregion=0x0-0xFFF)
+
+                               # ------------#
+#------------------------------# Peripherals #------------------------------------#
+                               # ------------#
+
+#--------------------------------------------------------------------------------
+# 				PORTA
+#--------------------------------------------------------------------------------
+peripheral (key=PORTA sfrs='TRISA PORTA' type=port)
+    iopin (key=RA0 dir=inout)
+    iopin (key=RA1 dir=inout)
+    iopin (key=RA2 dir=inout)
+    iopin (key=RA3 dir=inout)
+    iopin (key=RA4 dir=inout)
+    iopin (key=RA5 dir=inout)
+
+#--------------------------------------------------------------------------------
+# 				PORTB
+#--------------------------------------------------------------------------------
+peripheral (key=PORTB sfrs='TRISB PORTB' type=port)
+    iopin (key=RB0 dir=inout)
+        extint (key=INT0 enreg=INTCON enmask=0x10 flgreg=INTCON flgmask=0x02 prireg=NONE primask=0x00)
+    iopin (key=RB1 dir=inout)
+    iopin (key=RB2 dir=inout)
+    iopin (key=RB3 dir=inout)
+    iopin (key=RB4 dir=inout)
+        cnint (key=PORTIRQ enreg=INTCON enmask=0x08 flgreg=INTCON flgmask=0x01 prireg=NONE primask=0x01 cnkey=PORTIOC0)
+    iopin (key=RB5 dir=inout)
+        cnint (key=PORTIRQ enreg=INTCON enmask=0x08 flgreg=INTCON flgmask=0x01 prireg=NONE primask=0x01 cnkey=PORTIOC0)
+    iopin (key=RB6 dir=inout)
+        cnint (key=PORTIRQ enreg=INTCON enmask=0x08 flgreg=INTCON flgmask=0x01 prireg=NONE primask=0x01 cnkey=PORTIOC0)
+    iopin (key=RB7 dir=inout)
+        cnint (key=PORTIRQ enreg=INTCON enmask=0x08 flgreg=INTCON flgmask=0x01 prireg=NONE primask=0x01 cnkey=PORTIOC0)
+
+
+#--------------------------------------------------------------------------------
+# 				PORTC
+#--------------------------------------------------------------------------------
+
+peripheral (key=PORTC sfrs='TRISC PORTC' type=port)
+    iopin (key=RC0 dir=inout)
+    iopin (key=RC1 dir=inout)
+        cnpin (key=CCP2CN notify=CCP2)
+    iopin (key=RC2 dir=inout)
+        cnpin (key=CCP1CN notify=CCP1)
+    iopin (key=RC3 dir=inout)
+    iopin (key=RC4 dir=inout)
+    iopin (key=RC5 dir=inout)
+    iopin (key=RC6 dir=inout)
+    iopin (key=RC7 dir=inout)
+
+
+#--------------------------------------------------------------------------------
+# 				PORTD
+#--------------------------------------------------------------------------------
+
+peripheral (key=PORTD sfrs='TRISD PORTD' type=port)
+    iopin (key=RD0 dir=inout)
+    iopin (key=RD1 dir=inout)
+    iopin (key=RD2 dir=inout)
+    iopin (key=RD3 dir=inout)
+    iopin (key=RD4 dir=inout)
+    iopin (key=RD5 dir=inout)
+    iopin (key=RD6 dir=inout)
+    iopin (key=RD7 dir=inout)
+
+
+#--------------------------------------------------------------------------------
+# 				PORTE
+#--------------------------------------------------------------------------------
+
+peripheral (key=PORTE sfrs='TRISE PORTE' type=port)
+    iopin (key=RE0 dir=inout)
+    iopin (key=RE1 dir=inout)
+    iopin (key=RE2 dir=inout)
+
+#--------------------------------------------------------------------------------
+# 				TIMERs
+#--------------------------------------------------------------------------------
+peripheral (key=TMR0 sfrs='TMR0')
+    pinfunc (key=T0CKI port=RA4 dir=in)
+    interrupt (name=TMR0INT enreg=INTCON enmask=0x20 flgreg=INTCON flgmask=0x04 prireg=NONE primask=0x00)
+
+peripheral (key=TMR1 sfrs='TMR1H TMR1L T1CON')
+    pinfunc (key=T1CKI port=RC0 dir=in)
+    interrupt (name=TMR1INT enreg=PIE1 enmask=0x01 flgreg=PIR1 flgmask=0x01 prireg=NONE primask=0x00)
+
+peripheral (key=TMR2 sfrs='TMR2 PR2 T2CON')
+    interrupt (name=TMR2INT enreg=PIE1 enmask=0x02 flgreg=PIR1 flgmask=0x02 prireg=NONE primask=0x00)
+ 
+#--------------------------------------------------------------------------------
+# 				UARTs
+#--------------------------------------------------------------------------------
+
+peripheral (key=UART1 sfrs='SPBRG RCREG TXREG TXSTA RCSTA')
+    pinfunc (key=U1RX port=RC7 dir=in)
+    pinfunc (key=U1TX port=RC6 dir=out)
+    interrupt (name=RXINT1 enreg=PIE1 enmask=0x20 flgreg=PIR1 flgmask=0x20 prireg=NONE primask=0x00)
+    interrupt (name=TXINT1 enreg=PIE1 enmask=0x10 flgreg=PIR1 flgmask=0x10 prireg=NONE primask=0x00)
+
+
+#--------------------------------------------------------------------------------
+# 				CCP
+#--------------------------------------------------------------------------------
+
+peripheral (key=CCP1 sfrs='CCP1CON CCPR1L CCPR1H')
+    pinfunc (key=CCP1 port=RC2 dir=inout)
+    interrupt (name=CCP1INT enreg=PIE1 enmask=0x04 flgreg=PIR1 flgmask=0x04 prireg=NONE primask=0x00)
+    timers (addr=0x0 mask=0x00)
+        setting (val=0x00 cc=TMR1 pwm=TMR2)
+        setting (val=0x00 cc=TMR1 pwm=TMR2)
+        setting (val=0x00 cc=TMR1 pwm=TMR2)
+        setting (val=0x00 cc=TMR1 pwm=TMR2)
+
+peripheral (key=CCP2 sfrs='CCP2CON CCPR2L CCPR2H')
+    pinfunc (key=CCP2 port=RC1 dir=inout)
+    interrupt (name=CCP2INT enreg=PIE2 enmask=0x01 flgreg=PIR2 flgmask=0x01 prireg=NONE primask=0x00)
+    timers (addr=0x0 mask=0x00)
+        setting (val=0x00 cc=TMR1 pwm=TMR2)
+        setting (val=0x00 cc=TMR1 pwm=TMR2)
+        setting (val=0x00 cc=TMR1 pwm=TMR2)
+        setting (val=0x00 cc=TMR1 pwm=TMR2)
+
+#--------------------------------------------------------------------------------
+# 				OSC
+#--------------------------------------------------------------------------------
+
+peripheral (key=OSC)
+    pinfunc (key=T1OSCI port=RC0 dir=in)
+        nextp (nextperiph=TMR1 nextpin=T1CKI)
+    pinfunc (key=T1OSCO port=RC1 dir=out)
+
+
+peripheral (key=I2C)
+
+peripheral (key=PSP)
+
+
+#--------------------------------------------------------------------------------
+# 				CORE
+#--------------------------------------------------------------------------------
+peripheral (key=CORE sfrs='PCON')

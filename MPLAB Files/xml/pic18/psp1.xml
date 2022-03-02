@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE featureDefinitions SYSTEM "../featureDefinitions.dtd">
+<featureDefinitions name="PSP" iconName="PSP" helpIndex="">
+
+  <userControlGroup name="none" caption="none">
+    <userControlSubGroup name="none" caption="none">
+
+      <userControl name="applyButton">
+        <dialogConfig type="applyButton" caption="none"/>
+        <userAction name="apply">
+          <claimResource type="pin" pin="RD0" polarity="Inp"/>
+          <claimResource type="pin" pin="RD1" polarity="Inp"/>
+          <claimResource type="pin" pin="RD2" polarity="Inp"/>
+          <claimResource type="pin" pin="RD3" polarity="Inp"/>
+          <claimResource type="pin" pin="RD4" polarity="Inp"/>
+          <claimResource type="pin" pin="RD5" polarity="Inp"/>
+          <claimResource type="pin" pin="RD6" polarity="Inp"/>
+          <claimResource type="pin" pin="RD7" polarity="Inp"/>
+          <claimResource type="pin" pin="RE0" polarity="Inp"/>
+          <claimResource type="pin" pin="RE1" polarity="Inp"/>
+          <claimResource type="pin" pin="RE2" polarity="Inp"/>
+        </userAction>
+      </userControl>
+
+    </userControlSubGroup>
+  </userControlGroup>
+
+  <userControlGroup name="none" caption="none">
+    <userControlSubGroup name="none" caption="none">
+
+      <userControl name="enable">
+        <dialogConfig type="CK" caption="Enable on Startup"/>
+        <userAction name="enable">
+          <claimResource type="register" registerField="PSPMODE" value="1"/>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="PSPMODE" value="0"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="interruptEnable" enableForInt="PSP">
+        <dialogConfig type="CK" caption="Enable Interrupt on Startup"/>
+        <userAction name="enable">
+          <claimResource type="register" registerField="PSPIE" value="1"/>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="PSPIE" value="0"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="interruptPriority" priorityForInt="PSP">
+        <dialogConfig type="CB" caption="Interrupt Priority">
+          <selection name="priorityLevelToHigh" value="High"/>
+          <selection name="priorityLevelToLow" value="Low"/>
+        </dialogConfig>
+        <userAction>
+          <claimResource type="register" registerField="PSPIP" value="0"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PSPIP" value="1"/>
+        </userAction>
+      </userControl>
+
+    </userControlSubGroup>
+  </userControlGroup>
+
+</featureDefinitions>

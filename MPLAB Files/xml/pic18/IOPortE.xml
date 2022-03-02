@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<!DOCTYPE featureDefinitions SYSTEM "../featureDefinitions.dtd"[]>
+<featureDefinitions name="IOPort" iconName="IOPort" helpIndex="">
+	<userControlGroup name="none" caption="none">
+		<userControlSubGroup name="none" caption="none">
+			<userControl name="applyButton">
+				<dialogConfig type="applyButton" caption="none"></dialogConfig>
+				<userAction name="apply"></userAction>
+			</userControl>
+		</userControlSubGroup>
+	</userControlGroup>
+	<userControlGroup name="portPinSettings" caption="Port Pin Settings">
+		<userControlSubGroup name="RE0" caption="RE0">
+			<userControl name="dataDirection0">
+				<dialogConfig type="CB" caption="Data Direction 0">
+					<selection name="unclaimed" value="Unclaimed"></selection>
+					<selection name="input" value="Input"></selection>
+					<selection name="output" value="Output"></selection>
+				</dialogConfig>
+				<userAction name="output">
+					<claimResource type="register" registerField="TRISE0" value="0"></claimResource>
+					<claimResource type="pin" pin="RE0" polarity="Out"></claimResource>
+				</userAction>
+				<userAction name="input">
+					<claimResource type="register" registerField="TRISE0" value="1"></claimResource>
+					<claimResource type="pin" pin="RE0" polarity="Inp"></claimResource>
+				</userAction>
+				<userAction name="unclaimed">
+					<claimResource type="pin" flag="unclaim" pin="RE0" polarity="Out"></claimResource>
+				</userAction>
+			</userControl>
+			<userControl name="initialValue0">
+				<dialogConfig type="CB" caption="Initial Value 0">
+					<selection name="initValue0" value="0"></selection>
+					<selection name="initValue1" value="1"></selection>
+				</dialogConfig>
+				<userAction name="initValue1">
+					<claimResource type="register" registerField="PORTE0" value="1"></claimResource>
+					<claimResource type="register" registerField="LATE0" value="1"></claimResource>
+				</userAction>
+				<userAction name="initValue0">
+					<claimResource type="register" registerField="PORTE0" value="0"></claimResource>
+					<claimResource type="register" registerField="LATE0" value="0"></claimResource>
+				</userAction>
+			</userControl>
+		</userControlSubGroup>
+		<userControlSubGroup name="RE1" caption="RE1">
+			<userControl name="dataDirection1">
+				<dialogConfig type="CB" caption="Data Direction 1">
+					<selection name="unclaimed" value="Unclaimed"></selection>
+					<selection name="input" value="Input"></selection>
+					<selection name="output" value="Output"></selection>
+				</dialogConfig>
+				<userAction name="output">
+					<claimResource type="register" registerField="TRISE1" value="0"></claimResource>
+					<claimResource type="pin" pin="RE1" polarity="Out"></claimResource>
+				</userAction>
+				<userAction name="input">
+					<claimResource type="register" registerField="TRISE1" value="1"></claimResource>
+					<claimResource type="pin" pin="RE1" polarity="Inp"></claimResource>
+				</userAction>
+				<userAction name="unclaimed">
+					<claimResource type="pin" flag="unclaim" pin="RE1" polarity="Out"></claimResource>
+				</userAction>
+			</userControl>
+			<userControl name="initialValue1">
+				<dialogConfig type="CB" caption="Initial Value 1">
+					<selection name="initValue0" value="0"></selection>
+					<selection name="initValue1" value="1"></selection>
+				</dialogConfig>
+				<userAction name="initValue1">
+					<claimResource type="register" registerField="PORTE1" value="1"></claimResource>
+					<claimResource type="register" registerField="LATE1" value="1"></claimResource>
+				</userAction>
+				<userAction name="initValue0">
+					<claimResource type="register" registerField="PORTE1" value="0"></claimResource>
+					<claimResource type="register" registerField="LATE1" value="0"></claimResource>
+				</userAction>
+			</userControl>
+		</userControlSubGroup>
+		<userControlSubGroup name="RE2" caption="RE2">
+			<userControl name="dataDirection2">
+				<dialogConfig type="CB" caption="Data Direction 2">
+					<selection name="unclaimed" value="Unclaimed"></selection>
+					<selection name="input" value="Input"></selection>
+					<selection name="output" value="Output"></selection>
+				</dialogConfig>
+				<userAction name="output">
+					<claimResource type="register" registerField="TRISE2" value="0"></claimResource>
+					<claimResource type="pin" pin="RE2" polarity="Out"></claimResource>
+				</userAction>
+				<userAction name="input">
+					<claimResource type="register" registerField="TRISE2" value="1"></claimResource>
+					<claimResource type="pin" pin="RE2" polarity="Inp"></claimResource>
+				</userAction>
+				<userAction name="unclaimed">
+					<claimResource type="pin" flag="unclaim" pin="RE2" polarity="Out"></claimResource>
+				</userAction>
+			</userControl>
+			<userControl name="initialValue2">
+				<dialogConfig type="CB" caption="Initial Value 2">
+					<selection name="initValue0" value="0"></selection>
+					<selection name="initValue1" value="1"></selection>
+				</dialogConfig>
+				<userAction name="initValue1">
+					<claimResource type="register" registerField="PORTE2" value="1"></claimResource>
+					<claimResource type="register" registerField="LATE2" value="1"></claimResource>
+				</userAction>
+				<userAction name="initValue0">
+					<claimResource type="register" registerField="PORTE2" value="0"></claimResource>
+					<claimResource type="register" registerField="LATE2" value="0"></claimResource>
+				</userAction>
+			</userControl>
+		</userControlSubGroup>
+		<userControlSubGroup name="RE3" caption="RE3">
+			<userControl name="dataDirection3">
+				<dialogConfig type="CB" caption="Data Direction 3">
+					<selection name="unclaimed" value="Unclaimed"></selection>
+					<selection name="input" value="Input"></selection>
+				</dialogConfig>
+				<userAction name="input">
+					<claimResource type="pin" pin="RE3" polarity="Inp"></claimResource>
+				</userAction>
+				<userAction name="unclaimed">
+					<claimResource type="pin" flag="unclaim" pin="RE3" polarity="Inp"></claimResource>
+				</userAction>
+			</userControl>
+			<userControl name="initialValue3">
+				<dialogConfig type="CB" caption="Initial Value 3">
+					<selection name="initValue0" value="0"></selection>
+					<selection name="initValue1" value="1"></selection>
+				</dialogConfig>
+				<userAction name="initValue1">
+					<claimResource type="register" registerField="PORTE3" value="1"></claimResource>
+					<claimResource type="register" registerField="LATE3" value="1"></claimResource>
+				</userAction>
+				<userAction name="initValue0">
+					<claimResource type="register" registerField="PORTE3" value="0"></claimResource>
+					<claimResource type="register" registerField="LATE3" value="0"></claimResource>
+				</userAction>
+			</userControl>
+		</userControlSubGroup>
+	</userControlGroup>
+</featureDefinitions>

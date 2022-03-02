@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE pinDefinitions SYSTEM "../pinDefinitions.dtd">
+<pinDefinitions bitmap="20-Pin PDIP" height="240" width="260" type="DIP" numberOfPins="20" numberOfSides="2" topLeftX="0" leftTopY="17" pinHeight="20" pinWidth="12" pinSpacing="10" pin1Side="0" pin1Pos="0">
+
+  <pin number="1" name="VDD" initConnection="unaccessible">
+    <connection type="other" name="VDD" polarity="P" desc="Positive Supply for Logic and I/O Pins"></connection>
+  </pin>
+
+  <pin number="2" name="RA5/T1CKI/OSC1/CLKIN" initConnection="none">
+    <connection type="IOPort" name="RA5" feature="IOPort" port="A" pin="5" polarity="I/O" desc="PORTA bidirectional I/O Port Pin 5"></connection>
+    <connection type="periph" name="T1CKI" feature="Timer" instance="1" polarity="Inp" desc="Timer 1 exernal clock input"></connection>
+    <connection type="other" name="OSC1" polarity="Inp" desc="Oscillator Crystal Input"></connection>
+    <connection type="other" name="CLKIN" polarity="Inp" desc="Ext Clock Source Input"></connection>
+  </pin>
+
+  <pin number="3" name="RA4/AN3/T1G/OSC2/CLKOUT" initConnection="none">
+    <connection type="IOPort" name="RA4" feature="IOPort" port="A" pin="4" polarity="I/O" desc="PORTA bidirectional I/O Port Pin 4"></connection>
+    <connection type="periph" name="AN3" feature="A2D" instance="1" polarity="Inp" desc="Analog Input"></connection>
+    <connection type="periph" name="T1G" feature="T1 Gate" instance="1" polarity="Inp" desc="Timer1 Gate Input"></connection>
+    <connection type="other" name="OSC2" polarity="I/O" desc="Oscillator Crystal Output"></connection>
+    <connection type="other" name="CLKOUT" polarity="Inp" desc="Instruction Clock Output"></connection>
+  </pin>
+
+  <pin number="4" name="RA3/MCLR-L/VPP" initConnection="none">
+    <connection type="IOPort" name="RA3" feature="IOPort" port="A" pin="3" polarity="Inp" desc="PORTA Input Only I/O Port Pin 3"></connection>
+    <connection type="other" name="MCLR-L" polarity="I/P" desc="Active low Master Clear Reset Input"></connection>
+    <connection type="other" name="VPP" polarity="I/P" desc="Programming Voltage Input"></connection>
+  </pin>
+
+  <pin number="5" name="RC5/CCP1" initConnection="none">
+    <connection type="IOPort" name="RC5" feature="IOPort" port="C" pin="5" polarity="I/O" desc="PORTC bidirectional I/O Port Pin 5"></connection>
+    <connection type="periph" name="CCP1" feature="CCP" instance="1" pin="1" polarity="I/O" desc="Capture in, Compare out, or PWM out"></connection>
+  </pin>
+
+  <pin number="6" name="RC4/C2OUT/PH2" initConnection="none">
+    <connection type="IOPort" name="RC4" feature="IOPort" port="C" pin="4" polarity="I/O" desc="PORTC bidirectional I/O Port Pin 4"></connection>
+    <connection type="periph" name="C2OUT" feature="Comparator" instance="1" polarity="Inp" desc="Comparator2 Output"></connection>
+    <connection type="periph" name="PH2" feature="Two Phase PWM" instance="0" polarity="Out" desc="Two Phase PWM Output Channel 2"></connection>
+  </pin>
+
+  <pin number="7" name="RC3/AN7/C12IN3-/OP1" initConnection="none">
+    <connection type="IOPort" name="RC3" feature="IOPort" port="C" pin="3" polarity="I/O" desc="PORTC bidirectional I/O Port Pin 3"></connection>
+    <connection type="periph" name="AN7" feature="A2D" instance="1" polarity="Inp" desc="Analog Input"></connection>
+    <connection type="periph" name="C12IN3-" feature="Comparator" instance="1" polarity="Inp" desc="Comparator Inverting Input Pin"></connection>
+    <connection type="periph" name="OP1" feature="OpAmp" instance="1" polarity="Out" desc="OpAmp1 Output"></connection>
+  </pin>
+
+  <pin number="8" name="RC6/AN8/OP1-" initConnection="none">
+    <connection type="IOPort" name="RC6" feature="IOPort" port="C" pin="6" polarity="I/O" desc="PORTC bidirectional I/O Port Pin 6"></connection>
+    <connection type="periph" name="AN8" feature="A2D" instance="1" polarity="Inp" desc="Analog Input"></connection>
+    <connection type="periph" name="OP1-" feature="OpAmp" instance="1" polarity="Inp" desc="OpAmp1 Inverting Input"></connection>
+  </pin>
+
+  <pin number="9" name="RC7/AN9/OP1+" initConnection="none">
+    <connection type="IOPort" name="RC7" feature="IOPort" port="C" pin="7" polarity="I/O" desc="PORTC bidirectional I/O Port Pin 7"></connection>
+    <connection type="periph" name="AN9" feature="A2D" instance="1" polarity="Inp" desc="Analog Input"></connection>
+    <connection type="periph" name="OP1+" feature="OpAmp" instance="1" polarity="Inp" desc="OpAmp1 Non-Inverting Input"></connection>
+  </pin>
+
+  <pin number="10" name="RB7/SYNC" initConnection="none">
+    <connection type="IOPort" name="RB7" feature="IOPort" port="B" pin="7" polarity="I/O" desc="PORTB bidirectional I/O Port Pin 7"></connection>
+    <connection type="periph" name="SYNC" feature="Two Phase PWM" instance="1" polarity="Inp" desc="Two Phase PWM Synchronization Input"></connection>
+  </pin>
+
+  <pin number="11" name="RB6" initConnection="none">
+    <connection type="IOPort" name="RB6" feature="IOPort" port="B" pin="6" polarity="I/O" desc="PORTB bidirectional I/O Port Pin 6"></connection>
+  </pin>
+
+  <pin number="12" name="RB5/AN11/OP2+" initConnection="none">
+    <connection type="IOPort" name="RB5" feature="IOPort" port="B" pin="5" polarity="I/O" desc="PORTB bidirectional I/O Port Pin 5"></connection>
+    <connection type="periph" name="AN11" feature="A2D" instance="1" polarity="Inp" desc="Analog Input"></connection>
+    <connection type="periph" name="OP2+" feature="OpAmp" instance="1" polarity="Inp" desc="OpAmp2 Non-Inverting Input"></connection>
+  </pin>
+
+  <pin number="13" name="RB4/AN10/OP2-" initConnection="none">
+    <connection type="IOPort" name="RB4" feature="IOPort" port="B" pin="4" polarity="I/O" desc="PORTB bidirectional I/O Port Pin 4"></connection>
+    <connection type="periph" name="AN10" feature="A2D" instance="1" polarity="Inp" desc="Analog Input"></connection>
+    <connection type="periph" name="OP2-" feature="OpAmp" instance="1" polarity="Inp" desc="OpAmp2 Inverting Input"></connection>
+  </pin>
+
+  <pin number="14" name="RC2/AN6/C12IN2-/OP2" initConnection="none">
+    <connection type="IOPort" name="RC2" feature="IOPort" port="C" pin="2" polarity="I/O" desc="PORTC bidirectional I/O Port Pin 2"></connection>
+    <connection type="periph" name="AN6" feature="A2D" instance="1" polarity="Inp" desc="Analog Input"></connection>
+    <connection type="periph" name="C12IN2-" feature="Comparator" instance="1" polarity="Inp" desc="Comparator Inverting Input Pin"></connection>
+    <connection type="periph" name="OP2" feature="OpAmp" instance="1" polarity="Out" desc="OpAmp2 Output"></connection>
+  </pin>
+
+  <pin number="15" name="RC1/AN5/C12IN1-/PH1" initConnection="none">
+    <connection type="IOPort" name="RC1" feature="IOPort" port="C" pin="1" polarity="I/O" desc="PORTC bidirectional I/O Port Pin 1"></connection>
+    <connection type="periph" name="AN5" feature="A2D" instance="1" polarity="Inp" desc="Analog Input"></connection>
+    <connection type="periph" name="C12IN1-" feature="Comparator" instance="1" polarity="Inp" desc="Comparator Inverting Input Pin"></connection>
+    <connection type="periph" name="PH1" feature="Two Phase PWM" instance="1" polarity="Out" desc="Two Phase PWM Phase1 Output"></connection>
+  </pin>
+
+  <pin number="16" name="RC0/AN4/C2IN+" initConnection="none">
+    <connection type="IOPort" name="RC0" feature="IOPort" port="C" pin="0" polarity="I/O" desc="PORTC bidirectional I/O Port Pin 0"></connection>
+    <connection type="periph" name="AN4" feature="A2D" instance="1" polarity="Inp" desc="Analog Input"></connection>
+    <connection type="periph" name="C2IN+" feature="Comparator" instance="1" polarity="Inp" desc="Comparator2 Non-Inverting Input Pin"></connection>
+  </pin>
+
+  <pin number="17" name="RA2/AN2/T0CKI/INT/C1OUT" initConnection="none">
+    <connection type="IOPort" name="RA2" feature="IOPort" port="A" pin="2" polarity="I/O" desc="PORTA bidirectional I/O Port Pin 2"></connection>
+    <connection type="periph" name="AN2" feature="A2D" instance="1" polarity="Inp" desc="Analog Input"></connection>
+    <connection type="periph" name="T0CKI" feature="Timer" instance="0" polarity="Inp" desc="Timer 0 exernal clock input"></connection>
+    <connection type="periph" name="INT" feature="ExtInt" instance="1" polarity="Inp" desc="External Interrupt"></connection>
+    <connection type="periph" name="C1OUT" feature="Comparator" instance="1" polarity="Out" desc="Comparator1 Output Pin"></connection>
+  </pin>
+
+  <pin number="18" name="RA1/AN1/C12IN0-/VREF/ICSPCLK" initConnection="none">
+    <connection type="IOPort" name="RA1" feature="IOPort" port="A" pin="1" polarity="I/O" desc="PORTA bidirectional I/O Port Pin 1"></connection>
+    <connection type="periph" name="AN1" feature="A2D" instance="1" polarity="Inp" desc="Analog Input"></connection>
+    <connection type="periph" name="C12IN0-" feature="Comparator" instance="1" polarity="Inp" desc="Comparator Inverting Input Pin"></connection>
+    <connection type="periph" name="VREF" feature="Comparator" instance="1" polarity="Out" desc="Comparator Voltage Reference Output Pin"></connection>
+    <connection type="other" name="ICSPCLK" feature="IOPort" port="A" pin="1" polarity="Inp" desc="ICSP Programming Clock Input Pin"></connection>
+  </pin>
+
+  <pin number="19" name="RA0/AN0/C1IN+/ICSPDAT" initConnection="none">
+    <connection type="IOPort" name="RA0" feature="IOPort" port="A" pin="0" polarity="I/O" desc="PORTA bidirectional I/O Port Pin 0"></connection>
+    <connection type="periph" name="AN0" feature="A2D" instance="1" polarity="Inp" desc="Analog Input"></connection>
+    <connection type="periph" name="C1IN+" feature="Comparator" instance="1" polarity="Inp" desc="Comparator1 Non-Inverting Input Pin"></connection>
+    <connection type="other" name="ICSPDAT" feature="IOPort" port="A" pin="0" polarity="Inp" desc="ICSP Programming Data bidirectional I/O Port Pin"></connection>
+  </pin>
+
+  <pin number="20" name="VSS" initConnection="unaccessible">
+    <connection type="other" name="VSS" polarity="P" desc="Gnd Ref for Logic and I/O Pins"></connection>
+  </pin>
+
+</pinDefinitions>

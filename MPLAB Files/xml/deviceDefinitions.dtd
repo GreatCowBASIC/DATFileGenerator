@@ -1,0 +1,103 @@
+<!-- This is a DTD for the <deficeDefinitions> vocabulary as we received it -->
+<!-- from Sunrise.  I changed the XML documents in only one way in order to -->
+<!-- write a slightly tighter DTD: I removed @comment attributes from both -->
+<!-- the <operatingTemperature> and <group> elements and replaced them with -->
+<!-- regular XML comments. -->
+
+<!-- There are a number of attributes that the vocabulary handler -->
+<!-- completely ignores, but are in the documents nonetheless.  I have -->
+<!-- marked these attributes with an 'ignored' comment down below. -->
+
+<!ELEMENT deviceDefinitions (
+  (dynamicDutyMap?), operatingTemperature, memory, resources, packageList,
+  codeTemplate, errata, dataSheet, programRef, familyRef, features, features
+)>
+<!ATTLIST deviceDefinitions
+  name CDATA #REQUIRED
+  rev CDATA #REQUIRED
+  type CDATA #REQUIRED
+  family CDATA #REQUIRED
+>
+
+<!ELEMENT operatingTemperature (temperature+)>
+
+<!ELEMENT temperature (voltage+)>
+<!ATTLIST temperature minmax CDATA #REQUIRED>
+
+<!ELEMENT voltage (frequency+)>
+<!ATTLIST voltage minmax CDATA #REQUIRED>
+
+<!ELEMENT frequency EMPTY>
+<!ATTLIST frequency minmax CDATA #REQUIRED>
+
+<!ELEMENT memory EMPTY>
+<!ATTLIST memory
+  RAM CDATA #REQUIRED
+  programFLASH CDATA #REQUIRED
+  EEPROM CDATA #REQUIRED
+>
+
+<!ELEMENT resources (pinDefinitions, interrupts, configurationRegisters)>
+
+<!ELEMENT pinDefinitions EMPTY>
+<!ATTLIST pinDefinitions name CDATA #REQUIRED>
+
+<!ELEMENT interrupts EMPTY>
+<!ATTLIST interrupts
+  name CDATA #REQUIRED
+  IVTStart CDATA #REQUIRED
+  AIVTStart CDATA #REQUIRED
+  SFRAddressSize CDATA #REQUIRED
+>
+<!-- Note: @IVTStart, @AIVTStart, and @SFRAddressSize are all ignored by -->
+<!-- the vocab handler. -->
+
+<!ELEMENT configurationRegisters EMPTY>
+<!ATTLIST configurationRegisters name CDATA #REQUIRED>
+
+<!ELEMENT packageList (type+)>
+
+<!ELEMENT type EMPTY>
+<!ATTLIST type name CDATA #REQUIRED>
+
+<!ELEMENT codeTemplate EMPTY>
+<!ATTLIST codeTemplate name CDATA #REQUIRED>
+
+<!ELEMENT errata EMPTY>
+<!ATTLIST errata name CDATA #REQUIRED>
+
+<!ELEMENT dataSheet EMPTY>
+<!ATTLIST dataSheet name CDATA #REQUIRED>
+
+<!ELEMENT programRef EMPTY>
+<!ATTLIST programRef name CDATA #REQUIRED>
+
+<!ELEMENT familyRef EMPTY>
+<!ATTLIST familyRef name CDATA #REQUIRED>
+
+<!ELEMENT features (group*)>
+<!ATTLIST features
+  type CDATA #REQUIRED
+>
+
+<!ELEMENT group (feature*)>
+<!ATTLIST group
+  name CDATA #REQUIRED
+  type CDATA #IMPLIED
+  caption CDATA #IMPLIED
+  oldtype CDATA #IMPLIED
+>
+<!-- Note: The @oldtype attribute is ignored by the vocab handler. -->
+
+<!ELEMENT feature EMPTY>
+<!ATTLIST feature
+  name CDATA #REQUIRED
+  caption CDATA #REQUIRED
+  file CDATA #REQUIRED
+  feature CDATA #REQUIRED
+  image CDATA #REQUIRED
+  instance CDATA #IMPLIED
+  oldinstance CDATA #IMPLIED
+>
+<!-- Note: Both @instance and @oldinstance are ignored by the vocab -->
+<!-- handler. -->

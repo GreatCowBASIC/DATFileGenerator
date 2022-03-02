@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<!DOCTYPE interrupts SYSTEM "../interrupts.dtd">
+<!-- Modified For MSSP & PSP by v-soft 05/18/2005 -->
+<interrupts>
+
+<interrupt intNumber="0" vectorNumber="8" source="INT0" ISRName="External Interrupt 0" type="extern" instance="1" initAddress="0x000012"/>
+<interrupt intNumber="1" vectorNumber="9" source="T0" ISRName="Timer 0" type="periph" feature="Timer" instance="0" initAddress="0x000014"/>
+<interrupt intNumber="2" vectorNumber="10" source="T1" ISRName="Timer 1" type="periph" feature="Timer" instance="1" initAddress="0x000018"/>
+<interrupt intNumber="3" vectorNumber="11" source="T2" ISRName="Timer 2" type="periph" feature="Timer" instance="2" initAddress="0x00001E"/>
+<interrupt intNumber="4" vectorNumber="12" source="T3" ISRName="Timer 3" type="periph" feature="Timer" instance="3" initAddress="0x000020"/>
+<interrupt intNumber="5" vectorNumber="13" source="U1RX" ISRName="UART 1 Receiver" type="periph" feature="UART" instance="1" initAddress="0x000024"/>
+<interrupt intNumber="6" vectorNumber="14" source="U1TX" ISRName="UART 1 Transmitter" type="periph" feature="UART" instance="1" initAddress="0x000026"/>
+<interrupt intNumber="7" vectorNumber="15" source="AD" ISRName="A to D Converter Done" type="periph" feature="A2D" instance="1" initAddress="0x000028"/>
+<interrupt intNumber="8" vectorNumber="16" source="INT1" ISRName="External Interrupt 1" type="extern" instance="2" initAddress="0x000030"/>
+<interrupt intNumber="9" vectorNumber="17" source="T4" ISRName="Timer 4" type="periph" feature="Timer" instance="4" initAddress="0x00003A"/>
+<interrupt intNumber="10" vectorNumber="18" source="INT2" ISRName="External Interrupt 2" type="extern" instance="3" initAddress="0x00003E"/>
+<interrupt intNumber="11" vectorNumber="19" source="U2RX" ISRName="UART 2 Receiver" type="periph" feature="UART" instance="2" initAddress="0x000040"/>
+<interrupt intNumber="12" vectorNumber="20" source="U2TX" ISRName="UART 2 Transmitter" type="periph" feature="UART" instance="2" initAddress="0x000042"/>
+<interrupt intNumber="13" vectorNumber="21" source="INT3" ISRName="External Interrupt 3" type="extern" instance="4" initAddress="0x000058"/>
+<interrupt intNumber="14" vectorNumber="22" source="INT4" ISRName="External Interrupt 4" type="extern" instance="5" initAddress="0x00005A"/>
+<interrupt intNumber="15" vectorNumber="23" source="LVD" ISRName="Low Voltage Detect" type="periph" feature="LVD" instance="1" initAddress="0x000062"/>
+<interrupt intNumber="16" vectorNumber="24" source="IVR" ISRName="CAN Invalid Msg" type="periph" feature="CAN" instance="1" initAddress="0x000046"/>
+<interrupt intNumber="17" vectorNumber="25" source="WAK" ISRName="CAN Bus Wakeup" type="periph" feature="CAN" instance="1" initAddress="0x000046"/>
+<interrupt intNumber="18" vectorNumber="26" source="ERR" ISRName="CAN Error" type="periph" feature="CAN" instance="1" initAddress="0x000046"/>
+<interrupt intNumber="19" vectorNumber="27" source="TX2" ISRName="CAN Tx Buff 2" type="periph" feature="CAN" instance="1" initAddress="0x000046"/>
+<interrupt intNumber="20" vectorNumber="28" source="TX1" ISRName="CAN Tx Buff 1" type="periph" feature="CAN" instance="1" initAddress="0x000046"/>
+<interrupt intNumber="21" vectorNumber="29" source="TX0" ISRName="CAN Tx Buff 0" type="periph" feature="CAN" instance="1" initAddress="0x000046"/>
+<interrupt intNumber="22" vectorNumber="30" source="RX1" ISRName="CAN Rx Buff 1" type="periph" feature="CAN" instance="1" initAddress="0x000046"/>
+<interrupt intNumber="23" vectorNumber="31" source="RX0" ISRName="CAN Rx Buff 0" type="periph" feature="CAN" instance="1" initAddress="0x000046"/>
+<interrupt intNumber="24" vectorNumber="TBD" source="SPI1" ISRName="Serial Peripheral 1" type="periph" feature="SPI" instance="1" initAddress="TBD"/>
+<interrupt intNumber="25" vectorNumber="TBD" source="I2C" ISRName="I2C Transfer Complete" type="periph" feature="I2C" instance="1" initAddress="TBD"/>
+<interrupt intNumber="26" vectorNumber="TBD" source="PSP" ISRName="Parallel Slave Port " type="periph" feature="PSP"  instance="1" initAddress="TBD" />
+
+</interrupts>

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE featureDefinitions SYSTEM "../featureDefinitions.dtd">
+<featureDefinitions name="WDT" iconName="WDT" helpIndex="">
+
+  <userControlGroup name="none" caption="none">
+    <userControlSubGroup name="none" caption="none">
+
+      <userControl name="applyButton">
+        <dialogConfig type="applyButton" caption="none"/>
+        <userAction name="apply"/>
+      </userControl>
+
+    </userControlSubGroup>
+  </userControlGroup>
+
+  <userControlGroup name="none" caption="none">
+    <userControlSubGroup name="none" caption="none">
+
+      <userControl name="EnableCondition">
+        <dialogConfig type="CB" caption="Program enable">
+          <selection name="FuseCtrlEnabled" value="Fuse Controlled, Enabled"/>
+          <selection name="SoftCtrlEnabled" value="Software Controlled, Enabled"/>
+          <selection name="SoftCtrlDisabled" value="Software Controlled, Disabled"/>
+        </dialogConfig>
+        <userAction>
+          <claimResource type="register" registerField="WDTE" value="0"/>
+          <claimResource type="register" registerField="SWDTEN" value="0"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="WDTE" value="0"/>
+          <claimResource type="register" registerField="SWDTEN" value="1"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="WDTE" value="1"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="Prescale">
+        <dialogConfig type="CB" caption="WDT Prescaler">
+          <selection name="DivBy32" value="1:32"/>
+          <selection name="DivBy64" value="1:64"/>
+          <selection name="DivBy128" value="1:128"/>
+          <selection name="DivBy256" value="1:256"/>
+          <selection name="DivBy512" value="1:512"/>
+          <selection name="DivBy1024" value="1:1024"/>
+          <selection name="DivBy2048" value="1:2048"/>
+          <selection name="DivBy4096" value="1:4096"/>
+          <selection name="DivBy8192" value="1:8192"/>
+          <selection name="DivBy16384" value="1:16384"/>
+          <selection name="DivBy32768" value="1:32768"/>
+          <selection name="DivBy65536" value="1:65535"/>
+        </dialogConfig>
+        <userAction>
+          <claimResource type="register" registerField="WDTPS" value="1011"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="WDTPS" value="1010"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="WDTPS" value="1001"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="WDTPS" value="1000"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="WDTPS" value="0111"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="WDTPS" value="0110"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="WDTPS" value="0101"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="WDTPS" value="0100"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="WDTPS" value="0011"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="WDTPS" value="0010"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="WDTPS" value="0001"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="WDTPS" value="0000"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="Postscale">
+        <dialogConfig type="CB" caption="WDT Postscaler">
+          <selection name="DivBy1" value="1:1"/>
+          <selection name="DivBy2" value="1:2"/>
+          <selection name="DivBy4" value="1:4"/>
+          <selection name="DivBy8" value="1:8"/>
+          <selection name="DivBy16" value="1:16"/>
+          <selection name="DivBy32" value="1:32"/>
+          <selection name="DivBy64" value="1:64"/>
+          <selection name="DivBy128" value="1:128"/>
+        </dialogConfig>
+        <userAction>
+          <claimResource type="register" registerField="PS" value="111"/>
+          <claimResource type="register" registerField="PSA" value="1"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PS" value="110"/>
+          <claimResource type="register" registerField="PSA" value="1"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PS" value="101"/>
+          <claimResource type="register" registerField="PSA" value="1"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PS" value="100"/>
+          <claimResource type="register" registerField="PSA" value="1"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PS" value="011"/>
+          <claimResource type="register" registerField="PSA" value="1"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PS" value="010"/>
+          <claimResource type="register" registerField="PSA" value="1"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PS" value="001"/>
+          <claimResource type="register" registerField="PSA" value="1"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PS" value="000"/>
+          <claimResource type="register" registerField="PSA" value="1"/>
+        </userAction>
+      </userControl>
+
+    </userControlSubGroup>
+  </userControlGroup>
+
+</featureDefinitions>

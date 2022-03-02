@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE featureDefinitions SYSTEM "../featureDefinitions.dtd">
+<featureDefinitions name="CCPIC" iconName="IC" helpIndex="">
+
+  <userControlGroup name="none" caption="none">
+    <userControlSubGroup name="none" caption="none">
+
+      <userControl name="applyButton">
+        <dialogConfig type="applyButton" caption="none"/>
+        <userAction name="apply">
+          <claimResource type="pin" pin="CCP%instance%" polarity="Out"/>
+        </userAction>
+      </userControl>
+
+    </userControlSubGroup>
+  </userControlGroup>
+
+  <userControlGroup name="none" caption="none">
+    <userControlSubGroup name="none" caption="none">
+
+      <userControl name="Mode">
+        <dialogConfig type="CB" caption="Mode">
+          <selection name="falling" value="Capture Every Falling Edge"/>
+          <selection name="rising" value="Capture Every Rising Edge"/>
+          <selection name="4thRising" value="Capture Every 4th Rising Edge"/>
+          <selection name="16thRising" value="Capture Every 16th Rising Edge"/>
+        </dialogConfig>
+        <userAction name="16thRising">
+          <claimResource type="register" registerField="CCP%instance%M3" value="0"/>
+          <claimResource type="register" registerField="CCP%instance%M2" value="1"/>
+          <claimResource type="register" registerField="CCP%instance%M1" value="1"/>
+          <claimResource type="register" registerField="CCP%instance%M0" value="1"/>
+        </userAction>
+        <userAction name="4thRising">
+          <claimResource type="register" registerField="CCP%instance%M3" value="0"/>
+          <claimResource type="register" registerField="CCP%instance%M2" value="1"/>
+          <claimResource type="register" registerField="CCP%instance%M1" value="1"/>
+          <claimResource type="register" registerField="CCP%instance%M0" value="0"/>
+        </userAction>
+        <userAction name="rising">
+          <claimResource type="register" registerField="CCP%instance%M3" value="0"/>
+          <claimResource type="register" registerField="CCP%instance%M2" value="1"/>
+          <claimResource type="register" registerField="CCP%instance%M1" value="0"/>
+          <claimResource type="register" registerField="CCP%instance%M0" value="1"/>
+        </userAction>
+        <userAction name="falling">
+          <claimResource type="register" registerField="CCP%instance%M3" value="0"/>
+          <claimResource type="register" registerField="CCP%instance%M2" value="1"/>
+          <claimResource type="register" registerField="CCP%instance%M1" value="0"/>
+          <claimResource type="register" registerField="CCP%instance%M0" value="0"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="EnableInterrupt" enableForInt="CCP%instance%">
+        <dialogConfig type="CK" caption="Enable Interrupt"/>
+        <userAction name="enable">
+          <claimResource type="register" registerField="CCP%instance%IE" value="1"/>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="CCP%instance%IE" value="0"/>
+        </userAction>
+      </userControl>
+
+    </userControlSubGroup>
+  </userControlGroup>
+
+</featureDefinitions>

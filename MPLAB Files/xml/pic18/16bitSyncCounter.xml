@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE featureDefinitions SYSTEM "../featureDefinitions.dtd">
+<featureDefinitions name="16bitSyncCounter" iconName="syncCounter" helpIndex="">
+
+  <userControlGroup name="none" caption="none">
+    <userControlSubGroup name="none" caption="none">
+
+      <userControl name="applyButton">
+        <dialogConfig type="applyButton" caption="none"></dialogConfig>
+        <userAction name="apply">
+          <claimResource type="register" instance="%instance%" registerField="OWN_TMR" value="0001"></claimResource>
+          <claimResource type="register" instance="%instance%" registerField="RD16" value="0"></claimResource>
+          <claimResource type="register" registerField="TMR%instance%CS" value="1"></claimResource>
+          <claimResource type="register" registerField="T%instance%SYNC-L" value="0"></claimResource>
+          <claimResource type="pin" instance="%instance%" pin="T13CKI" polarity="Shared"></claimResource>
+        </userAction>
+      </userControl>
+
+    </userControlSubGroup>
+  </userControlGroup>
+
+  <userControlGroup name="none" caption="none">
+    <userControlSubGroup name="none" caption="none">
+
+      <userControl name="enable">
+        <dialogConfig type="CK" caption="Enable on Startup"></dialogConfig>
+        <userAction name="enable">
+          <claimResource type="register" registerField="TMR%instance%ON" value="1"></claimResource>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="TMR%instance%ON" value="0"></claimResource>
+        </userAction>
+      </userControl>
+
+      <userControl name="prescale">
+        <dialogConfig type="CB" caption="Time Clock Prescale">
+          <selection name="setTo0" value="1:1"></selection>
+          <selection name="setTo1" value="1:2"></selection>
+          <selection name="setTo2" value="1:4"></selection>
+          <selection name="setTo3" value="1:8"></selection>
+        </dialogConfig>
+        <userAction name="setTo3">
+          <claimResource type="register" registerField="T%instance%CKPS" value="11"></claimResource>
+        </userAction>
+        <userAction name="setTo2">
+          <claimResource type="register" registerField="T%instance%CKPS" value="10"></claimResource>
+        </userAction>
+        <userAction name="setTo1">
+          <claimResource type="register" registerField="T%instance%CKPS" value="01"></claimResource>
+        </userAction>
+        <userAction name="setTo0">
+          <claimResource type="register" registerField="T%instance%CKPS" value="00"></claimResource>
+        </userAction>
+      </userControl>
+
+<!-- timerPeriod is currently hardcoded and should not be present -->
+
+      <userControl type="readOnly" name="timerFrequency">
+        <dialogConfig type="general" caption="Baud Rate Error (%)"></dialogConfig>
+        <userAction>
+</userAction>
+      </userControl>
+
+      <userControl name="externalFrequency">
+        <dialogConfig type="TB" caption="External Frequency Setting"></dialogConfig>
+        <userAction>
+</userAction>
+      </userControl>
+
+      <userControl name="interruptEnable" enableForInt="T%instance%">
+        <dialogConfig type="CK" caption="Enable Interrupt on Startup"/>
+        <userAction name="enable">
+          <claimResource type="register" registerField="T%instance%IE" value="1"/>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="T%instance%IE" value="0"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="interruptPriority" priorityForInt="T%instance%">
+        <dialogConfig type="CB" caption="Interrupt Priority">
+          <selection name="priorityLevelToHigh" value="High"/>
+          <selection name="priorityLevelToLow" value="Low"/>
+        </dialogConfig>
+        <userAction>
+          <claimResource type="register" registerField="T%instance%IP" value="0"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="T%instance%IP" value="1"/>
+        </userAction>
+      </userControl>
+
+    </userControlSubGroup>
+  </userControlGroup>
+
+</featureDefinitions>

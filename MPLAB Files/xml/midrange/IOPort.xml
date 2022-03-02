@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE featureDefinitions SYSTEM "../featureDefinitions.dtd">
+<featureDefinitions name="IOPort" iconName="IOPort" helpIndex="">
+
+  <userControlGroup name="none" caption="none">
+    <userControlSubGroup name="none" caption="none">
+
+      <userControl name="applyButton">
+        <dialogConfig type="applyButton" caption="none"/>
+        <userAction/>
+      </userControl>
+
+    </userControlSubGroup>
+  </userControlGroup>
+
+  <userControlGroup name="portPinSettings" caption="Port Pin Settings">
+    <userControlSubGroup name="RB%indexControl%" caption="RB%indexControl%">
+
+      <userControl name="dataDirection%indexControl%" range="7">
+        <dialogConfig type="CB" caption="Data Direction %indexControl%">
+          <selection name="unclaimed" value="Unclaimed"/>
+          <selection name="input" value="Input"/>
+          <selection name="output" value="Output"/>
+        </dialogConfig>
+        <userAction name="output">
+          <claimResource type="register" registerField="TRIS%instance%%indexControl%" value="0"/>
+          <claimResource type="pin" pin="R%instance%%indexControl%" polarity="Out"/>
+        </userAction>
+        <userAction name="input">
+          <claimResource type="register" registerField="TRIS%instance%%indexControl%" value="1"/>
+          <claimResource type="pin" pin="R%instance%%indexControl%" polarity="Inp"/>
+        </userAction>
+        <userAction name="unclaimed">
+          <claimResource type="pin" flag="unclaim" pin="R%instance%%indexControl%" polarity="Out"/>
+        </userAction>
+      </userControl>
+ 
+      <userControl name="initialValue%indexControl%" range="7">
+        <dialogConfig type="CB" caption="Initial Value %indexControl%">
+          <selection name="initValue0" value="0"/>
+          <selection name="initValue1" value="1"/>
+        </dialogConfig>
+        <userAction name="initValue1">
+          <claimResource type="register" registerField="PORT%instance%%indexControl%" value="1"/>
+        </userAction>
+        <userAction name="initValue0">
+          <claimResource type="register" registerField="PORT%instance%%indexControl%" value="0"/>
+        </userAction>
+      </userControl>
+
+    </userControlSubGroup>
+  </userControlGroup>
+
+</featureDefinitions>

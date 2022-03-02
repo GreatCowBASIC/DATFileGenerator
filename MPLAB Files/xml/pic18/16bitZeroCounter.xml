@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE featureDefinitions SYSTEM "../featureDefinitions.dtd">
+<featureDefinitions name="16bitZeroCounter" iconName="16bitTimer" helpIndex="">
+
+  <userControlGroup name="none" caption="none">
+    <userControlSubGroup name="none" caption="none">
+
+      <userControl name="applyButton">
+        <dialogConfig type="applyButton" caption="none"></dialogConfig>
+        <userAction name="apply">
+          <claimResource type="register" instance="%instance%" registerField="OWN_TMR" value="0101"></claimResource>
+          <claimResource type="register" registerField="T%instance%8BIT" value="0"></claimResource>
+          <claimResource type="register" registerField="T%instance%CS" value="1"></claimResource>
+          <claimResource type="pin" pin="T%instance%CK" polarity="Inp"></claimResource>
+        </userAction>
+      </userControl>
+
+    </userControlSubGroup>
+  </userControlGroup>
+
+  <userControlGroup name="none" caption="none">
+    <userControlSubGroup name="none" caption="none">
+
+      <userControl name="enable">
+        <dialogConfig type="CK" caption="Enable on Startup"></dialogConfig>
+        <userAction name="enable">
+          <claimResource type="register" registerField="TMR%instance%ON" value="1"></claimResource>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="TMR%instance%ON" value="0"></claimResource>
+        </userAction>
+      </userControl>
+
+      <userControl name="prescale">
+        <dialogConfig type="CB" caption="Time Clock Prescale">
+          <selection name="setTo0" value="1:1"></selection>
+          <selection name="setTo1" value="1:2"></selection>
+          <selection name="setTo2" value="1:4"></selection>
+          <selection name="setTo3" value="1:8"></selection>
+          <selection name="setTo4" value="1:16"></selection>
+          <selection name="setTo5" value="1:32"></selection>
+          <selection name="setTo6" value="1:64"></selection>
+          <selection name="setTo7" value="1:128"></selection>
+          <selection name="setTo8" value="1:256"></selection>
+        </dialogConfig>
+        <userAction name="setTo8">
+          <claimResource type="register" registerField="T%instance%PS" value="111"></claimResource>
+          <claimResource type="register" instance="%instance%" registerField="PSA" value="0"></claimResource>
+        </userAction>
+        <userAction name="setTo7">
+          <claimResource type="register" registerField="T%instance%PS" value="110"></claimResource>
+          <claimResource type="register" instance="%instance%" registerField="PSA" value="0"></claimResource>
+        </userAction>
+        <userAction name="setTo6">
+          <claimResource type="register" registerField="T%instance%PS" value="101"></claimResource>
+          <claimResource type="register" instance="%instance%" registerField="PSA" value="0"></claimResource>
+        </userAction>
+        <userAction name="setTo5">
+          <claimResource type="register" registerField="T%instance%PS" value="100"></claimResource>
+          <claimResource type="register" instance="%instance%" registerField="PSA" value="0"></claimResource>
+        </userAction>
+        <userAction name="setTo4">
+          <claimResource type="register" registerField="T%instance%PS" value="011"></claimResource>
+          <claimResource type="register" instance="%instance%" registerField="PSA" value="0"></claimResource>
+        </userAction>
+        <userAction name="setTo3">
+          <claimResource type="register" registerField="T%instance%PS" value="010"></claimResource>
+          <claimResource type="register" instance="%instance%" registerField="PSA" value="0"></claimResource>
+        </userAction>
+        <userAction name="setTo2">
+          <claimResource type="register" registerField="T%instance%PS" value="001"></claimResource>
+          <claimResource type="register" instance="%instance%" registerField="PSA" value="0"></claimResource>
+        </userAction>
+        <userAction name="setTo1">
+          <claimResource type="register" registerField="T%instance%PS" value="000"></claimResource>
+          <claimResource type="register" instance="%instance%" registerField="PSA" value="0"></claimResource>
+        </userAction>
+        <userAction name="setTo0">
+          <claimResource type="register" instance="%instance%" registerField="PSA" value="1"></claimResource>
+        </userAction>
+      </userControl>
+
+      <userControl type="readOnly" name="timerFrequency">
+        <dialogConfig type="general" caption="Baud Rate Error (%)"></dialogConfig>
+        <userAction>
+</userAction>
+      </userControl>
+
+      <userControl name="externalFrequency">
+        <dialogConfig type="TB" caption="External Frequency Setting"></dialogConfig>
+        <userAction>
+</userAction>
+      </userControl>
+
+      <userControl name="sourceEdge">
+        <dialogConfig type="CB" caption="Source Edge">
+          <selection name="lowtohigh" value="Low to High"></selection> 
+          <selection name="hightolow" value="High to Low"></selection> 
+        </dialogConfig>
+        <userAction name="hightolow">
+          <claimResource type="register" registerField="T0SE" value="1"></claimResource>
+        </userAction>
+        <userAction name="lowtohigh">
+          <claimResource type="register" registerField="T0SE" value="0"></claimResource>
+        </userAction>
+      </userControl>
+
+      <userControl name="interruptEnable" enableForInt="T0">
+        <dialogConfig type="CK" caption="Enable Interrupt on Startup"/>
+        <userAction name="enable">
+          <claimResource type="register" registerField="T0IE" value="1"/>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="T0IE" value="0"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="interruptPriority" priorityForInt="T0">
+        <dialogConfig type="CB" caption="Interrupt Priority">
+          <selection name="priorityLevelToHigh" value="High"/>
+          <selection name="priorityLevelToLow" value="Low"/>
+        </dialogConfig>
+        <userAction>
+          <claimResource type="register" registerField="T0IP" value="0"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="T0IP" value="1"/>
+        </userAction>
+      </userControl>
+
+    </userControlSubGroup>
+  </userControlGroup>
+
+</featureDefinitions>

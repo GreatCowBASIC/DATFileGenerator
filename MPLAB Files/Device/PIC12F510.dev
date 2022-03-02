@@ -1,0 +1,171 @@
+# Device file info: $Id: PIC12F510.dev,v 1.26 2007/01/08 18:22:04 pauleyg Exp $
+# Macro file info: $Id: 16c5xmacro.dev,v 1.2 2006/08/04 20:16:11 nairnj Exp $
+format=0.1
+
+# device=PIC12F510
+# DOS: DOS-00633
+# PS:  DS-41257
+# DS:  DS-41268
+
+# MRK: updated to VDDmin match PBP, everything else looks good 
+vpp (range=10.000-12.000  dflt=11.000)
+vdd (range=2.000-5.500 dfltrange=3.000-5.500 nominal=5.000)
+
+pgming (memtech=ee tries=1 lvpthresh=0)
+    wait (pgm=3000 lvpgm=2000 eedata=2000 cfg=2000 userid=2000 erase=10000)
+    latches(pgm=1 eedata=1 userid=1 cfg=1)
+
+pgmmem (region=0x00-0x3FF)
+cfgmem (region=0xFFF-0xFFF)
+testmem (region=0x400-0x43F)
+calmem (region=0x3FF-0x3FF)
+userid (region=0x400-0x403)
+
+NumBanks=2
+MirrorRegs (0x00-0x0f 0x20-0x2f)
+
+ICDStr= HasICDDev=1 ICDDevIDMustUse=1
+
+                               #------#
+#------------------------------# SFRs #------------------------------#
+                               #------#
+
+sfr (key=INDF addr=0x0 size=1 flags=i access='u u u u u u u u')
+    reset (por='--------' mclr='--------')
+    bit (names='INDF' width='8')
+sfr (key=TMR0 addr=0x1 size=1 access='rw rw rw rw rw rw rw rw')
+    reset (por='xxxxxxxx' mclr='uuuuuuuu')
+    bit (names='TMR0' width='8')
+    stimulus (scl=rwb type=int regfiles=w pcfiles=w)
+sfr (key=PCL addr=0x2 size=1 access='rw rw rw rw rw rw rw rw')
+    reset (por='11111111' mclr='11111111')
+    bit (names='PCL' width='8')
+    stimulus (scl=rwb regfiles=w pcfiles=rw)
+sfr (key=STATUS addr=0x3 size=1 access='rw rw rw r r rw rw rw')
+    reset (por='00011xxx' mclr='00011uuu')
+    bit (names='GPWUF CWUF PA0 nTO nPD Z DC C' width='1 1 1 1 1 1 1 1')
+sfr (key=FSR addr=0x4 size=1 access='r r rw rw rw rw rw rw')
+    reset (por='110xxxxx' mclr='110uuuuu')
+    bit (names='FSR' width='8')
+    stimulus (scl=rwb regfiles=w pcfiles=rw)
+sfr (key=OSCCAL addr=0x5 size=1 access='rw rw rw rw rw rw rw u')
+    reset (por='1111111-' mclr='1111111=')
+    bit (names='CAL -' width='7 1')
+sfr (key=GPIO addr=0x6 size=1 access='u u rw rw r rw rw rw')
+    reset (por='--xxxxxx' mclr='--uuuuuu')
+    bit (names='- - GP' width='1 1 6')
+    stimulus (scl=rwb regfiles=rw pcfiles=rw)
+sfr (key=CM1CON0 addr=0x7 size=1 access='r rw rw rw rw rw rw rw')
+    reset (por='11111111' mclr='11111111')
+    bit (names='C1OUT nC1OUTEN C1POL nC1T0CS C1ON C1NREF C1PREF nC1WU' width='1 1 1 1 1 1 1 1')
+    stimulus (scl=rwb regfiles=w)
+sfr (key=ADCON0 addr=0x8 size=1 access='rw rw rw rw rw rw rw rw')
+    reset (por='11111100' mclr='11111100')
+    bit (names='ANS ADCS CHS GO/nDONE ADON' width='2 2 2 1 1')
+    bit (tag=scl names='ANS ADCS CHS GO_nDONE ADON' width='2 2 2 1 1')
+    stimulus (scl=rwb regfiles=w)
+sfr (key=ADRES addr=0x9 size=1 access='rw rw rw rw rw rw rw rw')
+    reset (por='xxxxxxxxx' mclr='uuuuuuuu')
+    bit (names='ADRES' width='8')
+    stimulus (scl=rwb type=int regfiles=r)
+
+                        #--------------------#
+#-----------------------# Configuration Bits #-----------------------#
+                        #--------------------#
+
+# TODO: Find the address of this configuration word.
+cfgbits (key=CONFIG addr=0xfff unused=0x0000)
+    field (key=OSC mask=0x0003 desc="Oscillator Select")
+        setting (req=0x0003 value=0x0003 desc="EXTRC With 1 ms DRT")
+        setting (req=0x0003 value=0x0002 desc="INTRC With 1 ms DRT")
+        setting (req=0x0003 value=0x0001 desc="XT Osc With 18 ms DRT")
+        setting (req=0x0003 value=0x0000 desc="LP Osc With 18 ms DRT")
+    field (key=WDT mask=0x0004 desc="Watchdog Timer Enable")
+        setting (req=0x0004 value=0x0004 desc="Enabled")
+        setting (req=0x0004 value=0x0000 desc="Disabled")
+    field (key=CP mask=0x0008 desc="Code Protect")
+        setting (req=0x0008 value=0x0008 desc="Off")
+            checksum (type=0x0 protregion=0x00-0x00)
+        setting (req=0x0008 value=0x0 desc="On")
+            checksum (type=0x20 protregion=0x40-0x3FE)
+    field (key=MCLRE mask=0x0010 desc="Master Clear Enable")
+        setting (req=0x0010 value=0x0010 desc="RB3/MCLR Functions as MCLR")
+        setting (req=0x0010 value=0x0000 desc="RB3/MCLR Functions as RB3")
+    field (key=IOSCFS mask=0x0020 desc="Internal Oscillator Frequency Select")
+        setting (req=0x0020 value=0x0020 desc="8 MHz INTOSC Speed")
+        setting (req=0x0020 value=0x0000 desc="4 MHz INTOSC Speed")
+
+                               # ---------------------------#
+#------------------------------# Nonmemory-Mapped Registers #------------------------------------#
+                               # ---------------------------#
+
+nmmr (key=WREG addr=0x0 size=1 access='rw rw rw rw rw rw rw rw')
+    reset (por='qqqqqqqq' mclr='qqqqqqqq')
+    bit (names='WREG' width='8')
+nmmr (key=STKPTR addr=0x1 size=1 flags=h access='rw rw rw rw rw rw rw rw')
+    reset (por='00000000' mclr='00000000')
+    bit (names='STKPTR' width='8')
+nmmr (key=TRISIO addr=0x3 size=1 access='u u rw rw rw rw rw rw')
+    reset (por='--111111' mclr='--111111')
+    bit (names='- - TRISIO5 TRISIO4 TRISIO3 TRISIO2 TRISIO1 TRISIO0')
+nmmr (key=OPTION_REG addr=0x5 size=1 access='rw rw rw rw rw rw rw rw')
+    reset (por='11111111' mclr='11111111')
+    bit (names='nGPWU nGPPU T0CS T0SE PSA PS' width='1 1 1 1 1 3')
+
+                               # ------------#
+#------------------------------# Peripherals #------------------------------------#
+                               # ------------#
+
+peripheral (key=GPIO sfrs='GPIO TRISIO' type=port)
+    iopin (key=GP0 dir=inout)
+        cnpin (key=GPIO0CN notify=CORE)
+        cnpin (key=C1INP notify=CMSINGLE)
+    iopin (key=GP1 dir=inout)
+        cnpin (key=GPIO1CN notify=CORE)
+        cnpin (key=C1INN notify=CMSINGLE)
+    iopin (key=GP2 dir=inout)
+    iopin (key=GP3 dir=in)
+        cnpin (key=GPIO3CN notify=CORE)
+    iopin (key=GP4 dir=inout)
+    iopin (key=GP5 dir=inout)
+
+
+#--------------------------------------------------------------------------------
+# 				CM
+#--------------------------------------------------------------------------------
+
+peripheral (key=CMSINGLE sfrs='CM1CON0')
+    pinfunc (key=C1INP port=GPIO0 dir=in)
+    pinfunc (key=C1INN port=GPIO1 dir=in)
+    pinfunc (key=C1OUT port=GPIO2 dir=out)
+
+#--------------------------------------------------------------------------------
+# 				ADC
+#--------------------------------------------------------------------------------
+peripheral (key=ADC8 sfrs='ADCON0 ADRES')
+    pinfunc (key=AN0 port=GP0 dir=in)
+    pinfunc (key=AN1 port=GP1 dir=in)
+    pinfunc (key=AN2 port=GP2 dir=in)
+    adgodone (key=ADCON0 mask=0x02)
+    access (key=ADCON0 mode=AD_PCFG_BASELINE)
+#    interrupt (name=ADC enreg=PIE1 enmask=0x40 flgreg=PIR1 flgmask=0x40 prireg=NONE primask=0x00)
+
+#--------------------------------------------------------------------------------
+# 				TIMERs
+#--------------------------------------------------------------------------------
+peripheral (key=TMR0 sfrs='TMR0')
+    pinfunc (key=T0CKI port=GP2 dir=in)
+
+#--------------------------------------------------------------------------------
+# 				OSC
+#--------------------------------------------------------------------------------
+peripheral (key=OSC)
+    pinfunc (key=OSC2 port=GP4 dir=out)
+    pinfunc (key=OSC1 port=GP5 dir=in)
+
+#--------------------------------------------------------------------------------
+# 				MCLR
+#--------------------------------------------------------------------------------
+peripheral (key=MCLR)
+    pinfunc (key=MCLR port=GP3 dir=in)
+

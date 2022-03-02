@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE featureDefinitions SYSTEM "../featureDefinitions.dtd">
+<featureDefinitions name="CCPOC" iconName="OC" helpIndex="">
+
+  <userControlGroup name="none" caption="none">
+    <userControlSubGroup name="none" caption="none">
+
+      <userControl name="applyButton">
+        <dialogConfig type="applyButton" caption="none"/>
+        <userAction name="apply"/>
+      </userControl>
+
+    </userControlSubGroup>
+  </userControlGroup>
+
+  <userControlGroup name="none" caption="none">
+    <userControlSubGroup name="none" caption="none">
+
+      <userControl name="Mode">
+        <dialogConfig type="CB" caption="Mode">
+          <selection name="PinGoesHigh" value="Set CCP%instance% Pin High"/>
+          <selection name="PinGoesLow" value="Set CCP%instance% Pin Low"/>
+          <selection name="InterruptOnly" value="Generate Interrupt Only"/>
+          <selection name="SpecialEvent" value="Special-Event Trigger"/>
+          <selection name="TogglePin" value="Toggle CCP%instance% Pin"/>
+        </dialogConfig>
+        <userAction name="TogglePin">
+          <claimResource type="pin" pin="CCP%instance%" polarity="Out"/>
+          <claimResource type="register" registerField="CCP%instance%M3" value="0"/>
+          <claimResource type="register" registerField="CCP%instance%M2" value="0"/>
+          <claimResource type="register" registerField="CCP%instance%M1" value="1"/>
+          <claimResource type="register" registerField="CCP%instance%M0" value="0"/>
+        </userAction>
+        <userAction name="SpecialEvent">
+          <claimResource type="register" registerField="CCP%instance%M3" value="1"/>
+          <claimResource type="register" registerField="CCP%instance%M2" value="0"/>
+          <claimResource type="register" registerField="CCP%instance%M1" value="1"/>
+          <claimResource type="register" registerField="CCP%instance%M0" value="1"/>
+        </userAction>
+        <userAction name="InterruptOnly">
+          <claimResource type="register" registerField="CCP%instance%M3" value="1"/>
+          <claimResource type="register" registerField="CCP%instance%M2" value="0"/>
+          <claimResource type="register" registerField="CCP%instance%M1" value="1"/>
+          <claimResource type="register" registerField="CCP%instance%M0" value="0"/>
+        </userAction>
+        <userAction name="PinGoesLow">
+          <claimResource type="register" registerField="CCP%instance%M3" value="1"/>
+          <claimResource type="register" registerField="CCP%instance%M2" value="0"/>
+          <claimResource type="register" registerField="CCP%instance%M1" value="0"/>
+          <claimResource type="register" registerField="CCP%instance%M0" value="1"/>
+          <claimResource type="pin" pin="CCP%instance%" polarity="Out"/>
+        </userAction>
+        <userAction name="PinGoesHigh">
+          <claimResource type="register" registerField="CCP%instance%M3" value="1"/>
+          <claimResource type="register" registerField="CCP%instance%M2" value="0"/>
+          <claimResource type="register" registerField="CCP%instance%M1" value="0"/>
+          <claimResource type="register" registerField="CCP%instance%M0" value="0"/>
+          <claimResource type="pin" pin="CCP%instance%" polarity="Out"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="DesiredCompareValue">
+        <dialogConfig type="TB" caption="Desired Compare Value"/>
+        <userAction/>
+      </userControl>
+
+      <userControl name="CompareValueH">
+        <dialogConfig type="CB" caption="The Compare Value" range="255">
+          <selection name="CompareValueH%index%" value="%index%"/>
+        </dialogConfig>
+        <userAction>
+          <claimResource type="register" registerField="CCPR%instance%H" value="%index%"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="CompareValueL">
+        <dialogConfig type="CB" caption="The Compare Value" range="255">
+          <selection name="CompareValueL%index%" value="%index%"/>
+        </dialogConfig>
+        <userAction>
+          <claimResource type="register" registerField="CCPR%instance%L" value="%index%"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="EnableInterrupt" enableForInt="CCP%instance%">
+        <dialogConfig type="CK" caption="Enable Interrupt"/>
+        <userAction name="enable">
+          <claimResource type="register" registerField="CCP%instance%IE" value="1"/>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="CCP%instance%IE" value="0"/>
+        </userAction>
+      </userControl>
+
+    </userControlSubGroup>
+  </userControlGroup>
+
+</featureDefinitions>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE featureDefinitions SYSTEM "../featureDefinitions.dtd">
+
+<featureDefinitions name="EMI" iconName="EMI" helpIndex="">
+
+<userControlGroup name="none" caption="none">
+<userControlSubGroup name="none" caption="none">
+
+<userControl name="applyButton">
+<dialogConfig type="applyButton" caption="none"></dialogConfig>
+<userAction name="apply">
+	<claimResource type="pin" pin="RD0" polarity="Inp"></claimResource>
+	<claimResource type="pin" pin="RD1" polarity="Inp"></claimResource>
+	<claimResource type="pin" pin="RD2" polarity="Inp"></claimResource>
+	<claimResource type="pin" pin="RD3" polarity="Inp"></claimResource>
+	<claimResource type="pin" pin="RD4" polarity="Inp"></claimResource>
+	<claimResource type="pin" pin="RD5" polarity="Inp"></claimResource>
+	<claimResource type="pin" pin="RD6" polarity="Inp"></claimResource>
+	<claimResource type="pin" pin="RD7" polarity="Inp"></claimResource>
+	<claimResource type="pin" pin="RE0" polarity="Inp"></claimResource>
+	<claimResource type="pin" pin="RE1" polarity="Inp"></claimResource>
+	<claimResource type="pin" pin="RE2" polarity="Inp"></claimResource>
+	<claimResource type="pin" pin="RE3" polarity="Inp"></claimResource>
+	<claimResource type="pin" pin="RE4" polarity="Inp"></claimResource>
+	<claimResource type="pin" pin="RE5" polarity="Inp"></claimResource>
+	<claimResource type="pin" pin="RE6" polarity="Inp"></claimResource>
+	<claimResource type="pin" pin="RE7" polarity="Inp"></claimResource>
+	<claimResource type="pin" pin="RH0" polarity="Out"></claimResource>
+	<claimResource type="pin" pin="RH1" polarity="Out"></claimResource>
+	<claimResource type="pin" pin="RH2" polarity="Out"></claimResource>
+	<claimResource type="pin" pin="RH3" polarity="Out"></claimResource>
+	<claimResource type="pin" pin="ALE" polarity="Out"></claimResource>
+	<claimResource type="pin" pin="OE-L" polarity="Out"></claimResource>
+	<claimResource type="pin" pin="WRH-L" polarity="Out"></claimResource>
+	<claimResource type="pin" pin="WRL-L" polarity="Out"></claimResource>
+	<claimResource type="pin" pin="BA0" polarity="Out"></claimResource>
+	<claimResource type="pin" pin="CE-L" polarity="Out"></claimResource>
+	<claimResource type="pin" pin="LB-L" polarity="Out"></claimResource>
+	<claimResource type="pin" pin="UB-L" polarity="Out"></claimResource>
+</userAction>
+</userControl>
+
+</userControlSubGroup>
+</userControlGroup>
+
+<userControlGroup name="none" caption="none">
+<userControlSubGroup name="none" caption="none">
+
+<userControl name="enable">
+<dialogConfig type="CK" caption="Enable on Startup"></dialogConfig>
+<userAction name="enable">
+	<claimResource type="register" registerField="EBDIS" value="0"></claimResource>
+</userAction>
+<userAction name="disable">
+	<claimResource type="register" registerField="EBDIS" value="1"></claimResource>
+</userAction>
+</userControl>
+
+<userControl name="byteWriteMode">
+<dialogConfig type="CB" caption="Byte Write Mode">
+	<selection name="byteWrite" value="Byte Write"></selection> 
+	<selection name="byteSelect" value="Byte Select"></selection> 
+	<selection name="wordWrite" value="Word Write"></selection> 
+</dialogConfig>
+<userAction name="wordWrite">
+	<claimResource type="register" registerField="WM1" value="1"></claimResource>
+	<claimResource type="register" registerField="WM0" value="0"></claimResource>
+</userAction>
+<userAction name="byteSelect">
+	<claimResource type="register" registerField="WM1" value="0"></claimResource>
+	<claimResource type="register" registerField="WM0" value="1"></claimResource>
+</userAction>
+<userAction name="byteWrite">
+	<claimResource type="register" registerField="WM1" value="0"></claimResource>
+	<claimResource type="register" registerField="WM0" value="0"></claimResource>
+</userAction>
+</userControl>
+
+</userControlSubGroup>
+</userControlGroup>
+
+</featureDefinitions>

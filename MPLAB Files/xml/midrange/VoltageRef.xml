@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE featureDefinitions SYSTEM "../featureDefinitions.dtd">
+
+<featureDefinitions name="VoltageRef" iconName="Voltage Reference" helpIndex="">
+
+  <userControlGroup name="none" caption="none">
+    <userControlSubGroup name="none" caption="none">
+      <userControl name="applyButton">
+        <dialogConfig type="applyButton" caption="none"/>
+        <userAction name="apply"/>
+      </userControl>
+    </userControlSubGroup>
+  </userControlGroup>
+
+  <userControlGroup name="RatioOfVDDSource" caption="Ratio of Vdd Source">
+    <userControlSubGroup name="none" caption="none">
+
+      <userControl name="Range">
+        <dialogConfig type="CB" caption="Range">
+          <selection name="LowRange" value="Low"/>
+          <selection name="HighRange" value="High"/>
+        </dialogConfig>
+        <userAction>
+          <claimResource type="register" registerField="VRR" value="0"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="VRR" value="1"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="Vdd">
+        <dialogConfig type="TB" caption="Vdd"/>
+        <userAction/>
+      </userControl>
+
+      <userControl name="DesiredVoltage">
+        <dialogConfig type="TB" caption="Desired voltage"/>
+        <userAction/>
+      </userControl>
+
+      <userControl name="VoltageMultiplier">
+        <dialogConfig type="CB" caption="Voltage Multiplier">
+          <selection name="SetTo0" value="SetTo0"/>
+          <selection name="SetTo1" value="SetTo1"/>
+          <selection name="SetTo2" value="SetTo2"/>
+          <selection name="SetTo3" value="SetTo3"/>
+          <selection name="SetTo4" value="SetTo4"/>
+          <selection name="SetTo5" value="SetTo5"/>
+          <selection name="SetTo5" value="SetTo6"/>
+          <selection name="SetTo7" value="SetTo7"/>
+          <selection name="SetTo8" value="SetTo8"/>
+          <selection name="SetTo9" value="SetTo9"/>
+          <selection name="SetToA" value="SetToA"/>
+          <selection name="SetToB" value="SetToB"/>
+          <selection name="SetToC" value="SetToC"/>
+          <selection name="SetToD" value="SetToD"/>
+          <selection name="SetToE" value="SetToE"/>
+          <selection name="SetToF" value="SetToF"/>
+        </dialogConfig>
+        <userAction>
+          <claimResource type="register" registerField="VR" value="1111"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="VR" value="1110"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="VR" value="1101"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="VR" value="1100"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="VR" value="1011"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="VR" value="1010"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="VR" value="1001"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="VR" value="1000"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="VR" value="0111"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="VR" value="0110"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="VR" value="0101"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="VR" value="0100"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="VR" value="0011"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="VR" value="0010"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="VR" value="0001"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="VR" value="0000"/>
+        </userAction>
+      </userControl>
+
+<!--       <userControl type="readOnly" name="ActualVoltage"> -->
+<!--         <dialogConfig type="general" caption="Actual voltage"/> -->
+<!--         <userAction/> -->
+<!--       </userControl> -->
+
+<!--       <userControl type="readOnly" name="VoltageError"> -->
+<!--         <dialogConfig type="general" caption="% Error"/> -->
+<!--         <userAction/> -->
+<!--       </userControl> -->
+
+    </userControlSubGroup>
+  </userControlGroup>
+
+  <userControlGroup name="Nominal1.2VSource" caption="Nominal 1.2V Source">
+    <userControlSubGroup name="none" caption="none">
+
+      <userControl name="EnableOnStartup">
+        <dialogConfig type="CK" caption="Enable on startup"/>
+        <userAction name="enable">
+          <claimResource type="register" registerField="VREN" value="1"/>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="VREN" value="0"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="BufferOnStartup">
+        <dialogConfig type="CK" caption="Enable interrupt on startup"/>
+        <userAction name="enable">
+          <claimResource type="register" registerField="VRBB" value="1"/>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="VRBB" value="0"/>
+        </userAction>
+      </userControl>
+
+    </userControlSubGroup>
+  </userControlGroup>
+
+  <userControlGroup name="Output" caption="Output">
+    <userControlSubGroup name="none" caption="none">
+
+      <userControl name="SendToPin">
+        <dialogConfig type="CB" caption="Send to pin">
+          <selection name="RatioOfVdd" value="Ratio of Vdd"/>
+          <selection name="Nominal1.2V" value="Nominal 1.2 V"/>
+          <selection name="Nothing" value="Nothing"/>
+        </dialogConfig>
+        <userAction>
+          <claimResource type="register" registerField="CVROE" value="0"/>
+          <claimResource type="register" registerField="VROE" value="0"/>
+        </userAction>
+        <userAction>
+          <claimResource type="pin" pin="VREF" polarity="Out"/>
+          <claimResource type="register" registerField="CVROE" value="0"/>
+          <claimResource type="register" registerField="VROE" value="1"/>
+        </userAction>
+        <userAction>
+          <claimResource type="pin" pin="VREF" polarity="Out"/>
+          <claimResource type="register" registerField="CVROE" value="1"/>
+        </userAction>
+      </userControl>
+
+    </userControlSubGroup>
+  </userControlGroup>
+
+</featureDefinitions>

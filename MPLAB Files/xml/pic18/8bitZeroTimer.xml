@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE featureDefinitions SYSTEM "../featureDefinitions.dtd">
+<featureDefinitions name="8bitZeroTimer" iconName="16bitTimer" helpIndex="">
+
+  <userControlGroup name="none" caption="none">
+    <userControlSubGroup name="none" caption="none">
+
+      <userControl name="applyButton">
+        <dialogConfig type="applyButton" caption="none"/>
+        <userAction name="apply">
+          <claimResource type="register" instance="0" registerField="OWN_TMR" value="1010"/>
+          <claimResource type="register" registerField="T08BIT" value="1"/>
+          <claimResource type="register" registerField="T0CS" value="0"/>
+        </userAction>
+      </userControl>
+
+    </userControlSubGroup>
+  </userControlGroup>
+
+  <userControlGroup name="none" caption="none">
+    <userControlSubGroup name="none" caption="none">
+
+      <userControl name="enable">
+        <dialogConfig type="CK" caption="Enable on Startup"/>
+        <userAction name="enable">
+          <claimResource type="register" registerField="TMR0ON" value="1"/>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="TMR0ON" value="0"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="prescale">
+        <dialogConfig type="CB" caption="Time Clock Prescale">
+          <selection name="setTo0" value="1:1"/>
+          <selection name="setTo1" value="1:2"/>
+          <selection name="setTo2" value="1:4"/>
+          <selection name="setTo3" value="1:8"/>
+          <selection name="setTo4" value="1:16"/>
+          <selection name="setTo5" value="1:32"/>
+          <selection name="setTo6" value="1:64"/>
+          <selection name="setTo7" value="1:128"/>
+          <selection name="setTo8" value="1:256"/>
+        </dialogConfig>
+        <userAction name="setTo8">
+          <claimResource type="register" registerField="T0PS" value="111"/>
+          <claimResource type="register" instance="0" registerField="PSA" value="0"/>
+        </userAction>
+        <userAction name="setTo7">
+          <claimResource type="register" registerField="T0PS" value="110"/>
+          <claimResource type="register" instance="0" registerField="PSA" value="0"/>
+        </userAction>
+        <userAction name="setTo6">
+          <claimResource type="register" registerField="T0PS" value="101"/>
+          <claimResource type="register" instance="0" registerField="PSA" value="0"/>
+        </userAction>
+        <userAction name="setTo5">
+          <claimResource type="register" registerField="T0PS" value="100"/>
+          <claimResource type="register" instance="0" registerField="PSA" value="0"/>
+        </userAction>
+        <userAction name="setTo4">
+          <claimResource type="register" registerField="T0PS" value="011"/>
+          <claimResource type="register" instance="0" registerField="PSA" value="0"/>
+        </userAction>
+        <userAction name="setTo3">
+          <claimResource type="register" registerField="T0PS" value="010"/>
+          <claimResource type="register" instance="0" registerField="PSA" value="0"/>
+        </userAction>
+        <userAction name="setTo2">
+          <claimResource type="register" registerField="T0PS" value="001"/>
+          <claimResource type="register" instance="0" registerField="PSA" value="0"/>
+        </userAction>
+        <userAction name="setTo1">
+          <claimResource type="register" registerField="T0PS" value="000"/>
+          <claimResource type="register" instance="0" registerField="PSA" value="0"/>
+        </userAction>
+        <userAction name="setTo0">
+          <claimResource type="register" instance="0" registerField="PSA" value="1"/>
+        </userAction>
+      </userControl>
+
+<!-- timerPeriod is currently hardcoded and should not be present -->
+
+      <userControl type="readOnly" name="timerFrequency">
+        <dialogConfig type="general" caption="Baud Rate Error (%)"/>
+        <userAction>
+        </userAction>
+      </userControl>
+
+      <userControl name="interruptEnable" enableForInt="T0">
+        <dialogConfig type="CK" caption="Enable Interrupt on Startup"/>
+        <userAction name="enable">
+          <claimResource type="register" registerField="T0IE" value="1"/>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="T0IE" value="0"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="interruptPriority" priorityForInt="T0">
+        <dialogConfig type="CB" caption="Interrupt Priority">
+          <selection name="priorityLevelToHigh" value="High"/>
+          <selection name="priorityLevelToLow" value="Low"/>
+        </dialogConfig>
+        <userAction>
+          <claimResource type="register" registerField="T0IP" value="0"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="T0IP" value="1"/>
+        </userAction>
+      </userControl>
+
+
+    </userControlSubGroup>
+  </userControlGroup>
+
+</featureDefinitions>

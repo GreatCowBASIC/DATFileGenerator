@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE featureDefinitions SYSTEM "../featureDefinitions.dtd">
+<featureDefinitions name="USART" iconName="USART" helpIndex="Addressable Universal Synchronous Asynchronous Receiver Transimitter">
+
+  <userControlGroup name="none" caption="none">
+    <userControlSubGroup name="none" caption="none">
+
+      <userControl name="applyButton">
+        <dialogConfig type="applyButton" caption="none"></dialogConfig>
+        <userAction name="apply">
+          <claimResource type="register" registerField="OWN_UART%instance%" value="1"></claimResource>
+          <claimResource type="register" instance="%instance%" registerField="SYNC" value="1"></claimResource>
+          <claimResource type="register" instance="%instance%" registerField="BRGH" value="0"></claimResource>
+        </userAction>
+      </userControl>
+
+    </userControlSubGroup>
+  </userControlGroup>
+
+  <userControlGroup name="communicationSettings" caption="Communication Settings">
+    <userControlSubGroup name="none" caption="none">
+
+      <userControl name="enable">
+        <dialogConfig type="CK" caption="Enable on Startup"></dialogConfig>
+        <userAction name="enable">
+          <claimResource type="register" instance="%instance%" registerField="SPEN" value="1"></claimResource>
+          <claimResource type="pin" pin="U%instance%RX" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="U%instance%TX" polarity="Out"></claimResource>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" instance="%instance%" registerField="SPEN" value="0"></claimResource>
+        </userAction>
+      </userControl>
+
+      <userControl name="baudRate">
+        <dialogConfig type="TB" caption="Baud Rate"></dialogConfig>
+        <userAction>
+</userAction>
+      </userControl>
+
+      <userControl name="baudRateUnits">
+        <dialogConfig type="CB" caption="none">
+          <selection name="setToBps" value="bps"></selection>
+          <selection name="setToKbps" value="kbps"></selection>
+        </dialogConfig>
+        <userAction name="setToBps">
+        </userAction>
+        <userAction name="setToKbps">
+        </userAction>
+      </userControl>
+
+      <userControl type="readOnly" name="baudRateError">
+        <dialogConfig type="general" caption="Baud Rate Error (%)"></dialogConfig>
+        <userAction>
+        </userAction>
+      </userControl>
+		<userControl name="BRGCount">
+			<dialogConfig type="TB" caption="Baud Rate Generator Count"></dialogConfig>
+			<userAction>
+				<!-- The 'variable' attribute is added newly to accomodate the new requirement of variable value supplied by -->
+				<!-- user in configuration dialog. Used as true/false(1/0) -->
+				<claimResource type="register" instance="%instance%" registerField="SPBRG" value="0" variable="1"></claimResource>
+			</userAction>
+		</userControl>
+
+      <userControl name="dataBits">
+        <dialogConfig type="CB" caption="Data Bits">
+          <selection name="dataBits8" value="8"></selection>
+          <selection name="dataBits9" value="9"></selection>
+        </dialogConfig>
+        <userAction name="dataBits9">
+          <claimResource type="register" instance="%instance%" registerField="TX9" value="1"></claimResource>
+          <claimResource type="register" instance="%instance%" registerField="RX9" value="1"></claimResource>
+        </userAction>
+        <userAction name="dataBits8">
+          <claimResource type="register" instance="%instance%" registerField="TX9" value="0"></claimResource>
+          <claimResource type="register" instance="%instance%" registerField="RX9" value="0"></claimResource>
+        </userAction>
+      </userControl>
+
+      <userControl name="masterSlave">
+        <dialogConfig type="CB" caption="Master Slave Mode">
+          <selection name="slave" value="Slave (external clock)"></selection>
+          <selection name="master" value="Master (internal clock)"></selection>
+        </dialogConfig>
+        <userAction name="master">
+          <claimResource type="register" instance="%instance%" registerField="CSRC" value="1"></claimResource>
+        </userAction>
+        <userAction name="slave">
+          <claimResource type="register" instance="%instance%" registerField="CSRC" value="0"></claimResource>
+        </userAction>
+      </userControl>
+
+    </userControlSubGroup>
+  </userControlGroup>
+
+  <userControlGroup name="operationalSettings" caption="Operational Settings">
+
+    <userControlSubGroup name="receiverSettings" caption="Receiver">
+
+      <userControl name="parity">
+        <dialogConfig type="CB" caption="Parity">
+          <selection name="disable" value="Bit 9 Parity"></selection>
+          <selection name="enable" value="Bit 9 Address detect"></selection>
+        </dialogConfig>
+        <userAction name="enable">
+          <claimResource type="register" instance="%instance%" registerField="ADDEN" value="1"></claimResource>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" instance="%instance%" registerField="ADDEN" value="0"></claimResource>
+        </userAction>
+      </userControl>
+
+      <userControl name="singleRxMode">
+        <dialogConfig type="CK" caption="Single Receive Enable"></dialogConfig>
+        <userAction name="enable">
+          <claimResource type="register" instance="%instance%" registerField="SREN" value="1"></claimResource>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" instance="%instance%" registerField="SREN" value="0"></claimResource>
+        </userAction>
+      </userControl>
+
+      <userControl name="receiverMode">
+        <dialogConfig type="CB" caption="Receiver Mode">
+          <selection name="disable" value="Continuous receive disabled"></selection>
+          <selection name="enable" value="Continuous receive enabled"></selection>
+        </dialogConfig>
+        <userAction name="enable">
+          <claimResource type="register" instance="%instance%" registerField="CREN" value="1"></claimResource>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" instance="%instance%" registerField="CREN" value="0"></claimResource>
+        </userAction>
+      </userControl>
+
+<!-- Interrupt module should also use these interrupt constraint group (enable/priority) for setting UART interrupts -->
+      <userControl name="receiverInterruptEnable" enableForInt="U%instance%RX">
+        <dialogConfig type="CK" caption="Enable Interrupt on Startup"/>
+        <userAction name="enable">
+          <claimResource type="register" registerField="U%instance%RXIE" value="1"/>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="U%instance%RXIE" value="0"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="receiverInterruptPriority" priorityForInt="U%instance%TX">
+        <dialogConfig type="CB" caption="Interrupt Priority">
+          <selection name="rxPriorityLevelToHigh" value="High"/>
+          <selection name="rxPriorityLevelToLow" value="Low"/>
+        </dialogConfig>
+        <userAction name="rxPriorityLevelToLow">
+         <claimResource type="register" registerField="U%instance%RXIP" value="0" /> 
+        </userAction>
+        <userAction name="rxPriorityLevelToHigh">
+         <claimResource type="register" registerField="U%instance%RXIP" value="1" /> 
+       </userAction>
+      </userControl>
+
+      <userControl name="receiverInterruptConfig">
+        <dialogConfig type="CB" caption="Generate In on buffersize">
+          <selection name="onAnyCharInBuffer" value="At least 1 char"></selection> 
+        </dialogConfig>
+        <userAction name="onAnyCharInBuffer">
+</userAction>
+      </userControl>
+
+    </userControlSubGroup>
+
+    <userControlSubGroup name="transmitterSettings" caption="Transmitter">
+
+      <userControl name="transmitEnable">
+        <dialogConfig type="CK" caption="Enable Transmit"></dialogConfig>
+        <userAction name="enable">
+          <claimResource type="register" instance="%instance%" registerField="TXEN" value="1"></claimResource>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" instance="%instance%" registerField="TXEN" value="0"></claimResource>
+        </userAction>
+      </userControl>
+
+<!-- Interrupt module should also use these interrupt constraint group (enable/priority) for setting UART interrupts -->
+      <userControl name="transmitInterruptEnable" enableForInt="U%instance%TX">
+        <dialogConfig type="CK" caption="Enable Interrupt on Startup"/>
+        <userAction name="enable">
+          <claimResource type="register" registerField="U%instance%TXIE" value="1"/>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="U%instance%TXIE" value="0"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="transmitInterruptPriority" priorityForInt="U%instance%TX">
+        <dialogConfig type="CB" caption="Interrupt Priority">
+          <selection name="txPriorityLevelToHigh" value="High"/>
+          <selection name="txPriorityLevelToLow" value="Low"/>
+        </dialogConfig>
+        <userAction>
+          <claimResource type="register" registerField="U%instance%TXIP" value="0"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="U%instance%TXIP" value="1"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="transmitInterruptConfig">
+        <dialogConfig type="CB" caption="Generate Int on Register">
+          <selection name="on1EmptyRegister" value="1 Empty"></selection> 
+        </dialogConfig>
+        <userAction name="on1EmptyRegister">
+</userAction>
+      </userControl>
+
+    </userControlSubGroup>
+
+  </userControlGroup>
+
+</featureDefinitions>

@@ -1,0 +1,805 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE featureDefinitions SYSTEM "../featureDefinitions.dtd">
+
+<featureDefinitions name="TwoPhasePWM" iconName="Two-Phase PWM" helpIndex="">
+
+  <userControlGroup name="none" caption="none">
+    <userControlSubGroup name="none" caption="none">
+      <userControl name="applyButton">
+        <dialogConfig type="applyButton" caption="none"/>
+        <userAction name="apply"/>
+      </userControl>
+    </userControlSubGroup>
+  </userControlGroup>
+
+  <userControlGroup name="General" caption="General">
+    <userControlSubGroup name="none" caption="none">
+
+      <userControl name="EnableAutoRestart">
+        <dialogConfig type="CK" caption="Enable auto restart"/>
+        <userAction name="enable">
+          <claimResource type="register" registerField="PRSEN" value="1"/>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="PRSEN" value="0"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="EnableAutoShutdown">
+        <dialogConfig type="CK" caption="Enable auto shutdown"/>
+        <userAction name="enable">
+          <claimResource type="register" registerField="PASEN" value="1"/>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="PASEN" value="0"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="SYNCPinFunction">
+        <dialogConfig type="CB" caption="SYNC-Pin Function">
+          <selection name="SYNCUnused" value="Unused"/>
+          <selection name="SYNCSlave" value="Slave"/>
+          <selection name="SYNCMaster" value="Master"/>
+        </dialogConfig>
+        <userAction>
+          <claimResource type="pin" pin="SYNC" polarity="Out"/>
+          <claimResource type="register" registerField="SYNC1" value="1"/>
+          <claimResource type="register" registerField="SYNC0" value="1"/>
+          <claimResource type="register" registerField="TRISB7" value="0"/>
+        </userAction>
+        <userAction>
+          <claimResource type="pin" pin="SYNC" polarity="Inp"/>
+          <claimResource type="register" registerField="SYNC1" value="1"/>
+          <claimResource type="register" registerField="SYNC0" value="0"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="SYNC1" value="0"/>
+        </userAction>
+      </userControl>
+
+    </userControlSubGroup>
+  </userControlGroup>
+
+  <userControlGroup name="Mode" caption="Mode">
+    <userControlSubGroup name="none" caption="none">
+
+      <userControl name="Mode">
+        <dialogConfig type="CB" caption="SYNC-Pin Function">
+          <selection name="TwoPhaseMode" value="Normal, Two-Phase"/>
+          <selection name="ComCompReset" value="Complementary, Reset by Comparator"/>
+          <selection name="ComCounterReset" value="Complementary, Reset by Counter"/>
+          <selection name="ComAnyReset" value="Complementary, Reset by Comparator or Counter"/>
+        </dialogConfig>
+        <userAction>
+          <claimResource type="register" registerField="COMOD" value="11"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="COMOD" value="10"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="COMOD" value="01"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="COMOD" value="00"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="ComplementaryModeDelay">
+        <dialogConfig type="CB" caption="Complementary-Mode Delay">
+          <selection name="ComDelay_000" value="0"/>
+          <selection name="ComDelay_005" value="5"/>
+          <selection name="ComDelay_010" value="10"/>
+          <selection name="ComDelay_015" value="15"/>
+          <selection name="ComDelay_020" value="20"/>
+          <selection name="ComDelay_025" value="25"/>
+          <selection name="ComDelay_030" value="30"/>
+          <selection name="ComDelay_035" value="35"/>
+          <selection name="ComDelay_040" value="40"/>
+          <selection name="ComDelay_045" value="45"/>
+          <selection name="ComDelay_050" value="50"/>
+          <selection name="ComDelay_055" value="55"/>
+          <selection name="ComDelay_060" value="60"/>
+          <selection name="ComDelay_065" value="65"/>
+          <selection name="ComDelay_070" value="70"/>
+          <selection name="ComDelay_075" value="75"/>
+          <selection name="ComDelay_080" value="80"/>
+          <selection name="ComDelay_085" value="85"/>
+          <selection name="ComDelay_090" value="90"/>
+          <selection name="ComDelay_095" value="95"/>
+          <selection name="ComDelay_100" value="100"/>
+          <selection name="ComDelay_105" value="105"/>
+          <selection name="ComDelay_110" value="110"/>
+          <selection name="ComDelay_115" value="115"/>
+          <selection name="ComDelay_120" value="120"/>
+          <selection name="ComDelay_125" value="125"/>
+          <selection name="ComDelay_130" value="130"/>
+          <selection name="ComDelay_135" value="135"/>
+          <selection name="ComDelay_140" value="140"/>
+          <selection name="ComDelay_145" value="145"/>
+          <selection name="ComDelay_150" value="150"/>
+          <selection name="ComDelay_155" value="155"/>
+        </dialogConfig>
+        <userAction>
+          <claimResource type="register" registerField="CMDLY" value="11111"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="CMDLY" value="11110"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="CMDLY" value="11101"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="CMDLY" value="11100"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="CMDLY" value="11011"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="CMDLY" value="11010"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="CMDLY" value="11001"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="CMDLY" value="11000"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="CMDLY" value="10111"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="CMDLY" value="10110"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="CMDLY" value="10101"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="CMDLY" value="10100"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="CMDLY" value="10011"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="CMDLY" value="10010"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="CMDLY" value="10001"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="CMDLY" value="10000"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="CMDLY" value="01111"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="CMDLY" value="01110"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="CMDLY" value="01101"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="CMDLY" value="01100"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="CMDLY" value="01011"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="CMDLY" value="01010"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="CMDLY" value="01001"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="CMDLY" value="01000"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="CMDLY" value="00111"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="CMDLY" value="00110"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="CMDLY" value="00101"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="CMDLY" value="00100"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="CMDLY" value="00011"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="CMDLY" value="00010"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="CMDLY" value="00001"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="CMDLY" value="00000"/>
+        </userAction>
+      </userControl>
+
+    </userControlSubGroup>
+  </userControlGroup>
+
+  <userControlGroup name="FrequencyAndDutyCycle" caption="Frequency and Duty Cycle">
+    <userControlSubGroup name="none" caption="none">
+
+      <userControl name="DesiredFrequency">
+        <dialogConfig type="TB" caption="Desired Frequency"/>
+        <userAction/>
+      </userControl>
+
+      <userControl name="DesiredDutyCycle">
+        <dialogConfig type="TB" caption="Desired Duty Cycle"/>
+        <userAction/>
+      </userControl>
+
+      <userControl name="PWMClockPrescaler">
+        <dialogConfig type="CB" caption="PWM Clock Prescaler">
+          <selection name="FoscBy1" value="Fosc / 1"/>
+          <selection name="FoscBy2" value="Fosc / 2"/>
+          <selection name="FoscBy4" value="Fosc / 4"/>
+          <selection name="FoscBy8" value="Fosc / 8"/>
+        </dialogConfig>
+        <userAction>
+          <claimResource type="register" registerField="PWMP" value="11"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PWMP" value="10"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PWMP" value="01"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PWMP" value="00"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="PWMClockPeriod">
+        <dialogConfig type="CB" caption="PWM Clock Period">
+          <selection name="PWMClockTimes_01" value="1"/>
+          <selection name="PWMClockTimes_02" value="2"/>
+          <selection name="PWMClockTimes_03" value="3"/>
+          <selection name="PWMClockTimes_04" value="4"/>
+          <selection name="PWMClockTimes_05" value="5"/>
+          <selection name="PWMClockTimes_06" value="6"/>
+          <selection name="PWMClockTimes_07" value="7"/>
+          <selection name="PWMClockTimes_08" value="8"/>
+          <selection name="PWMClockTimes_09" value="9"/>
+          <selection name="PWMClockTimes_10" value="10"/>
+          <selection name="PWMClockTimes_11" value="11"/>
+          <selection name="PWMClockTimes_12" value="12"/>
+          <selection name="PWMClockTimes_13" value="13"/>
+          <selection name="PWMClockTimes_14" value="14"/>
+          <selection name="PWMClockTimes_15" value="15"/>
+          <selection name="PWMClockTimes_16" value="16"/>
+          <selection name="PWMClockTimes_17" value="17"/>
+          <selection name="PWMClockTimes_18" value="18"/>
+          <selection name="PWMClockTimes_19" value="19"/>
+          <selection name="PWMClockTimes_20" value="20"/>
+          <selection name="PWMClockTimes_21" value="21"/>
+          <selection name="PWMClockTimes_22" value="22"/>
+          <selection name="PWMClockTimes_23" value="23"/>
+          <selection name="PWMClockTimes_24" value="24"/>
+          <selection name="PWMClockTimes_25" value="25"/>
+          <selection name="PWMClockTimes_26" value="26"/>
+          <selection name="PWMClockTimes_27" value="27"/>
+          <selection name="PWMClockTimes_28" value="28"/>
+          <selection name="PWMClockTimes_29" value="29"/>
+          <selection name="PWMClockTimes_30" value="30"/>
+          <selection name="PWMClockTimes_31" value="31"/>
+          <selection name="PWMClockTimes_32" value="32"/>
+        </dialogConfig>
+        <userAction>
+          <claimResource type="register" registerField="PER" value="11111"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PER" value="11110"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PER" value="11101"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PER" value="11100"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PER" value="11011"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PER" value="11010"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PER" value="11001"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PER" value="11000"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PER" value="10111"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PER" value="10110"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PER" value="10101"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PER" value="10100"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PER" value="10011"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PER" value="10010"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PER" value="10001"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PER" value="10000"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PER" value="01111"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PER" value="01110"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PER" value="01101"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PER" value="01100"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PER" value="01011"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PER" value="01010"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PER" value="01001"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PER" value="01000"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PER" value="00111"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PER" value="00110"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PER" value="00101"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PER" value="00100"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PER" value="00011"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PER" value="00010"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PER" value="00001"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PER" value="00000"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="TMR2Prescaler">
+        <dialogConfig type="CB" caption="TMR2 Prescaler for Two-Phase PWM">
+          <selection name="Times1" value="x1"/>
+          <selection name="Times4" value="x4"/>
+          <selection name="Times16" value="x16"/>
+        </dialogConfig>
+        <userAction>
+          <claimResource type="register" registerField="T2CKPS" value="10"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="T2CKPS" value="01"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="T2CKPS" value="00"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="DutyCycleMSB">
+        <dialogConfig type="CB" caption="This control sets the high 8 bits of the PWM duty cycle" range="255">
+          <selection name="SetTo%index%" value="SetTo%index%"/>
+        </dialogConfig>
+        <userAction>
+          <claimResource type="register" registerField="CCPR1L" value="%index%"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="DutyCycleLSB">
+        <dialogConfig type="CB" caption="This control sets the low 2 bits of the PWM duty cycle." range="3">
+          <selection name="SetTo%index%" value="SetTo%index%"/>
+        </dialogConfig>
+        <userAction>
+          <claimResource type="register" registerField="DC1B" value="%index%"/>
+        </userAction>
+      </userControl>
+
+    </userControlSubGroup>
+  </userControlGroup>
+
+  <userControlGroup name="PhaseSpecific" caption="Phase-Specific Settings">
+    <userControlSubGroup name="none" caption="none">
+
+      <userControl name="Phase1_EnableOutput">
+        <dialogConfig type="CK" caption="Enable output"/>
+        <userAction name="enable">
+          <claimResource type="pin" pin="PH1" polarity="Out"/>
+          <claimResource type="register" registerField="PH1EN" value="1"/>
+          <claimResource type="register" registerField="ANS5" value="0"/>
+          <claimResource type="register" registerField="TRISC1" value="0"/>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="PH1EN" value="0"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="Phase2_EnableOutput">
+        <dialogConfig type="CK" caption="Enable output"/>
+        <userAction name="enable">
+          <claimResource type="pin" pin="PH2" polarity="Out"/>
+          <claimResource type="register" registerField="PH2EN" value="1"/>
+          <claimResource type="register" registerField="TRISC4" value="0"/>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="PH2EN" value="0"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="Phase1_InvertOutput">
+        <dialogConfig type="CK" caption="Invert output"/>
+        <userAction name="enable">
+          <claimResource type="register" registerField="POL" instance="1" value="1"/>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="POL" instance="1" value="0"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="Phase2_InvertOutput">
+        <dialogConfig type="CK" caption="Invert output"/>
+        <userAction name="enable">
+          <claimResource type="register" registerField="POL" instance="2" value="1"/>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="POL" instance="2" value="0"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="Phase1_EnableBlanking">
+        <dialogConfig type="CK" caption="Enable blanking"/>
+        <userAction name="enable">
+          <claimResource type="register" registerField="BLANK1" value="1"/>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="BLANK1" value="0"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="Phase2_EnableBlanking">
+        <dialogConfig type="CK" caption="Enable blanking"/>
+        <userAction name="enable">
+          <claimResource type="register" registerField="BLANK2" value="1"/>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="BLANK2" value="0"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="Phase1_ResetOnC1OUT">
+        <dialogConfig type="CK" caption="Reset When C1OUT Goes High"/>
+        <userAction name="enable">
+          <claimResource type="register" registerField="C1EN" instance="1" value="1"/>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="C1EN" instance="1" value="0"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="Phase2_ResetOnC1OUT">
+        <dialogConfig type="CK" caption="Reset When C1OUT Goes High"/>
+        <userAction name="enable">
+          <claimResource type="register" registerField="C1EN" instance="2" value="1"/>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="C1EN" instance="2" value="0"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="Phase1_ResetOnC2OUT">
+        <dialogConfig type="CK" caption="Reset When C2OUT Goes High"/>
+        <userAction name="enable">
+          <claimResource type="register" registerField="C2EN" instance="1" value="1"/>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="C2EN" instance="1" value="0"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="Phase2_ResetOnC2OUT">
+        <dialogConfig type="CK" caption="Reset When C2OUT Goes High"/>
+        <userAction name="enable">
+          <claimResource type="register" registerField="C2EN" instance="2" value="1"/>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="C2EN" instance="2" value="0"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="Phase1_Delay">
+        <dialogConfig type="CB" caption="Phase One Delay">
+          <selection name="Phase1Delay_00" value="0"/>
+          <selection name="Phase1Delay_01" value="1"/>
+          <selection name="Phase1Delay_02" value="2"/>
+          <selection name="Phase1Delay_03" value="3"/>
+          <selection name="Phase1Delay_04" value="4"/>
+          <selection name="Phase1Delay_05" value="5"/>
+          <selection name="Phase1Delay_06" value="6"/>
+          <selection name="Phase1Delay_07" value="7"/>
+          <selection name="Phase1Delay_08" value="8"/>
+          <selection name="Phase1Delay_09" value="9"/>
+          <selection name="Phase1Delay_10" value="10"/>
+          <selection name="Phase1Delay_11" value="11"/>
+          <selection name="Phase1Delay_12" value="12"/>
+          <selection name="Phase1Delay_13" value="13"/>
+          <selection name="Phase1Delay_14" value="14"/>
+          <selection name="Phase1Delay_15" value="15"/>
+          <selection name="Phase1Delay_16" value="16"/>
+          <selection name="Phase1Delay_17" value="17"/>
+          <selection name="Phase1Delay_18" value="18"/>
+          <selection name="Phase1Delay_19" value="19"/>
+          <selection name="Phase1Delay_20" value="20"/>
+          <selection name="Phase1Delay_21" value="21"/>
+          <selection name="Phase1Delay_22" value="22"/>
+          <selection name="Phase1Delay_23" value="23"/>
+          <selection name="Phase1Delay_24" value="24"/>
+          <selection name="Phase1Delay_25" value="25"/>
+          <selection name="Phase1Delay_26" value="26"/>
+          <selection name="Phase1Delay_27" value="27"/>
+          <selection name="Phase1Delay_28" value="28"/>
+          <selection name="Phase1Delay_29" value="29"/>
+          <selection name="Phase1Delay_30" value="30"/>
+          <selection name="Phase1Delay_31" value="31"/>
+        </dialogConfig>
+        <userAction>
+          <claimResource type="register" registerField="PH" instance="1" value="11111"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PH" instance="1" value="11110"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PH" instance="1" value="11101"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PH" instance="1" value="11100"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PH" instance="1" value="11011"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PH" instance="1" value="11010"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PH" instance="1" value="11001"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PH" instance="1" value="11000"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PH" instance="1" value="10111"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PH" instance="1" value="10110"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PH" instance="1" value="10101"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PH" instance="1" value="10100"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PH" instance="1" value="10011"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PH" instance="1" value="10010"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PH" instance="1" value="10001"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PH" instance="1" value="10000"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PH" instance="1" value="01111"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PH" instance="1" value="01110"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PH" instance="1" value="01101"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PH" instance="1" value="01100"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PH" instance="1" value="01011"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PH" instance="1" value="01010"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PH" instance="1" value="01001"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PH" instance="1" value="01000"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PH" instance="1" value="00111"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PH" instance="1" value="00110"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PH" instance="1" value="00101"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PH" instance="1" value="00100"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PH" instance="1" value="00011"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PH" instance="1" value="00010"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PH" instance="1" value="00001"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PH" instance="1" value="00000"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="Phase2_Delay">
+        <dialogConfig type="CB" caption="Phase Two Delay">
+          <selection name="Phase2Delay_00" value="0"/>
+          <selection name="Phase2Delay_01" value="1"/>
+          <selection name="Phase2Delay_02" value="2"/>
+          <selection name="Phase2Delay_03" value="3"/>
+          <selection name="Phase2Delay_04" value="4"/>
+          <selection name="Phase2Delay_05" value="5"/>
+          <selection name="Phase2Delay_06" value="6"/>
+          <selection name="Phase2Delay_07" value="7"/>
+          <selection name="Phase2Delay_08" value="8"/>
+          <selection name="Phase2Delay_09" value="9"/>
+          <selection name="Phase2Delay_10" value="10"/>
+          <selection name="Phase2Delay_11" value="11"/>
+          <selection name="Phase2Delay_12" value="12"/>
+          <selection name="Phase2Delay_13" value="13"/>
+          <selection name="Phase2Delay_14" value="14"/>
+          <selection name="Phase2Delay_15" value="15"/>
+          <selection name="Phase2Delay_16" value="16"/>
+          <selection name="Phase2Delay_17" value="17"/>
+          <selection name="Phase2Delay_18" value="18"/>
+          <selection name="Phase2Delay_19" value="19"/>
+          <selection name="Phase2Delay_20" value="20"/>
+          <selection name="Phase2Delay_21" value="21"/>
+          <selection name="Phase2Delay_22" value="22"/>
+          <selection name="Phase2Delay_23" value="23"/>
+          <selection name="Phase2Delay_24" value="24"/>
+          <selection name="Phase2Delay_25" value="25"/>
+          <selection name="Phase2Delay_26" value="26"/>
+          <selection name="Phase2Delay_27" value="27"/>
+          <selection name="Phase2Delay_28" value="28"/>
+          <selection name="Phase2Delay_29" value="29"/>
+          <selection name="Phase2Delay_30" value="30"/>
+          <selection name="Phase2Delay_31" value="31"/>
+        </dialogConfig>
+        <userAction>
+          <claimResource type="register" registerField="PH" instance="2" value="11111"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PH" instance="2" value="11110"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PH" instance="2" value="11101"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PH" instance="2" value="11100"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PH" instance="2" value="11011"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PH" instance="2" value="11010"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PH" instance="2" value="11001"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PH" instance="2" value="11000"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PH" instance="2" value="10111"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PH" instance="2" value="10110"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PH" instance="2" value="10101"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PH" instance="2" value="10100"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PH" instance="2" value="10011"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PH" instance="2" value="10010"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PH" instance="2" value="10001"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PH" instance="2" value="10000"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PH" instance="2" value="01111"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PH" instance="2" value="01110"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PH" instance="2" value="01101"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PH" instance="2" value="01100"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PH" instance="2" value="01011"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PH" instance="2" value="01010"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PH" instance="2" value="01001"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PH" instance="2" value="01000"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PH" instance="2" value="00111"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PH" instance="2" value="00110"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PH" instance="2" value="00101"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PH" instance="2" value="00100"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PH" instance="2" value="00011"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PH" instance="2" value="00010"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PH" instance="2" value="00001"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="PH" instance="2" value="00000"/>
+        </userAction>
+      </userControl>
+
+    </userControlSubGroup>
+  </userControlGroup>
+
+</featureDefinitions>

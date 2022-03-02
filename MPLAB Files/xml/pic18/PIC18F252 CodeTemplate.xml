@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE codeDefinitions SYSTEM "../codeDefinitions.dtd">
+
+<codeDefinitions>
+
+<codeBlock>
+
+<code name="fuses" caption="fuses (DCR) configuration">
+
+	<line comment="B5=OSCEN-L B2:0=FOSC2:0"></line>
+	<line register="CONFIG1H" action="WCFG" mask="0x00FF" comment=""></line>
+
+	<line comment="B3:2=BORV1:0 B1=BOREN B0=PWRTEN-L"></line>
+	<line register="CONFIG2L" action="WCFG" mask="0x00FF" comment=""></line>
+	<line comment="B3:1=WDTPS2:0 B0=WDTEN"></line>
+	<line register="CONFIG2H" action="WCFG" mask="0x00FF" comment=""></line>
+
+	<line comment="B7=WAIT B1=PM1:0"></line>
+	<line register="CONFIG3L" action="WCFG" mask="0x00FF" comment=""></line>
+	<line comment="B1=T10SCMX (not in x620 or x720) B0=CCP2MX"></line>
+	<line register="CONFIG3H" action="WCFG" mask="0x00FF" comment=""></line>
+
+	<line comment="B7=DEBUG-L B2=LVP B0=STVREN"></line>
+	<line register="CONFIG4L" action="WCFG" mask="0x00FF" comment=""></line>
+
+	<line comment="B7:0=CP7:0"></line>
+	<line register="CONFIG5L" action="WCFG" mask="0x00FF" comment=""></line>
+	<line comment="B7=CPD B6=CPB"></line>
+	<line register="CONFIG5H" action="WCFG" mask="0x00FF" comment=""></line>
+
+	<line comment="B7:0=WR7:0"></line>
+	<line register="CONFIG6L" action="WCFG" mask="0x00FF" comment=""></line>
+	<line comment="B7=WRTD B6=WRTB B5=WRTC"></line>
+	<line register="CONFIG6H" action="WCFG" mask="0x00FF" comment=""></line>
+
+	<line comment="B7:0=EBTR7:0"></line>
+	<line register="CONFIG7L" action="WCFG" mask="0x00FF" comment=""></line>
+	<line comment="B6=EBTRB"></line>
+	<line register="CONFIG7H" action="WCFG" mask="0x00FF" comment=""></line>
+
+</code>
+
+<code name="ResetErrorChecks" caption="Check for reset errors">
+
+</code>
+
+<code name="Interrupts" caption="Disable Interrupts during configuration">
+
+	<line comment="disable ints"></line>
+	<line comment="B6=CM B4=EE B3=BCL B2=LVD B1=TMR3 B0=CCP2"></line>
+	<line register="PIE2" action="W" value="0x0000" mask="0x005F" comment=""></line>
+	<line comment="B7=PSP B6=AD B5=RC1 B4=TX1 B3=SSP B2=CCP1 B1=TMR2 B0=TMR1"></line>
+	<line register="PIE1" action="W" value="0x0000" mask="0x00FF" comment=""></line>
+
+</code>
+
+<code name="Oscillator" caption="Oscillator configuration">
+
+	<line comment="B0=SCS"></line>
+	<line register="OSCCON" action="WREG" mask="0x0001" comment=""></line>
+	<line comment="B5=IRVST B4=LVDEN B3:0=LVDL3:0"></line>
+	<line register="LVDCON" action="WREG" mask="0x003F" comment=""></line>
+	<line comment="B5=IRVST B4=LVDEN B3:0=LVDL3:0"></line>
+	<line register="WDTCON" action="WREG" mask="0x0001" comment=""></line>
+	<line comment="B7=IPEN B4=RI-L B3=TO-L B2=PD-L B1=POR-L B0=BOR-L"></line>
+	<line register="RCON" action="WREG" mask="0x009F" comment=""></line>
+
+</code>
+
+<code name="IOPort" caption="IO Ports configuration">
+
+	<line comment="port A is 7 bits wide"></line>
+	<line comment="set TRIS to all inputs before setting initial value"></line>
+	<line register="TRISA" action="W" value="0x7F" mask="0x007F" comment=""></line>
+	<line register="PORTA" action="WREG" mask="0x007F" comment=""></line>
+	<line comment="set port bit as input (1) or output (0)"></line>
+	<line register="TRISA" action="WREG" mask="0x007F" comment=""></line>
+
+	<line comment="port B is 8 bits wide"></line>
+	<line comment="set TRIS to all inputs before setting initial value"></line>
+	<line register="TRISB" action="W" value="0xFF" mask="0x00FF" comment=""></line>
+	<line register="PORTB" action="WREG" mask="0x00FF" comment=""></line>
+	<line comment="set port bit as input (1) or output (0)"></line>
+	<line register="TRISB" action="WREG" mask="0x00FF" comment=""></line>
+
+	<line comment="port C is 8 bits wide"></line>
+	<line comment="set TRIS to all inputs before setting initial value"></line>
+	<line register="TRISC" action="W" value="0xFF" mask="0x00FF" comment=""></line>
+	<line register="PORTC" action="WREG" mask="0x00FF" comment=""></line>
+	<line comment="set port bit as input (1) or output (0)"></line>
+	<line register="TRISC" action="WREG" mask="0x00FF" comment=""></line>
+
+</code>
+
+<code name="CCP" caption="CCP configuration">
+
+	<line comment="(H)Register High Byte"></line>
+	<line comment="(L)Register Low Byte"></line>
+	<line comment="(CON)B5:4=DCB1:0 B4:0=CCPM3:0"></line>
+	<line comment="CCP1"></line>
+	<line register="CCPR1H" action="WREG" mask="0x00FF" comment=""></line>
+	<line register="CCPR1L" action="WREG" mask="0x00FF" comment=""></line>
+	<line register="CCP1CON" action="WREG" mask="0x003F" comment=""></line>
+	<line comment="CCP2"></line>
+	<line register="CCPR2H" action="WREG" mask="0x00FF" comment=""></line>
+	<line register="CCPR2L" action="WREG" mask="0x00FF" comment=""></line>
+	<line register="CCP2CON" action="WREG" mask="0x003F" comment=""></line>
+
+</code>
+
+<code name="MSSP" caption="MSSP configuration">
+
+	<line comment="RX/TX buffer"></line>
+	<line register="SSPBUF" action="R" mask="0x00FF" comment=""></line>
+	<line comment="Address register (I2C Slave) or BRG (I2C Master)"></line>
+	<line register="SSPADD" action="WREG" mask="0x00FF" comment=""></line>
+	<line comment="B7=SMP B6=CKE B5=D/A-L B4=P B3=S B2=R/W-L B1=UA B0=BF"></line>
+	<line register="SSPSTAT" action="WREG" mask="0x00FF" comment=""></line>
+	<line comment="B7=WCOL B6=SSPOV B5=SSPEN B4=CKP B3:0=SSPM3:0"></line>
+	<line register="SSPCON1" action="WREG" mask="0x00FF" comment=""></line>
+	<line comment="B7=GCEN B6=ACKSTAT B5=ACKDT B4=ACKEN B3=RCEN B2=PEN B1=RSEN B0=SEN"></line>
+	<line register="SSPCON2" action="WREG" mask="0x00FF" comment=""></line>
+
+</code>
+
+<code name="USART" caption="USART configuration">
+
+	<line comment="USART1 and USART2"></line>
+	<line comment="(RCSTA)B7=SPEN B6=RX9 B5=SREN B4=CREN B3=ADDEN B2=FERR B1=OERR B0=RX9D"></line>
+	<line comment="(TXSTA)B7=CSRC B6=TX9 B5=TXEN B4=SYNC B2=BRGH B1=TRMT B0=TX9D"></line>
+	<line comment="(SPBRG)Baud rate generator"></line>
+	<line comment="(RCREG)Receive register"></line>
+	<line register="RCSTA" action="WREG" mask="0x00FF" comment="set up receive options"></line>
+	<line register="TXSTA" action="WREG" mask="0x00F7" comment="set up transmit options"></line>
+	<line register="SPBRG" action="WREG" mask="0x00FF" comment="set up baud"></line>
+	<line register="RCREG" action="R" value="0x0000" mask="0x00FF" comment="flush receive buffer"></line>
+	<line register="RCREG" action="R" value="0x0000" mask="0x00FF" comment=""></line>
+
+</code>
+
+<code name="A2D" caption="A2D configuration">
+
+	<line comment=""></line>
+	<line comment="B7:6=ADCS1:0 B5:3=CHS2:0 B2=GO B0=ADON"></line>
+	<line register="ADCON0" action="WREG" mask="0x003B" comment="GO bit2 to 0"></line>
+	<line comment="B7=ADFM B6=ADCS2 B3:0=PCFG3:0"></line>
+	<line register="ADCON1" action="WREG" mask="0x003F" comment=""></line>
+
+</code>
+
+<code name="required" caption="Interrupt flags cleared and interrupt configuration">
+
+	<line comment="interrupt priorities"></line>
+	<line comment="B6=CM B4=EE B3=BCL B2=LVD B1=TMR3 B0=CCP2"></line>
+	<line register="IPR2" action="WREG" mask="0x005F" comment=""></line>
+	<line comment="B7=PSP B6=AD B5=RC1 B4=TX1 B3=SSP B2=CCP1 B1=TMR2 B0=TMR1"></line>
+	<line register="IPR1" action="WREG" mask="0x00FF" comment=""></line>
+
+	<line comment="clear int flags"></line>
+	<line comment="B6=CM B4=EE B3=BCL B2=LVD B1=TMR3 B0=CCP2"></line>
+	<line register="PIR2" action="W" value="0x0000" mask="0x005F" comment=""></line>
+	<line comment="B7=PSP B6=AD B5=RC1 B4=TX1 B3=SSP B2=CCP1 B1=TMR2 B0=TMR1"></line>
+	<line register="PIR1" action="W" value="0x0000" mask="0x00FF" comment=""></line>
+
+	<line comment="global and external interrupt enables"></line>
+	<line comment="B7=GIE B6=PEIE B5=TMR0IE B4=INTOIE B3=RBIE B2=TMR0IF B1=INTOIF B0=RBIF"></line>
+	<line register="INTCON" action="WREG" mask="0x00FF" comment=""></line>
+	<line comment="B7=RBPU-L B6:3=INTEDG0:3 B2=TMR0IP B1=INT3IP B0=RBIP"></line>
+	<line register="INTCON2" action="WREG" mask="0x00FF" comment=""></line>
+	<line comment="B7:6=INT2:1IP B5:3=INT3:1IE B2:0=INT3:1IF"></line>
+	<line register="INTCON3" action="WREG" mask="0x00FF" comment=""></line>
+
+</code>
+
+<code name="TMR" caption="Timers configuration">
+
+	<line comment="timer0"></line>
+	<line comment="(CON)B7=TMRON B6=T8BIT B5=TCS B4=TSE B3=PSA B2:0=TPS2:0"></line>
+	<line comment="(TMRH)B7:0=Timer register High byte"></line>
+	<line comment="(TMRL)B7:0=Timer register Low byte"></line>
+	<line code="bcf T0CON,TMR0ON" comment="stop the timer"></line>
+	<line register="T0CON" action="WREG" mask="0x00FF" comment="set options with timer on/off (bit7)"></line>
+	<line comment="***note: must reload 0x100-TMR in application code***"></line>
+	<line register="TMR0" action="LREG.b_H" mask="0xFFFF" comment="preset timer values"></line>
+	<line register="TMR0" action="LREG.b_L" mask="0xFFFF" comment=""></line>
+
+	<line comment="timer2"></line>
+	<line comment="(CON)B6:3=TOUTPS3:0 B2=TMRON B1:0=TCKPS1:0"></line>
+	<line comment="(TMR)Timer register (cleared)"></line>
+	<line comment="(PR)Timer preload register (set)"></line>
+	<line code="bcf T2CON,TMR2ON" comment="stop the timer"></line>
+	<line register="T2CON" action="WREG" mask="0x007F" comment="set options with timer on/off (bit2)"></line>
+	<line register="TMR2" action="W" value="0x0000" mask="0x00FF" comment="preset timer values"></line>
+	<line register="PR2" action="WREG" mask="0x00FF" comment="preload timer values"></line>
+
+	<line comment="timer1 and timer3"></line>
+	<line comment="(CON)B7=RD16 B5:4=TCKPS1:0 B3=TOSCEN B2=TSYNC-L B1=TMRCS B0=TMRON"></line>
+	<line comment="(TMRH)Timer register High byte"></line>
+	<line comment="(TMRL)Timer register Low byte"></line>
+	<line code="bcf T1CON,TMR1ON" comment="stop the timer"></line>
+	<line register="T1CON" action="WREG" mask="0x00BF" comment="set options with timer on/off (bit0)"></line>
+	<line comment="***note: must reload 0x100-TMR in application code***"></line>
+	<line register="TMR1" action="LREG.b_H" mask="0xFFFF" comment="preset timer values"></line>
+	<line register="TMR1" action="LREG.b_L" mask="0xFFFF" comment=""></line>
+	<line code="bcf T3CON,TMR3ON" comment="stop the timer"></line>
+	<line register="T3CON" action="WREG" mask="0x00BF" comment="set options with timer on/off (bit0)"></line>
+	<line comment="***note: must reload 0x100-TMR in application code***"></line>
+	<line register="TMR3" action="LREG.b_H" mask="0xFFFF" comment="preset timer values"></line>
+	<line register="TMR3" action="LREG.b_L" mask="0xFFFF" comment=""></line>
+
+</code>
+
+<code name="CPU" caption="CPU register configuration">
+
+</code>
+
+<code name="Interrupts" caption="enable interrupts">
+
+	<line comment="feature interrupt enables"></line>
+	<line comment="B6=CM B4=EE B3=BCL B2=LVD B1=TMR3 B0=CCP2"></line>
+	<line register="PIE2" action="WREG" mask="0x005F" comment=""></line>
+	<line comment="B7=PSP B6=AD B5=RC1 B4=TX1 B3=SSP B2=CCP1 B1=TMR2 B0=TMR1"></line>
+	<line register="PIE1" action="WREG" mask="0x00FF" comment=""></line>
+
+	<line code="return" comment="end of init"></line>
+
+</code>
+
+<code name="ResetErrorHandlers" caption="">
+
+</code>
+
+</codeBlock>
+
+</codeDefinitions>

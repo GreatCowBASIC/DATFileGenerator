@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE featureDefinitions SYSTEM "../featureDefinitions.dtd">
+
+<featureDefinitions name="Comparator" iconName="Comparator" helpIndex="">
+
+  <userControlGroup name="none" caption="none">
+    <userControlSubGroup name="none" caption="none">
+      <userControl name="applyButton">
+        <dialogConfig type="applyButton" caption="none"/>
+        <userAction name="apply"/>
+      </userControl>
+    </userControlSubGroup>
+  </userControlGroup>
+
+  <userControlGroup name="General" caption="General">
+    <userControlSubGroup name="none" caption="none">
+
+      <userControl name="EnableOnStartup">
+        <dialogConfig type="CK" caption="Enable on startup"/>
+        <userAction name="enable">
+          <claimResource type="register" registerField="C%instance%ON" value="1"/>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="C%instance%ON" value="0"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="EnableInterrupt" enableForInt="CM%instance%">
+        <dialogConfig type="CK" caption="Enable interrupt on startup"/>
+        <userAction name="enable">
+          <claimResource type="register" registerField="C%instance%IE" value="1"/>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="C%instance%IE" value="0"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="ComparatorSpeed">
+        <dialogConfig type="CB" caption="Comparator speed">
+          <selection name="NormalSpeed" value="Normal"/>
+          <selection name="SlowSpeed" value="Slow, Low Power"/>
+        </dialogConfig>
+        <userAction>
+          <claimResource type="register" registerField="C%instance%SP" value="0"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="C%instance%SP" value="1"/>
+        </userAction>
+      </userControl>
+
+    </userControlSubGroup>
+  </userControlGroup>
+
+  <userControlGroup name="InputOutput" caption="Input/Output">
+    <userControlSubGroup name="none" caption="none">
+
+      <userControl name="NonInvertingInput">
+        <dialogConfig type="CB" caption="Non-inverting input">
+          <selection name="CxIN+" value="C%instance%IN+"/>
+          <selection name="VoltageRef" value="CVRef"/>
+        </dialogConfig>
+        <userAction>
+          <claimResource type="register" registerField="C%instance%R" value="1"/>
+        </userAction>
+        <userAction>
+          <claimResource type="pin" pin="C%instance%IN+" polarity="Inp"/>
+          <claimResource type="register" registerField="C%instance%R" value="0"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="CVRefSource">
+        <dialogConfig type="CB" caption="CVRef source">
+          <selection name="RatioOfVddSource" value="Ratio of Vdd"/>
+          <selection name="Nominal1.2VSource" value="Nominal 1.2V"/>
+        </dialogConfig>
+        <userAction>
+          <claimResource type="register" registerField="C%instance%VREN" value="0"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="C%instance%VREN" value="1"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="InvertingInput">
+        <dialogConfig type="CB" caption="Inverting input">
+          <selection name="C12IN0-" value="C12IN0-"/>
+          <selection name="C12IN1-" value="C12IN1-"/>
+          <selection name="C12IN2-" value="C12IN2-"/>
+          <selection name="C12IN3-" value="C12IN3-"/>
+        </dialogConfig>
+        <userAction>
+          <claimResource type="pin" pin="C12IN3-" polarity="Inp"/>
+          <claimResource type="register" registerField="C%instance%CH" value="11"/>
+        </userAction>
+        <userAction>
+          <claimResource type="pin" pin="C12IN2-" polarity="Inp"/>
+          <claimResource type="register" registerField="C%instance%CH" value="10"/>
+        </userAction>
+        <userAction>
+          <claimResource type="pin" pin="C12IN1-" polarity="Inp"/>
+          <claimResource type="register" registerField="C%instance%CH" value="01"/>
+        </userAction>
+        <userAction>
+          <claimResource type="pin" pin="C12IN0-" polarity="Inp"/>
+          <claimResource type="register" registerField="C%instance%CH" value="00"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="OutputToPin">
+        <dialogConfig type="CK" caption="Output to pin"/>
+        <userAction name="enable">
+          <claimResource type="pin" pin="C%instance%OUT" polarity="Out"/>
+          <claimResource type="register" registerField="C%instance%OE" value="1"/>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="C%instance%OE" value="0"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="InvertOutput">
+        <dialogConfig type="CK" caption="Output to pin"/>
+        <userAction name="enable">
+          <claimResource type="register" registerField="C%instance%POL" value="1"/>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="C%instance%POL" value="0"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="SyncToFallingEdgeOfT1">
+        <dialogConfig type="CK" caption="Sync ouput to falling edge of Timer 1"/>
+        <userAction name="enable">
+          <claimResource type="register" registerField="C2SYNC" value="1"/>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="C2SYNC" value="0"/>
+        </userAction>
+      </userControl>
+
+    </userControlSubGroup>
+  </userControlGroup>
+
+</featureDefinitions>

@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE featureDefinitions SYSTEM "../featureDefinitions.dtd">
+
+<featureDefinitions name="ADC" iconName="ADC" helpIndex="">
+
+  <userControlGroup name="none" caption="none">
+    <userControlSubGroup name="none" caption="none">
+      <userControl name="applyButton">
+        <dialogConfig type="applyButton" caption="none"/>
+        <userAction name="apply"/>
+      </userControl>
+    </userControlSubGroup>
+  </userControlGroup>
+
+  <userControlGroup name="General" caption="General">
+    <userControlSubGroup name="none" caption="none">
+
+      <userControl name="EnableOnStartup">
+        <dialogConfig type="CK" caption="Enable on startup"/>
+        <userAction name="enable">
+          <claimResource type="register" registerField="ADON" value="1"/>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="ADON" value="0"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="EnableInterrupt" enableForInt="AD">
+        <dialogConfig type="CK" caption="Enable on startup"/>
+        <userAction name="enable">
+          <claimResource type="register" registerField="ADIE" value="1"/>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="ADIE" value="0"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="ReferenceVoltage">
+        <dialogConfig type="CB" caption="Range">
+          <selection name="Vdd" value="Vdd"/>
+          <selection name="VRefPin" value="VRef Pin"/>
+        </dialogConfig>
+        <userAction>
+          <claimResource type="pin" pin="VREF" polarity="Inp"/>
+          <claimResource type="register" registerField="VCFG" value="1"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="VCFG" value="0"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="ResultFormat">
+        <dialogConfig type="CB" caption="Range">
+          <selection name="LeftJustified" value="Left Justified"/>
+          <selection name="RightJustified" value="Right Justified"/>
+        </dialogConfig>
+        <userAction>
+          <claimResource type="register" registerField="ADFM" value="1"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="ADFM" value="0"/>
+        </userAction>
+      </userControl>
+
+    </userControlSubGroup>
+  </userControlGroup>
+
+  <userControlGroup name="InputChannels" caption="Input Channels">
+    <userControlSubGroup name="none" caption="none">
+
+<!-- This representation won't work for us if our code for automatically -->
+<!-- generating the TRIS bits fails.  Remember to test that out! -->
+
+      <userControl name="EnableChannel%indexControl%" range="11">
+        <dialogConfig type="BoxCK" caption="AN%indexControl%"/>
+        <userAction name="enable">
+          <claimResource type="register" registerField="ANS%indexControl%" value="1"/>
+          <claimResource type="pin" pin="AN%indexControl%" polarity="Inp"/>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="ANS%indexControl%" value="0"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="ReadChannel">
+        <dialogConfig type="CB" caption="">
+          <selection name="Read0" value="AN0"/>
+          <selection name="Read1" value="AN1"/>
+          <selection name="Read2" value="AN2"/>
+          <selection name="Read3" value="AN3"/>
+          <selection name="Read4" value="AN4"/>
+          <selection name="Read5" value="AN5"/>
+          <selection name="Read6" value="AN6"/>
+          <selection name="Read7" value="AN7"/>
+          <selection name="Read8" value="AN8"/>
+          <selection name="Read9" value="AN9"/>
+          <selection name="Read10" value="AN10"/>
+          <selection name="Read11" value="AN11"/>
+          <selection name="ReadCVRef" value="CVRef"/>
+          <selection name="Read1.2VNominal" value="1.2V Nominal"/>
+        </dialogConfig>
+        <userAction>
+          <claimResource type="register" registerField="CHS" value="1101"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="CHS" value="1100"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="CHS" value="1011"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="CHS" value="1010"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="CHS" value="1001"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="CHS" value="1000"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="CHS" value="0111"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="CHS" value="0110"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="CHS" value="0101"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="CHS" value="0100"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="CHS" value="0011"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="CHS" value="0010"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="CHS" value="0001"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="CHS" value="0000"/>
+        </userAction>
+      </userControl>
+
+     </userControlSubGroup>
+  </userControlGroup>
+
+  <userControlGroup name="Conversion" caption="Conversion">
+    <userControlSubGroup name="none" caption="none">
+
+<!-- This control does nothing more than capture the user's intent to use -->
+<!-- one type of clock source or the other. -->
+
+      <userControl name="ConversionClockSourceFlavor">
+        <dialogConfig type="CB" caption="Conversion Clock Source">
+          <selection name="Fosc" value="Fosc Based"/>
+          <selection name="ADCIntOsc" value="ADC Internal Oscillator"/>
+        </dialogConfig>
+        <userAction/>
+        <userAction/>
+      </userControl>
+
+      <userControl name="ConversionClockSourceSelect">
+        <dialogConfig type="CB" caption="Conversion Clock Source Select">
+          <selection name="FoscBy2" value="Fosc/2"/>
+          <selection name="FoscBy4" value="Fosc/4"/>
+          <selection name="FoscBy8" value="Fosc/8"/>
+          <selection name="FoscBy16" value="Fosc/16"/>
+          <selection name="FoscBy32" value="Fosc/32"/>
+          <selection name="FoscBy64" value="Fosc/64"/>
+          <selection name="ADRC" value="ADRC (500 kHz)"/>
+        </dialogConfig>
+        <userAction>
+          <claimResource type="register" registerField="ADCS" value="011"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="ADCS" value="110"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="ADCS" value="010"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="ADCS" value="101"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="ADCS" value="001"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="ADCS" value="100"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="ADCS" value="000"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="DesiredSamplePeriod">
+        <dialogConfig type="TB" caption="Desired Sample Period"/>
+        <userAction/>
+      </userControl>
+
+    </userControlSubGroup>
+  </userControlGroup>
+
+</featureDefinitions>

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE featureDefinitions SYSTEM "../featureDefinitions.dtd">
+
+<featureDefinitions name="LVD" iconName="LVD" helpIndex="">
+
+<userControlGroup name="none" caption="none">
+<userControlSubGroup name="none" caption="none">
+
+<userControl name="applyButton">
+<dialogConfig type="applyButton" caption="none"></dialogConfig>
+<userAction name="apply">
+</userAction>
+</userControl>
+
+</userControlSubGroup>
+</userControlGroup>
+
+<userControlGroup name="thresholdSettings" caption="Threshold Settings">
+<userControlSubGroup name="none" caption="none">
+
+<userControl name="enable">
+<dialogConfig type="CK" caption="Enable on Startup"></dialogConfig>
+<userAction name="enable">
+	<claimResource type="register" registerField="LVDEN" value="1"></claimResource>
+</userAction>
+<userAction name="disable">
+	<claimResource type="register" registerField="LVDEN" value="0"></claimResource>
+</userAction>
+</userControl>
+
+<userControl name="threshold">
+<dialogConfig type="CB" caption="Threshold">
+	<selection name="19V" value="2.0 - 2.12"></selection> 
+	<selection name="21V" value="2.2 - 2.33"></selection> 
+	<selection name="23V" value="2.4 - 2.54"></selection> 
+	<selection name="25V" value="2.5 - 2.65"></selection> 
+	<selection name="26V" value="2.7 - 2.86"></selection> 
+	<selection name="29V" value="2.8 - 2.97"></selection> 
+	<selection name="31V" value="3.0 - 3.18"></selection> 
+	<selection name="34V" value="3.3 - 3.50"></selection> 
+	<selection name="36V" value="3.5 - 3.71"></selection> 
+	<selection name="37V" value="3.6 - 3.82"></selection> 
+	<selection name="39V" value="3.8 - 4.03"></selection> 
+	<selection name="41V" value="4.0 - 4.24"></selection> 
+	<selection name="43V" value="4.2 - 4.45"></selection> 
+	<selection name="46V" value="4.5 - 4.77"></selection> 
+	<selection name="LVDIN" value="is LVDIN Pin (nom. 1.24V)"></selection> 
+</dialogConfig>
+<userAction name="LVDIN">
+	<claimResource type="register" registerField="LVDL" value="1111"></claimResource>
+	<claimResource type="pin" pin="LVDIN" polarity="Inp"></claimResource>
+</userAction>
+<userAction name="46V">
+	<claimResource type="register" registerField="LVDL" value="1110"></claimResource>
+</userAction>
+<userAction name="43V">
+	<claimResource type="register" registerField="LVDL" value="1101"></claimResource>
+</userAction>
+<userAction name="41V">
+	<claimResource type="register" registerField="LVDL" value="1100"></claimResource>
+</userAction>
+<userAction name="39V">
+	<claimResource type="register" registerField="LVDL" value="1011"></claimResource>
+</userAction>
+<userAction name="37V">
+	<claimResource type="register" registerField="LVDL" value="1010"></claimResource>
+</userAction>
+<userAction name="36V">
+	<claimResource type="register" registerField="LVDL" value="1001"></claimResource>
+</userAction>
+<userAction name="34V">
+	<claimResource type="register" registerField="LVDL" value="1000"></claimResource>
+</userAction>
+<userAction name="31V">
+	<claimResource type="register" registerField="LVDL" value="0111"></claimResource>
+</userAction>
+<userAction name="29V">
+	<claimResource type="register" registerField="LVDL" value="0110"></claimResource>
+</userAction>
+<userAction name="26V">
+	<claimResource type="register" registerField="LVDL" value="0101"></claimResource>
+</userAction>
+<userAction name="25V">
+	<claimResource type="register" registerField="LVDL" value="0100"></claimResource>
+</userAction>
+<userAction name="23V">
+	<claimResource type="register" registerField="LVDL" value="0011"></claimResource>
+</userAction>
+<userAction name="21V">
+	<claimResource type="register" registerField="LVDL" value="0010"></claimResource>
+</userAction>
+<userAction name="19V">
+	<claimResource type="register" registerField="LVDL" value="0001"></claimResource>
+</userAction>
+</userControl>
+
+<userControl name="interruptEnable" enableForInt="LVD">
+<dialogConfig type="CK" caption="Enable Interrupt on Startup"></dialogConfig>
+<userAction name="enable">
+	<claimResource type="register" registerField="LVDIE" value="1"></claimResource>
+</userAction>
+<userAction name="disable">
+	<claimResource type="register" registerField="LVDIE" value="0"></claimResource>
+</userAction>
+</userControl>
+
+<userControl name="interruptPriority" priorityForInt="LVD">
+  <dialogConfig type="CB" caption="Interrupt Priority">
+    <selection name="PriorityLevelToHigh" value="High"/>
+    <selection name="PriorityLevelToLow" value="Low"/>
+  </dialogConfig>
+  <userAction>
+    <claimResource type="register" registerField="LVDIP" value="0"/>
+  </userAction>
+  <userAction>
+    <claimResource type="register" registerField="LVDIP" value="1"/>
+  </userAction>
+</userControl>
+
+</userControlSubGroup>
+</userControlGroup>
+
+</featureDefinitions>

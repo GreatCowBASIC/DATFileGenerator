@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE featureDefinitions SYSTEM "../featureDefinitions.dtd"[]>
+<featureDefinitions name="Oscillator4" iconName="oscillator" helpIndex="">
+	<userControlGroup name="none" caption="none">
+		<userControlSubGroup name="none" caption="none">
+			<userControl name="applyButton">
+				<dialogConfig type="applyButton" caption="none"></dialogConfig>
+				<userAction name="apply">
+					<claimResource type="register" registerField="SCS" value="00"></claimResource>
+				</userAction>
+			</userControl>
+		</userControlSubGroup>
+	</userControlGroup>
+	<userControlGroup name="primaryOscSettings" caption="Primary Oscillator Settings">
+		<userControlSubGroup name="none" caption="none">
+			<userControl name="clockFreq">
+				<dialogConfig type="TB" caption="System Clock Frequency"></dialogConfig>
+				<userAction>
+					<!-- this is needed for baud calc and should just be stored --></userAction>
+			</userControl>
+			<userControl type="readOnly" name="fcy">
+				<dialogConfig type="general" caption="fcy"></dialogConfig>
+				<userAction></userAction>
+			</userControl>
+			<userControl name="showAdvanced">
+				<dialogConfig type="CK" caption="View Advanced Oscillator Settings"></dialogConfig>
+				<userAction name="enable"></userAction>
+				<userAction name="disable"></userAction>
+			</userControl>
+		</userControlSubGroup>
+	</userControlGroup>
+	<userControlGroup name="advancedOscSettings" caption="Advanced Oscillator Settings">
+		<userControlSubGroup name="none" caption="none">
+			<userControl name="primaryMode">
+				<dialogConfig type="CB" caption="Primary Oscillator Mode">
+					<selection name="setToECPLL" value="ECPLL"></selection>
+					<selection name="setToEC" value="EC"></selection>
+					<selection name="setToHSPLL" value="HSPLL"></selection>
+					<selection name="setToHS" value="HS"></selection>
+					<selection name="setToINTRC" value="INTRC"></selection>
+				</dialogConfig>
+				<userAction name="setToINTRC">
+					<claimResource type="register" registerField="FOSC2" value="0"></claimResource>
+				</userAction>
+				<userAction name="setToHS">
+					<claimResource type="register" registerField="FOSC2" value="1"></claimResource>
+					<claimResource type="register" registerField="FOSC1" value="0"></claimResource>
+					<claimResource type="register" registerField="FOSC0" value="0"></claimResource>
+					<claimResource type="pin" pin="OSC1" polarity="Inp"></claimResource>
+					<claimResource type="pin" pin="CLKO" polarity="Out"></claimResource>
+				</userAction>
+				<userAction name="setToHSPLL">
+					<claimResource type="register" registerField="FOSC2" value="1"></claimResource>
+					<claimResource type="register" registerField="FOSC1" value="0"></claimResource>
+					<claimResource type="register" registerField="FOSC0" value="1"></claimResource>
+					<claimResource type="register" registerField="PLLEN" value="0"></claimResource>
+					<claimResource type="pin" pin="OSC1" polarity="Inp"></claimResource>
+					<claimResource type="pin" pin="OSC2" polarity="Inp"></claimResource>
+				</userAction>
+				<userAction name="setToEC">
+					<claimResource type="register" registerField="FOSC2" value="1"></claimResource>
+					<claimResource type="register" registerField="FOSC1" value="1"></claimResource>
+					<claimResource type="register" registerField="FOSC0" value="0"></claimResource>
+					<claimResource type="pin" pin="OSC1" polarity="Inp"></claimResource>
+					<claimResource type="pin" pin="OSC2" polarity="Inp"></claimResource>
+				</userAction>
+				<userAction name="setToECPLL">
+					<claimResource type="register" registerField="FOSC2" value="1"></claimResource>
+					<claimResource type="register" registerField="FOSC1" value="1"></claimResource>
+					<claimResource type="register" registerField="FOSC0" value="1"></claimResource>
+					<claimResource type="register" registerField="PLLEN" value="1"></claimResource>
+					<claimResource type="pin" pin="OSC1" polarity="Inp"></claimResource>
+					<claimResource type="pin" pin="OSC2" polarity="Out"></claimResource>
+				</userAction>
+			</userControl>
+			<userControl name="enableFailsafe">
+				<dialogConfig type="CK" caption="Enable Failsafe Clock Monitor"></dialogConfig>
+				<userAction name="enable">
+					<claimResource type="register" registerField="FCMEN" value="1"></claimResource>
+				</userAction>
+				<userAction name="disable">
+					<claimResource type="register" registerField="FCMEN" value="0"></claimResource>
+				</userAction>
+			</userControl>
+			<userControl name="idleEnable">
+				<dialogConfig type="CK" caption="Device enters idle mode on SLEEP"></dialogConfig>
+				<userAction name="enable">
+					<claimResource type="register" registerField="IDLEN" value="1"></claimResource>
+				</userAction>
+				<userAction name="disable">
+					<claimResource type="register" registerField="IDLEN" value="0"></claimResource>
+				</userAction>
+			</userControl>
+			<userControl name="enableTwoSpeedStartup">
+				<dialogConfig type="CK" caption="Enable Two-Speed Startup"></dialogConfig>
+				<userAction name="enable">
+					<claimResource type="register" registerField="IESO" value="1"></claimResource>
+				</userAction>
+				<userAction name="disable">
+					<claimResource type="register" registerField="IESO" value="0"></claimResource>
+				</userAction>
+			</userControl>
+		</userControlSubGroup>
+	</userControlGroup>
+</featureDefinitions>

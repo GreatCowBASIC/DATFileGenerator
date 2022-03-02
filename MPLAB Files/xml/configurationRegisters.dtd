@@ -1,0 +1,96 @@
+<!-- Here is yet another DTD for yet another XML vocab we received from -->
+<!-- Sunrise.  As with all of the other vocabularies, I made very gentle -->
+<!-- modifications to the XML documents to slightly tighten this DTD, but -->
+<!-- it would be nice to go farther.  The <sfr> and <field> elements are a -->
+<!-- little 'loosey goosey'. -->
+
+<!ELEMENT configurationRegisters (
+  specialFunctionRegisters, deviceConfigurationRegisters
+)>
+
+<!ELEMENT specialFunctionRegisters (
+  CPUCore | InterruptControl | ICN | IOPort | Timers | IC | OC | QEI | PWM
+  | SPI | I2C | UART | CAN | DCI | A2D | NVM | reset | oscillator | PMD
+  | MSSP | CCP | VoltageRef | Comparator | EMI | PSP | TwoPhasePWM | EEPROM
+  | OpAmp)*
+>
+
+<!ELEMENT CPUCore (sfr | UnusedRegs)*>
+<!ELEMENT InterruptControl (sfr | UnusedRegs)*>
+<!ELEMENT ICN (sfr | UnusedRegs)*>
+<!ELEMENT IOPort (sfr | UnusedRegs)*>
+<!ELEMENT Timers (sfr | UnusedRegs)*>
+<!ELEMENT IC (sfr | UnusedRegs)*>
+<!ELEMENT OC (sfr | UnusedRegs)*>
+<!ELEMENT QEI (sfr | UnusedRegs)*>
+<!ELEMENT PWM (sfr | UnusedRegs)*>
+<!ELEMENT SPI (sfr | UnusedRegs)*>
+<!ELEMENT I2C (sfr | UnusedRegs)*>
+<!ELEMENT UART (sfr | UnusedRegs)*>
+<!ELEMENT CAN (sfr | UnusedRegs)*>
+<!ELEMENT DCI (sfr | UnusedRegs)*>
+<!ELEMENT A2D (sfr | UnusedRegs)*>
+<!ELEMENT NVM (sfr | UnusedRegs)*>
+<!ELEMENT reset (sfr | UnusedRegs)*>
+<!ELEMENT oscillator (sfr | UnusedRegs)*>
+<!ELEMENT PMD (sfr | UnusedRegs)*>
+<!ELEMENT MSSP (sfr | UnusedRegs)*>
+<!ELEMENT CCP (sfr | UnusedRegs)*>
+<!ELEMENT VoltageRef (sfr | UnusedRegs)*>
+<!ELEMENT Comparator (sfr | UnusedRegs)*>
+<!ELEMENT EMI (sfr | UnusedRegs)*>
+<!ELEMENT PSP (sfr | UnusedRegs)*>
+<!ELEMENT TwoPhasePWM (sfr | UnusedRegs)*>
+<!ELEMENT EEPROM (sfr | UnusedRegs)*>
+<!ELEMENT OpAmp (sfr | UnusedRegs)*>
+
+<!ELEMENT sfr (field*)>
+<!ATTLIST sfr
+  key CDATA #REQUIRED
+  addr CDATA #REQUIRED
+  por CDATA #IMPLIED
+  mclr CDATA #IMPLIED
+  size CDATA #IMPLIED
+  flags CDATA #IMPLIED
+  desc CDATA #IMPLIED
+>
+<!-- Most <sfr> elements have @por and @mclr, while a few have @size and -->
+<!-- @flags, and even fewer have @desc.  Seems to me we need two entirely -->
+<!-- different elements here so we can tighten requirements on the -->
+<!-- attribute list.  Note that the vocab handler ignores the @size, -->
+<!-- @flags, and @desc attributes. -->
+
+<!ELEMENT UnusedRegs EMPTY>
+<!ATTLIST UnusedRegs addr CDATA #REQUIRED>
+
+<!ELEMENT field (settings*)>
+<!ATTLIST field
+  key CDATA #REQUIRED
+  mask CDATA #REQUIRED
+  desc CDATA #REQUIRED
+  instance CDATA #IMPLIED
+  bits CDATA #IMPLIED
+>
+<!-- The existing XML documents written in this vocab are a little sloppy -->
+<!-- with with presence/absence of the @instance attribute.  We could -->
+<!-- tighten this DTD if we wrote it in or decided upon a suitable default -->
+<!-- value. -->
+
+<!ELEMENT settings (setting+)>
+
+<!ELEMENT setting EMPTY>
+<!ATTLIST setting
+  reg CDATA #REQUIRED
+  value CDATA #REQUIRED
+  desc CDATA #REQUIRED
+>
+
+<!ELEMENT deviceConfigurationRegisters (cfgbits*)>
+
+<!ELEMENT cfgbits (field+)>
+<!ATTLIST cfgbits
+  key CDATA #REQUIRED
+  addr CDATA #REQUIRED
+  unused CDATA #REQUIRED
+  por CDATA #REQUIRED
+>

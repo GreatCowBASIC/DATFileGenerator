@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE featureDefinitions SYSTEM "../featureDefinitions.dtd">
+<featureDefinitions name="IOPortWithPUAndIOC" iconName="IOPort" helpIndex="">
+
+  <userControlGroup name="none" caption="none">
+    <userControlSubGroup name="none" caption="none">
+
+      <userControl name="applyButton">
+        <dialogConfig type="applyButton" caption="none"/>
+        <userAction/>
+      </userControl>
+
+    </userControlSubGroup>
+  </userControlGroup>
+
+  <userControlGroup name="portPinSettings" caption="Port Pin Settings">
+    <userControlSubGroup name="RB%indexControl%" caption="RB%indexControl%">
+
+      <userControl name="Direction%indexControl%" range="7">
+        <dialogConfig type="CB" caption="Data Direction %indexControl%">
+          <selection name="unclaimed" value="Unclaimed"/>
+          <selection name="input" value="Input"/>
+          <selection name="output" value="Output"/>
+        </dialogConfig>
+        <userAction name="output">
+          <claimResource type="register" registerField="TRIS%instance%%indexControl%" value="0"/>
+          <claimResource type="pin" pin="R%instance%%indexControl%" polarity="Out"/>
+        </userAction>
+        <userAction name="input">
+          <claimResource type="register" registerField="TRIS%instance%%indexControl%" value="1"/>
+          <claimResource type="pin" pin="R%instance%%indexControl%" polarity="Inp"/>
+        </userAction>
+        <userAction name="unclaimed">
+          <claimResource type="pin" flag="unclaim" pin="R%instance%%indexControl%" polarity="Out"/>
+        </userAction>
+      </userControl>
+ 
+      <userControl name="InitValue%indexControl%" range="7">
+        <dialogConfig type="CB" caption="Initial Value %indexControl%">
+          <selection name="initValue0" value="0"/>
+          <selection name="initValue1" value="1"/>
+        </dialogConfig>
+        <userAction name="1">
+          <claimResource type="register" registerField="PORT%instance%%indexControl%" value="1"/>
+        </userAction>
+        <userAction name="0">
+          <claimResource type="register" registerField="PORT%instance%%indexControl%" value="0"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="PullUp%indexControl%" range="7">
+        <dialogConfig type="CK" caption="Enable Pull-Up %indexControl%"/>
+        <userAction name="enable">
+          <claimResource type="register" registerField="WPU%instance%%indexControl%" value="1"/>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="WPU%instance%%indexControl%" value="0"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="IntOnChange%indexControl%" range="7">
+        <dialogConfig type="CK" caption="Enable Interrupt-On-Change %indexControl%"/>
+        <userAction name="enable">
+          <claimResource type="register" registerField="IOC%instance%%indexControl%" value="1"/>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="IOC%instance%%indexControl%" value="0"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="GlobalPullUpEnable">
+        <dialogConfig type="CK" caption="Global Pull-Up Enable"/>
+        <userAction name="enable">
+          <claimResource type="register" registerField="RAPU-L" value="0"/>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="RAPU-L" value="1"/>
+        </userAction>
+      </userControl>
+
+    </userControlSubGroup>
+  </userControlGroup>
+
+</featureDefinitions>

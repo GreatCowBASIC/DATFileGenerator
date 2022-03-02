@@ -1,0 +1,1150 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE featureDefinitions SYSTEM "../featureDefinitions.dtd">
+<featureDefinitions name="CAN" iconName="CAN" helpIndex="">
+
+  <userControlGroup name="none" caption="none">
+    <userControlSubGroup name="none" caption="none">
+
+      <userControl name="applyButton">
+        <dialogConfig type="applyButton" caption="none"></dialogConfig>
+        <userAction name="apply">
+          <claimResource type="pin" pin="C%instance%RX" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="C%instance%TX" polarity="Out"></claimResource>
+        </userAction>
+      </userControl>
+
+    </userControlSubGroup>
+  </userControlGroup>
+
+  <userControlGroup name="none" caption="none">
+    <userControlSubGroup name="none" caption="none">
+
+      <userControl name="enable">
+        <dialogConfig type="CK" caption="Enable on Startup"></dialogConfig>
+        <userAction name="enable">
+        </userAction>
+        <userAction name="disable">
+        </userAction>
+      </userControl>
+
+    </userControlSubGroup>
+  </userControlGroup>
+
+  <userControlGroup name="operationalSettings" caption="none">
+    <userControlSubGroup name="none" caption="none">
+
+      <userControl name="operationModeStatus">
+        <dialogConfig type="CB" caption="Post-config. operating mode">
+          <selection name="normal" value="Normal"></selection> 
+          <selection name="disable" value="Disable"></selection> 
+          <selection name="loopback" value="Loopback"></selection> 
+          <selection name="listen" value="Listen"></selection> 
+          <selection name="config" value="Configuration"></selection> 
+        </dialogConfig>
+        <userAction name="config">
+          <claimResource type="register" registerField="REQOP" value="0100"></claimResource>
+        </userAction>
+        <userAction name="listen">
+          <claimResource type="register" registerField="REQOP" value="0011"></claimResource>
+        </userAction>
+        <userAction name="loopback">
+          <claimResource type="register" registerField="REQOP" value="0010"></claimResource>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="REQOP" value="0001"></claimResource>
+        </userAction>
+        <userAction name="normal">
+          <claimResource type="register" registerField="REQOP" value="0000"></claimResource>
+        </userAction>
+      </userControl>
+
+      <userControl name="baudRatePrescaler">
+        <dialogConfig type="CB" range="63" caption="Baud Rate Prescaler">
+          <selection name="baud%index%" value="2 x (%index%+1) div by"></selection>
+        </dialogConfig>
+        <userAction>
+          <claimResource type="register" registerField="BRP" value="%index%"></claimResource>
+        </userAction>
+      </userControl>
+
+      <userControl type="readOnly" name="baud">
+        <dialogConfig type="general" caption="Baud"></dialogConfig>
+        <userAction>
+</userAction>
+      </userControl>
+
+      <userControl name="multiplyFcy">
+        <dialogConfig type="CB" caption="Propogation time segment: xFcy">
+          <selection name="1x" value="Fcy"></selection>
+        </dialogConfig>
+        <userAction name="1x">
+</userAction>
+      </userControl>
+
+      <userControl name="propagationTimeSegment">
+        <dialogConfig type="CB" caption="Propogation time segment">
+          <selection name="1x" value="1 x Tq"></selection>
+          <selection name="2x" value="2 x Tq"></selection>
+          <selection name="3x" value="3 x Tq"></selection>
+          <selection name="4x" value="4 x Tq"></selection>
+          <selection name="5x" value="5 x Tq"></selection>
+          <selection name="6x" value="6 x Tq"></selection>
+          <selection name="7x" value="7 x Tq"></selection>
+          <selection name="8x" value="8 x Tq"></selection>
+        </dialogConfig>
+        <userAction name="8x">
+          <claimResource type="register" registerField="PRSEG" value="111"></claimResource>
+        </userAction>
+        <userAction name="7x">
+          <claimResource type="register" registerField="PRSEG" value="100"></claimResource>
+        </userAction>
+        <userAction name="6x">
+          <claimResource type="register" registerField="PRSEG" value="101"></claimResource>
+        </userAction>
+        <userAction name="5x">
+          <claimResource type="register" registerField="PRSEG" value="100"></claimResource>
+        </userAction>
+        <userAction name="4x">
+          <claimResource type="register" registerField="PRSEG" value="011"></claimResource>
+        </userAction>
+        <userAction name="3x">
+          <claimResource type="register" registerField="PRSEG" value="010"></claimResource>
+        </userAction>
+        <userAction name="2x">
+          <claimResource type="register" registerField="PRSEG" value="001"></claimResource>
+        </userAction>
+        <userAction name="1x">
+          <claimResource type="register" registerField="PRSEG" value="000"></claimResource>
+        </userAction>
+      </userControl>
+
+      <userControl name="phaseBufferSegmentLength">
+        <dialogConfig type="CB" caption="Phase buffer segment length">
+          <selection name="1x" value="1 x Tq"></selection>
+          <selection name="2x" value="2 x Tq"></selection>
+          <selection name="3x" value="3 x Tq"></selection>
+          <selection name="4x" value="4 x Tq"></selection>
+          <selection name="5x" value="5 x Tq"></selection>
+          <selection name="6x" value="6 x Tq"></selection>
+          <selection name="7x" value="7 x Tq"></selection>
+          <selection name="8x" value="8 x Tq"></selection>
+        </dialogConfig>
+        <userAction name="8x">
+          <claimResource type="register" registerField="SEG1PH" value="111"></claimResource>
+        </userAction>
+        <userAction name="7x">
+          <claimResource type="register" registerField="SEG1PH" value="100"></claimResource>
+        </userAction>
+        <userAction name="6x">
+          <claimResource type="register" registerField="SEG1PH" value="101"></claimResource>
+        </userAction>
+        <userAction name="5x">
+          <claimResource type="register" registerField="SEG1PH" value="100"></claimResource>
+        </userAction>
+        <userAction name="4x">
+          <claimResource type="register" registerField="SEG1PH" value="011"></claimResource>
+        </userAction>
+        <userAction name="3x">
+          <claimResource type="register" registerField="SEG1PH" value="010"></claimResource>
+        </userAction>
+        <userAction name="2x">
+          <claimResource type="register" registerField="SEG1PH" value="001"></claimResource>
+        </userAction>
+        <userAction name="1x">
+          <claimResource type="register" registerField="SEG1PH" value="000"></claimResource>
+        </userAction>
+      </userControl>
+
+      <userControl name="phaseBufferSegment2Length">
+        <dialogConfig type="CB" caption="Phase buffer segment lenght 2">
+          <selection name="1x" value="1 x Tq"></selection>
+          <selection name="2x" value="2 x Tq"></selection>
+          <selection name="3x" value="3 x Tq"></selection>
+          <selection name="4x" value="4 x Tq"></selection>
+          <selection name="5x" value="5 x Tq"></selection>
+          <selection name="6x" value="6 x Tq"></selection>
+          <selection name="7x" value="7 x Tq"></selection>
+          <selection name="8x" value="8 x Tq"></selection>
+        </dialogConfig>
+        <userAction name="8x">
+          <claimResource type="register" registerField="SEG2PH" value="111"></claimResource>
+        </userAction>
+        <userAction name="7x">
+          <claimResource type="register" registerField="SEG2PH" value="100"></claimResource>
+        </userAction>
+        <userAction name="6x">
+          <claimResource type="register" registerField="SEG2PH" value="101"></claimResource>
+        </userAction>
+        <userAction name="5x">
+          <claimResource type="register" registerField="SEG2PH" value="100"></claimResource>
+        </userAction>
+        <userAction name="4x">
+          <claimResource type="register" registerField="SEG2PH" value="011"></claimResource>
+        </userAction>
+        <userAction name="3x">
+          <claimResource type="register" registerField="SEG2PH" value="010"></claimResource>
+        </userAction>
+        <userAction name="2x">
+          <claimResource type="register" registerField="SEG2PH" value="001"></claimResource>
+        </userAction>
+        <userAction name="1x">
+          <claimResource type="register" registerField="SEG2PH" value="000"></claimResource>
+        </userAction>
+      </userControl>
+
+      <userControl name="phase2TimeSelect">
+        <dialogConfig type="CB" caption="Phase 2 time select">
+          <selection name="max" value="Max of SEGPH1 or IPT"></selection>
+          <selection name="free" value="Freely programmable"></selection>
+        </dialogConfig>
+        <userAction name="free">
+          <claimResource type="register" registerField="BTLMODE" value="1"></claimResource>
+        </userAction>
+        <userAction name="max">
+          <claimResource type="register" registerField="BTLMODE" value="0"></claimResource>
+        </userAction>
+      </userControl>
+
+      <userControl name="lineSampleRate">
+        <dialogConfig type="CB" caption="Line sample rate">
+          <selection name="once" value="Once"></selection>
+          <selection name="3Times" value="3 times"></selection>
+        </dialogConfig>
+        <userAction name="3Times">
+          <claimResource type="register" registerField="SAM" value="1"></claimResource>
+        </userAction>
+        <userAction name="once">
+          <claimResource type="register" registerField="SAM" value="0"></claimResource>
+        </userAction>
+      </userControl>
+
+      <userControl name="syncJumpWidth">
+        <dialogConfig type="CB" caption="Sync Jump Width">
+          <selection name="1x" value="1 x Tq"></selection>
+          <selection name="2x" value="2 x Tq"></selection>
+          <selection name="3x" value="3 x Tq"></selection>
+          <selection name="4x" value="4 x Tq"></selection>
+        </dialogConfig>
+        <userAction name="4x">
+          <claimResource type="register" registerField="SJWS" value="11"></claimResource>
+        </userAction>
+        <userAction name="3x">
+          <claimResource type="register" registerField="SJWS" value="10"></claimResource>
+        </userAction>
+        <userAction name="2x">
+          <claimResource type="register" registerField="SJWS" value="01"></claimResource>
+        </userAction>
+        <userAction name="1x">
+          <claimResource type="register" registerField="SJWS" value="00"></claimResource>
+        </userAction>
+      </userControl>
+
+      <userControl name="enableEventCapture">
+        <dialogConfig type="CK" caption="Enable event capture"></dialogConfig>
+        <userAction name="enable">
+          <claimResource type="register" registerField="CANCAP" value="1"></claimResource>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="CANCAP" value="0"></claimResource>
+        </userAction>
+      </userControl>
+
+      <userControl name="filterWakeup">
+        <dialogConfig type="CK" caption="Filter Wakeup"></dialogConfig>
+        <userAction name="enable">
+          <claimResource type="register" registerField="WAKFIL" value="1"></claimResource>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="WAKFIL" value="0"></claimResource>
+        </userAction>
+      </userControl>
+
+      <userControl name="enableDriveHigh">
+        <dialogConfig type="CK" caption="Enable drive high bit"></dialogConfig>
+        <userAction name="enable">
+          <claimResource type="register" registerField="ENDRHI" value="1"></claimResource>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="ENDRHI" value="0"></claimResource>
+        </userAction>
+      </userControl>
+
+      <userControl name="wakeupDisable">
+        <dialogConfig type="CK" caption="CAN bus activity wake up feature disable"></dialogConfig>
+        <userAction name="enable">
+          <claimResource type="register" registerField="WAKDIS" value="1"></claimResource>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="WAKDIS" value="0"></claimResource>
+        </userAction>
+      </userControl>
+
+    </userControlSubGroup>
+  </userControlGroup>
+
+  <userControlGroup name="transmitter" caption="none">
+    <userControlSubGroup name="none" caption="none">
+
+      <userControl name="abortTransmissions">
+        <dialogConfig type="CK" caption="Abort transmissions"></dialogConfig>
+        <userAction name="enable">
+          <claimResource type="register" registerField="ABAT" value="1"></claimResource>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="ABAT" value="0"></claimResource>
+        </userAction>
+      </userControl>
+
+      <userControl name="TxRTRSet%indexControl%" range="2">
+        <dialogConfig type="CK" caption="TX RTR Set%indexControl%"></dialogConfig>
+        <userAction name="enable">
+          <claimResource type="register" registerField="TXRTR_TX%indexControl%" value="1"></claimResource>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="TXRTR_TX%indexControl%" value="0"></claimResource>
+        </userAction>
+      </userControl>
+
+      <userControl name="messageSendRequest%indexControl%" range="2">
+        <dialogConfig type="CK" caption="Message request%indexControl%"></dialogConfig>
+        <userAction name="enable">
+          <claimResource type="register" registerField="TXREQ_TX%indexControl%" value="1"></claimResource>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="TXREQ_TX%indexControl%" value="0"></claimResource>
+        </userAction>
+      </userControl>
+
+      <userControl name="rtrEnTX%indexControl%" range="2">
+        <dialogConfig type="CK" caption="Message request%indexControl%"></dialogConfig>
+        <userAction name="enable">
+          <claimResource type="register" registerField="RTREN_TX%indexControl%" value="1"></claimResource>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="RTREN_TX%indexControl%" value="0"></claimResource>
+        </userAction>
+      </userControl>
+
+      <userControl name="dataCodeLengthTX%indexControl%" range="2">
+        <dialogConfig type="CB" caption="Data code lengthTX%indexControl%">
+          <selection name="setTo0" value="0 bytes"></selection> 
+          <selection name="setTo1" value="1 bytes"></selection> 
+          <selection name="setTo2" value="2 bytes"></selection> 
+          <selection name="setTo3" value="3 bytes"></selection> 
+          <selection name="setTo4" value="4 bytes"></selection> 
+          <selection name="setTo5" value="5 bytes"></selection> 
+          <selection name="setTo6" value="6 bytes"></selection> 
+          <selection name="setTo7" value="7 bytes"></selection> 
+          <selection name="setTo8" value="8 bytes"></selection> 
+          <selection name="setTo9" value="9 bytes"></selection> 
+          <selection name="setTo10" value="10 bytes"></selection> 
+          <selection name="setTo11" value="11 bytes"></selection> 
+          <selection name="setTo12" value="12 bytes"></selection> 
+          <selection name="setTo13" value="13 bytes"></selection> 
+          <selection name="setTo14" value="14 bytes"></selection> 
+          <selection name="setTo15" value="15 bytes"></selection> 
+        </dialogConfig>
+        <userAction name="setTo15">
+          <claimResource type="register" registerField="DLC_TX%indexControl%" value="1111"></claimResource>
+        </userAction>
+        <userAction name="setTo14">
+          <claimResource type="register" registerField="DLC_TX%indexControl%" value="1110"></claimResource>
+        </userAction>
+        <userAction name="setTo13">
+          <claimResource type="register" registerField="DLC_TX%indexControl%" value="1101"></claimResource>
+        </userAction>
+        <userAction name="setTo12">
+          <claimResource type="register" registerField="DLC_TX%indexControl%" value="1100"></claimResource>
+        </userAction>
+        <userAction name="setTo11">
+          <claimResource type="register" registerField="DLC_TX%indexControl%" value="1011"></claimResource>
+        </userAction>
+        <userAction name="setTo10">
+          <claimResource type="register" registerField="DLC_TX%indexControl%" value="1010"></claimResource>
+        </userAction>
+        <userAction name="setTo9">
+          <claimResource type="register" registerField="DLC_TX%indexControl%" value="1001"></claimResource>
+        </userAction>
+        <userAction name="setTo8">
+          <claimResource type="register" registerField="DLC_TX%indexControl%" value="1000"></claimResource>
+        </userAction>
+        <userAction name="setTo7">
+          <claimResource type="register" registerField="DLC_TX%indexControl%" value="0111"></claimResource>
+        </userAction>
+        <userAction name="setTo6">
+          <claimResource type="register" registerField="DLC_TX%indexControl%" value="0110"></claimResource>
+        </userAction>
+        <userAction name="setTo5">
+          <claimResource type="register" registerField="DLC_TX%indexControl%" value="0101"></claimResource>
+        </userAction>
+        <userAction name="setTo4">
+          <claimResource type="register" registerField="DLC_TX%indexControl%" value="0100"></claimResource>
+        </userAction>
+        <userAction name="setTo3">
+          <claimResource type="register" registerField="DLC_TX%indexControl%" value="0011"></claimResource>
+        </userAction>
+        <userAction name="setTo2">
+          <claimResource type="register" registerField="DLC_TX%indexControl%" value="0010"></claimResource>
+        </userAction>
+        <userAction name="setTo1">
+          <claimResource type="register" registerField="DLC_TX%indexControl%" value="0001"></claimResource>
+        </userAction>
+        <userAction name="setTo0">
+          <claimResource type="register" registerField="DLC_TX%indexControl%" value="0000"></claimResource>
+        </userAction>
+      </userControl>
+
+      <userControl name="transmitPriority%indexControl%" range="2">
+        <dialogConfig type="CB" caption="Transmit Priority%indexControl%">
+          <selection name="lowest" value="Lowest"></selection>
+          <selection name="low" value="Low"></selection>
+          <selection name="highIntermediate" value="High intermediate"></selection>
+          <selection name="high" value="High"></selection>
+        </dialogConfig>
+        <userAction name="high">
+          <claimResource type="register" registerField="TXPRI_TX%indexControl%" value="11"></claimResource>
+        </userAction>
+        <userAction name="highIntermediate">
+          <claimResource type="register" registerField="TXPRI_TX%indexControl%" value="10"></claimResource>
+        </userAction>
+        <userAction name="low">
+          <claimResource type="register" registerField="TXPRI_TX%indexControl%" value="01"></claimResource>
+        </userAction>
+        <userAction name="lowest">
+          <claimResource type="register" registerField="TXPRI_TX%indexControl%" value="00"></claimResource>
+        </userAction>
+      </userControl>
+
+      <userControl name="messageIDEN%indexControl%" range="2">
+        <dialogConfig type="CB" caption="Message ID enable%indexControl%">
+          <selection name="sid" value="Transmit SID"></selection>
+          <selection name="eid" value="Transmit EID"></selection>
+        </dialogConfig>
+        <userAction name="eid">
+          <claimResource type="register" registerField="EXIDEN_TX%indexControl%" value="1"></claimResource>
+        </userAction>
+        <userAction name="sid">
+          <claimResource type="register" registerField="EXIDEN_TX%indexControl%" value="0"></claimResource>
+        </userAction>
+      </userControl>
+
+      <userControl name="TXSID%indexControl%" range="2">
+        <dialogConfig type="TB" caption="TXSID%indexControl%"></dialogConfig>
+        <userAction>
+</userAction>
+      </userControl>
+
+      <userControl name="TXEID%indexControl%" range="2">
+        <dialogConfig type="TB" caption="TXEID%indexControl%"></dialogConfig>
+        <userAction>
+</userAction>
+      </userControl>
+
+    </userControlSubGroup>
+  </userControlGroup>
+
+  <userControlGroup name="receiver" caption="none">
+    <userControlSubGroup name="none" caption="none">
+
+      <userControl name="doubleBufferEnable">
+        <dialogConfig type="CK" caption="Double buffer enable"></dialogConfig>
+        <userAction name="enable">
+          <claimResource type="register" registerField="DBEN_RX0" value="1"></claimResource>
+          <claimResource type="register" registerField="DBEN_RX1" value="1"></claimResource>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="DBEN_RX0" value="0"></claimResource>
+          <claimResource type="register" registerField="DBEN_RX1" value="0"></claimResource>
+        </userAction>
+      </userControl>
+
+      <userControl name="RxRTRSet%indexControl%" range="1">
+        <dialogConfig type="CK" caption="RX RTR Set%indexControl%"></dialogConfig>
+        <userAction name="enable">
+          <claimResource type="register" registerField="RXRTR_RX%indexControl%" value="1"></claimResource>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="RXRTR_RX%indexControl%" value="0"></claimResource>
+        </userAction>
+      </userControl>
+
+      <userControl name="dataCodeLengthRX%indexControl%" range="1">
+        <dialogConfig type="CB" caption="Data code lengthRX%indexControl%">
+          <selection name="setTo0" value="0 bytes"></selection> 
+          <selection name="setTo1" value="1 bytes"></selection> 
+          <selection name="setTo2" value="2 bytes"></selection> 
+          <selection name="setTo3" value="3 bytes"></selection> 
+          <selection name="setTo4" value="4 bytes"></selection> 
+          <selection name="setTo5" value="5 bytes"></selection> 
+          <selection name="setTo6" value="6 bytes"></selection> 
+          <selection name="setTo7" value="7 bytes"></selection> 
+          <selection name="setTo8" value="8 bytes"></selection> 
+          <selection name="setTo9" value="9 bytes"></selection> 
+          <selection name="setTo10" value="10 bytes"></selection> 
+          <selection name="setTo11" value="11 bytes"></selection> 
+          <selection name="setTo12" value="12 bytes"></selection> 
+          <selection name="setTo13" value="13 bytes"></selection> 
+          <selection name="setTo14" value="14 bytes"></selection> 
+          <selection name="setTo15" value="15 bytes"></selection> 
+        </dialogConfig>
+        <userAction name="setTo15">
+          <claimResource type="register" registerField="DLC_RX%indexControl%" value="1111"></claimResource>
+        </userAction>
+        <userAction name="setTo14">
+          <claimResource type="register" registerField="DLC_RX%indexControl%" value="1110"></claimResource>
+        </userAction>
+        <userAction name="setTo13">
+          <claimResource type="register" registerField="DLC_RX%indexControl%" value="1101"></claimResource>
+        </userAction>
+        <userAction name="setTo12">
+          <claimResource type="register" registerField="DLC_RX%indexControl%" value="1100"></claimResource>
+        </userAction>
+        <userAction name="setTo11">
+          <claimResource type="register" registerField="DLC_RX%indexControl%" value="1011"></claimResource>
+        </userAction>
+        <userAction name="setTo10">
+          <claimResource type="register" registerField="DLC_RX%indexControl%" value="1010"></claimResource>
+        </userAction>
+        <userAction name="setTo9">
+          <claimResource type="register" registerField="DLC_RX%indexControl%" value="1001"></claimResource>
+        </userAction>
+        <userAction name="setTo8">
+          <claimResource type="register" registerField="DLC_RX%indexControl%" value="1000"></claimResource>
+        </userAction>
+        <userAction name="setTo7">
+          <claimResource type="register" registerField="DLC_RX%indexControl%" value="0111"></claimResource>
+        </userAction>
+        <userAction name="setTo6">
+          <claimResource type="register" registerField="DLC_RX%indexControl%" value="0110"></claimResource>
+        </userAction>
+        <userAction name="setTo5">
+          <claimResource type="register" registerField="DLC_RX%indexControl%" value="0101"></claimResource>
+        </userAction>
+        <userAction name="setTo4">
+          <claimResource type="register" registerField="DLC_RX%indexControl%" value="0100"></claimResource>
+        </userAction>
+        <userAction name="setTo3">
+          <claimResource type="register" registerField="DLC_RX%indexControl%" value="0011"></claimResource>
+        </userAction>
+        <userAction name="setTo2">
+          <claimResource type="register" registerField="DLC_RX%indexControl%" value="0010"></claimResource>
+        </userAction>
+        <userAction name="setTo1">
+          <claimResource type="register" registerField="DLC_RX%indexControl%" value="0001"></claimResource>
+        </userAction>
+        <userAction name="setTo0">
+          <claimResource type="register" registerField="DLC_RX%indexControl%" value="0000"></claimResource>
+        </userAction>
+      </userControl>
+
+      <userControl name="RxSRR%indexControl%" range="1">
+        <dialogConfig type="CK" caption="RX SRR%indexControl%"></dialogConfig>
+        <userAction name="enable">
+          <claimResource type="register" registerField="SRR_RX%indexControl%" value="1"></claimResource>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="SRR_RX%indexControl%" value="0"></claimResource>
+        </userAction>
+      </userControl>
+
+      <userControl name="messageIDENRX%indexControl%" range="1">
+        <dialogConfig type="CB" caption="Message ID RX enable%indexControl%">
+          <selection name="sid" value="Transmit SID"></selection>
+          <selection name="eid" value="Transmit EID"></selection>
+        </dialogConfig>
+        <userAction name="eid">
+          <claimResource type="register" registerField="EXIDEN_RX%indexControl%" value="1"></claimResource>
+        </userAction>
+        <userAction name="sid">
+          <claimResource type="register" registerField="EXIDEN_RX%indexControl%" value="0"></claimResource>
+        </userAction>
+      </userControl>
+
+      <userControl name="RXSID%indexControl%" range="1">
+        <dialogConfig type="TB" caption="RXSID%indexControl%"></dialogConfig>
+        <userAction>
+</userAction>
+      </userControl>
+
+      <userControl name="RXEID%indexControl%" range="1">
+        <dialogConfig type="TB" caption="RXEID%indexControl%"></dialogConfig>
+        <userAction>
+</userAction>
+      </userControl>
+
+      <userControl name="receiveBufferOperatingMode">
+        <dialogConfig type="CB" caption="Rx buffer operating mode">
+          <selection name="allValid" value="Receive all valid messages"></selection>
+          <selection name="sid" value="Receive only valid SID messages"></selection>
+          <selection name="eid" value="Receive only valid EID messages"></selection>
+          <selection name="all" value="Receive all messages"></selection>
+        </dialogConfig>
+        <userAction name="all">
+          <claimResource type="register" registerField="RXM_RX0" value="11"></claimResource>
+          <claimResource type="register" registerField="RXM_RX1" value="11"></claimResource>
+        </userAction>
+        <userAction name="eid">
+          <claimResource type="register" registerField="RXM_RX0" value="10"></claimResource>
+          <claimResource type="register" registerField="RXM_RX1" value="10"></claimResource>
+        </userAction>
+        <userAction name="sid">
+          <claimResource type="register" registerField="RXM_RX0" value="01"></claimResource>
+          <claimResource type="register" registerField="RXM_RX1" value="01"></claimResource>
+        </userAction>
+        <userAction name="allValid">
+          <claimResource type="register" registerField="RXM_RX0" value="00"></claimResource>
+          <claimResource type="register" registerField="RXM_RX1" value="00"></claimResource>
+        </userAction>
+      </userControl>
+
+    </userControlSubGroup>
+  </userControlGroup>
+
+  <userControlGroup name="receiverFilters" caption="none">
+    <userControlSubGroup name="none" caption="none">
+
+      <userControl name="sid%indexControl%" range="15">
+        <dialogConfig type="TB" caption="SID%indexControl%"></dialogConfig>
+        <userAction>
+</userAction>
+      </userControl>
+
+      <userControl name="eidEn%indexControl%" range="15">
+        <dialogConfig type="CK" caption="EID Enable %indexControl%"></dialogConfig>
+        <userAction name="enable">
+          <claimResource type="register" registerField="EXIDEN_RX_F%indexControl%" value="1"></claimResource>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="EXIDEN_RX_F%indexControl%" value="0"></claimResource>
+        </userAction>
+      </userControl>
+
+      <userControl name="rxFilterEn%indexControl%" range="15">
+        <dialogConfig type="CK" caption="RX Filter Enable %indexControl%"></dialogConfig>
+        <userAction name="enable">
+          <claimResource type="register" registerField="RXF%indexControl%EN" value="1"></claimResource>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="RXF%indexControl%EN" value="0"></claimResource>
+        </userAction>
+      </userControl>
+
+      <userControl name="eid%indexControl%" range="15">
+        <dialogConfig type="TB" caption="EID%indexControl%"></dialogConfig>
+        <userAction>
+</userAction>
+      </userControl>
+
+      <userControl name="filterSel%indexControl%" range="15">
+        <dialogConfig type="CB" caption="Filter %indexControl% select">
+          <selection name="am0" value="Accept. Mask0"></selection>
+          <selection name="am1" value="Accept. Mask1"></selection>
+          <selection name="filter15" value="Fitler 15"></selection>
+          <selection name="noMask" value="No mask"></selection>
+        </dialogConfig>
+        <userAction name="noMask">
+          <claimResource type="register" registerField="FIL%indexControl%_1" value="1"></claimResource>
+          <claimResource type="register" registerField="FIL%indexControl%_0" value="1"></claimResource>
+        </userAction>
+        <userAction name="filter15">
+          <claimResource type="register" registerField="FIL%indexControl%_1" value="1"></claimResource>
+          <claimResource type="register" registerField="FIL%indexControl%_0" value="0"></claimResource>
+        </userAction>
+        <userAction name="am1">
+          <claimResource type="register" registerField="FIL%indexControl%_1" value="0"></claimResource>
+          <claimResource type="register" registerField="FIL%indexControl%_0" value="1"></claimResource>
+        </userAction>
+        <userAction name="am0">
+          <claimResource type="register" registerField="FIL%indexControl%_1" value="0"></claimResource>
+          <claimResource type="register" registerField="FIL%indexControl%_0" value="0"></claimResource>
+        </userAction>
+      </userControl>
+
+      <userControl name="rxAssocBuff%indexControl%" range="15">
+        <dialogConfig type="CB" caption="RX Filter pointer assoc %indexControl%">
+          <selection name="index0" value="RXB0"></selection> 
+          <selection name="index1" value="RXB1"></selection> 
+          <selection name="index2" value="B0"></selection> 
+          <selection name="index3" value="B1"></selection> 
+          <selection name="index4" value="B2"></selection> 
+          <selection name="index5" value="B3"></selection> 
+          <selection name="index6" value="B4"></selection> 
+          <selection name="index7" value="B5"></selection> 
+        </dialogConfig>
+        <userAction name="index7">
+          <claimResource type="register" registerField="F%indexControl%BP_3" value="0"></claimResource>
+          <claimResource type="register" registerField="F%indexControl%BP_2" value="1"></claimResource>
+          <claimResource type="register" registerField="F%indexControl%BP_1" value="1"></claimResource>
+          <claimResource type="register" registerField="F%indexControl%BP_0" value="1"></claimResource>
+        </userAction>
+        <userAction name="index6">
+          <claimResource type="register" registerField="F%indexControl%BP_3" value="0"></claimResource>
+          <claimResource type="register" registerField="F%indexControl%BP_2" value="1"></claimResource>
+          <claimResource type="register" registerField="F%indexControl%BP_1" value="1"></claimResource>
+          <claimResource type="register" registerField="F%indexControl%BP_0" value="0"></claimResource>
+        </userAction>
+        <userAction name="index5">
+          <claimResource type="register" registerField="F%indexControl%BP_3" value="0"></claimResource>
+          <claimResource type="register" registerField="F%indexControl%BP_2" value="1"></claimResource>
+          <claimResource type="register" registerField="F%indexControl%BP_1" value="0"></claimResource>
+          <claimResource type="register" registerField="F%indexControl%BP_0" value="1"></claimResource>
+        </userAction>
+        <userAction name="index4">
+          <claimResource type="register" registerField="F%indexControl%BP_3" value="0"></claimResource>
+          <claimResource type="register" registerField="F%indexControl%BP_2" value="1"></claimResource>
+          <claimResource type="register" registerField="F%indexControl%BP_1" value="0"></claimResource>
+          <claimResource type="register" registerField="F%indexControl%BP_0" value="0"></claimResource>
+        </userAction>
+        <userAction name="index3">
+          <claimResource type="register" registerField="F%indexControl%BP_3" value="0"></claimResource>
+          <claimResource type="register" registerField="F%indexControl%BP_2" value="0"></claimResource>
+          <claimResource type="register" registerField="F%indexControl%BP_1" value="1"></claimResource>
+          <claimResource type="register" registerField="F%indexControl%BP_0" value="1"></claimResource>
+        </userAction>
+        <userAction name="index2">
+          <claimResource type="register" registerField="F%indexControl%BP_3" value="0"></claimResource>
+          <claimResource type="register" registerField="F%indexControl%BP_2" value="0"></claimResource>
+          <claimResource type="register" registerField="F%indexControl%BP_1" value="1"></claimResource>
+          <claimResource type="register" registerField="F%indexControl%BP_0" value="0"></claimResource>
+        </userAction>
+        <userAction name="index1">
+          <claimResource type="register" registerField="F%indexControl%BP_3" value="0"></claimResource>
+          <claimResource type="register" registerField="F%indexControl%BP_2" value="0"></claimResource>
+          <claimResource type="register" registerField="F%indexControl%BP_1" value="0"></claimResource>
+          <claimResource type="register" registerField="F%indexControl%BP_0" value="1"></claimResource>
+        </userAction>
+        <userAction name="index0">
+          <claimResource type="register" registerField="F%indexControl%BP_3" value="0"></claimResource>
+          <claimResource type="register" registerField="F%indexControl%BP_2" value="0"></claimResource>
+          <claimResource type="register" registerField="F%indexControl%BP_1" value="0"></claimResource>
+          <claimResource type="register" registerField="F%indexControl%BP_0" value="0"></claimResource>
+        </userAction>
+      </userControl>
+
+    </userControlSubGroup>
+  </userControlGroup>
+
+  <userControlGroup name="receiverMasks" caption="none">
+    <userControlSubGroup name="none" caption="none">
+
+      <userControl name="sidMask%indexControl%" range="1">
+        <dialogConfig type="TB" caption="SID mask %indexControl%"></dialogConfig>
+        <userAction>
+</userAction>
+      </userControl>
+
+      <userControl name="eidMaskEn%indexControl%" range="1">
+        <dialogConfig type="CK" caption="EID mask enable %indexControl%"></dialogConfig>
+        <userAction name="enable">
+          <claimResource type="register" registerField="EXIDEN_RX_M%indexControl%" value="1"></claimResource>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="EXIDEN_RX_M%indexControl%" value="0"></claimResource>
+        </userAction>
+      </userControl>
+
+      <userControl name="eidMask%indexControl%" range="1">
+        <dialogConfig type="TB" caption="EID mask %indexControl%"></dialogConfig>
+        <userAction>
+</userAction>
+      </userControl>
+
+    </userControlSubGroup>
+  </userControlGroup>
+
+  <userControlGroup name="Interrupt" caption="none">
+    <userControlSubGroup name="none" caption="none">
+
+      <userControl name="invalidMessage" enableForInt="IVR">
+        <dialogConfig type="BoxCK" caption="Invalid message"></dialogConfig>
+        <userAction name="enable">
+          <claimResource type="register" registerField="IVRIE" value="1"></claimResource>
+          <claimResource type="register" registerField="IVRIP" value="1"></claimResource>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="IVRIE" value="0"></claimResource>
+          <claimResource type="register" registerField="IVRIP" value="0"></claimResource>
+        </userAction>
+      </userControl>
+
+      <userControl name="busWakeup" enableForInt="WAK">
+        <dialogConfig type="BoxCK" caption="Bus wakeup"></dialogConfig>
+        <userAction name="enable">
+          <claimResource type="register" registerField="WAKIE" value="1"></claimResource>
+          <claimResource type="register" registerField="WAKIP" value="1"></claimResource>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="WAKIE" value="0"></claimResource>
+          <claimResource type="register" registerField="WAKIP" value="0"></claimResource>
+        </userAction>
+      </userControl>
+
+      <userControl name="receive0" enableForInt="RX0">
+        <dialogConfig type="BoxCK" caption="Receive 0"></dialogConfig>
+        <userAction name="enable">
+          <claimResource type="register" registerField="RX0IE" value="1"></claimResource>
+          <claimResource type="register" registerField="RX0IP" value="1"></claimResource>
+          <claimResource type="register" registerField="RXB0IE" value="1"></claimResource>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="RX0IE" value="0"></claimResource>
+          <claimResource type="register" registerField="RX0IP" value="0"></claimResource>
+          <claimResource type="register" registerField="RXB0IE" value="0"></claimResource>
+        </userAction>
+      </userControl>
+
+      <userControl name="receive1" enableForInt="RX1">
+        <dialogConfig type="BoxCK" caption="Receive 1"></dialogConfig>
+        <userAction name="enable">
+          <claimResource type="register" registerField="RX1IE" value="1"></claimResource>
+          <claimResource type="register" registerField="RX1IP" value="1"></claimResource>
+          <claimResource type="register" registerField="RXB1IE" value="1"></claimResource>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="RX1IE" value="0"></claimResource>
+          <claimResource type="register" registerField="RX1IP" value="0"></claimResource>
+          <claimResource type="register" registerField="RXB1IE" value="0"></claimResource>
+        </userAction>
+      </userControl>
+
+      <userControl name="transmit0" enableForInt="TX0">
+        <dialogConfig type="BoxCK" caption="Transmit 0"></dialogConfig>
+        <userAction name="enable">
+          <claimResource type="register" registerField="TX0IE" value="1"></claimResource>
+          <claimResource type="register" registerField="TX0IP" value="1"></claimResource>
+          <claimResource type="register" registerField="TXB0IE" value="1"></claimResource>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="TX0IE" value="0"></claimResource>
+          <claimResource type="register" registerField="TX0IP" value="0"></claimResource>
+          <claimResource type="register" registerField="TXB0IE" value="0"></claimResource>
+        </userAction>
+      </userControl>
+
+      <userControl name="transmit1" enableForInt="TX1">
+        <dialogConfig type="BoxCK" caption="Transmit 1"></dialogConfig>
+        <userAction name="enable">
+          <claimResource type="register" registerField="TX1IE" value="1"></claimResource>
+          <claimResource type="register" registerField="TX1IP" value="1"></claimResource>
+          <claimResource type="register" registerField="TXB1IE" value="1"></claimResource>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="TX1IE" value="0"></claimResource>
+          <claimResource type="register" registerField="TX1IP" value="0"></claimResource>
+          <claimResource type="register" registerField="TXB1IE" value="0"></claimResource>
+        </userAction>
+      </userControl>
+
+      <userControl name="transmit2" enableForInt="TX2">
+        <dialogConfig type="BoxCK" caption="Transmit 2"></dialogConfig>
+        <userAction name="enable">
+          <claimResource type="register" registerField="TX2IE" value="1"></claimResource>
+          <claimResource type="register" registerField="TX2IP" value="1"></claimResource>
+          <claimResource type="register" registerField="TXB2IE" value="1"></claimResource>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="TX2IE" value="0"></claimResource>
+          <claimResource type="register" registerField="TX2IP" value="0"></claimResource>
+          <claimResource type="register" registerField="TXB2IE" value="0"></claimResource>
+        </userAction>
+      </userControl>
+
+      <userControl name="RXTXErrors" enableForInt="ERR">
+        <dialogConfig type="BoxCK" caption="RX TX Errors"></dialogConfig>
+        <userAction name="enable">
+          <claimResource type="register" registerField="ERRIE" value="1"></claimResource>
+          <claimResource type="register" registerField="ERRIP" value="1"></claimResource>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="ERRIE" value="0"></claimResource>
+          <claimResource type="register" registerField="ERRIP" value="0"></claimResource>
+        </userAction>
+      </userControl>
+
+    </userControlSubGroup>
+  </userControlGroup>
+
+  <userControlGroup name="ECAN" caption="none">
+    <userControlSubGroup name="none" caption="none">
+
+      <userControl name="ecanMode">
+        <dialogConfig type="CB" caption="ECAN mode select">
+          <selection name="mode0" value="Legacy (Mode 0)"></selection> 
+          <selection name="mode1" value="Enh. Legacy (Mode 1)"></selection> 
+          <selection name="mode2" value="Enh. FIFO (Mode 2)"></selection> 
+        </dialogConfig>
+        <userAction name="mode2">
+          <claimResource type="register" registerField="MDSEL1" value="1"></claimResource>
+          <claimResource type="register" registerField="MDSEL0" value="0"></claimResource>
+        </userAction>
+        <userAction name="mode1">
+          <claimResource type="register" registerField="MDSEL1" value="0"></claimResource>
+          <claimResource type="register" registerField="MDSEL0" value="1"></claimResource>
+        </userAction>
+        <userAction name="mode0">
+          <claimResource type="register" registerField="MDSEL1" value="0"></claimResource>
+          <claimResource type="register" registerField="MDSEL0" value="0"></claimResource>
+        </userAction>
+      </userControl>
+
+      <userControl name="windowAddrBits">
+        <dialogConfig type="CB" caption="Window Address Bits (mode 0 only)">
+          <selection name="rxBuff0" value="Receive Buffer 0"></selection> 
+          <selection name="rxBuff1" value="Receive Buffer 1"></selection> 
+          <selection name="txBuff0" value="Transmit Buffer 0"></selection> 
+          <selection name="txBuff1" value="Transmit Buffer 1"></selection> 
+          <selection name="txBuff2" value="Transmit Buffer 2"></selection> 
+        </dialogConfig>
+        <userAction name="txBuff2">
+          <claimResource type="register" registerField="WIN" value="0010"></claimResource>
+        </userAction>
+        <userAction name="txBuff1">
+          <claimResource type="register" registerField="WIN" value="0011"></claimResource>
+        </userAction>
+        <userAction name="txBuff0">
+          <claimResource type="register" registerField="WIN" value="0100"></claimResource>
+        </userAction>
+        <userAction name="rxBuff1">
+          <claimResource type="register" registerField="WIN" value="0101"></claimResource>
+        </userAction>
+        <userAction name="rxBuff0">
+          <claimResource type="register" registerField="WIN" value="0000"></claimResource>
+        </userAction>
+      </userControl>
+
+      <userControl name="fifoReadPtrBits">
+        <dialogConfig type="CB" caption="FIFO Read Pointer Bits (mode 2 only)">
+          <selection name="address0" value="0000"></selection>
+          <selection name="address1" value="0001"></selection>
+          <selection name="address2" value="0010"></selection>
+          <selection name="address3" value="0011"></selection>
+          <selection name="address4" value="0100"></selection>
+          <selection name="address5" value="0101"></selection>
+          <selection name="address6" value="0110"></selection>
+          <selection name="address7" value="0111"></selection>
+        </dialogConfig>
+        <userAction name="address7">
+          <claimResource type="register" registerField="FP30" value="0111"></claimResource>
+        </userAction>
+        <userAction name="address6">
+          <claimResource type="register" registerField="FP30" value="0110"></claimResource>
+        </userAction>
+        <userAction name="address5">
+          <claimResource type="register" registerField="FP30" value="0101"></claimResource>
+        </userAction>
+        <userAction name="address4">
+          <claimResource type="register" registerField="FP30" value="0100"></claimResource>
+        </userAction>
+        <userAction name="address3">
+          <claimResource type="register" registerField="FP30" value="0011"></claimResource>
+        </userAction>
+        <userAction name="address2">
+          <claimResource type="register" registerField="FP30" value="0010"></claimResource>
+        </userAction>
+        <userAction name="address1">
+          <claimResource type="register" registerField="FP30" value="0001"></claimResource>
+        </userAction>
+        <userAction name="address0">
+          <claimResource type="register" registerField="FP30" value="0000"></claimResource>
+        </userAction>
+      </userControl>
+
+      <userControl name="fifoHighWaterMark">
+        <dialogConfig type="CB" caption="FIFO High Water Mark bit">
+          <selection name="4buff" value="Interrupt on four receive buffers remain"></selection> 
+          <selection name="1buff" value="Interrupt on one receive buffer remains"></selection> 
+        </dialogConfig>
+        <userAction name="1buff">
+          <claimResource type="register" registerField="FIFOWM" value="1"></claimResource>
+        </userAction>
+        <userAction name="4buff">
+          <claimResource type="register" registerField="FIFOWM" value="0"></claimResource>
+        </userAction>
+      </userControl>
+
+      <userControl name="enhWindowAddrBits">
+        <dialogConfig type="CB" caption="Enhanced Window Addresss bits">
+          <selection name="af012Brg23" value="Accept. Filters 0,1,2 and BRGCON2,3"></selection> 
+          <selection name="af345Brg1IO" value="Accept. Filters 3,4,5 and BRGCON1, CIOCON"></selection> 
+          <selection name="afmErrInt" value="Accept. Filter Masks, Error and Int. Control"></selection> 
+          <selection name="txBuff0" value="Transmit Buffer 0"></selection> 
+          <selection name="txBuff1" value="Transmit Buffer 1"></selection> 
+          <selection name="txBuff2" value="Transmit Buffer 2"></selection> 
+          <selection name="af678" value="Accept. Filters 6,7,8"></selection> 
+          <selection name="af91011" value="Accept. Filters 9,10,11"></selection> 
+          <selection name="af121314" value="Accept. Filters 12,13,14"></selection> 
+          <selection name="af15" value="Accept. Filter 15"></selection> 
+          <selection name="rxint01" value="RXINT0, RXINT1"></selection> 
+          <selection name="rxBuff0" value="Receive Buffer 0"></selection> 
+          <selection name="rxBuff1" value="Receive Buffer 1"></selection> 
+          <selection name="txrxBuff0" value="TX/RX Buffer 0"></selection> 
+          <selection name="txrxBuff1" value="TX/RX Buffer 1"></selection> 
+          <selection name="txrxBuff2" value="TX/RX Buffer 2"></selection> 
+          <selection name="txrxBuff3" value="TX/RX Buffer 3"></selection> 
+          <selection name="txrxBuff4" value="TX/RX Buffer 4"></selection> 
+          <selection name="txrxBuff5" value="TX/RX Buffer 5"></selection> 
+        </dialogConfig>
+        <userAction name="txrxBuff5">
+          <claimResource type="register" registerField="EWIN" value="10111"></claimResource>
+        </userAction>
+        <userAction name="txrxBuff4">
+          <claimResource type="register" registerField="EWIN" value="10110"></claimResource>
+        </userAction>
+        <userAction name="txrxBuff3">
+          <claimResource type="register" registerField="EWIN" value="10101"></claimResource>
+        </userAction>
+        <userAction name="txrxBuff2">
+          <claimResource type="register" registerField="EWIN" value="10100"></claimResource>
+        </userAction>
+        <userAction name="txrxBuff1">
+          <claimResource type="register" registerField="EWIN" value="10011"></claimResource>
+        </userAction>
+        <userAction name="txrxBuff0">
+          <claimResource type="register" registerField="EWIN" value="10010"></claimResource>
+        </userAction>
+        <userAction name="rxBuff1">
+          <claimResource type="register" registerField="EWIN" value="10001"></claimResource>
+        </userAction>
+        <userAction name="rxBuff0">
+          <claimResource type="register" registerField="EWIN" value="10000"></claimResource>
+        </userAction>
+        <userAction name="rxint01">
+          <claimResource type="register" registerField="EWIN" value="01111"></claimResource>
+        </userAction>
+        <userAction name="af15">
+          <claimResource type="register" registerField="EWIN" value="01001"></claimResource>
+        </userAction>
+        <userAction name="af121314">
+          <claimResource type="register" registerField="EWIN" value="01000"></claimResource>
+        </userAction>
+        <userAction name="af91011">
+          <claimResource type="register" registerField="EWIN" value="00111"></claimResource>
+        </userAction>
+        <userAction name="af678">
+          <claimResource type="register" registerField="EWIN" value="00110"></claimResource>
+        </userAction>
+        <userAction name="txBuff2">
+          <claimResource type="register" registerField="EWIN" value="00101"></claimResource>
+        </userAction>
+        <userAction name="txBuff1">
+          <claimResource type="register" registerField="EWIN" value="00100"></claimResource>
+        </userAction>
+        <userAction name="txBuff0">
+          <claimResource type="register" registerField="EWIN" value="00011"></claimResource>
+        </userAction>
+        <userAction name="afmErrInt">
+          <claimResource type="register" registerField="EWIN" value="00010"></claimResource>
+        </userAction>
+        <userAction name="af345Brg1IO">
+          <claimResource type="register" registerField="EWIN" value="00001"></claimResource>
+        </userAction>
+        <userAction name="af012Brg23">
+          <claimResource type="register" registerField="EWIN" value="00000"></claimResource>
+        </userAction>
+      </userControl>
+
+      <userControl name="filterLengthCount">
+        <dialogConfig type="CB" caption="RX filter length count bit">
+          <selection name="none" value="None"></selection> 
+          <selection name="upTo1" value="Up To 1 if DLC 0001, 0010, or 0011"></selection> 
+          <selection name="upTo2" value="Up To 2 if DLC 0001, 0010, or 0011"></selection> 
+          <selection name="upTo3" value="Up To 3 if DLC 0001, 0010, or 0011"></selection> 
+          <selection name="upTo4" value="Up To 4 if DLC 0001, 0010, or 0011"></selection> 
+          <selection name="upTo5" value="Up To 5 if DLC 0001, 0010, or 0011"></selection> 
+          <selection name="upTo6" value="Up To 6 if DLC 0001, 0010, or 0011"></selection> 
+          <selection name="upTo7" value="Up To 7 if DLC 0001, 0010, or 0011"></selection> 
+          <selection name="upTo8" value="Up To 8 if DLC 0001, 0010, or 0011"></selection> 
+          <selection name="upTo9" value="Up To 9 if 0010 or 0011, UpTo 8 if 0001"></selection> 
+          <selection name="upTo10" value="Up To 10 if DLC 0010 or 0011, 8 if 0001"></selection> 
+          <selection name="upTo11" value="Up To 11 if DLC 0010 or 0011, 8 if 0001"></selection> 
+          <selection name="upTo12" value="Up To 12 if DLC 0010 or 0011, 8 if 0001"></selection> 
+          <selection name="upTo13" value="Up To 13 if DLC 0010 or 0011, 8 if 0001"></selection> 
+          <selection name="upTo14" value="Up To 14 if DLC 0010 or 0011, 8 if 0001"></selection> 
+          <selection name="upTo15" value="Up To 15 if DLC 0010 or 0011, 8 if 0001"></selection> 
+          <selection name="upTo16" value="Up To 16 if DLC 0010 or 0011, 8 if 0001"></selection> 
+          <selection name="upTo17" value="Up To 17 if DLC 0011, 16 if 0010, 8 if 0001"></selection> 
+          <selection name="upTo18" value="Up To 18 if DLC 0011, 16 if 0010, 8 if 0001"></selection> 
+        </dialogConfig>
+        <userAction name="upTo18">
+          <claimResource type="register" registerField="FLC" value="10010"></claimResource>
+        </userAction>
+        <userAction name="upTo17">
+          <claimResource type="register" registerField="FLC" value="10001"></claimResource>
+        </userAction>
+        <userAction name="upTo16">
+          <claimResource type="register" registerField="FLC" value="10000"></claimResource>
+        </userAction>
+        <userAction name="upTo15">
+          <claimResource type="register" registerField="FLC" value="01111"></claimResource>
+        </userAction>
+        <userAction name="upTo14">
+          <claimResource type="register" registerField="FLC" value="01110"></claimResource>
+        </userAction>
+        <userAction name="upTo13">
+          <claimResource type="register" registerField="FLC" value="01101"></claimResource>
+        </userAction>
+        <userAction name="upTo12">
+          <claimResource type="register" registerField="FLC" value="01100"></claimResource>
+        </userAction>
+        <userAction name="upTo11">
+          <claimResource type="register" registerField="FLC" value="01011"></claimResource>
+        </userAction>
+        <userAction name="upTo10">
+          <claimResource type="register" registerField="FLC" value="01010"></claimResource>
+        </userAction>
+        <userAction name="upTo9">
+          <claimResource type="register" registerField="FLC" value="01001"></claimResource>
+        </userAction>
+        <userAction name="upTo8">
+          <claimResource type="register" registerField="FLC" value="01000"></claimResource>
+        </userAction>
+        <userAction name="upTo7">
+          <claimResource type="register" registerField="FLC" value="00111"></claimResource>
+        </userAction>
+        <userAction name="upTo6">
+          <claimResource type="register" registerField="FLC" value="00110"></claimResource>
+        </userAction>
+        <userAction name="upTo5">
+          <claimResource type="register" registerField="FLC" value="00101"></claimResource>
+        </userAction>
+        <userAction name="upTo4">
+          <claimResource type="register" registerField="FLC" value="00100"></claimResource>
+        </userAction>
+        <userAction name="upTo3">
+          <claimResource type="register" registerField="FLC" value="00011"></claimResource>
+        </userAction>
+        <userAction name="upTo2">
+          <claimResource type="register" registerField="FLC" value="00010"></claimResource>
+        </userAction>
+        <userAction name="upTo1">
+          <claimResource type="register" registerField="FLC" value="00001"></claimResource>
+        </userAction>
+        <userAction name="none">
+          <claimResource type="register" registerField="FLC" value="00000"></claimResource>
+        </userAction>
+      </userControl>
+
+      <userControl name="bufferTXEn%indexControl%" range="5">
+        <dialogConfig type="CK" caption="Buffer%indexControl% TX Enable"></dialogConfig>
+        <userAction name="enable">
+          <claimResource type="register" registerField="B%indexControl%TXEN" value="1"></claimResource>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="B%indexControl%TXEN" value="0"></claimResource>
+        </userAction>
+      </userControl>
+
+      <userControl name="bufferIntEn%indexControl%" range="5">
+        <dialogConfig type="CK" caption="RX TX Buffer%indexControl% Int Enable"></dialogConfig>
+        <userAction name="enable">
+          <claimResource type="register" registerField="B%indexControl%IE" value="1"></claimResource>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="B%indexControl%IE" value="0"></claimResource>
+        </userAction>
+      </userControl>
+
+    </userControlSubGroup>
+  </userControlGroup>
+
+</featureDefinitions>

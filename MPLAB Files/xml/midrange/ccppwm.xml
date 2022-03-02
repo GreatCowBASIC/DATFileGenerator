@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE featureDefinitions SYSTEM "../featureDefinitions.dtd">
+<featureDefinitions name="CCPPWM" iconName="PWM" helpIndex="">
+
+  <userControlGroup name="none" caption="none">
+    <userControlSubGroup name="none" caption="none">
+
+      <userControl name="applyButton">
+        <dialogConfig type="applyButton" caption="none"/>
+        <userAction name="apply">
+          <claimResource type="pin" pin="CCP%instance%" polarity="Out"/>
+          <claimResource type="register" registerField="TRISC5" value="0"/>
+          <claimResource type="register" registerField="CCP%instance%M3" value="1"/>
+          <claimResource type="register" registerField="CCP%instance%M2" value="1"/>
+        </userAction>
+      </userControl>
+
+    </userControlSubGroup>
+  </userControlGroup>
+
+  <userControlGroup name="none" caption="none">
+    <userControlSubGroup name="none" caption="none">
+
+      <userControl name="InvertOutput">
+        <dialogConfig type="CK" caption="Invert PWM Output"/>
+        <userAction name="enable">
+          <claimResource type="register" registerField="CCP%instance%M1" value="1"/>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="CCP%instance%M1" value="0"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="DesiredFrequency">
+        <dialogConfig type="TB" caption="Desired Frequency"/>
+        <userAction/>
+      </userControl>
+
+      <userControl name="DesiredDutyCycle">
+        <dialogConfig type="TB" caption="Desired Duty Cycle"/>
+        <userAction/>
+      </userControl>
+
+      <userControl name="PeriodRegister">
+        <dialogConfig type="CB" caption="Load the period register" range="255">
+          <selection name="PeriodRegister%index%" value="%index%"/>
+        </dialogConfig>
+        <userAction>
+          <claimResource type="register" registerField="PR2" value="%index%"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="TMR2Prescaler">
+        <dialogConfig type="CB" caption="TMR2 Prescaler for Two-Phase PWM">
+          <selection name="Times1" value="x1"/>
+          <selection name="Times4" value="x4"/>
+          <selection name="Times16" value="x16"/>
+        </dialogConfig>
+        <userAction>
+          <claimResource type="register" registerField="T2CKPS" value="10"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="T2CKPS" value="01"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="T2CKPS" value="00"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="DutyCycleMSB">
+        <dialogConfig type="CB" caption="This control sets the high 8 bits of the PWM duty cycle" range="255">
+          <selection name="SetTo%index%" value="SetTo%index%"/>
+        </dialogConfig>
+        <userAction>
+          <claimResource type="register" registerField="CCPR1L" value="%index%"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="DutyCycleLSB">
+        <dialogConfig type="CB" caption="This control sets the low 2 bits of the PWM duty cycle." range="3">
+          <selection name="SetTo%index%" value="SetTo%index%"/>
+        </dialogConfig>
+        <userAction>
+          <claimResource type="register" registerField="DC1B" value="%index%"/>
+        </userAction>
+      </userControl>
+
+    </userControlSubGroup>
+  </userControlGroup>
+</featureDefinitions>

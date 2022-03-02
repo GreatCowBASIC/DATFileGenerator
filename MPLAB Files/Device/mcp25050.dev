@@ -1,0 +1,29 @@
+# Device file info: $Id: MCP25050.dev,v 1.6 2006/08/04 20:16:12 nairnj Exp $
+# Macro file info: $Id: 16macro.dev,v 1.4 2006/08/04 20:16:11 nairnj Exp $
+#device=MCP25050
+
+vpp (range=12.750-13.250 dflt=13.000)
+vdd (range=4.750-5.250 dfltrange=4.750-5.250 nominal=5.000)
+
+IsChecksumless=1
+
+pgming (memtech=ee ovrpgm=3 tries=25)
+    wait (pgm=100 cfg=100)
+    latches(pgm=1 cfg=1)
+
+pgmmem (region=0x00-0x45)
+cfgmem (region=0x2007-0x2007)
+
+                               # -------------------#
+#------------------------------# Configuration Bits #------------------------------------#
+                               # -------------------#
+
+cfgbits (key=CONFIG addr=0x2007 unused=0x3FF8)
+    field (key=RSTEN mask=0x4 desc="Reset on GP7 Enable Bit")
+        setting (req=0x4 value=0x4 desc="Reset enabled on GP7 I/O pin")
+        setting (req=0x4 value=0x0 desc="GP7 is general I/O")
+    field (key=OSC mask=0x3 desc="Oscillator")
+        setting (req=0x3 value=0x3 desc="HS")
+        setting (req=0x3 value=0x2 desc="Reserved")
+        setting (req=0x3 value=0x1 desc="XT")
+        setting (req=0x3 value=0x0 desc="LP")

@@ -1,0 +1,17 @@
+<!ELEMENT dynamicDutyMap (dynamicInputDutyTable, dynamicOutputDutyTable)>
+
+<!ELEMENT dynamicInputDutyTable (dynamicDuty | dynamicDutyUnimpl)*>
+
+<!ELEMENT dynamicOutputDutyTable (
+    dynamicDuty | dynamicDutyNull | dynamicDutyUnimpl)*>
+
+<!ELEMENT dynamicDuty EMPTY>
+<!ATTLIST dynamicDuty
+  name CDATA #REQUIRED
+  port CDATA #IMPLIED
+  pin CDATA #IMPLIED
+>
+
+<!ELEMENT dynamicDutyNull EMPTY>
+
+<!ELEMENT dynamicDutyUnimpl EMPTY>

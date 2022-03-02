@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE featureDefinitions SYSTEM "../featureDefinitions.dtd">
+
+<featureDefinitions name="Oscillator3" iconName="oscillator" helpIndex="">
+
+  <userControlGroup name="none" caption="none">
+    <userControlSubGroup name="none" caption="none">
+
+      <userControl name="applyButton">
+        <dialogConfig type="applyButton" caption="none"/>
+        <userAction name="apply">
+          <claimResource type="register" registerField="SCS" value="00"/>
+        </userAction>
+      </userControl>
+
+    </userControlSubGroup>
+  </userControlGroup>
+
+  <userControlGroup name="primaryOscSettings" caption="Primary Oscillator Settings">
+    <userControlSubGroup name="none" caption="none">
+
+      <userControl name="clockFreq">
+        <dialogConfig type="TB" caption="System Clock Frequency"/>
+        <userAction>
+          <!-- this is needed for baud calc and should just be stored -->
+        </userAction>
+      </userControl>
+
+      <userControl type="readOnly" name="fcy">
+        <dialogConfig type="general" caption="fcy"/>
+        <userAction>
+        </userAction>
+      </userControl>
+
+      <userControl name="showAdvanced">
+        <dialogConfig type="CK" caption="View Advanced Oscillator Settings"/>
+        <userAction name="enable"/>
+        <userAction name="disable"/>
+      </userControl>
+
+    </userControlSubGroup>
+  </userControlGroup>
+
+  <userControlGroup name="advancedOscSettings" caption="Advanced Oscillator Settings">
+    <userControlSubGroup name="none" caption="none">
+
+      <userControl name="primaryMode">
+        <dialogConfig type="CB" caption="Primary Oscillator Mode">
+          <selection name="setToECIOSPLL" value="ECIOSPLL"/>
+          <selection name="setToECIOPLL" value="ECIOPLL"/>
+          <selection name="setToHSSPLL" value="HSSPLL"/>
+	  <selection name="setToRCIO" value="RCIO"/>
+	  <selection name="setToHSPLL4" value="HSPLL"/>
+          <selection name="setToECIO" value="ECIO"/>
+	  <selection name="setToEC" value="EC"/>
+          <selection name="setToRC" value="RC"/>
+	  <selection name="setToHS" value="HS"/>
+	  <selection name="setToXT" value="XT"/>
+          <selection name="setToLP" value="LP"/>
+        </dialogConfig>
+        <userAction name="setToLP">
+          <claimResource type="register" registerField="FOSC" value="0000"/>
+          <claimResource type="pin" pin="OSC1" polarity="Inp"/>
+          <claimResource type="pin" pin="OSC2" polarity="Out"/>
+        </userAction>
+        <userAction name="setToXT">
+          <claimResource type="register" registerField="FOSC" value="0001"/>
+          <claimResource type="pin" pin="OSC1" polarity="Inp"/>
+          <claimResource type="pin" pin="OSC2" polarity="Inp"/>
+        </userAction>
+        <userAction name="setToHS">
+          <claimResource type="register" registerField="FOSC" value="0010"/>
+          <claimResource type="pin" pin="OSC1" polarity="Inp"/>
+          <claimResource type="pin" pin="OSC2" polarity="Inp"/>
+        </userAction>
+        <userAction name="setToRC">
+          <claimResource type="register" registerField="FOSC" value="0011"/>
+          <claimResource type="pin" pin="OSC1" polarity="Inp"/>
+          <claimResource type="pin" pin="CLKO" polarity="Out"/>
+        </userAction>
+        <userAction name="setToEC">
+          <claimResource type="register" registerField="FOSC" value="0100"/>
+          <claimResource type="pin" pin="OSC1" polarity="Inp"/>
+          <claimResource type="pin" pin="CLKO" polarity="Out"/>
+        </userAction>
+        <userAction name="setToECIO">
+          <claimResource type="register" registerField="FOSC" value="0101"/>
+          <claimResource type="pin" pin="OSC1" polarity="Inp"/>
+        </userAction>
+        <userAction name="setToHSPLL4">
+          <claimResource type="register" registerField="FOSC" value="0110"/>
+          <claimResource type="pin" pin="OSC1" polarity="Inp"/>
+          <claimResource type="pin" pin="OSC2" polarity="Inp"/>
+        </userAction>
+        <userAction name="setToRCIO">
+          <claimResource type="register" registerField="FOSC" value="0111"/>
+          <claimResource type="pin" pin="OSC1" polarity="Inp"/>
+        </userAction>
+        <userAction name="setToHSSPLL4">
+          <claimResource type="register" registerField="FOSC" value="1110"/>
+          <claimResource type="pin" pin="OSC1" polarity="Inp"/>
+          <claimResource type="pin" pin="OSC2" polarity="Inp"/>
+        </userAction>
+        <userAction name="setToECIOPLL">
+          <claimResource type="register" registerField="FOSC" value="1100"/>
+          <claimResource type="pin" pin="OSC2" polarity="Out"/>
+        </userAction>
+        <userAction name="setToECIOSPLL">
+          <claimResource type="register" registerField="FOSC" value="1101"/>
+          <claimResource type="pin" pin="OSC2" polarity="Out"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="clockSwitching">
+        <dialogConfig type="CK" caption="Enable Clock Switching"/>
+        <userAction name="enable">
+          <claimResource type="register" registerField="OSCSEN-L" value="0"/>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="OSCSEN-L" value="1"/>
+        </userAction>
+      </userControl>
+
+
+    </userControlSubGroup>
+  </userControlGroup>
+
+</featureDefinitions>

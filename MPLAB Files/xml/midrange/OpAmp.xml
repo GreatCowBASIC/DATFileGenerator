@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE featureDefinitions SYSTEM "../featureDefinitions.dtd">
+
+<featureDefinitions name="OpAmp" iconName="Op Amp" helpIndex="">
+
+  <userControlGroup name="none" caption="none">
+    <userControlSubGroup name="none" caption="none">
+      <userControl name="applyButton">
+        <dialogConfig type="applyButton" caption="none"/>
+        <userAction name="apply">
+          <claimResource type="pin" pin="OP%instance%+" polarity="Inp"/>
+          <claimResource type="pin" pin="OP%instance%-" polarity="Inp"/>
+          <claimResource type="pin" pin="OP%instance%" polarity="Out"/>
+        </userAction>
+      </userControl>
+    </userControlSubGroup>
+  </userControlGroup>
+
+  <userControlGroup name="Op-Amp Configuration" caption="Op-Amp Configuration">
+    <userControlSubGroup name="none" caption="none">
+
+      <userControl name="Enable">
+        <dialogConfig type="CK" caption="Enable on startup"/>
+        <userAction name="enable">
+          <claimResource type="register" instance="%instance%" registerField="OPAON" value="1"/>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" instance="%instance%" registerField="OPAON" value="0"/>
+        </userAction>
+      </userControl>
+
+    </userControlSubGroup>
+  </userControlGroup>
+
+</featureDefinitions>

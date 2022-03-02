@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE featureDefinitions SYSTEM "../featureDefinitions.dtd">
+
+<featureDefinitions name="InterruptsPIC16F785" iconName="interrupts-midrange" helpIndex="">
+
+  <userControlGroup name="none" caption="none">
+    <userControlSubGroup name="none" caption="none">
+      <userControl name="applyButton">
+        <dialogConfig type="applyButton" caption="none"/>
+        <userAction name="apply"/>
+      </userControl>
+    </userControlSubGroup>
+  </userControlGroup>
+
+  <userControlGroup name="General" caption="General Interrupt Properties">
+    <userControlSubGroup name="none" caption="none">
+
+      <userControl name="GlobalInterruptEnable">
+        <dialogConfig type="CK" caption="Assign the global interrupt enable"/>
+        <userAction name="enable">
+          <claimResource type="register" registerField="GIE" value="1"/>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="GIE" value="0"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="PeripheralInterruptEnable">
+        <dialogConfig type="CK" caption="Assign the peripheral interrupt enable"/>
+        <userAction name="enable">
+          <claimResource type="register" registerField="PEIE" value="1"/>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="PEIE" value="0"/>
+        </userAction>
+      </userControl>
+
+    </userControlSubGroup>
+  </userControlGroup>
+
+  <userControlGroup name="Garbage" caption="This doesn't belong here!">
+    <userControlSubGroup name="none" caption="none">
+
+      <userControl name="MCLREnable">
+        <dialogConfig type="CK" caption="Enable MCLR pin"/>
+        <userAction name="enable">
+          <claimResource type="pin" pin="MCLR-L" polarity="Inp"/>
+          <claimResource type="register" registerField="MCLREN" value="1"/>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="MCLREN" value="0"/>
+        </userAction>
+      </userControl>
+
+    </userControlSubGroup>
+  </userControlGroup>
+
+  <userControlGroup name="ExternalInterrupts" caption="External Interrupts">
+    <userControlSubGroup name="none" caption="none">
+
+      <userControl name="RAIntEnable" enableForInt="RA">
+        <dialogConfig type="CK" caption="Enable PORTA interrupt-on-change"/>
+        <userAction name="enable">
+          <claimResource type="register" registerField="RAIE" value="1"/>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="RAIE" value="0"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="ExtIntEnable" enableForInt="INT">
+        <dialogConfig type="CK" caption="Enable external interrupt"/>
+        <userAction name="enable">
+          <claimResource type="pin" pin="INT" polarity="Inp"/>
+          <claimResource type="register" registerField="INTE" value="1"/>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="INTE" value="0"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="ExtIntEdge" edgeForInt="INT">
+        <dialogConfig type="CB" caption="Select triggering edge for external interrupt">
+          <selection name="TriggerOnFallingEdge" value="Falling"/>
+          <selection name="TriggerOnRisingEdge" value="Rising"/>
+        </dialogConfig>
+        <userAction>
+          <claimResource type="register" registerField="INTEDG" value="1"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="INTEDG" value="0"/>
+        </userAction>
+      </userControl>
+
+    </userControlSubGroup>
+  </userControlGroup>
+
+</featureDefinitions>

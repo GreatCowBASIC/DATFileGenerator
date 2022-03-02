@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE deviceDefinitions SYSTEM "deviceDefinitions.dtd">
+<deviceDefinitions name="PIC18F4480" rev="A" type="8-bit MCU" family="GP">
+
+<!-- needs finishing volt and temp -->
+  <operatingTemperature>
+    <temperature minmax="-40 degC, +85 degC">
+      <voltage minmax="2.5V, 5.5V">
+        <frequency minmax="0 MHz, 40 MHz"/>
+      </voltage>
+      <voltage minmax="4.5V, 5.5V">
+        <frequency minmax="0 MHz, 40 MHz"/>
+      </voltage>
+    </temperature>
+    <temperature minmax="-40 degC, +125 degC">
+      <voltage minmax="4.5V, 5.5V">
+        <frequency minmax="0 MHz, 40 MHz"/>
+      </voltage>
+    </temperature>
+  </operatingTemperature>
+
+  <memory RAM="768" programFLASH="16384" EEPROM="256"/>
+
+  <resources>
+    <pinDefinitions name="PIC18/PIC18F4x80 40-Pin PDIP PinsDefinitions"/>
+    <interrupts name="PIC18/PIC18F4x8x Interrupts" IVTStart="" AIVTStart="" SFRAddressSize=""/>
+    <configurationRegisters name="PIC18/PIC18F4x8x ConfigurationRegisters"/>
+  </resources>
+
+  <packageList>
+    <type name="40-Pin PDIP"/>
+    <type name="44-Pin TQFP"/>
+    <type name="44-Pin QFN"/>
+  </packageList>
+
+  <codeTemplate name="PIC18/PIC18F4580 CodeTemplate"/>
+
+  <errata name="*80219*"/>
+  <dataSheet name="*39637*"/>
+  <programRef name="PIC18F4x8x ProgrammersReferenceManual"/>
+  <familyRef name="PIC18F4x8x FamilyReferenceManual"/>
+
+  <features type="required">
+
+    <group name="integration" type="integration" caption="integration">
+      <feature name="Oscillator2" oldinstance="1" caption="Oscillator" file="PIC18/Oscillator2" feature="Oscillator2" image="oscillator"/>
+    </group>
+
+    <group name="integration" type="integration" caption="integration">
+      <feature name="Interrupts18" caption="Interrupts and Traps" file="PIC18/Interrupts" feature="Interrupts18" image="Interrupts"/>
+    </group>
+
+  </features>
+  <features type="optional">
+
+    <group name="RTC" type="RTC" caption="RTC">
+      <feature name="RTC" oldinstance="1" caption="RTC" file="PIC18/RTC" feature="Timer1" image="RTC"/>
+    </group>
+
+    <group name="IOPort" type="IOPort" caption="I/O Ports">
+      <feature name="IOPort" instance="A" caption="Port A" file="PIC18/IOPort" feature="IOPortA" image="IOPort"/>
+      <feature name="IOPort" instance="B" caption="Port B" file="PIC18/IOPort" feature="IOPortB" image="IOPort"/>
+      <feature name="IOPort" instance="C" caption="Port C" file="PIC18/IOPort" feature="IOPortC" image="IOPort"/>
+      <feature name="IOPort" instance="D" caption="Port D" file="PIC18/IOPort" feature="IOPortD" image="IOPort"/>
+      <feature name="IOPortE" oldinstance="E" caption="Port E" file="PIC18/IOPortE" feature="IOPortE" image="IOPort"/>
+    </group>
+
+    <group name="timer" type="Timers" caption="Timers">
+      <feature name="16bitZeroTimer" instance="0" caption="16-bit Timer 0" file="PIC18/16bitZeroTimer" feature="Timer0" image="TimerR"/>
+      <feature name="16bitTimer" instance="1" caption="16-bit Timer 1" file="PIC18/16bitTimer" feature="Timer1" image="TimerR"/>
+      <feature name="16bitTimer" instance="3" caption="16-bit Timer 3" file="PIC18/16bitTimer" feature="Timer3" image="TimerR"/>
+      <feature name="8bitZeroTimer" instance="0" caption="8-bit Timer 0" file="PIC18/8bitZeroTimer" feature="Timer0" image="TimerR"/>
+      <feature name="8bitTimer" instance="2" caption="8-bit Timer 2" file="PIC18/8bitTimer" feature="Timer2" image="TimerR"/>
+    </group>
+
+    <group name="counter" type="Counters" caption="Counters">
+      <feature name="16bitZeroCounter" instance="0" caption="16-bit Counter 0" file="PIC18/16bitZeroCounter" feature="counter0" image="Counter"/>
+      <feature name="16bitAsyncCounter" instance="1" caption="Async Counter 1" file="PIC18/16bitAsyncCounter" feature="counter1" image="Counter"/>
+      <feature name="16bitSyncCounter" instance="1" caption="Sync Counter 1" file="PIC18/16bitSyncCounter" feature="counter1" image="Counter"/>
+      <feature name="16bitAsyncCounter" instance="3" caption="Async Counter 3" file="PIC18/16bitAsyncCounter" feature="counter3" image="Counter"/>
+      <feature name="16bitSyncCounter" instance="3" caption="Sync Counter 3" file="PIC18/16bitSyncCounter" feature="counter3" image="Counter"/>
+      <feature name="8bitZeroCounter" instance="0" caption="8-bit Counter 0" file="PIC18/8bitZeroCounter" feature="counter0" image="Counter"/>
+    </group>
+
+    <group name="IC" type="IC" caption="IC">
+      <feature name="CCPIC" instance="1" caption="IC 1" file="PIC18/IC" feature="CCPIC1" image="Capture"/>
+      <feature name="CCPIC" instance="2" caption="IC 2" file="PIC18/IC" feature="CCPIC2" image="Capture"/>
+    </group>
+
+    <group name="OC" type="OC" caption="OC">
+      <feature name="CCPOC" instance="1" caption="OC 1" file="PIC18/OC" feature="CCPOC1" image="Compare"/>
+      <feature name="CCPOC" instance="2" caption="OC 2" file="PIC18/OC" feature="CCPOC2" image="Compare"/>
+      <feature name="Comparator" instance="1" caption="Comparator" file="PIC18/Comparator_RD13_02" feature="Comparator" image="Compare"/>
+      <feature name="VoltageRef" instance="1" caption="Cmp Voltage Reference" file="PIC18/VoltageRef" feature="VoltageRef" image="Compare"/>
+    </group>
+
+    <group name="PWM" type="PWM" caption="PWM">
+      <feature name="CCPPWM" instance="1" caption="PWM" file="PIC18/PWM" feature="PWM1" image="PWM"/>
+      <feature name="CCPPWM" instance="2" caption="PWM" file="PIC18/PWM" feature="PWM2" image="PWM"/>
+    </group>
+
+    <group name="SPI" type="SPI" caption="SPI">
+      <feature name="SPI" instance="1" caption="SPI 1" file="PIC18/SPI1" feature="SPI1" image="SPI"/>
+    </group>
+
+    <group name="I2C" type="I2C" caption="I2C">
+      <feature name="I2C" oldinstance="1" caption="I2C" file="PIC18/I2C1" feature="I2C" image="I2C"/>
+    </group>
+
+    <group name="UART" type="UART" caption="UART">
+      <feature name="UART" instance="1" caption="UART 1" file="PIC18/EUART" feature="UART1" image="UART"/>
+      <feature name="USART" instance="1" caption="USART 1" file="PIC18/EUSART" feature="USART1" image="UART"/>
+    </group>
+
+    <group name="CAN" type="CAN" caption="CAN">
+      <feature name="CAN" instance="1" caption="CAN 1" file="PIC18/CAN" feature="CAN1" image="CAN"/>
+    </group>
+
+    <group name="A2D" type="A2D" caption="A to D">
+      <feature name="A2D10bit" oldinstance="1" caption="10-bit A to D" file="PIC18/A2D10bit11chAcq" feature="A2D10bit" image="ADC"/>
+    </group>
+
+    <group name="reset" type="Reset" caption="Reset"> <!-- temp -->
+      <feature name="BOR" oldinstance="1" caption="Reset" file="PIC18/BORSW" feature="BOR" image="Brownout"/>
+      <feature name="LVD" oldinstance="1" caption="LVD" file="PIC18/LVD" feature="LVD" image="LVD"/>
+      <feature name="WDT" oldinstance="1" caption="WDT" file="PIC18/WDTPS5" feature="WDT" image="WDT"/>
+    </group>
+
+    <group name="EMI" type="EMI" caption="EMI">
+      <feature name="PSP" oldinstance="1" caption="PSP" file="PIC18/PSP1" feature="PSP" image="PSP"/>
+    </group>
+
+  </features>
+
+</deviceDefinitions>

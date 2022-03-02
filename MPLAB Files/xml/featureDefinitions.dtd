@@ -1,0 +1,73 @@
+<!-- This DTD describes the <featureDefinitions> vocab as we got it from -->
+<!-- Sunrise (almost).  I stripped all of the <codeGen> elements out of the -->
+<!-- documents to tighten the DTD.  I did the same with the <dependency> -->
+<!-- and <comment> elements.  Whatever they started with that I will never -->
+<!-- understand, (might as well start over on those things and have a -->
+<!-- cleaner vocab). -->
+
+<!-- What we have here is very loose.  The vocab handler ignores a number -->
+<!-- of these elements.  The <userControl> and <claimResource> elements are -->
+<!-- way too loosey-goosey for my tastes. -->
+
+<!ELEMENT featureDefinitions (userControlGroup*)>
+<!ATTLIST featureDefinitions
+  name CDATA #REQUIRED
+  iconName CDATA #REQUIRED
+  helpIndex CDATA #REQUIRED
+>
+
+<!ELEMENT userControlGroup (userControlSubGroup*)>
+<!ATTLIST userControlGroup
+  name CDATA #REQUIRED
+  caption CDATA #REQUIRED
+>
+
+<!ELEMENT userControlSubGroup (userControl*)>
+<!ATTLIST userControlSubGroup
+  name CDATA #REQUIRED
+  caption CDATA #REQUIRED
+>
+
+<!ELEMENT userControl (dialogConfig?, userAction*)>
+<!ATTLIST userControl
+  type CDATA #IMPLIED
+  name CDATA #IMPLIED
+  range CDATA #IMPLIED
+  state CDATA #IMPLIED
+  value CDATA #IMPLIED
+  enableForInt CDATA #IMPLIED
+  priorityForInt CDATA #IMPLIED
+  edgeForInt CDATA #IMPLIED
+>
+
+<!ELEMENT dialogConfig (selection*)>
+<!ATTLIST dialogConfig
+  type CDATA #REQUIRED
+  caption CDATA #REQUIRED
+  range CDATA #IMPLIED
+>
+
+<!ELEMENT selection EMPTY>
+<!ATTLIST selection
+  name CDATA #REQUIRED
+  value CDATA #REQUIRED
+>
+
+<!ELEMENT userAction (claimResource)*>
+<!ATTLIST userAction
+  name CDATA #IMPLIED
+>
+
+<!ELEMENT claimResource EMPTY>
+<!ATTLIST claimResource
+  type CDATA #REQUIRED
+  instance CDATA #IMPLIED
+  registerField CDATA #IMPLIED
+  method CDATA #IMPLIED
+  value CDATA #IMPLIED
+  pin CDATA #IMPLIED
+  polarity CDATA #IMPLIED
+  flag CDATA #IMPLIED
+  bitshited  CDATA #IMPLIED
+  mask  CDATA #IMPLIED
+>

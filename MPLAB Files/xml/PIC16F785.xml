@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE deviceDefinitions SYSTEM "deviceDefinitions.dtd">
+<deviceDefinitions name="PIC16F785" rev="A" type="8-bit MCU" family="GP">
+
+  <operatingTemperature>
+    <temperature minmax="-40 degC, +85 degC">
+      <voltage minmax="2.5V, 5.5V">
+        <frequency minmax="0 MHz, 25 MHz"/>
+      </voltage>
+      <voltage minmax="4.5V, 5.5V">
+        <frequency minmax="0 MHz, 25 MHz"/>
+      </voltage>
+    </temperature>
+    <temperature minmax="-40 degC, +125 degC">
+      <voltage minmax="4.5V, 5.5V">
+        <frequency minmax="0 MHz, 25 MHz"/>
+      </voltage>
+    </temperature>
+  </operatingTemperature>
+
+  <memory RAM="128" programFLASH="2048" EEPROM="256"/>
+
+  <resources>
+    <pinDefinitions name="midrange/PIC16F785 20-Pin DIP PinsDefinitions"/>
+    <interrupts name="midrange/PIC16F785 Interrupts" IVTStart="" AIVTStart="" SFRAddressSize=""/>
+    <configurationRegisters name="midrange/PIC16F785 ConfigurationRegisters"/>
+  </resources>
+
+  <packageList>
+    <type name="20-Pin PDIP"/>
+  </packageList>
+
+  <codeTemplate name="midrange/PIC16F785 CodeTemplate"/>
+
+  <errata name=""/>
+  <dataSheet name="*41249*"/>
+  <programRef name=""/>
+  <familyRef name=""/>
+
+  <features type="required">
+    <group name="integration" type="integration" caption="integration">
+      <feature name="Oscillator1" caption="Oscillator" file="midrange/Oscillator1" image="oscillator" feature=""/>
+      <feature name="InterruptsMid" caption="Interrupts and Traps" file="midrange/Interrupts1" image="Interrupts" feature=""/>
+    </group>
+  </features>
+
+  <features type="optional">
+
+    <group name="IOPort" type="IOPort" caption="I/O Ports">
+      <feature name="IOPortWithPUAndIOC" instance="A" caption="Port A" file="midrange/IOPortWithPUAndIOC" image="IOPort" feature=""/>
+      <feature name="IOPort" instance="B" caption="Port B" file="midrange/IOPort" image="IOPort" feature=""/>
+      <feature name="IOPort" instance="C" caption="Port C" file="midrange/IOPort" image="IOPort" feature=""/>
+    </group>
+
+    <group name="timer" type="Timers" caption="Timers">
+      <feature name="8bitZeroTimer" instance="0" caption="8-bit Timer 0" file="midrange/8bitZeroTimer" image="TimerR" feature=""/>
+      <feature name="16bitTimer" instance="1" caption="16-bit Timer 1" file="midrange/16bitTimer" image="TimerR" feature=""/>
+      <feature name="8bitTimer" instance="2" caption="8-bit Timer 2" file="midrange/8bitTimer" image="TimerR" feature=""/>
+    </group>
+
+    <group name="counter" type="Counters" caption="Counters">
+      <feature name="8bitZeroCounter" instance="0" caption="8-bit Counter 0" file="midrange/8bitZeroCounter" image="Counter" feature=""/>
+      <feature name="16bitCounter" instance="1" caption="Counter 1" file="midrange/16bitCounter" image="Counter" feature=""/>
+    </group>
+
+    <group name="OpAmp" type="OpAmp" caption="OpAmp">
+      <feature name="OpAmp" instance="1" caption="OpAmp1" file="midrange/OpAmp" image="OpAmp" feature=""/>
+      <feature name="OpAmp" instance="2" caption="OpAmp2" file="midrange/OpAmp" image="OpAmp" feature=""/>
+    </group>
+
+    <group name="IC" type="IC" caption="IC">
+      <feature name="CCPIC" instance="1" caption="IC 1" file="midrange/IC"  image="Capture" feature=""/>
+    </group>
+
+
+    <group name="OC" type="OC" caption="OC">
+      <feature name="CCPOC" instance="1" caption="OC 1" file="midrange/OC" image="Compare" feature=""/>
+      <feature name="Comparator" instance="1" caption="Comparator 1" file="midrange/Comparator" image="Compare" feature=""/>
+      <feature name="Comparator" instance="2" caption="Comparator 2" file="midrange/Comparator" image="Compare" feature=""/>
+      <feature name="VoltageRef" instance="1" caption="Voltage Reference" file="midrange/VoltageRef" image="Compare" feature=""/>
+    </group>
+
+    <group name="PWM" type="PWM" caption="PWM">
+      <feature name="CCPPWM" instance="1" caption="PWM" file="midrange/CCPPWM" image="PWM" feature=""/>
+      <feature name="TwoPhasePWM" instance="1" caption="Two-Phase PWM" file="midrange/TwoPhasePWM" image="PWM" feature=""/>
+    </group>
+
+    <group name="A2D" type="A2D" caption="A to D">
+      <feature name="ADC" instance="1" caption="10-bit A to D" file="midrange/ADC" image="ADC" feature=""/>
+    </group>
+
+    <group name="reset" type="Reset" caption="Reset">
+      <feature name="BOR" caption="Reset" file="midrange/BOR" image="Brownout" feature=""/>
+      <feature name="WDT" caption="WDT" file="midrange/WDT" image="WDT" feature=""/>
+    </group>
+
+  </features>
+
+</deviceDefinitions>

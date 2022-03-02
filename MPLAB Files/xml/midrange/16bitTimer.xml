@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE featureDefinitions SYSTEM "../featureDefinitions.dtd">
+<featureDefinitions name="16bitTimer" iconName="16bitTimer" helpIndex="">
+
+  <userControlGroup name="none" caption="none">
+    <userControlSubGroup name="none" caption="none">
+
+      <userControl name="applyButton">
+        <dialogConfig type="applyButton" caption="none"/>
+        <userAction name="apply">
+          <claimResource type="register" registerField="TMR%instance%CS" value="0"/>
+        </userAction>
+      </userControl>
+
+    </userControlSubGroup>
+  </userControlGroup>
+
+  <userControlGroup name="General" caption="General">
+    <userControlSubGroup name="none" caption="none">
+
+      <userControl name="EnableOnStartup">
+        <dialogConfig type="CK" caption="Enable On Startup"/>
+        <userAction name="enable">
+          <claimResource type="register" registerField="TMR%instance%ON" value="1"/>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="TMR%instance%ON" value="0"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="EnableGateCtrl">
+        <dialogConfig type="CK" caption="Enable Gating"/>
+        <userAction name="enable">
+          <claimResource type="register" registerField="TMR%instance%GE" value="1"/>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="TMR%instance%GE" value="0"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="SelectGateSource">
+        <dialogConfig type="CB" caption="Gate Source Select">
+          <selection name="Comparator" value="Comparator"/>
+          <selection name="Pin" value="T1G Pin"/>
+        </dialogConfig>
+        <userAction>
+          <claimResource type="pin" pin="T1G" polarity="Inp"/>
+          <claimResource type="register" registerField="T%instance%GSS" value="1"/>
+          <claimResource type="register" registerField="ANS3" value="0"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="T%instance%GSS" value="0"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="InvertGateSource">
+        <dialogConfig type="CK" caption="Invert Gate Source"/>
+        <userAction name="enable">
+          <claimResource type="register" registerField="T%instance%GINV" value="1"/>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="T%instance%GINV" value="0"/>
+        </userAction>
+      </userControl>
+
+    </userControlSubGroup>
+  </userControlGroup>
+
+  <userControlGroup name="TimerPeriod" caption="timer Period">
+    <userControlSubGroup name="none" caption="none">
+
+      <userControl name="Prescale">
+        <dialogConfig type="CB" caption="Timer Prescale">
+          <selection name="DivBy1" value="1:1"/>
+          <selection name="DivBy2" value="1:2"/>
+          <selection name="DivBy4" value="1:4"/>
+          <selection name="DivBy8" value="1:8"/>
+        </dialogConfig>
+        <userAction>
+          <claimResource type="register" registerField="T%instance%CKPS" value="11"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="T%instance%CKPS" value="10"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="T%instance%CKPS" value="01"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="T%instance%CKPS" value="00"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="DesiredTimerPeriod">
+        <dialogConfig type="TB" caption="Desired Timer Period"/>
+        <userAction/>
+      </userControl>
+
+      <userControl name="PreloadL">
+        <dialogConfig type="CB" caption="Preload the TMR%instance%L register" range="255">
+          <selection name="PreloadL%index%" value="%index%"/>
+        </dialogConfig>
+        <userAction>
+          <claimResource type="register" registerField="TMR%instance%L" value="%index%"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="PreloadH">
+        <dialogConfig type="CB" caption="Preload the TMR%instance%H register" range="255">
+          <selection name="PreloadH%index%" value="%index%"/>
+        </dialogConfig>
+        <userAction>
+          <claimResource type="register" registerField="TMR%instance%H" value="%index%"/>
+        </userAction>
+      </userControl>
+
+    </userControlSubGroup>
+  </userControlGroup>
+
+  <userControlGroup name="Interrupt" caption="Interrupt">
+    <userControlSubGroup name="none" caption="none">
+
+      <userControl name="EnableInterrupt" enableForInt="T%instance%">
+        <dialogConfig type="CK" caption="Enable Interrupt"/>
+        <userAction name="enable">
+          <claimResource type="register" registerField="TMR%instance%IE" value="1"/>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="TMR%instance%IE" value="0"/>
+        </userAction>
+      </userControl>
+
+    </userControlSubGroup>
+  </userControlGroup>
+
+</featureDefinitions>

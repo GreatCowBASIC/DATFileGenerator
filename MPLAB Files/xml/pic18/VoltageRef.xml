@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE featureDefinitions SYSTEM "../featureDefinitions.dtd">
+
+<featureDefinitions name="VoltageRef" iconName="VoltageRef" helpIndex="">
+
+<userControlGroup name="none" caption="none">
+<userControlSubGroup name="none" caption="none">
+
+<userControl name="applyButton">
+<dialogConfig type="applyButton" caption="none"></dialogConfig>
+<userAction name="apply">
+</userAction>
+</userControl>
+
+</userControlSubGroup>
+</userControlGroup>
+
+<userControlGroup name="none" caption="none">
+<userControlSubGroup name="general" caption="General">
+
+<userControl name="enable">
+	<dialogConfig type="CK" caption="Enable on Startup"></dialogConfig>
+<userAction name="enable">
+	<claimResource type="register" registerField="CVREN" value="1"></claimResource>
+</userAction>
+<userAction name="disable">
+	<claimResource type="register" registerField="CVREN" value="0"></claimResource>
+</userAction>
+</userControl>
+
+<userControl name="BufferOnStartup">
+	<dialogConfig type="CK" caption="Buffer on startup"></dialogConfig>
+<userAction name="enable">
+	<claimResource type="register" registerField="CVROE" value="1"></claimResource>
+	<!-- <claimResource type="pin" pin="CVREF" polarity="Out"></claimResource> -->
+</userAction>
+<userAction name="disable">
+	<claimResource type="register" registerField="CVROE" value="0"></claimResource>
+</userAction>
+</userControl>
+</userControlSubGroup>
+
+<userControlSubGroup name="referenceVoltageSetting" caption="Reference Voltage Setting">
+<userControl name="range">
+	<dialogConfig type="CB" caption="VREF Range">
+		<selection name="1_32Step" value="0.25 to 0.75 CVrsrc with 1/32 Step Size"></selection> 
+		<selection name="1_24Step" value="0.00 to 0.75 CVrsrc with 1/24 Step Size"></selection> 
+	</dialogConfig>
+	<userAction name="1_24Step">
+		<claimResource type="register" registerField="CVRR" value="1"></claimResource>
+	</userAction>
+	<userAction name="1_32Step">
+		<claimResource type="register" registerField="CVRR" value="0"></claimResource>
+	</userAction>
+</userControl>
+
+<userControl name="source">
+	<dialogConfig type="CB" caption="VREF Source">
+	<selection name="vddvss" value="Vdd - Vss"></selection> 
+	<selection name="vref" value="Vref+ - Vref-"></selection> 
+	</dialogConfig>
+<userAction name="vref">
+	<claimResource type="register" registerField="CVRSS" value="1"></claimResource>
+	<claimResource type="pin" pin="VREF+" polarity="Inp"></claimResource>
+	<claimResource type="pin" pin="VREF-" polarity="Inp"></claimResource>
+</userAction>
+<userAction name="vddvss">
+	<claimResource type="register" registerField="CVRSS" value="0"></claimResource>
+</userAction>
+</userControl>
+			
+<userControl name="avdd">
+	<dialogConfig type="TB" caption="AVdd"></dialogConfig>
+	<userAction></userAction>
+</userControl>
+
+<userControl name="avss">
+	<dialogConfig type="TB" caption="AVss"></dialogConfig>
+	<userAction></userAction>
+</userControl>
+			
+<userControl name="vrefPlus">
+	<dialogConfig type="TB" caption="VRef+"></dialogConfig>
+	<userAction></userAction>
+</userControl>
+			
+<userControl name="vrefMinus">
+	<dialogConfig type="TB" caption="VRef-"></dialogConfig>
+	<userAction></userAction>
+</userControl>
+			
+<userControl name="DesiredVoltage">
+	<dialogConfig type="TB" caption="Desired Voltage"></dialogConfig>
+	<userAction></userAction>
+</userControl>
+			
+<userControl type="readOnly" name="ActualVoltage">
+	<dialogConfig type="general" caption="Actual Voltage"></dialogConfig>
+	<userAction></userAction>
+</userControl>
+			
+<userControl type="readOnly" name="VoltageError">
+	<dialogConfig type="general" caption="Error"></dialogConfig>
+	<userAction></userAction>
+</userControl>
+			
+<userControl name="VoltageValue">
+	<dialogConfig type="TB" caption="Actual Voltage Value"></dialogConfig>
+	<userAction>
+	<!-- The 'variable' attribute is added newly to accomodate the new requirement of variable value supplied by -->
+	<!-- user in configuration dialog. Used as true/false(1/0) -->
+	<claimResource type="register" registerField="CVR" value="0" variable="1"></claimResource>
+	</userAction>
+</userControl>
+
+</userControlSubGroup>
+</userControlGroup>
+</featureDefinitions>

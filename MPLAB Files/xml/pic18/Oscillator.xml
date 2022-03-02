@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE featureDefinitions SYSTEM "../featureDefinitions.dtd">
+
+<featureDefinitions name="Oscillator" iconName="oscillator" helpIndex="">
+
+<userControlGroup name="none" caption="none">
+<userControlSubGroup name="none" caption="none">
+
+<userControl name="applyButton">
+<dialogConfig type="applyButton" caption="none"></dialogConfig>
+<userAction name="apply">
+	<claimResource type="pin" pin="OSC1" polarity="Inp"></claimResource>
+</userAction>
+</userControl>
+
+</userControlSubGroup>
+</userControlGroup>
+
+<userControlGroup name="primaryOscSettings" caption="Primary Oscillator Settings">
+<userControlSubGroup name="none" caption="none">
+
+<userControl name="clockFreq">
+<dialogConfig type="TB" caption="System Clock Frequency"></dialogConfig>
+<userAction>
+	<!-- this is needed for baud calc and should just be stored -->
+</userAction>
+</userControl>
+
+<userControl type="readOnly" name="fcy">
+<dialogConfig type="general" caption="fcy"></dialogConfig>
+<userAction>
+</userAction>
+</userControl>
+
+<userControl name="showAdvanced">
+<dialogConfig type="CK" caption="View Advanced Oscillator Settings"></dialogConfig>
+<userAction name="enable">
+	<!-- what to do here????? -->
+</userAction>
+<userAction name="disable">
+</userAction>
+</userControl>
+
+</userControlSubGroup>
+</userControlGroup>
+
+<userControlGroup name="advancedOscSettings" caption="Advanced Oscillator Settings">
+<userControlSubGroup name="none" caption="none">
+
+<userControl name="clockSource">
+<dialogConfig type="CB" caption="Clock Source">
+	<selection name="primOsc" value="Primary Oscillator"></selection> 
+</dialogConfig>
+<userAction name="primOsc">
+</userAction>
+</userControl>
+
+<userControl name="useClockDivider">
+
+<dialogConfig type="CB" caption="Clock Divide">
+	<selection name="setToDiv1" value="divide by 1"></selection>
+</dialogConfig>
+<userAction name="setToDiv1">
+</userAction>
+
+</userControl>
+
+<userControl name="primaryMode">
+<dialogConfig type="CB" caption="Primary Mode Select (OSC2 Pin)">
+	<selection name="setToERCIO" value="RC (I/O)"></selection>
+	<selection name="setToLP" value="LP x1 (OSC2)"></selection>
+	<selection name="setToECIO" value="ECIO x1 (I/O)"></selection>
+	<selection name="setToERC" value="RC (CLKO)"></selection>
+	<selection name="setToEC" value="EC x1 (CLKO)"></selection>
+	<selection name="setToXTL" value="XT (OSC2)"></selection>
+	<selection name="setToHS" value="HS (OSC2)"></selection>
+	<selection name="setToXTPLL4" value="HS + PLL x4 (OSC2)"></selection>
+</dialogConfig>
+<userAction name="setToXTPLL4">
+	<claimResource type="register" registerField="FOSC" value="110"></claimResource>
+	<claimResource type="pin" pin="OSC2" polarity="Inp"></claimResource>
+</userAction>
+
+<userAction name="setToHS">
+	<claimResource type="register" registerField="FOSC" value="010"></claimResource>
+	<claimResource type="pin" pin="OSC2" polarity="Inp"></claimResource>
+</userAction>
+
+<userAction name="setToXTL">
+	<claimResource type="register" registerField="FOSC" value="001"></claimResource>
+	<claimResource type="pin" pin="OSC2" polarity="Inp"></claimResource>
+</userAction>
+
+<userAction name="setToEC">
+	<claimResource type="register" registerField="FOSC" value="100"></claimResource>
+	<claimResource type="pin" pin="CLKO" polarity="Out"></claimResource>
+</userAction>
+
+<userAction name="setToERC">
+	<claimResource type="register" registerField="FOSC" value="011"></claimResource>
+	<claimResource type="pin" pin="CLKO" polarity="Out"></claimResource>
+</userAction>
+
+<userAction name="setToECIO">
+	<claimResource type="register" registerField="FOSC" value="101"></claimResource>
+</userAction>
+
+<userAction name="setToLP">
+	<claimResource type="register" registerField="FOSC" value="000"></claimResource>
+	<claimResource type="pin" pin="OSC2" polarity="Out"></claimResource>
+</userAction>
+
+<userAction name="setToERCIO">
+	<claimResource type="register" registerField="FOSC" value="111"></claimResource>
+</userAction>
+
+</userControl>
+
+<userControl name="aux32Khz">
+<dialogConfig type="CK" caption="Aux. 32KHz Oscillator Enabled"></dialogConfig>
+<userAction name="enable">
+	<claimResource type="pin" pin="T1OSO" polarity="Shared"></claimResource>
+	<claimResource type="pin" pin="T1OSI" polarity="Shared"></claimResource>
+	<claimResource type="register" registerField="SCS" value="1"></claimResource>
+</userAction>
+<userAction name="disable">
+	<claimResource type="register" registerField="SCS" value="0"></claimResource>
+</userAction>
+</userControl>
+
+</userControlSubGroup>
+</userControlGroup>
+
+</featureDefinitions>

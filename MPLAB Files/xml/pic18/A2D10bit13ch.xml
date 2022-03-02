@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE featureDefinitions SYSTEM "../featureDefinitions.dtd">
+<featureDefinitions name="A2D10bit" iconName="A2D" helpIndex="">
+
+  <userControlGroup name="none" caption="none">
+    <userControlSubGroup name="none" caption="none">
+
+      <userControl name="applyButton">
+        <dialogConfig type="applyButton" caption="none"></dialogConfig>
+        <userAction name="apply">
+</userAction>
+      </userControl>
+
+    </userControlSubGroup>
+  </userControlGroup>
+
+  <userControlGroup name="operational Settings" caption="Operational Settings">
+    <userControlSubGroup name="none" caption="none">
+
+      <userControl name="enable">
+        <dialogConfig type="CK" caption="Enable on Startup"></dialogConfig>
+        <userAction name="enable">
+          <claimResource type="register" registerField="ADON" value="1"></claimResource>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="ADON" value="0"></claimResource>
+        </userAction>
+      </userControl>
+
+      <userControl name="dataOutputFormat">
+        <dialogConfig type="CB" caption="Data Output Format:">
+          <selection name="uFractional" value="Unsigned Fractional (left justified)"></selection>
+          <selection name="uInteger" value="Unsigned Integer (right justified)"></selection>
+        </dialogConfig>
+        <userAction name="uInteger">
+          <claimResource type="register" registerField="ADFM" value="1"></claimResource>
+        </userAction>
+        <userAction name="uFractional">
+          <claimResource type="register" registerField="ADFM" value="0"></claimResource>
+        </userAction>
+      </userControl>
+
+      <userControl name="voltageRef">
+        <dialogConfig type="CB" caption="Voltage Ref Sources:">
+          <selection name="AVdd_AVss" value="AVdd is Vrefh, AVss is Vrefl"></selection>
+          <selection name="Vrefh_AVss" value="Ext. Vref+ is Vrefh, AVss is Vrefl"></selection>
+          <selection name="AVdd_Vrefl" value="AVdd is Vrefh, Ext. Vref- is Vrefl"></selection>
+          <selection name="Vrefh_Vrefl" value="Ext. Vref+ Vrefh, Ext. Vref- is Vrefl"></selection>
+        </dialogConfig>
+        <userAction name="Vrefh_Vrefl">
+          <claimResource type="register" registerField="VCFG1" value="1"></claimResource>
+          <claimResource type="register" registerField="VCFG0" value="1"></claimResource>
+        </userAction>
+        <userAction name="AVdd_Vrefl">
+          <claimResource type="register" registerField="VCFG1" value="1"></claimResource>
+          <claimResource type="register" registerField="VCFG0" value="0"></claimResource>
+        </userAction>
+        <userAction name="Vrefh_AVss">
+          <claimResource type="register" registerField="VCFG1" value="0"></claimResource>
+          <claimResource type="register" registerField="VCFG0" value="1"></claimResource>
+        </userAction>
+        <userAction name="AVdd_AVss">
+          <claimResource type="register" registerField="VCFG1" value="0"></claimResource>
+          <claimResource type="register" registerField="VCFG0" value="0"></claimResource>
+        </userAction>
+      </userControl>
+
+    </userControlSubGroup>
+  </userControlGroup>
+ 
+  <userControlGroup name="modeSettings" caption="Mode Settings">
+
+    <userControlSubGroup name="samplingMode" caption="Sampling Mode">
+
+</userControlSubGroup>
+
+    <userControlSubGroup name="conversionMode" caption="Conversion Mode">
+ 
+      <userControl name="samplePeriod">
+        <dialogConfig type="TB" caption="Sample Period"></dialogConfig>
+        <userAction>
+	<!-- TAD=TCY*(0.5*(ADCS[5:0]+1)) -->
+	<!-- min=TCY/2, max=32*TCY -->
+        </userAction>
+      </userControl>
+
+      <userControl name="samplePeriodUnits">
+        <dialogConfig type="CB" caption="none">
+          <selection name="setTousecs" value="usecs"></selection>
+          <selection name="setTo???" value="???"></selection>
+        </dialogConfig>
+        <userAction name="setTousecs">
+        </userAction>
+        <userAction name="setTo???">
+        </userAction>
+      </userControl>
+
+      <userControl type="readOnly" name="samplePeriodError">
+        <dialogConfig type="general" caption="Sample Period Error (%)"></dialogConfig>
+        <userAction>
+        </userAction>
+      </userControl>
+
+      <userControl name="operateDuringSleep">
+        <dialogConfig type="CB" caption="CPU Sleep Operation">
+          <selection name="noWakeOnSleep" value="No wake-up"></selection> 
+          <selection name="wakeOnSleep" value="Wake-up on Done Bit"></selection> 
+        </dialogConfig>
+        <userAction name="wakeOnSleep">
+          <claimResource type="register" registerField="ADCS2" value="1"></claimResource>
+          <claimResource type="register" registerField="ADCS1" value="1"></claimResource>
+          <claimResource type="register" registerField="ADCS0" value="1"></claimResource>
+          <claimResource type="register" registerField="CCP2M3" value="1"></claimResource>
+          <claimResource type="register" registerField="CCP2M2" value="0"></claimResource>
+          <claimResource type="register" registerField="CCP2M1" value="1"></claimResource>
+          <claimResource type="register" registerField="CCP2M0" value="1"></claimResource>
+          <claimResource type="register" registerField="ADON" value="1"></claimResource>
+        </userAction>
+        <userAction name="noWakeOnSleep">
+		</userAction>
+      </userControl>
+      
+      <userControl name="acqTimeSelect">
+
+		<dialogConfig type="CB" caption="Acq. Time Select:">
+			<selection name="Sel1" value="0 TAD"></selection> 
+			<selection name="Sel2" value="2 TAD"></selection> 
+			<selection name="Sel3" value="4 TAD"></selection> 
+			<selection name="Sel4" value="6 TAD"></selection> 
+			<selection name="Sel5" value="8 TAD"></selection> 
+			<selection name="Sel6" value="12 TAD"></selection> 
+			<selection name="Sel7" value="16 TAD"></selection> 
+			<selection name="Sel8" value="20 TAD"></selection> 
+        </dialogConfig>
+        
+        <userAction name="Sel1">
+			<claimResource type="register" registerField="CS" value="000"></claimResource>
+        </userAction>
+        
+        <userAction name="Sel2">
+			<claimResource type="register" registerField="CS" value="001"></claimResource>
+		</userAction>
+
+        <userAction name="Sel3">
+			<claimResource type="register" registerField="CS" value="010"></claimResource>
+        </userAction>
+        
+        <userAction name="Sel4">
+			<claimResource type="register" registerField="CS" value="011"></claimResource>
+		</userAction>
+        
+        <userAction name="Sel5">
+			<claimResource type="register" registerField="CS" value="100"></claimResource>
+        </userAction>
+        
+        <userAction name="Sel6">
+			<claimResource type="register" registerField="CS" value="101"></claimResource>
+		</userAction>
+
+        <userAction name="Sel7">
+			<claimResource type="register" registerField="CS" value="110"></claimResource>
+        </userAction>
+        
+        <userAction name="Sel8">
+			<claimResource type="register" registerField="CS" value="111"></claimResource>
+		</userAction>
+		
+      </userControl>
+
+      <userControl name="clockSource">
+        <dialogConfig type="CB" caption="Clock Source">
+          <selection name="Tcy_div2_mult1" value=".5 * Tcy"></selection>
+          <selection name="Tcy_div2_mult2" value="2 * .5 * Tcy"></selection>
+          <selection name="Tcy_div2_mult4" value="4 * .5 * Tcy"></selection>
+          <selection name="Tcy_div2_mult8" value="8 * .5 * Tcy"></selection>
+          <selection name="Tcy_div2_mult8" value="16 * .5 * Tcy"></selection>
+          <selection name="Tcy_div2_mult16" value="32 * .5 * Tcy"></selection>
+          <selection name="internalClock" value="A/D internal RC clock"></selection>
+        </dialogConfig>
+        <userAction name="internalClock">
+          <claimResource type="register" registerField="ADCS2" value="1"></claimResource>
+          <claimResource type="register" registerField="ADCS1" value="1"></claimResource>
+          <claimResource type="register" registerField="ADCS0" value="1"></claimResource>
+        </userAction>
+        <userAction name="Tcy_div2_mult32">
+          <claimResource type="register" registerField="ADCS2" value="1"></claimResource>
+          <claimResource type="register" registerField="ADCS1" value="1"></claimResource>
+          <claimResource type="register" registerField="ADCS0" value="0"></claimResource>
+        </userAction>
+        <userAction name="Tcy_div2_mult16">
+          <claimResource type="register" registerField="ADCS2" value="0"></claimResource>
+          <claimResource type="register" registerField="ADCS1" value="1"></claimResource>
+          <claimResource type="register" registerField="ADCS0" value="0"></claimResource>
+        </userAction>
+        <userAction name="Tcy_div2_mult8">
+          <claimResource type="register" registerField="ADCS2" value="1"></claimResource>
+          <claimResource type="register" registerField="ADCS1" value="0"></claimResource>
+          <claimResource type="register" registerField="ADCS0" value="1"></claimResource>
+        </userAction>
+        <userAction name="Tcy_div2_mult4">
+          <claimResource type="register" registerField="ADCS2" value="0"></claimResource>
+          <claimResource type="register" registerField="ADCS1" value="0"></claimResource>
+          <claimResource type="register" registerField="ADCS0" value="1"></claimResource>
+        </userAction>
+        <userAction name="Tcy_div2_mult2">
+          <claimResource type="register" registerField="ADCS2" value="1"></claimResource>
+          <claimResource type="register" registerField="ADCS1" value="0"></claimResource>
+          <claimResource type="register" registerField="ADCS0" value="0"></claimResource>
+        </userAction>
+        <userAction name="Tcy_div2_mult1">
+          <claimResource type="register" registerField="ADCS2" value="0"></claimResource>
+          <claimResource type="register" registerField="ADCS1" value="0"></claimResource>
+          <claimResource type="register" registerField="ADCS0" value="0"></claimResource>
+        </userAction>
+      </userControl>
+
+    </userControlSubGroup>
+
+  </userControlGroup>
+
+  <userControlGroup name="inputSettings" caption="A/D Input Settings">
+
+    <userControlSubGroup name="CH0" caption="CH0">
+
+      <userControl name="inputConfigured">
+        <dialogConfig type="CB" caption="Configure as A/D Inputs">
+          <selection name="allDigital" value="No channels"></selection>
+          <selection name="allAnalog" value="All channels"></selection>
+          <selection name="AN0to0" value="AN0 only"></selection>
+          <selection name="AN0to1" value="AN0 and AN1"></selection>
+          <selection name="AN0to2" value="AN0 thru AN2"></selection>
+          <selection name="AN0to3" value="AN0 thru AN3"></selection>
+          <selection name="AN0to4" value="AN0 thru AN4"></selection>
+          <selection name="AN0to5" value="AN0 thru AN5"></selection>
+          <selection name="AN0to6" value="AN0 thru AN6"></selection>
+          <selection name="AN0to7" value="AN0 thru AN7"></selection>
+          <selection name="AN0to8" value="AN0 thru AN8"></selection>
+          <selection name="AN0to9" value="AN0 thru AN9"></selection>
+          <selection name="AN0to10" value="AN0 thru AN10"></selection>
+          <selection name="AN0to11" value="AN0 thru AN11"></selection>
+        </dialogConfig>
+        <userAction name="AN0to11">
+          <claimResource type="register" registerField="PCFG" value="0011"></claimResource>
+          <claimResource type="pin" pin="AN0" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="AN1" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="AN2" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="AN3" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="AN4" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="AN5" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="AN6" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="AN7" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="AN8" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="AN9" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="AN10" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="AN11" polarity="Inp"></claimResource>
+        </userAction>
+        <userAction name="AN0to10">
+          <claimResource type="register" registerField="PCFG" value="0100"></claimResource>
+          <claimResource type="pin" pin="AN0" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="AN1" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="AN2" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="AN3" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="AN4" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="AN5" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="AN6" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="AN7" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="AN8" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="AN9" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="AN10" polarity="Inp"></claimResource>
+        </userAction>
+        <userAction name="AN0to9">
+          <claimResource type="register" registerField="PCFG" value="0101"></claimResource>
+          <claimResource type="pin" pin="AN0" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="AN1" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="AN2" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="AN3" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="AN4" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="AN5" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="AN6" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="AN7" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="AN8" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="AN9" polarity="Inp"></claimResource>
+        </userAction>
+        <userAction name="AN0to8">
+          <claimResource type="register" registerField="PCFG" value="0110"></claimResource>
+          <claimResource type="pin" pin="AN0" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="AN1" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="AN2" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="AN3" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="AN4" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="AN5" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="AN6" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="AN7" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="AN8" polarity="Inp"></claimResource>
+        </userAction>
+        <userAction name="AN0to7">
+          <claimResource type="register" registerField="PCFG" value="0111"></claimResource>
+          <claimResource type="pin" pin="AN0" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="AN1" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="AN2" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="AN3" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="AN4" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="AN5" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="AN6" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="AN7" polarity="Inp"></claimResource>
+        </userAction>
+        <userAction name="AN0to6">
+          <claimResource type="register" registerField="PCFG" value="1000"></claimResource>
+          <claimResource type="pin" pin="AN0" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="AN1" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="AN2" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="AN3" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="AN4" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="AN5" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="AN6" polarity="Inp"></claimResource>
+        </userAction>
+        <userAction name="AN0to5">
+          <claimResource type="register" registerField="PCFG" value="1001"></claimResource>
+          <claimResource type="pin" pin="AN0" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="AN1" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="AN2" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="AN3" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="AN4" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="AN5" polarity="Inp"></claimResource>
+        </userAction>
+        <userAction name="AN0to4">
+          <claimResource type="register" registerField="PCFG" value="1010"></claimResource>
+          <claimResource type="pin" pin="AN0" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="AN1" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="AN2" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="AN3" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="AN4" polarity="Inp"></claimResource>
+        </userAction>
+        <userAction name="AN0to3">
+          <claimResource type="register" registerField="PCFG" value="1011"></claimResource>
+          <claimResource type="pin" pin="AN0" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="AN1" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="AN2" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="AN3" polarity="Inp"></claimResource>
+        </userAction>
+        <userAction name="AN0to2">
+          <claimResource type="register" registerField="PCFG" value="1100"></claimResource>
+          <claimResource type="pin" pin="AN0" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="AN1" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="AN2" polarity="Inp"></claimResource>
+        </userAction>
+        <userAction name="AN0to1">
+          <claimResource type="register" registerField="PCFG" value="1101"></claimResource>
+          <claimResource type="pin" pin="AN0" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="AN1" polarity="Inp"></claimResource>
+        </userAction>
+        <userAction name="AN0to0">
+          <claimResource type="register" registerField="PCFG" value="1110"></claimResource>
+          <claimResource type="pin" pin="AN0" polarity="Inp"></claimResource>
+        </userAction>
+        <userAction name="allAnalog">
+          <claimResource type="register" registerField="PCFG" value="0000"></claimResource>
+          <claimResource type="pin" pin="AN0" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="AN1" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="AN2" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="AN3" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="AN4" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="AN5" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="AN6" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="AN7" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="AN8" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="AN9" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="AN10" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="AN11" polarity="Inp"></claimResource>
+          <claimResource type="pin" pin="AN12" polarity="Inp"></claimResource>
+        </userAction>
+        <userAction name="allDigital">
+          <claimResource type="register" registerField="PCFG" value="1111"></claimResource>
+        </userAction>
+      </userControl>
+
+      <userControl name="sampleAPosInput">
+        <dialogConfig type="CB" range="12" caption="Sample A Pos. Input">
+          <selection name="sampleAPosInputToAN%index%" value="AN%index%"></selection>
+        </dialogConfig>
+        <userAction>
+	<!-- method to compute in bit mode should reference register info table read from XML -->
+          <claimResource type="register" registerField="CH0SA" method="conversionInt4Bit"></claimResource>
+        </userAction>
+      </userControl>
+
+    </userControlSubGroup>
+
+    <userControlSubGroup name="none" caption="none">
+
+      <userControl name="interruptEnable" enableForInt="AD">
+        <dialogConfig type="CK" caption="Enable Interrupt on Startup"/>
+        <userAction name="enable">
+          <claimResource type="register" registerField="ADIE" value="1"/>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="ADIE" value="0"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="interruptPriority" priorityForInt="AD">
+        <dialogConfig type="CB" caption="Interrupt Priority">
+          <selection name="PriorityLevelToHigh" value="High"/>
+          <selection name="PriorityLevelToLow" value="Low"/>
+        </dialogConfig>
+        <userAction>
+          <claimResource type="register" registerField="ADIP" value="0"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="ADIP" value="1"/>
+        </userAction>
+      </userControl>
+
+    </userControlSubGroup>
+  </userControlGroup>
+</featureDefinitions>

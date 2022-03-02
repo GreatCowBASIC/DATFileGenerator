@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE featureDefinitions SYSTEM "../featureDefinitions.dtd">
+<featureDefinitions name="8bitTimer" iconName="16bitTimer" helpIndex="">
+
+  <userControlGroup name="none" caption="none">
+    <userControlSubGroup name="none" caption="none">
+
+      <userControl name="applyButton">
+        <dialogConfig type="applyButton" caption="none"/>
+        <userAction name="apply"/>
+      </userControl>
+
+    </userControlSubGroup>
+  </userControlGroup>
+
+  <userControlGroup name="General" caption="General">
+    <userControlSubGroup name="none" caption="none">
+
+      <userControl name="EnableOnStartup">
+        <dialogConfig type="CK" caption="Enable On Startup"/>
+        <userAction name="enable">
+          <claimResource type="register" registerField="TMR%instance%ON" value="1"/>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="TMR%instance%ON" value="0"/>
+        </userAction>
+      </userControl>
+
+    </userControlSubGroup>
+  </userControlGroup>
+
+  <userControlGroup name="TimerPeriod" caption="timer Period">
+    <userControlSubGroup name="none" caption="none">
+
+      <userControl name="Prescale">
+        <dialogConfig type="CB" caption="Timer Prescale">
+          <selection name="DivBy1" value="1:1"/>
+          <selection name="DivBy4" value="1:4"/>
+          <selection name="DivBy16" value="1:16"/>
+        </dialogConfig>
+        <userAction>
+          <claimResource type="register" registerField="T%instance%CKPS" value="10"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="T%instance%CKPS" value="01"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="T%instance%CKPS" value="00"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="Postscale">
+        <dialogConfig type="CB" caption="Timer Postscale">
+          <selection name="setTo0" value="1:1"/>
+          <selection name="setTo1" value="1:2"/>
+          <selection name="setTo2" value="1:3"/>
+          <selection name="setTo3" value="1:4"/>
+          <selection name="setTo4" value="1:5"/>
+          <selection name="setTo5" value="1:6"/>
+          <selection name="setTo6" value="1:7"/>
+          <selection name="setTo7" value="1:8"/>
+          <selection name="setTo8" value="1:9"/>
+          <selection name="setTo9" value="1:10"/>
+          <selection name="setToA" value="1:11"/>
+          <selection name="setToB" value="1:12"/>
+          <selection name="setToC" value="1:13"/>
+          <selection name="setToD" value="1:14"/>
+          <selection name="setToE" value="1:15"/>
+          <selection name="setToF" value="1:16"/>
+        </dialogConfig>
+        <userAction>
+          <claimResource type="register" registerField="TOUTPS" value="1111"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="TOUTPS" value="1110"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="TOUTPS" value="1101"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="TOUTPS" value="1100"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="TOUTPS" value="1011"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="TOUTPS" value="1010"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="TOUTPS" value="1001"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="TOUTPS" value="1000"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="TOUTPS" value="0111"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="TOUTPS" value="0110"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="TOUTPS" value="0101"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="TOUTPS" value="0100"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="TOUTPS" value="0011"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="TOUTPS" value="0010"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="TOUTPS" value="0001"/>
+        </userAction>
+        <userAction>
+          <claimResource type="register" registerField="TOUTPS" value="0000"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="DesiredTimerPeriod">
+        <dialogConfig type="TB" caption="Desired Timer Period"/>
+        <userAction/>
+      </userControl>
+
+      <userControl name="PeriodRegister">
+        <dialogConfig type="CB" caption="Load the period register" range="255">
+          <selection name="PeriodRegister%index%" value="%index%"/>
+        </dialogConfig>
+        <userAction>
+          <claimResource type="register" registerField="PR%instance%" value="%index%"/>
+        </userAction>
+      </userControl>
+
+    </userControlSubGroup>
+  </userControlGroup>
+
+  <userControlGroup name="Interrupt" caption="Interrupt">
+    <userControlSubGroup name="none" caption="none">
+
+      <userControl name="EnableInterrupt" enableForInt="T%instance%">
+        <dialogConfig type="CK" caption="Enable Interrupt"/>
+        <userAction name="enable">
+          <claimResource type="register" registerField="TMR%instance%IE" value="1"/>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="TMR%instance%IE" value="0"/>
+        </userAction>
+      </userControl>
+
+    </userControlSubGroup>
+  </userControlGroup>
+
+</featureDefinitions>

@@ -1,0 +1,1082 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE configurationRegisters SYSTEM "../configurationRegisters.dtd">
+<configurationRegisters>
+
+  <specialFunctionRegisters>
+
+    <CPUCore>
+      <sfr key="WREG" addr="0x0FFF" por="xxxxxxxxxxxxxxxx" mclr="uuuuuuuuuuuuuuuu"></sfr>
+    </CPUCore>
+
+    <InterruptControl>
+      <sfr key="INTCON" addr="0xFF2" por="0000000000000000" mclr="0000000000000000">
+        <field key="GIE" instance="1" mask="0x0080" desc=""></field>
+        <field key="PEIE" instance="1" mask="0x0040" desc=""></field>
+        <field key="TMR0IE" instance="1" mask="0x0020" desc=""></field>
+        <field key="T0IE" instance="1" mask="0x0020" desc=""></field>
+        <field key="INT0IE" instance="1" mask="0x0010" desc=""></field>
+        <field key="RBIE" instance="1" mask="0x0008" desc=""></field>
+        <field key="TMR0IF" instance="1" mask="0x0004" desc=""></field>
+        <field key="T0IF" instance="1" mask="0x0004" desc=""></field>
+        <field key="INT0IF" instance="1" mask="0x0002" desc=""></field>
+        <field key="RBIF" instance="1" mask="0x0001" desc=""></field>
+      </sfr>
+      <sfr key="INTCON2" addr="0xFF1" por="1111111111111111" mclr="0000000000000000">
+        <field key="RBPU" instance="1" mask="0x0080" desc=""></field>
+        <field key="INTEDG0" instance="1" mask="0x0040" desc=""></field>
+        <field key="INTEDG1" instance="1" mask="0x0020" desc=""></field>
+        <field key="INTEDG2" instance="1" mask="0x0010" desc=""></field>
+        <field key="INTEDG3" instance="1" mask="0x0008" desc=""></field>
+        <field key="TMR0IP" instance="1" mask="0x0004" desc=""></field>
+        <field key="T0IP" instance="1" mask="0x0004" desc=""></field>
+        <field key="INT3IP" instance="1" mask="0x0002" desc=""></field>
+        <field key="RBIP" instance="1" mask="0x0001" desc=""></field>
+      </sfr>
+      <sfr key="INTCON3" addr="0xFF0" por="0000000011000000" mclr="0000000000000000">
+        <field key="INT2IP" instance="1" mask="0x0080" desc=""></field>
+        <field key="INT1IP" instance="1" mask="0x0040" desc=""></field>
+        <field key="INT3IE" instance="1" mask="0x0020" desc=""></field>
+        <field key="INT2IE" instance="1" mask="0x0010" desc=""></field>
+        <field key="INT1IE" instance="1" mask="0x0008" desc=""></field>
+        <field key="INT3IF" instance="1" mask="0x0004" desc=""></field>
+        <field key="INT2IF" instance="1" mask="0x0002" desc=""></field>
+        <field key="INT1IF" instance="1" mask="0x0001" desc=""></field>
+      </sfr>
+      <sfr key="IPR3" addr="0xFA5" por="1111111111111111" mclr="0000000000000000">
+        <field key="SSP2IP" instance="1" mask="0x0080" desc=""></field>
+        <field key="BCL2IP" instance="1" mask="0x0040" desc=""></field>
+        <field key="RC2IP" instance="1" mask="0x0020" desc=""></field>
+        <field key="TX2IP" instance="1" mask="0x0010" desc=""></field>
+        <field key="U2TXIP" instance="1" mask="0x0010" desc=""></field>
+        <field key="TMR4IP" instance="1" mask="0x0008" desc=""></field>
+        <field key="T4IP" instance="1" mask="0x0008" desc=""></field>
+        <field key="CCP5IP" instance="1" mask="0x0004" desc=""></field>
+        <field key="CCP4IP" instance="1" mask="0x0002" desc=""></field>
+        <field key="CCP3IP" instance="1" mask="0x0001" desc=""></field>
+      </sfr>
+      <sfr key="PIR3" addr="0xFA4" por="0000000000000000" mclr="0000000000000000">
+        <field key="SSP2IF" instance="1" mask="0x0080" desc=""></field>
+        <field key="BCL2IF" instance="1" mask="0x0040" desc=""></field>
+        <field key="RC2IF" instance="1" mask="0x0020" desc=""></field>
+        <field key="U2RXIP" instance="1" mask="0x0020" desc=""></field>
+        <field key="TX2IF" instance="1" mask="0x0010" desc=""></field>
+        <field key="U2TXIF" instance="1" mask="0x0010" desc=""></field>
+        <field key="TMR4IF" instance="1" mask="0x0008" desc=""></field>
+        <field key="T4IF" instance="1" mask="0x0008" desc=""></field>
+        <field key="CCP5IF" instance="1" mask="0x0004" desc=""></field>
+        <field key="CCP4IF" instance="1" mask="0x0002" desc=""></field>
+        <field key="CCP3IF" instance="1" mask="0x0001" desc=""></field>
+      </sfr>
+      <sfr key="PIE3" addr="0xFA3" por="0000000000000000" mclr="0000000000000000">
+        <field key="SSP2IE" instance="1" mask="0x0080" desc=""></field>
+        <field key="BCL2IE" instance="1" mask="0x0040" desc=""></field>
+        <field key="RC2IE" instance="1" mask="0x0020" desc=""></field>
+        <field key="U2RXIE" instance="1" mask="0x0020" desc=""></field>
+        <field key="TX2IE" instance="1" mask="0x0010" desc=""></field>
+        <field key="U2TXIE" instance="1" mask="0x0010" desc=""></field>
+        <field key="TMR4IE" instance="1" mask="0x0008" desc=""></field>
+        <field key="T4IE" instance="1" mask="0x0008" desc=""></field>
+        <field key="CCP5IE" instance="1" mask="0x0004" desc=""></field>
+        <field key="CCP4IE" instance="1" mask="0x0002" desc=""></field>
+        <field key="CCP3IE" instance="1" mask="0x0001" desc=""></field>
+      </sfr>
+      <sfr key="IPR2" addr="0xFA2" por="1111111111111111" mclr="0000000000000000">
+        <field key="OSCFIP" instance="1" mask="0x0080" desc=""></field>
+        <field key="CMIP" instance="1" mask="0x0040" desc=""></field>
+        <field key="reserved" instance="1" mask="0x0020" desc=""></field>
+        <field key="EEIP" instance="1" mask="0x0010" desc=""></field>
+        <field key="BCLIP" instance="1" mask="0x0008" desc=""></field>
+        <field key="LVDIP" instance="1" mask="0x0004" desc=""></field>
+        <field key="TMR3IP" instance="1" mask="0x0002" desc=""></field>
+        <field key="T3IP" instance="1" mask="0x0002" desc=""></field>
+        <field key="CCP2IP" instance="1" mask="0x0001" desc=""></field>
+      </sfr>
+      <sfr key="PIR2" addr="0xFA1" por="0000000000000000" mclr="0000000000000000">
+        <field key="OSCFIF" instance="1" mask="0x0080" desc=""></field>
+        <field key="CMIF" instance="1" mask="0x0040" desc=""></field>
+        <field key="reserved" instance="1" mask="0x0020" desc=""></field>
+        <field key="EEIF" instance="1" mask="0x0010" desc=""></field>
+        <field key="BCLIF" instance="1" mask="0x0008" desc=""></field>
+        <field key="LVDIF" instance="1" mask="0x0004" desc=""></field>
+        <field key="TMR3IF" instance="1" mask="0x0002" desc=""></field>
+        <field key="T3IF" instance="1" mask="0x0002" desc=""></field>
+        <field key="CCP2IF" instance="1" mask="0x0001" desc=""></field>
+      </sfr>
+      <sfr key="PIE2" addr="0xFA0" por="0000000000000000" mclr="0000000000000000">
+        <field key="OSCFIE" instance="1" mask="0x0080" desc=""></field>
+        <field key="CMIE" instance="1" mask="0x0040" desc=""></field>
+        <field key="reserved" instance="1" mask="0x0030" desc=""></field>
+        <field key="BCL1IE" instance="1" mask="0x0008" desc=""></field>
+        <field key="reserved" instance="1" mask="0x0004" desc=""></field>
+        <field key="TMR3IE" instance="1" mask="0x0002" desc=""></field>
+        <field key="T3IE" instance="1" mask="0x0002" desc=""></field>
+        <field key="CCP2IE" instance="1" mask="0x0001" desc=""></field>
+      </sfr>
+      <sfr key="IPR1" addr="0xF9F" por="1111111111111111" mclr="0000000000000000">
+        <field key="PSPIP" instance="1" mask="0x0080" desc=""></field>
+        <field key="ADIP" instance="1" mask="0x0040" desc=""></field>
+        <field key="RCIP" instance="1" mask="0x0020" desc=""></field>
+        <field key="U1RXIP" instance="1" mask="0x0020" desc=""></field>
+        <field key="TXIP" instance="1" mask="0x0010" desc=""></field>
+        <field key="U1TXIP" instance="1" mask="0x0010" desc=""></field>
+        <field key="SSP1IP" instance="1" mask="0x0008" desc=""></field>
+        <field key="CCP1IP" instance="1" mask="0x0004" desc=""></field>
+        <field key="TMR2IP" instance="1" mask="0x0002" desc=""></field>
+        <field key="T2IP" instance="1" mask="0x0002" desc=""></field>
+        <field key="TMR1IP" instance="1" mask="0x0001" desc=""></field>
+        <field key="T1IP" instance="1" mask="0x0001" desc=""></field>
+      </sfr>
+      <sfr key="PIR1" addr="0xF9E" por="0000000000000000" mclr="0000000000000000">
+        <field key="PSPIF" instance="1" mask="0x0080" desc=""></field>
+        <field key="ADIF" instance="1" mask="0x0040" desc=""></field>
+        <field key="RCIF" instance="1" mask="0x0020" desc=""></field>
+        <field key="TXIF" instance="1" mask="0x0010" desc=""></field>
+        <field key="U1TXIF" instance="1" mask="0x0010" desc=""></field>
+        <field key="SSP1IF" instance="1" mask="0x0008" desc=""></field>
+        <field key="CCP1IF" instance="1" mask="0x0004" desc=""></field>
+        <field key="TMR2IF" instance="1" mask="0x0002" desc=""></field>
+        <field key="T2IF" instance="1" mask="0x0002" desc=""></field>
+        <field key="TMR1IF" instance="1" mask="0x0001" desc=""></field>
+        <field key="T1IF" instance="1" mask="0x0001" desc=""></field>
+      </sfr>
+      <sfr key="PIE1" addr="0xF9D" por="0000000000000000" mclr="0000000000000000">
+        <field key="PSPIE" instance="1" mask="0x0080" desc=""></field>
+        <field key="ADIE" instance="1" mask="0x0040" desc=""></field>
+        <field key="RCIE" instance="1" mask="0x0020" desc=""></field>
+        <field key="U1RXIE" instance="1" mask="0x0020" desc=""></field>
+        <field key="TXIE" instance="1" mask="0x0010" desc=""></field>
+        <field key="U1TXIE" instance="1" mask="0x0010" desc=""></field>
+        <field key="SSP1IE" instance="1" mask="0x0008" desc=""></field>
+        <field key="CCP1IE" instance="1" mask="0x0004" desc=""></field>
+        <field key="TMR2IE" instance="1" mask="0x0002" desc=""></field>
+        <field key="T2IE" instance="1" mask="0x0002" desc=""></field>
+        <field key="TMR1IE" instance="1" mask="0x0001" desc=""></field>
+        <field key="T1IE" instance="1" mask="0x0001" desc=""></field>
+      </sfr>
+    </InterruptControl>
+
+    <IOPort>
+      <sfr key="OWNPORT" addr="0x000" por="0000000000000000" mclr="0000000000000000">
+        <field key="OWN_PORTA" instance="1" mask="0x8000" desc="fake register"></field>
+        <field key="OWN_PORTB" instance="1" mask="0x4000" desc="fake register"></field>
+        <field key="OWN_PORTC" instance="1" mask="0x2000" desc="fake register"></field>
+        <field key="OWN_PORTD" instance="1" mask="0x1000" desc="fake register"></field>
+        <field key="OWN_PORTE" instance="1" mask="0x0800" desc="fake register"></field>
+        <field key="OWN_PORTF" instance="1" mask="0x0400" desc="fake register"></field>
+        <field key="OWN_PORTG" instance="1" mask="0x0200" desc="fake register"></field>
+        <field key="OWN_PORTH" instance="1" mask="0x0100" desc="fake register"></field>
+        <field key="OWN_PORTJ" instance="1" mask="0x0080" desc="fake register"></field>
+        <field key="OWN_PORTK" instance="1" mask="0x0040" desc="fake register"></field>
+      </sfr>
+      <sfr key="TRISA" addr="0xF92" por="1111111111111111" mclr="1111111111111111">
+        <field key="TRISA7" instance="1" mask="0x0080" desc=""></field>
+        <field key="TRISA6" instance="1" mask="0x0040" desc=""></field>
+        <field key="TRISA5" instance="1" mask="0x0020" desc=""></field>
+        <field key="TRISA4" instance="1" mask="0x0010" desc=""></field>
+        <field key="TRISA3" instance="1" mask="0x0008" desc=""></field>
+        <field key="TRISA2" instance="1" mask="0x0004" desc=""></field>
+        <field key="TRISA1" instance="1" mask="0x0002" desc=""></field>
+        <field key="TRISA0" instance="1" mask="0x0001" desc=""></field>
+      </sfr>
+      <sfr key="PORTA" addr="0xF80" por="0000000000000000" mclr="uuuuuuuuuuuuuuuu">
+        <field key="PORTA7" instance="1" mask="0x0080" desc=""></field>
+        <field key="PORTA6" instance="1" mask="0x0040" desc=""></field>
+        <field key="PORTA5" instance="1" mask="0x0020" desc=""></field>
+        <field key="PORTA4" instance="1" mask="0x0010" desc=""></field>
+        <field key="PORTA3" instance="1" mask="0x0008" desc=""></field>
+        <field key="PORTA2" instance="1" mask="0x0004" desc=""></field>
+        <field key="PORTA1" instance="1" mask="0x0002" desc=""></field>
+        <field key="PORTA0" instance="1" mask="0x0001" desc=""></field>
+      </sfr>
+      <sfr key="LATA" addr="0xF89" por="xxxxxxxxxxxxxxxx" mclr="uuuuuuuuuuuuuuuu">
+        <field key="LATA7" instance="1" mask="0x0080" desc=""></field>
+        <field key="LATA6" instance="1" mask="0x0040" desc=""></field>
+        <field key="LATA5" instance="1" mask="0x0020" desc=""></field>
+        <field key="LATA4" instance="1" mask="0x0010" desc=""></field>
+        <field key="LATA3" instance="1" mask="0x0008" desc=""></field>
+        <field key="LATA2" instance="1" mask="0x0004" desc=""></field>
+        <field key="LATA1" instance="1" mask="0x0002" desc=""></field>
+        <field key="LATA0" instance="1" mask="0x0001" desc=""></field>
+      </sfr>
+      <sfr key="TRISB" addr="0xF93" por="1111111111111111" mclr="1111111111111111">
+        <field key="TRISB7" instance="1" mask="0x0080" desc=""></field>
+        <field key="TRISB6" instance="1" mask="0x0040" desc=""></field>
+        <field key="TRISB5" instance="1" mask="0x0020" desc=""></field>
+        <field key="TRISB4" instance="1" mask="0x0010" desc=""></field>
+        <field key="TRISB3" instance="1" mask="0x0008" desc=""></field>
+        <field key="TRISB2" instance="1" mask="0x0004" desc=""></field>
+        <field key="TRISB1" instance="1" mask="0x0002" desc=""></field>
+        <field key="TRISB0" instance="1" mask="0x0001" desc=""></field>
+      </sfr>
+      <sfr key="PORTB" addr="0xF81" por="0000000000000000" mclr="uuuuuuuuuuuuuuuu">
+        <field key="PORTB7" instance="1" mask="0x0080" desc=""></field>
+        <field key="PORTB6" instance="1" mask="0x0040" desc=""></field>
+        <field key="PORTB5" instance="1" mask="0x0020" desc=""></field>
+        <field key="PORTB4" instance="1" mask="0x0010" desc=""></field>
+        <field key="PORTB3" instance="1" mask="0x0008" desc=""></field>
+        <field key="PORTB2" instance="1" mask="0x0004" desc=""></field>
+        <field key="PORTB1" instance="1" mask="0x0002" desc=""></field>
+        <field key="PORTB0" instance="1" mask="0x0001" desc=""></field>
+      </sfr>
+      <sfr key="LATB" addr="0xF8A" por="xxxxxxxxxxxxxxxx" mclr="uuuuuuuuuuuuuuuu">
+        <field key="LATB7" instance="1" mask="0x0080" desc=""></field>
+        <field key="LATB6" instance="1" mask="0x0040" desc=""></field>
+        <field key="LATB5" instance="1" mask="0x0020" desc=""></field>
+        <field key="LATB4" instance="1" mask="0x0010" desc=""></field>
+        <field key="LATB3" instance="1" mask="0x0008" desc=""></field>
+        <field key="LATB2" instance="1" mask="0x0004" desc=""></field>
+        <field key="LATB1" instance="1" mask="0x0002" desc=""></field>
+        <field key="LATB0" instance="1" mask="0x0001" desc=""></field>
+      </sfr>
+      <sfr key="TRISC" addr="0xF94" por="1111111111111111" mclr="1111111111111111">
+        <field key="TRISC7" instance="1" mask="0x0080" desc=""></field>
+        <field key="TRISC6" instance="1" mask="0x0040" desc=""></field>
+        <field key="TRISC5" instance="1" mask="0x0020" desc=""></field>
+        <field key="TRISC4" instance="1" mask="0x0010" desc=""></field>
+        <field key="TRISC3" instance="1" mask="0x0008" desc=""></field>
+        <field key="TRISC2" instance="1" mask="0x0004" desc=""></field>
+        <field key="TRISC1" instance="1" mask="0x0002" desc=""></field>
+        <field key="TRISC0" instance="1" mask="0x0001" desc=""></field>
+      </sfr>
+      <sfr key="PORTC" addr="0xF82" por="0000000000000000" mclr="uuuuuuuuuuuuuuuu">
+        <field key="PORTC7" instance="1" mask="0x0080" desc=""></field>
+        <field key="PORTC6" instance="1" mask="0x0040" desc=""></field>
+        <field key="PORTC5" instance="1" mask="0x0020" desc=""></field>
+        <field key="PORTC4" instance="1" mask="0x0010" desc=""></field>
+        <field key="PORTC3" instance="1" mask="0x0008" desc=""></field>
+        <field key="PORTC2" instance="1" mask="0x0004" desc=""></field>
+        <field key="PORTC1" instance="1" mask="0x0002" desc=""></field>
+        <field key="PORTC0" instance="1" mask="0x0001" desc=""></field>
+      </sfr>
+      <sfr key="LATC" addr="0xF8B" por="xxxxxxxxxxxxxxxx" mclr="uuuuuuuuuuuuuuuu">
+        <field key="LATC7" instance="1" mask="0x0080" desc=""></field>
+        <field key="LATC6" instance="1" mask="0x0040" desc=""></field>
+        <field key="LATC5" instance="1" mask="0x0020" desc=""></field>
+        <field key="LATC4" instance="1" mask="0x0010" desc=""></field>
+        <field key="LATC3" instance="1" mask="0x0008" desc=""></field>
+        <field key="LATC2" instance="1" mask="0x0004" desc=""></field>
+        <field key="LATC1" instance="1" mask="0x0002" desc=""></field>
+        <field key="LATC0" instance="1" mask="0x0001" desc=""></field>
+      </sfr>
+      <sfr key="TRISD" addr="0xF95" por="1111111111111111" mclr="1111111111111111">
+        <field key="TRISD7" instance="1" mask="0x0080" desc=""></field>
+        <field key="TRISD6" instance="1" mask="0x0040" desc=""></field>
+        <field key="TRISD5" instance="1" mask="0x0020" desc=""></field>
+        <field key="TRISD4" instance="1" mask="0x0010" desc=""></field>
+        <field key="TRISD3" instance="1" mask="0x0008" desc=""></field>
+        <field key="TRISD2" instance="1" mask="0x0004" desc=""></field>
+        <field key="TRISD1" instance="1" mask="0x0002" desc=""></field>
+        <field key="TRISD0" instance="1" mask="0x0001" desc=""></field>
+      </sfr>
+      <sfr key="PORTD" addr="0xF83" por="0000000000000000" mclr="uuuuuuuuuuuuuuuu">
+        <field key="PORTD7" instance="1" mask="0x0080" desc=""></field>
+        <field key="PORTD6" instance="1" mask="0x0040" desc=""></field>
+        <field key="PORTD5" instance="1" mask="0x0020" desc=""></field>
+        <field key="PORTD4" instance="1" mask="0x0010" desc=""></field>
+        <field key="PORTD3" instance="1" mask="0x0008" desc=""></field>
+        <field key="PORTD2" instance="1" mask="0x0004" desc=""></field>
+        <field key="PORTD1" instance="1" mask="0x0002" desc=""></field>
+        <field key="PORTD0" instance="1" mask="0x0001" desc=""></field>
+      </sfr>
+      <sfr key="LATD" addr="0xF8C" por="xxxxxxxxxxxxxxxx" mclr="uuuuuuuuuuuuuuuu">
+        <field key="LATD7" instance="1" mask="0x0080" desc=""></field>
+        <field key="LATD6" instance="1" mask="0x0040" desc=""></field>
+        <field key="LATD5" instance="1" mask="0x0020" desc=""></field>
+        <field key="LATD4" instance="1" mask="0x0010" desc=""></field>
+        <field key="LATD3" instance="1" mask="0x0008" desc=""></field>
+        <field key="LATD2" instance="1" mask="0x0004" desc=""></field>
+        <field key="LATD1" instance="1" mask="0x0002" desc=""></field>
+        <field key="LATD0" instance="1" mask="0x0001" desc=""></field>
+      </sfr>
+      <sfr key="TRISE" addr="0xF96" por="1111111111111111" mclr="1111111111111111">
+        <field key="TRISE7" instance="1" mask="0x0080" desc=""></field>
+        <field key="TRISE6" instance="1" mask="0x0040" desc=""></field>
+        <field key="TRISE5" instance="1" mask="0x0020" desc=""></field>
+        <field key="TRISE4" instance="1" mask="0x0010" desc=""></field>
+        <field key="TRISE3" instance="1" mask="0x0008" desc=""></field>
+        <field key="TRISE2" instance="1" mask="0x0004" desc=""></field>
+        <field key="TRISE1" instance="1" mask="0x0002" desc=""></field>
+        <field key="TRISE0" instance="1" mask="0x0001" desc=""></field>
+      </sfr>
+      <sfr key="PORTE" addr="0xF84" por="0000000000000000" mclr="uuuuuuuuuuuuuuuu">
+        <field key="PORTE7" instance="1" mask="0x0080" desc=""></field>
+        <field key="PORTE6" instance="1" mask="0x0040" desc=""></field>
+        <field key="PORTE5" instance="1" mask="0x0020" desc=""></field>
+        <field key="PORTE4" instance="1" mask="0x0010" desc=""></field>
+        <field key="PORTE3" instance="1" mask="0x0008" desc=""></field>
+        <field key="PORTE2" instance="1" mask="0x0004" desc=""></field>
+        <field key="PORTE1" instance="1" mask="0x0002" desc=""></field>
+        <field key="PORTE0" instance="1" mask="0x0001" desc=""></field>
+      </sfr>
+      <sfr key="LATE" addr="0xF8D" por="xxxxxxxxxxxxxxxx" mclr="uuuuuuuuuuuuuuuu">
+        <field key="LATE7" instance="1" mask="0x0080" desc=""></field>
+        <field key="LATE6" instance="1" mask="0x0040" desc=""></field>
+        <field key="LATE5" instance="1" mask="0x0020" desc=""></field>
+        <field key="LATE4" instance="1" mask="0x0010" desc=""></field>
+        <field key="LATE3" instance="1" mask="0x0008" desc=""></field>
+        <field key="LATE2" instance="1" mask="0x0004" desc=""></field>
+        <field key="LATE1" instance="1" mask="0x0002" desc=""></field>
+        <field key="LATE0" instance="1" mask="0x0001" desc=""></field>
+      </sfr>
+      <sfr key="TRISF" addr="0xF97" por="1111111111111111" mclr="1111111111111111">
+        <field key="TRISF7" instance="1" mask="0x0080" desc=""></field>
+        <field key="TRISF6" instance="1" mask="0x0040" desc=""></field>
+        <field key="TRISF5" instance="1" mask="0x0020" desc=""></field>
+        <field key="TRISF4" instance="1" mask="0x0010" desc=""></field>
+        <field key="TRISF3" instance="1" mask="0x0008" desc=""></field>
+        <field key="TRISF2" instance="1" mask="0x0004" desc=""></field>
+        <field key="TRISF1" instance="1" mask="0x0002" desc=""></field>
+        <field key="TRISF0" instance="1" mask="0x0001" desc=""></field>
+      </sfr>
+      <sfr key="PORTF" addr="0xF85" por="0000000000000000" mclr="uuuuuuuuuuuuuuuu">
+        <field key="PORTF7" instance="1" mask="0x0080" desc=""></field>
+        <field key="PORTF6" instance="1" mask="0x0040" desc=""></field>
+        <field key="PORTF5" instance="1" mask="0x0020" desc=""></field>
+        <field key="PORTF4" instance="1" mask="0x0010" desc=""></field>
+        <field key="PORTF3" instance="1" mask="0x0008" desc=""></field>
+        <field key="PORTF2" instance="1" mask="0x0004" desc=""></field>
+        <field key="PORTF1" instance="1" mask="0x0002" desc=""></field>
+        <field key="PORTF0" instance="1" mask="0x0001" desc=""></field>
+      </sfr>
+      <sfr key="LATF" addr="0xF8E" por="xxxxxxxxxxxxxxxx" mclr="uuuuuuuuuuuuuuuu">
+        <field key="LATF7" instance="1" mask="0x0080" desc=""></field>
+        <field key="LATF6" instance="1" mask="0x0040" desc=""></field>
+        <field key="LATF5" instance="1" mask="0x0020" desc=""></field>
+        <field key="LATF4" instance="1" mask="0x0010" desc=""></field>
+        <field key="LATF3" instance="1" mask="0x0008" desc=""></field>
+        <field key="LATF2" instance="1" mask="0x0004" desc=""></field>
+        <field key="LATF1" instance="1" mask="0x0002" desc=""></field>
+        <field key="LATF0" instance="1" mask="0x0001" desc=""></field>
+      </sfr>
+      <sfr key="TRISG" addr="0xF98" por="1111111111111111" mclr="1111111111111111">
+        <field key="TRISG7" instance="1" mask="0x0080" desc=""></field>
+        <field key="TRISG6" instance="1" mask="0x0040" desc=""></field>
+        <field key="TRISG5" instance="1" mask="0x0020" desc=""></field>
+        <field key="TRISG4" instance="1" mask="0x0010" desc=""></field>
+        <field key="TRISG3" instance="1" mask="0x0008" desc=""></field>
+        <field key="TRISG2" instance="1" mask="0x0004" desc=""></field>
+        <field key="TRISG1" instance="1" mask="0x0002" desc=""></field>
+        <field key="TRISG0" instance="1" mask="0x0001" desc=""></field>
+      </sfr>
+      <sfr key="PORTG" addr="0xF86" por="0000000000000000" mclr="uuuuuuuuuuuuuuuu">
+        <field key="PORTG7" instance="1" mask="0x0080" desc=""></field>
+        <field key="PORTG6" instance="1" mask="0x0040" desc=""></field>
+        <field key="PORTG5" instance="1" mask="0x0020" desc=""></field>
+        <field key="PORTG4" instance="1" mask="0x0010" desc=""></field>
+        <field key="PORTG3" instance="1" mask="0x0008" desc=""></field>
+        <field key="PORTG2" instance="1" mask="0x0004" desc=""></field>
+        <field key="PORTG1" instance="1" mask="0x0002" desc=""></field>
+        <field key="PORTG0" instance="1" mask="0x0001" desc=""></field>
+      </sfr>
+      <sfr key="LATG" addr="0xF8F" por="xxxxxxxxxxxxxxxx" mclr="uuuuuuuuuuuuuuuu">
+        <field key="LATG7" instance="1" mask="0x0080" desc=""></field>
+        <field key="LATG6" instance="1" mask="0x0040" desc=""></field>
+        <field key="LATG5" instance="1" mask="0x0020" desc=""></field>
+        <field key="LATG4" instance="1" mask="0x0010" desc=""></field>
+        <field key="LATG3" instance="1" mask="0x0008" desc=""></field>
+        <field key="LATG2" instance="1" mask="0x0004" desc=""></field>
+        <field key="LATG1" instance="1" mask="0x0002" desc=""></field>
+        <field key="LATG0" instance="1" mask="0x0001" desc=""></field>
+      </sfr>
+      <sfr key="TRISH" addr="0xF99" por="1111111111111111" mclr="1111111111111111">
+        <field key="TRISH7" instance="1" mask="0x0080" desc=""></field>
+        <field key="TRISH6" instance="1" mask="0x0040" desc=""></field>
+        <field key="TRISH5" instance="1" mask="0x0020" desc=""></field>
+        <field key="TRISH4" instance="1" mask="0x0010" desc=""></field>
+        <field key="TRISH3" instance="1" mask="0x0008" desc=""></field>
+        <field key="TRISH2" instance="1" mask="0x0004" desc=""></field>
+        <field key="TRISH1" instance="1" mask="0x0002" desc=""></field>
+        <field key="TRISH0" instance="1" mask="0x0001" desc=""></field>
+      </sfr>
+      <sfr key="PORTH" addr="0xF87" por="0000000000000000" mclr="uuuuuuuuuuuuuuuu">
+        <field key="PORTH7" instance="1" mask="0x0080" desc=""></field>
+        <field key="PORTH6" instance="1" mask="0x0040" desc=""></field>
+        <field key="PORTH5" instance="1" mask="0x0020" desc=""></field>
+        <field key="PORTH4" instance="1" mask="0x0010" desc=""></field>
+        <field key="PORTH3" instance="1" mask="0x0008" desc=""></field>
+        <field key="PORTH2" instance="1" mask="0x0004" desc=""></field>
+        <field key="PORTH1" instance="1" mask="0x0002" desc=""></field>
+        <field key="PORTH0" instance="1" mask="0x0001" desc=""></field>
+      </sfr>
+      <sfr key="LATH" addr="0xF90" por="xxxxxxxxxxxxxxxx" mclr="uuuuuuuuuuuuuuuu">
+        <field key="LATH7" instance="1" mask="0x0080" desc=""></field>
+        <field key="LATH6" instance="1" mask="0x0040" desc=""></field>
+        <field key="LATH5" instance="1" mask="0x0020" desc=""></field>
+        <field key="LATH4" instance="1" mask="0x0010" desc=""></field>
+        <field key="LATH3" instance="1" mask="0x0008" desc=""></field>
+        <field key="LATH2" instance="1" mask="0x0004" desc=""></field>
+        <field key="LATH1" instance="1" mask="0x0002" desc=""></field>
+        <field key="LATH0" instance="1" mask="0x0001" desc=""></field>
+      </sfr>
+      <sfr key="TRISJ" addr="0xF9A" por="1111111111111111" mclr="1111111111111111">
+        <field key="TRISJ7" instance="1" mask="0x0080" desc=""></field>
+        <field key="TRISJ6" instance="1" mask="0x0040" desc=""></field>
+        <field key="TRISJ5" instance="1" mask="0x0020" desc=""></field>
+        <field key="TRISJ4" instance="1" mask="0x0010" desc=""></field>
+        <field key="TRISJ3" instance="1" mask="0x0008" desc=""></field>
+        <field key="TRISJ2" instance="1" mask="0x0004" desc=""></field>
+        <field key="TRISJ1" instance="1" mask="0x0002" desc=""></field>
+        <field key="TRISJ0" instance="1" mask="0x0001" desc=""></field>
+      </sfr>
+      <sfr key="PORTJ" addr="0xF88" por="0000000000000000" mclr="uuuuuuuuuuuuuuuu">
+        <field key="PORTJ7" instance="1" mask="0x0080" desc=""></field>
+        <field key="PORTJ6" instance="1" mask="0x0040" desc=""></field>
+        <field key="PORTJ5" instance="1" mask="0x0020" desc=""></field>
+        <field key="PORTJ4" instance="1" mask="0x0010" desc=""></field>
+        <field key="PORTJ3" instance="1" mask="0x0008" desc=""></field>
+        <field key="PORTJ2" instance="1" mask="0x0004" desc=""></field>
+        <field key="PORTJ1" instance="1" mask="0x0002" desc=""></field>
+        <field key="PORTJ0" instance="1" mask="0x0001" desc=""></field>
+      </sfr>
+      <sfr key="LATJ" addr="0xF91" por="xxxxxxxxxxxxxxxx" mclr="uuuuuuuuuuuuuuuu">
+        <field key="LATJ7" instance="1" mask="0x0080" desc=""></field>
+        <field key="LATJ6" instance="1" mask="0x0040" desc=""></field>
+        <field key="LATJ5" instance="1" mask="0x0020" desc=""></field>
+        <field key="LATJ4" instance="1" mask="0x0010" desc=""></field>
+        <field key="LATJ3" instance="1" mask="0x0008" desc=""></field>
+        <field key="LATJ2" instance="1" mask="0x0004" desc=""></field>
+        <field key="LATJ1" instance="1" mask="0x0002" desc=""></field>
+        <field key="LATJ0" instance="1" mask="0x0001" desc=""></field>
+      </sfr>
+      <sfr key="TRISK" addr="0x000" por="1111111111111111" mclr="1111111111111111">
+        <field key="TRISK7" instance="1" mask="0x0080" desc=""></field>
+        <field key="TRISK6" instance="1" mask="0x0040" desc=""></field>
+        <field key="TRISK5" instance="1" mask="0x0020" desc=""></field>
+        <field key="TRISK4" instance="1" mask="0x0010" desc=""></field>
+        <field key="TRISK3" instance="1" mask="0x0008" desc=""></field>
+        <field key="TRISK2" instance="1" mask="0x0004" desc=""></field>
+        <field key="TRISK1" instance="1" mask="0x0002" desc=""></field>
+        <field key="TRISK0" instance="1" mask="0x0001" desc=""></field>
+      </sfr>
+      <sfr key="PORTK" addr="0x000" por="0000000000000000" mclr="uuuuuuuuuuuuuuuu">
+        <field key="PORTK7" instance="1" mask="0x0080" desc=""></field>
+        <field key="PORTK6" instance="1" mask="0x0040" desc=""></field>
+        <field key="PORTK5" instance="1" mask="0x0020" desc=""></field>
+        <field key="PORTK4" instance="1" mask="0x0010" desc=""></field>
+        <field key="PORTK3" instance="1" mask="0x0008" desc=""></field>
+        <field key="PORTK2" instance="1" mask="0x0004" desc=""></field>
+        <field key="PORTK1" instance="1" mask="0x0002" desc=""></field>
+        <field key="PORTK0" instance="1" mask="0x0001" desc=""></field>
+      </sfr>
+      <sfr key="LATK" addr="0x000" por="xxxxxxxxxxxxxxxx" mclr="uuuuuuuuuuuuuuuu">
+        <field key="LATK7" instance="1" mask="0x0080" desc=""></field>
+        <field key="LATK6" instance="1" mask="0x0040" desc=""></field>
+        <field key="LATK5" instance="1" mask="0x0020" desc=""></field>
+        <field key="LATK4" instance="1" mask="0x0010" desc=""></field>
+        <field key="LATK3" instance="1" mask="0x0008" desc=""></field>
+        <field key="LATK2" instance="1" mask="0x0004" desc=""></field>
+        <field key="LATK1" instance="1" mask="0x0002" desc=""></field>
+        <field key="LATK0" instance="1" mask="0x0001" desc=""></field>
+      </sfr>
+    </IOPort>
+
+    <Timers>
+      <sfr key="OWNTMR0" addr="0x000" por="0000000000000000" mclr="0000000000000000">
+        <field key="OWN_TMR" instance="0" mask="0x000F" desc="fake register"></field>
+      </sfr>
+      <sfr key="OWNTMR1" addr="0x000" por="0000000000000000" mclr="0000000000000000">
+        <field key="OWN_TMR" instance="1" mask="0x000F" desc="fake register"></field>
+      </sfr>
+      <sfr key="OWNTMR2" addr="0x000" por="0000000000000000" mclr="0000000000000000">
+        <field key="OWN_TMR" instance="2" mask="0x000F" desc="fake register"></field>
+      </sfr>
+      <sfr key="OWNTMR3" addr="0x000" por="0000000000000000" mclr="0000000000000000">
+        <field key="OWN_TMR" instance="3" mask="0x000F" desc="fake register"></field>
+      </sfr>
+      <sfr key="OWNTMR4" addr="0x000" por="0000000000000000" mclr="0000000000000000">
+        <field key="OWN_TMR" instance="4" mask="0x000F" desc="fake register"></field>
+      </sfr>
+      <sfr key="NEEDTMR" addr="0x000" por="0000000000000000" mclr="0000000000000000">
+        <field key="NEED_TMR" instance="0" mask="0x0040" desc="fake register"></field>
+        <field key="NEED_TMR" instance="1" mask="0xF000" desc="fake register"></field>
+        <field key="NEED_TMR" instance="2" mask="0x0800" desc="fake register"></field>
+        <field key="NEED_TMR" instance="3" mask="0x0400" desc="fake register"></field>
+        <field key="NEED_TMR" instance="4" mask="0x0080" desc="fake register"></field>
+      </sfr>
+      <sfr key="TMR0" addr="0xFD7" por="xxxxxxxxxxxxxxxx" mclr="uuuuuuuuuuuuuuuu">
+        <field key="TMR" instance="0" mask="0xFFFF" desc=""></field>
+        <field key="TMR0H" instance="1" mask="0xFF00" desc=""></field>
+        <field key="TMR0L" instance="1" mask="0x00FF" desc=""></field>
+        <field key="PR" instance="0" mask="0xFFFF" desc="alias"></field>
+        <field key="PR0H" instance="1" mask="0xFF00" desc=""></field>
+        <field key="PR0L" instance="1" mask="0x00FF" desc=""></field>
+      </sfr>
+      <sfr key="PR0" addr="0x000" por="1111111111111111" mclr="1111111111111111">
+</sfr>
+      <sfr key="T0CON" addr="0xFD5" por="1111111111111111" mclr="00000000uuuuuuuu">
+        <field key="TMR0ON" instance="1" mask="0x0080" desc=""></field>
+        <field key="T08BIT" instance="1" mask="0x0040" desc=""></field>
+        <field key="T0CS" instance="1" mask="0x0020" desc=""></field>
+        <field key="T0SE" instance="1" mask="0x0010" desc=""></field>
+        <field key="PSA" instance="0" mask="0x0008" desc=""></field>
+        <field key="T0PS" instance="1" mask="0x0007" desc=""></field>
+      </sfr>
+      <sfr key="TMR1" addr="0xFCE" por="xxxxxxxxxxxxxxxx" mclr="uuuuuuuuuuuuuuuu">
+        <field key="TMR" instance="1" mask="0xFFFF" desc=""></field>
+        <field key="TMR1H" instance="1" mask="0xFF00" desc=""></field>
+        <field key="TMR1L" instance="1" mask="0x00FF" desc=""></field>
+        <field key="PR" instance="1" mask="0xFFFF" desc="alias"></field>
+        <field key="PR1H" instance="1" mask="0xFF00" desc=""></field>
+        <field key="PR1L" instance="1" mask="0x00FF" desc=""></field>
+      </sfr>
+      <sfr key="PR1" addr="0x000" por="1111111111111111" mclr="1111111111111111">
+</sfr>
+      <sfr key="T1CON" addr="0xFCD" por="0000000000000000" mclr="00000000uuuuuuuu">
+        <field key="RD16" instance="1" mask="0x0080" desc=""></field>
+        <field key="T1RUN" instance="1" mask="0x0040" desc=""></field>
+        <field key="T1CKPS" instance="1" mask="0x0030" desc=""></field>
+        <field key="T1OSCEN" instance="1" mask="0x0008" desc=""></field>
+        <field key="T3OSCEN" instance="1" mask="0x0008" desc="shadow register for timer 3"></field>
+        <field key="T1SYNC-L" instance="1" mask="0x0004" desc=""></field>
+        <field key="TMR1CS" instance="1" mask="0x0002" desc=""></field>
+        <field key="TMR1ON" instance="1" mask="0x0001" desc=""></field>
+      </sfr>
+      <sfr key="TMR2" addr="0xFCC" por="xxxxxxxxxxxxxxxx" mclr="uuuuuuuuuuuuuuuu">
+        <field key="TMR" instance="2" mask="0xFFFF" desc=""></field>
+        <field key="TMR2H" instance="1" mask="0xFF00" desc=""></field>
+        <field key="TMR2L" instance="1" mask="0x00FF" desc=""></field>
+      </sfr>
+      <sfr key="PR2" addr="0xFCB" por="1111111111111111" mclr="1111111111111111">
+        <field key="PR" instance="2" mask="0xFFFF" desc=""></field>
+        <field key="PR2H" instance="1" mask="0xFF00" desc=""></field>
+        <field key="PR2L" instance="1" mask="0x00FF" desc=""></field>
+      </sfr>
+      <sfr key="T2CON" addr="0xFCA" por="0000000000000000" mclr="00000000uuuuuuuu">
+        <field key="T2OUTPS" instance="1" mask="0x0078" desc=""></field>
+        <field key="TMR2ON" instance="1" mask="0x0004" desc=""></field>
+        <field key="T2CKPS" instance="1" mask="0x0003" desc=""></field>
+      </sfr>
+      <sfr key="TMR3" addr="0xFB3" por="xxxxxxxxxxxxxxxx" mclr="uuuuuuuuuuuuuuuu">
+        <field key="TMR" instance="3" mask="0xFFFF" desc=""></field>
+        <field key="TMR3H" instance="1" mask="0xFF00" desc=""></field>
+        <field key="TMR3L" instance="1" mask="0x00FF" desc=""></field>
+        <field key="PR" instance="3" mask="0xFFFF" desc="alias"></field>
+        <field key="PR3H" instance="1" mask="0xFF00" desc=""></field>
+        <field key="PR3L" instance="1" mask="0x00FF" desc=""></field>
+      </sfr>
+      <sfr key="PR3" addr="0x000" por="xxxxxxxxxxxxxxxx" mclr="1111111111111111">
+</sfr>
+      <sfr key="T3CON" addr="0xFB1" por="0000000000000000" mclr="00000000uuuuuuuu">
+        <field key="RD16" instance="3" mask="0x0080" desc=""></field>
+        <field key="T3CCP2" instance="1" mask="0x0040" desc=""></field>
+        <field key="T3CKPS" instance="1" mask="0x0030" desc=""></field>
+        <field key="T3CCP1" instance="1" mask="0x0008" desc=""></field>
+        <field key="T3SYNC-L" instance="1" mask="0x0004" desc=""></field>
+        <field key="TMR3CS" instance="1" mask="0x0002" desc=""></field>
+        <field key="TMR3ON" instance="1" mask="0x0001" desc=""></field>
+      </sfr>
+      <sfr key="TMR4" addr="0xF78" por="xxxxxxxxxxxxxxxx" mclr="uuuuuuuuuuuuuuuu">
+        <field key="TMR" instance="4" mask="0xFFFF" desc=""></field>
+        <field key="TMR4H" instance="1" mask="0xFF00" desc=""></field>
+        <field key="TMR4L" instance="1" mask="0x00FF" desc=""></field>
+      </sfr>
+      <sfr key="PR4" addr="0xF77" por="1111111111111111" mclr="1111111111111111">
+        <field key="PR" instance="4" mask="0xFFFF" desc=""></field>
+        <field key="PR4H" instance="1" mask="0xFF00" desc=""></field>
+        <field key="PR4L" instance="1" mask="0x00FF" desc=""></field>
+      </sfr>
+      <sfr key="T4CON" addr="0xF76" por="0000000000000000" mclr="00000000uuuuuuuu">
+        <field key="T4OUTPS" instance="1" mask="0x0078" desc=""></field>
+        <field key="TMR4ON" instance="1" mask="0x0004" desc=""></field>
+        <field key="T4CKPS" instance="1" mask="0x0003" desc=""></field>
+      </sfr>
+    </Timers>
+
+    <UART>
+      <sfr key="OWNUART" addr="0x000" por="0000000000000000" mclr="0000000000000000">
+        <field key="OWN_UART1" instance="1" mask="0x8000" desc="fake register"></field>
+        <field key="OWN_UART2" instance="1" mask="0x8000" desc="fake register"/>
+      </sfr>
+      <sfr key="RCSTA1" addr="0xfab" por="0000000000000000" mclr="0000000000000000">
+        <field key="SPEN" instance="1" mask="0x0080" desc=""></field>
+        <field key="RX9" instance="1" mask="0x0040" desc=""></field>
+        <field key="SREN" instance="1" mask="0x0020" desc=""></field>
+        <field key="CREN" instance="1" mask="0x0010" desc=""></field>
+        <field key="ADDEN" instance="1" mask="0x0008" desc=""></field>
+        <field key="FERR" instance="1" mask="0x0004" desc=""></field>
+        <field key="OERR" instance="1" mask="0x0002" desc=""></field>
+        <field key="RX9D" instance="1" mask="0x0001" desc=""></field>
+      </sfr>
+      <sfr key="TXSTA1" addr="0xfac" por="0000000000000010" mclr="0000000000000000">
+        <field key="CSRC" instance="1" mask="0x0080" desc=""></field>
+        <field key="TX9" instance="1" mask="0x0040" desc=""></field>
+        <field key="TXEN" instance="1" mask="0x0020" desc=""></field>
+        <field key="SYNC" instance="1" mask="0x0010" desc=""></field>
+        <field key="reserved" instance="1" mask="0x0008" desc=""></field>
+        <field key="BRGH" instance="1" mask="0x0004" desc=""></field>
+        <field key="TRMT" instance="1" mask="0x0002" desc=""></field>
+        <field key="TX9D" instance="1" mask="0x0001" desc=""></field>
+      </sfr>
+      <sfr key="TXREG1" addr="0xfad" por="0000000000000000" mclr="0000000000000000">
+        <field key="TXREG1" instance="1" mask="0x00FF" desc=""></field>
+        <field key="UTX8" instance="1" mask="0x00FF" desc="dsPIC alias"></field>
+      </sfr>
+      <sfr key="RCREG1" addr="0xfae" por="0000000000000000" mclr="0000000000000000">
+        <field key="RCREG1" instance="1" mask="0x00FF" desc=""></field>
+        <field key="URX8" instance="1" mask="0x00FF" desc="dsPIC alias"></field>
+      </sfr>
+      <sfr key="SPBRG1" addr="0xfaf" por="0000000000000000" mclr="0000000000000000">
+        <field key="SPBRG1" instance="1" mask="0x00FF" desc=""></field>
+        <field key="U1BRG" instance="1" mask="0x00FF" desc="dsPIC alias"></field>
+      </sfr>
+      <sfr key="RCSTA2" addr="0xf6b" por="0000000000000000" mclr="0000000000000000">
+        <field key="SPEN" instance="2" mask="0x0080" desc=""></field>
+        <field key="RX9" instance="2" mask="0x0040" desc=""></field>
+        <field key="SREN" instance="2" mask="0x0020" desc=""></field>
+        <field key="CREN" instance="2" mask="0x0010" desc=""></field>
+        <field key="ADDEN" instance="2" mask="0x0008" desc=""></field>
+        <field key="FERR" instance="2" mask="0x0004" desc=""></field>
+        <field key="OERR" instance="2" mask="0x0002" desc=""></field>
+        <field key="RX9D" instance="2" mask="0x0001" desc=""></field>
+        <field key="UARTEN" instance="2" mask="0x0080" desc="dsPIC alias"></field>
+      </sfr>
+      <sfr key="TXSTA2" addr="0xf6c" por="0000000000000010" mclr="0000000100010000">
+        <field key="CSRC" instance="2" mask="0x0080" desc=""></field>
+        <field key="TX9" instance="2" mask="0x0040" desc=""></field>
+        <field key="TXEN" instance="2" mask="0x0020" desc=""></field>
+        <field key="SYNC" instance="2" mask="0x0010" desc=""></field>
+        <field key="reserved" instance="2" mask="0x0008" desc=""></field>
+        <field key="BRGH" instance="2" mask="0x0004" desc=""></field>
+        <field key="TRMT" instance="2" mask="0x0002" desc=""></field>
+        <field key="TX9D" instance="2" mask="0x0001" desc=""></field>
+      </sfr>
+      <sfr key="TXREG2" addr="0xf6d" por="0000000000000000" mclr="0000000000000000">
+        <field key="TXREG2" instance="1" mask="0x00FF" desc=""></field>
+        <field key="UTX8" instance="2" mask="0x00FF" desc="dsPIC alias"></field>
+      </sfr>
+      <sfr key="RCREG2" addr="0xf6e" por="0000000000000000" mclr="0000000000000000">
+        <field key="RCREG2" instance="1" mask="0x00FF" desc=""></field>
+        <field key="URX8" instance="2" mask="0x00FF" desc="dsPIC alias"></field>
+      </sfr>
+      <sfr key="SPBRG2" addr="0xf6f" por="0000000000000000" mclr="0000000000000000">
+        <field key="SPBRG2" instance="1" mask="0x00FF" desc=""></field>
+        <field key="U2BRG" instance="1" mask="0x00FF" desc="dsPIC alias"></field>
+      </sfr>
+      <sfr key="BAUDCON1" addr="0xf7e" por="0000000001000000" mclr="0000000000000000">
+        <field key="ABDOVF" instance="1" mask="0x0080" desc=""/>
+        <field key="RCIDL" instance="1" mask="0x0040" desc=""/>
+        <field key="reserved" instance="1" mask="0x0020" desc=""/>
+        <field key="SCKP" instance="1" mask="0x0010" desc=""/>
+        <field key="BRG16" instance="1" mask="0x0008" desc=""/>
+        <field key="reserved" instance="1" mask="0x0004" desc=""/>
+        <field key="WUE" instance="1" mask="0x0002" desc=""/>
+        <field key="WAKE" instance="1" mask="0x0002" desc="dsPIC alias"/>
+        <field key="ABDEN" instance="1" mask="0x0001" desc=""/>
+        <field key="ABAUD" instance="1" mask="0x0001" desc="dsPIC alias"/>
+      </sfr>
+      <sfr key="BAUDCON2" addr="0xf7c" por="0000000001000000" mclr="0000000000000000">
+        <field key="ABDOVF" instance="2" mask="0x0080" desc=""/>
+        <field key="RCIDL" instance="2" mask="0x0040" desc=""/>
+        <field key="reserved" instance="2" mask="0x0020" desc=""/>
+        <field key="SCKP" instance="2" mask="0x0010" desc=""/>
+        <field key="BRG16" instance="2" mask="0x0008" desc=""/>
+        <field key="reserved" instance="2" mask="0x0004" desc=""/>
+        <field key="WUE" instance="2" mask="0x0002" desc=""/>
+        <field key="WAKE" instance="2" mask="0x0002" desc="dsPIC alias"/>
+        <field key="ABDEN" instance="2" mask="0x0001" desc=""/>
+        <field key="ABAUD" instance="2" mask="0x0001" desc="dsPIC alias"/>
+      </sfr>
+    </UART>
+
+    <A2D>
+      <sfr key="OWNA2D" addr="0x000" por="0000000000000000" mclr="0000000000000000">
+        <field key="OWN_A2D1" instance="1" mask="0x8000" desc="fake register"></field>
+        <field key="OWN_A2D2" instance="1" mask="0x4000" desc="fake register"></field>
+      </sfr>
+      <sfr key="ADRESH" addr="0xfc4" por="0000000000000000" mclr="0000000000000000">
+        <field key="ADRESL" instance="1" mask="0x00FF" desc=""></field>
+      </sfr>
+      <sfr key="ADRESL" addr="0xfc3" por="0000000000000000" mclr="0000000000000000">
+        <field key="ADRESL" instance="1" mask="0x00FF" desc=""></field>
+      </sfr>
+      <sfr key="ADCON0" addr="0xfc2" por="0000000000000000" mclr="0000000000000000">
+        <field key="reserved" instance="1" mask="0x00C0" desc=""></field>
+        <field key="CHS" instance="1" mask="0x003C" desc=""></field>
+        <field key="CHS3" instance="1" mask="0x0020" desc=""></field>
+        <field key="CHS2" instance="1" mask="0x0010" desc=""></field>
+        <field key="CHS1" instance="1" mask="0x0008" desc=""></field>
+        <field key="CHS0" instance="1" mask="0x0004" desc=""></field>
+        <field key="CH0SA" instance="1" mask="0x003C" desc="dsPIC alias"></field>
+        <field key="GO" instance="1" mask="0x0002" desc=""></field>
+        <field key="ADON" instance="1" mask="0x0001" desc=""></field>
+      </sfr>
+      <sfr key="ADCON1" addr="0xfc1" por="0000000000000000" mclr="0000000000000000">
+        <field key="reserved" instance="1" mask="0x00C0" desc=""></field>
+        <field key="VCFG" instance="1" mask="0x0030" desc=""></field>
+        <field key="VCFG1" instance="1" mask="0x0020" desc=""></field>
+        <field key="VCFG0" instance="1" mask="0x0010" desc=""></field>
+        <field key="PCFG" instance="1" mask="0x000F" desc=""></field>
+        <field key="PCFG15" instance="1" mask="0x8000" desc=""></field>
+        <field key="PCFG14" instance="1" mask="0x4000" desc=""></field>
+        <field key="PCFG13" instance="1" mask="0x2000" desc=""></field>
+        <field key="PCFG12" instance="1" mask="0x1000" desc=""></field>
+        <field key="PCFG11" instance="1" mask="0x0800" desc=""></field>
+        <field key="PCFG10" instance="1" mask="0x0400" desc=""></field>
+        <field key="PCFG9" instance="1" mask="0x0200" desc=""></field>
+        <field key="PCFG8" instance="1" mask="0x0100" desc=""></field>
+        <field key="PCFG7" instance="1" mask="0x0080" desc=""></field>
+        <field key="PCFG6" instance="1" mask="0x0040" desc=""></field>
+        <field key="PCFG5" instance="1" mask="0x0020" desc=""></field>
+        <field key="PCFG4" instance="1" mask="0x0010" desc=""></field>
+        <field key="PCFG3" instance="1" mask="0x0008" desc=""></field>
+        <field key="PCFG2" instance="1" mask="0x0004" desc=""></field>
+        <field key="PCFG1" instance="1" mask="0x0002" desc=""></field>
+        <field key="PCFG0" instance="1" mask="0x0001" desc=""></field>
+      </sfr>
+      <sfr key="ADCON2" addr="0xfc0" por="0000000000000000" mclr="0000000000000000">
+        <field key="ADFM" instance="1" mask="0x0080" desc=""/>
+        <field key="FORM" instance="1" mask="0x00C0" desc="dsPIC aliases"/>
+        <field key="FORM1" instance="1" mask="0x0080" desc=""/>
+        <field key="FORMO" instance="1" mask="0x0040" desc=""/>
+        <field key="ACQT2" instance="1" mask="0x0020" desc=""/>
+        <field key="ACQT1" instance="1" mask="0x0010" desc=""/>
+        <field key="ACQT0" instance="1" mask="0x0008" desc=""/>
+        <field key="ADCS" instance="1" mask="0x0007" desc=""/>
+        <field key="ADCS2" instance="1" mask="0x0004" desc=""/>
+        <field key="ADCS1" instance="1" mask="0x0002" desc=""/>
+        <field key="ADCS0" instance="1" mask="0x0001" desc=""/>
+      </sfr>
+      <sfr key="A2DFAKE" addr="0x0000" por="0000000000000000" mclr="0000000000000000">
+        <field key="SAMC" instance="1" mask="0x0004" desc="needed for constraint hardcode dsPIC"></field>
+      </sfr>
+    </A2D>
+
+    <reset>
+      <sfr key="RCON" addr="0xfd0" por="0000000000000000" mclr="uuuuuuuu1uuuuuuu">
+        <field key="IPEN" instance="1" mask="0x0080" desc=""></field>
+        <field key="reserved" instance="1" mask="0x0060" desc=""></field>
+        <field key="RI-L" instance="1" mask="0x0010" desc=""></field>
+        <field key="TO-L" instance="1" mask="0x0008" desc=""></field>
+        <field key="PD-L" instance="1" mask="0x0004" desc=""></field>
+        <field key="POR-L" instance="1" mask="0x0002" desc=""></field>
+        <field key="BOR-L" instance="1" mask="0x0001" desc=""></field>
+      </sfr>
+      <sfr key="WDTCON" addr="0xfd1" por="0000000000000000" mclr="uuuuuuuu1uuuuuuu">
+        <field key="reserved" instance="1" mask="0x00FF" desc=""></field>
+        <field key="SWDTE" instance="1" mask="0x0001" desc=""></field>
+        <field key="SWDTEN" instance="1" mask="0x0001" desc="alias"></field>
+      </sfr>
+    </reset>
+
+    <oscillator>
+      <sfr key="OSCCON" addr="0xfd3" por="0000000000000000" mclr="00yy00yy00000000">
+        <field key="IDLEN" instance="1" mask="0x0070" desc=""/>
+		<field key="reserved" instance="1" mask="0x00" desc=""/>
+        <!-- Is this necessary? -->
+        <field key="OSTS" instance="1" mask="0x0008" desc="alias"/>
+        <field key="SCS" instance="1" mask="0x0003" desc=""/>
+      </sfr>
+     <sfr key="OSCTUNE" addr="0xf9b" por="000000000000u000" mclr="00yy00yy00000000">
+        <field key="reserved" instance="1" mask="0x0080" desc=""/>
+        <field key="PLLEN" instance="1" mask="0x0040" desc=""/>
+        <field key="reserved" instance="1" mask="0x003F" desc=""/>
+      </sfr> 
+    </oscillator>
+
+    <EMI>
+      <sfr key="MEMCON" addr="0xf9c" por="0000000000000000" mclr="00yy00yy00000000">
+        <field key="EBDIS" instance="1" mask="0x0080" desc=""></field>
+        <field key="reserved" instance="1" mask="0x0040" desc=""></field>
+        <field key="WAIT1" instance="1" mask="0x0020" desc=""></field>
+        <field key="WAIT0" instance="1" mask="0x0010" desc=""></field>
+        <field key="reserved" instance="1" mask="0x0008" desc=""></field>
+        <field key="reserved" instance="1" mask="0x0004" desc=""></field>
+        <field key="WM1" instance="1" mask="0x0002" desc=""></field>
+        <field key="WM0" instance="1" mask="0x0001" desc=""></field>
+      </sfr>
+    </EMI>
+
+    <MSSP>
+      <sfr key="OWNMSSP" addr="0x000" por="0000000000000000" mclr="0000000000000000">
+        <field key="OWN_MSSP1" instance="1" mask="0x0001" desc="fake register"></field>
+		<field key="OWN_MSSP2" instance="1" mask="0x0001" desc="fake register"></field>
+	  </sfr>
+      <sfr key="SSP1CON2" addr="0xc5" por="0000000000000000" mclr="0000000000000000">
+        <field key="GCEN" instance="1" mask="0x0080" desc=""></field>
+        <field key="ACKSTAT" instance="1" mask="0x0040" desc=""></field>
+        <field key="ACKDT" instance="1" mask="0x0020" desc=""></field>
+        <field key="ACKEN" instance="1" mask="0x0010" desc=""></field>
+        <field key="RCEN" instance="1" mask="0x0008" desc=""></field>
+        <field key="PEN" instance="1" mask="0x0004" desc=""></field>
+        <field key="RSEN" instance="1" mask="0x0002" desc=""></field>
+        <field key="SEN" instance="1" mask="0x0001" desc=""></field>
+      </sfr>
+      <sfr key="SSP1CON1" addr="0xc6" por="0000000000000000" mclr="0000000000000000">
+        <field key="WCOL" instance="1" mask="0x0080" desc=""></field>
+        <field key="SSPOV" instance="1" mask="0x0040" desc=""></field>
+        <field key="SSPEN" instance="1" mask="0x0020" desc=""></field>
+        <field key="CKP" instance="1" mask="0x0010" desc=""></field>
+        <field key="SSPM3" instance="1" mask="0x0008" desc=""></field>
+        <field key="SSPM2" instance="1" mask="0x0004" desc=""></field>
+        <field key="SSPM1" instance="1" mask="0x0002" desc=""></field>
+        <field key="SSPM0" instance="1" mask="0x0001" desc=""></field>
+      </sfr>
+      <sfr key="SSP1STAT" addr="0xc7" por="0000000000000000" mclr="0000000000000000">
+        <field key="SMP" instance="1" mask="0x0080" desc=""/>
+        <field key="CKE" instance="1" mask="0x0040" desc=""/>
+        <field key="DTOA-L" instance="1" mask="0x0020" desc=""/>
+        <field key="P" instance="1" mask="0x0010" desc=""/>
+        <field key="S" instance="1" mask="0x0008" desc=""/>
+        <field key="RW-L" instance="1" mask="0x0004" desc=""/>
+        <field key="UA" instance="1" mask="0x0002" desc=""/>
+        <field key="BF" instance="1" mask="0x0001" desc=""/>
+      </sfr>
+      <sfr key="SSP1ADD" addr="0xc8" por="0000000000000000" mclr="0000000000000000">
+        <field key="SSPADD" instance="1" mask="0x00FF" desc=""/>
+        <field key="I2CADD" instance="1" mask="0x00FF" desc="alias addr slave mode"/>
+        <field key="I2CBRG" instance="1" mask="0x00FF" desc="alias brg reload master mode"/>
+      </sfr>
+      <sfr key="SSP1BUF" addr="0xc9" por="0000000000000000" mclr="0000000000000000">
+        <field key="SSPBUF" instance="1" mask="0x00FF" desc=""/>
+      </sfr>
+      <sfr key="SSP2CON2" addr="0x62" por="0000000000000000" mclr="0000000000000000">
+        <field key="GCEN" instance="2" mask="0x0080" desc=""/>
+        <field key="ACKSTAT" instance="2" mask="0x0040" desc=""/>
+        <field key="ACKDT" instance="2" mask="0x0020" desc=""/>
+        <field key="ACKEN" instance="2" mask="0x0010" desc=""/>
+        <field key="RCEN" instance="2" mask="0x0008" desc=""/>
+        <field key="PEN" instance="2" mask="0x0004" desc=""/>
+        <field key="RSEN" instance="2" mask="0x0002" desc=""/>
+        <field key="SEN" instance="2" mask="0x0001" desc=""/>
+      </sfr>
+	  <sfr key="SSP2CON1" addr="0x63" por="0000000000000000" mclr="0000000000000000">
+        <field key="WCOL" instance="2" mask="0x0080" desc=""></field>
+        <field key="SSPOV" instance="2" mask="0x0040" desc=""></field>
+        <field key="SSPEN" instance="2" mask="0x0020" desc=""></field>
+        <field key="CKP" instance="2" mask="0x0010" desc=""></field>
+        <field key="SSPM3" instance="2" mask="0x0008" desc=""></field>
+        <field key="SSPM2" instance="2" mask="0x0004" desc=""></field>
+        <field key="SSPM1" instance="2" mask="0x0002" desc=""></field>
+        <field key="SSPM0" instance="2" mask="0x0001" desc=""></field>
+      </sfr>
+	  <sfr key="SSP2STAT" addr="0x64" por="0000000000000000" mclr="0000000000000000">
+        <field key="SMP" instance="2" mask="0x0080" desc=""></field>
+        <field key="CKE" instance="2" mask="0x0040" desc=""></field>
+        <field key="DTOA-L" instance="2" mask="0x0020" desc=""></field>
+        <field key="P" instance="2" mask="0x0010" desc=""></field>
+        <field key="S" instance="2" mask="0x0008" desc=""></field>
+        <field key="RW-L" instance="2" mask="0x0004" desc=""></field>
+        <field key="UA" instance="2" mask="0x0002" desc=""></field>
+        <field key="BF" instance="2" mask="0x0001" desc=""></field>
+      </sfr>
+	  <sfr key="SSP2ADD" addr="0x65" por="0000000000000000" mclr="0000000000000000">
+        <field key="SSPADD" instance="2" mask="0x00FF" desc=""></field>
+        <field key="I2CADD" instance="2" mask="0x00FF" desc="alias addr slave mode"></field>
+        <field key="I2CBRG" instance="2" mask="0x00FF" desc="alias brg reload master mode"></field>
+      </sfr>
+	  <sfr key="SSP2BUF" addr="0x66" por="0000000000000000" mclr="0000000000000000">
+        <field key="SSPBUF" instance="1" mask="0x00FF" desc=""></field>
+      </sfr>
+    </MSSP>
+
+    <PSP>
+      <sfr key="PSPCON" addr="0xfb0" por="0000000000000000" mclr="0000000000000000">
+        <field key="IBF" instance="1" mask="0x0080" desc=""></field>
+        <field key="OBF" instance="1" mask="0x0040" desc=""></field>
+        <field key="IBOV" instance="1" mask="0x0020" desc=""></field>
+        <field key="PSPMODE" instance="1" mask="0x0010" desc=""></field>
+        <field key="reserved" instance="1" mask="0x0008" desc=""></field>
+        <field key="reserved" instance="1" mask="0x0004" desc=""></field>
+        <field key="reserved" instance="1" mask="0x0002" desc=""></field>
+        <field key="reserved" instance="1" mask="0x0001" desc=""></field>
+      </sfr>
+    </PSP>
+
+    <CCP>
+      <sfr key="OWNCCP" addr="0x000" por="0000000000000000" mclr="0000000000000000">
+        <field key="OWN_CCP1" instance="1" mask="0x0003" desc="fake register"></field>
+        <field key="OWN_CCP2" instance="1" mask="0x000C" desc="fake register"></field>
+        <field key="OWN_CCP3" instance="1" mask="0x0030" desc="fake register"></field>
+        <field key="OWN_CCP4" instance="1" mask="0x00C0" desc="fake register"></field>
+      </sfr>
+      <sfr key="OWNCCP2" addr="0x000" por="0000000000000000" mclr="0000000000000000">
+        <field key="OWN_CCP5" instance="1" mask="0x0003" desc="fake register"></field>
+      </sfr>
+      <sfr key="CCPR1H" addr="0xfbf" por="0000000000000000" mclr="0000000000000000">
+        <field key="CCPR1H" instance="1" mask="0x00FF" desc=""></field>
+      </sfr>
+      <sfr key="CCPR1L" addr="0xfbe" por="0000000000000000" mclr="0000000000000000">
+        <field key="CCPR1L" instance="1" mask="0x00FF" desc=""></field>
+      </sfr>
+      <sfr key="CCPR1" addr="0xfbe" por="0000000000000000" mclr="0000000000000000">
+        <field key="CCPR1" instance="1" mask="0xFFFF" desc="shadow register"></field>
+      </sfr>
+      <sfr key="CCP1CON" addr="0xfbd" por="0000000000000000" mclr="0000000000000000">
+        <field key="reserved" instance="1" mask="0x0080" desc=""></field>
+        <field key="reserved" instance="1" mask="0x0040" desc=""></field>
+        <field key="DC1B10" instance="1" mask="0x0030" desc=""></field>
+        <field key="DC1B1" instance="1" mask="0x0020" desc=""></field>
+        <field key="DC1B0" instance="1" mask="0x0010" desc=""></field>
+        <field key="CCP1M3" instance="1" mask="0x0008" desc=""></field>
+        <field key="CCP1M2" instance="1" mask="0x0004" desc=""></field>
+        <field key="CCP1M1" instance="1" mask="0x0002" desc=""></field>
+        <field key="CCP1M0" instance="1" mask="0x0001" desc=""></field>
+      </sfr>
+      <sfr key="CCPR2H" addr="0xfbc" por="0000000000000000" mclr="0000000000000000">
+        <field key="CCPR2H" instance="1" mask="0x00FF" desc=""></field>
+      </sfr>
+      <sfr key="CCPR2L" addr="0xfbb" por="0000000000000000" mclr="0000000000000000">
+        <field key="CCPR2L" instance="1" mask="0x00FF" desc=""></field>
+      </sfr>
+      <sfr key="CCPR2" addr="0xfbb" por="0000000000000000" mclr="0000000000000000">
+        <field key="CCPR2" instance="1" mask="0xFFFF" desc="shadow register"></field>
+      </sfr>
+      <sfr key="CCP2CON" addr="0xfba" por="0000000000000000" mclr="0000000000000000">
+        <field key="reserved" instance="2" mask="0x0080" desc=""></field>
+        <field key="reserved" instance="2" mask="0x0040" desc=""></field>
+        <field key="DC2B10" instance="1" mask="0x0030" desc=""></field>
+        <field key="DC2B1" instance="1" mask="0x0020" desc=""></field>
+        <field key="DC2B0" instance="1" mask="0x0010" desc=""></field>
+        <field key="CCP2M3" instance="1" mask="0x0008" desc=""></field>
+        <field key="CCP2M2" instance="1" mask="0x0004" desc=""></field>
+        <field key="CCP2M1" instance="1" mask="0x0002" desc=""></field>
+        <field key="CCP2M0" instance="1" mask="0x0001" desc=""></field>
+      </sfr>
+      <sfr key="CCPR3H" addr="0xfb9" por="0000000000000000" mclr="0000000000000000">
+        <field key="CCPR3H" instance="1" mask="0x00FF" desc=""></field>
+      </sfr>
+      <sfr key="CCPR3L" addr="0xfb8" por="0000000000000000" mclr="0000000000000000">
+        <field key="CCPR3L" instance="1" mask="0x00FF" desc=""></field>
+      </sfr>
+      <sfr key="CCPR3" addr="0xfb8" por="0000000000000000" mclr="0000000000000000">
+        <field key="CCPR3" instance="1" mask="0xFFFF" desc="shadow register"></field>
+      </sfr>
+      <sfr key="CCP3CON" addr="0xfb7" por="0000000000000000" mclr="0000000000000000">
+        <field key="reserved" instance="3" mask="0x0080" desc=""></field>
+        <field key="reserved" instance="3" mask="0x0040" desc=""></field>
+        <field key="DC3B10" instance="1" mask="0x0030" desc=""></field>
+        <field key="DC3B1" instance="1" mask="0x0020" desc=""></field>
+        <field key="DC3B0" instance="1" mask="0x0010" desc=""></field>
+        <field key="CCP3M3" instance="1" mask="0x0008" desc=""></field>
+        <field key="CCP3M2" instance="1" mask="0x0004" desc=""></field>
+        <field key="CCP3M1" instance="1" mask="0x0002" desc=""></field>
+        <field key="CCP3M0" instance="1" mask="0x0001" desc=""></field>
+      </sfr>
+      <sfr key="CCPR4H" addr="0xf75" por="0000000000000000" mclr="0000000000000000">
+        <field key="CCPR4H" instance="1" mask="0x00FF" desc=""></field>
+      </sfr>
+      <sfr key="CCPR4L" addr="0xf74" por="0000000000000000" mclr="0000000000000000">
+        <field key="CCPR4L" instance="1" mask="0x00FF" desc=""></field>
+      </sfr>
+      <sfr key="CCPR4" addr="0xf74" por="0000000000000000" mclr="0000000000000000">
+        <field key="CCPR4" instance="1" mask="0xFFFF" desc="shadow register"></field>
+      </sfr>
+      <sfr key="CCP4CON" addr="0xf73" por="0000000000000000" mclr="0000000000000000">
+        <field key="reserved" instance="4" mask="0x0080" desc=""></field>
+        <field key="reserved" instance="4" mask="0x0040" desc=""></field>
+        <field key="DC4B10" instance="1" mask="0x0030" desc=""></field>
+        <field key="DC4B1" instance="1" mask="0x0020" desc=""></field>
+        <field key="DC4B0" instance="1" mask="0x0010" desc=""></field>
+        <field key="CCP4M3" instance="1" mask="0x0008" desc=""></field>
+        <field key="CCP4M2" instance="1" mask="0x0004" desc=""></field>
+        <field key="CCP4M1" instance="1" mask="0x0002" desc=""></field>
+        <field key="CCP4M0" instance="1" mask="0x0001" desc=""></field>
+      </sfr>
+      <sfr key="CCPR5H" addr="0xf72" por="0000000000000000" mclr="0000000000000000">
+        <field key="CCPR5H" instance="1" mask="0x00FF" desc=""></field>
+      </sfr>
+      <sfr key="CCPR5L" addr="0xf71" por="0000000000000000" mclr="0000000000000000">
+        <field key="CCPR5L" instance="1" mask="0x00FF" desc=""></field>
+      </sfr>
+      <sfr key="CCPR5" addr="0xf71" por="0000000000000000" mclr="0000000000000000">
+        <field key="CCPR5" instance="1" mask="0xFFFF" desc="shadow register"></field>
+      </sfr>
+      <sfr key="CCP5CON" addr="0xf70" por="0000000000000000" mclr="0000000000000000">
+        <field key="reserved" instance="5" mask="0x0080" desc=""></field>
+        <field key="reserved" instance="5" mask="0x0040" desc=""></field>
+        <field key="DC5B10" instance="1" mask="0x0030" desc=""></field>
+        <field key="DC5B1" instance="1" mask="0x0020" desc=""></field>
+        <field key="DC5B0" instance="1" mask="0x0010" desc=""></field>
+        <field key="CCP5M3" instance="1" mask="0x0008" desc=""></field>
+        <field key="CCP5M2" instance="1" mask="0x0004" desc=""></field>
+        <field key="CCP5M1" instance="1" mask="0x0002" desc=""></field>
+        <field key="CCP5M0" instance="1" mask="0x0001" desc=""></field>
+      </sfr>
+    </CCP>
+
+    <VoltageRef>
+      <sfr key="CVRCON" addr="0xfb5" por="0000000000000000" mclr="0000000000000000">
+        <field key="CVREN" instance="1" mask="0x0080" desc=""></field>
+        <field key="CVROE" instance="1" mask="0x0040" desc=""></field>
+        <field key="CVRR" instance="1" mask="0x0020" desc=""></field>
+        <field key="CVRSS" instance="1" mask="0x0010" desc=""></field>
+        <field key="CVR3" instance="1" mask="0x0008" desc=""></field>
+        <field key="CVR2" instance="1" mask="0x0004" desc=""></field>
+        <field key="CVR1" instance="1" mask="0x0002" desc=""></field>
+        <field key="CVR0" instance="1" mask="0x0001" desc=""></field>
+      </sfr>
+    </VoltageRef>
+
+    <Comparator>
+      <sfr key="CMCON" addr="0xfb4" por="0000000000000000" mclr="0000000000000000">
+        <field key="C2OUT" instance="1" mask="0x0080" desc=""></field>
+        <field key="C1OUT" instance="1" mask="0x0040" desc=""></field>
+        <field key="C2INV" instance="1" mask="0x0020" desc=""></field>
+        <field key="C1INV" instance="1" mask="0x0010" desc=""></field>
+        <field key="CIS" instance="1" mask="0x0008" desc=""></field>
+        <field key="CM2" instance="1" mask="0x0004" desc=""></field>
+        <field key="CM1" instance="1" mask="0x0002" desc=""></field>
+        <field key="CM0" instance="1" mask="0x0001" desc=""></field>
+      </sfr>
+    </Comparator>
+
+  </specialFunctionRegisters>
+
+  <deviceConfigurationRegisters>
+
+    <cfgbits key="CONFIG1L" addr="0x300000" unused="0x0000" por="1111111111111111">
+      <field key="DEBUG-L" instance="1" mask="0x0080" desc=""/>
+      <field key="XINST" instance="1" mask="0x0040" desc=""/>
+	  <field key="STVREN" instance="1" mask="0x0020" desc=""/>
+	  <field key="reserved" instance="1" mask="0x001E" desc=""/>
+	  <field key="WDTEN" instance="1" mask="0x0001" desc=""/>
+    </cfgbits>
+
+    <cfgbits key="CONFIG1H" addr="0x300001" unused="0x0000" por="1111111111111111">
+      <field key="reserved" instance="1" mask="0x00F8" desc=""/>
+      <field key="CP0" instance="1" mask="0x0004" desc=""/>
+	  <field key="reserved" instance="1" mask="0x0003" desc=""/>
+    </cfgbits>
+
+    <cfgbits key="CONFIG2L" addr="0x300002" unused="0x0000" por="1111111111111111">
+      <field key="IESO" instance="1" mask="0x0080" desc=""/>
+      <field key="FCMEN" instance="1" mask="0x0040" desc=""/>
+      <field key="reserved" instance="1" mask="0x0038" desc=""/>
+      <field key="FOSC2" instance="1" mask="0x0004" desc=""/>
+      <field key="FOSC1" instance="1" mask="0x0002" desc=""/>
+      <field key="FOSC0" instance="1" mask="0x0001" desc=""/>
+    </cfgbits>
+
+    <cfgbits key="CONFIG2H" addr="0x300003" unused="0x0000" por="1111111111111111">
+      <field key="reserved" instance="1" mask="0x00F0" desc=""/>
+      <field key="WDTPS" instance="1" mask="0x000F" desc=""/>
+    </cfgbits>
+
+    <cfgbits key="CONFIG3L" addr="0x300004" unused="0x0000" por="1111111111111111">
+      <field key="WAIT" instance="1" mask="0x0080" desc=""/>
+      <field key="BW" instance="1" mask="0x0040" desc=""/>
+      <field key="EMB" instance="1" mask="0x0030" desc=""/>
+      <field key="EASHFT" instance="1" mask="0x0008" desc=""/>
+	  <field key="reserved" instance="1" mask="0x0007" desc=""/>
+    </cfgbits>
+
+    <cfgbits key="CONFIG3H" addr="0x300005" unused="0x0000" por="1111111111111111">
+      <field key="reserved" instance="1" mask="0x00FC" desc=""/>
+      <!-- DS-39609B call this register 'r'. -->
+      <field key="ECCPMX" instance="1" mask="0x0002" desc=""/>
+      <field key="CCP2MX" instance="1" mask="0x0001" desc=""/>
+    </cfgbits>
+
+    <!-- What's this for? -->
+    <cfgbits key="CONFIGFake" addr="0x000000" unused="0x0000" por="1111111111111111">
+      <field key="CCP1MX" instance="1" mask="0x0001" desc=""/>
+      <field key="CCP3MX" instance="1" mask="0x0010" desc=""/>
+      <field key="CCP4MX" instance="1" mask="0x0100" desc=""/>
+      <field key="CCP5MX" instance="1" mask="0x1000" desc=""/>
+    </cfgbits>
+
+    <!-- Why is this here? -->
+
+  </deviceConfigurationRegisters>
+
+</configurationRegisters>

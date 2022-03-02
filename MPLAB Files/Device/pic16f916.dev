@@ -1,0 +1,698 @@
+# Device file info: $Id: PIC16F916.dev,v 1.73 2006/11/17 15:59:02 sol Exp $
+# Macro file info: $Id: 16macro.dev,v 1.4 2006/08/04 20:16:11 nairnj Exp $
+
+format=0.1
+
+#device=PIC16F916
+# DOS: DOS-00536
+# PS:  DS-41244
+# DS:  DS-41250
+
+#early copy of spec - MRK
+vpp (range=10.000-12.000  dflt=11.000)
+vdd (range=2.000-5.500  dfltrange=4.500-5.500  nominal=5.000)
+
+pgming (memtech=ee tries=1 boundary=8)
+	wait (pgm=2500 lvpgm=2500 eedata=8000 cfg=2500 userid=2500 erase=6000)
+	latches(pgm=8 eedata=1 userid=1 cfg=1 rowerase=16)
+
+pgmmem (region=0x00-0x1FFF)
+cfgmem (region=0x2007-0x2007)
+testmem (region=0x2000-0x2FFF)
+userid (region=0x2000-0x2003)
+eedata (region=0x0-0xFF)
+devid (region=0x2006-0x2006 idmask=0x3FE0 id=0x13A0)
+    ver (id=0x13a0 desc="a1")
+bkbgvectmem (region=0x2004-0x2004)
+
+HasLCD=0x40    # NOTE! Temporary flag until peripheral info is added to file!
+
+NumBanks=4
+MirrorRegs (0x0-0x0 0x80-0x80 0x100-0x100 0x180-0x180)
+MirrorRegs (0x1-0x1 0x101-0x101)
+MirrorRegs (0x81-0x81 0x181-0x181)
+MirrorRegs (0x2-0x4 0x82-0x84 0x102-0x104 0x182-0x184)
+MirrorRegs (0x6-0x6 0x106-0x106)
+MirrorRegs (0x86-0x86 0x186-0x186)
+MirrorRegs (0xA-0xB 0x8A-0x8B 0x10A-0x10B 0x18A-0x18B)
+MirrorRegs (0x70-0x7F 0xF0-0xFF 0x170-0x17F 0x1F0-0x1FF)
+UnusedRegs (0x8-0x8)
+UnusedRegs (0x1b-0x1d)
+UnusedRegs (0x88-0x89)
+UnusedRegs (0x9a-0x9b)
+UnusedRegs (0x112-0x112)
+UnusedRegs (0x115-0x115)
+UnusedRegs (0x118-0x118)
+UnusedRegs (0x11b-0x11b)
+UnusedRegs (0x11e-0x11f)
+UnusedRegs (0x185-0x185)
+UnusedRegs (0x187-0x189)
+UnusedRegs (0x18e-0x18f)
+
+sfr (key=INDF addr=0x0 size=1 flags=i access='u u u u u u u u') #?
+    reset (por='--------' mclr='--------')
+    bit (names='INDF' width='8')
+sfr (key=TMR0 addr=0x1 size=1 access='rw rw rw rw rw rw rw rw') #?
+    reset (por='xxxxxxxx' mclr='uuuuuuuu')
+    bit (names='TMR0' width='8')
+    stimulus (scl=rwb type=int regfiles=w pcfiles=w)
+sfr (key=PCL addr=0x2 size=1 access='rw rw rw rw rw rw rw rw') #?
+    reset (por='00000000' mclr='00000000')
+    bit (names='PCL' width='8')
+    stimulus (scl=rwb regfiles=w pcfiles=rw)
+sfr (key=STATUS addr=0x3 size=1 access='rw rw rw r r rw rw rw')
+    reset (por='00011xxx' mclr='000qquuu')
+    bit (names='IRP RP nTO nPD Z DC C' width='1 2 1 1 1 1 1')
+sfr (key=FSR addr=0x4 size=1 access='rw rw rw rw rw rw rw rw') #?
+    reset (por='xxxxxxxx' mclr='uuuuuuuu')
+    bit (names='FSR' width='8')
+    stimulus (scl=rwb type=int regfiles=w pcfiles=rw)
+
+# JJ tells me that PORTA's reset values have changed once again, this
+# time to match some of the smaller devices.
+sfr (key=PORTA addr=0x5 size=1 access='rw rw rw rw rw rw rw rw')
+    reset (por='xxxxxxxx' mclr='uuuuuuuu')
+    bit (names='RA7 RA6 RA5 RA4 RA3 RA2 RA1 RA0')
+    bit (tag=scl names='RA' width='8')
+    stimulus (scl=rwb regfiles=rw pcfiles=rw)
+
+# DOS B's detailed register description gives the POR/BOR reset state
+# as 'xx000000' and this conflicts with the summary table, which says
+# 'xxxxxxxx'.  JJ tells me that 'xxxxxxxx' is correct.
+sfr (key=PORTB addr=0x6 size=1 access='rw rw rw rw rw rw rw rw')
+    reset (por='xxxxxxxx' mclr='uuuuuuuu')
+    bit (names='RB7 RB6 RB5 RB4 RB3 RB2 RB1 RB0')
+    bit (tag=scl names='RB' width='8')
+    stimulus (scl=rwb regfiles=rw pcfiles=rw)
+
+# Q: DOS provides no data for access flags.
+sfr (key=PORTC addr=0x7 size=1 access='rw rw rw rw rw rw rw rw')
+    reset (por='xxxxxxxx' mclr='uuuuuuuu')
+    bit (names='RC7 RC6 RC5 RC4 RC3 RC2 RC1 RC0')
+    bit (tag=scl names='RC' width='8')
+    stimulus (scl=rwb regfiles=rw pcfiles=rw)
+
+# This register is only on the 914/917.
+#
+# Q: DOS provides no data for access flags.
+#sfr (key=PORTD addr=0x8 size=1 access='rw rw rw rw rw rw rw rw')
+#    reset (por='xxxxxxxx' mclr='uuuuuuuu')
+#    bit (names='RD7 RD6 RD5 RD4 RD3 RD2 RD1 RD0')
+#    bit (tag=scl names='RC' width='8')
+
+# RE2<2:0> are on only 914/917.
+#
+# Q: DOS provides no data for access flags.  This set was copied from
+# another device file.
+sfr (key=PORTE addr=0x9 size=1 access='u u u u r u u u')
+    reset (por='----x---' mclr='----u---')
+    bit (names='- - - - RE3 - - -')
+    bit (tag=scl names='RE' width='8')
+    stimulus (scl=rwb regfiles=rw pcfiles=rw)
+
+sfr (key=PCLATH addr=0xA size=1 access='u u u rw rw rw rw rw') #?
+    reset (por='---00000' mclr='---00000')
+    bit (names='- - - PCLATH' width='1 1 1 5')
+    stimulus (scl=rwb type=int regfiles=w pcfiles=rw)
+sfr (key=INTCON addr=0xB size=1 access='rw rw rw rw rw rw rw rw')
+    reset (por='0000000x' mclr='0000000x')
+    bit (names='GIE PEIE TMR0IE INTE RBIE TMR0IF INTF RBIF')
+    stimulus (scl=rwb regfiles=w pcfiles=rw)
+sfr (key=PIR1 addr=0xC size=1 access='rw rw r r r rw rw rw')
+    reset (por='00000000' mclr='00000000')
+    bit (names='EEIF ADIF RCIF TXIF SSPIF CCP1IF TMR2IF TMR1IF')
+    bit (tag=scl names='EEIF ADIF - - SSPIF CCP1IF TMR2IF TMR1IF')
+    stimulus (scl=rwb regfiles=w pcfiles=rw)
+
+# Q: The detailed description of this register says that b3 is both
+# R/W-0 and unimplemented.  The summary table gives the reset states
+# of the bit as 0 for POR/BOR and 0 for all other resets.
+#
+# Email from JJ: Bit 0 is available only on the 914/917 devices.
+sfr (key=PIR2 addr=0xD size=1 access='rw rw rw rw u rw u u')
+    reset (por='0000-0--' mclr='0000-0--')
+    bit (names='OSFIF C2IF C1IF LCDIF - LVDIF - -')
+    stimulus (scl=rwb regfiles=w pcfiles=rw)
+
+# Q: The DOS doesn't give access flags for TMR1L and TMR1H.  'rw' is
+# probably a good bet for now.
+sfr (key=TMR1 addr=0xE size=2 flags=j)
+# The j flag means all these registers together form one larger register
+    bit (names='TMR1' width='16')
+    stimulus (scl=rwb type=int regfiles=w)
+sfr (key=TMR1L addr=0xE size=1 access='rw rw rw rw rw rw rw rw')
+    reset (por='xxxxxxxx' mclr='uuuuuuuu')
+    bit (names='TMR1L' width='8')
+    stimulus (scl=rwb type=int regfiles=w pcfiles=w)
+sfr (key=TMR1H addr=0xF size=1 access='rw rw rw rw rw rw rw rw')
+    reset (por='xxxxxxxx' mclr='uuuuuuuu')
+    bit (names='TMR1H' width='8')
+    stimulus (scl=rwb type=int regfiles=w pcfiles=w)
+
+sfr (key=T1CON addr=0x10 size=1 access='rw rw rw rw rw rw rw rw')
+    reset (por='00000000' mclr='uuuuuuuu')
+    bit (names='T1GINV TMR1GE T1CKPS T1OSCEN nT1SYNC TMR1CS TMR1ON' width='1 1 2 1 1 1 1')
+    stimulus (scl=rwb regfiles=w)
+
+# Q: The DOS doesn't give access flags for TMR2.  'rw' on every bit is
+# probably a good bet for now.
+sfr (key=TMR2 addr=0x11 size=1 access='rw rw rw rw rw rw rw rw')
+    reset (por='00000000' mclr='00000000')
+    bit (names='TMR2' width='8')
+    stimulus (scl=rwb type=int regfiles=w pcfiles=w)
+sfr (key=T2CON addr=0x12 size=1 access='u rw rw rw rw rw rw rw')
+    reset (por='-0000000' mclr='-0000000')
+    bit (names='- TOUTPS TMR2ON T2CKPS' width='1 4 1 2')
+    stimulus (scl=rwb regfiles=w)
+
+# Q: The DOS doesn't give access flags for SSPBUF.  This is probably a
+# safe bet.
+sfr (key=SSPBUF addr=0x13 size=1 access='rw rw rw rw rw rw rw rw')
+    reset (por='xxxxxxxx' mclr='uuuuuuuu')
+    bit (names='SSPBUF' width='8')
+    stimulus (scl=rwb type=int regfiles=rw pcfiles=rw)
+sfr (key=SSPCON addr=0x14 size=1 access='rw rw rw rw rw rw rw rw')
+    reset (por='00000000' mclr='00000000')
+    bit (names='WCOL SSPOV SSPEN CKP SSPM' width='1 1 1 1 4')
+    stimulus (scl=rwb regfiles=w pcfiles=rw)
+
+# Q: The DOS doesn't give access flags for CCPR1L and CCPR1H.  All
+# bits 'rw' is probably a safe bet.
+sfr (key=CCPR1 addr=0x15 size=2 flags=j)
+# The j flag means all these registers together form one larger register
+    bit (names='CCPR1' width='16')
+    stimulus (scl=rwb type=int regfiles=w)
+sfr (key=CCPR1L addr=0x15 size=1 access='rw rw rw rw rw rw rw rw')
+    reset (por='xxxxxxxx' mclr='uuuuuuuu')
+    bit (names='CCPR1L' width='8')
+    stimulus (scl=rwb type=int regfiles=w)
+sfr (key=CCPR1H addr=0x16 size=1 access='rw rw rw rw rw rw rw rw')
+    reset (por='xxxxxxxx' mclr='uuuuuuuu')
+    bit (names='CCPR1H' width='8')
+    stimulus (scl=rwb type=int regfiles=w)
+sfr (key=CCP1CON addr=0x17 size=1 access='u u rw rw rw rw rw rw')
+    reset (por='--000000' mclr='--000000')
+    bit (names='- - CCP1X CCP1Y CCP1M' width='1 1 1 1 4')
+    stimulus (scl=rwb regfiles=w)
+sfr (key=RCSTA addr=0x18 size=1 access='rw rw rw rw rw r r r')
+    reset (por='0000000x' mclr='0000000x')
+    bit (names='SPEN RX9 SREN CREN ADDEN FERR OERR RX9D')
+    stimulus (scl=rwb regfiles=w)
+sfr (key=TXREG addr=0x19 size=1 access='rw rw rw rw rw rw rw rw')
+    reset (por='00000000' mclr='00000000')
+    bit (names='TXREG' width='8')
+    stimulus (scl=rwb regfiles=w)
+sfr (key=RCREG addr=0x1A size=1 access='r r r r r r r r')
+    reset (por='00000000' mclr='00000000')
+    bit (names='RCREG' width='8')
+    stimulus (scl=rb regfiles=rp)
+
+sfr (key=ADRESH addr=0x1E size=1 access='rw rw rw rw rw rw rw rw')
+    reset (por='xxxxxxxx' mclr='uuuuuuuu')
+    bit (names='ADRESH' width='8')
+    stimulus (scl=rwb type=int)
+
+# DOS B's detailed description for this register indicates that b5 is
+# unimplemented.  JJ tells me this is a mistake.
+sfr (key=ADCON0 addr=0x1F size=1 access='rw rw rw rw rw rw rw rw')
+    reset (por='00000000' mclr='00000000')
+    bit (names='ADFM VCFG CHS GO/nDONE ADON' width='1 2 3 1 1')
+    bit (tag=scl names='ADFM VCFG CHS GO_nDONE ADON' width='1 2 3 1 1')
+    stimulus (scl=rwb regfiles=w)
+
+sfr (key=OPTION_REG addr=0x81 size=1 access='rw rw rw rw rw rw rw rw')
+    reset (por='11111111' mclr='11111111')
+    bit (names='nRBPU INTEDG T0CS T0SE PSA PS' width='1 1 1 1 1 3')
+    stimulus (scl=rwb regfiles=w)
+
+# DOS B's detailed description for this register gives the POR/BOR
+# value for this register as xx0x0000.  JJ tells me that is in error,
+# and what we have here is correct.
+sfr (key=TRISA addr=0x85 size=1 access='rw rw rw rw rw rw rw rw')
+    reset (por='11111111' mclr='11111111')
+    bit (names='TRISA7 TRISA6 TRISA5 TRISA4 TRISA3 TRISA2 TRISA1 TRISA0')
+    bit (tag=scl names='TRISA' width='8')
+    stimulus (scl=rwb regfiles=w)
+
+sfr (key=TRISB addr=0x86 size=1 access='rw rw rw rw rw rw rw rw')
+    reset (por='11111111' mclr='11111111')
+    bit (names='TRISB7 TRISB6 TRISB5 TRISB4 TRISB3 TRISB2 TRISB1 TRISB0')
+    bit (tag=scl names='TRISB' width='8')
+    stimulus (scl=rwb regfiles=w)
+sfr (key=TRISC addr=0x87 size=1 access='rw rw rw rw rw rw rw rw')
+    reset (por='11111111' mclr='11111111')
+    bit (names='TRISC7 TRISC6 TRISC5 TRISC4 TRISC3 TRISC2 TRISC1 TRISC0')
+    bit (tag=scl names='TRISC' width='8')
+    stimulus (scl=rwb regfiles=w)
+
+sfr (key=TRISE addr=0x89 size=1 access='u u u u r u u u')
+    reset (por='----1---' mclr='----1---')
+    bit (names='- - - - TRISE3 - - -')
+    bit (tag=scl names='TRISE' width='8')
+    stimulus (scl=rwb regfiles=w)
+
+# This register is only on the 914/917.
+#sfr (key=TRISD addr=0x88 size=1 access='rw rw rw rw rw rw rw rw')
+#    reset (por='11111111' mclr='11111111')
+#    bit (names='TRISD7 TRISD6 TRISD5 TRISD4 TRISD3 TRISD2 TRISD1 TRISD0')
+
+sfr (key=PIE1 addr=0x8C size=1 access='rw rw rw rw rw rw rw rw')
+    reset (por='00000000' mclr='00000000')
+    bit (names='EEIE ADIE RCIE TXIE SSPIE CCP1IE TMR2IE TMR1IE')
+    stimulus (scl=rwb regfiles=w pcfiles=rw)
+
+# DOS B's detailed description applies the qualifier U-0 to both bits
+# 2 and 6, yet these bits have names LVDIE and C2IE.  JJ told me these
+# bits do indeed exist and are clear at reset.
+#
+# DOS B's detailed register description simultaneously declares b3 as
+# R/W-0 and unimplemented.  The summary table gives a value of '0' for
+# this bit rather than '-'.  JJ tells me that b3 is indeed U-0.
+#
+# Email from JJ: Bit 0 is available only on 914/917.
+sfr (key=PIE2 addr=0x8D size=1 access='rw rw rw rw u rw u u')
+    reset (por='0000-0--' mclr='0000-0--')
+    bit (names='OSFIE C2IE C1IE LCDIE - LVDIE - -')
+    stimulus (scl=rwb regfiles=w pcfiles=rw)
+
+# DOS B's detailed description for this register says b5 is R/W-0, but
+# also says it's unimplemented.  JJ tells me - and U-0 are correct.
+sfr (key=PCON addr=0x8E size=1 access='u u u rw u u rw rw')
+    reset (por='---1--qq' mclr='---u--uu')
+    bit (names='- - - SBOREN - - nPOR nBOR')
+    stimulus (scl=rwb regfiles=w)
+
+sfr (key=OSCCON addr=0x8F size=1 access='u rw rw rw r r r rw')
+    reset (por='-110x000' mclr='-110x000')
+    bit (names='- IRCF OSTS HTS LTS SCS' width='1 3 1 1 1 1')
+    stimulus (scl=rwb regfiles=w pcfiles=rw)
+sfr (key=OSCTUNE addr=0x90 size=1 access='u u u rw rw rw rw rw')
+    reset (por='---00000' mclr='---uuuuu')
+    bit (names='- - - TUN' width='1 1 1 5')
+    stimulus (scl=rwb regfiles=w pcfiles=rw)
+
+# Bits 7-5 are 'forced 0' on 913/916.
+sfr (key=ANSEL addr=0x91 size=1 access='u u u rw rw rw rw rw')
+    reset (por='---11111' mclr='---11111')
+    bit (names='AN' width='8')
+    stimulus (scl=rwb regfiles=r)
+
+# Q: The DOS gives no access flags for register PR2.
+sfr (key=PR2 addr=0x92 size=1 access='rw rw rw rw rw rw rw rw')
+    reset (por='11111111' mclr='11111111')
+    bit (names='PR2' width='8')
+    stimulus (scl=rwb type=int regfiles=w)
+sfr (key=SSPADD addr=0x93 size=1 access='rw rw rw rw rw rw rw rw')
+    reset (por='00000000' mclr='00000000')
+    bit (names='SSPADD' width='8')
+    stimulus (scl=rwb type=int regfiles=w pcfiles=rw)
+# Bits are rw so they can be simulated
+# sfr (key=SSPSTAT addr=0x94 size=1 access='rw rw r r r r r r')
+sfr (key=SSPSTAT addr=0x94 size=1 access='rw rw rw rw rw rw rw rw')
+    reset (por='00000000' mclr='00000000')
+    bit (names='SMP CKE D/nA P S R/nW UA BF')
+
+sfr (key=WPUB addr=0x95 size=1 access='rw rw rw rw rw rw rw rw')
+    reset (por='11111111' mclr='11111111')
+    bit (names='WPUB' width='8')
+    stimulus (scl=rwb regfiles=w)
+sfr (key=IOCB addr=0x96 size=1 access='rw rw rw rw - - - -')
+    reset (por='0000----' mclr='0000----')
+    bit (names='IOCB - - - -' width='4 1 1 1 1')
+    stimulus (scl=rwb regfiles=w)
+sfr (key=CMCON1 addr=0x97 size=1 access='u u u u u u rw rw')
+    reset (por='------10' mclr='------10')
+    bit (names='- - - - - - T1GSS C2SYNC')
+    stimulus (scl=rwb regfiles=w)
+
+# DOS B's detailed description of TXSTA called b3 'SENDB', and said it
+# was R/W-0.  JJ tells me this is a mistake and that it is U-0.
+sfr (key=TXSTA addr=0x98 size=1 access='rw rw rw rw u rw r rw')
+    reset (por='0000-010' mclr='0000-010')
+    bit (names='CSRC TX9 TXEN SYNC - BRGH TRMT TX9D')
+    stimulus (scl=rwb regfiles=w)
+sfr (key=SPBRG addr=0x99 size=1 access='rw rw rw rw rw rw rw rw')
+    reset (por='00000000' mclr='00000000')
+    bit (names='SPBRG' width='8')
+    stimulus (scl=rwb regfiles=w)
+
+sfr (key=CMCON0 addr=0x9C size=1 access='r r rw rw rw rw rw rw')
+    reset (por='00000000' mclr='00000000')
+    bit (names='C2OUT C1OUT C2INV C1INV CIS CM' width='1 1 1 1 1 3')
+    stimulus (scl=rwb regfiles=w)
+sfr (key=VRCON addr=0x9D size=1 access='rw u rw u rw rw rw rw')
+    reset (por='0-0-0000' mclr='0-0-0000')
+    bit (names='VREN - VRR - VR' width='1 1 1 1 4')
+    stimulus (scl=rwb regfiles=w)
+
+sfr (key=ADRESL addr=0x9E size=1 access='rw rw rw rw rw rw rw rw')
+    reset (por='xxxxxxxx' mclr='uuuuuuuu')
+    bit (names='ADRESL' width='8')
+    stimulus (scl=rwb type=int regfiles=r)
+sfr (key=ADCON1 addr=0x9F size=1 access='u rw rw rw u u u u')
+    reset (por='-000----' mclr='-000----')
+    bit (names='- ADCS - - - -' width='1 3 1 1 1 1')
+    stimulus (scl=rwb regfiles=w)
+
+sfr (key=WDTCON addr=0x105 size=1 access='u u u rw rw rw rw rw')
+    reset (por='---01000' mclr='---01000')
+    bit (names='- - - WDTPS SWDTEN' width='1 1 1 4 1')
+    stimulus (scl=rwb regfiles=w pcfiles=rw)
+
+# DOS B contains no descriptions for the access flags, but I got these
+# values directly from JJ via multiple emails.
+sfr (key=LCDCON addr=0x107 size=1 access='rw rw rc rw rw rw rw rw')
+    reset (por='00010011' mclr='00010011')
+    bit (names='LCDEN SLPEN WERR VLCDEN CS LMUX' width='1 1 1 1 2 2')
+    stimulus (scl=rwb regfiles=w pcfiles=rw)
+sfr (key=LCDPS addr=0x108 size=1 access='rw r r rw rw rw rw rw')
+    reset (por='00000000' mclr='00000000')
+    bit (names='WFT BIASMD LCDA WA LP' width='1 1 1 1 4')
+    stimulus (scl=rwb regfiles=w pcfiles=rw)
+
+# DOS B's summary table said the reset state of b2 was 0.  JJ tells me
+# this is incorrect.
+sfr (key=LVDCON addr=0x109 size=1 access='u u rw rw u rw rw rw')
+    reset (por='--00-100' mclr='--00-100')
+    bit (names='- - IRVST LVDEN - LVDL' width='1 1 1 1 1 3')
+    stimulus (scl=rwb regfiles=w pcfiles=rw)
+
+# Q: The DOS contains no information on the access flags for EEDATL
+# and EEDATH.
+sfr (key=EEDATL addr=0x10C size=1 access='rw rw rw rw rw rw rw rw')
+# Reset values may be wrong because of discrepancies in the Data Sheet
+    reset (por='00000000' mclr='uuuuuuuu')
+    bit (names='EEDATL' width='8')
+    stimulus (scl=rwb regfiles=rw pcfiles=rw)
+sfr (key=EEADRL addr=0x10D size=1 access='rw rw rw rw rw rw rw rw')
+    reset (por='00000000' mclr='uuuuuuuu')
+    bit (names='EEADRL' width='8')
+    stimulus (scl=rwb regfiles=w pcfiles=rw)
+
+sfr (key=EEDATH addr=0x10E size=1 access='u u rw rw rw rw rw rw')
+# Reset values may be wrong because of discrepancies in the Data Sheet
+    reset (por='--000000' mclr='--uuuuuu')
+    bit (names='- - EEDATH' width='1 1 6')
+    stimulus (scl=rwb regfiles=rw pcfiles=rw)
+sfr (key=EEADRH addr=0x10F size=1 access='u u u rw rw rw rw rw')
+    reset (por='---00000' mclr='---uuuuu')
+    bit (names='- - - EEADRH' width='1 1 1 5')
+    stimulus (scl=rwb regfiles=w pcfiles=rw)
+
+# Some of these SFRs are commented out because they don't exist on the
+# 913/916.
+#
+# Q: Rev B of the DOS doesn't give any information regarding the
+# access flags for registers LCDDAT0-LCDDAT11 and LCDSE0-LCDSE2, so
+# we'll have to assume 'rw' until we learn otherwise.
+sfr (key=LCDDATA0 addr=0x110 size=1 access='rw rw rw rw rw rw rw rw')
+    reset (por='xxxxxxxx' mclr='uuuuuuuu')
+    bit (names='SEG7 SEG6 SEG5 SEG4 SEG3 SEG2 SEG1 SEG0')
+    stimulus (scl=rwb regfiles=w pcfiles=rw)
+sfr (key=LCDDATA1 addr=0x111 size=1 access='rw rw rw rw rw rw rw rw')
+    reset (por='xxxxxxxx' mclr='uuuuuuuu')
+    bit (names='SEG15 SEG14 SEG13 SEG12 SEG11 SEG10 SEG9 SEG8')
+    stimulus (scl=rwb regfiles=w pcfiles=rw)
+sfr (key=LCDDATA3 addr=0x113 size=1 access='rw rw rw rw rw rw rw rw')
+    reset (por='xxxxxxxx' mclr='uuuuuuuu')
+    bit (names='SEG7 SEG6 SEG5 SEG4 SEG3 SEG2 SEG1 SEG0')
+    stimulus (scl=rwb regfiles=w pcfiles=rw)
+sfr (key=LCDDATA4 addr=0x114 size=1 access='rw rw rw rw rw rw rw rw')
+    reset (por='xxxxxxxx' mclr='uuuuuuuu')
+    bit (names='SEG15 SEG14 SEG13 SEG12 SEG11 SEG10 SEG9 SEG8')
+    stimulus (scl=rwb regfiles=w pcfiles=rw)
+sfr (key=LCDDATA6 addr=0x116 size=1 access='rw rw rw rw rw rw rw rw')
+    reset (por='xxxxxxxx' mclr='uuuuuuuu')
+    bit (names='SEG7 SEG6 SEG5 SEG4 SEG3 SEG2 SEG1 SEG0')
+    stimulus (scl=rwb regfiles=w pcfiles=rw)
+sfr (key=LCDDATA7 addr=0x117 size=1 access='rw rw rw rw rw rw rw rw')
+    reset (por='xxxxxxxx' mclr='uuuuuuuu')
+    bit (names='SEG15 SEG14 SEG13 SEG12 SEG11 SEG10 SEG9 SEG8')
+    stimulus (scl=rwb regfiles=w pcfiles=rw)
+sfr (key=LCDDATA9 addr=0x119 size=1 access='rw rw rw rw rw rw rw rw')
+    reset (por='xxxxxxxx' mclr='uuuuuuuu')
+    bit (names='SEG7 SEG6 SEG5 SEG4 SEG3 SEG2 SEG1 SEG0')
+    stimulus (scl=rwb regfiles=w pcfiles=rw)
+sfr (key=LCDDATA10 addr=0x11A size=1 access='rw rw rw rw rw rw rw rw')
+    reset (por='xxxxxxxx' mclr='uuuuuuuu')
+    bit (names='SEG15 SEG14 SEG13 SEG12 SEG11 SEG10 SEG9 SEG8')
+    stimulus (scl=rwb regfiles=w pcfiles=rw)
+sfr (key=LCDSE0 addr=0x11C size=1 access='rw rw rw rw rw rw rw rw')
+    reset (por='00000000' mclr='uuuuuuuu')
+    bit (names='SEG7 SEG6 SEG5 SEG4 SEG3 SEG2 SEG1 SEG0')
+    stimulus (scl=rwb regfiles=w pcfiles=rw)
+sfr (key=LCDSE1 addr=0x11D size=1 access='rw rw rw rw rw rw rw rw')
+    reset (por='00000000' mclr='uuuuuuuu')
+    bit (names='SEG15 SEG14 SEG13 SEG12 SEG11 SEG10 SEG9 SEG8')
+#sfr (key=LCDSE2 addr=0x11E size=1 access='rw rw rw rw rw rw rw rw')
+#    reset (por='00000000' mclr='uuuuuuuu')
+#    bit (names='SEG23 SEG22 SEG21 SEG20 SEG19 SEG18 SEG17 SEG16')
+    stimulus (scl=rwb regfiles=w pcfiles=rw)
+
+# DOS B's detailed register description disagrees with the summary
+# table with respect to b7.  The table gives the POR/BOR reset state
+# as '-' while the diagram gives the state as 'x'.  JJ tells me that
+# this bit should be 'x' on POR/BOR and 'u' on all other resets.
+sfr (key=EECON1 addr=0x18C size=1 access='rw u u u rw rw rs rs')
+    reset (por='x---x000' mclr='u---q000')
+    bit (names='EEPGD - - - WRERR WREN WR RD')
+    stimulus (scl=rwb regfiles=w pcfiles=rw)
+
+# Q: I can find no data in the DOS regarding the access flags of this
+# register, so we'll assume that this is correct for now.
+sfr (key=EECON2 addr=0x18D size=1 flags=w access='w w w w w w w w')
+    reset (por='--------' mclr='--------')
+    bit (names='EECON2' width='8')
+
+                               # -------------------#
+#------------------------------# Configuration Bits #------------------------------------#
+                               # -------------------#
+
+cfgbits (key=CONFIG addr=0x2007 unused=0x0000) #?
+    field (key=OSC mask=0x7 desc="Oscillator")
+        setting (req=0x7 value=0x0 desc="LP")
+        setting (req=0x7 value=0x1 desc="XT")
+        setting (req=0x7 value=0x2 desc="HS")
+        setting (req=0x7 value=0x3 desc="EC")
+        setting (req=0x7 value=0x4 desc="INTOSCIO")
+        setting (req=0x7 value=0x5 desc="INTOSC")
+        setting (req=0x7 value=0x6 desc="EXTRCIO")
+        setting (req=0x7 value=0x7 desc="EXTRC")
+    field (key=WDT mask=0x8 desc="Watchdog Timer" min=1)
+        setting (req=0x8 value=0x8 desc="On")
+        setting (req=0x8 value=0x0 desc="Off")
+    field (key=PUT mask=0x10 desc="Power Up Timer")
+        setting (req=0x10 value=0x10 desc="Off")
+        setting (req=0x10 value=0x0 desc="On")
+    field (key=MCLRE mask=0x20 desc="MCLR Pin Function Select")
+        setting (req=0x20 value=0x20 desc="Normal Function")
+        setting (req=0x20 value=0x0 desc="Alternate Function")
+    field (key=CP mask=0x40 desc="Code Protect")
+        setting (req=0x40 value=0x40 desc="Off")
+            checksum (type=0x0 protregion=0x00-0x00)
+        setting (req=0x40 value=0x0 desc="On")
+            checksum (type=0x20 protregion=0x000-0x1FFF) #?
+    field (key=CPD mask=0x80 desc="Data EE Read Protect")
+        setting (req=0x80 value=0x80 desc="Off")
+        setting (req=0x80 value=0x0 desc="On")
+    field (key=BODEN mask=0x300 desc="Brown Out Detect")
+        setting (req=0x300 value=0x300 desc="BOD Enabled, SBODEN Disabled")
+        setting (req=0x300 value=0x200 desc="BOD Enabled While Running, Disabled In Sleep, SBODEN Disabled")
+        setting (req=0x300 value=0x100 desc="Controlled by SBODEN")
+        setting (req=0x300 value=0x0 desc="BOD And SBODEN Disabled")
+    field (key=IESO mask=0x400 desc="Internal-External Switch Over")
+        setting (req=0x400 value=0x400 desc="Enabled")
+        setting (req=0x400 value=0x0 desc="Disabled")
+    field (key=FCMEN mask=0x800 desc="Fail Clock Monitor Enable")
+        setting (req=0x800 value=0x800 desc="Enabled")
+        setting (req=0x800 value=0x0 desc="Disabled")
+    field (key=BACKBUG mask=0x1000 desc="Background Debug" flags=h)
+        setting (req=0x1000 value=0x1000 desc="Disabled")
+        setting (req=0x1000 value=0x0 desc="Enabled")
+
+                               #-------------#
+#------------------------------# Peripherals #------------------------------------#
+                               #-------------#
+#--------------------------------------------------------------------------------
+# 				PORTA
+#--------------------------------------------------------------------------------
+peripheral (key=PORTA sfrs='TRISA PORTA' type=port)
+    iopin (key=RA0 dir=inout)
+        cnpin (key=C1INN notify=CM)
+    iopin (key=RA1 dir=inout)
+        cnpin (key=C2INN notify=CM)
+    iopin (key=RA2 dir=inout)
+        cnpin (key=C2INP notify=CM)
+    iopin (key=RA3 dir=inout)
+        cnpin (key=C1INP notify=CM)
+    iopin (key=RA4 dir=inout)
+    iopin (key=RA5 dir=inout)
+    iopin (key=RA6 dir=inout)
+    iopin (key=RA7 dir=inout)
+
+#--------------------------------------------------------------------------------
+# 				PORTB
+#--------------------------------------------------------------------------------
+peripheral (key=PORTB sfrs='TRISB PORTB' type=port)
+    iopin (key=RB0 dir=inout)
+        extint (key=INT0 enreg=INTCON enmask=0x10 flgreg=INTCON flgmask=0x02 prireg=NONE primask=0x00)
+    iopin (key=RB1 dir=inout)
+    iopin (key=RB2 dir=inout)
+    iopin (key=RB3 dir=inout)
+    iopin (key=RB4 dir=inout)
+        cnint (key=PORTIRQ enreg=INTCON enmask=0x08 flgreg=INTCON flgmask=0x01 prireg=NONE primask=0x00 cnkey=PORTIOC0)
+    iopin (key=RB5 dir=inout)
+        cnint (key=PORTIRQ enreg=INTCON enmask=0x08 flgreg=INTCON flgmask=0x01 prireg=NONE primask=0x00 cnkey=PORTIOC0)
+    iopin (key=RB6 dir=inout)
+        cnint (key=PORTIRQ enreg=INTCON enmask=0x08 flgreg=INTCON flgmask=0x01 prireg=NONE primask=0x00 cnkey=PORTIOC0)
+    iopin (key=RB7 dir=inout)
+        cnint (key=PORTIRQ enreg=INTCON enmask=0x08 flgreg=INTCON flgmask=0x01 prireg=NONE primask=0x00 cnkey=PORTIOC0)
+
+
+#--------------------------------------------------------------------------------
+# 				PORTC
+#--------------------------------------------------------------------------------
+
+peripheral (key=PORTC sfrs='TRISC PORTC' type=port)
+    iopin (key=RC0 dir=inout)
+    iopin (key=RC1 dir=inout)
+    iopin (key=RC2 dir=inout)
+    iopin (key=RC3 dir=inout)
+    iopin (key=RC4 dir=inout)
+        cnpin (key=T1G notify=TMR1)
+    iopin (key=RC5 dir=inout)
+        cnpin (key=CCP1CN notify=CCP1)
+    iopin (key=RC6 dir=inout)
+    iopin (key=RC7 dir=inout)
+
+#--------------------------------------------------------------------------------
+# 				PORTE
+#--------------------------------------------------------------------------------
+
+peripheral (key=PORTE sfrs='TRISE PORTE' type=port)
+    iopin (key=RE3 dir=in)
+
+#--------------------------------------------------------------------------------
+# 				ADC
+#--------------------------------------------------------------------------------
+
+peripheral (key=ADC10 sfrs='ADCON0 ADCON1 ANSEL ADRESL ADRESH')
+    pinfunc (key=AN0 port=RA0 dir=in)
+    pinfunc (key=AN1 port=RA1 dir=in)
+    pinfunc (key=AN2 port=RA2 dir=in)
+    pinfunc (key=AN3 port=RA3 dir=in)
+    pinfunc (key=AN4 port=RA5 dir=in)
+    access (key=ADCON0 mode=AD_ADCON0_NO_ADCS_3CHS)
+    access (key=ADCON1 mode=AD_ADCS_ONLY)
+    adgodone (key=ADCON0 mask=0x02)
+    interrupt (name=ADC enreg=PIE1 enmask=0x40 flgreg=PIR1 flgmask=0x40 prireg=NONE primask=0x00)
+
+
+#--------------------------------------------------------------------------------
+# 				UARTs
+#--------------------------------------------------------------------------------
+
+peripheral (key=UART1 sfrs='SPBRG RCREG TXREG TXSTA RCSTA')
+    pinfunc (key=U1RX port=RC7 dir=in)
+    pinfunc (key=U1TX port=RC6 dir=out)
+    interrupt (name=RXINT1 enreg=PIE1 enmask=0x20 flgreg=PIR1 flgmask=0x20 prireg=NONE primask=0x00)
+    interrupt (name=TXINT1 enreg=PIE1 enmask=0x10 flgreg=PIR1 flgmask=0x10 prireg=NONE primask=0x00)
+
+#--------------------------------------------------------------------------------
+# 				TIMERs
+#--------------------------------------------------------------------------------
+peripheral (key=TMR0 sfrs='TMR0')
+    pinfunc (key=T0CKI port=RA4 dir=in)
+        nextp (nextperiph=CM nextpin=C1OUT)
+    interrupt (name=TMR0INT enreg=INTCON enmask=0x20 flgreg=INTCON flgmask=0x04 prireg=NONE primask=0x00)
+
+peripheral (key=TMR1 sfrs='TMR1H TMR1L T1CON')
+    pinfunc (key=T1CKI port=RC5 dir=in)
+        nextp (nextperiph=CCP1 nextpin=CCP1)
+    pinfunc (key=T1G port=RC4 dir=in)
+    interrupt (name=TMR1INT enreg=PIE1 enmask=0x01 flgreg=PIR1 flgmask=0x01 prireg=NONE primask=0x00)
+
+peripheral (key=TMR2 sfrs='TMR2 PR2 T2CON')
+    interrupt (name=TMR2INT enreg=PIE1 enmask=0x02 flgreg=PIR1 flgmask=0x02 prireg=NONE primask=0x00)
+ 
+#--------------------------------------------------------------------------------
+# 				CCP
+#--------------------------------------------------------------------------------
+
+peripheral (key=CCP1 sfrs='CCP1CON CCPR1L CCPR1H')
+    pinfunc (key=CCP1 port=RC5 dir=inout)
+    interrupt (name=CCP1INT enreg=PIE1 enmask=0x04 flgreg=PIR1 flgmask=0x04 prireg=NONE primask=0x00)
+    specialevent (key=ADC10)
+    timers (addr=0x0 mask=0x00)
+        setting (val=0x00 cc=TMR1 pwm=TMR2)
+        setting (val=0x00 cc=TMR1 pwm=TMR2)
+        setting (val=0x00 cc=TMR1 pwm=TMR2)
+        setting (val=0x00 cc=TMR1 pwm=TMR2)
+
+#--------------------------------------------------------------------------------
+# 				CM
+#--------------------------------------------------------------------------------
+
+peripheral (key=CM sfrs='CMCON0 CMCON1 VRCON')
+    pinfunc (key=C1INP port=RA3 dir=in)
+    pinfunc (key=C1INN port=RA0 dir=in)
+    pinfunc (key=C1OUT port=RA4 dir=inout)
+    pinfunc (key=C2INP port=RA2 dir=in)
+    pinfunc (key=C2INN port=RA1 dir=in)
+    pinfunc (key=C2OUT port=RA5 dir=inout)
+    interrupt (name=CMINT enreg=PIE2 enmask=0x20 flgreg=PIR2 flgmask=0x20 prireg=NONE primask=0x00)
+    interrupt (name=CM2INT enreg=PIE2 enmask=0x40 flgreg=PIR2 flgmask=0x40 prireg=NONE primask=0x00)
+
+#--------------------------------------------------------------------------------
+# 				OSC
+#--------------------------------------------------------------------------------
+
+peripheral (key=OSC sfrs='OSCCON')
+    pinfunc (key=OSC2 port=RA6 dir=out)
+    pinfunc (key=OSC1 port=RA7 dir=in)
+    pinfunc (key=T1OSCI port=RA7 dir=in)
+    pinfunc (key=T1OSCO port=RA6 dir=out)
+
+
+#--------------------------------------------------------------------------------
+# 				MCLR
+#--------------------------------------------------------------------------------
+peripheral (key=MCLR)
+    pinfunc (key=MCLR port=RE3 dir=in)
+
+peripheral (key=I2C)
+
+#--------------------------------------------------------------------------------
+# 				CORE
+#--------------------------------------------------------------------------------
+peripheral (key=CORE sfrs='EEDATL EEDATH EEADRL EEADRH EECON1 EECON2 PCON WDTCON')
+    interrupt (name=EEINT enreg=PIE1 enmask=0x80 flgreg=PIR1 flgmask=0x80 prireg=NONE primask=0x00)
+
+
+
+#--------------------------------------------------------------------------------
+# 				LCD
+#--------------------------------------------------------------------------------
+
+peripheral (key=LCD sfrs='LCDCON LCDPS LCDSE0 LCDSE1')
+    pinfunc (key=SEG0 port=RB0 dir=out ctrladdr=0x11C ctrlmask=0x01)
+    pinfunc (key=SEG1 port=RB1 dir=out ctrladdr=0x11C ctrlmask=0x02)
+    pinfunc (key=SEG2 port=RB2 dir=out ctrladdr=0x11C ctrlmask=0x04)
+    pinfunc (key=SEG3 port=RB3 dir=out ctrladdr=0x11C ctrlmask=0x08)
+    pinfunc (key=SEG4 port=RA4 dir=out ctrladdr=0x11C ctrlmask=0x10)
+    pinfunc (key=SEG5 port=RA5 dir=out ctrladdr=0x11C ctrlmask=0x20)
+    pinfunc (key=SEG6 port=RC3 dir=out ctrladdr=0x11C ctrlmask=0x40)
+    pinfunc (key=SEG7 port=RA1 dir=out ctrladdr=0x11C ctrlmask=0x80)
+    pinfunc (key=SEG8 port=RC7 dir=out ctrladdr=0x11D ctrlmask=0x01)
+    pinfunc (key=SEG9 port=RC6 dir=out ctrladdr=0x11D ctrlmask=0x02)
+    pinfunc (key=SEG10 port=RC5 dir=out ctrladdr=0x11D ctrlmask=0x04)
+    pinfunc (key=SEG11 port=RC4 dir=out ctrladdr=0x11D ctrlmask=0x08)
+    pinfunc (key=SEG12 port=RA0 dir=out ctrladdr=0x11D ctrlmask=0x10)
+    pinfunc (key=SEG13 port=RB7 dir=out ctrladdr=0x11D ctrlmask=0x20)
+    pinfunc (key=SEG14 port=RB6 dir=out ctrladdr=0x11D ctrlmask=0x40)
+    pinfunc (key=SEG15 port=RA3 dir=out ctrladdr=0x11D ctrlmask=0x80)
+    pinfunc (key=LCDCOM0 port=RB4 dir=out ctrladdr=0x107 ctrlmask=0x0)
+    pinfunc (key=LCDCOM1 port=RB5 dir=out ctrladdr=0x107 ctrlmask=0x3)
+    pinfunc (key=LCDCOM2 port=RA2 dir=out ctrladdr=0x107 ctrlmask=0x2)
+    pinfunc (key=LCDCOM3 port=RA3 dir=out ctrladdr=0x107 ctrlmask=0x3)
+    interrupt (name=LCDINT enreg=PIE2 enmask=0x10 flgreg=PIR2 flgmask=0x10 prireg=NONE primask=0x00)

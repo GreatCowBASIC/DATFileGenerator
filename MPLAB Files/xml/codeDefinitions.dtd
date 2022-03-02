@@ -1,0 +1,27 @@
+<!-- This is a DTD for the <codeDefinitions> vocabulary, exactly as we -->
+<!-- received it from Sunrise.  The attribute list for the <line> element -->
+<!-- is incredibly loose. -->
+
+<!ELEMENT codeDefinitions (codeBlock)>
+
+<!ELEMENT codeBlock (code*)>
+
+<!ELEMENT code (line*)>
+<!ATTLIST code
+  name CDATA #REQUIRED
+  caption CDATA #REQUIRED
+>
+
+<!ELEMENT line EMPTY>
+<!ATTLIST line
+  action (W | WMAN | R | WREG | WREGMAN | WCFG | LREG.b_L | LREG.b_H | W.b_L
+    | W.b_H) #IMPLIED
+  code CDATA #IMPLIED
+  label CDATA #IMPLIED
+  include CDATA #IMPLIED
+  comment CDATA #IMPLIED
+  register CDATA #IMPLIED
+  mask CDATA #IMPLIED
+  RWMEnabled CDATA #IMPLIED
+  value CDATA #IMPLIED
+>

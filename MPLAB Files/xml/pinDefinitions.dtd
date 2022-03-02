@@ -1,0 +1,45 @@
+<!-- This DTD matches up with the <pinDefinitions> vocabulary that we got -->
+<!-- from Sunrise.  As with other vocabularies, I deleted the @comment -->
+<!-- attribute from an element here and there so I could tighten this DTD. -->
+
+<!-- The semantics of the <connection@port> and <connection@pin> attributes -->
+<!-- are not so good in this vocabulary.  We should definitely fix them on -->
+<!-- the next revision of this vocabulary. -->
+
+<!ELEMENT pinDefinitions (pin*)>
+<!ATTLIST pinDefinitions
+  bitmap CDATA #REQUIRED
+  height CDATA #REQUIRED
+  width CDATA #REQUIRED
+  type CDATA #REQUIRED
+  numberOfPins CDATA #REQUIRED
+  numberOfSides CDATA #REQUIRED
+  topLeftX CDATA #REQUIRED
+  leftTopY CDATA #REQUIRED
+  pinHeight CDATA #REQUIRED
+  pinWidth CDATA #REQUIRED
+  pinSpacing CDATA #REQUIRED
+  pin1Side CDATA #REQUIRED
+  pin1Pos CDATA #REQUIRED
+>
+<!-- Note: Both @pin1Side and @pin1Pos are ignored by the vocab handler. -->
+
+<!ELEMENT pin (connection*)>
+<!ATTLIST pin
+  number CDATA #REQUIRED
+  name CDATA #REQUIRED
+  initConnection CDATA #REQUIRED
+>
+
+<!ELEMENT connection EMPTY>
+<!ATTLIST connection
+  type CDATA #REQUIRED
+  name CDATA #REQUIRED
+  desc CDATA #REQUIRED
+  polarity CDATA #REQUIRED
+  feature CDATA #IMPLIED
+  instance CDATA #IMPLIED
+  port CDATA #IMPLIED
+  pin CDATA #IMPLIED
+>
+<!-- Note: Both @feature and @instance are ignored by the vocab handler. -->

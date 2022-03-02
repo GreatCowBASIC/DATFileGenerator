@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?> 
+<!DOCTYPE interrupts SYSTEM "../interrupts.dtd">
+
+<interrupts>
+  <interrupt intNumber="0" vectorNumber="" source="INT0" ISRName="External Interrupt 0" type="extern" instance="1" initAddress="0x0"/>
+  <interrupt intNumber="1" vectorNumber="" source="T0" ISRName="Timer 0" type="periph" feature="Timer" instance="0" initAddress="0x0"/>
+  <interrupt intNumber="2" vectorNumber="" source="T1" ISRName="Timer 1" type="periph" feature="Timer" instance="1" initAddress="0x0"/>
+  <interrupt intNumber="3" vectorNumber="" source="T2" ISRName="Timer 2" type="periph" feature="Timer" instance="2" initAddress="0x0"/>
+  <interrupt intNumber="4" vectorNumber="" source="T3" ISRName="Timer 3" type="periph" feature="Timer" instance="3" initAddress="0x0"/>
+  <interrupt intNumber="5" vectorNumber="" source="AD" ISRName="A to D Converter Done" type="periph" feature="A2D" instance="1" initAddress="0x0"/>
+  <interrupt intNumber="6" vectorNumber="" source="INT1" ISRName="External Interrupt 1" type="extern" instance="2" initAddress="0x0"/>
+  <interrupt intNumber="7" vectorNumber="" source="INT2" ISRName="External Interrupt 2" type="extern" instance="3" initAddress="0x0"/>
+  <interrupt intNumber="8" vectorNumber="" source="SSP" ISRName="Synchronous Serial Port" type="periph" feature="SSP" instance="1" initAddress="0x0"/>
+  <interrupt intNumber="9" vectorNumber="" source="CCP1" ISRName="CCP 1" type="periph" feature="CCP" instance="1" initAddress="0x0"/>
+  <interrupt intNumber="10" vectorNumber="" source="RB" ISRName="PORTB Interrupt-on-Change" type="periph" feature="RB" instance="1" initAddress="0x0"/>
+  <interrupt intNumber="11" vectorNumber="" source="LVD" ISRName="Low Voltage Detect" type="periph" feature="LVD" instance="1" initAddress="0x0"/>
+  <interrupt intNumber="12" vectorNumber="" source="CM" ISRName="Comparator" type="periph" feature="Comparator" instance="1" initAddress="0x0"/>
+  <interrupt intNumber="13" vectorNumber="" source="EE" ISRName="Data EEPROM/Flash Write" type="periph" feature="" instance="1" initAddress="0x0"/>
+  <interrupt intNumber="14" vectorNumber="" source="BCL" ISRName="Bus-Collision Interrupt" type="periph" feature="" instance="1" initAddress="0x0"/>
+  <interrupt intNumber="15" vectorNumber="" source="CCP2" ISRName="CCP 2" type="periph" feature="CCP" instance="2" initAddress="0x0"/>
+</interrupts>

@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE featureDefinitions SYSTEM "../featureDefinitions.dtd">
+
+<featureDefinitions name="Oscillator2" iconName="oscillator" helpIndex="">
+
+  <userControlGroup name="none" caption="none">
+    <userControlSubGroup name="none" caption="none">
+
+      <userControl name="applyButton">
+        <dialogConfig type="applyButton" caption="none"/>
+        <userAction name="apply">
+          <claimResource type="register" registerField="SCS" value="00"/>
+        </userAction>
+      </userControl>
+
+    </userControlSubGroup>
+  </userControlGroup>
+
+  <userControlGroup name="primaryOscSettings" caption="Primary Oscillator Settings">
+    <userControlSubGroup name="none" caption="none">
+
+      <userControl name="clockFreq">
+        <dialogConfig type="TB" caption="System Clock Frequency"/>
+        <userAction>
+          <!-- this is needed for baud calc and should just be stored -->
+        </userAction>
+      </userControl>
+
+      <userControl type="readOnly" name="fcy">
+        <dialogConfig type="general" caption="fcy"/>
+        <userAction>
+        </userAction>
+      </userControl>
+
+      <userControl name="showAdvanced">
+        <dialogConfig type="CK" caption="View Advanced Oscillator Settings"/>
+        <userAction name="enable"/>
+        <userAction name="disable"/>
+      </userControl>
+
+    </userControlSubGroup>
+  </userControlGroup>
+
+  <userControlGroup name="advancedOscSettings" caption="Advanced Oscillator Settings">
+    <userControlSubGroup name="none" caption="none">
+
+      <userControl name="primaryMode">
+        <dialogConfig type="CB" caption="Primary Oscillator Mode">
+          <selection name="setToINTIO1" value="INTIO1"/>
+          <selection name="setToINTIO2" value="INTIO2"/>
+	  <selection name="setToRCIO" value="RCIO"/>
+	  <selection name="setToHSPLL4" value="HSPLL x4"/>
+          <selection name="setToECIO" value="ECIO"/>
+	  <selection name="setToEC" value="EC"/>
+          <selection name="setToRC" value="RC"/>
+	  <selection name="setToHS" value="HS"/>
+	  <selection name="setToXT" value="XT"/>
+          <selection name="setToLP" value="LP"/>
+        </dialogConfig>
+        <userAction name="setToLP">
+          <claimResource type="register" registerField="FOSC" value="0000"/>
+          <claimResource type="pin" pin="OSC1" polarity="Inp"/>
+          <claimResource type="pin" pin="OSC2" polarity="Out"/>
+        </userAction>
+        <userAction name="setToXT">
+          <claimResource type="register" registerField="FOSC" value="0001"/>
+          <claimResource type="pin" pin="OSC1" polarity="Inp"/>
+          <claimResource type="pin" pin="OSC2" polarity="Inp"/>
+        </userAction>
+        <userAction name="setToHS">
+          <claimResource type="register" registerField="FOSC" value="0010"/>
+          <claimResource type="pin" pin="OSC1" polarity="Inp"/>
+          <claimResource type="pin" pin="OSC2" polarity="Inp"/>
+        </userAction>
+        <userAction name="setToRC">
+          <claimResource type="register" registerField="FOSC" value="0011"/>
+          <claimResource type="pin" pin="OSC1" polarity="Inp"/>
+          <claimResource type="pin" pin="CLKO" polarity="Out"/>
+        </userAction>
+        <userAction name="setToEC">
+          <claimResource type="register" registerField="FOSC" value="0100"/>
+          <claimResource type="pin" pin="OSC1" polarity="Inp"/>
+          <claimResource type="pin" pin="CLKO" polarity="Out"/>
+        </userAction>
+        <userAction name="setToECIO">
+          <claimResource type="register" registerField="FOSC" value="0101"/>
+          <claimResource type="pin" pin="OSC1" polarity="Inp"/>
+        </userAction>
+        <userAction name="setToHSPLL4">
+          <claimResource type="register" registerField="FOSC" value="0110"/>
+          <claimResource type="pin" pin="OSC1" polarity="Inp"/>
+          <claimResource type="pin" pin="OSC2" polarity="Inp"/>
+        </userAction>
+        <userAction name="setToRCIO">
+          <claimResource type="register" registerField="FOSC" value="0111"/>
+          <claimResource type="pin" pin="OSC1" polarity="Inp"/>
+        </userAction>
+        <userAction name="setToINTIO2">
+          <claimResource type="register" registerField="FOSC" value="1000"/>
+        </userAction>
+        <userAction name="setToINTIO1">
+          <claimResource type="register" registerField="FOSC" value="1001"/>
+          <claimResource type="pin" pin="CLKO" polarity="Out"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="intOscFreq">
+        <dialogConfig type="CB" caption="Internal Oscillator Frequency">
+          <selection name="setTo32MHz" value="32.0"/>
+          <selection name="setTo16MHz" value="16.0"/>
+          <selection name="setTo8MHz" value="8.0"/>
+          <selection name="setTo4MHz" value="4.0"/>
+          <selection name="setTo2MHz" value="2.0"/>
+          <selection name="setTo1MHz" value="1.0"/>
+          <selection name="setTo500kHz" value="0.500"/>
+          <selection name="setTo250kHz" value="0.250"/>
+          <selection name="setTo125kHz" value="0.125"/>
+          <selection name="setTo31kHz" value="0.031"/>
+        </dialogConfig>
+        <userAction name="setTo31KHz">
+          <claimResource type="register" registerField="IRCF" value="000"/>
+	  <claimResource type="register" registerField="PLLEN" value="0"/>
+        </userAction>
+        <userAction name="setTo125KHz">
+          <claimResource type="register" registerField="IRCF" value="001"/>
+	  <claimResource type="register" registerField="PLLEN" value="0"/>
+        </userAction>
+        <userAction name="setTo250KHz">
+          <claimResource type="register" registerField="IRCF" value="010"/>
+	  <claimResource type="register" registerField="PLLEN" value="0"/>
+        </userAction>
+        <userAction name="setTo500KHz">
+          <claimResource type="register" registerField="IRCF" value="011"/>
+	  <claimResource type="register" registerField="PLLEN" value="0"/>
+        </userAction>
+        <userAction name="setTo1MHz">
+          <claimResource type="register" registerField="IRCF" value="100"/>
+	  <claimResource type="register" registerField="PLLEN" value="0"/>
+        </userAction>
+        <userAction name="setTo2MHz">
+          <claimResource type="register" registerField="IRCF" value="101"/>
+	  <claimResource type="register" registerField="PLLEN" value="0"/>
+        </userAction>
+        <userAction name="setTo4MHz">
+          <claimResource type="register" registerField="IRCF" value="110"/>
+	  <claimResource type="register" registerField="PLLEN" value="0"/>
+        </userAction>
+        <userAction name="setTo8MHz">
+          <claimResource type="register" registerField="IRCF" value="111"/>
+	  <claimResource type="register" registerField="PLLEN" value="0"/>
+        </userAction>
+        <userAction name="setTo16MHz">
+          <claimResource type="register" registerField="IRCF" value="110"/>
+	  <claimResource type="register" registerField="PLLEN" value="1"/>
+        </userAction>
+        <userAction name="setTo32MHz">
+          <claimResource type="register" registerField="IRCF" value="111"/>
+	  <claimResource type="register" registerField="PLLEN" value="1"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="enableFailsafe">
+        <dialogConfig type="CK" caption="Enable Failsafe Clock Monitor"/>
+        <userAction name="enable">
+          <claimResource type="register" registerField="FCMEN" value="1"/>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="FCMEN" value="0"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="idleEnable">
+        <dialogConfig type="CK" caption="Device enters idle mode on SLEEP"/>
+        <userAction name="enable">
+          <claimResource type="register" registerField="IDLEN" value="1"/>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="IDLEN" value="0"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="useINTOSC">
+        <dialogConfig type="CK" caption="Use INTOSC source for 31 kHz"/>
+        <userAction name="enable">
+          <claimResource type="register" registerField="INTSRC" value="1"/>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="INTSRC" value="0"/>
+        </userAction>
+      </userControl>
+
+      <userControl name="enableTwoSpeedStartup">
+        <dialogConfig type="CK" caption="Enable Two-Speed Startup"/>
+        <userAction name="enable">
+          <claimResource type="register" registerField="IESO" value="1"/>
+        </userAction>
+        <userAction name="disable">
+          <claimResource type="register" registerField="IESO" value="0"/>
+        </userAction>
+      </userControl>
+
+
+    </userControlSubGroup>
+  </userControlGroup>
+
+</featureDefinitions>

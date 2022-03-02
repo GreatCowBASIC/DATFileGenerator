@@ -1,0 +1,12 @@
+This uses MPLAB-X 5.5
+However, the source files for the CONFIG have incorrect masks, and, therefore the INC file produced has the incorrect bit values.
+
+Example
+
+C:\Program Files\Microchip\MPLABX\v5.50\packs\Microchip\PIC18F-Q_DFP\1.11.185\xc8\pic\dat\cfgdata\18f27q84.cfgdata
+
+is CWORD:300002:FF:3F:CONFIG3 should be CWORD:300002:FF:FF:CONFIG3
+is CWORD:300004:7F:9F:CONFIG5 should be CWORD:300004:7F:FF:CONFIG5
+
+So, edit the .cfgdata before conversation to resolve the issue.
+

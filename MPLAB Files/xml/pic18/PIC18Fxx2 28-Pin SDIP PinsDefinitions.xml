@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE pinDefinitions SYSTEM "../pinDefinitions.dtd">
+
+<pinDefinitions bitmap="28-Pin SDIP" height="330" width="316" type="SDIP" numberOfPins="28" numberOfSides="2" 
+topLeftX="0" leftTopY="17" pinHeight="20" pinWidth="12" pinSpacing="10" pin1Side="0" pin1Pos="0">
+
+<pin number="1" name="MCLR-L/VPP" initConnection="unaccessible">
+	<connection type="other" name="MCLR-L/VPP" polarity="I/P" desc="Active low Master Reset Input or Programming Voltage Input"></connection>
+</pin>
+
+<pin number="2" name="RA0/AN0" initConnection="none">
+	<connection type="IOPort" name="RA0" feature="IOPort" port="A" pin="0" polarity="I/O" desc="PORT bidirectional I/O Port Pin"></connection>
+	<connection type="periph" name="AN0" feature="A2D" instance="0" polarity="Inp" desc="Analog Input"></connection>
+</pin>
+
+<pin number="3" name="RA1/AN1" initConnection="none">
+	<connection type="IOPort" name="RA1" feature="IOPort" port="A" pin="1" polarity="I/O" desc="PORT bidirectional I/O Port Pin"></connection>
+	<connection type="periph" name="AN1" feature="A2D" instance="1" polarity="Inp" desc="Analog Input"></connection>
+</pin>
+
+<pin number="4" name="RA2/AN2/VREF-" initConnection="none">
+	<connection type="IOPort" name="RA2" feature="IOPort" port="A" pin="2" polarity="I/O" desc="PORTA bidirectional I/O Port Pin 10"></connection>
+	<connection type="periph" name="AN2" feature="A2D" instance="1" polarity="Out" desc="Analog Input"></connection>
+	<connection type="other" name="VREF-" polarity="Input" desc="Analog Voltage Ref (Low) Input"></connection>
+</pin>
+
+<pin number="5" name="RA3/AN3/VREF+" initConnection="none">
+	<connection type="IOPort" name="RA3" feature="IOPort" port="A" pin="3" polarity="I/O" desc="PORTA bidirectional I/O Port Pin 10"></connection>
+	<connection type="periph" name="AN3" feature="A2D" instance="1" polarity="Out" desc="Analog Input"></connection>
+	<connection type="other" name="VREF+" polarity="Input" desc="Analog Voltage Ref (High) Input"></connection>
+</pin>
+
+<pin number="6" name="RA4/T0CK" initConnection="none">
+	<connection type="IOPort" name="RA4" feature="IOPort" port="A" pin="4" polarity="I/O" desc="PORT bidirectional I/O Port Pin"></connection>
+	<connection type="periph" name="T0CK" feature="Timer" instance="0" polarity="Inp" desc="Timer 0 exernal clock input"></connection>
+</pin>
+
+<pin number="7" name="RA5/AN4/LVDIN/SS1-L" initConnection="none">
+	<connection type="IOPort" name="RA5" feature="IOPort" port="A" pin="5" polarity="I/O" desc="PORT bidirectional I/O Port Pin"></connection>
+	<connection type="periph" name="AN4" feature="A2D" instance="4" polarity="Inp" desc="Analog Input"></connection>
+	<connection type="other" name="LVDIN" feature="Reset" polarity="Input" desc="Analog Low Voltage Detect Ref Volage Input Pin"></connection>
+	<connection type="periph" name="SS1-L" feature="SPI" instance="1" polarity="Inp" desc="SPI slave select input"></connection>
+</pin>
+
+<pin number="8" name="VSS" initConnection="unaccessible">
+	<connection type="other" name="VSS" polarity="P" desc="Gnd Ref for Logic and I/O Pins"></connection>
+</pin>
+
+<pin number="9" name="OSC1/CLKI" initConnection="none">
+	<connection type="other" name="OSC1" polarity="Inp" desc="Oscillator Crystal Input"></connection>
+	<connection type="other" name="CLKI" polarity="Inp" desc="Ext Clock Source Input"></connection>
+</pin>
+
+<pin number="10" name="OSC2/CLKO/RA6" initConnection="none">
+	<connection type="other" name="OSC2" polarity="I/O" desc="Oscillator Crystal Output"></connection>
+	<connection type="other" name="CLKO" polarity="Inp" desc="Oscillator Crystal Output"></connection>
+	<connection type="IOPort" name="RA6" feature="IOPort" port="A" pin="6" polarity="I/O" desc="PORT bidirectional I/O Port Pin"></connection>
+</pin>
+
+<pin number="11" name="RC0/T1OSO/T13CKI" initConnection="none">
+	<connection type="IOPort" name="RC0" feature="IOPort" port="C" pin="0" polarity="I/O" desc="PORT bidirectional I/O Port"></connection>
+	<connection type="periph" name="T1OSO" feature="Timer" instance="1" polarity="Out" desc="Timer 1 oscillator output"></connection>
+	<connection type="periph" name="T13CKI" feature="Timer" instance="1,3" polarity="Inp" desc="Timer 1,3 exernal clock input"></connection>
+</pin>
+
+<pin number="12" name="RC1/T1OSI/CCP2" initConnection="none">
+	<connection type="IOPort" name="RC1" feature="IOPort" port="C" pin="1" polarity="I/O" desc="PORT bidirectional I/O Port"></connection>
+	<connection type="periph" name="T1OSI" feature="Timer" instance="1" polarity="Inp" desc="Timer 1 oscillator input"></connection>
+	<connection type="periph" name="CCP2" feature="CCP" instance="1" pin="2" polarity="I/O" desc="Capture in, Compare out, or PWM out"></connection>
+</pin>
+
+<pin number="13" name="RC2/CCP1" initConnection="none">
+	<connection type="IOPort" name="RC2" feature="IOPort" port="C" pin="2" polarity="I/O" desc="PORT bidirectional I/O Port"></connection>
+	<connection type="periph" name="CCP1" feature="CCP" instance="1" pin="1" polarity="I/O" desc="Capture in, Compare out, or PWM out"></connection>
+</pin>
+
+<pin number="14" name="RC3/SCK1/SCL" initConnection="none">
+	<connection type="IOPort" name="RC3" feature="IOPort" port="C" pin="3" polarity="I/O" desc="PORT bidirectional I/O Port"></connection>
+	<connection type="periph" name="SCK1" feature="SPI" instance="1" polarity="I/O" desc="SPI1 Sync Serial Clock I/O"></connection>
+	<connection type="periph" name="SCL" feature="I2C" polarity="I/O" desc="I2C Sync Serial Clock I/O"></connection>
+</pin>
+
+<pin number="15" name="RC4/SDI1/SDA" initConnection="none">
+	<connection type="IOPort" name="RC4" feature="IOPort" port="C" pin="4" polarity="I/O" desc="PORT bidirectional I/O Port"></connection>
+	<connection type="periph" name="SDI1" feature="SPI" instance="1" polarity="I/O" desc="SPI1 Data In"></connection>
+	<connection type="periph" name="SDA" feature="I2C" polarity="I/O" desc="I2C Sync Serial Data I/O"></connection>
+</pin>
+
+<pin number="16" name="RC5/SDO1" initConnection="none">
+	<connection type="IOPort" name="RC5" feature="IOPort" port="C" pin="5" polarity="I/O" desc="PORT bidirectional I/O Port"></connection>
+	<connection type="periph" name="SDO1" feature="SPI" instance="1" polarity="I/O" desc="SPI1 Data Out"></connection>
+</pin>
+
+<pin number="17" name="RC6/U1TX/CK1" initConnection="none">
+	<connection type="periph" name="U1TX" feature="UART" instance="1" polarity="Out" desc="UART1 Transmit"></connection>
+	<connection type="periph" name="CK1" feature="UART" instance="1" polarity="Out" desc="UART1 Synch clock"></connection>
+	<connection type="IOPort" name="RC6" feature="IOPort" port="C" pin="6" polarity="I/O" desc="PORT bidirectional I/O Port"></connection>
+</pin>
+
+<pin number="18" name="RC7/U1RX/DT1" initConnection="none">
+	<connection type="periph" name="U1RX" feature="UART" instance="1" polarity="Inp" desc="UART1 Receive"></connection>
+	<connection type="periph" name="DT1" feature="UART" instance="1" polarity="Inp" desc="UART1 Synch data"></connection>
+	<connection type="IOPort" name="RC7" feature="IOPort" port="C" pin="7" polarity="I/O" desc="PORT bidirectional I/O Port"></connection>
+</pin>
+
+<pin number="19" name="VSS" initConnection="unaccessible">
+	<connection type="other" name="VSS" polarity="P" desc="Ground Ref for for Logic and I/O"></connection>
+</pin>
+
+<pin number="20" name="VDD" initConnection="unaccessible">
+	<connection type="other" name="VDD" polarity="P" desc="Positive Supply for Logic and I/O"></connection>
+</pin>
+
+<pin number="21" name="RB0/INT0" initConnection="none">
+	<connection type="IOPort" name="RB0" feature="IOPort" port="B" pin="0" polarity="I/O" desc="PORT bidirectional I/O Port Pin"></connection>
+	<connection type="periph" name="INT0" feature="ExtInt" instance="1" polarity="Inp" desc="External Interrupt 1"></connection>
+</pin>
+
+<pin number="22" name="RB1/INT1" initConnection="none">
+	<connection type="IOPort" name="RB1" feature="IOPort" port="B" pin="1" polarity="I/O" desc="PORT bidirectional I/O Port Pin"></connection>
+	<connection type="periph" name="INT1" feature="ExtInt" instance="1" polarity="Inp" desc="External Interrupt 1"></connection>
+</pin>
+
+<pin number="23" name="RB2/INT2" initConnection="none">
+	<connection type="IOPort" name="RB2" feature="IOPort" port="B" pin="2" polarity="I/O" desc="PORT bidirectional I/O Port Pin"></connection>
+	<connection type="periph" name="INT2" feature="ExtInt" instance="1" polarity="Inp" desc="External Interrupt 1"></connection>
+</pin>
+
+<pin number="24" name="RB3/INT3/CCP2MX" initConnection="none">
+	<connection type="IOPort" name="RB3" feature="IOPort" port="B" pin="3" polarity="I/O" desc="PORT bidirectional I/O Port"></connection>
+	<connection type="periph" name="INT3" feature="ExtInt" instance="4" polarity="Inp" desc="External Interrupt 1"></connection>
+	<connection type="periph" name="CCP2MX" feature="CCP" instance="1" pin="2" polarity="I/O" desc="Capture in, Compare out, or PWM out"></connection>
+</pin>
+
+<pin number="25" name="RB4" initConnection="none">
+	<connection type="IOPort" name="RB4" feature="IOPort" port="B" pin="4" polarity="I/O" desc="PORT bidirectional I/O Port"></connection>
+</pin>
+
+<pin number="26" name="RB5/PGM" initConnection="none">
+	<connection type="IOPort" name="RB5" feature="IOPort" port="B" pin="5" polarity="I/O" desc="PORT bidirectional I/O Port"></connection>
+	<connection type="other" name="PGM" polarity="I/O" desc="In Ckt Serial Programming Data I/O Pin"></connection>
+</pin>
+
+<pin number="27" name="RB6/PGC" initConnection="none">
+	<connection type="IOPort" name="RB6" feature="IOPort" port="B" pin="6" polarity="I/O" desc="PORT bidirectional I/O Port"></connection>
+	<connection type="other" name="PGC" polarity="I/O" desc="In Ckt Serial Programming Data I/O Pin"></connection>
+</pin>
+
+<pin number="28" name="RB7/PGD" initConnection="none">
+	<connection type="IOPort" name="RB7" feature="IOPort" port="B" pin="7" polarity="I/O" desc="PORT bidirectional I/O Port"></connection>
+	<connection type="other" name="PGD" polarity="I/O" desc="In Ckt Serial Programming Data I/O Pin"></connection>
+</pin>
+
+</pinDefinitions>

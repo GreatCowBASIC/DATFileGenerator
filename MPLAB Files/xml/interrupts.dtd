@@ -1,0 +1,26 @@
+<!-- This DTD describes the VDI XML vocabulary for describing a device's -->
+<!-- interrupts that we got from Sunrise.  I made only one change: I -->
+<!-- removed the @comment attribute from an <interrupts> element so I could -->
+<!-- disallow it and have a slightly tighter DTD.  With that one change, -->
+<!-- all of our <interrupts> files are valid against this DTD. -->
+
+<!ELEMENT interrupts (trap*, interrupt*)>
+
+<!ELEMENT trap EMPTY>
+
+<!ELEMENT interrupt EMPTY>
+
+<!ENTITY % trap_and_interrupt_attribute_list
+  "vectorNumber CDATA #REQUIRED
+  source CDATA #REQUIRED
+  ISRName CDATA #REQUIRED
+  initAddress CDATA #REQUIRED
+  instance CDATA #REQUIRED
+  intNumber CDATA #REQUIRED
+  type (periph | NVM | CN | extern | internal) #REQUIRED
+  feature CDATA #IMPLIED"
+>
+
+<!ATTLIST trap %trap_and_interrupt_attribute_list;>
+
+<!ATTLIST interrupt %trap_and_interrupt_attribute_list;>

@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE featureDefinitions SYSTEM "../featureDefinitions.dtd">
+
+<featureDefinitions name="Oscillator" iconName="oscillator" helpIndex="">
+
+<userControlGroup name="none" caption="none">
+<userControlSubGroup name="none" caption="none">
+
+<userControl name="applyButton">
+<dialogConfig type="applyButton" caption="none"></dialogConfig>
+<userAction name="apply">
+	<claimResource type="pin" pin="OSC1" polarity="Inp"></claimResource>
+</userAction>
+</userControl>
+
+</userControlSubGroup>
+</userControlGroup>
+
+<userControlGroup name="primaryOscSettings" caption="Primary Oscillator Settings">
+<userControlSubGroup name="none" caption="none">
+
+<userControl name="clockFreq">
+<dialogConfig type="TB" caption="System Clock Frequency"></dialogConfig>
+<userAction>
+	<!-- this is needed for baud calc and should just be stored -->
+</userAction>
+</userControl>
+
+<userControl type="readOnly" name="fcy">
+<dialogConfig type="general" caption="fcy"></dialogConfig>
+<userAction>
+</userAction>
+</userControl>
+
+<userControl name="showAdvanced">
+<dialogConfig type="CK" caption="View Advanced Oscillator Settings"></dialogConfig>
+<userAction name="enable">
+	<!-- what to do here????? -->
+</userAction>
+<userAction name="disable">
+</userAction>
+</userControl>
+
+</userControlSubGroup>
+</userControlGroup>
+
+<userControlGroup name="advancedOscSettings" caption="Advanced Oscillator Settings">
+<userControlSubGroup name="none" caption="none">
+
+<userControl name="clockSource">
+<dialogConfig type="CB" caption="Clock Source">
+	<selection name="primOsc" value="Primary Oscillator"></selection> 
+	<selection name="internalFRC8M" value="Internal (8MHz)"></selection> 
+	<selection name="internalFRC4M" value="Internal (4MHz)"></selection> 
+	<selection name="internalFRC2M" value="Internal (2MHz)"></selection> 
+	<selection name="internalFRC1M" value="Internal (1MHz)"></selection> 
+	<selection name="internalFRC500k" value="Internal (500kHz)"></selection> 
+	<selection name="internalFRC250k" value="Internal (250kHz)"></selection> 
+	<selection name="internalFRC125k" value="Internal (125kHz)"></selection> 
+	<selection name="internalFRC31k" value="Internal (31.25kHz)"></selection> 
+	<selection name="internalLPRC" value="Internal RC (31kHz)"></selection> 
+	<selection name="secOsc" value="Secondary Oscillator (Timer1)"></selection> 
+</dialogConfig>
+<userAction name="secOsc">
+	<claimResource type="register" registerField="SCS1" value="0"></claimResource>
+	<claimResource type="register" registerField="SCS0" value="1"></claimResource>
+	<claimResource type="register" registerField="T10SCEN" value="1"></claimResource>
+</userAction>
+<userAction name="internalLPRC">
+	<claimResource type="register" registerField="SCS1" value="1"></claimResource>
+	<claimResource type="register" registerField="SCS0" value="0"></claimResource>
+	<claimResource type="register" registerField="IRCF2" value="0"></claimResource>
+	<claimResource type="register" registerField="IRCF1" value="0"></claimResource>
+	<claimResource type="register" registerField="IRCF0" value="0"></claimResource>
+	<claimResource type="register" registerField="INTSRC" value="0"></claimResource>
+</userAction>
+<userAction name="internalFRC31k">
+	<claimResource type="register" registerField="SCS1" value="1"></claimResource>
+	<claimResource type="register" registerField="SCS0" value="0"></claimResource>
+	<claimResource type="register" registerField="IRCF2" value="0"></claimResource>
+	<claimResource type="register" registerField="IRCF1" value="0"></claimResource>
+	<claimResource type="register" registerField="IRCF0" value="0"></claimResource>
+	<claimResource type="register" registerField="INTSRC" value="1"></claimResource>
+</userAction>
+<userAction name="internalFRC125k">
+	<claimResource type="register" registerField="SCS1" value="1"></claimResource>
+	<claimResource type="register" registerField="SCS0" value="0"></claimResource>
+	<claimResource type="register" registerField="IRCF2" value="0"></claimResource>
+	<claimResource type="register" registerField="IRCF1" value="0"></claimResource>
+	<claimResource type="register" registerField="IRCF0" value="1"></claimResource>
+</userAction>
+<userAction name="internalFRC250k">
+	<claimResource type="register" registerField="SCS1" value="1"></claimResource>
+	<claimResource type="register" registerField="SCS0" value="0"></claimResource>
+	<claimResource type="register" registerField="IRCF2" value="0"></claimResource>
+	<claimResource type="register" registerField="IRCF1" value="1"></claimResource>
+	<claimResource type="register" registerField="IRCF0" value="0"></claimResource>
+</userAction>
+<userAction name="internalFRC500k">
+	<claimResource type="register" registerField="SCS1" value="1"></claimResource>
+	<claimResource type="register" registerField="SCS0" value="0"></claimResource>
+	<claimResource type="register" registerField="IRCF2" value="0"></claimResource>
+	<claimResource type="register" registerField="IRCF1" value="1"></claimResource>
+	<claimResource type="register" registerField="IRCF0" value="1"></claimResource>
+</userAction>
+<userAction name="internalFRC1M">
+	<claimResource type="register" registerField="SCS1" value="1"></claimResource>
+	<claimResource type="register" registerField="SCS0" value="0"></claimResource>
+	<claimResource type="register" registerField="IRCF2" value="1"></claimResource>
+	<claimResource type="register" registerField="IRCF1" value="0"></claimResource>
+	<claimResource type="register" registerField="IRCF0" value="0"></claimResource>
+</userAction>
+<userAction name="internalFRC2M">
+	<claimResource type="register" registerField="SCS1" value="1"></claimResource>
+	<claimResource type="register" registerField="SCS0" value="0"></claimResource>
+	<claimResource type="register" registerField="IRCF2" value="1"></claimResource>
+	<claimResource type="register" registerField="IRCF1" value="0"></claimResource>
+	<claimResource type="register" registerField="IRCF0" value="1"></claimResource>
+</userAction>
+<userAction name="internalFRC4M">
+	<claimResource type="register" registerField="SCS1" value="1"></claimResource>
+	<claimResource type="register" registerField="SCS0" value="0"></claimResource>
+	<claimResource type="register" registerField="IRCF2" value="1"></claimResource>
+	<claimResource type="register" registerField="IRCF1" value="1"></claimResource>
+	<claimResource type="register" registerField="IRCF0" value="0"></claimResource>
+</userAction>
+<userAction name="internalFRC8M">
+	<claimResource type="register" registerField="SCS1" value="1"></claimResource>
+	<claimResource type="register" registerField="SCS0" value="0"></claimResource>
+	<claimResource type="register" registerField="IRCF2" value="1"></claimResource>
+	<claimResource type="register" registerField="IRCF1" value="1"></claimResource>
+	<claimResource type="register" registerField="IRCF0" value="1"></claimResource>
+</userAction>
+<userAction name="primOsc">
+	<claimResource type="register" registerField="SCS1" value="0"></claimResource>
+	<claimResource type="register" registerField="SCS0" value="0"></claimResource>
+</userAction>
+</userControl>
+
+<userControl name="useClockDivider">
+<dialogConfig type="CB" caption="Clock Divide">
+	<selection name="setToDiv1" value="divide by 1"></selection>
+</dialogConfig>
+<userAction name="setToDiv1">
+</userAction>
+</userControl>
+
+<userControl name="primaryMode">
+<dialogConfig type="CB" caption="Primary Mode Select (OSC2 Pin)">
+	<selection name="setToERCIO" value="RC x1 (I/O)"></selection>
+	<selection name="setToLP" value="LP x1 (OSC2)"></selection>
+	<selection name="setToECIO" value="ECIO x1 (I/O)"></selection>
+	<selection name="setToERC" value="RC x1 (CLKO)"></selection>
+	<selection name="setToEC" value="EC x1 (CLKO)"></selection>
+	<selection name="setToXTL" value="XT x1 (OSC2)"></selection>
+	<selection name="setToHS" value="HS x1 (OSC2)"></selection>
+	<selection name="setToHSPLL4" value="HS + PLL x4 (OSC2)"></selection>
+	<selection name="setToInt8MPLLIO" value="Internal 8Mhz + PLL x4 (I/O)"></selection>
+	<selection name="setToInt8MPLLCLKO" value="Internal 8Mhz + PLL x4 (CLKO)"></selection>
+	<selection name="setToInt4MPLLIO" value="Internal 4Mhz + PLL x4 (I/O)"></selection>
+	<selection name="setToInt4MPLLCLKO" value="Internal 4Mhz + PLL x4 (CLKO)"></selection>
+</dialogConfig>
+<userAction name="setToInt4MPLLCLKO">
+	<claimResource type="register" registerField="FOSC3" value="1"></claimResource>
+	<claimResource type="register" registerField="FOSC" value="000"></claimResource>
+	<claimResource type="register" registerField="PLLEN" value="1"></claimResource>
+	<claimResource type="register" registerField="IRCF2" value="1"></claimResource>
+	<claimResource type="register" registerField="IRCF1" value="1"></claimResource>
+	<claimResource type="register" registerField="IRCF0" value="0"></claimResource>
+	<claimResource type="pin" pin="CLKO" polarity="Inp"></claimResource>
+</userAction>
+<userAction name="setToInt4MPLLIO">
+	<claimResource type="register" registerField="FOSC3" value="1"></claimResource>
+	<claimResource type="register" registerField="FOSC" value="001"></claimResource>
+	<claimResource type="register" registerField="PLLEN" value="1"></claimResource>
+	<claimResource type="register" registerField="IRCF2" value="1"></claimResource>
+	<claimResource type="register" registerField="IRCF1" value="1"></claimResource>
+	<claimResource type="register" registerField="IRCF0" value="1"></claimResource>
+</userAction>
+<userAction name="setToInt8MPLLCLKO">
+	<claimResource type="register" registerField="FOSC3" value="1"></claimResource>
+	<claimResource type="register" registerField="FOSC" value="000"></claimResource>
+	<claimResource type="register" registerField="PLLEN" value="1"></claimResource>
+	<claimResource type="register" registerField="IRCF2" value="1"></claimResource>
+	<claimResource type="register" registerField="IRCF1" value="1"></claimResource>
+	<claimResource type="register" registerField="IRCF0" value="0"></claimResource>
+	<claimResource type="pin" pin="CLKO" polarity="Inp"></claimResource>
+</userAction>
+<userAction name="setToInt8MPLLIO">
+	<claimResource type="register" registerField="FOSC3" value="1"></claimResource>
+	<claimResource type="register" registerField="FOSC" value="001"></claimResource>
+	<claimResource type="register" registerField="PLLEN" value="1"></claimResource>
+	<claimResource type="register" registerField="IRCF2" value="1"></claimResource>
+	<claimResource type="register" registerField="IRCF1" value="1"></claimResource>
+	<claimResource type="register" registerField="IRCF0" value="1"></claimResource>
+</userAction>
+<userAction name="setToXTPLL4">
+	<claimResource type="register" registerField="FOSC3" value="0"></claimResource>
+	<claimResource type="register" registerField="FOSC" value="110"></claimResource>
+	<claimResource type="register" registerField="PLLEN" value="0"></claimResource>
+	<claimResource type="pin" pin="OSC2" polarity="Inp"></claimResource>
+</userAction>
+
+<userAction name="setToHS">
+	<claimResource type="register" registerField="FOSC3" value="0"></claimResource>
+	<claimResource type="register" registerField="FOSC" value="010"></claimResource>
+	<claimResource type="register" registerField="PLLEN" value="0"></claimResource>
+	<claimResource type="pin" pin="OSC2" polarity="Inp"></claimResource>
+</userAction>
+
+<userAction name="setToXTL">
+	<claimResource type="register" registerField="FOSC3" value="0"></claimResource>
+	<claimResource type="register" registerField="FOSC" value="001"></claimResource>
+	<claimResource type="register" registerField="PLLEN" value="0"></claimResource>
+	<claimResource type="pin" pin="OSC2" polarity="Inp"></claimResource>
+</userAction>
+
+<userAction name="setToEC">
+	<claimResource type="register" registerField="FOSC3" value="0"></claimResource>
+	<claimResource type="register" registerField="FOSC" value="100"></claimResource>
+	<claimResource type="register" registerField="PLLEN" value="0"></claimResource>
+	<claimResource type="pin" pin="CLKO" polarity="Out"></claimResource>
+</userAction>
+
+<userAction name="setToERC">
+	<claimResource type="register" registerField="FOSC3" value="0"></claimResource>
+	<claimResource type="register" registerField="FOSC" value="011"></claimResource>
+	<claimResource type="register" registerField="PLLEN" value="0"></claimResource>
+	<claimResource type="pin" pin="CLKO" polarity="Out"></claimResource>
+</userAction>
+
+<userAction name="setToECIO">
+	<claimResource type="register" registerField="FOSC3" value="0"></claimResource>
+	<claimResource type="register" registerField="FOSC" value="101"></claimResource>
+	<claimResource type="register" registerField="PLLEN" value="0"></claimResource>
+</userAction>
+
+<userAction name="setToLP">
+	<claimResource type="register" registerField="FOSC3" value="0"></claimResource>
+	<claimResource type="register" registerField="FOSC" value="000"></claimResource>
+	<claimResource type="register" registerField="PLLEN" value="0"></claimResource>
+	<claimResource type="pin" pin="CLKO" polarity="Out"></claimResource>
+</userAction>
+
+<userAction name="setToERCIO">
+	<claimResource type="register" registerField="FOSC3" value="0"></claimResource>
+	<claimResource type="register" registerField="FOSC" value="111"></claimResource>
+	<claimResource type="register" registerField="PLLEN" value="0"></claimResource>
+</userAction>
+
+</userControl>
+
+<userControl name="clockSwitching">
+<dialogConfig type="CK" caption="Clock Switching"></dialogConfig>
+<userAction name="enable">
+	<claimResource type="register" registerField="FCKSMEN14" value="0"></claimResource>
+</userAction>
+<userAction name="disable">
+	<claimResource type="register" registerField="FCKSMEN14" value="1"></claimResource>
+</userAction>
+</userControl>
+
+<userControl name="aux32Khz">
+<dialogConfig type="CK" caption="Aux. 32KHz Oscillator Enabled"></dialogConfig>
+<userAction name="enable">
+	<claimResource type="pin" pin="T1OSO" polarity="Shared"></claimResource>
+	<claimResource type="pin" pin="T1OSI" polarity="Shared"></claimResource>
+	<claimResource type="register" registerField="SCS" value="1"></claimResource>
+</userAction>
+<userAction name="disable">
+	<claimResource type="register" registerField="SCS" value="0"></claimResource>
+</userAction>
+</userControl>
+
+<userControl name="idleEnable">
+<dialogConfig type="CK" caption="Oscillator Idle Enabled on Sleep"></dialogConfig>
+<userAction name="enable">
+	<claimResource type="register" registerField="IDLEN" value="1"></claimResource>
+</userAction>
+<userAction name="disable">
+	<claimResource type="register" registerField="IDLEN" value="0"></claimResource>
+</userAction>
+</userControl>
+
+<userControl name="conversionInt">
+<dialogConfig type="CB" caption="Conversions / Int">
+	<selection name="centerFreq" value="Center Frequency"></selection>
+	<selection name="minFreq" value="Minimum Frequency"></selection>
+	<selection name="tuneBinary3" value="10001"></selection>
+	<selection name="tuneBinary4" value="10010"></selection>
+	<selection name="tuneBinary5" value="10011"></selection>
+	<selection name="tuneBinary6" value="10100"></selection>
+	<selection name="tuneBinary7" value="10101"></selection>
+	<selection name="tuneBinary8" value="10110"></selection>
+	<selection name="tuneBinary9" value="10111"></selection>
+	<selection name="tuneBinary10" value="11000"></selection>
+	<selection name="tuneBinary11" value="11001"></selection>
+	<selection name="tuneBinary12" value="11010"></selection>
+	<selection name="tuneBinary13" value="11011"></selection>
+	<selection name="tuneBinary14" value="11100"></selection>
+	<selection name="tuneBinary15" value="11101"></selection>
+	<selection name="tuneBinary16" value="11110"></selection>
+	<selection name="tuneBinary17" value="11111"></selection>
+	<selection name="centerFreqC" value="Center Frequency"></selection>
+	<selection name="tuneBinary19" value="00001"></selection>
+	<selection name="tuneBinary20" value="00010"></selection>
+	<selection name="tuneBinary21" value="00011"></selection>
+	<selection name="tuneBinary22" value="00100"></selection>
+	<selection name="tuneBinary23" value="00101"></selection>
+	<selection name="tuneBinary24" value="00110"></selection>
+	<selection name="tuneBinary25" value="00111"></selection>
+	<selection name="tuneBinary26" value="01000"></selection>
+	<selection name="tuneBinary27" value="01001"></selection>
+	<selection name="tuneBinary28" value="01010"></selection>
+	<selection name="tuneBinary29" value="01011"></selection>
+	<selection name="tuneBinary30" value="01100"></selection>
+	<selection name="tuneBinary31" value="01101"></selection>
+	<selection name="tuneBinary32" value="01110"></selection>
+	<selection name="maxFreq" value="Maximum Frequency"></selection>
+</dialogConfig>
+<userAction name="maxFreq">
+	<claimResource type="register" registerField="TUN40" value="01111"></claimResource>
+</userAction>
+<userAction name="tuneBinary32">
+	<claimResource type="register" registerField="TUN40" value="01110"></claimResource>
+</userAction>
+<userAction name="tuneBinary31">
+	<claimResource type="register" registerField="TUN40" value="01101"></claimResource>
+</userAction>
+<userAction name="tuneBinary30">
+	<claimResource type="register" registerField="TUN40" value="01100"></claimResource>
+</userAction>
+<userAction name="tuneBinary29">
+	<claimResource type="register" registerField="TUN40" value="01011"></claimResource>
+</userAction>
+<userAction name="tuneBinary28">
+	<claimResource type="register" registerField="TUN40" value="01010"></claimResource>
+</userAction>
+<userAction name="tuneBinary27">
+	<claimResource type="register" registerField="TUN40" value="01001"></claimResource>
+</userAction>
+<userAction name="tuneBinary26">
+	<claimResource type="register" registerField="TUN40" value="01000"></claimResource>
+</userAction>
+<userAction name="tuneBinary25">
+	<claimResource type="register" registerField="TUN40" value="00111"></claimResource>
+</userAction>
+<userAction name="tuneBinary24">
+	<claimResource type="register" registerField="TUN40" value="00110"></claimResource>
+</userAction>
+<userAction name="tuneBinary23">
+	<claimResource type="register" registerField="TUN40" value="00101"></claimResource>
+</userAction>
+<userAction name="tuneBinary22">
+	<claimResource type="register" registerField="TUN40" value="00100"></claimResource>
+</userAction>
+<userAction name="tuneBinary21">
+	<claimResource type="register" registerField="TUN40" value="00011"></claimResource>
+</userAction>
+<userAction name="tuneBinary20">
+	<claimResource type="register" registerField="TUN40" value="00010"></claimResource>
+</userAction>
+<userAction name="tuneBinary19">
+	<claimResource type="register" registerField="TUN40" value="00001"></claimResource>
+</userAction>
+<userAction name="centerFreqC">
+	<claimResource type="register" registerField="TUN40" value="00000"></claimResource>
+</userAction>
+<userAction name="tuneBinary17">
+	<claimResource type="register" registerField="TUN40" value="11111"></claimResource>
+</userAction>
+<userAction name="tuneBinary16">
+	<claimResource type="register" registerField="TUN40" value="11110"></claimResource>
+</userAction>
+<userAction name="tuneBinary15">
+	<claimResource type="register" registerField="TUN40" value="11101"></claimResource>
+</userAction>
+<userAction name="tuneBinary14">
+	<claimResource type="register" registerField="TUN40" value="11100"></claimResource>
+</userAction>
+<userAction name="tuneBinary13">
+	<claimResource type="register" registerField="TUN40" value="11011"></claimResource>
+</userAction>
+<userAction name="tuneBinary12">
+	<claimResource type="register" registerField="TUN40" value="11010"></claimResource>
+</userAction>
+<userAction name="tuneBinary11">
+	<claimResource type="register" registerField="TUN40" value="11001"></claimResource>
+</userAction>
+<userAction name="tuneBinary10">
+	<claimResource type="register" registerField="TUN40" value="11000"></claimResource>
+</userAction>
+<userAction name="tuneBinary9">
+	<claimResource type="register" registerField="TUN40" value="10111"></claimResource>
+</userAction>
+<userAction name="tuneBinary8">
+	<claimResource type="register" registerField="TUN40" value="10110"></claimResource>
+</userAction>
+<userAction name="tuneBinary7">
+	<claimResource type="register" registerField="TUN40" value="10101"></claimResource>
+</userAction>
+<userAction name="tuneBinary6">
+	<claimResource type="register" registerField="TUN40" value="10100"></claimResource>
+</userAction>
+<userAction name="tuneBinary5">
+	<claimResource type="register" registerField="TUN40" value="10011"></claimResource>
+</userAction>
+<userAction name="tuneBinary4">
+	<claimResource type="register" registerField="TUN40" value="10010"></claimResource>
+</userAction>
+<userAction name="tuneBinary3">
+	<claimResource type="register" registerField="TUN40" value="10001"></claimResource>
+</userAction>
+<userAction name="minFreq">
+	<claimResource type="register" registerField="TUN40" value="10000"></claimResource>
+</userAction>
+<userAction name="centerFreq">
+	<claimResource type="register" registerField="TUN40" value="00000"></claimResource>
+</userAction>
+</userControl>
+
+</userControlSubGroup>
+</userControlGroup>
+
+</featureDefinitions>
