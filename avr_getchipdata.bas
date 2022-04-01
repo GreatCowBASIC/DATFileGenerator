@@ -453,6 +453,10 @@ FOR CurrentChip = StartChip to ChipCount
       ChipFamily = 121
     end if
 
+    if ChipFamilyOveride = 123 then
+      ChipFamily = 123
+    end if
+
     if ChipFamilyOveride = 121 then
       If ChipPinsRaw <> -1 then
         ChipPins = ChipPinsRaw
@@ -1408,13 +1412,26 @@ Function GetIntName (IntVect As String) As String
             IntName = "UsartRX1Ready"
 
         Case "USART1_UDRE", "UART1_UDRE":
-            IntName = "UsartTX2Ready"
+            If ChipFamilyOveride <> 123 then
+              IntName = "UsartTX2Ready"
+            Else
+              IntName = "UsartTX1Ready"
+            End If
 
         Case "USART1_TX", "UART1_TX", "USART1_TXC":
-            IntName = "UsartTX2Sent"
+            If ChipFamilyOveride <> 123 then
+              IntName = "UsartTX2Sent"
+            Else
+              IntName = "UsartTX1Sent"
+            End If
+
 
         Case "USART1_RX", "UART1_RX", "USART1_RXC":
-            IntName = "UsartRX2Ready"
+            If ChipFamilyOveride <> 123 then
+              IntName = "UsartRX2Ready"
+            Else
+              IntName = "UsartRX1Ready"
+            End If
 
         Case "USART2_UDRE":
             IntName = "UsartTX3Ready"
