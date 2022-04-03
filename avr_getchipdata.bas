@@ -96,7 +96,7 @@ Dim Shared As Integer ChipRAM, RamStart, ChipFamily, ChipPins, CurrentPinout
 Dim Shared As Integer IntC, SVC, ChipADC, ChipIO, LastMask, LastValue, MaxChipAddress
 Dim Shared As Integer PinoutCount, HardwareMult, ChipEEPROM, ChipEEPROMRaw, GPRCounTemp
 Dim Shared As Integer RegXL, RegXH, RegYL, RegYH, RegZL, RegZH, ILC
-Dim Shared As Double ChipMHz, ChipWords, ChipUSART, ChipGPR, ChipPinsRaw, ChipFamilyOveride
+Dim Shared As Double ChipMHz, ChipWords, ChipUSART, ChipGPR, ChipPinsRaw, ChipFamilyOveride, ChipSubFamily
 Dim Shared As String ChipName, Packages, ChipNameTidy
 
 Dim Shared As Integer SVBC, EDC
@@ -272,6 +272,7 @@ FOR CurrentChip = StartChip to ChipCount
     ChipGPR = -1
     ChipPinsRaw = -1
     ChipFamilyOveride = - 1
+    ChipSubFamily = -1
     'Read .xml
     If ChipList(CurrentChip).FileType = 4 Then
       ReadXml4(ChipList(CurrentChip).FileName)
@@ -347,6 +348,9 @@ FOR CurrentChip = StartChip to ChipCount
 
 
     If ChipFamilyOveride = -1 Then ChipFamilyOveride = VAL(TempData)
+    TempData = Mid(TempData, INSTR(TempData, ",") + 1)
+
+    If ChipSubFamily = -1 Then ChipSubFamily = VAL(TempData)
     TempData = Mid(TempData, INSTR(TempData, ",") + 1)
 
 '    Consume theprint "3 "+ChipPackageList ADC value
@@ -453,10 +457,6 @@ FOR CurrentChip = StartChip to ChipCount
       ChipFamily = 121
     end if
 
-    if ChipFamilyOveride = 123 then
-      ChipFamily = 123
-    end if
-
     if ChipFamilyOveride = 121 then
       If ChipPinsRaw <> -1 then
         ChipPins = ChipPinsRaw
@@ -502,6 +502,10 @@ FOR CurrentChip = StartChip to ChipCount
       Print #1, "Family=" + Str(ChipFamilyOveride)
     else
       Print #1, "Family=" + Str(ChipFamily)
+    end if
+
+    if ChipSubFamily > 0 then
+      Print #1, "SubFamily=" + Str(ChipSubFamily)
     end if
 
 
@@ -1412,26 +1416,13 @@ Function GetIntName (IntVect As String) As String
             IntName = "UsartRX1Ready"
 
         Case "USART1_UDRE", "UART1_UDRE":
-            If ChipFamilyOveride <> 123 then
-              IntName = "UsartTX2Ready"
-            Else
-              IntName = "UsartTX1Ready"
-            End If
+            IntName = "UsartTX2Ready"
 
         Case "USART1_TX", "UART1_TX", "USART1_TXC":
-            If ChipFamilyOveride <> 123 then
-              IntName = "UsartTX2Sent"
-            Else
-              IntName = "UsartTX1Sent"
-            End If
-
+            IntName = "UsartTX2Sent"
 
         Case "USART1_RX", "UART1_RX", "USART1_RXC":
-            If ChipFamilyOveride <> 123 then
-              IntName = "UsartRX2Ready"
-            Else
-              IntName = "UsartRX1Ready"
-            End If
+            IntName = "UsartRX2Ready"
 
         Case "USART2_UDRE":
             IntName = "UsartTX3Ready"

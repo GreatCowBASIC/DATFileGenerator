@@ -43,10 +43,6 @@ UsartTX1Sent:USART_TX,15,TXCIE,TXC
 VLM:VLM,10,VLMIE,VLMF
 WDT:WDT,9,WDIE,WDIF
 
-
-
-
-
 [Registers]
 CCP,60
 SPL,61
@@ -364,7 +360,7 @@ RXSIE,UCSRD,7
 [FreeRAM]
 40:60
 
-[Pins-UDFN]
+[Pins-SOIC]
 1,VCC
 2,PA0(IO),TPISCK(IO),ADC0(I)
 3,PA1(IO),TPIDATA(IO),ADC1(I)
@@ -385,3 +381,4 @@ NoConfig-PRG
 
 [Config]
 NoConfig-PRG
+
