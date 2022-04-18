@@ -26,7 +26,7 @@ ADC=15
 MaxMHz=32
 
 'This constant is exposed with only the first parameter (if more than one)
-IntOsc=16
+IntOsc=32, 24, 16, 8, 4, 2, 1, 0.5, 0.25, 0.125, 0.0625
 
 '31kSupport is exposed as Chip31Kconfig, Chip31Kregister, Chip31KValue
 31kSupport=LFINT,OSCCON1,64
