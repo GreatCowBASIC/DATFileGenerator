@@ -11,7 +11,7 @@
 Prog=32768
 
 'This constant is exposed as ChipEEPROM
-EEPROM=2048
+EEPROM=1024
 
 'This constant is exposed as ChipRAM
 RAM=4096

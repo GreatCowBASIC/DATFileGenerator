@@ -20,7 +20,7 @@ RAM=1024
 I/O=18
 
 'This constant is exposed as ChipADC
-ADC=21
+ADC=17
 
 'This constant is exposed as ChipMhz
 MaxMHz=32
@@ -29,7 +29,7 @@ MaxMHz=32
 IntOsc=32, 24, 16, 8, 4, 2, 1, 0.5, 0.25, 0.125, 0.0625
 
 '31kSupport is exposed as Chip31Kconfig, Chip31Kregister, Chip31KValue
-31kSupport=LFINT,OSCCON1,80
+31kSupport=LFINT,OSCCON1,64
 
 'This constant is exposed as ChipPins
 Pins=20

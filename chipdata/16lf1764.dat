@@ -52,6 +52,14 @@ MaxAddress=4095
 ';Microcontroller specific configuration Constants used in specific libraries, compiler or user programs
 ';This section of constants is specific to a microcontroller, so the constants may not be present for all microcontrollers
 
+'ChipPWMTimerVariant constant is used in pwmh and provides information for the timer register used for PWM
+PWMTimerVariant=1
+'ChipSMTClockSourceVariant constant is used in smth and provides information for the register used for SMT
+SMTClockSourceVariant=0
+
+'ChipPWM16TYPE=1 constant is used within the compiler or libaries to control functionality
+PWM16TYPE=1
+
 'ChipHEFMemWords is used within hefsaf.h.  This constant provides information with respect to the register used for setting the HEF operations
 HEFMemWords=128
 

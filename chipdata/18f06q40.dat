@@ -37,6 +37,9 @@ Pins=14
 'This constant is exposed as ChipFamily
 Family=16
 
+'This constant is exposed as ChipFamilyVariant
+FamilyVariant=1
+
 'This constant is exposed as ChipSubFamily
 SubFamily=16105
 

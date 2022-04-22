@@ -26,7 +26,7 @@ ADC=0
 MaxMHz=20
 
 'This constant is exposed with only the first parameter (if more than one)
-IntOsc=0
+IntOsc=4
 
 'This constant is exposed as ChipPins
 Pins=18

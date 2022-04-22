@@ -41,7 +41,7 @@ Family=16
 FamilyVariant=1
 
 'This constant is exposed as ChipSubFamily
-SubFamily=16000
+SubFamily=16107
 
 'This constant is exposed as ChipPSP
 PSP=0

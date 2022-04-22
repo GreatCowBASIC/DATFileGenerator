@@ -20,7 +20,7 @@ RAM=256
 I/O=6
 
 'This constant is exposed as ChipADC
-ADC=9
+ADC=5
 
 'This constant is exposed as ChipMhz
 MaxMHz=32
