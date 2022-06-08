@@ -442,7 +442,7 @@ G1ARSEN,COG1ASD,6
 G1ASDE,COG1ASD,7
 
 [FreeRAM]
-20:5F
+40:7F
 
 [NoBankRAM]
 'NoBankRAM is somewhat misnamed - it is used for the defintion of (any) access bank locations
@@ -456,7 +456,7 @@ G1ASDE,COG1ASD,7
 'If there are no ranges defined in NoBankRAM, the compiler will try to guess them.
 'On 18Fs, it will guess based on where the lowest SFR is, and from what the total RAM on the chip is. If there's only one range defined
 'in the NoBankRAM locations, the compiler will assume that is the range for the RAM, and then will guess where the range for the access bank SFRs is.
-20:5F
+70:7F
 
 [Pins-DIP]
 7,RA0(IO)
