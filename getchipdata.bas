@@ -1952,6 +1952,7 @@ Sub CalcRamBlocks
   RBC = 0
   SRBC = 0
   IF ChipFamily <> 16 THEN
+    ' print ChipRAM
     If ChipRAM = 16 THEN
       RBC = RBC + 1: RamBlock(RBC) = "10:1F"
       SRBC = SRBC + 1: SharedRamBlock(SRBC) = "10:1F"
@@ -1996,8 +1997,31 @@ Sub CalcRamBlocks
         End if
 
       Else
-        RBC = RBC + 1: RamBlock(RBC) = "20:5F"
-        SRBC = SRBC + 1: SharedRamBlock(SRBC) = "20:5F"
+
+        If ucase(ChipName) = "12F752" or ucase(ChipName) = "12HV752" Then
+            RBC = RBC + 1: RamBlock(RBC) = "40:7F"
+        Else
+            RBC = RBC + 1: RamBlock(RBC) = "20:5F"
+        End If
+
+        'added to handle 18f NoBankRAM June 2019
+        if len( NoBankRAMStr ) <> 0 then
+
+          if instr(NoBankRAMStr, "|") = 0 then
+              SRBC = SRBC + 1: SharedRamBlock(SRBC) = NoBankRAMStr
+          else
+              NoBankRAMStr = NoBankRAMStr + "|"
+              do while instr(NoBankRAMStr, "|") <> 0
+                  SRBC = SRBC + 1: SharedRamBlock(SRBC) = mid( NoBankRAMStr ,1, instr(NoBankRAMStr, "|") - 1 )
+                  NoBankRAMStr =  mid( NoBankRAMStr , instr(NoBankRAMStr, "|") + 1 )
+              loop
+          end if
+        else
+          SRBC = SRBC + 1: SharedRamBlock(SRBC) = "20:5F"
+        end if
+
+
+        
       End If
     ElseIf ChipRAM = 67 Then
       RBC = RBC + 1: RamBlock(RBC) = "0D:1F"

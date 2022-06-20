@@ -1,67 +1,76 @@
 'GCBASIC/GCGB Chip Data File
 'Chip: RF509AG
 'Main Format last revised:   14/07/2017
-'Header Format last revised: 28/03/2019
+'Header Format last revised: 22/05/2021
 
 [ChipData]
-';All items in the ChipData section of this DAT file are available to user programs as constants.
-';The constants have the prefix of CHIP. See the examples below.
+';All items in the ChipData section are available to user programs as constants
+';The constants have the prefix of Chip: See the examples below
 
-'This constant is exposed as CHIPWORDS.
+'This constant is exposed as ChipWORDS
 Prog=1024
 
-'This constant is exposed as CHIPEEPROM.
+'This constant is exposed as ChipEEPROM
 EEPROM=0
 
-'This constant is exposed as CHIPRAM.
+'This constant is exposed as ChipRAM
 RAM=41
 
-'This constant is exposed as CHIPIO.
+'This constant is exposed as ChipIO
 I/O=6
 
-'This constant is exposed as CHIPADC.
+'This constant is exposed as ChipADC
 ADC=0
 
-'This constant is exposed as CHIPMHZ.
+'This constant is exposed as ChipMhz
 MaxMHz=4
 
-'This constant is exposed with only the first parameter (if more than one parameter) exposed
+'This constant is exposed with only the first parameter (if more than one)
 IntOsc=4
 
-'This constant is exposed as CHIPPINS.
+'This constant is exposed as ChipPins
 Pins=8
 
-'This constant is exposed as CHIPFAMILY.
+'This constant is exposed as ChipFamily
 Family=12
 
-'This constant is exposed as CHIPCONFIGWORDS.
+'This constant is exposed as ChipSubFamily
+SubFamily=12000
+
+'This constant is exposed as ChipConfWords
 ConfigWords=1
 
-'This constant is exposed as CHIPPSP
+'This constant is exposed as ChipPSP
 PSP=0
 
-'This constant is exposed as CHIPMAXADDRESS
+'This constant is exposed as ChipUSART
+USART=0
+
+'This constant is exposed as ChipMaxAddress
 MaxAddress=63
 
-';Microcontroller specific configuration. Constants used within specific libraries, the compiler or user programs. All sourced from chip data database.
-';This section of constants is specific to a microcontroller.  Therefore, the constants may not be present for a specific microcontroller.
+';Microcontroller specific configuration Constants used in specific libraries, compiler or user programs
+';This section of constants is specific to a microcontroller, so the constants may not be present for all microcontrollers
 
-'CHIPSTACKS csn be used within  user programs.  This constant provides information with respect to the number of stacks avaiable 
+'ChipStacks constant can be used in user programs and provides the available stack depth
 Stacks=2
 
-'CHIPUSERIDADDRESS is used within user programs.  This constant provides information with respect to the address of the UserID.
+'ChipUserIDAddress constant is used in user programs and provides the User ID address
 UserIDAddress=1024
 
-'CHIPUSERIDLENGTH is used within user programs.  This constant provides information with respect to the length of the UserID (in words). 
+'ChipUserIDLength constant is used in user programs to provide the length of the UserID (in words)
 UserIDLength=4
 
+'ChipSelfWrite constant is used within the compiler to indicate the chip is self write capable
+SelfWrite=0
+
 [Interrupts]
-'For specific details of the interrupts see the microcontrollers datasheet.
-'The first parameter is the Great Cow BASIC identifier used within user code to expose the specific interrupt.
+'For specific details of the interrupts see the microcontroller datasheet
+'The first parameter is the Great Cow BASIC identifier used in user code to expose the specific interrupt
 
 [Registers]
-'For specific details of the registers see the microcontrollers datasheet.
-'The first parameter is the Great Cow BASIC register name that can be used within user code to expose the specific register.
+'For specific details of the registers see the microcontroller datasheet
+'The first parameter is the Great Cow BASIC register name used in user code to expose the specific register
 INDF,0
 TMR0,1
 PCL,2
@@ -71,8 +80,8 @@ OSCCAL,5
 GPIO,6
 
 [Bits]
-'For specific details of the bits (all bits are relative to a register in terms of register.bits) see the microcontrollers datasheet.
-'The first parameter is the Great Cow BASIC bit name that can be used within user code to expose the specific register.bit.
+'For details of the bits (relative to a register in terms of registerbits) see the microcontroller datasheet
+'The first parameter is the Great Cow BASIC bit name used in user code to expose the specific registerbit
 C,STATUS,0
 DC,STATUS,1
 Z,STATUS,2
@@ -114,6 +123,17 @@ TRIS5,TRIS,5
 30:3F
 
 [NoBankRAM]
+'NoBankRAM is somewhat misnamed - it is used for the defintion of (any) access bank locations
+'If a memory location is defined in both NoBankRAM and FreeRAM, then the compiler knows that it is access bank RAM.
+'If an SFR location is in one of the NoBankRAM ranges, then the compiler knows not to do any bank selection when accessing that register.
+
+'The NoBankRAM section must include two ranges, one for access bank RAM, one for access bank SFRs, or there will be issues.
+'The first range MUST be the ACCESS RAM range
+'The first range is the FAST SFR range
+
+'If there are no ranges defined in NoBankRAM, the compiler will try to guess them.
+'On 18Fs, it will guess based on where the lowest SFR is, and from what the total RAM on the chip is. If there's only one range defined
+'in the NoBankRAM locations, the compiler will assume that is the range for the RAM, and then will guess where the range for the access bank SFRs is.
 07:0F
 
 [Pins-DIP]
@@ -127,16 +147,16 @@ TRIS5,TRIS,5
 1,Vdd
 
 [ConfigOps]
-'For specific details of the config options see the microcontrollers datasheet.
-'The first parameter is the configuration field that can be used to expose the specific configuration bits.
-'The others parameter are the options the configuration field that can be set.
+'For details of the config options see the microcontroller datasheet
+'The first parameter is the configuration field that can be used to expose specific configuration bits
+'The other parameters are the configuration field options that can be set
 OSC=LP,XT,INTRC,EXTRC
 WDT=OFF,ON
 CP=ON,OFF
 MCLRE=OFF,ON
 
 [Config]
-'For specific details of the config addresses see the microcontrollers datasheet.
+'For details of the config addresses see the microcontroller datasheet
 OSC_LP,1,4092
 LP_OSC,1,4092
 OSC_XT,1,4093
