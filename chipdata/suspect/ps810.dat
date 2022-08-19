@@ -1,0 +1,468 @@
+'GCBASIC/GCGB Chip Data File
+'Chip: PS810
+'Main Format last revised:   14/07/2017
+'Header Format last revised: 22/05/2021
+
+[ChipData]
+';All items in the ChipData section are available to user programs as constants
+';The constants have the prefix of Chip: See the examples below
+
+'This constant is exposed as ChipWORDS
+Prog=65536
+
+'This constant is exposed as ChipEEPROM
+EEPROM=1024
+
+'This constant is exposed as ChipRAM
+RAM=3936
+
+'This constant is exposed as ChipIO
+I/O=70
+
+'This constant is exposed as ChipADC
+ADC=16
+
+'This constant is exposed as ChipMhz
+MaxMHz=40
+
+'This constant is exposed with only the first parameter (if more than one)
+IntOsc=32, 16, 8, 4, 2, 1
+
+'This constant is exposed as ChipPins
+Pins=80
+
+'This constant is exposed as ChipFamily
+Family=14
+
+'This constant is exposed as ChipSubFamily
+SubFamily=14000
+
+'This constant is exposed as ChipConfWords
+ConfigWords=7
+
+'This constant is exposed as ChipPSP
+PSP=0
+
+'This constant is exposed as ChipUSART
+USART=1
+
+'This constant is exposed as ChipMaxAddress
+MaxAddress=4095
+
+';Microcontroller specific configuration Constants used in specific libraries, compiler or user programs
+';This section of constants is specific to a microcontroller, so the constants may not be present for all microcontrollers
+
+'ChipStacks constant can be used in user programs and provides the available stack depth
+Stacks=31
+
+'ChipUserIDAddress constant is used in user programs and provides the User ID address
+UserIDAddress=2097152
+
+'ChipUserIDLength constant is used in user programs to provide the length of the UserID (in words)
+UserIDLength=8
+
+'WriteFlashBlocksize constant is used in user programs that write to flash memory in bytes
+WriteFlashBlockSize=64
+
+'EraseFlashBlockSize constant is used in user programs that write to flash memory in bytes
+EraseFlashBlockSize=64
+
+'ChipSelfWrite constant is used within the compiler to indicate the chip is self write capable
+SelfWrite=1
+
+[Interrupts]
+'For specific details of the interrupts see the microcontroller datasheet
+'The first parameter is the Great Cow BASIC identifier used in user code to expose the specific interrupt
+ADCReady:ADIE,ADIF
+Comp1Change:CMIE,CMIF
+ExtInt0:INT0IE,INT0IF
+PORTBChange:RBIE,RBIF
+PortChange:RBIE,RBIF
+Timer0Overflow:TMR0IE,TMR0IF
+Timer1Overflow:TMR1IE,TMR1IF
+Timer2Match:TMR2IE,TMR2IF
+Timer3Overflow:TMR3IE,TMR3IF
+
+[Registers]
+'For specific details of the registers see the microcontroller datasheet
+'The first parameter is the Great Cow BASIC register name used in user code to expose the specific register
+PORTA,3968
+PORTB,3969
+LATB,3978
+PDPB,3985
+TRISB,3987
+REFCAL,3994
+OSCCAL,3995
+BGCAL,3996
+PIE1,3997
+PIR1,3998
+IPR1,3999
+PIE2,4000
+PIR2,4001
+IPR2,4002
+EECON1,4006
+EECON2,4007
+T3CON,4017
+TMR3,4018
+CMCON,4020
+ADCON2,4032
+ADCON1,4033
+ADCON0,4034
+ADRESL,4035
+ADRESH,4036
+ASICON2,4037
+ASICON1,4038
+ASISTAT,4039
+ASIADD,4040
+ASIBUF,4041
+T2CON,4042
+TMR2,4044
+T1CON,4045
+TMR1,4046
+RCON,4048
+WDTCON,4049
+OSCCON,4051
+T0CON,4053
+TMR0L,4054
+TMR0H,4055
+STATUS,4056
+FSR2L,4057
+FSR2H,4058
+PLUSW2,4059
+PREINC2,4060
+POSTDEC2,4061
+POSTINC2,4062
+INDF2,4063
+BSR,4064
+FSR1L,4065
+FSR1H,4066
+PLUSW1,4067
+PREINC1,4068
+POSTDEC1,4069
+POSTINC1,4070
+INDF1,4071
+WREG,4072
+FSR0L,4073
+FSR0H,4074
+PLUSW0,4075
+PREINC0,4076
+POSTDEC0,4077
+POSTINC0,4078
+INDF0,4079
+INTCON2,4081
+INTCON,4082
+PROD,4083
+PRODL,4083
+PRODH,4084
+TABLAT,4085
+TBLPTR,4086
+TBLPTRL,4086
+TBLPTRH,4087
+TBLPTRU,4088
+PC,4089
+PCL,4089
+PCLATH,4090
+PCLATU,4091
+STKPTR,4092
+TOS,4093
+TOSL,4093
+TOSH,4094
+TOSU,4095
+
+[Bits]
+'For details of the bits (relative to a register in terms of registerbits) see the microcontroller datasheet
+'The first parameter is the Great Cow BASIC bit name used in user code to expose the specific registerbit
+TMR1IE,PIE1,0
+TMR2IE,PIE1,1
+ASIIE,PIE1,3
+ADIE,PIE1,6
+TMR1IF,PIR1,0
+TMR2IF,PIR1,1
+ASIIF,PIR1,3
+ADIF,PIR1,6
+TMR1IP,IPR1,0
+TMR2IP,IPR1,1
+ASIIP,IPR1,3
+ADIP,IPR1,6
+T1PSA,T1CON,3
+T1ON,T1CON,7
+T1PS0,T1CON,0
+T1PS1,T1CON,1
+T1PS2,T1CON,2
+ADCOV,ADCON1,7
+SIZE0,ADCON1,4
+SIZE1,ADCON1,5
+SIZE2,ADCON1,6
+BIE,ASICON1,0
+SRIE,ASICON1,1
+RSIE,ASICON1,2
+SIE,ASICON1,3
+PIE,ASICON1,4
+ASIMOD2,ASICON1,6
+ASIMOD1,ASICON1,7
+RA5,PORTA,5
+MCLR,PORTA,5
+INT0,PORTA,5
+RB0,PORTB,0
+RB1,PORTB,1
+RB2,PORTB,2
+RB3,PORTB,3
+RB4,PORTB,4
+RB5,PORTB,5
+RB6,PORTB,6
+RB7,PORTB,7
+SCL,PORTB,0
+SDA,PORTB,1
+VC2,PORTB,5
+NTC,PORTB,6
+SPS,PORTB,1
+PGC,PORTB,6
+PGD,PORTB,7
+LATB0,LATB,0
+LATB1,LATB,1
+LATB2,LATB,2
+LATB3,LATB,3
+LATB4,LATB,4
+LATB5,LATB,5
+LATB6,LATB,6
+LATB7,LATB,7
+PDPB0,PDPB,0
+PDPB1,PDPB,1
+PDPB2,PDPB,2
+PDPB3,PDPB,3
+PDPB4,PDPB,4
+PDPB5,PDPB,5
+PDPB6,PDPB,6
+PDPB7,PDPB,7
+TRISB0,TRISB,0
+TRISB1,TRISB,1
+TRISB2,TRISB,2
+TRISB3,TRISB,3
+TRISB4,TRISB,4
+TRISB5,TRISB,5
+TRISB6,TRISB,6
+TRISB7,TRISB,7
+REXT,OSCCAL,7
+OSC0,OSCCAL,0
+OSC1,OSCCAL,1
+OSC2,OSCCAL,2
+OSC3,OSCCAL,3
+OSC4,OSCCAL,4
+OSC5,OSCCAL,5
+OSC6,OSCCAL,6
+BGTC0,BGCAL,0
+BGTC1,BGCAL,1
+BGTC2,BGCAL,2
+BGTC3,BGCAL,3
+TMR3IE,PIE2,1
+AOFIE,PIE2,3
+CMIE,PIE2,6
+TMR3IF,PIR2,1
+AOFIF,PIR2,3
+CMIF,PIR2,6
+TMR3IP,IPR2,1
+AOFIP,IPR2,3
+CMIP,IPR2,6
+RD,EECON1,0
+WR,EECON1,1
+WREN,EECON1,2
+WRERR,EECON1,3
+FREE,EECON1,4
+COMA,EECON1,5
+CFGS,EECON1,6
+EEPGD,EECON1,7
+T3PSA,T3CON,3
+T3ON,T3CON,7
+T3PS0,T3CON,0
+T3PS1,T3CON,1
+T3PS2,T3CON,2
+CWVEN,CMCON,0
+CWVI,CMCON,4
+CWTST,CMCON,7
+C340,ADCON2,7
+ADCS0,ADCON2,0
+ADCS1,ADCON2,1
+ADCS2,ADCON2,2
+ADCS3,ADCON2,3
+ADON,ADCON0,0
+GO_DONE,ADCON0,1
+GO_NOT_DONE,ADCON0,1
+GO,ADCON0,1
+NOT_DONE,ADCON0,1
+DONE,ADCON0,1
+AACS_SPSPS0,ASICON2,0
+BACS_SPSPS1,ASICON2,1
+CKEN_SPSPS2,ASICON2,2
+NACK_BBMPS0,ASICON2,3
+GCEN_BBMPS1,ASICON2,4
+AEN_BBMPS2,ASICON2,5
+SLWRT_BBM,ASICON2,6
+TP,ASICON2,7
+AACS,ASICON2,0
+BACS,ASICON2,1
+CKEN,ASICON2,2
+NACK,ASICON2,3
+GCEN,ASICON2,4
+AEN,ASICON2,5
+SLWRT,ASICON2,6
+SPSPS0,ASICON2,0
+SPSPS1,ASICON2,1
+SPSPS2,ASICON2,2
+BBMPS0,ASICON2,3
+BBMPS1,ASICON2,4
+BBMPS2,ASICON2,5
+BBM,ASICON2,6
+BF,ASISTAT,0
+SRF,ASISTAT,1
+RSF,ASISTAT,2
+SF,ASISTAT,3
+PF,ASISTAT,4
+R_NOT_W,ASISTAT,5
+D_NOT_A,ASISTAT,6
+ASIOV,ASISTAT,7
+R_W,ASISTAT,5
+D_A,ASISTAT,6
+T2PSA,T2CON,3
+T2ON,T2CON,7
+T2PS0,T2CON,0
+T2PS1,T2CON,1
+T2PS2,T2CON,2
+NOT_BOR,RCON,0
+NOT_POR,RCON,1
+NOT_PD,RCON,2
+NOT_TO,RCON,3
+NOT_RI,RCON,4
+GPB,RCON,6
+IPEN,RCON,7
+BOR,RCON,0
+POR,RCON,1
+PD,RCON,2
+TO,RCON,3
+RI,RCON,4
+SWDTEN,WDTCON,0
+OSTS,OSCCON,3
+IDLEN,OSCCON,7
+SCS0,OSCCON,0
+SCS1,OSCCON,1
+SCS2,OSCCON,2
+T0PSA,T0CON,3
+T0RD16,T0CON,5
+T08BIT,T0CON,6
+TMR0ON,T0CON,7
+T0PS0,T0CON,0
+T0PS1,T0CON,1
+T0PS2,T0CON,2
+C,STATUS,0
+DC,STATUS,1
+Z,STATUS,2
+OV,STATUS,3
+N,STATUS,4
+RBIP,INTCON2,0
+TMR0IP,INTCON2,2
+INTEDG0,INTCON2,6
+NOT_RBPU,INTCON2,7
+T0IP,INTCON2,2
+RBPU,INTCON2,7
+RBIF,INTCON,0
+INT0IF,INTCON,1
+TMR0IF,INTCON,2
+RBIE,INTCON,3
+INT0IE,INTCON,4
+TMR0IE,INTCON,5
+PEIE_GIEL,INTCON,6
+GIE_GIEH,INTCON,7
+INT0F,INTCON,1
+T0IF,INTCON,2
+INT0E,INTCON,4
+T0IE,INTCON,5
+PEIE,INTCON,6
+GIE,INTCON,7
+GIEL,INTCON,6
+GIEH,INTCON,7
+STKUNF,STKPTR,6
+STKOVF,STKPTR,7
+STKFUL,STKPTR,7
+CHS0,ADCON0,2
+CHS1,ADCON0,3
+CHS2,ADCON0,4
+CHS3,ADCON0,5
+CHS4,ADCON0,6
+
+[FreeRAM]
+
+[NoBankRAM]
+'NoBankRAM is somewhat misnamed - it is used for the defintion of (any) access bank locations
+'If a memory location is defined in both NoBankRAM and FreeRAM, then the compiler knows that it is access bank RAM.
+'If an SFR location is in one of the NoBankRAM ranges, then the compiler knows not to do any bank selection when accessing that register.
+
+'The NoBankRAM section must include two ranges, one for access bank RAM, one for access bank SFRs, or there will be issues.
+'The first range MUST be the ACCESS RAM range
+'The first range is the FAST SFR range
+
+'If there are no ranges defined in NoBankRAM, the compiler will try to guess them.
+'On 18Fs, it will guess based on where the lowest SFR is, and from what the total RAM on the chip is. If there's only one range defined
+'in the NoBankRAM locations, the compiler will assume that is the range for the RAM, and then will guess where the range for the access bank SFRs is.
+
+[Pins-TQFP]
+9,MCLR
+49,OSC1
+50,OSC2
+11,Vss
+12,Vdd
+25,AVdd
+26,AVss
+31,Vss
+32,Vdd
+48,Vdd
+51,Vss
+70,Vss
+71,Vdd
+
+[ConfigOps]
+'For details of the config options see the microcontroller datasheet
+'The first parameter is the configuration field that can be used to expose specific configuration bits
+'The other parameters are the configuration field options that can be set
+WDT=OFF_2H,ON_2H
+MCLRE=OFF_3H,ON_3H
+STVR=OFF_4L,ON_4L
+CP01=ON_5L,OFF_5L
+CPB=ON_5H,OFF_5H
+WRT01=ON_6L,OFF_6L
+WRTC=ON_6H,OFF_6H
+WRTB=ON_6H,OFF_6H
+EBTR01=ON_7L,OFF_7L
+EBTRB=ON_7H,OFF_7H
+
+[Config]
+'For details of the config addresses see the microcontroller datasheet
+WDT_OFF_2H,2,254
+WDT_ON_2H,2,255
+MCLRE_OFF_3H,3,127
+MCLRE_ON_3H,3,255
+STVR_OFF_4L,4,254
+STVR_ON_4L,4,255
+CP01_ON_5L,5,254
+CP01_OFF_5L,5,255
+CPB_ON_5H,5,191
+CPB_OFF_5H,5,255
+WRT01_ON_6L,6,254
+WRT01_OFF_6L,6,255
+WRTC_ON_6H,6,223
+WRTC_OFF_6H,6,255
+WRTB_ON_6H,6,191
+WRTB_OFF_6H,6,255
+EBTR01_ON_7L,6,254
+EBTR01_OFF_7L,6,255
+EBTRB_ON_7H,6,191
+EBTRB_OFF_7H,6,255
+DEVID1,6,4194302
+DEVID2,6,4194303
+IDLOC0,6,2097152
+IDLOC1,6,2097153
+IDLOC2,6,2097154
+IDLOC3,6,2097155
+IDLOC4,6,2097156
+IDLOC5,6,2097157
+IDLOC6,6,2097158
+IDLOC7,6,2097159
+

@@ -108,7 +108,7 @@ Dim Shared As Integer CurrentChipCheck
 Dim As Integer RC, CW, T, DisableRead, CVNC, CheckSFR, CheckSFR2, CheckSFRBit, SingleByteConfigElement
 Dim As Integer PD, DL, CD, IntFound, FindInt, SortMore, PPO, ArrayPointer
 Dim As Integer OscPins, MCLRPin, PF
-Dim Shared As Integer ChipFamily, RBC, SRBC, ConfigOptions, ChipFamilyVariant
+Dim Shared As Integer ChipFamily, RBC, SRBC, ConfigOptions, ChipFamilyVariant, ChipNotTested
 Dim Shared As Integer ChipEEPROM, ChipRAM, ChipIO, ChipADC
 Dim Shared As Double ChipWords, ChipMHz, ChipIntOsc, ChipUSART
 Dim Shared As String ChipIntOscSpeeds, FixedConstants
@@ -738,6 +738,9 @@ FOR CurrentChip = StartChip to ChipIncCount
     TempData = ThisChipData
 
     TempData = Mid(TempData, INSTR(TempData, ",") + 1)
+    ChipNotTested = VAL(TempData)
+
+    TempData = Mid(TempData, INSTR(TempData, ",") + 1)
     ChipSubFamily = VAL(TempData)
 
     TempData = Mid(TempData, INSTR(TempData, ",") + 1)
@@ -1147,6 +1150,13 @@ FOR CurrentChip = StartChip to ChipIncCount
     Print #1, "';All items in the ChipData section are available to user programs as constants"
     Print #1, "';The constants have the prefix of Chip: See the examples below"
     Print #1, ""
+    
+    If ChipNotTested = 1 Then
+        Print #1, ";This chip has not been tested or validated.  This is a development DAT file"
+        Print #1, "NotTested = 1"
+        Print #1, ""
+    End If
+
     Print #1, "'This constant is exposed as ChipWORDS"
     Print #1, "Prog=" + Str(ChipWords * 1024)
     PRINT #1, ""
@@ -1408,7 +1418,7 @@ FOR CurrentChip = StartChip to ChipIncCount
     Print #1, "'For specific details of the registers see the microcontroller datasheet"
     Print #1, "'The first parameter is the Great Cow BASIC register name used in user code to expose the specific register"
     FOR PD = 1 to SVC
-        If Val("&H" + SysVars(PD, 2)) <= MaxChipAddress or ( instr(ucase(chipname),"16F152")<>0  and len(chipname)= 8) Then  'PIC16F15213
+        If Val("&H" + SysVars(PD, 2)) <= MaxChipAddress or ( ( instr(ucase(chipname),"16F152")<>0  or instr(ucase(chipname),"16F180")<>0  or instr(ucase(chipname),"16F171")<>0  or instr(ucase(chipname),"16F181")<>0  ) and len(chipname)= 8) Then  'PIC16F15213
             TempData = SysVars(PD, 1) + "," + Str(Val("&H" + SysVars(PD, 2)))
             PRINT #1, TempData
         Else
@@ -1929,7 +1939,12 @@ Sub CalcIntOscSpeeds
           else
               ChipIntOscSpeeds = "64, 48, 32, 24, 16, 8, 4, 2, 1, 0.5, 0.25, 0.125"
           end if
-      Case 32: ChipIntOscSpeeds = "32, 24, 16, 8, 4, 2, 1, 0.5, 0.25, 0.125, 0.0625"
+      Case 32: 
+        IF ChipSubFamily = 15002  or ChipSubFamily = 15003 or  ChipSubFamily = 15004 Then
+          ChipIntOscSpeeds = "32, 16, 8, 4, 2, 1"
+        Else
+          ChipIntOscSpeeds = "32, 24, 16, 8, 4, 2, 1, 0.5, 0.25, 0.125, 0.0625"
+        End If
       Case Else:
         ChipIntOscSpeeds = Str(ChipIntOsc)
         Print "Warning: W103: unusual int osc speed:" + Str(ChipIntOsc)  + " (No OSCCON, Has OSCCON2)"
