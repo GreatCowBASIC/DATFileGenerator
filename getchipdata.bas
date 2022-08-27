@@ -1152,8 +1152,8 @@ FOR CurrentChip = StartChip to ChipIncCount
     Print #1, ""
     
     If ChipNotTested = 1 Then
-        Print #1, ";This chip has not been tested or validated.  This is a development DAT file"
-        Print #1, "NotTested = 1"
+        Print #1, "'This chip has not been tested or validated.  This is a development DAT file"
+        Print #1, "NotTested=1"
         Print #1, ""
     End If
 
