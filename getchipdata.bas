@@ -4618,18 +4618,18 @@ sub ReadIncFileLineIn
         Delimiter = ","
         split  ( text, Delimiter, MaxCount, s() )
 
-
-        if ucase(s(0)) = ucase("p"+ChipName+".inc") then
+        if ucase(s(0)) = ucase("p"+ChipName+".inc")  then
 
           if ucase(s(1)) = "A" THEN
 
             if INSTR(ucase(DataSource),ucase(s(2))) <> 0 Then
                 'found a match
                     'append a Line
-                    LastLineRead = DataSource
+                    LastLineRead = s(3)
                     HandlingAddingLine  = 1
-                    DataSource =  s(3)
-                    Print SPC(5);"(A)";DataSource
+                    'DataSource =  s(3)
+	            Print SPC(5);DataSource		
+                    Print SPC(5);"(A)";s(3)
                     'ReadCriticalDatLine(CurrentChipCheck)=""
                 end if
 

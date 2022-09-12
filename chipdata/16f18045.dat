@@ -7,14 +7,11 @@
 ';All items in the ChipData section are available to user programs as constants
 ';The constants have the prefix of Chip: See the examples below
 
-;This chip has not been tested or validated.  This is a development DAT file
-NotTested = 1
-
 'This constant is exposed as ChipWORDS
-Prog=16384
+Prog=8192
 
 'This constant is exposed as ChipEEPROM
-EEPROM=1024
+EEPROM=128
 
 'This constant is exposed as ChipRAM
 RAM=1024
@@ -60,6 +57,9 @@ MaxAddress=8191
 
 ';Microcontroller specific configuration Constants used in specific libraries, compiler or user programs
 ';This section of constants is specific to a microcontroller, so the constants may not be present for all microcontrollers
+
+'ChipPWMTimerVariant constant is used in pwmh and provides information for the timer register used for PWM
+PWMTimerVariant=2
 
 'ChipSAFMemWords is used within hefsaf.h.  This constant provides information with respect to the register used for setting the SAF operations
 SAFMemWords=128
@@ -718,6 +718,7 @@ NW2,SSP1STAT,2
 NA2,SSP1STAT,5
 NWRITE1,SSP1STAT,2
 NADDRESS1,SSP1STAT,5
+SSP1CON2_SEN,SSP1CON2,0
 SEN,SSP1CON2,0
 RSEN,SSP1CON2,1
 PEN,SSP1CON2,2

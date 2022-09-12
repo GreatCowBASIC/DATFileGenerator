@@ -7,17 +7,14 @@
 ';All items in the ChipData section are available to user programs as constants
 ';The constants have the prefix of Chip: See the examples below
 
-;This chip has not been tested or validated.  This is a development DAT file
-NotTested = 1
-
 'This constant is exposed as ChipWORDS
-Prog=32768
+Prog=16384
 
 'This constant is exposed as ChipEEPROM
-EEPROM=2048
+EEPROM=256
 
 'This constant is exposed as ChipRAM
-RAM=1024
+RAM=2048
 
 'This constant is exposed as ChipIO
 I/O=25
@@ -60,6 +57,9 @@ MaxAddress=16383
 
 ';Microcontroller specific configuration Constants used in specific libraries, compiler or user programs
 ';This section of constants is specific to a microcontroller, so the constants may not be present for all microcontrollers
+
+'ChipPWMTimerVariant constant is used in pwmh and provides information for the timer register used for PWM
+PWMTimerVariant=2
 
 'ChipSAFMemWords is used within hefsaf.h.  This constant provides information with respect to the register used for setting the SAF operations
 SAFMemWords=128
@@ -733,6 +733,7 @@ NW2,SSP1STAT,2
 NA2,SSP1STAT,5
 NWRITE1,SSP1STAT,2
 NADDRESS1,SSP1STAT,5
+SSP1CON2_SEN,SSP1CON2,0
 SEN,SSP1CON2,0
 RSEN,SSP1CON2,1
 PEN,SSP1CON2,2
@@ -2607,7 +2608,20 @@ A0:EF
 4A0:4EF
 520:56F
 5A0:5EF
-620:64F
+620:66F
+6A0:6EF
+720:76F
+7A0:7EF
+820:86F
+8A0:8EF
+920:96F
+9A0:9EF
+A20:A6F
+AA0:AEF
+B20:B6F
+BA0:BEF
+C20:C6F
+CA0:CBF
 
 [NoBankRAM]
 'NoBankRAM is somewhat misnamed - it is used for the defintion of (any) access bank locations

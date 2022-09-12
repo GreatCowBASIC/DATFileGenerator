@@ -5,7 +5,7 @@
 
 
 #include once "ext/xml/dom.bi"
-#DEFINE kINDEX_IDX      "\.mchp_packs"  'UserProfile+kINDEX.IDX
+#DEFINE kINDEX_IDX    ""  ' "  "\.mchp_packs"  'UserProfile+kINDEX.IDX
 #DEFINE kUniqueBits ""'"TMR10,TMR11,TMR12,TMR13,TMR14,TMR15,TMR16,TMR17,TMR18,TMR19,ON,OUT,GO,POL,C1OUT,C2OUT,SYNC,INTN,INTP,CKPS0,CKPS1,CKPS2,CS0,CS1,CS2"
 #DEFINE kKillRegister ""  '"W,DATA"
 #DEFINE kKillBits ""' "DATA"
@@ -63,7 +63,7 @@ Declare Sub PopulateRAMDefinitions ( SourceFolder as string, Version as string, 
 Declare Sub PopulateConfig ( SourceFolder as string, Version as string, Chip as string )
 
   UserProfile = ENVIRON("Userprofile")
-
+  UserProfile = "C:\Program Files\Microchip\MPLABX\v6.00\packs"
   'read the kINDEX_IDX to populate SourceFileArray()
   PopulateSourceFilesLocation
 

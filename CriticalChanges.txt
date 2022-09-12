@@ -107,3 +107,22 @@ p16lf627a.inc,R,DATA_CP_OFF          EQU  H'3FFF'; Data memory code protection o
 p16lf628.inc,R,DATA_CP_OFF          EQU  H'3FFF'; Data memory code protection off,'DATA_CP_OFF          EQU  H'3FFF'; Data memory code protection off
 p16lf628a.inc,R,DATA_CP_OFF          EQU  H'3FFF'; Data memory code protection off,'DATA_CP_OFF          EQU  H'3FFF'; Data memory code protection off
 p16lf648a.inc,R,DATA_CP_OFF          EQU  H'3FFF'; Data memory code protection off,'DATA_CP_OFF          EQU  H'3FFF'; Data memory code protection off
+
+p16f18075.inc,A,;----- SSP1CON2 Bits,SSP1CON2_SEN     EQU  H'0000'
+p16F18013.inc,A,;----- SSP1CON2 Bits,SSP1CON2_SEN     EQU  H'0000'
+p16F18014.inc,A,;----- SSP1CON2 Bits,SSP1CON2_SEN     EQU  H'0000'
+p16F18015.inc,A,;----- SSP1CON2 Bits,SSP1CON2_SEN     EQU  H'0000'
+p16F18023.inc,A,;----- SSP1CON2 Bits,SSP1CON2_SEN     EQU  H'0000'
+p16F18024.inc,A,;----- SSP1CON2 Bits,SSP1CON2_SEN     EQU  H'0000'
+p16F18025.inc,A,;----- SSP1CON2 Bits,SSP1CON2_SEN     EQU  H'0000'
+p16F18026.inc,A,;----- SSP1CON2 Bits,SSP1CON2_SEN     EQU  H'0000'
+p16F18044.inc,A,;----- SSP1CON2 Bits,SSP1CON2_SEN     EQU  H'0000'
+p16F18045.inc,A,;----- SSP1CON2 Bits,SSP1CON2_SEN     EQU  H'0000'
+p16F18046.inc,A,;----- SSP1CON2 Bits,SSP1CON2_SEN     EQU  H'0000'
+p16F18054.inc,A,;----- SSP1CON2 Bits,SSP1CON2_SEN     EQU  H'0000'
+p16F18055.inc,A,;----- SSP1CON2 Bits,SSP1CON2_SEN     EQU  H'0000'
+p16F18056.inc,A,;----- SSP1CON2 Bits,SSP1CON2_SEN     EQU  H'0000'
+p16F18074.inc,A,;----- SSP1CON2 Bits,SSP1CON2_SEN     EQU  H'0000'
+p16F18075.inc,A,;----- SSP1CON2 Bits,SSP1CON2_SEN     EQU  H'0000'
+p16F18076.inc,A,;----- SSP1CON2 Bits,SSP1CON2_SEN     EQU  H'0000'
+
