@@ -11,7 +11,7 @@ I/O=53
 ADC=8
 MaxMHz=16
 Pins=64
-USART=1
+USART=2
 Family=120
 ConfigWords=0
 GPR=32
@@ -922,4 +922,3 @@ NoConfig-PRG
 
 [Config]
 NoConfig-PRG
-
