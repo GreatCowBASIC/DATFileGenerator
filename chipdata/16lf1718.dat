@@ -22,6 +22,9 @@ I/O=25
 'This constant is exposed as ChipADC
 ADC=17
 
+'These constants are the valid ADC constants
+ADCConstants=AN{0..17} USAGE:AN0..AN17
+
 'This constant is exposed as ChipMhz
 MaxMHz=32
 

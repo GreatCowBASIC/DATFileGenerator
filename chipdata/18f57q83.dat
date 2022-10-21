@@ -22,6 +22,9 @@ I/O=44
 'This constant is exposed as ChipADC
 ADC=43
 
+'These constants are the valid ADC constants
+ADCConstants=AN{A..G}{0..7} USAGE:ANA0..ANG74343
+
 'This constant is exposed as ChipMhz
 MaxMHz=64
 
@@ -8712,16 +8715,16 @@ ZCD=OFF
 DEBUG=OFF
 
 [ConfigMask]
+119
+251
 255
-255
-255
-255
-255
-255
-255
-255
-255
-255
+191
+127
+63
+159
+143
+51
+1
 
 [ConfigOps]
 'For details of the config options see the microcontroller datasheet

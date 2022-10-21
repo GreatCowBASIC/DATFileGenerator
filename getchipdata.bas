@@ -113,7 +113,7 @@ Dim Shared As Integer ChipEEPROM, ChipRAM, ChipIO, ChipADC
 Dim Shared As Double ChipWords, ChipMHz, ChipIntOsc, ChipUSART
 Dim Shared As String ChipIntOscSpeeds, FixedConstants
 
-Dim Shared As String InstDir, IncFileDir, DevFileDir, MPASMInfoFile, OutputDir, VDIFileDir, ChipName, _31kSupportValueStr,  _31kSupportValueExpandedStr
+Dim Shared As String InstDir, IncFileDir, DevFileDir, MPASMInfoFile, OutputDir, VDIFileDir, ChipName, _31kSupportValueStr,  _31kSupportValueExpandedStr,ADCHelperStr
 Dim Shared As Integer DefConf, ConfMask, DFN, ChipPins, COC, PinoutCount, PowerPinsAdded
 Dim Shared As Integer ChipSubFamily, HEFMemory, SAFMemory, ProgMemRowSize, ProgMemRowSizeMandate, PWMTimerVariant, SMTClockSourceVariant, ConfigBaseLocVariant, IntOSCCONFormatVariant, READAD10BITFORCEVariant, Stacks, IDAddress, IDLength, SectorRAMAddress, SectorRAMAddressSize, ChipMinimumBankSel, ChipSelfWrite
 Dim Shared As Integer WriteFlashBlockSize, EraseFlashBlockSize
@@ -845,8 +845,21 @@ FOR CurrentChip = StartChip to ChipIncCount
       TempData = Mid(TempData, INSTR(TempData, ",") + 1)
       EraseFlashBlockSize = VAL(TempData)
 
+      TempData = Mid(TempData, INSTR(TempData, ",") + 1)
+      ADCHelperStr = Left(TempData, INSTR(TempData, ",") - 1)
 
-
+      If CheckBit("CHSN3") and ChipADC = 11 And ChipPins = 28 Then
+        'set to AN13
+        Replace  ADCHelperStr, "34", Str(13)
+        Replace  ADCHelperStr, "34", Str(13)
+      ElseIf CheckBit("CHSN3") and ChipADC = 14 And ChipPins = 40 Then
+        'set to AN21
+        Replace  ADCHelperStr, "34", Str(21)
+        Replace  ADCHelperStr, "34", Str(21)
+      Else
+        Replace  ADCHelperStr, "34", Str(ChipADC)
+        Replace  ADCHelperStr, "34", Str(ChipADC)
+      End If
 
     End If
 
@@ -1172,6 +1185,15 @@ FOR CurrentChip = StartChip to ChipIncCount
     Print #1, "'This constant is exposed as ChipADC"
     Print #1, "ADC=" + Str(ChipADC)
     PRINT #1, ""
+
+
+    IF ChipADC > 0 and ADCHelperStr <> "" then
+      Print #1, "'These constants are the valid ADC constants"
+      Print #1, "ADCConstants=" + ADCHelperStr
+      Print #1, ""  
+    End If
+
+
     Print #1, "'This constant is exposed as ChipMhz"
     Print #1, "MaxMHz=" + Str(ChipMHz)
     PRINT #1, ""
