@@ -23,7 +23,7 @@ I/O=12
 ADC=15
 
 'These constants are the valid ADC constants
-ADCConstants=AN{A..G}{0..7} USAGE:ANA0..ANG71515
+ADCConstants=AN{A..G}{0..7} USAGE:ANA0..ANG7
 
 'This constant is exposed as ChipMhz
 MaxMHz=32

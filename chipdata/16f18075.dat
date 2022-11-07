@@ -23,7 +23,7 @@ I/O=36
 ADC=35
 
 'These constants are the valid ADC constants
-ADCConstants=AN{A..G}{0..7} USAGE:ANA0..ANG73535
+ADCConstants=AN{A..G}{0..7} USAGE:ANA0..ANG7
 
 'This constant is exposed as ChipMhz
 MaxMHz=32
@@ -63,6 +63,9 @@ MaxAddress=8191
 
 'ChipPWMTimerVariant constant is used in pwmh and provides information for the timer register used for PWM
 PWMTimerVariant=2
+
+'ChipReadAD10BitForceVariant is used within adc.h.  This constant provides information with respect to the register used for setting the ADC operations
+ReadAD10BitForceVariant=4
 
 'ChipSAFMemWords is used within hefsaf.h.  This constant provides information with respect to the register used for setting the SAF operations
 SAFMemWords=128
@@ -584,7 +587,7 @@ GVAL,T1GCON,2
 GGO_NDONE,T1GCON,3
 GSPM,T1GCON,4
 GTM,T1GCON,5
-GPOL,T1GCON,6
+T1GCON_GPOL,T1GCON,6
 GE,T1GCON,7
 T1GVAL,T1GCON,2
 T1GGO_NDONE,T1GCON,3
@@ -993,7 +996,7 @@ ADIE,PIE4,3
 ADTIE,PIE4,4
 ZCDIE,PIE4,5
 WDTCON_SEN,WDTCON,0
-CS,WDTCON,7
+WDTCON_WDTCON_CS,WDTCON,7
 WDTPS0,WDTCON,1
 WDTPS1,WDTCON,2
 WDTPS2,WDTCON,3
@@ -1470,7 +1473,7 @@ NCO1CKS3,NCO1CLK,3
 NCO1PWS0,NCO1CLK,5
 NCO1PWS1,NCO1CLK,6
 NCO1PWS2,NCO1CLK,7
-CS,CWG1CLK,0
+CWG1CLK_CS,CWG1CLK,0
 CWG1CS,CWG1CLK,0
 ISM0,CWG1ISM,0
 ISM1,CWG1ISM,1
@@ -1784,7 +1787,7 @@ INTN_ZCDCON,ZCDCON,0
 INTP_ZCDCON,ZCDCON,1
 POL_ZCDCON,ZCDCON,4
 OUT_ZCDCON,ZCDCON,5
-SEN,ZCDCON,7
+ZCDCON_SEN,ZCDCON,7
 ZCDINTN,ZCDCON,0
 ZCDINTP,ZCDCON,1
 ZCDPOL,ZCDCON,4

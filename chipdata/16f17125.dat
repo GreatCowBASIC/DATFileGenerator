@@ -7,9 +7,6 @@
 ';All items in the ChipData section are available to user programs as constants
 ';The constants have the prefix of Chip: See the examples below
 
-'This chip has not been tested or validated.  This is a development DAT file
-NotTested=1
-
 'This constant is exposed as ChipWORDS
 Prog=8192
 
@@ -26,7 +23,7 @@ I/O=12
 ADC=11
 
 'These constants are the valid ADC constants
-ADCConstants=AN{A..G}{0..7} USAGE:ANA0..ANG71111
+ADCConstants=AN{A..G}{0..7} USAGE:ANA0..ANG7
 
 'This constant is exposed as ChipMhz
 MaxMHz=32
@@ -63,6 +60,9 @@ MaxAddress=8191
 
 ';Microcontroller specific configuration Constants used in specific libraries, compiler or user programs
 ';This section of constants is specific to a microcontroller, so the constants may not be present for all microcontrollers
+
+'ChipReadAD10BitForceVariant is used within adc.h.  This constant provides information with respect to the register used for setting the ADC operations
+ReadAD10BitForceVariant=4
 
 'ChipSAFMemWords is used within hefsaf.h.  This constant provides information with respect to the register used for setting the SAF operations
 SAFMemWords=128
@@ -636,7 +636,7 @@ GVAL,T1GCON,2
 GGO_NDONE,T1GCON,3
 GSPM,T1GCON,4
 GTM,T1GCON,5
-GPOL,T1GCON,6
+T1GCON_GPOL,T1GCON,6
 GE,T1GCON,7
 T1GVAL,T1GCON,2
 T1GGO_NDONE,T1GCON,3
@@ -709,7 +709,7 @@ S1P1IE,PWM1GIE,0
 S1P2IE,PWM1GIE,1
 ERSNOW,PWM1CON,0
 ERSPOL,PWM1CON,1
-LD,PWM1CON,2
+PWM1CON_LD,PWM1CON,2
 PWM1CON_EN,PWM1CON,7
 PPEN,PWM1S1CFG,3
 POL1,PWM1S1CFG,6
@@ -892,9 +892,9 @@ INTN_CM1CON1,CM1CON1,0
 INTP_CM1CON1,CM1CON1,1
 C1INTN,CM1CON1,0
 C1INTP,CM1CON1,1
-NCH0,CM1NCH,0
-NCH1,CM1NCH,1
-NCH2,CM1NCH,2
+CM1NCH_NCH0,CM1NCH,0
+CM1NCH_NCH1,CM1NCH,1
+CM1NCH_NCH2,CM1NCH,2
 C1NCH0,CM1NCH,0
 C1NCH1,CM1NCH,1
 C1NCH2,CM1NCH,2
@@ -907,8 +907,8 @@ C1PCH2,CM1PCH,2
 NSS,DAC1CON,0
 REFRNG,DAC1CON,6
 DAC1CON_EN,DAC1CON,7
-PSS0,DAC1CON,2
-PSS1,DAC1CON,3
+DAC1CON_PSS0,DAC1CON,2
+DAC1CON_PSS1,DAC1CON,3
 OE0,DAC1CON,4
 OE1,DAC1CON,5
 RESON,OPA1CON1,3
@@ -1225,7 +1225,7 @@ INTN_ZCDCON,ZCDCON,0
 INTP_ZCDCON,ZCDCON,1
 POL_ZCDCON,ZCDCON,4
 OUT_ZCDCON,ZCDCON,5
-SEN,ZCDCON,7
+ZCDCON_SEN,ZCDCON,7
 ZCDINTN,ZCDCON,0
 ZCDINTP,ZCDCON,1
 ZCDPOL,ZCDCON,4
@@ -1627,7 +1627,7 @@ NCO1CKS3,NCO1CLK,3
 NCO1PWS0,NCO1CLK,5
 NCO1PWS1,NCO1CLK,6
 NCO1PWS2,NCO1CLK,7
-CS,CWG1CLK,0
+CWG1CLK_CS,CWG1CLK,0
 CWG1CS,CWG1CLK,0
 ISM0,CWG1ISM,0
 ISM1,CWG1ISM,1

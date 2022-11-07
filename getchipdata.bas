@@ -694,12 +694,16 @@ FOR CurrentChip = StartChip to ChipIncCount
 
                 If SFRB1.Reg = "EECON1" Then
                     SFRB2.Name = SFRB2.Reg + "_" + SFRB2.Name
+                ElseIf SFRB1.Reg = "SSP1CON2" Then
+                    SFRB2.Name = SFRB2.Reg + "_" + SFRB2.Name
                 ElseIf SFRB2.Reg = "EECON1" Then
                     SFRB1.Name = SFRB1.Reg + "_" + SFRB1.Name
                 ElseIf SFRB2.Reg = "STATUS" Then
                   SFRB1.Name = SFRB1.Reg + "_" + SFRB1.Name
                 ElseIf SFRB1.Bit = SFRB2.Bit Then
                     SFRB2.Name = SFRB2.Reg + "_" + SFRB2.Name
+                ElseIf SFRB1.Bit <> SFRB2.Bit Then
+                    SFRB1.Name = SFRB1.Reg + "_" + SFRB1.Name
                 Else
                     Print "Unresolved bit name conflict:"
                     Print SFRB1.Name, SFRB1.Reg, SFRB2.Name, SFRB2.Reg
@@ -711,6 +715,7 @@ FOR CurrentChip = StartChip to ChipIncCount
 
    'Obtain chip data
    ThisChipData = ""
+   ADCHelperStr=""
    ChipNameTemp = ChipName
    GetChipDataAgain:
    If Left(ChipNameTemp, 2) = "RF" Then
@@ -856,9 +861,16 @@ FOR CurrentChip = StartChip to ChipIncCount
         'set to AN21
         Replace  ADCHelperStr, "34", Str(21)
         Replace  ADCHelperStr, "34", Str(21)
-      Else
-        Replace  ADCHelperStr, "34", Str(ChipADC)
-        Replace  ADCHelperStr, "34", Str(ChipADC)
+      ElseIF instr(ADCHelperStr, "XX") <> 0 Then
+        'print ADCHelperStr,
+        'Replace  ADCHelperStr, "XX", Str(ChipADC)
+        'print ADCHelperStr, Str(ChipADC)
+      
+          ADCHelperStr = Replacestr (ADCHelperStr, "XX", Str(ChipADC))
+          ADCHelperStr = Replacestr (ADCHelperStr, "XX", Str(ChipADC))
+      ElseIF instr(ADCHelperStr, "34") <> 0 Then
+          Replace  ADCHelperStr, "34", Str(ChipADC)
+          Replace  ADCHelperStr, "34", Str(ChipADC)
       End If
 
     End If
