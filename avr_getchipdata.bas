@@ -3188,56 +3188,30 @@ Function GPR16Check ( FileName As String , Device as String ) as Integer
 
   GPR16Check = 0
 
-  if instr( ucase(FileName), "TINY4" ) > 0 then
+  if trim(ucase ( Device )) = "ATTINY4" then
       GPR16Check = -1
       exit Function
   end if
-  if instr( ucase(FileName), "TINY5" ) > 0 then
+  if trim(ucase ( Device ))  = "ATTINY5" then
       GPR16Check = -1
       exit Function
   end if
-  if instr( ucase(FileName), "TINY9" ) > 0 then
+  if trim(ucase ( Device ))  = "ATTINY9" then
       GPR16Check = -1
       exit Function
   end if
-  if instr( ucase(FileName), "TINY10" ) > 0 then
+  if trim(ucase ( Device ))  = "ATTINY10" then
       GPR16Check = -1
       exit Function
   end if
-  if instr( ucase(FileName), "TINY20" ) > 0 then
+  if trim(ucase ( Device ))  = "ATTINY20" then
       GPR16Check = -1
       exit Function
   end if
-  if instr( ucase(FileName), "TINY40" ) > 0 then
+  if trim(ucase ( Device ))  = "ATTINY40" then
       GPR16Check = -1
       exit Function
   end if
-
-  if instr( ucase(device), "TINY4" ) > 0 then
-      GPR16Check = -1
-      exit Function
-  end if
-  if instr( ucase(device), "TINY5" ) > 0 then
-      GPR16Check = -1
-      exit Function
-  end if
-  if instr( ucase(device), "TINY9" ) > 0 then
-      GPR16Check = -1
-      exit Function
-  end if
-  if instr( ucase(device), "TINY10" ) > 0 then
-      GPR16Check = -1
-      exit Function
-  end if
-  if instr( ucase(device), "TINY20" ) > 0 then
-      GPR16Check = -1
-      exit Function
-  end if
-  if instr( ucase(device), "TINY40" ) > 0 then
-      GPR16Check = -1
-      exit Function
-  end if
-
 
 
 End Function
