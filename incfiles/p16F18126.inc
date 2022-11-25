@@ -1417,7 +1417,7 @@ EXTOR            EQU  H'0007'
 
 
 ;----- OSCEN Bits -----------------------------------------------------
-PLLREN           EQU  H'0000'
+PLLEN           EQU  H'0000'
 ADOEN            EQU  H'0002'
 SOSCEN           EQU  H'0003'
 LFOEN            EQU  H'0004'

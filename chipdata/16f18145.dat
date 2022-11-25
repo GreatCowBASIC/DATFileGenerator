@@ -7,9 +7,6 @@
 ';All items in the ChipData section are available to user programs as constants
 ';The constants have the prefix of Chip: See the examples below
 
-'This chip has not been tested or validated.  This is a development DAT file
-NotTested=1
-
 'This constant is exposed as ChipWORDS
 Prog=8192
 
@@ -63,6 +60,9 @@ MaxAddress=8191
 
 ';Microcontroller specific configuration Constants used in specific libraries, compiler or user programs
 ';This section of constants is specific to a microcontroller, so the constants may not be present for all microcontrollers
+
+'ChipReadAD10BitForceVariant is used within adc.h.  This constant provides information with respect to the register used for setting the ADC operations
+ReadAD10BitForceVariant=4
 
 'ChipSAFMemWords is used within hefsaf.h.  This constant provides information with respect to the register used for setting the SAF operations
 SAFMemWords=128
@@ -646,7 +646,7 @@ GVAL,T1GCON,2
 GGO_NDONE,T1GCON,3
 GSPM,T1GCON,4
 GTM,T1GCON,5
-GPOL,T1GCON,6
+T1GCON_GPOL,T1GCON,6
 GE,T1GCON,7
 T1GVAL,T1GCON,2
 T1GGO_NDONE,T1GCON,3
@@ -719,7 +719,7 @@ S1P1IE,PWM1GIE,0
 S1P2IE,PWM1GIE,1
 ERSNOW,PWM1CON,0
 ERSPOL,PWM1CON,1
-LD,PWM1CON,2
+PWM1CON_LD,PWM1CON,2
 PWM1CON_EN,PWM1CON,7
 PPEN,PWM1S1CFG,3
 POL1,PWM1S1CFG,6
@@ -1238,7 +1238,7 @@ INTN_ZCDCON,ZCDCON,0
 INTP_ZCDCON,ZCDCON,1
 POL_ZCDCON,ZCDCON,4
 OUT_ZCDCON,ZCDCON,5
-SEN,ZCDCON,7
+ZCDCON_SEN,ZCDCON,7
 ZCDINTN,ZCDCON,0
 ZCDINTP,ZCDCON,1
 ZCDPOL,ZCDCON,4
@@ -1640,7 +1640,7 @@ NCO1CKS3,NCO1CLK,3
 NCO1PWS0,NCO1CLK,5
 NCO1PWS1,NCO1CLK,6
 NCO1PWS2,NCO1CLK,7
-CS,CWG1CLK,0
+CWG1CLK_CS,CWG1CLK,0
 CWG1CS,CWG1CLK,0
 ISM0,CWG1ISM,0
 ISM1,CWG1ISM,1
