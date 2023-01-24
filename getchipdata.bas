@@ -1307,12 +1307,9 @@ FOR CurrentChip = StartChip to ChipIncCount
 
     IF FixedConstants <> "" then
 
-          Print #1, "'ChipSMTClockSourceVariant constant is used in smth and provides information for the register used for SMT"
-          Print #1, "SMTClockSourceVariant=" + Str( SMTClockSourceVariant )
-
         if instr(FixedConstants, "|" ) = 0 then
             Print #1, ""
-            Print #1, "'Chip"+FixedConstants+ " constant is used within the compiler or libaries to control functionality"
+            Print #1, "'Chip"+FixedConstants+ " constant is used within the compiler or libaries to control functionality. Value may be decimal representation of a hex number."
             Print #1, FixedConstants
         else
             FixedConstants = FixedConstants + "|"
@@ -1323,9 +1320,6 @@ FOR CurrentChip = StartChip to ChipIncCount
                 FixedConstants =  mid( FixedConstants , instr(FixedConstants, "|") + 1 )
             loop
         end if
-
-
-
     End If
 
     IF SMTClockSourceVariant <> 0 then

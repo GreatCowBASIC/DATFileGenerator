@@ -55,6 +55,9 @@ MaxAddress=31
 ';Microcontroller specific configuration Constants used in specific libraries, compiler or user programs
 ';This section of constants is specific to a microcontroller, so the constants may not be present for all microcontrollers
 
+'ChipOSCCAL=0X0C1E constant is used within the compiler or libaries to control functionality. Value may be decimal representation of a hex number.
+OSCCAL=0X0C1E
+
 'ChipStacks constant can be used in user programs and provides the available stack depth
 Stacks=2
 
