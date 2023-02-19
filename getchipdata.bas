@@ -1276,6 +1276,13 @@ FOR CurrentChip = StartChip to ChipIncCount
             Print #1, "'This constant is exposed as ChipMemorylock"
             Print #1, "MemoryLock=NVMLOCK"
         End if
+        If Instr(chipname,"Q71") <> 0 then
+            Print #1, ""
+            Print #1, "'This constant is exposed as ChipMemorylock"
+            Print #1, "MemoryLock=NVMLOCK"
+        End if
+
+
     End if
 
 
@@ -2388,7 +2395,7 @@ Sub CalcRamBlocks
       RBC = RBC + 1: RamBlock(RBC) = "0:FF"
       RBC = RBC + 1: RamBlock(RBC) = "200:2FF"
 
-    Elseif   Instr(UCase(ChipName),"Q43" ) <> 0 or Instr(UCase(ChipName),"Q41" ) <> 0 or Instr(UCase(ChipName),"Q40" ) <> 0 or Instr(UCase(ChipName),"Q83" ) <> 0 or Instr(UCase(ChipName),"Q84" ) <> 0Then
+    Elseif   Instr(UCase(ChipName),"Q43" ) <> 0 or Instr(UCase(ChipName),"Q41" ) <> 0 or Instr(UCase(ChipName),"Q40" ) <> 0 or Instr(UCase(ChipName),"Q83" ) <> 0 or Instr(UCase(ChipName),"Q84") <> 0 or Instr(UCase(ChipName),"Q71") <> 0 Then
 
       ChipMinimumBankSel = 5
       'add 1280 for the base of 0x500
@@ -3099,6 +3106,20 @@ Function GetIntName (IntVect As String) As String
     Case "ACTORSIE"
         IntName = "ActiveClockTuningOutofRangeInterrupt"
 
+    Case "ADCH1IE"
+        IntName = "ADCContext1ThresholdInterrupt"
+    Case "ADCH2IE"
+        IntName = "ADCContext1ThresholdInterrupt"
+    Case "ADCH3IE"
+        IntName = "ADCContext1ThresholdInterrupt"
+    Case "ADCH4IE"
+        IntName = "ADCContext1ThresholdInterrupt"
+    Case "IOCVIE"
+        IntName = "VirtualPortsIOCInterrupt"
+    Case "TU16AIE"
+        IntName ="16bitUniversalTimerAInterrupt"
+    Case "TU16BIE"
+        IntName ="16bitUniversalTimerBInterrupt"
 
 
     Case Else:
