@@ -5788,6 +5788,7 @@ BBSIZE=BBSIZE_128
 BOREN=OFF
 BORV=VBOR_2P85
 CLKOUTEN=OFF
+CP=OFF
 CPD=OFF
 CSWEN=ON
 DEBUG=OFF
@@ -5829,6 +5830,7 @@ ZCD=OFF
 255
 143
 1
+1
 
 [ConfigOps]
 'For details of the config options see the microcontroller datasheet
@@ -5868,6 +5870,7 @@ WRTD=OFF,ON
 WRTSAF=OFF,ON
 WRTAPP=OFF,ON
 CPD=OFF,ON
+CP=OFF,ON
 
 [Config]
 'For details of the config addresses see the microcontroller datasheet
@@ -6128,4 +6131,6 @@ WRTAPP_OFF,9,255
 WRTAPP_ON,9,127
 CPD_OFF,10,255
 CPD_ON,10,254
+CP_OFF,11,255
+CP_ON,11,254
 

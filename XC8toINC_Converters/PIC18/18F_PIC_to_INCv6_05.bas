@@ -775,7 +775,7 @@ Sub PopulateConfig( SourceFolder as string, Version as string, Chip as string )
               configsuffix = mid(trim(configname),7)
             end if
 
-            If val(trim(configsuffix))<11 then
+            If instr( chip , "Q8") = 0 then
 
               print ""
               print ";----- "+configname+" Options --------------------------------------------------"
