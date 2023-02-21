@@ -6,18 +6,22 @@
 
 
 #include once "ext/xml/dom.bi"
+#include "windows.bi"
 
-#DEFINE kINDEX_IDX      "C:\Program Files\Microchip\MPLABX\v6.05\packs"
+#DEFINE kINDEX_IDX   Environ( "USERPROFILE" )+"\.mchp_packs"
 
+                     'the version may need changing 
+#DEFINE kINDEX_IDX2  "C:\Program Files\Microchip\MPLABX\v6.05\packs"
 
 #DEFINE kUniqueBits "INTN,INTP,OUT,POL,ON,C1OUT,C2OUT,GPOL,IOEN,CS,NOT,CKPS0,CKPS1,CKPS2,CS0,CS1,CS2,OV,SEN,BUSY,RDY,STAT0,STAT1,SPI1MD,GO,IPEN,NOT_DONE,NCH0,NCH1,NCH2,PSS0,PSS1,LD,CPON,PR0,PR1,PR2"
 #DEFINE kKillRegister "W,DATA,FSR2,FSR1,FSR0"
 #DEFINE kKillBits "DATA"
 Type SFR
-  RegisterName as String
-  RegisterAddresss as String
-  RegisterLength as String
   Count as Integer
+  RegisterName as String * 65
+  RegisterAddresss as String * 8
+  RegisterLength as String * 3
+
 End Type
 
 Type SFRBits
@@ -42,18 +46,20 @@ Type SourceFiles
   SourceFolder As String
   Version as string
   Pack as String
+  Location As String
 End Type
 
 Dim Shared SourceFileArray(10000) As SourceFiles
 Dim Shared SourceFileArrayPointer as Integer = 0
 Dim Shared SFRBitsArrayPointer as Integer = 0
 Dim Shared SFRDataCount as Integer = 0
-Dim Shared SFRData(3000) as SFR
+Dim Shared SFRData(30000) as SFR
 Dim Shared SFRBits(20000) as SFRBits
 Dim Shared SFRUniques() as string
 Dim Shared currentitem as string
 Dim Shared BadRam(100) as string
 Dim Shared BadRamPointer as Integer = 0
+Dim Shared ChipINDEX_IDX as String
 
 Declare Sub PopulateSourceFilesLocation ( kINDEX_IDX_location as string )
 Declare Function FindChip ( chiptofind as string ) as string
@@ -64,6 +70,9 @@ Declare Sub PopulateRAMDefinitions ( SourceFolder as string, Version as string, 
 Declare Sub PopulateConfig ( SourceFolder as string, Version as string, Chip as string )
 
 PopulateSourceFilesLocation  ( kINDEX_IDX )
+PopulateSourceFilesLocation  ( kINDEX_IDX2 )
+
+
 
   Dim CD as integer = 1
   If COMMAND(CD) <> "" then
@@ -75,8 +84,6 @@ PopulateSourceFilesLocation  ( kINDEX_IDX )
     Dim folder_DFP as string
 
     targetchip = ParamUpper
-'    print kINDEX_IDX
-
 
     if chipdetails = "NOCHIP" then
         print "Not a valid chip"
@@ -89,10 +96,9 @@ PopulateSourceFilesLocation  ( kINDEX_IDX )
     End if
 
     chipdetails = FindChip ( targetchip )
-
     split( chipdetails, ",",-1,chipparameters() )
-
-    fsp_ini = kINDEX_IDX+"\Microchip\"+chipparameters(3)+"_DFP\"+chipparameters(1)+"\xc8\pic\dat\ini\"+ mid(targetchip,4)  +".ini"
+    ChipINDEX_IDX = chipparameters(5)
+    fsp_ini = ChipINDEX_IDX+"\Microchip\"+chipparameters(3)+"_DFP\"+chipparameters(1)+"\xc8\pic\dat\ini\"+ mid(targetchip,4)  +".ini"
 
     Print "        LIST"
     Print ";=========================================================================="
@@ -100,10 +106,10 @@ PopulateSourceFilesLocation  ( kINDEX_IDX )
     Print ";  Built by Great Cow BASIC convertor"
     Print ";  MPASM processor include for the chip shown below"
     Print ";"
-    Print "; " + kINDEX_IDX+"\index.idx"
+    Print "; " + ChipINDEX_IDX+"\index.idx"
     Print "; " + fsp_ini
-    print "; " + kINDEX_IDX+"\Microchip\"+chipparameters(3)+"_DFP\"+chipparameters(1)+"\edc\"+ mid(targetchip,4)  +".PIC"
-    print "; " + kINDEX_IDX+"\Microchip\"+chipparameters(3)+"_DFP\"+chipparameters(1)+"\xc8\pic\dat\cfgdata\"+ mid(targetchip,4)  +".cfgdata"
+    print "; " + ChipINDEX_IDX+"\Microchip\"+chipparameters(3)+"_DFP\"+chipparameters(1)+"\edc\"+ mid(targetchip,4)  +".PIC"
+    print "; " + ChipINDEX_IDX+"\Microchip\"+chipparameters(3)+"_DFP\"+chipparameters(1)+"\xc8\pic\dat\cfgdata\"+ mid(targetchip,4)  +".cfgdata"
     print ";"
     Print ";=========================================================================="
 
@@ -156,6 +162,7 @@ PopulateSourceFilesLocation  ( kINDEX_IDX )
 
     do while not eof(1)
         Line input #1, DataSource
+
         If DataSource <> "" and left( datasource, 4 ) = "SFR=" Then
             'check to see if this should be ignored.
             FoundRegistersToBeIgnored = 0
@@ -166,20 +173,38 @@ PopulateSourceFilesLocation  ( kINDEX_IDX )
 
                 end if
             next
+            
             if FoundRegistersToBeIgnored = 0 then
                 SFRDataCount += 1
-                SFRData(SFRDataCount).Count = SFRDataCount
-                SFRData(SFRDataCount).RegisterName = mid(Trim(UCase(DataSource)),5)
-                split( SFRData(SFRDataCount).RegisterName , "," , 99 , SFRRegister() )
+                
+                'SFRData(SFRDataCount).RegisterName = mid(Trim(UCase(DataSource)),5)
+                'split( SFRData(SFRDataCount).RegisterName , "|" , 99 , SFRRegister() )
+                Dim as String SplitString, SplitString1, SplitString2, SplitString3
+                SplitString = mid(Trim(UCase(DataSource)),5)
+                SplitString1 = mid ( SplitString, 1, instr( SplitString, ",") -1  )
+                replace (SplitString, SplitString1+",", "" )
+                SplitString2 = mid ( SplitString, 1, instr( SplitString, ",") -1  )
+                replace (SplitString, SplitString2+",", "" )
+                SplitString3 = SplitString
+
+                
                 with SFRData(SFRDataCount)
-                    .RegisterName = SFRRegister(0)
-                    .RegisterAddresss = SFRRegister(1)
-                    .RegisterLength = SFRRegister(2)
-                    print left(.RegisterName+"                 ",17)+"EQU  H'"+right("000"+.RegisterAddresss,4)+"'"
+                    .Count = SFRDataCount
+
+                    .RegisterName = SplitString1+""
+
+                    .RegisterAddresss = SplitString2+""
+
+                    .RegisterLength = SplitString3+""
+
                 end with
+                print left(SplitString1+"                 ",17)+"EQU  H'"+right("000"+.SplitString2,4)+"'"
+      
+                
             end if
         end if
     loop
+    
     close
 
     'open Ini for registersbits
@@ -432,7 +457,7 @@ Function FindChip ( chiptofind as string ) as string
 
     if arraypointer <> -1 then
       with SourceFileArray( arraypointer )
-        return   chiptofind+","+.Version + "," + .Core + "," + .Family +","+.Pack
+        return   chiptofind+","+.Version + "," + .Core + "," + .Family +","+.Pack+","+.Location
       end with
     else
         return "NOCHIP"
@@ -522,6 +547,7 @@ Sub PopulateSourceFilesLocation  (  kindex_idx_location as string  )
                                 .Family = devices->Child( "atmel:device" , devicecounter )->Attribute("family")
                                 .Version = releases->Child("atmel:release", childenreleasecounter )->Attribute("version")
                                 .Pack = idx->Child("pdsc", childenpdsccounter )->Attribute("name")
+                                .Location = kindex_idx_location
                           end with
                           'print devices->Child( "atmel:device" , devicecounter )->Attribute("name")
                           SourceFileArrayPointer = SourceFileArrayPointer + 1
@@ -616,7 +642,7 @@ Sub PopulateRAMDefinitions ( SourceFolder as string, Version as string, Chip as 
 
 
   Var xmldoc = new ext.xml.tree
-  xmldoc->load( kINDEX_IDX+"\Microchip\"+SourceFolder+"_DFP\"+Version+"\edc\"+ Chip  +".PIC" )
+  xmldoc->load( ChipINDEX_IDX+"\Microchip\"+SourceFolder+"_DFP\"+Version+"\edc\"+ Chip  +".PIC" )
 
   If xmldoc = 0 Then
     Print "XML file seems empty"
@@ -701,7 +727,7 @@ Sub PopulateConfig( SourceFolder as string, Version as string, Chip as string )
     Dim idlocsuffix as Integer = 0
 
     Dim ConfigCount as Integer = 0
-    fsp_config = kINDEX_IDX+"\Microchip\"+SourceFolder+"_DFP\"+Version+"\xc8\pic\dat\cfgdata\"+ Chip  +".cfgdata"
+    fsp_config = ChipINDEX_IDX+"\Microchip\"+SourceFolder+"_DFP\"+Version+"\xc8\pic\dat\cfgdata\"+ Chip  +".cfgdata"
 
     open fsp_config for input as #1
     do while not eof(1)

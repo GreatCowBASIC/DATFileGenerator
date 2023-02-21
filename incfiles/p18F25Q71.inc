@@ -5,13 +5,13 @@
 ;  MPASM processor include for the chip shown below
 ;
 ; C:\Users\admin\.mchp_packs\index.idx
-; C:\Users\admin\.mchp_packs\Microchip\PIC18F-Q_DFP\1.16.368\xc8\pic\dat\ini\18F46Q71.ini
-; C:\Users\admin\.mchp_packs\Microchip\PIC18F-Q_DFP\1.16.368\edc\18F46Q71.PIC
-; C:\Users\admin\.mchp_packs\Microchip\PIC18F-Q_DFP\1.16.368\xc8\pic\dat\cfgdata\18F46Q71.cfgdata
+; C:\Users\admin\.mchp_packs\Microchip\PIC18F-Q_DFP\1.16.368\xc8\pic\dat\ini\18F25Q71.ini
+; C:\Users\admin\.mchp_packs\Microchip\PIC18F-Q_DFP\1.16.368\edc\18F25Q71.PIC
+; C:\Users\admin\.mchp_packs\Microchip\PIC18F-Q_DFP\1.16.368\xc8\pic\dat\cfgdata\18F25Q71.cfgdata
 ;
 ;==========================================================================
         NOLIST
-        IFNDEF __PIC18F46Q71
+        IFNDEF __PIC18F25Q71
            MESSG "Processor-header file mismatch.  Verify selected processor."
         ENDIF
 ;==========================================================================
@@ -173,8 +173,6 @@ VPORTCON         EQU  H'010C'
 ADCGA            EQU  H'0110'
 ADCGB            EQU  H'0111'
 ADCGC            EQU  H'0112'
-ADCGD            EQU  H'0113'
-ADCGE            EQU  H'0114'
 OPA1CON0         EQU  H'011F'
 OPA1CON1         EQU  H'0120'
 OPA1CON2         EQU  H'0121'
@@ -194,17 +192,13 @@ OPA2ORS          EQU  H'012E'
 LATA             EQU  H'0140'
 LATB             EQU  H'0141'
 LATC             EQU  H'0142'
-LATD             EQU  H'0143'
-LATE             EQU  H'0144'
 TRISA            EQU  H'0148'
 TRISB            EQU  H'0149'
 TRISC            EQU  H'014A'
-TRISD            EQU  H'014B'
 TRISE            EQU  H'014C'
 PORTA            EQU  H'0150'
 PORTB            EQU  H'0151'
 PORTC            EQU  H'0152'
-PORTD            EQU  H'0153'
 PORTE            EQU  H'0154'
 APMCON           EQU  H'01C0'
 APMPRE           EQU  H'01C1'
@@ -269,17 +263,6 @@ RC4PPS           EQU  H'0215'
 RC5PPS           EQU  H'0216'
 RC6PPS           EQU  H'0217'
 RC7PPS           EQU  H'0218'
-RD0PPS           EQU  H'0219'
-RD1PPS           EQU  H'021A'
-RD2PPS           EQU  H'021B'
-RD3PPS           EQU  H'021C'
-RD4PPS           EQU  H'021D'
-RD5PPS           EQU  H'021E'
-RD6PPS           EQU  H'021F'
-RD7PPS           EQU  H'0220'
-RE0PPS           EQU  H'0221'
-RE1PPS           EQU  H'0222'
-RE2PPS           EQU  H'0223'
 INT0PPS          EQU  H'023E'
 INT1PPS          EQU  H'023F'
 INT2PPS          EQU  H'0240'
@@ -626,15 +609,7 @@ INLVLC           EQU  H'0414'
 IOCCP            EQU  H'0415'
 IOCCN            EQU  H'0416'
 IOCCF            EQU  H'0417'
-ANSELD           EQU  H'0418'
-WPUD             EQU  H'0419'
-ODCOND           EQU  H'041A'
-SLRCOND          EQU  H'041B'
-INLVLD           EQU  H'041C'
-ANSELE           EQU  H'0420'
 WPUE             EQU  H'0421'
-ODCONE           EQU  H'0422'
-SLRCONE          EQU  H'0423'
 INLVLE           EQU  H'0424'
 IOCEP            EQU  H'0425'
 IOCEN            EQU  H'0426'
@@ -803,6 +778,797 @@ TOSH             EQU  H'04FE'
 TOSU             EQU  H'04FF'
 
 
+;----- PMD1 Bits -----------------------------------------------------
+TMR0MD           EQU  H'0000'
+TMR1MD           EQU  H'0001'
+TMR2MD           EQU  H'0002'
+TMR3MD           EQU  H'0003'
+TMR4MD           EQU  H'0004'
+APMMD            EQU  H'0005'
+ZCDMD            EQU  H'0006'
+CM1MD            EQU  H'0007'
+
+
+;----- CM1CON0 Bits -----------------------------------------------------
+SYNC             EQU  H'0000'
+POL_CM1CON0      EQU  H'0004'
+OE               EQU  H'0005'
+OUT_CM1CON0      EQU  H'0006'
+EN               EQU  H'0007'
+HYS0             EQU  H'0001'
+HYS1             EQU  H'0002'
+C1SYNC           EQU  H'0000'
+C1HYS            EQU  H'0001'
+C1HYS1           EQU  H'0002'
+C1POL            EQU  H'0004'
+C1OE             EQU  H'0005'
+C1OUT_CM1CON0    EQU  H'0006'
+C1EN             EQU  H'0007'
+
+
+;----- CM1CON1 Bits -----------------------------------------------------
+INTN_CM1CON1     EQU  H'0000'
+INTP_CM1CON1     EQU  H'0001'
+RDY_CM1CON1      EQU  H'0007'
+SP0              EQU  H'0002'
+SP1              EQU  H'0003'
+C1INTN           EQU  H'0000'
+C1INTP           EQU  H'0001'
+C1SP0            EQU  H'0002'
+C1SP1            EQU  H'0003'
+C1RDY            EQU  H'0007'
+
+
+;----- CM1NCH Bits -----------------------------------------------------
+NCH0_CM1NCH      EQU  H'0000'
+NCH1_CM1NCH      EQU  H'0001'
+NCH2_CM1NCH      EQU  H'0002'
+C1NCH0           EQU  H'0000'
+C1NCH1           EQU  H'0001'
+C1NCH2           EQU  H'0002'
+
+
+;----- CM1PCH Bits -----------------------------------------------------
+PCH0             EQU  H'0000'
+PCH1             EQU  H'0001'
+PCH2             EQU  H'0002'
+C1PCH0           EQU  H'0000'
+C1PCH1           EQU  H'0001'
+C1PCH2           EQU  H'0002'
+
+
+;----- SPI1CON1 Bits -----------------------------------------------------
+SDOP             EQU  H'0000'
+SDIP             EQU  H'0001'
+SSP              EQU  H'0002'
+FST              EQU  H'0004'
+CKP              EQU  H'0005'
+CKE              EQU  H'0006'
+SMP              EQU  H'0007'
+SPI1SDOP         EQU  H'0000'
+SPI1SDIP         EQU  H'0001'
+SPI1SSP          EQU  H'0002'
+SPI1FST          EQU  H'0004'
+SPI1CKP          EQU  H'0005'
+SPI1CKE          EQU  H'0006'
+SPI1SMP          EQU  H'0007'
+
+
+;----- OSCCON1 Bits -----------------------------------------------------
+NDIV0            EQU  H'0000'
+NDIV1            EQU  H'0001'
+NDIV2            EQU  H'0002'
+NDIV3            EQU  H'0003'
+NOSC0            EQU  H'0004'
+NOSC1            EQU  H'0005'
+NOSC2            EQU  H'0006'
+
+
+;----- DMA1PR Bits -----------------------------------------------------
+PR0_DMA1PR       EQU  H'0000'
+PR1_DMA1PR       EQU  H'0001'
+PR2_DMA1PR       EQU  H'0002'
+DMA1PR0          EQU  H'0000'
+DMA1PR1          EQU  H'0001'
+DMA1PR2          EQU  H'0002'
+
+
+;----- DAC1DAT Bits -----------------------------------------------------
+DAC1R0           EQU  H'0000'
+DAC1R1           EQU  H'0001'
+DAC1R2           EQU  H'0002'
+DAC1R3           EQU  H'0003'
+DAC1R4           EQU  H'0004'
+DAC1R5           EQU  H'0005'
+DAC1R6           EQU  H'0006'
+DAC1R7           EQU  H'0007'
+
+
+;----- DAC1CON Bits -----------------------------------------------------
+EN               EQU  H'0007'
+DAC1PSS0         EQU  H'0002'
+DAC1PSS1         EQU  H'0003'
+DAC1EN           EQU  H'0007'
+NSS0             EQU  H'0000'
+PSS0_DAC1CON     EQU  H'0002'
+PSS1_DAC1CON     EQU  H'0003'
+OE0              EQU  H'0004'
+OE1              EQU  H'0005'
+
+
+;----- CLCNSEL1 Bits -----------------------------------------------------
+D2S0             EQU  H'0000'
+D2S1             EQU  H'0001'
+D2S2             EQU  H'0002'
+D2S3             EQU  H'0003'
+D2S4             EQU  H'0004'
+D2S5             EQU  H'0005'
+D2S6             EQU  H'0006'
+
+
+;----- CLCNGLS1 Bits -----------------------------------------------------
+G2D1N            EQU  H'0000'
+G2D1T            EQU  H'0001'
+G2D2N            EQU  H'0002'
+G2D2T            EQU  H'0003'
+G2D3N            EQU  H'0004'
+G2D3T            EQU  H'0005'
+G2D4N            EQU  H'0006'
+G2D4T            EQU  H'0007'
+
+
+;----- PORTWIN1 Bits -----------------------------------------------------
+IN0              EQU  H'0000'
+IN1              EQU  H'0001'
+IN2              EQU  H'0002'
+IN3              EQU  H'0003'
+
+
+;----- OPA1CON1 Bits -----------------------------------------------------
+RESON            EQU  H'0003'
+NSS0             EQU  H'0000'
+NSS1             EQU  H'0001'
+NSS2             EQU  H'0002'
+GSEL0            EQU  H'0004'
+GSEL1            EQU  H'0005'
+GSEL2            EQU  H'0006'
+OPA1RESON        EQU  H'0003'
+OPA1NSS0         EQU  H'0000'
+OPA1NSS1         EQU  H'0001'
+OPA1NSS2         EQU  H'0002'
+OPA1GSEL0        EQU  H'0004'
+OPA1GSEL1        EQU  H'0005'
+OPA1GSEL2        EQU  H'0006'
+
+
+;----- OPA1CON0 Bits -----------------------------------------------------
+UG               EQU  H'0003'
+CPON_OPA1CON0    EQU  H'0005'
+EN               EQU  H'0007'
+UG0              EQU  H'0003'
+OPA1UG           EQU  H'0003'
+OPA1CPON         EQU  H'0005'
+OPA1EN           EQU  H'0007'
+
+
+;----- OPA1CON2 Bits -----------------------------------------------------
+PCH0             EQU  H'0000'
+PCH1             EQU  H'0001'
+PCH2             EQU  H'0002'
+NCH0_OPA1CON2    EQU  H'0004'
+NCH1_OPA1CON2    EQU  H'0005'
+NCH2_OPA1CON2    EQU  H'0006'
+OPA1PCH0         EQU  H'0000'
+OPA1PCH1         EQU  H'0001'
+OPA1PCH2         EQU  H'0002'
+OPA1NCH0         EQU  H'0004'
+OPA1NCH1         EQU  H'0005'
+OPA1NCH2         EQU  H'0006'
+
+
+;----- OPA1CON3 Bits -----------------------------------------------------
+INTOE            EQU  H'0005'
+PSS0_OPA1CON3    EQU  H'0000'
+PSS1_OPA1CON3    EQU  H'0001'
+FMS0             EQU  H'0006'
+FMS1             EQU  H'0007'
+OPA1INTOE        EQU  H'0005'
+OPA1PSS0         EQU  H'0000'
+OPA1PSS1         EQU  H'0001'
+OPA1FMS0         EQU  H'0006'
+OPA1FMS1         EQU  H'0007'
+
+
+;----- OPA1CON4 Bits -----------------------------------------------------
+OFCST            EQU  H'0002'
+PTRES            EQU  H'0004'
+OFCSEL0          EQU  H'0000'
+OFCSEL1          EQU  H'0001'
+OPA1OFCST        EQU  H'0002'
+OPA1PTRES        EQU  H'0004'
+OPA1OFCSEL0      EQU  H'0000'
+OPA1OFCSEL1      EQU  H'0001'
+
+
+;----- OPA1HWC Bits -----------------------------------------------------
+ORPOL            EQU  H'0003'
+OREN             EQU  H'0007'
+HWCL0            EQU  H'0000'
+HWCL1            EQU  H'0001'
+HWCL2            EQU  H'0002'
+HWCH0            EQU  H'0004'
+HWCH1            EQU  H'0005'
+HWCH2            EQU  H'0006'
+OPA1ORPOL        EQU  H'0003'
+OPA1OREN         EQU  H'0007'
+OPA1HWCL0        EQU  H'0000'
+OPA1HWCL1        EQU  H'0001'
+OPA1HWCL2        EQU  H'0002'
+OPA1HWCH0        EQU  H'0004'
+OPA1HWCH1        EQU  H'0005'
+OPA1HWCH2        EQU  H'0006'
+
+
+;----- OPA1OFFSET Bits -----------------------------------------------------
+OFFSET0          EQU  H'0000'
+OFFSET1          EQU  H'0001'
+OFFSET2          EQU  H'0002'
+OFFSET3          EQU  H'0003'
+OFFSET4          EQU  H'0004'
+OFFSET5          EQU  H'0005'
+OFFSET6          EQU  H'0006'
+OFFSET7          EQU  H'0007'
+OPA1OFFSET0      EQU  H'0000'
+OPA1OFFSET1      EQU  H'0001'
+OPA1OFFSET2      EQU  H'0002'
+OPA1OFFSET3      EQU  H'0003'
+OPA1OFFSET4      EQU  H'0004'
+OPA1OFFSET5      EQU  H'0005'
+OPA1OFFSET6      EQU  H'0006'
+OPA1OFFSET7      EQU  H'0007'
+
+
+;----- OPA1ORS Bits -----------------------------------------------------
+ORS0             EQU  H'0000'
+ORS1             EQU  H'0001'
+ORS2             EQU  H'0002'
+ORS3             EQU  H'0003'
+ORS4             EQU  H'0004'
+OPA1ORS0         EQU  H'0000'
+OPA1ORS1         EQU  H'0001'
+OPA1ORS2         EQU  H'0002'
+OPA1ORS3         EQU  H'0003'
+OPA1ORS4         EQU  H'0004'
+
+
+;----- APMPERS1 Bits -----------------------------------------------------
+BG               EQU  H'0002'
+FVR1             EQU  H'0003'
+FVR2             EQU  H'0004'
+ADCD             EQU  H'0005'
+ADCA             EQU  H'0006'
+TEMP             EQU  H'0007'
+APMPERS1_2       EQU  H'0002'
+APMPERS1_3       EQU  H'0003'
+APMPERS1_4       EQU  H'0004'
+APMPERS1_5       EQU  H'0005'
+APMPERS1_6       EQU  H'0006'
+APMPERS1_7       EQU  H'0007'
+
+
+;----- APMPERS1H Bits -----------------------------------------------------
+OPA1             EQU  H'0000'
+OPA2             EQU  H'0001'
+DAC1             EQU  H'0002'
+DAC2             EQU  H'0003'
+DAC3             EQU  H'0004'
+CMP1             EQU  H'0005'
+CMP2             EQU  H'0006'
+ZCD              EQU  H'0007'
+APMPERS1_8       EQU  H'0000'
+APMPERS1_9       EQU  H'0001'
+APMPERS1_10      EQU  H'0002'
+APMPERS1_11      EQU  H'0003'
+APMPERS1_12      EQU  H'0004'
+APMPERS1_13      EQU  H'0005'
+APMPERS1_14      EQU  H'0006'
+APMPERS1_15      EQU  H'0007'
+
+
+;----- APMPERE1 Bits -----------------------------------------------------
+BG               EQU  H'0002'
+FVR1             EQU  H'0003'
+FVR2             EQU  H'0004'
+ADCD             EQU  H'0005'
+ADCA             EQU  H'0006'
+TEMP             EQU  H'0007'
+APMPERE1_2       EQU  H'0002'
+APMPERE1_3       EQU  H'0003'
+APMPERE1_4       EQU  H'0004'
+APMPERE1_5       EQU  H'0005'
+APMPERE1_6       EQU  H'0006'
+APMPERE1_7       EQU  H'0007'
+
+
+;----- APMPERE1H Bits -----------------------------------------------------
+OPA1             EQU  H'0000'
+OPA2             EQU  H'0001'
+DAC1             EQU  H'0002'
+DAC2             EQU  H'0003'
+DAC3             EQU  H'0004'
+CMP1             EQU  H'0005'
+CMP2             EQU  H'0006'
+ZCD              EQU  H'0007'
+APMPERE1_8       EQU  H'0000'
+APMPERE1_9       EQU  H'0001'
+APMPERE1_10      EQU  H'0002'
+APMPERE1_11      EQU  H'0003'
+APMPERE1_12      EQU  H'0004'
+APMPERE1_13      EQU  H'0005'
+APMPERE1_14      EQU  H'0006'
+APMPERE1_15      EQU  H'0007'
+
+
+;----- RA1PPS Bits -----------------------------------------------------
+RA1PPS0          EQU  H'0000'
+RA1PPS1          EQU  H'0001'
+RA1PPS2          EQU  H'0002'
+RA1PPS3          EQU  H'0003'
+RA1PPS4          EQU  H'0004'
+RA1PPS5          EQU  H'0005'
+
+
+;----- RB1PPS Bits -----------------------------------------------------
+RB1PPS0          EQU  H'0000'
+RB1PPS1          EQU  H'0001'
+RB1PPS2          EQU  H'0002'
+RB1PPS3          EQU  H'0003'
+RB1PPS4          EQU  H'0004'
+RB1PPS5          EQU  H'0005'
+
+
+;----- RC1PPS Bits -----------------------------------------------------
+RC1PPS0          EQU  H'0000'
+RC1PPS1          EQU  H'0001'
+RC1PPS2          EQU  H'0002'
+RC1PPS3          EQU  H'0003'
+RC1PPS4          EQU  H'0004'
+RC1PPS5          EQU  H'0005'
+
+
+;----- INT1PPS Bits -----------------------------------------------------
+INT1PPS0         EQU  H'0000'
+INT1PPS1         EQU  H'0001'
+INT1PPS2         EQU  H'0002'
+INT1PPS3         EQU  H'0003'
+INT1PPS4         EQU  H'0004'
+INT1PPS5         EQU  H'0005'
+
+
+;----- T1CKIPPS Bits -----------------------------------------------------
+T1CKIPPS0        EQU  H'0000'
+T1CKIPPS1        EQU  H'0001'
+T1CKIPPS2        EQU  H'0002'
+T1CKIPPS3        EQU  H'0003'
+T1CKIPPS4        EQU  H'0004'
+T1CKIPPS5        EQU  H'0005'
+
+
+;----- T1GPPS Bits -----------------------------------------------------
+T1GPPS0          EQU  H'0000'
+T1GPPS1          EQU  H'0001'
+T1GPPS2          EQU  H'0002'
+T1GPPS3          EQU  H'0003'
+T1GPPS4          EQU  H'0004'
+T1GPPS5          EQU  H'0005'
+
+
+;----- CCP1PPS Bits -----------------------------------------------------
+CCP1PPS0         EQU  H'0000'
+CCP1PPS1         EQU  H'0001'
+CCP1PPS2         EQU  H'0002'
+CCP1PPS3         EQU  H'0003'
+CCP1PPS4         EQU  H'0004'
+CCP1PPS5         EQU  H'0005'
+
+
+;----- PWM1ERSPPS Bits -----------------------------------------------------
+PWM1ERSPPS0      EQU  H'0000'
+PWM1ERSPPS1      EQU  H'0001'
+PWM1ERSPPS2      EQU  H'0002'
+PWM1ERSPPS3      EQU  H'0003'
+PWM1ERSPPS4      EQU  H'0004'
+PWM1ERSPPS5      EQU  H'0005'
+
+
+;----- CLCIN1PPS Bits -----------------------------------------------------
+CLCIN1PPS0       EQU  H'0000'
+CLCIN1PPS1       EQU  H'0001'
+CLCIN1PPS2       EQU  H'0002'
+CLCIN1PPS3       EQU  H'0003'
+CLCIN1PPS4       EQU  H'0004'
+CLCIN1PPS5       EQU  H'0005'
+
+
+;----- U1RXPPS Bits -----------------------------------------------------
+U1RXPPS0         EQU  H'0000'
+U1RXPPS1         EQU  H'0001'
+U1RXPPS2         EQU  H'0002'
+U1RXPPS3         EQU  H'0003'
+U1RXPPS4         EQU  H'0004'
+U1RXPPS5         EQU  H'0005'
+
+
+;----- U1CTSPPS Bits -----------------------------------------------------
+U1CTSPPS0        EQU  H'0000'
+U1CTSPPS1        EQU  H'0001'
+U1CTSPPS2        EQU  H'0002'
+U1CTSPPS3        EQU  H'0003'
+U1CTSPPS4        EQU  H'0004'
+U1CTSPPS5        EQU  H'0005'
+
+
+;----- OPA1ORPPS Bits -----------------------------------------------------
+OPA1PPS0         EQU  H'0000'
+OPA1PPS1         EQU  H'0001'
+OPA1PPS2         EQU  H'0002'
+OPA1PPS3         EQU  H'0003'
+OPA1PPS4         EQU  H'0004'
+OPA1PPS5         EQU  H'0005'
+
+
+;----- RB1I2C Bits -----------------------------------------------------
+TH0              EQU  H'0000'
+TH1              EQU  H'0001'
+PU0              EQU  H'0004'
+PU1              EQU  H'0005'
+SLEW0            EQU  H'0006'
+SLEW1            EQU  H'0007'
+I2CTH0           EQU  H'0000'
+I2CTH1           EQU  H'0001'
+I2CPU0           EQU  H'0004'
+I2CPU1           EQU  H'0005'
+I2CSLEW0         EQU  H'0006'
+I2CSLEW1         EQU  H'0007'
+
+
+;----- U1P1H Bits -----------------------------------------------------
+P1H              EQU  H'0000'
+
+
+;----- U1CON1 Bits -----------------------------------------------------
+SENDB            EQU  H'0000'
+BRKOVR           EQU  H'0001'
+RXBIMD           EQU  H'0003'
+WUE              EQU  H'0004'
+ON_U1CON1        EQU  H'0007'
+U1SENDB          EQU  H'0000'
+U1BRKOVR         EQU  H'0001'
+U1RXBIMD         EQU  H'0003'
+U1WUE            EQU  H'0004'
+U1ON             EQU  H'0007'
+
+
+;----- U1CON0 Bits -----------------------------------------------------
+MODE0            EQU  H'0000'
+MODE1            EQU  H'0001'
+MODE2            EQU  H'0002'
+MODE3            EQU  H'0003'
+U1RXEN           EQU  H'0004'
+U1TXEN           EQU  H'0005'
+U1ABDEN          EQU  H'0006'
+U1BRGS           EQU  H'0007'
+U1MODE0          EQU  H'0000'
+U1MODE1          EQU  H'0001'
+U1MODE2          EQU  H'0002'
+U1MODE3          EQU  H'0003'
+RXEN             EQU  H'0004'
+TXEN             EQU  H'0005'
+ABDEN            EQU  H'0006'
+BRGS             EQU  H'0007'
+
+
+;----- U1CON2 Bits -----------------------------------------------------
+TXPOL            EQU  H'0002'
+C0EN             EQU  H'0003'
+RXPOL            EQU  H'0006'
+RUNOVF           EQU  H'0007'
+FLO0             EQU  H'0000'
+FLO1             EQU  H'0001'
+STP0             EQU  H'0004'
+STP1             EQU  H'0005'
+U1TXPOL          EQU  H'0002'
+U1C0EN           EQU  H'0003'
+U1RXPOL          EQU  H'0006'
+U1RUNOVF         EQU  H'0007'
+U1FLO0           EQU  H'0000'
+U1FLO1           EQU  H'0001'
+U1STP0           EQU  H'0004'
+U1STP1           EQU  H'0005'
+
+
+;----- U1FIFO Bits -----------------------------------------------------
+RXBF             EQU  H'0000'
+RXBE             EQU  H'0001'
+XON              EQU  H'0002'
+RXIDL            EQU  H'0003'
+TXBF             EQU  H'0004'
+TXBE             EQU  H'0005'
+STPMD            EQU  H'0006'
+TXWRE            EQU  H'0007'
+U1RXBF           EQU  H'0000'
+U1RXBE           EQU  H'0001'
+U1XON            EQU  H'0002'
+U1RXIDL          EQU  H'0003'
+U1TXBF           EQU  H'0004'
+U1TXBE           EQU  H'0005'
+U1STPMD          EQU  H'0006'
+U1TXWRE          EQU  H'0007'
+U1RCIDL          EQU  H'0003'
+RCIDL            EQU  H'0003'
+
+
+;----- U1UIR Bits -----------------------------------------------------
+ABDIE            EQU  H'0002'
+ABDIF            EQU  H'0006'
+WUIF             EQU  H'0007'
+U1ABDIE          EQU  H'0002'
+U1ABDIF          EQU  H'0006'
+U1WUIF           EQU  H'0007'
+
+
+;----- U1ERRIR Bits -----------------------------------------------------
+TXCIF            EQU  H'0000'
+RXFOIF           EQU  H'0001'
+RXBKIF           EQU  H'0002'
+FERIF            EQU  H'0003'
+CERIF            EQU  H'0004'
+ABDOVF           EQU  H'0005'
+PERIF            EQU  H'0006'
+TXMTIF           EQU  H'0007'
+U1TXCIF          EQU  H'0000'
+U1RXFOIF         EQU  H'0001'
+U1RXBKIF         EQU  H'0002'
+U1FERIF          EQU  H'0003'
+U1CERIF          EQU  H'0004'
+U1ABDOVF         EQU  H'0005'
+U1PERIF          EQU  H'0006'
+U1TXMTIF         EQU  H'0007'
+
+
+;----- U1ERRIE Bits -----------------------------------------------------
+TXCIE            EQU  H'0000'
+RXFOIE           EQU  H'0001'
+RXBKIE           EQU  H'0002'
+FERIE            EQU  H'0003'
+CERIE            EQU  H'0004'
+ABDOVE           EQU  H'0005'
+PERIE            EQU  H'0006'
+TXMTIE           EQU  H'0007'
+U1TXCIE          EQU  H'0000'
+U1RXFOIE         EQU  H'0001'
+U1RXBKIE         EQU  H'0002'
+U1FERIE          EQU  H'0003'
+U1CERIE          EQU  H'0004'
+U1ABDOVE         EQU  H'0005'
+U1PERIE          EQU  H'0006'
+U1TXMTIE         EQU  H'0007'
+
+
+;----- T1CON Bits -----------------------------------------------------
+ON_T1CON         EQU  H'0000'
+RD16             EQU  H'0001'
+NOT_SYNC         EQU  H'0002'
+TMR1ON           EQU  H'0000'
+T1RD16           EQU  H'0001'
+NOT_T1SYNC       EQU  H'0002'
+T1CKPS0          EQU  H'0004'
+T1CKPS1          EQU  H'0005'
+CKPS0_T1CON      EQU  H'0004'
+CKPS1_T1CON      EQU  H'0005'
+RD161            EQU  H'0001'
+
+
+;----- TMR1L Bits -----------------------------------------------------
+TMR1L0           EQU  H'0000'
+TMR1L1           EQU  H'0001'
+TMR1L2           EQU  H'0002'
+TMR1L3           EQU  H'0003'
+TMR1L4           EQU  H'0004'
+TMR1L5           EQU  H'0005'
+TMR1L6           EQU  H'0006'
+TMR1L7           EQU  H'0007'
+
+
+;----- TMR1H Bits -----------------------------------------------------
+TMR1H0           EQU  H'0000'
+TMR1H1           EQU  H'0001'
+TMR1H2           EQU  H'0002'
+TMR1H3           EQU  H'0003'
+TMR1H4           EQU  H'0004'
+TMR1H5           EQU  H'0005'
+TMR1H6           EQU  H'0006'
+TMR1H7           EQU  H'0007'
+
+
+;----- T1GCON Bits -----------------------------------------------------
+GVAL             EQU  H'0002'
+GGO              EQU  H'0003'
+GSPM             EQU  H'0004'
+GTM              EQU  H'0005'
+GPOL_T1GCON      EQU  H'0006'
+GE               EQU  H'0007'
+T1GVAL           EQU  H'0002'
+T1GGO            EQU  H'0003'
+T1GSPM           EQU  H'0004'
+T1GTM            EQU  H'0005'
+T1GPOL           EQU  H'0006'
+T1GE             EQU  H'0007'
+NOT_DONE_T1GCON  EQU  H'0003'
+NOT_T1DONE       EQU  H'0003'
+
+
+;----- T1GATE Bits -----------------------------------------------------
+GSS0             EQU  H'0000'
+GSS1             EQU  H'0001'
+GSS2             EQU  H'0002'
+GSS3             EQU  H'0003'
+GSS4             EQU  H'0004'
+T1GSS0           EQU  H'0000'
+T1GSS1           EQU  H'0001'
+T1GSS2           EQU  H'0002'
+T1GSS3           EQU  H'0003'
+T1GSS4           EQU  H'0004'
+
+
+;----- T1CLK Bits -----------------------------------------------------
+T1CS0            EQU  H'0000'
+T1CS1            EQU  H'0001'
+T1CS2            EQU  H'0002'
+T1CS3            EQU  H'0003'
+T1CS4            EQU  H'0004'
+CS0_T1CLK        EQU  H'0000'
+CS1_T1CLK        EQU  H'0001'
+CS2_T1CLK        EQU  H'0002'
+CS3              EQU  H'0003'
+CS4              EQU  H'0004'
+
+
+;----- CCP1CON Bits -----------------------------------------------------
+FMT              EQU  H'0004'
+OUT_CCP1CON      EQU  H'0005'
+EN               EQU  H'0007'
+MODE0            EQU  H'0000'
+MODE1            EQU  H'0001'
+MODE2            EQU  H'0002'
+MODE3            EQU  H'0003'
+CCP1FMT          EQU  H'0004'
+CCP1OUT          EQU  H'0005'
+CCP1EN           EQU  H'0007'
+CCP1MODE0        EQU  H'0000'
+CCP1MODE1        EQU  H'0001'
+CCP1MODE2        EQU  H'0002'
+CCP1MODE3        EQU  H'0003'
+
+
+;----- CCP1CAP Bits -----------------------------------------------------
+CTS0             EQU  H'0000'
+CTS1             EQU  H'0001'
+CTS2             EQU  H'0002'
+CTS3             EQU  H'0003'
+CCP1CTS0         EQU  H'0000'
+CCP1CTS1         EQU  H'0001'
+CCP1CTS2         EQU  H'0002'
+CCP1CTS3         EQU  H'0003'
+
+
+;----- CRCCON1 Bits -----------------------------------------------------
+PLEN0            EQU  H'0000'
+PLEN1            EQU  H'0001'
+PLEN2            EQU  H'0002'
+PLEN3            EQU  H'0003'
+PLEN4            EQU  H'0004'
+
+
+;----- ADCON1 Bits -----------------------------------------------------
+DSEN             EQU  H'0000'
+PCSC             EQU  H'0001'
+GPOL_ADCON1      EQU  H'0005'
+IPEN_ADCON1      EQU  H'0006'
+PPOL             EQU  H'0007'
+ADDSEN           EQU  H'0000'
+ADPCSC           EQU  H'0001'
+ADGPOL           EQU  H'0005'
+ADIPEN           EQU  H'0006'
+ADPPOL           EQU  H'0007'
+
+
+;----- ADCSEL1 Bits -----------------------------------------------------
+SSI              EQU  H'0006'
+CHEN             EQU  H'0007'
+
+
+;----- PWM1ERS Bits -----------------------------------------------------
+ERS0             EQU  H'0000'
+ERS1             EQU  H'0001'
+ERS2             EQU  H'0002'
+ERS3             EQU  H'0003'
+
+
+;----- PWM1CLK Bits -----------------------------------------------------
+CLK0             EQU  H'0000'
+CLK1             EQU  H'0001'
+CLK2             EQU  H'0002'
+CLK3             EQU  H'0003'
+CLK4             EQU  H'0004'
+
+
+;----- PWM1LDS Bits -----------------------------------------------------
+LDS0             EQU  H'0000'
+LDS1             EQU  H'0001'
+LDS2             EQU  H'0002'
+LDS3             EQU  H'0003'
+
+
+;----- PWM1GIR Bits -----------------------------------------------------
+S1P1IF           EQU  H'0000'
+S1P2IF           EQU  H'0001'
+
+
+;----- PWM1GIE Bits -----------------------------------------------------
+S1P1IE           EQU  H'0000'
+S1P2IE           EQU  H'0001'
+
+
+;----- PWM1CON Bits -----------------------------------------------------
+ERSNOW           EQU  H'0000'
+ERSPOL           EQU  H'0001'
+LD_PWM1CON       EQU  H'0002'
+EN               EQU  H'0007'
+
+
+;----- PWM1S1CFG Bits -----------------------------------------------------
+PPEN             EQU  H'0003'
+POL1             EQU  H'0006'
+POL2             EQU  H'0007'
+MODE0            EQU  H'0000'
+MODE1            EQU  H'0001'
+MODE2            EQU  H'0002'
+
+
+;----- IPR1 Bits -----------------------------------------------------
+INT0IP           EQU  H'0000'
+ADCH1IP          EQU  H'0001'
+ADIP             EQU  H'0002'
+ACTIP            EQU  H'0003'
+C1IP             EQU  H'0004'
+ADCH2IP          EQU  H'0005'
+ADCH3IP          EQU  H'0006'
+ADCH4IP          EQU  H'0007'
+
+
+;----- PIE1 Bits -----------------------------------------------------
+INT0IE           EQU  H'0000'
+ADCH1IE          EQU  H'0001'
+ADIE             EQU  H'0002'
+ACTIE            EQU  H'0003'
+C1IE             EQU  H'0004'
+ADCH2IE          EQU  H'0005'
+ADCH3IE          EQU  H'0006'
+ADCH4IE          EQU  H'0007'
+
+
+;----- PIR1 Bits -----------------------------------------------------
+INT0IF           EQU  H'0000'
+ADCH1IF          EQU  H'0001'
+ADIF             EQU  H'0002'
+ACTIF            EQU  H'0003'
+C1IF             EQU  H'0004'
+ADCH2IF          EQU  H'0005'
+ADCH3IF          EQU  H'0006'
+ADCH4IF          EQU  H'0007'
+
+
 ;----- CLKRCON Bits -----------------------------------------------------
 EN               EQU  H'0007'
 CLKRDIV0         EQU  H'0000'
@@ -953,17 +1719,6 @@ SYSCMD           EQU  H'0007'
 LVDMD            EQU  H'0005'
 
 
-;----- PMD1 Bits -----------------------------------------------------
-TMR0MD           EQU  H'0000'
-TMR1MD           EQU  H'0001'
-TMR2MD           EQU  H'0002'
-TMR3MD           EQU  H'0003'
-TMR4MD           EQU  H'0004'
-APMMD            EQU  H'0005'
-ZCDMD            EQU  H'0006'
-CM1MD            EQU  H'0007'
-
-
 ;----- PMD2 Bits -----------------------------------------------------
 CM2MD            EQU  H'0000'
 ADCMD            EQU  H'0001'
@@ -1018,54 +1773,6 @@ TU2MD            EQU  H'0001'
 ;----- CMOUT Bits -----------------------------------------------------
 MC1OUT           EQU  H'0000'
 MC2OUT           EQU  H'0001'
-
-
-;----- CM1CON0 Bits -----------------------------------------------------
-SYNC             EQU  H'0000'
-POL_CM1CON0      EQU  H'0004'
-OE               EQU  H'0005'
-OUT_CM1CON0      EQU  H'0006'
-EN               EQU  H'0007'
-HYS0             EQU  H'0001'
-HYS1             EQU  H'0002'
-C1SYNC           EQU  H'0000'
-C1HYS            EQU  H'0001'
-C1HYS1           EQU  H'0002'
-C1POL            EQU  H'0004'
-C1OE             EQU  H'0005'
-C1OUT_CM1CON0    EQU  H'0006'
-C1EN             EQU  H'0007'
-
-
-;----- CM1CON1 Bits -----------------------------------------------------
-INTN_CM1CON1     EQU  H'0000'
-INTP_CM1CON1     EQU  H'0001'
-RDY_CM1CON1      EQU  H'0007'
-SP0              EQU  H'0002'
-SP1              EQU  H'0003'
-C1INTN           EQU  H'0000'
-C1INTP           EQU  H'0001'
-C1SP0            EQU  H'0002'
-C1SP1            EQU  H'0003'
-C1RDY            EQU  H'0007'
-
-
-;----- CM1NCH Bits -----------------------------------------------------
-NCH0_CM1NCH      EQU  H'0000'
-NCH1_CM1NCH      EQU  H'0001'
-NCH2_CM1NCH      EQU  H'0002'
-C1NCH0           EQU  H'0000'
-C1NCH1           EQU  H'0001'
-C1NCH2           EQU  H'0002'
-
-
-;----- CM1PCH Bits -----------------------------------------------------
-PCH0             EQU  H'0000'
-PCH1             EQU  H'0001'
-PCH2             EQU  H'0002'
-C1PCH0           EQU  H'0000'
-C1PCH1           EQU  H'0001'
-C1PCH2           EQU  H'0002'
 
 
 ;----- CM2CON0 Bits -----------------------------------------------------
@@ -1183,32 +1890,9 @@ WDTTMR3          EQU  H'0006'
 WDTTMR4          EQU  H'0007'
 
 
-;----- DAC1DAT Bits -----------------------------------------------------
-DAC1R0           EQU  H'0000'
-DAC1R1           EQU  H'0001'
-DAC1R2           EQU  H'0002'
-DAC1R3           EQU  H'0003'
-DAC1R4           EQU  H'0004'
-DAC1R5           EQU  H'0005'
-DAC1R6           EQU  H'0006'
-DAC1R7           EQU  H'0007'
-
-
 ;----- DAC1DATH Bits -----------------------------------------------------
 DAC1R8           EQU  H'0000'
 DAC1R9           EQU  H'0001'
-
-
-;----- DAC1CON Bits -----------------------------------------------------
-EN               EQU  H'0007'
-DAC1PSS0         EQU  H'0002'
-DAC1PSS1         EQU  H'0003'
-DAC1EN           EQU  H'0007'
-NSS0             EQU  H'0000'
-PSS0_DAC1CON     EQU  H'0002'
-PSS1_DAC1CON     EQU  H'0003'
-OE0              EQU  H'0004'
-OE1              EQU  H'0005'
 
 
 ;----- SPI1RXB Bits -----------------------------------------------------
@@ -1242,23 +1926,6 @@ SPI1BMODE        EQU  H'0000'
 SPI1MST          EQU  H'0001'
 SPI1LSBF         EQU  H'0002'
 SPI1SPIEN        EQU  H'0007'
-
-
-;----- SPI1CON1 Bits -----------------------------------------------------
-SDOP             EQU  H'0000'
-SDIP             EQU  H'0001'
-SSP              EQU  H'0002'
-FST              EQU  H'0004'
-CKP              EQU  H'0005'
-CKE              EQU  H'0006'
-SMP              EQU  H'0007'
-SPI1SDOP         EQU  H'0000'
-SPI1SDIP         EQU  H'0001'
-SPI1SSP          EQU  H'0002'
-SPI1FST          EQU  H'0004'
-SPI1CKP          EQU  H'0005'
-SPI1CKE          EQU  H'0006'
-SPI1SMP          EQU  H'0007'
 
 
 ;----- SPI1CON2 Bits -----------------------------------------------------
@@ -1358,16 +2025,6 @@ ACTUD            EQU  H'0006'
 ACTEN            EQU  H'0007'
 
 
-;----- OSCCON1 Bits -----------------------------------------------------
-NDIV0            EQU  H'0000'
-NDIV1            EQU  H'0001'
-NDIV2            EQU  H'0002'
-NDIV3            EQU  H'0003'
-NOSC0            EQU  H'0004'
-NOSC1            EQU  H'0005'
-NOSC2            EQU  H'0006'
-
-
 ;----- OSCCON2 Bits -----------------------------------------------------
 CDIV0            EQU  H'0000'
 CDIV1            EQU  H'0001'
@@ -1432,15 +2089,6 @@ PR2_SCANPR       EQU  H'0002'
 SCANPR0          EQU  H'0000'
 SCANPR1          EQU  H'0001'
 SCANPR2          EQU  H'0002'
-
-
-;----- DMA1PR Bits -----------------------------------------------------
-PR0_DMA1PR       EQU  H'0000'
-PR1_DMA1PR       EQU  H'0001'
-PR2_DMA1PR       EQU  H'0002'
-DMA1PR0          EQU  H'0000'
-DMA1PR1          EQU  H'0001'
-DMA1PR2          EQU  H'0002'
 
 
 ;----- DMA2PR Bits -----------------------------------------------------
@@ -1579,16 +2227,6 @@ D1S5             EQU  H'0005'
 D1S6             EQU  H'0006'
 
 
-;----- CLCNSEL1 Bits -----------------------------------------------------
-D2S0             EQU  H'0000'
-D2S1             EQU  H'0001'
-D2S2             EQU  H'0002'
-D2S3             EQU  H'0003'
-D2S4             EQU  H'0004'
-D2S5             EQU  H'0005'
-D2S6             EQU  H'0006'
-
-
 ;----- CLCNSEL2 Bits -----------------------------------------------------
 D3S0             EQU  H'0000'
 D3S1             EQU  H'0001'
@@ -1618,17 +2256,6 @@ G1D3N            EQU  H'0004'
 G1D3T            EQU  H'0005'
 G1D4N            EQU  H'0006'
 G1D4T            EQU  H'0007'
-
-
-;----- CLCNGLS1 Bits -----------------------------------------------------
-G2D1N            EQU  H'0000'
-G2D1T            EQU  H'0001'
-G2D2N            EQU  H'0002'
-G2D2T            EQU  H'0003'
-G2D3N            EQU  H'0004'
-G2D3T            EQU  H'0005'
-G2D4N            EQU  H'0006'
-G2D4T            EQU  H'0007'
 
 
 ;----- CLCNGLS2 Bits -----------------------------------------------------
@@ -1911,13 +2538,6 @@ IN2              EQU  H'0002'
 IN3              EQU  H'0003'
 
 
-;----- PORTWIN1 Bits -----------------------------------------------------
-IN0              EQU  H'0000'
-IN1              EQU  H'0001'
-IN2              EQU  H'0002'
-IN3              EQU  H'0003'
-
-
 ;----- PORTWIN2 Bits -----------------------------------------------------
 IN0              EQU  H'0000'
 IN1              EQU  H'0001'
@@ -2048,163 +2668,6 @@ ADCGC6           EQU  H'0006'
 ADCGC7           EQU  H'0007'
 
 
-;----- ADCGD Bits -----------------------------------------------------
-CGD0             EQU  H'0000'
-CGD1             EQU  H'0001'
-CGD2             EQU  H'0002'
-CGD3             EQU  H'0003'
-CGD4             EQU  H'0004'
-CGD5             EQU  H'0005'
-CGD6             EQU  H'0006'
-CGD7             EQU  H'0007'
-ADCGD0           EQU  H'0000'
-ADCGD1           EQU  H'0001'
-ADCGD2           EQU  H'0002'
-ADCGD3           EQU  H'0003'
-ADCGD4           EQU  H'0004'
-ADCGD5           EQU  H'0005'
-ADCGD6           EQU  H'0006'
-ADCGD7           EQU  H'0007'
-
-
-;----- ADCGE Bits -----------------------------------------------------
-CGE0             EQU  H'0000'
-CGE1             EQU  H'0001'
-CGE2             EQU  H'0002'
-ADCGE0           EQU  H'0000'
-ADCGE1           EQU  H'0001'
-ADCGE2           EQU  H'0002'
-
-
-;----- OPA1CON0 Bits -----------------------------------------------------
-UG               EQU  H'0003'
-CPON_OPA1CON0    EQU  H'0005'
-EN               EQU  H'0007'
-UG0              EQU  H'0003'
-OPA1UG           EQU  H'0003'
-OPA1CPON         EQU  H'0005'
-OPA1EN           EQU  H'0007'
-
-
-;----- OPA1CON1 Bits -----------------------------------------------------
-RESON            EQU  H'0003'
-NSS0             EQU  H'0000'
-NSS1             EQU  H'0001'
-NSS2             EQU  H'0002'
-GSEL0            EQU  H'0004'
-GSEL1            EQU  H'0005'
-GSEL2            EQU  H'0006'
-OPA1RESON        EQU  H'0003'
-OPA1NSS0         EQU  H'0000'
-OPA1NSS1         EQU  H'0001'
-OPA1NSS2         EQU  H'0002'
-OPA1GSEL0        EQU  H'0004'
-OPA1GSEL1        EQU  H'0005'
-OPA1GSEL2        EQU  H'0006'
-
-
-;----- OPA1CON2 Bits -----------------------------------------------------
-PCH0             EQU  H'0000'
-PCH1             EQU  H'0001'
-PCH2             EQU  H'0002'
-NCH0_OPA1CON2    EQU  H'0004'
-NCH1_OPA1CON2    EQU  H'0005'
-NCH2_OPA1CON2    EQU  H'0006'
-OPA1PCH0         EQU  H'0000'
-OPA1PCH1         EQU  H'0001'
-OPA1PCH2         EQU  H'0002'
-OPA1NCH0         EQU  H'0004'
-OPA1NCH1         EQU  H'0005'
-OPA1NCH2         EQU  H'0006'
-
-
-;----- OPA1CON3 Bits -----------------------------------------------------
-INTOE            EQU  H'0005'
-PSS0_OPA1CON3    EQU  H'0000'
-PSS1_OPA1CON3    EQU  H'0001'
-PSS2             EQU  H'0002'
-PSS3             EQU  H'0003'
-PSS4             EQU  H'0004'
-FMS0             EQU  H'0006'
-FMS1             EQU  H'0007'
-OPA1INTOE        EQU  H'0005'
-OPA1PSS0         EQU  H'0000'
-OPA1PSS1         EQU  H'0001'
-OPA1PSS2         EQU  H'0002'
-OPA1PSS3         EQU  H'0003'
-OPA1PSS4         EQU  H'0004'
-OPA1FMS0         EQU  H'0006'
-OPA1FMS1         EQU  H'0007'
-
-
-;----- OPA1CON4 Bits -----------------------------------------------------
-OFCST            EQU  H'0002'
-PTRES            EQU  H'0004'
-OFCSEL0          EQU  H'0000'
-OFCSEL1          EQU  H'0001'
-OPA1OFCST        EQU  H'0002'
-OPA1PTRES        EQU  H'0004'
-OPA1OFCSEL0      EQU  H'0000'
-OPA1OFCSEL1      EQU  H'0001'
-
-
-;----- OPA1HWC Bits -----------------------------------------------------
-ORPOL            EQU  H'0003'
-OREN             EQU  H'0007'
-HWCL0            EQU  H'0000'
-HWCL1            EQU  H'0001'
-HWCL2            EQU  H'0002'
-HWCH0            EQU  H'0004'
-HWCH1            EQU  H'0005'
-HWCH2            EQU  H'0006'
-OPA1ORPOL        EQU  H'0003'
-OPA1OREN         EQU  H'0007'
-OPA1HWCL0        EQU  H'0000'
-OPA1HWCL1        EQU  H'0001'
-OPA1HWCL2        EQU  H'0002'
-OPA1HWCH0        EQU  H'0004'
-OPA1HWCH1        EQU  H'0005'
-OPA1HWCH2        EQU  H'0006'
-
-
-;----- OPA1OFFSET Bits -----------------------------------------------------
-OFFSET0          EQU  H'0000'
-OFFSET1          EQU  H'0001'
-OFFSET2          EQU  H'0002'
-OFFSET3          EQU  H'0003'
-OFFSET4          EQU  H'0004'
-OFFSET5          EQU  H'0005'
-OFFSET6          EQU  H'0006'
-OFFSET7          EQU  H'0007'
-OPA1OFFSET0      EQU  H'0000'
-OPA1OFFSET1      EQU  H'0001'
-OPA1OFFSET2      EQU  H'0002'
-OPA1OFFSET3      EQU  H'0003'
-OPA1OFFSET4      EQU  H'0004'
-OPA1OFFSET5      EQU  H'0005'
-OPA1OFFSET6      EQU  H'0006'
-OPA1OFFSET7      EQU  H'0007'
-
-
-;----- OPA1ORS Bits -----------------------------------------------------
-ORS0             EQU  H'0000'
-ORS1             EQU  H'0001'
-ORS2             EQU  H'0002'
-ORS3             EQU  H'0003'
-ORS4             EQU  H'0004'
-ORS5             EQU  H'0005'
-ORS6             EQU  H'0006'
-ORS7             EQU  H'0007'
-OPA1ORS0         EQU  H'0000'
-OPA1ORS1         EQU  H'0001'
-OPA1ORS2         EQU  H'0002'
-OPA1ORS3         EQU  H'0003'
-OPA1ORS4         EQU  H'0004'
-OPA1ORS5         EQU  H'0005'
-OPA1ORS6         EQU  H'0006'
-OPA1ORS7         EQU  H'0007'
-
-
 ;----- OPA2CON0 Bits -----------------------------------------------------
 UG               EQU  H'0003'
 CPON_OPA2CON0    EQU  H'0005'
@@ -2251,11 +2714,17 @@ OPA2NCH2         EQU  H'0006'
 INTOE            EQU  H'0005'
 PSS0_OPA2CON3    EQU  H'0000'
 PSS1_OPA2CON3    EQU  H'0001'
+PSS2             EQU  H'0002'
+PSS3             EQU  H'0003'
+PSS4             EQU  H'0004'
 FMS0             EQU  H'0006'
 FMS1             EQU  H'0007'
 OPA2INTOE        EQU  H'0005'
 OPA2PSS0         EQU  H'0000'
 OPA2PSS1         EQU  H'0001'
+OPA2PSS2         EQU  H'0002'
+OPA2PSS3         EQU  H'0003'
+OPA2PSS4         EQU  H'0004'
 OPA2FMS0         EQU  H'0006'
 OPA2FMS1         EQU  H'0007'
 
@@ -2315,11 +2784,17 @@ ORS1             EQU  H'0001'
 ORS2             EQU  H'0002'
 ORS3             EQU  H'0003'
 ORS4             EQU  H'0004'
+ORS5             EQU  H'0005'
+ORS6             EQU  H'0006'
+ORS7             EQU  H'0007'
 OPA2ORS0         EQU  H'0000'
 OPA2ORS1         EQU  H'0001'
 OPA2ORS2         EQU  H'0002'
 OPA2ORS3         EQU  H'0003'
 OPA2ORS4         EQU  H'0004'
+OPA2ORS5         EQU  H'0005'
+OPA2ORS6         EQU  H'0006'
+OPA2ORS7         EQU  H'0007'
 
 
 ;----- LATA Bits -----------------------------------------------------
@@ -2355,23 +2830,6 @@ LATC6            EQU  H'0006'
 LATC7            EQU  H'0007'
 
 
-;----- LATD Bits -----------------------------------------------------
-LATD0            EQU  H'0000'
-LATD1            EQU  H'0001'
-LATD2            EQU  H'0002'
-LATD3            EQU  H'0003'
-LATD4            EQU  H'0004'
-LATD5            EQU  H'0005'
-LATD6            EQU  H'0006'
-LATD7            EQU  H'0007'
-
-
-;----- LATE Bits -----------------------------------------------------
-LATE0            EQU  H'0000'
-LATE1            EQU  H'0001'
-LATE2            EQU  H'0002'
-
-
 ;----- TRISA Bits -----------------------------------------------------
 TRISA0           EQU  H'0000'
 TRISA1           EQU  H'0001'
@@ -2403,23 +2861,6 @@ TRISC4           EQU  H'0004'
 TRISC5           EQU  H'0005'
 TRISC6           EQU  H'0006'
 TRISC7           EQU  H'0007'
-
-
-;----- TRISD Bits -----------------------------------------------------
-TRISD0           EQU  H'0000'
-TRISD1           EQU  H'0001'
-TRISD2           EQU  H'0002'
-TRISD3           EQU  H'0003'
-TRISD4           EQU  H'0004'
-TRISD5           EQU  H'0005'
-TRISD6           EQU  H'0006'
-TRISD7           EQU  H'0007'
-
-
-;----- TRISE Bits -----------------------------------------------------
-TRISE0           EQU  H'0000'
-TRISE1           EQU  H'0001'
-TRISE2           EQU  H'0002'
 
 
 ;----- PORTA Bits -----------------------------------------------------
@@ -2455,21 +2896,7 @@ RC6              EQU  H'0006'
 RC7              EQU  H'0007'
 
 
-;----- PORTD Bits -----------------------------------------------------
-RD0              EQU  H'0000'
-RD1              EQU  H'0001'
-RD2              EQU  H'0002'
-RD3              EQU  H'0003'
-RD4              EQU  H'0004'
-RD5              EQU  H'0005'
-RD6              EQU  H'0006'
-RD7              EQU  H'0007'
-
-
 ;----- PORTE Bits -----------------------------------------------------
-RE0              EQU  H'0000'
-RE1              EQU  H'0001'
-RE2              EQU  H'0002'
 RE3              EQU  H'0003'
 
 
@@ -2554,40 +2981,6 @@ APMPER14         EQU  H'0006'
 APMPER15         EQU  H'0007'
 
 
-;----- APMPERS1 Bits -----------------------------------------------------
-BG               EQU  H'0002'
-FVR1             EQU  H'0003'
-FVR2             EQU  H'0004'
-ADCD             EQU  H'0005'
-ADCA             EQU  H'0006'
-TEMP             EQU  H'0007'
-APMPERS1_2       EQU  H'0002'
-APMPERS1_3       EQU  H'0003'
-APMPERS1_4       EQU  H'0004'
-APMPERS1_5       EQU  H'0005'
-APMPERS1_6       EQU  H'0006'
-APMPERS1_7       EQU  H'0007'
-
-
-;----- APMPERS1H Bits -----------------------------------------------------
-OPA1             EQU  H'0000'
-OPA2             EQU  H'0001'
-DAC1             EQU  H'0002'
-DAC2             EQU  H'0003'
-DAC3             EQU  H'0004'
-CMP1             EQU  H'0005'
-CMP2             EQU  H'0006'
-ZCD              EQU  H'0007'
-APMPERS1_8       EQU  H'0000'
-APMPERS1_9       EQU  H'0001'
-APMPERS1_10      EQU  H'0002'
-APMPERS1_11      EQU  H'0003'
-APMPERS1_12      EQU  H'0004'
-APMPERS1_13      EQU  H'0005'
-APMPERS1_14      EQU  H'0006'
-APMPERS1_15      EQU  H'0007'
-
-
 ;----- APMPERS2 Bits -----------------------------------------------------
 BG               EQU  H'0002'
 FVR1             EQU  H'0003'
@@ -2620,40 +3013,6 @@ APMPERS2_12      EQU  H'0004'
 APMPERS2_13      EQU  H'0005'
 APMPERS2_14      EQU  H'0006'
 APMPERS2_15      EQU  H'0007'
-
-
-;----- APMPERE1 Bits -----------------------------------------------------
-BG               EQU  H'0002'
-FVR1             EQU  H'0003'
-FVR2             EQU  H'0004'
-ADCD             EQU  H'0005'
-ADCA             EQU  H'0006'
-TEMP             EQU  H'0007'
-APMPERE1_2       EQU  H'0002'
-APMPERE1_3       EQU  H'0003'
-APMPERE1_4       EQU  H'0004'
-APMPERE1_5       EQU  H'0005'
-APMPERE1_6       EQU  H'0006'
-APMPERE1_7       EQU  H'0007'
-
-
-;----- APMPERE1H Bits -----------------------------------------------------
-OPA1             EQU  H'0000'
-OPA2             EQU  H'0001'
-DAC1             EQU  H'0002'
-DAC2             EQU  H'0003'
-DAC3             EQU  H'0004'
-CMP1             EQU  H'0005'
-CMP2             EQU  H'0006'
-ZCD              EQU  H'0007'
-APMPERE1_8       EQU  H'0000'
-APMPERE1_9       EQU  H'0001'
-APMPERE1_10      EQU  H'0002'
-APMPERE1_11      EQU  H'0003'
-APMPERE1_12      EQU  H'0004'
-APMPERE1_13      EQU  H'0005'
-APMPERE1_14      EQU  H'0006'
-APMPERE1_15      EQU  H'0007'
 
 
 ;----- APMPERE2 Bits -----------------------------------------------------
@@ -2744,15 +3103,6 @@ RA0PPS4          EQU  H'0004'
 RA0PPS5          EQU  H'0005'
 
 
-;----- RA1PPS Bits -----------------------------------------------------
-RA1PPS0          EQU  H'0000'
-RA1PPS1          EQU  H'0001'
-RA1PPS2          EQU  H'0002'
-RA1PPS3          EQU  H'0003'
-RA1PPS4          EQU  H'0004'
-RA1PPS5          EQU  H'0005'
-
-
 ;----- RA2PPS Bits -----------------------------------------------------
 RA2PPS0          EQU  H'0000'
 RA2PPS1          EQU  H'0001'
@@ -2814,15 +3164,6 @@ RB0PPS2          EQU  H'0002'
 RB0PPS3          EQU  H'0003'
 RB0PPS4          EQU  H'0004'
 RB0PPS5          EQU  H'0005'
-
-
-;----- RB1PPS Bits -----------------------------------------------------
-RB1PPS0          EQU  H'0000'
-RB1PPS1          EQU  H'0001'
-RB1PPS2          EQU  H'0002'
-RB1PPS3          EQU  H'0003'
-RB1PPS4          EQU  H'0004'
-RB1PPS5          EQU  H'0005'
 
 
 ;----- RB2PPS Bits -----------------------------------------------------
@@ -2888,15 +3229,6 @@ RC0PPS4          EQU  H'0004'
 RC0PPS5          EQU  H'0005'
 
 
-;----- RC1PPS Bits -----------------------------------------------------
-RC1PPS0          EQU  H'0000'
-RC1PPS1          EQU  H'0001'
-RC1PPS2          EQU  H'0002'
-RC1PPS3          EQU  H'0003'
-RC1PPS4          EQU  H'0004'
-RC1PPS5          EQU  H'0005'
-
-
 ;----- RC2PPS Bits -----------------------------------------------------
 RC2PPS0          EQU  H'0000'
 RC2PPS1          EQU  H'0001'
@@ -2951,105 +3283,6 @@ RC7PPS4          EQU  H'0004'
 RC7PPS5          EQU  H'0005'
 
 
-;----- RD0PPS Bits -----------------------------------------------------
-RD0PPS0          EQU  H'0000'
-RD0PPS1          EQU  H'0001'
-RD0PPS2          EQU  H'0002'
-RD0PPS3          EQU  H'0003'
-RD0PPS4          EQU  H'0004'
-RD0PPS5          EQU  H'0005'
-
-
-;----- RD1PPS Bits -----------------------------------------------------
-RD1PPS0          EQU  H'0000'
-RD1PPS1          EQU  H'0001'
-RD1PPS2          EQU  H'0002'
-RD1PPS3          EQU  H'0003'
-RD1PPS4          EQU  H'0004'
-RD1PPS5          EQU  H'0005'
-
-
-;----- RD2PPS Bits -----------------------------------------------------
-RD2PPS0          EQU  H'0000'
-RD2PPS1          EQU  H'0001'
-RD2PPS2          EQU  H'0002'
-RD2PPS3          EQU  H'0003'
-RD2PPS4          EQU  H'0004'
-RD2PPS5          EQU  H'0005'
-
-
-;----- RD3PPS Bits -----------------------------------------------------
-RD3PPS0          EQU  H'0000'
-RD3PPS1          EQU  H'0001'
-RD3PPS2          EQU  H'0002'
-RD3PPS3          EQU  H'0003'
-RD3PPS4          EQU  H'0004'
-RD3PPS5          EQU  H'0005'
-
-
-;----- RD4PPS Bits -----------------------------------------------------
-RD4PPS0          EQU  H'0000'
-RD4PPS1          EQU  H'0001'
-RD4PPS2          EQU  H'0002'
-RD4PPS3          EQU  H'0003'
-RD4PPS4          EQU  H'0004'
-RD4PPS5          EQU  H'0005'
-
-
-;----- RD5PPS Bits -----------------------------------------------------
-RD5PPS0          EQU  H'0000'
-RD5PPS1          EQU  H'0001'
-RD5PPS2          EQU  H'0002'
-RD5PPS3          EQU  H'0003'
-RD5PPS4          EQU  H'0004'
-RD5PPS5          EQU  H'0005'
-
-
-;----- RD6PPS Bits -----------------------------------------------------
-RD6PPS0          EQU  H'0000'
-RD6PPS1          EQU  H'0001'
-RD6PPS2          EQU  H'0002'
-RD6PPS3          EQU  H'0003'
-RD6PPS4          EQU  H'0004'
-RD6PPS5          EQU  H'0005'
-
-
-;----- RD7PPS Bits -----------------------------------------------------
-RD7PPS0          EQU  H'0000'
-RD7PPS1          EQU  H'0001'
-RD7PPS2          EQU  H'0002'
-RD7PPS3          EQU  H'0003'
-RD7PPS4          EQU  H'0004'
-RD7PPS5          EQU  H'0005'
-
-
-;----- RE0PPS Bits -----------------------------------------------------
-RE0PPS0          EQU  H'0000'
-RE0PPS1          EQU  H'0001'
-RE0PPS2          EQU  H'0002'
-RE0PPS3          EQU  H'0003'
-RE0PPS4          EQU  H'0004'
-RE0PPS5          EQU  H'0005'
-
-
-;----- RE1PPS Bits -----------------------------------------------------
-RE1PPS0          EQU  H'0000'
-RE1PPS1          EQU  H'0001'
-RE1PPS2          EQU  H'0002'
-RE1PPS3          EQU  H'0003'
-RE1PPS4          EQU  H'0004'
-RE1PPS5          EQU  H'0005'
-
-
-;----- RE2PPS Bits -----------------------------------------------------
-RE2PPS0          EQU  H'0000'
-RE2PPS1          EQU  H'0001'
-RE2PPS2          EQU  H'0002'
-RE2PPS3          EQU  H'0003'
-RE2PPS4          EQU  H'0004'
-RE2PPS5          EQU  H'0005'
-
-
 ;----- INT0PPS Bits -----------------------------------------------------
 INT0PPS0         EQU  H'0000'
 INT0PPS1         EQU  H'0001'
@@ -3057,15 +3290,6 @@ INT0PPS2         EQU  H'0002'
 INT0PPS3         EQU  H'0003'
 INT0PPS4         EQU  H'0004'
 INT0PPS5         EQU  H'0005'
-
-
-;----- INT1PPS Bits -----------------------------------------------------
-INT1PPS0         EQU  H'0000'
-INT1PPS1         EQU  H'0001'
-INT1PPS2         EQU  H'0002'
-INT1PPS3         EQU  H'0003'
-INT1PPS4         EQU  H'0004'
-INT1PPS5         EQU  H'0005'
 
 
 ;----- INT2PPS Bits -----------------------------------------------------
@@ -3084,24 +3308,6 @@ T0CKIPPS2        EQU  H'0002'
 T0CKIPPS3        EQU  H'0003'
 T0CKIPPS4        EQU  H'0004'
 T0CKIPPS5        EQU  H'0005'
-
-
-;----- T1CKIPPS Bits -----------------------------------------------------
-T1CKIPPS0        EQU  H'0000'
-T1CKIPPS1        EQU  H'0001'
-T1CKIPPS2        EQU  H'0002'
-T1CKIPPS3        EQU  H'0003'
-T1CKIPPS4        EQU  H'0004'
-T1CKIPPS5        EQU  H'0005'
-
-
-;----- T1GPPS Bits -----------------------------------------------------
-T1GPPS0          EQU  H'0000'
-T1GPPS1          EQU  H'0001'
-T1GPPS2          EQU  H'0002'
-T1GPPS3          EQU  H'0003'
-T1GPPS4          EQU  H'0004'
-T1GPPS5          EQU  H'0005'
 
 
 ;----- T3CKIPPS Bits -----------------------------------------------------
@@ -3140,15 +3346,6 @@ T4INPPS4         EQU  H'0004'
 T4INPPS5         EQU  H'0005'
 
 
-;----- CCP1PPS Bits -----------------------------------------------------
-CCP1PPS0         EQU  H'0000'
-CCP1PPS1         EQU  H'0001'
-CCP1PPS2         EQU  H'0002'
-CCP1PPS3         EQU  H'0003'
-CCP1PPS4         EQU  H'0004'
-CCP1PPS5         EQU  H'0005'
-
-
 ;----- CCP2PPS Bits -----------------------------------------------------
 CCP2PPS0         EQU  H'0000'
 CCP2PPS1         EQU  H'0001'
@@ -3156,15 +3353,6 @@ CCP2PPS2         EQU  H'0002'
 CCP2PPS3         EQU  H'0003'
 CCP2PPS4         EQU  H'0004'
 CCP2PPS5         EQU  H'0005'
-
-
-;----- PWM1ERSPPS Bits -----------------------------------------------------
-PWM1ERSPPS0      EQU  H'0000'
-PWM1ERSPPS1      EQU  H'0001'
-PWM1ERSPPS2      EQU  H'0002'
-PWM1ERSPPS3      EQU  H'0003'
-PWM1ERSPPS4      EQU  H'0004'
-PWM1ERSPPS5      EQU  H'0005'
 
 
 ;----- PWM2ERSPPS Bits -----------------------------------------------------
@@ -3225,15 +3413,6 @@ CLCIN0PPS2       EQU  H'0002'
 CLCIN0PPS3       EQU  H'0003'
 CLCIN0PPS4       EQU  H'0004'
 CLCIN0PPS5       EQU  H'0005'
-
-
-;----- CLCIN1PPS Bits -----------------------------------------------------
-CLCIN1PPS0       EQU  H'0000'
-CLCIN1PPS1       EQU  H'0001'
-CLCIN1PPS2       EQU  H'0002'
-CLCIN1PPS3       EQU  H'0003'
-CLCIN1PPS4       EQU  H'0004'
-CLCIN1PPS5       EQU  H'0005'
 
 
 ;----- CLCIN2PPS Bits -----------------------------------------------------
@@ -3344,24 +3523,6 @@ I2C1SCLPPS4      EQU  H'0004'
 I2C1SCLPPS5      EQU  H'0005'
 
 
-;----- U1RXPPS Bits -----------------------------------------------------
-U1RXPPS0         EQU  H'0000'
-U1RXPPS1         EQU  H'0001'
-U1RXPPS2         EQU  H'0002'
-U1RXPPS3         EQU  H'0003'
-U1RXPPS4         EQU  H'0004'
-U1RXPPS5         EQU  H'0005'
-
-
-;----- U1CTSPPS Bits -----------------------------------------------------
-U1CTSPPS0        EQU  H'0000'
-U1CTSPPS1        EQU  H'0001'
-U1CTSPPS2        EQU  H'0002'
-U1CTSPPS3        EQU  H'0003'
-U1CTSPPS4        EQU  H'0004'
-U1CTSPPS5        EQU  H'0005'
-
-
 ;----- U2RXPPS Bits -----------------------------------------------------
 U2RXPPS0         EQU  H'0000'
 U2RXPPS1         EQU  H'0001'
@@ -3378,15 +3539,6 @@ U2CTSPPS2        EQU  H'0002'
 U2CTSPPS3        EQU  H'0003'
 U2CTSPPS4        EQU  H'0004'
 U2CTSPPS5        EQU  H'0005'
-
-
-;----- OPA1ORPPS Bits -----------------------------------------------------
-OPA1PPS0         EQU  H'0000'
-OPA1PPS1         EQU  H'0001'
-OPA1PPS2         EQU  H'0002'
-OPA1PPS3         EQU  H'0003'
-OPA1PPS4         EQU  H'0004'
-OPA1PPS5         EQU  H'0005'
 
 
 ;----- OPA2ORPPS Bits -----------------------------------------------------
@@ -3426,21 +3578,6 @@ APMCLKPPS5       EQU  H'0005'
 
 
 ;----- RB2I2C Bits -----------------------------------------------------
-TH0              EQU  H'0000'
-TH1              EQU  H'0001'
-PU0              EQU  H'0004'
-PU1              EQU  H'0005'
-SLEW0            EQU  H'0006'
-SLEW1            EQU  H'0007'
-I2CTH0           EQU  H'0000'
-I2CTH1           EQU  H'0001'
-I2CPU0           EQU  H'0004'
-I2CPU1           EQU  H'0005'
-I2CSLEW0         EQU  H'0006'
-I2CSLEW1         EQU  H'0007'
-
-
-;----- RB1I2C Bits -----------------------------------------------------
 TH0              EQU  H'0000'
 TH1              EQU  H'0001'
 PU0              EQU  H'0004'
@@ -3669,135 +3806,12 @@ I2CBTOC2         EQU  H'0002'
 I2CBTOC3         EQU  H'0003'
 
 
-;----- U1P1H Bits -----------------------------------------------------
-P1H              EQU  H'0000'
-
-
 ;----- U1P2H Bits -----------------------------------------------------
 P2H              EQU  H'0000'
 
 
 ;----- U1P3H Bits -----------------------------------------------------
 P3H              EQU  H'0000'
-
-
-;----- U1CON0 Bits -----------------------------------------------------
-MODE0            EQU  H'0000'
-MODE1            EQU  H'0001'
-MODE2            EQU  H'0002'
-MODE3            EQU  H'0003'
-U1RXEN           EQU  H'0004'
-U1TXEN           EQU  H'0005'
-U1ABDEN          EQU  H'0006'
-U1BRGS           EQU  H'0007'
-U1MODE0          EQU  H'0000'
-U1MODE1          EQU  H'0001'
-U1MODE2          EQU  H'0002'
-U1MODE3          EQU  H'0003'
-RXEN             EQU  H'0004'
-TXEN             EQU  H'0005'
-ABDEN            EQU  H'0006'
-BRGS             EQU  H'0007'
-
-
-;----- U1CON1 Bits -----------------------------------------------------
-SENDB            EQU  H'0000'
-BRKOVR           EQU  H'0001'
-RXBIMD           EQU  H'0003'
-WUE              EQU  H'0004'
-ON_U1CON1        EQU  H'0007'
-U1SENDB          EQU  H'0000'
-U1BRKOVR         EQU  H'0001'
-U1RXBIMD         EQU  H'0003'
-U1WUE            EQU  H'0004'
-U1ON             EQU  H'0007'
-
-
-;----- U1CON2 Bits -----------------------------------------------------
-TXPOL            EQU  H'0002'
-C0EN             EQU  H'0003'
-RXPOL            EQU  H'0006'
-RUNOVF           EQU  H'0007'
-FLO0             EQU  H'0000'
-FLO1             EQU  H'0001'
-STP0             EQU  H'0004'
-STP1             EQU  H'0005'
-U1TXPOL          EQU  H'0002'
-U1C0EN           EQU  H'0003'
-U1RXPOL          EQU  H'0006'
-U1RUNOVF         EQU  H'0007'
-U1FLO0           EQU  H'0000'
-U1FLO1           EQU  H'0001'
-U1STP0           EQU  H'0004'
-U1STP1           EQU  H'0005'
-
-
-;----- U1FIFO Bits -----------------------------------------------------
-RXBF             EQU  H'0000'
-RXBE             EQU  H'0001'
-XON              EQU  H'0002'
-RXIDL            EQU  H'0003'
-TXBF             EQU  H'0004'
-TXBE             EQU  H'0005'
-STPMD            EQU  H'0006'
-TXWRE            EQU  H'0007'
-U1RXBF           EQU  H'0000'
-U1RXBE           EQU  H'0001'
-U1XON            EQU  H'0002'
-U1RXIDL          EQU  H'0003'
-U1TXBF           EQU  H'0004'
-U1TXBE           EQU  H'0005'
-U1STPMD          EQU  H'0006'
-U1TXWRE          EQU  H'0007'
-U1RCIDL          EQU  H'0003'
-RCIDL            EQU  H'0003'
-
-
-;----- U1UIR Bits -----------------------------------------------------
-ABDIE            EQU  H'0002'
-ABDIF            EQU  H'0006'
-WUIF             EQU  H'0007'
-U1ABDIE          EQU  H'0002'
-U1ABDIF          EQU  H'0006'
-U1WUIF           EQU  H'0007'
-
-
-;----- U1ERRIR Bits -----------------------------------------------------
-TXCIF            EQU  H'0000'
-RXFOIF           EQU  H'0001'
-RXBKIF           EQU  H'0002'
-FERIF            EQU  H'0003'
-CERIF            EQU  H'0004'
-ABDOVF           EQU  H'0005'
-PERIF            EQU  H'0006'
-TXMTIF           EQU  H'0007'
-U1TXCIF          EQU  H'0000'
-U1RXFOIF         EQU  H'0001'
-U1RXBKIF         EQU  H'0002'
-U1FERIF          EQU  H'0003'
-U1CERIF          EQU  H'0004'
-U1ABDOVF         EQU  H'0005'
-U1PERIF          EQU  H'0006'
-U1TXMTIF         EQU  H'0007'
-
-
-;----- U1ERRIE Bits -----------------------------------------------------
-TXCIE            EQU  H'0000'
-RXFOIE           EQU  H'0001'
-RXBKIE           EQU  H'0002'
-FERIE            EQU  H'0003'
-CERIE            EQU  H'0004'
-ABDOVE           EQU  H'0005'
-PERIE            EQU  H'0006'
-TXMTIE           EQU  H'0007'
-U1TXCIE          EQU  H'0000'
-U1RXFOIE         EQU  H'0001'
-U1RXBKIE         EQU  H'0002'
-U1FERIE          EQU  H'0003'
-U1CERIE          EQU  H'0004'
-U1ABDOVE         EQU  H'0005'
-U1PERIE          EQU  H'0006'
-U1TXMTIE         EQU  H'0007'
 
 
 ;----- U2CON0 Bits -----------------------------------------------------
@@ -3915,85 +3929,6 @@ U2CERIE          EQU  H'0004'
 U2ABDOVE         EQU  H'0005'
 U2PERIE          EQU  H'0006'
 U2TXMTIE         EQU  H'0007'
-
-
-;----- TMR1L Bits -----------------------------------------------------
-TMR1L0           EQU  H'0000'
-TMR1L1           EQU  H'0001'
-TMR1L2           EQU  H'0002'
-TMR1L3           EQU  H'0003'
-TMR1L4           EQU  H'0004'
-TMR1L5           EQU  H'0005'
-TMR1L6           EQU  H'0006'
-TMR1L7           EQU  H'0007'
-
-
-;----- TMR1H Bits -----------------------------------------------------
-TMR1H0           EQU  H'0000'
-TMR1H1           EQU  H'0001'
-TMR1H2           EQU  H'0002'
-TMR1H3           EQU  H'0003'
-TMR1H4           EQU  H'0004'
-TMR1H5           EQU  H'0005'
-TMR1H6           EQU  H'0006'
-TMR1H7           EQU  H'0007'
-
-
-;----- T1CON Bits -----------------------------------------------------
-ON_T1CON         EQU  H'0000'
-RD16             EQU  H'0001'
-NOT_SYNC         EQU  H'0002'
-TMR1ON           EQU  H'0000'
-T1RD16           EQU  H'0001'
-NOT_T1SYNC       EQU  H'0002'
-T1CKPS0          EQU  H'0004'
-T1CKPS1          EQU  H'0005'
-CKPS0_T1CON      EQU  H'0004'
-CKPS1_T1CON      EQU  H'0005'
-RD161            EQU  H'0001'
-
-
-;----- T1GCON Bits -----------------------------------------------------
-GVAL             EQU  H'0002'
-GGO              EQU  H'0003'
-GSPM             EQU  H'0004'
-GTM              EQU  H'0005'
-GPOL_T1GCON      EQU  H'0006'
-GE               EQU  H'0007'
-T1GVAL           EQU  H'0002'
-T1GGO            EQU  H'0003'
-T1GSPM           EQU  H'0004'
-T1GTM            EQU  H'0005'
-T1GPOL           EQU  H'0006'
-T1GE             EQU  H'0007'
-NOT_DONE_T1GCON  EQU  H'0003'
-NOT_T1DONE       EQU  H'0003'
-
-
-;----- T1GATE Bits -----------------------------------------------------
-GSS0             EQU  H'0000'
-GSS1             EQU  H'0001'
-GSS2             EQU  H'0002'
-GSS3             EQU  H'0003'
-GSS4             EQU  H'0004'
-T1GSS0           EQU  H'0000'
-T1GSS1           EQU  H'0001'
-T1GSS2           EQU  H'0002'
-T1GSS3           EQU  H'0003'
-T1GSS4           EQU  H'0004'
-
-
-;----- T1CLK Bits -----------------------------------------------------
-T1CS0            EQU  H'0000'
-T1CS1            EQU  H'0001'
-T1CS2            EQU  H'0002'
-T1CS3            EQU  H'0003'
-T1CS4            EQU  H'0004'
-CS0_T1CLK        EQU  H'0000'
-CS1_T1CLK        EQU  H'0001'
-CS2_T1CLK        EQU  H'0002'
-CS3              EQU  H'0003'
-CS4              EQU  H'0004'
 
 
 ;----- TMR0L Bits -----------------------------------------------------
@@ -4268,34 +4203,6 @@ T4RSEL3          EQU  H'0003'
 T4RSEL4          EQU  H'0004'
 
 
-;----- CCP1CON Bits -----------------------------------------------------
-FMT              EQU  H'0004'
-OUT_CCP1CON      EQU  H'0005'
-EN               EQU  H'0007'
-MODE0            EQU  H'0000'
-MODE1            EQU  H'0001'
-MODE2            EQU  H'0002'
-MODE3            EQU  H'0003'
-CCP1FMT          EQU  H'0004'
-CCP1OUT          EQU  H'0005'
-CCP1EN           EQU  H'0007'
-CCP1MODE0        EQU  H'0000'
-CCP1MODE1        EQU  H'0001'
-CCP1MODE2        EQU  H'0002'
-CCP1MODE3        EQU  H'0003'
-
-
-;----- CCP1CAP Bits -----------------------------------------------------
-CTS0             EQU  H'0000'
-CTS1             EQU  H'0001'
-CTS2             EQU  H'0002'
-CTS3             EQU  H'0003'
-CCP1CTS0         EQU  H'0000'
-CCP1CTS1         EQU  H'0001'
-CCP1CTS2         EQU  H'0002'
-CCP1CTS3         EQU  H'0003'
-
-
 ;----- CCP2CON Bits -----------------------------------------------------
 FMT              EQU  H'0004'
 OUT_CCP2CON      EQU  H'0005'
@@ -4497,14 +4404,6 @@ ACCM             EQU  H'0004'
 BUSY_CRCCON0     EQU  H'0005'
 GO_CRCCON0       EQU  H'0006'
 EN               EQU  H'0007'
-
-
-;----- CRCCON1 Bits -----------------------------------------------------
-PLEN0            EQU  H'0000'
-PLEN1            EQU  H'0001'
-PLEN2            EQU  H'0002'
-PLEN3            EQU  H'0003'
-PLEN4            EQU  H'0004'
 
 
 ;----- CRCCON2 Bits -----------------------------------------------------
@@ -5784,22 +5683,11 @@ ADCONT           EQU  H'0006'
 ADON             EQU  H'0007'
 DONE             EQU  H'0000'
 FM0              EQU  H'0002'
+FM1              EQU  H'0003'
 GO_NOT_DONE      EQU  H'0000'
 GO_NDONE         EQU  H'0000'
 ADFM0            EQU  H'0002'
-
-
-;----- ADCON1 Bits -----------------------------------------------------
-DSEN             EQU  H'0000'
-PCSC             EQU  H'0001'
-GPOL_ADCON1      EQU  H'0005'
-IPEN_ADCON1      EQU  H'0006'
-PPOL             EQU  H'0007'
-ADDSEN           EQU  H'0000'
-ADPCSC           EQU  H'0001'
-ADGPOL           EQU  H'0005'
-ADIPEN           EQU  H'0006'
-ADPPOL           EQU  H'0007'
+ADFM1            EQU  H'0003'
 
 
 ;----- ADCON2 Bits -----------------------------------------------------
@@ -5905,11 +5793,6 @@ CTX1             EQU  H'0001'
 ADCTXSW          EQU  H'0007'
 ADCTX0           EQU  H'0000'
 ADCTX1           EQU  H'0001'
-
-
-;----- ADCSEL1 Bits -----------------------------------------------------
-SSI              EQU  H'0006'
-CHEN             EQU  H'0007'
 
 
 ;----- ADCSEL2 Bits -----------------------------------------------------
@@ -6191,90 +6074,11 @@ IOCCF6           EQU  H'0006'
 IOCCF7           EQU  H'0007'
 
 
-;----- ANSELD Bits -----------------------------------------------------
-ANSELD0          EQU  H'0000'
-ANSELD1          EQU  H'0001'
-ANSELD2          EQU  H'0002'
-ANSELD3          EQU  H'0003'
-ANSELD4          EQU  H'0004'
-ANSELD5          EQU  H'0005'
-ANSELD6          EQU  H'0006'
-ANSELD7          EQU  H'0007'
-
-
-;----- WPUD Bits -----------------------------------------------------
-WPUD0            EQU  H'0000'
-WPUD1            EQU  H'0001'
-WPUD2            EQU  H'0002'
-WPUD3            EQU  H'0003'
-WPUD4            EQU  H'0004'
-WPUD5            EQU  H'0005'
-WPUD6            EQU  H'0006'
-WPUD7            EQU  H'0007'
-
-
-;----- ODCOND Bits -----------------------------------------------------
-ODCD0            EQU  H'0000'
-ODCD1            EQU  H'0001'
-ODCD2            EQU  H'0002'
-ODCD3            EQU  H'0003'
-ODCD4            EQU  H'0004'
-ODCD5            EQU  H'0005'
-ODCD6            EQU  H'0006'
-ODCD7            EQU  H'0007'
-
-
-;----- SLRCOND Bits -----------------------------------------------------
-SLRD0            EQU  H'0000'
-SLRD1            EQU  H'0001'
-SLRD2            EQU  H'0002'
-SLRD3            EQU  H'0003'
-SLRD4            EQU  H'0004'
-SLRD5            EQU  H'0005'
-SLRD6            EQU  H'0006'
-SLRD7            EQU  H'0007'
-
-
-;----- INLVLD Bits -----------------------------------------------------
-INLVLD0          EQU  H'0000'
-INLVLD1          EQU  H'0001'
-INLVLD2          EQU  H'0002'
-INLVLD3          EQU  H'0003'
-INLVLD4          EQU  H'0004'
-INLVLD5          EQU  H'0005'
-INLVLD6          EQU  H'0006'
-INLVLD7          EQU  H'0007'
-
-
-;----- ANSELE Bits -----------------------------------------------------
-ANSELE0          EQU  H'0000'
-ANSELE1          EQU  H'0001'
-ANSELE2          EQU  H'0002'
-
-
 ;----- WPUE Bits -----------------------------------------------------
-WPUE0            EQU  H'0000'
-WPUE1            EQU  H'0001'
-WPUE2            EQU  H'0002'
 WPUE3            EQU  H'0003'
 
 
-;----- ODCONE Bits -----------------------------------------------------
-ODCE0            EQU  H'0000'
-ODCE1            EQU  H'0001'
-ODCE2            EQU  H'0002'
-
-
-;----- SLRCONE Bits -----------------------------------------------------
-SLRE0            EQU  H'0000'
-SLRE1            EQU  H'0001'
-SLRE2            EQU  H'0002'
-
-
 ;----- INLVLE Bits -----------------------------------------------------
-INLVLE0          EQU  H'0000'
-INLVLE1          EQU  H'0001'
-INLVLE2          EQU  H'0002'
 INLVLE3          EQU  H'0003'
 
 
@@ -6524,54 +6328,6 @@ BASE19           EQU  H'0003'
 BASE20           EQU  H'0004'
 
 
-;----- PWM1ERS Bits -----------------------------------------------------
-ERS0             EQU  H'0000'
-ERS1             EQU  H'0001'
-ERS2             EQU  H'0002'
-ERS3             EQU  H'0003'
-
-
-;----- PWM1CLK Bits -----------------------------------------------------
-CLK0             EQU  H'0000'
-CLK1             EQU  H'0001'
-CLK2             EQU  H'0002'
-CLK3             EQU  H'0003'
-CLK4             EQU  H'0004'
-
-
-;----- PWM1LDS Bits -----------------------------------------------------
-LDS0             EQU  H'0000'
-LDS1             EQU  H'0001'
-LDS2             EQU  H'0002'
-LDS3             EQU  H'0003'
-
-
-;----- PWM1GIR Bits -----------------------------------------------------
-S1P1IF           EQU  H'0000'
-S1P2IF           EQU  H'0001'
-
-
-;----- PWM1GIE Bits -----------------------------------------------------
-S1P1IE           EQU  H'0000'
-S1P2IE           EQU  H'0001'
-
-
-;----- PWM1CON Bits -----------------------------------------------------
-ERSNOW           EQU  H'0000'
-ERSPOL           EQU  H'0001'
-LD_PWM1CON       EQU  H'0002'
-EN               EQU  H'0007'
-
-
-;----- PWM1S1CFG Bits -----------------------------------------------------
-PPEN             EQU  H'0003'
-POL1             EQU  H'0006'
-POL2             EQU  H'0007'
-MODE0            EQU  H'0000'
-MODE1            EQU  H'0001'
-MODE2            EQU  H'0002'
-
-
 ;----- PWM2ERS Bits -----------------------------------------------------
 ERS0             EQU  H'0000'
 ERS1             EQU  H'0001'
@@ -6713,17 +6469,6 @@ CRCIP            EQU  H'0006'
 IOCIP            EQU  H'0007'
 
 
-;----- IPR1 Bits -----------------------------------------------------
-INT0IP           EQU  H'0000'
-ADCH1IP          EQU  H'0001'
-ADIP             EQU  H'0002'
-ACTIP            EQU  H'0003'
-C1IP             EQU  H'0004'
-ADCH2IP          EQU  H'0005'
-ADCH3IP          EQU  H'0006'
-ADCH4IP          EQU  H'0007'
-
-
 ;----- IPR2 Bits -----------------------------------------------------
 ZCDIP            EQU  H'0000'
 CLC5IP           EQU  H'0001'
@@ -6825,17 +6570,6 @@ CRCIE            EQU  H'0006'
 IOCIE            EQU  H'0007'
 
 
-;----- PIE1 Bits -----------------------------------------------------
-INT0IE           EQU  H'0000'
-ADCH1IE          EQU  H'0001'
-ADIE             EQU  H'0002'
-ACTIE            EQU  H'0003'
-C1IE             EQU  H'0004'
-ADCH2IE          EQU  H'0005'
-ADCH3IE          EQU  H'0006'
-ADCH4IE          EQU  H'0007'
-
-
 ;----- PIE2 Bits -----------------------------------------------------
 ZCDIE            EQU  H'0000'
 CLC5IE           EQU  H'0001'
@@ -6935,17 +6669,6 @@ NVMIF            EQU  H'0004'
 CLC1IF           EQU  H'0005'
 CRCIF            EQU  H'0006'
 IOCIF            EQU  H'0007'
-
-
-;----- PIR1 Bits -----------------------------------------------------
-INT0IF           EQU  H'0000'
-ADCH1IF          EQU  H'0001'
-ADIF             EQU  H'0002'
-ACTIF            EQU  H'0003'
-C1IF             EQU  H'0004'
-ADCH2IF          EQU  H'0005'
-ADCH3IF          EQU  H'0006'
-ADCH4IF          EQU  H'0007'
 
 
 ;----- PIR2 Bits -----------------------------------------------------
@@ -7113,16 +6836,6 @@ DOZE2            EQU  H'0002'
 ;----- STKPTR Bits -----------------------------------------------------
 STKPTR0          EQU  H'0000'
 STKPTR1          EQU  H'0001'
-STKPTR2          EQU  H'0002'
-STKPTR3          EQU  H'0003'
-STKPTR4          EQU  H'0004'
-STKPTR5          EQU  H'0005'
-SP0              EQU  H'0000'
-SP1              EQU  H'0001'
-SP2              EQU  H'0002'
-SP3              EQU  H'0003'
-SP4              EQU  H'0004'
-SP5              EQU  H'0005'
 
 ;==========================================================================
 ;
@@ -7130,7 +6843,7 @@ SP5              EQU  H'0005'
 ;
 ;==========================================================================
 
-__MAXRAM  H'14FF'
+__MAXRAM  H'0DFF'
 __BADRAM  H'0000'-H'0038'
 __BADRAM  H'003B'-H'003F'
 __BADRAM  H'004E'-H'0062'
@@ -7140,13 +6853,15 @@ __BADRAM  H'00BA'-H'00BD'
 __BADRAM  H'00C6'-H'00D3'
 __BADRAM  H'00E0'-H'00E7'
 __BADRAM  H'010E'-H'0110'
-__BADRAM  H'0115'-H'011E'
+__BADRAM  H'0113'-H'011E'
 __BADRAM  H'012F'-H'013F'
-__BADRAM  H'0145'-H'0147'
+__BADRAM  H'0143'-H'0147'
+__BADRAM  H'014B'
 __BADRAM  H'014E'-H'0150'
+__BADRAM  H'0153'
 __BADRAM  H'0155'-H'01BF'
 __BADRAM  H'01EB'-H'0211'
-__BADRAM  H'0224'-H'023D'
+__BADRAM  H'0219'-H'023D'
 __BADRAM  H'0246'-H'0247'
 __BADRAM  H'024A'-H'024E'
 __BADRAM  H'0254'-H'0256'
@@ -7169,9 +6884,10 @@ __BADRAM  H'0362'-H'0372'
 __BADRAM  H'0384'-H'039F'
 __BADRAM  H'03B5'-H'03BB'
 __BADRAM  H'03C5'-H'03D6'
-__BADRAM  H'041E'
-__BADRAM  H'041E'
-__BADRAM  H'041F'
+__BADRAM  H'0418'-H'041F'
+__BADRAM  H'0420'
+__BADRAM  H'0422'
+__BADRAM  H'0423'
 __BADRAM  H'0428'-H'043C'
 __BADRAM  H'0448'-H'0457'
 __BADRAM  H'048E'-H'0499'
@@ -7314,70 +7030,6 @@ _WDTCCS_SOSC_6       EQU  H'D7'; WDT reference clock is SOSC
 _WDTCCS_SC_6         EQU  H'FF'; Software Control
 
 ;----- CONFIG7 Options --------------------------------------------------
-_BBSIZE_BBSIZE_16384_7 EQU  H'7F'; Boot Block size is 16384 words
-_BBSIZE_BBSIZE_16256_7 EQU  H'7E'; Boot Block size is 16256 words
-_BBSIZE_BBSIZE_16128_7 EQU  H'7D'; Boot Block size is 16128 words
-_BBSIZE_BBSIZE_16000_7 EQU  H'7C'; Boot Block size is 16000 words
-_BBSIZE_BBSIZE_15872_7 EQU  H'7B'; Boot Block size is 15872 words
-_BBSIZE_BBSIZE_15744_7 EQU  H'7A'; Boot Block size is 15744 words
-_BBSIZE_BBSIZE_15616_7 EQU  H'79'; Boot Block size is 15616 words
-_BBSIZE_BBSIZE_15488_7 EQU  H'78'; Boot Block size is 15488 words
-_BBSIZE_BBSIZE_15360_7 EQU  H'77'; Boot Block size is 15360 words
-_BBSIZE_BBSIZE_15232_7 EQU  H'76'; Boot Block size is 15232 words
-_BBSIZE_BBSIZE_15104_7 EQU  H'75'; Boot Block size is 15104 words
-_BBSIZE_BBSIZE_14976_7 EQU  H'74'; Boot Block size is 14976 words
-_BBSIZE_BBSIZE_14848_7 EQU  H'73'; Boot Block size is 14848 words
-_BBSIZE_BBSIZE_14720_7 EQU  H'72'; Boot Block size is 14720 words
-_BBSIZE_BBSIZE_14592_7 EQU  H'71'; Boot Block size is 14592 words
-_BBSIZE_BBSIZE_14464_7 EQU  H'70'; Boot Block size is 14464 words
-_BBSIZE_BBSIZE_14336_7 EQU  H'6F'; Boot Block size is 14336 words
-_BBSIZE_BBSIZE_14208_7 EQU  H'6E'; Boot Block size is 14208 words
-_BBSIZE_BBSIZE_14080_7 EQU  H'6D'; Boot Block size is 14080 words
-_BBSIZE_BBSIZE_13952_7 EQU  H'6C'; Boot Block size is 13952 words
-_BBSIZE_BBSIZE_13824_7 EQU  H'6B'; Boot Block size is 13824 words
-_BBSIZE_BBSIZE_13696_7 EQU  H'6A'; Boot Block size is 13696 words
-_BBSIZE_BBSIZE_13568_7 EQU  H'69'; Boot Block size is 13568 words
-_BBSIZE_BBSIZE_13440_7 EQU  H'68'; Boot Block size is 13440 words
-_BBSIZE_BBSIZE_13312_7 EQU  H'67'; Boot Block size is 13312 words
-_BBSIZE_BBSIZE_13184_7 EQU  H'66'; Boot Block size is 13184 words
-_BBSIZE_BBSIZE_13056_7 EQU  H'65'; Boot Block size is 13056 words
-_BBSIZE_BBSIZE_12928_7 EQU  H'64'; Boot Block size is 12928 words
-_BBSIZE_BBSIZE_12800_7 EQU  H'63'; Boot Block size is 12800 words
-_BBSIZE_BBSIZE_12672_7 EQU  H'62'; Boot Block size is 12672 words
-_BBSIZE_BBSIZE_12544_7 EQU  H'61'; Boot Block size is 12544 words
-_BBSIZE_BBSIZE_12416_7 EQU  H'60'; Boot Block size is 12416 words
-_BBSIZE_BBSIZE_12288_7 EQU  H'5F'; Boot Block size is 12288 words
-_BBSIZE_BBSIZE_12160_7 EQU  H'5E'; Boot Block size is 12160 words
-_BBSIZE_BBSIZE_12032_7 EQU  H'5D'; Boot Block size is 12032 words
-_BBSIZE_BBSIZE_11904_7 EQU  H'5C'; Boot Block size is 11904 words
-_BBSIZE_BBSIZE_11776_7 EQU  H'5B'; Boot Block size is 11776 words
-_BBSIZE_BBSIZE_11648_7 EQU  H'5A'; Boot Block size is 11648 words
-_BBSIZE_BBSIZE_11520_7 EQU  H'59'; Boot Block size is 11520 words
-_BBSIZE_BBSIZE_11392_7 EQU  H'58'; Boot Block size is 11392 words
-_BBSIZE_BBSIZE_11264_7 EQU  H'57'; Boot Block size is 11264 words
-_BBSIZE_BBSIZE_11136_7 EQU  H'56'; Boot Block size is 11136 words
-_BBSIZE_BBSIZE_11008_7 EQU  H'55'; Boot Block size is 11008 words
-_BBSIZE_BBSIZE_10880_7 EQU  H'54'; Boot Block size is 10880 words
-_BBSIZE_BBSIZE_10752_7 EQU  H'53'; Boot Block size is 10752 words
-_BBSIZE_BBSIZE_10624_7 EQU  H'52'; Boot Block size is 10624 words
-_BBSIZE_BBSIZE_10496_7 EQU  H'51'; Boot Block size is 10496 words
-_BBSIZE_BBSIZE_10368_7 EQU  H'50'; Boot Block size is 10368 words
-_BBSIZE_BBSIZE_10240_7 EQU  H'4F'; Boot Block size is 10240 words
-_BBSIZE_BBSIZE_10112_7 EQU  H'4E'; Boot Block size is 10112 words
-_BBSIZE_BBSIZE_9984_7 EQU  H'4D'; Boot Block size is 9984 words
-_BBSIZE_BBSIZE_9856_7 EQU  H'4C'; Boot Block size is 9856 words
-_BBSIZE_BBSIZE_9728_7 EQU  H'4B'; Boot Block size is 9728 words
-_BBSIZE_BBSIZE_9600_7 EQU  H'4A'; Boot Block size is 9600 words
-_BBSIZE_BBSIZE_9472_7 EQU  H'49'; Boot Block size is 9472 words
-_BBSIZE_BBSIZE_9344_7 EQU  H'48'; Boot Block size is 9344 words
-_BBSIZE_BBSIZE_9216_7 EQU  H'47'; Boot Block size is 9216 words
-_BBSIZE_BBSIZE_9088_7 EQU  H'46'; Boot Block size is 9088 words
-_BBSIZE_BBSIZE_8960_7 EQU  H'45'; Boot Block size is 8960 words
-_BBSIZE_BBSIZE_8832_7 EQU  H'44'; Boot Block size is 8832 words
-_BBSIZE_BBSIZE_8704_7 EQU  H'43'; Boot Block size is 8704 words
-_BBSIZE_BBSIZE_8576_7 EQU  H'42'; Boot Block size is 8576 words
-_BBSIZE_BBSIZE_8448_7 EQU  H'41'; Boot Block size is 8448 words
-_BBSIZE_BBSIZE_8320_7 EQU  H'40'; Boot Block size is 8320 words
 _BBSIZE_BBSIZE_8192_7 EQU  H'3F'; Boot Block size is 8192 words
 _BBSIZE_BBSIZE_8064_7 EQU  H'3E'; Boot Block size is 8064 words
 _BBSIZE_BBSIZE_7936_7 EQU  H'3D'; Boot Block size is 7936 words

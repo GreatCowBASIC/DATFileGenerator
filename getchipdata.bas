@@ -1605,6 +1605,7 @@ FOR CurrentChip = StartChip to ChipIncCount
         FOR PD = 1 to ConfMask
             TempData = Trim(Str(ConfigMask(PD)))
             IF TempData = "0" THEN TempData = "255"
+            IF Instr ( ChipName, "18F" ) > 0 and ( Instr ( ChipName, "Q83" ) > 0 or Instr ( ChipName, "Q84" ) > 0 or Instr ( ChipName, "Q71" ) > 0 ) Then TempData = "255"
             PRINT #1, TempData
         NEXT
         Print #1, ""
