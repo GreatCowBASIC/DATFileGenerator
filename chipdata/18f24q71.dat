@@ -68,7 +68,7 @@ PWM16TYPE=2
 SMTClockSourceVariant=4
 
 'ChipSAFMemWords is used within hefsaf.h.  This constant provides information with respect to the register used for setting the SAF operations
-SAFMemWords=512
+SAFMemWords=1024
 
 'ChipsEraseRowSizeWords is used within hefsaf.h.  This constant provides information with respect to the register used for setting the HEFSAF operations
 EraseRowSizeWords=128
