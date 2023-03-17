@@ -64,6 +64,9 @@ MaxAddress=14079
 'ChipPWMTimerVariant constant is used in pwmh and provides information for the timer register used for PWM
 PWMTimerVariant=2
 
+'ChipPWM16TYPE=2 constant is used within the compiler or libaries to control functionality. Value may be decimal representation of a hex number.
+PWM16TYPE=2
+
 'ChipSMTClockSourceVariant constant is used in smth and provides information for the register used for SMT
 SMTClockSourceVariant=4
 
@@ -97,6 +100,9 @@ SelfWrite=1
 [Interrupts]
 'For specific details of the interrupts see the microcontroller datasheet
 'The first parameter is the Great Cow BASIC identifier used in user code to expose the specific interrupt
+16bitUniversalTimerAInterrupt:TU16AIE,TU16AIF
+16bitUniversalTimerBInterrupt:TU16BIE,TU16BIF
+ADCContext1ThresholdInterrupt:ADCH2IE,ADCH2IF
 ADCReady:ADIE,ADIF
 ADThreshold:ADTIE,ADTIF
 ActiveClockTuning:ACTIE,ACTIF
@@ -1530,7 +1536,7 @@ SPI1EOSIE,SPI1INTE,4
 SPI1SOSIE,SPI1INTE,5
 SPI1TCZIE,SPI1INTE,6
 SPI1SRMTIE,SPI1INTE,7
-CLKSEL0,SPI1CLK,0
+SPI1CLK_CLKSEL0,SPI1CLK,0
 CLKSEL1,SPI1CLK,1
 CLKSEL2,SPI1CLK,2
 CLKSEL3,SPI1CLK,3
@@ -1573,10 +1579,10 @@ TFNRFNIE,C1FIFOCON1,0
 TFHRFHIE,C1FIFOCON1,1
 TFERFFIE,C1FIFOCON1,2
 RXOVIE,C1FIFOCON1,3
-TXATIE,C1FIFOCON1,4
+C1FIFOCON1_TXATIE,C1FIFOCON1,4
 RXTSEN,C1FIFOCON1,5
 RTREN,C1FIFOCON1,6
-TXEN,C1FIFOCON1,7
+C1FIFOCON1_C1FIFOCON1_C1FIFOCON1_C1FIFOCON1_C1FIFOCON1_TXEN,C1FIFOCON1,7
 UINC,C1FIFOCON1H,0
 TXREQ,C1FIFOCON1H,1
 FRESET,C1FIFOCON1H,2
@@ -1596,7 +1602,7 @@ TFNRFNIF,C1FIFOSTA1,0
 TFHRFHIF,C1FIFOSTA1,1
 TFERFFIF,C1FIFOSTA1,2
 RXOVIF,C1FIFOSTA1,3
-TXATIF,C1FIFOSTA1,4
+C1FIFOSTA1_TXATIF,C1FIFOSTA1,4
 TXERR,C1FIFOSTA1,5
 TXLARB,C1FIFOSTA1,6
 TXABT,C1FIFOSTA1,7
@@ -5645,7 +5651,7 @@ SMT1PR20,SMT1PRU,4
 SMT1PR21,SMT1PRU,5
 SMT1PR22,SMT1PRU,6
 SMT1PR23,SMT1PRU,7
-CPOL,SMT1CON0,2
+SMT1CON0_SMT1CON0_CPOL,SMT1CON0,2
 SPOL,SMT1CON0,3
 WPOL,SMT1CON0,4
 STP,SMT1CON0,5
@@ -8649,16 +8655,16 @@ ZCD=OFF
 DEBUG=OFF
 
 [ConfigMask]
-119
-251
 255
-191
-127
-63
-159
-143
-51
-1
+255
+255
+255
+255
+255
+255
+255
+255
+255
 
 [ConfigOps]
 'For details of the config options see the microcontroller datasheet
