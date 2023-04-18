@@ -58,6 +58,9 @@ MaxAddress=4095
 'ChipPWMTimerVariant constant is used in pwmh and provides information for the timer register used for PWM
 PWMTimerVariant=1
 
+'ChipTIMERXCLOCKSOURCESVARIANT=1 constant is used within the compiler or libaries to control functionality. Value may be decimal representation of a hex number.
+TIMERXCLOCKSOURCESVARIANT=1
+
 'ChipSMTClockSourceVariant constant is used in smth and provides information for the register used for SMT
 SMTClockSourceVariant=2
 

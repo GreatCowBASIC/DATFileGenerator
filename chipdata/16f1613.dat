@@ -55,6 +55,9 @@ MaxAddress=4095
 ';Microcontroller specific configuration Constants used in specific libraries, compiler or user programs
 ';This section of constants is specific to a microcontroller, so the constants may not be present for all microcontrollers
 
+'ChipTIMERXCLOCKSOURCESVARIANT=1 constant is used within the compiler or libaries to control functionality. Value may be decimal representation of a hex number.
+TIMERXCLOCKSOURCESVARIANT=1
+
 'ChipSMTClockSourceVariant constant is used in smth and provides information for the register used for SMT
 SMTClockSourceVariant=1
 
