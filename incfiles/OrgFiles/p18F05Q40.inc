@@ -4,14 +4,14 @@
 ;  Built by Great Cow BASIC convertor
 ;  MPASM processor include for the chip shown below
 ;
-; C:\Program Files (x86)\Microchip\MPLABX\v5.40\packs\index.idx
-; C:\Program Files (x86)\Microchip\MPLABX\v5.40\packs\Microchip\PIC18F-Q_DFP\1.5.124\xc8\pic\dat\ini\18F05Q40.ini
-; C:\Program Files (x86)\Microchip\MPLABX\v5.40\packs\Microchip\PIC18F-Q_DFP\1.5.124\edc\18F05Q40.PIC
-; C:\Program Files (x86)\Microchip\MPLABX\v5.40\packs\Microchip\PIC18F-Q_DFP\1.5.124\xc8\pic\dat\cfgdata\18F05Q40.cfgdata
+; C:\Program Files\Microchip\MPLABX\v6.05\packs\index.idx
+; C:\Program Files\Microchip\MPLABX\v6.05\packs\Microchip\PIC18F-Q_DFP\1.14.237\xc8\pic\dat\ini\18F05Q40.ini
+; C:\Program Files\Microchip\MPLABX\v6.05\packs\Microchip\PIC18F-Q_DFP\1.14.237\edc\18F05Q40.PIC
+; C:\Program Files\Microchip\MPLABX\v6.05\packs\Microchip\PIC18F-Q_DFP\1.14.237\xc8\pic\dat\cfgdata\18F05Q40.cfgdata
 ;
 ;==========================================================================
         NOLIST
-        IFNDEF __18F05Q40
+        IFNDEF __PIC18F05Q40
            MESSG "Processor-header file mismatch.  Verify selected processor."
         ENDIF
 ;==========================================================================
@@ -1732,14 +1732,14 @@ DSZ11            EQU  H'0003'
 
 
 ;----- DMANDSA Bits -----------------------------------------------------
-SSA0             EQU  H'0000'
-SSA1             EQU  H'0001'
-SSA2             EQU  H'0002'
-SSA3             EQU  H'0003'
-SSA4             EQU  H'0004'
-SSA5             EQU  H'0005'
-SSA6             EQU  H'0006'
-SSA7             EQU  H'0007'
+DSA0             EQU  H'0000'
+DSA1             EQU  H'0001'
+DSA2             EQU  H'0002'
+DSA3             EQU  H'0003'
+DSA4             EQU  H'0004'
+DSA5             EQU  H'0005'
+DSA6             EQU  H'0006'
+DSA7             EQU  H'0007'
 
 
 ;----- DMANDSAH Bits -----------------------------------------------------
@@ -3485,7 +3485,6 @@ CCP1MODE0        EQU  H'0000'
 CCP1MODE1        EQU  H'0001'
 CCP1MODE2        EQU  H'0002'
 CCP1MODE3        EQU  H'0003'
-P1M1             EQU  H'0007'
 
 
 ;----- CCP1CAP Bits -----------------------------------------------------
@@ -3829,6 +3828,7 @@ C1IP             EQU  H'0004'
 SMT1IP           EQU  H'0005'
 SMT1PRAIP        EQU  H'0006'
 SMT1PWAIP        EQU  H'0007'
+CM1IP            EQU  H'0004'
 
 
 ;----- IPR2 Bits -----------------------------------------------------
@@ -3869,6 +3869,7 @@ C2IP             EQU  H'0004'
 CLC2IP           EQU  H'0005'
 PWM2PIP          EQU  H'0006'
 PWM2IP           EQU  H'0007'
+CM2IP            EQU  H'0004'
 
 
 ;----- IPR6 Bits -----------------------------------------------------
@@ -4032,6 +4033,11 @@ CWG1LSAC0        EQU  H'0002'
 CWG1LSAC1        EQU  H'0003'
 CWG1LSDB0        EQU  H'0004'
 CWG1LSDB1        EQU  H'0005'
+LSAC1            EQU  H'0003'
+LSBD0            EQU  H'0004'
+LSBD1            EQU  H'0005'
+CWG1LSBD0        EQU  H'0004'
+CWG1LSBD1        EQU  H'0005'
 
 
 ;----- CWG1AS1 Bits -----------------------------------------------------
@@ -5126,6 +5132,7 @@ C1IE             EQU  H'0004'
 SMT1IE           EQU  H'0005'
 SMT1PRAIE        EQU  H'0006'
 SMT1PWAIE        EQU  H'0007'
+CM1IE            EQU  H'0004'
 
 
 ;----- PIE2 Bits -----------------------------------------------------
@@ -5166,6 +5173,7 @@ C2IE             EQU  H'0004'
 CLC2IE           EQU  H'0005'
 PWM2PIE          EQU  H'0006'
 PWM2IE           EQU  H'0007'
+CM2IE            EQU  H'0004'
 
 
 ;----- PIE6 Bits -----------------------------------------------------
@@ -5237,6 +5245,7 @@ C1IF             EQU  H'0004'
 SMT1IF           EQU  H'0005'
 SMT1PRAIF        EQU  H'0006'
 SMT1PWAIF        EQU  H'0007'
+CM1IF            EQU  H'0004'
 
 
 ;----- PIR2 Bits -----------------------------------------------------
@@ -5277,6 +5286,7 @@ C2IF             EQU  H'0004'
 CLC2IF           EQU  H'0005'
 PWM2PIF          EQU  H'0006'
 PWM2IF           EQU  H'0007'
+CM2IF            EQU  H'0004'
 
 
 ;----- PIR6 Bits -----------------------------------------------------
@@ -5475,58 +5485,58 @@ SP6              EQU  H'0006'
 ;
 ;==========================================================================
 
-       __MAXRAM  H'0DFF'
-       __BADRAM  H'0000'-H'0038'
-       __BADRAM  H'003B'-H'003F'
-       __BADRAM  H'004E'-H'0063'
-       __BADRAM  H'0069'
-       __BADRAM  H'009A'-H'009F'
-       __BADRAM  H'00A3'-H'00AB'
-       __BADRAM  H'00BA'-H'00BD'
-       __BADRAM  H'00C0'-H'00D3'
-       __BADRAM  H'00E0'-H'00E7'
-       __BADRAM  H'0204'
-       __BADRAM  H'0207'
-       __BADRAM  H'0208'
-       __BADRAM  H'0209'-H'0210'
-       __BADRAM  H'0217'
-       __BADRAM  H'0218'
-       __BADRAM  H'0219'-H'023D'
-       __BADRAM  H'0246'-H'0247'
-       __BADRAM  H'024A'-H'024E'
-       __BADRAM  H'0250'
-       __BADRAM  H'0254'-H'0256'
-       __BADRAM  H'025C'-H'025D'
-       __BADRAM  H'0265'-H'0268'
-       __BADRAM  H'0278'-H'0287'
-       __BADRAM  H'02A0'
-       __BADRAM  H'02B5'
-       __BADRAM  H'02B7'
-       __BADRAM  H'02C8'
-       __BADRAM  H'02CA'
-       __BADRAM  H'02EA'-H'030F'
-       __BADRAM  H'0322'
-       __BADRAM  H'032F'-H'033F'
-       __BADRAM  H'0344'-H'034B'
-       __BADRAM  H'034E'
-       __BADRAM  H'0359'
-       __BADRAM  H'0362'-H'0366'
-       __BADRAM  H'0372'
-       __BADRAM  H'0384'-H'03BB'
-       __BADRAM  H'03C5'-H'03D6'
-       __BADRAM  H'03EE'
-       __BADRAM  H'03FB'-H'03FF'
-       __BADRAM  H'0408'-H'040F'
-       __BADRAM  H'0418'-H'043F'
-       __BADRAM  H'0448'-H'0457'
-       __BADRAM  H'048E'-H'049C'
-       __BADRAM  H'049E'-H'04A7'
-       __BADRAM  H'04BF'
-       __BADRAM  H'04C1'-H'04C5'
-       __BADRAM  H'04C7'
-       __BADRAM  H'04C9'-H'04CD'
-       __BADRAM  H'04CF'
-       __BADRAM  H'04E1'-H'04E5'
+__MAXRAM  H'0DFF'
+__BADRAM  H'0000'-H'0038'
+__BADRAM  H'003B'-H'003F'
+__BADRAM  H'004E'-H'0063'
+__BADRAM  H'0069'
+__BADRAM  H'009A'-H'009F'
+__BADRAM  H'00A3'-H'00AB'
+__BADRAM  H'00BA'-H'00BD'
+__BADRAM  H'00C0'-H'00D3'
+__BADRAM  H'00E0'-H'00E7'
+__BADRAM  H'0204'
+__BADRAM  H'0207'
+__BADRAM  H'0208'
+__BADRAM  H'0209'-H'0210'
+__BADRAM  H'0217'
+__BADRAM  H'0218'
+__BADRAM  H'0219'-H'023D'
+__BADRAM  H'0246'-H'0247'
+__BADRAM  H'024A'-H'024E'
+__BADRAM  H'0250'
+__BADRAM  H'0254'-H'0256'
+__BADRAM  H'025C'-H'025D'
+__BADRAM  H'0265'-H'0268'
+__BADRAM  H'0278'-H'0287'
+__BADRAM  H'02A0'
+__BADRAM  H'02B5'
+__BADRAM  H'02B7'
+__BADRAM  H'02C8'
+__BADRAM  H'02CA'
+__BADRAM  H'02EA'-H'030F'
+__BADRAM  H'0322'
+__BADRAM  H'032F'-H'033F'
+__BADRAM  H'0344'-H'034B'
+__BADRAM  H'034E'
+__BADRAM  H'0359'
+__BADRAM  H'0362'-H'0366'
+__BADRAM  H'0372'
+__BADRAM  H'0384'-H'03BB'
+__BADRAM  H'03C5'-H'03D6'
+__BADRAM  H'03EE'
+__BADRAM  H'03FB'-H'03FF'
+__BADRAM  H'0408'-H'040F'
+__BADRAM  H'0418'-H'043F'
+__BADRAM  H'0448'-H'0457'
+__BADRAM  H'048E'-H'049C'
+__BADRAM  H'049E'-H'04A7'
+__BADRAM  H'04BF'
+__BADRAM  H'04C1'-H'04C5'
+__BADRAM  H'04C7'
+__BADRAM  H'04C9'-H'04CD'
+__BADRAM  H'04CF'
+__BADRAM  H'04E1'-H'04E5'
 
 
 ;==========================================================================
@@ -5653,7 +5663,7 @@ _WDTCWS_WDTCWS_5_6   EQU  H'FD'; window delay = 25 percent of time; no software 
 _WDTCWS_WDTCWS_6_6   EQU  H'FE'; window always open (100%); no software control; keyed access required
 _WDTCWS_WDTCWS_7_6   EQU  H'FF'; window always open (100%); software control; keyed access not required
 _WDTCCS_LFINTOSC_6   EQU  H'C7'; WDT reference clock is the 31.0 kHz LFINTOSC
-_WDTCCS_MFINTOSC_6   EQU  H'CF'; WDT reference clock is the 32kHz MFINTOSC output
+_WDTCCS_MFINTOSC_6   EQU  H'CF'; WDT reference clock is the 31.25kHz MFINTOSC output
 _WDTCCS_SOSC_6       EQU  H'D7'; WDT reference clock is SOSC
 _WDTCCS_SC_6         EQU  H'FF'; Software Control
 
@@ -5719,5 +5729,37 @@ _IDLOC28           EQU  H'20001C'
 _IDLOC29           EQU  H'20001D'
 _IDLOC30           EQU  H'20001E'
 _IDLOC31           EQU  H'20001F'
+_IDLOC32           EQU  H'200020'
+_IDLOC33           EQU  H'200021'
+_IDLOC34           EQU  H'200022'
+_IDLOC35           EQU  H'200023'
+_IDLOC36           EQU  H'200024'
+_IDLOC37           EQU  H'200025'
+_IDLOC38           EQU  H'200026'
+_IDLOC39           EQU  H'200027'
+_IDLOC40           EQU  H'200028'
+_IDLOC41           EQU  H'200029'
+_IDLOC42           EQU  H'20002A'
+_IDLOC43           EQU  H'20002B'
+_IDLOC44           EQU  H'20002C'
+_IDLOC45           EQU  H'20002D'
+_IDLOC46           EQU  H'20002E'
+_IDLOC47           EQU  H'20002F'
+_IDLOC48           EQU  H'200030'
+_IDLOC49           EQU  H'200031'
+_IDLOC50           EQU  H'200032'
+_IDLOC51           EQU  H'200033'
+_IDLOC52           EQU  H'200034'
+_IDLOC53           EQU  H'200035'
+_IDLOC54           EQU  H'200036'
+_IDLOC55           EQU  H'200037'
+_IDLOC56           EQU  H'200038'
+_IDLOC57           EQU  H'200039'
+_IDLOC58           EQU  H'20003A'
+_IDLOC59           EQU  H'20003B'
+_IDLOC60           EQU  H'20003C'
+_IDLOC61           EQU  H'20003D'
+_IDLOC62           EQU  H'20003E'
+_IDLOC63           EQU  H'20003F'
 
         LIST
