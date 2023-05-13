@@ -56,7 +56,7 @@ PSP=0
 USART=5
 
 'This constant is exposed as ChipMaxAddress
-MaxAddress=9215
+MaxAddress=9471
 
 ';Microcontroller specific configuration Constants used in specific libraries, compiler or user programs
 ';This section of constants is specific to a microcontroller, so the constants may not be present for all microcontrollers

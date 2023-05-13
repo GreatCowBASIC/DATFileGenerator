@@ -5,13 +5,13 @@
 ;  MPASM processor include for the chip shown below
 ;
 ; C:\Program Files (x86)\Microchip\MPLABX\v5.40\packs\index.idx
-; C:\Program Files (x86)\Microchip\MPLABX\v5.40\packs\Microchip\PIC18F-Q_DFP\1.5.124\xc8\pic\dat\ini\18F04Q41.ini
-; C:\Program Files (x86)\Microchip\MPLABX\v5.40\packs\Microchip\PIC18F-Q_DFP\1.5.124\edc\18F04Q41.PIC
-; C:\Program Files (x86)\Microchip\MPLABX\v5.40\packs\Microchip\PIC18F-Q_DFP\1.5.124\xc8\pic\dat\cfgdata\18F04Q41.cfgdata
+; C:\Program Files (x86)\Microchip\MPLABX\v5.40\packs\Microchip\PIC18F-Q_DFP\1.5.124\xc8\pic\dat\ini\18F05Q41.ini
+; C:\Program Files (x86)\Microchip\MPLABX\v5.40\packs\Microchip\PIC18F-Q_DFP\1.5.124\edc\18F05Q41.PIC
+; C:\Program Files (x86)\Microchip\MPLABX\v5.40\packs\Microchip\PIC18F-Q_DFP\1.5.124\xc8\pic\dat\cfgdata\18F05Q41.cfgdata
 ;
 ;==========================================================================
         NOLIST
-        IFNDEF __18F04Q41
+        IFNDEF __18F05Q41
            MESSG "Processor-header file mismatch.  Verify selected processor."
         ENDIF
 ;==========================================================================
@@ -3579,12 +3579,10 @@ GSS0             EQU  H'0000'
 GSS1             EQU  H'0001'
 GSS2             EQU  H'0002'
 GSS3             EQU  H'0003'
-GSS4             EQU  H'0004'
 T3GSS0           EQU  H'0000'
 T3GSS1           EQU  H'0001'
 T3GSS2           EQU  H'0002'
 T3GSS3           EQU  H'0003'
-T3GSS4           EQU  H'0004'
 
 
 ;----- T3CLK Bits -----------------------------------------------------
@@ -5592,7 +5590,7 @@ SP6              EQU  H'0006'
 ;
 ;==========================================================================
 
-       __MAXRAM  H'08FF'
+       __MAXRAM  H'0DFF'
        __BADRAM  H'0000'-H'0038'
        __BADRAM  H'003B'-H'003F'
        __BADRAM  H'004E'-H'0063'
@@ -5779,6 +5777,7 @@ _BBSIZE_BBSIZE_512_7 EQU  H'FF'; Boot Block size is 512 words
 _BBSIZE_BBSIZE_1024_7 EQU  H'FE'; Boot Block size is 1024 words
 _BBSIZE_BBSIZE_2048_7 EQU  H'FD'; Boot Block size is 2048 words
 _BBSIZE_BBSIZE_4096_7 EQU  H'FC'; Boot Block size is 4096 words
+_BBSIZE_BBSIZE_8192_7 EQU  H'FB'; Boot Block size is 8192 words
 _BBEN_OFF_7          EQU  H'FF'; Boot block disabled
 _BBEN_ON_7           EQU  H'F7'; Boot block enabled
 _SAFEN_OFF_7         EQU  H'FF'; SAF disabled
