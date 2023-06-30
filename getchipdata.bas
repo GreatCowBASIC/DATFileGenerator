@@ -1440,7 +1440,7 @@ FOR CurrentChip = StartChip to ChipIncCount
 
     Print #1, "[Interrupts]"
     Print #1, "'For specific details of the interrupts see the microcontroller datasheet"
-    Print #1, "'The first parameter is the Great Cow BASIC identifier used in user code to expose the specific interrupt"
+    Print #1, "'The first parameter is the GCBASIC identifier used in user code to expose the specific interrupt"
 
     For PD = 1 to ILC
         With IntList(PD)
@@ -1451,7 +1451,7 @@ FOR CurrentChip = StartChip to ChipIncCount
 
     PRINT #1, "[Registers]"
     Print #1, "'For specific details of the registers see the microcontroller datasheet"
-    Print #1, "'The first parameter is the Great Cow BASIC register name used in user code to expose the specific register"
+    Print #1, "'The first parameter is the GCBASIC register name used in user code to expose the specific register"
     FOR PD = 1 to SVC
         If Val("&H" + SysVars(PD, 2)) <= MaxChipAddress or ( ( instr(ucase(chipname),"16F152")<>0  or instr(ucase(chipname),"16F180")<>0  or instr(ucase(chipname),"16F171")<>0  or instr(ucase(chipname),"16F181")<>0  ) and len(chipname)= 8) Then  'PIC16F15213
             TempData = SysVars(PD, 1) + "," + Str(Val("&H" + SysVars(PD, 2)))
@@ -1464,7 +1464,7 @@ FOR CurrentChip = StartChip to ChipIncCount
 
     PRINT #1, "[Bits]"
     Print #1, "'For details of the bits (relative to a register in terms of registerbits) see the microcontroller datasheet"
-    Print #1, "'The first parameter is the Great Cow BASIC bit name used in user code to expose the specific registerbit"
+    Print #1, "'The first parameter is the GCBASIC bit name used in user code to expose the specific registerbit"
     FOR PD = 1 to SVBC
         With SysVarBits(PD)
 
@@ -1581,7 +1581,7 @@ FOR CurrentChip = StartChip to ChipIncCount
 
     IF Left(ChipName, 2) = "18" THEN
         Print #1, "[ASMConfig]"
-        Print #1, "'The Great Cow BASIC compiler default configuration for a specific microcontroller"
+        Print #1, "'The GCBASIC compiler default configuration for a specific microcontroller"
 
         FOR PD = 1 to DefConf
             'print DefConfig(PD, 0) + ">" +DefConfig(PD, 1) + "=" + DefConfig(PD, 2)
@@ -1623,7 +1623,7 @@ FOR CurrentChip = StartChip to ChipIncCount
 
     Print #1, "[Config]"
     Print #1, "'For details of the config addresses see the microcontroller datasheet"
-    If SingleByteConfigElement = -1 then Print #1, "'CONFIG Single Byte config elements have been transformed into CONFIG Words for Great Cow BASIC compiler"
+    If SingleByteConfigElement = -1 then Print #1, "'CONFIG Single Byte config elements have been transformed into CONFIG Words for GCBASIC compiler"
 
 
     FOR PD = 1 TO COC
