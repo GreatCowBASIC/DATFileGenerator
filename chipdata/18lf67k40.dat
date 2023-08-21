@@ -14,7 +14,7 @@ Prog=65536
 EEPROM=1024
 
 'This constant is exposed as ChipRAM
-RAM=2048
+RAM=3562
 
 'This constant is exposed as ChipIO
 I/O=53
@@ -56,7 +56,7 @@ MaxAddress=4095
 ';This section of constants is specific to a microcontroller, so the constants may not be present for all microcontrollers
 
 'ChipPWMTimerVariant constant is used in pwmh and provides information for the timer register used for PWM
-PWMTimerVariant=2
+PWMTimerVariant=1
 
 'ChipSMTClockSourceVariant constant is used in smth and provides information for the register used for SMT
 SMTClockSourceVariant=3
@@ -81,7 +81,7 @@ SelfWrite=1
 
 [Interrupts]
 'For specific details of the interrupts see the microcontroller datasheet
-'The first parameter is the Great Cow BASIC identifier used in user code to expose the specific interrupt
+'The first parameter is the GCBASIC identifier used in user code to expose the specific interrupt
 ADCReady:ADIE,ADIF
 ADThreshold:ADTIE,ADTIF
 CCP1:CCP1IE,CCP1IF
@@ -142,7 +142,7 @@ ZeroCrossDetect:ZCDIE,ZCDIF
 
 [Registers]
 'For specific details of the registers see the microcontroller datasheet
-'The first parameter is the Great Cow BASIC register name used in user code to expose the specific register
+'The first parameter is the GCBASIC register name used in user code to expose the specific register
 PPSLOCK,3567
 INT0PPS,3568
 INT1PPS,3569
@@ -799,7 +799,7 @@ TOSU,4095
 
 [Bits]
 'For details of the bits (relative to a register in terms of registerbits) see the microcontroller datasheet
-'The first parameter is the Great Cow BASIC bit name used in user code to expose the specific registerbit
+'The first parameter is the GCBASIC bit name used in user code to expose the specific registerbit
 INT1PPS0,INT1PPS,0
 INT1PPS1,INT1PPS,1
 INT1PPS2,INT1PPS,2
@@ -4798,7 +4798,7 @@ SP4,STKPTR,4
 SP5,STKPTR,5
 
 [FreeRAM]
-0:7FF
+0:DE9
 
 [NoBankRAM]
 'NoBankRAM is somewhat misnamed - it is used for the defintion of (any) access bank locations
@@ -4882,7 +4882,7 @@ F60:FFF
 57,Vdd
 
 [ASMConfig]
-'The Great Cow BASIC compiler default configuration for a specific microcontroller
+'The GCBASIC compiler default configuration for a specific microcontroller
 BOREN=SBORDIS
 BORV=VBOR_190
 CLKOUTEN=OFF

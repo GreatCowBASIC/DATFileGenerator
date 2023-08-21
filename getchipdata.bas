@@ -408,7 +408,7 @@ FOR CurrentChip = StartChip to ChipIncCount
             Replace MaxRam, "'", ""
             MaxRam = Trim(MaxRam)
             MaxChipAddress = VAL("&H" + MaxRam)
-
+            
         END IF
 
         IF INSTR(DataSource, "PSPMODE") <> 0 THEN PSP = 1
@@ -2416,7 +2416,7 @@ Sub CalcRamBlocks
             loop
         end if
       end if
-
+        
     Elseif Instr(UCase(ChipName),"Q10" ) <> 0 Then
 
         'added to handle SECTOR RAM
