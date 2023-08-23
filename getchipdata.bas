@@ -1266,6 +1266,11 @@ FOR CurrentChip = StartChip to ChipIncCount
             Print #1, "'This constant is exposed as ChipMemorylock"
             Print #1, "MemoryLock=NVMCON2"
         End if
+        If Instr(chipname,"K40") <> 0 then
+            Print #1, ""
+            Print #1, "'This constant is exposed as ChipMemorylock"
+            Print #1, "MemoryLock=NVMCON2"
+        End if        
         If Instr(chipname,"Q83") <> 0 then
             Print #1, ""
             Print #1, "'This constant is exposed as ChipMemorylock"
