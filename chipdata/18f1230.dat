@@ -72,7 +72,7 @@ SelfWrite=1
 
 [Interrupts]
 'For specific details of the interrupts see the microcontroller datasheet
-'The first parameter is the Great Cow BASIC identifier used in user code to expose the specific interrupt
+'The first parameter is the GCBASIC identifier used in user code to expose the specific interrupt
 ADCReady:ADIE,ADIF
 Comp0Change:CMP0IE,CMP0IF
 Comp1Change:CMP1IE,CMP1IF
@@ -94,7 +94,7 @@ VoltageFail:LVDIE,LVDIF
 
 [Registers]
 'For specific details of the registers see the microcontroller datasheet
-'The first parameter is the Great Cow BASIC register name used in user code to expose the specific register
+'The first parameter is the GCBASIC register name used in user code to expose the specific register
 PORTA,3968
 PORTB,3969
 OVDCONS,3970
@@ -212,7 +212,7 @@ TOSU,4095
 
 [Bits]
 'For details of the bits (relative to a register in terms of registerbits) see the microcontroller datasheet
-'The first parameter is the Great Cow BASIC bit name used in user code to expose the specific registerbit
+'The first parameter is the GCBASIC bit name used in user code to expose the specific registerbit
 TMR1IE,PIE1,0
 CMP0IE,PIE1,1
 CMP1IE,PIE1,2
@@ -658,7 +658,7 @@ F80:FFF
 14,Vdd
 
 [ASMConfig]
-'The Great Cow BASIC compiler default configuration for a specific microcontroller
+'The GCBASIC compiler default configuration for a specific microcontroller
 BBSIZ=BB256
 BORV=3
 BOR=BOHW

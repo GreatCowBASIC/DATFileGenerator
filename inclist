@@ -621,6 +621,7 @@ p18f24k40.inc
 p18f24k42.inc
 P18F24K50.INC
 p18f24q10.inc
+p18F24Q71.inc
 p18f2510.inc
 p18f2515.inc
 p18f252.inc
@@ -645,6 +646,7 @@ P18F25K80.INC
 p18f25k83.inc
 p18f25q10.inc
 p18f25q43.inc
+p18F25Q71.inc
 p18f2610.inc
 p18f2620.inc
 p18f2680.inc
@@ -662,6 +664,7 @@ P18F26K80.INC
 p18f26k83.inc
 p18f26q10.inc
 p18f26q43.inc
+p18F26Q71.inc
 p18F26Q83.inc
 p18F26Q84.inc
 P18F27J13.INC
@@ -734,6 +737,7 @@ p18f46k42.inc
 P18F46K80.INC
 p18f46q10.inc
 p18f46q43.inc
+p18F46Q71.inc
 p18F46Q83.inc
 p18F46Q84.inc
 P18F47J13.INC
@@ -748,6 +752,7 @@ p18f55k42.inc
 p18f55q43.inc
 p18f56k42.inc
 p18f56q43.inc
+p18F56Q71.inc
 p18F56Q83.inc
 p18F56Q84.inc
 p18f57k42.inc

@@ -82,6 +82,9 @@ EraseFlashBlockSize=64
 'ChipSelfWrite constant is used within the compiler to indicate the chip is self write capable
 SelfWrite=1
 
+'ChipLF constant can be used within the programmer compiler to indicate the chip is a low voltage chip
+LF=True
+
 [Interrupts]
 'For specific details of the interrupts see the microcontroller datasheet
 'The first parameter is the GCBASIC identifier used in user code to expose the specific interrupt

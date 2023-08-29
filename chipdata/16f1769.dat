@@ -57,10 +57,8 @@ MaxAddress=4095
 
 'ChipPWMTimerVariant constant is used in pwmh and provides information for the timer register used for PWM
 PWMTimerVariant=1
-'ChipSMTClockSourceVariant constant is used in smth and provides information for the register used for SMT
-SMTClockSourceVariant=0
 
-'ChipPWM16TYPE=1 constant is used within the compiler or libaries to control functionality
+'ChipPWM16TYPE=1 constant is used within the compiler or libaries to control functionality. Value may be decimal representation of a hex number.
 PWM16TYPE=1
 
 'ChipHEFMemWords is used within hefsaf.h.  This constant provides information with respect to the register used for setting the HEF operations
@@ -89,7 +87,7 @@ SelfWrite=1
 
 [Interrupts]
 'For specific details of the interrupts see the microcontroller datasheet
-'The first parameter is the Great Cow BASIC identifier used in user code to expose the specific interrupt
+'The first parameter is the GCBASIC identifier used in user code to expose the specific interrupt
 ADCReady:ADIE,ADIF
 CCP1:CCP1IE,CCP1IF
 CCP2:CCP2IE,CCP2IF
@@ -126,7 +124,7 @@ ZeroCrossDetect:ZCDIE,ZCDIF
 
 [Registers]
 'For specific details of the registers see the microcontroller datasheet
-'The first parameter is the Great Cow BASIC register name used in user code to expose the specific register
+'The first parameter is the GCBASIC register name used in user code to expose the specific register
 INDF0,0
 INDF1,1
 PCL,2
@@ -563,7 +561,7 @@ TOSH,4079
 
 [Bits]
 'For details of the bits (relative to a register in terms of registerbits) see the microcontroller datasheet
-'The first parameter is the Great Cow BASIC bit name used in user code to expose the specific registerbit
+'The first parameter is the GCBASIC bit name used in user code to expose the specific registerbit
 TMR1IF,PIR1,0
 TMR2IF,PIR1,1
 CCP1IF,PIR1,2

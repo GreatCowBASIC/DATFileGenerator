@@ -1440,8 +1440,15 @@ FOR CurrentChip = StartChip to ChipIncCount
     Print #1, "'ChipSelfWrite constant is used within the compiler to indicate the chip is self write capable"
     Print #1, "SelfWrite="+str(ChipSelfWrite)
 
+    If Instr(Ucase(chipname),"LF" ) > 0 Then
+      Print #1, ""
+      Print #1, "'ChipLF constant can be used within the programmer compiler to indicate the chip is a low voltage chip"
+      Print #1, "LF=True"
+    End if
+
     Print #1, ""
 
+    
 
     Print #1, "[Interrupts]"
     Print #1, "'For specific details of the interrupts see the microcontroller datasheet"

@@ -43,6 +43,9 @@ Family=16
 'This constant is exposed as ChipSubFamily
 SubFamily=16104
 
+'This constant is exposed as ChipMemorylock
+MemoryLock=NVMCON2
+
 'This constant is exposed as ChipPSP
 PSP=0
 
@@ -78,7 +81,7 @@ SelfWrite=1
 
 [Interrupts]
 'For specific details of the interrupts see the microcontroller datasheet
-'The first parameter is the Great Cow BASIC identifier used in user code to expose the specific interrupt
+'The first parameter is the GCBASIC identifier used in user code to expose the specific interrupt
 ADCReady:ADIE,ADIF
 ADThreshold:ADTIE,ADTIF
 CCP1:CCP1IE,CCP1IF
@@ -116,7 +119,7 @@ ZeroCrossDetect:ZCDIE,ZCDIF
 
 [Registers]
 'For specific details of the registers see the microcontroller datasheet
-'The first parameter is the Great Cow BASIC register name used in user code to expose the specific register
+'The first parameter is the GCBASIC register name used in user code to expose the specific register
 PPSLOCK,3744
 INT0PPS,3745
 INT1PPS,3746
@@ -522,7 +525,7 @@ TOSU,4095
 
 [Bits]
 'For details of the bits (relative to a register in terms of registerbits) see the microcontroller datasheet
-'The first parameter is the Great Cow BASIC bit name used in user code to expose the specific registerbit
+'The first parameter is the GCBASIC bit name used in user code to expose the specific registerbit
 PORT,INT1PPS,3
 INT1PPS0,INT1PPS,0
 INT1PPS1,INT1PPS,1
@@ -2991,7 +2994,7 @@ F60:FFF
 20,Vdd
 
 [ASMConfig]
-'The Great Cow BASIC compiler default configuration for a specific microcontroller
+'The GCBASIC compiler default configuration for a specific microcontroller
 BOREN=SBORDIS
 BORV=VBOR_2P45
 CLKOUTEN=OFF

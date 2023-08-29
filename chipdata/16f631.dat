@@ -66,7 +66,7 @@ SelfWrite=0
 
 [Interrupts]
 'For specific details of the interrupts see the microcontroller datasheet
-'The first parameter is the Great Cow BASIC identifier used in user code to expose the specific interrupt
+'The first parameter is the GCBASIC identifier used in user code to expose the specific interrupt
 Comp1Change:C1IE,C1IF
 Comp2Change:C2IE,C2IF
 EEPROMReady:EEIE,EEIF
@@ -79,7 +79,7 @@ Timer1Overflow:TMR1IE,TMR1IF
 
 [Registers]
 'For specific details of the registers see the microcontroller datasheet
-'The first parameter is the Great Cow BASIC register name used in user code to expose the specific register
+'The first parameter is the GCBASIC register name used in user code to expose the specific register
 INDF,0
 TMR0,1
 PCL,2
@@ -126,7 +126,7 @@ SRCON,414
 
 [Bits]
 'For details of the bits (relative to a register in terms of registerbits) see the microcontroller datasheet
-'The first parameter is the Great Cow BASIC bit name used in user code to expose the specific registerbit
+'The first parameter is the GCBASIC bit name used in user code to expose the specific registerbit
 TMR1IF,PIR1,0
 T1IF,PIR1,0
 TMR1IE,PIE1,0

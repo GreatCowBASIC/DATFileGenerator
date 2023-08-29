@@ -99,7 +99,7 @@ SelfWrite=1
 
 [Interrupts]
 'For specific details of the interrupts see the microcontroller datasheet
-'The first parameter is the Great Cow BASIC identifier used in user code to expose the specific interrupt
+'The first parameter is the GCBASIC identifier used in user code to expose the specific interrupt
 16bitUniversalTimerAInterrupt:TU16AIE,TU16AIF
 16bitUniversalTimerBInterrupt:TU16BIE,TU16BIF
 ADCContext1ThresholdInterrupt:ADCH2IE,ADCH2IF
@@ -215,7 +215,7 @@ ZeroCrossDetect:ZCDIE,ZCDIF
 
 [Registers]
 'For specific details of the registers see the microcontroller datasheet
-'The first parameter is the Great Cow BASIC register name used in user code to expose the specific register
+'The first parameter is the GCBASIC register name used in user code to expose the specific register
 BOOTREG,56
 CLKRCON,57
 CLKRCLK,58
@@ -1423,7 +1423,7 @@ TOSU,1279
 
 [Bits]
 'For details of the bits (relative to a register in terms of registerbits) see the microcontroller datasheet
-'The first parameter is the Great Cow BASIC bit name used in user code to expose the specific registerbit
+'The first parameter is the GCBASIC bit name used in user code to expose the specific registerbit
 TMR0MD,PMD1,0
 TMR1MD,PMD1,1
 TMR2MD,PMD1,2
@@ -8680,7 +8680,7 @@ CHS4,ADCON0,6
 [Pins-TQFP]
 
 [ASMConfig]
-'The Great Cow BASIC compiler default configuration for a specific microcontroller
+'The GCBASIC compiler default configuration for a specific microcontroller
 BBEN=OFF
 BBSIZE=BBSIZE_512
 BOOTPINSEL=RA4
@@ -8777,7 +8777,7 @@ DEBUG=OFF,ON
 
 [Config]
 'For details of the config addresses see the microcontroller datasheet
-'CONFIG Single Byte config elements have been transformed into CONFIG Words for Great Cow BASIC compiler
+'CONFIG Single Byte config elements have been transformed into CONFIG Words for GCBASIC compiler
 FEXTOSC_LP,1,248
 FEXTOSC_XT,1,249
 FEXTOSC_HS,1,250

@@ -79,9 +79,12 @@ EraseFlashBlockSize=32
 'ChipSelfWrite constant is used within the compiler to indicate the chip is self write capable
 SelfWrite=1
 
+'ChipLF constant can be used within the programmer compiler to indicate the chip is a low voltage chip
+LF=True
+
 [Interrupts]
 'For specific details of the interrupts see the microcontroller datasheet
-'The first parameter is the Great Cow BASIC identifier used in user code to expose the specific interrupt
+'The first parameter is the GCBASIC identifier used in user code to expose the specific interrupt
 ADC2Ready:AD2IE,AD2IF
 ADCReady:ADIE,ADIF
 ExtInt0:INTE,INTF
@@ -101,7 +104,7 @@ UsartTX1Ready:TXIE,TXIF
 
 [Registers]
 'For specific details of the registers see the microcontroller datasheet
-'The first parameter is the Great Cow BASIC register name used in user code to expose the specific register
+'The first parameter is the GCBASIC register name used in user code to expose the specific register
 INDF0,0
 INDF1,1
 PCL,2
@@ -331,7 +334,7 @@ TOSH,4079
 
 [Bits]
 'For details of the bits (relative to a register in terms of registerbits) see the microcontroller datasheet
-'The first parameter is the Great Cow BASIC bit name used in user code to expose the specific registerbit
+'The first parameter is the GCBASIC bit name used in user code to expose the specific registerbit
 TMR1IF,PIR1,0
 TMR2IF,PIR1,1
 SSP2IF,PIR1,2
