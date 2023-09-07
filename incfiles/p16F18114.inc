@@ -4,10 +4,10 @@
 ;  Built by Great Cow BASIC convertor
 ;  MPASM processor include for the chip shown below
 ;
-; C:\Users\admin\.mchp_packs\index.idx
-; C:\Users\admin\.mchp_packs\Microchip\PIC16F1xxxx_DFP\1.15.191\xc8\pic\dat\ini\16F18114.ini
-; C:\Users\admin\.mchp_packs\Microchip\PIC16F1xxxx_DFP\1.15.191\edc\PIC16F18114.PIC
-; C:\Users\admin\.mchp_packs\Microchip\PIC16F1xxxx_DFP\1.15.191\xc8\pic\dat\cfgdata\16F18114.cfgdata
+; C:\Program Files\Microchip\MPLABX\v6.15\packs\index.idx
+; C:\Program Files\Microchip\MPLABX\v6.15\packs\Microchip\PIC16F1xxxx_DFP\1.19.363\xc8\pic\dat\ini\16F18114.ini
+; C:\Program Files\Microchip\MPLABX\v6.15\packs\Microchip\PIC16F1xxxx_DFP\1.19.363\edc\PIC16F18114.PIC
+; C:\Program Files\Microchip\MPLABX\v6.15\packs\Microchip\PIC16F1xxxx_DFP\1.19.363\xc8\pic\dat\cfgdata\16F18114.cfgdata
 ;
 ;==========================================================================
         NOLIST
@@ -296,12 +296,12 @@ NVMDATL          EQU  H'1C8E'
 NVMDATH          EQU  H'1C8F'
 NVMCON1          EQU  H'1C90'
 NVMCON2          EQU  H'1C91'
-SCANLADR         EQU  H'1C92'
-SCANLADRL        EQU  H'1C92'
-SCANLADRH        EQU  H'1C93'
-SCANHADR         EQU  H'1C95'
-SCANHADRL        EQU  H'1C95'
-SCANHADRH        EQU  H'1C96'
+SCANHADR         EQU  H'1C92'
+SCANHADRL        EQU  H'1C92'
+SCANHADRH        EQU  H'1C93'
+SCANLADR         EQU  H'1C95'
+SCANLADRL        EQU  H'1C95'
+SCANLADRH        EQU  H'1C96'
 SCANCON0         EQU  H'1C98'
 SCANTRIG         EQU  H'1C99'
 CRCDATA          EQU  H'1C9A'
@@ -1286,6 +1286,10 @@ OUTPS1           EQU  H'0001'
 OUTPS2           EQU  H'0002'
 OUTPS3           EQU  H'0003'
 T016BIT          EQU  H'0004'
+T0OUTPS0         EQU  H'0000'
+T0OUTPS1         EQU  H'0001'
+T0OUTPS2         EQU  H'0002'
+T0OUTPS3         EQU  H'0003'
 
 
 ;----- T0CON1 Bits -----------------------------------------------------
@@ -2293,12 +2297,9 @@ C2OUT_CMOUT      EQU  H'0001'
 
 ;----- DAC2CON Bits -----------------------------------------------------
 NSS              EQU  H'0000'
-REFRNG           EQU  H'0006'
 EN               EQU  H'0007'
 PSS0             EQU  H'0002'
 PSS1             EQU  H'0003'
-OE0              EQU  H'0004'
-OE1              EQU  H'0005'
 
 
 ;----- NVMADR Bits -----------------------------------------------------
@@ -2514,12 +2515,12 @@ XOR31            EQU  H'0007'
 
 ;----- CRCCON0 Bits -----------------------------------------------------
 FULL             EQU  H'0000'
-LENDIAN          EQU  H'0001'
+SHIFTM           EQU  H'0001'
 ACCMOD           EQU  H'0004'
 CRCBUSY          EQU  H'0005'
 CRCGO            EQU  H'0006'
 CRCEN            EQU  H'0007'
-SHIFTM           EQU  H'0001'
+LENDIAN          EQU  H'0001'
 SETUP0           EQU  H'0002'
 SETUP1           EQU  H'0003'
 ACCM             EQU  H'0004'
@@ -3434,7 +3435,7 @@ _CONFIG3      EQU  H'8009'
 _CONFIG4      EQU  H'800A'
 _CONFIG5      EQU  H'800B'
 ;==========================================================================
-             ; C:\Users\admin\.mchp_packs\Microchip\PIC16F1xxxx_DFP\1.15.191\xc8\pic\dat\cfgdata\16F18114.cfgdata
+             ; C:\Program Files\Microchip\MPLABX\v6.15\packs\Microchip\PIC16F1xxxx_DFP\1.19.363\xc8\pic\dat\cfgdata\16F18114.cfgdata
 ;==========================================================================
 
 ;----- CONFIG1 Options --------------------------------------------------
@@ -3483,6 +3484,8 @@ _PPS1WAY_ON          EQU  H'3FFF'; The PPSLOCKED bit can be cleared and set only
 _PPS1WAY_OFF         EQU  H'37FF'; The PPSLOCKED bit can be set and cleared as needed (unlocking sequence is required)
 _STVREN_ON           EQU  H'3FFF'; Stack Overflow or Underflow will cause a reset
 _STVREN_OFF          EQU  H'2FFF'; Stack Overflow or Underflow will not cause a reset
+_DEBUG_OFF           EQU  H'3FFF'; Background Debugger disabled
+_DEBUG_ON            EQU  H'1FFF'; background debugger enabled
 
 ;----- CONFIG3 Options --------------------------------------------------
 _WDTCPS_WDTCPS_0     EQU  H'3FE0'; Divider ratio 1:32
@@ -3538,9 +3541,9 @@ _WDTCCS_SC           EQU  H'3FFF'; Software Control
 _BBSIZE_BB512        EQU  H'3FFF'; 512 words boot block size
 _BBSIZE_BB1K         EQU  H'3FFE'; 1024 words boot block size
 _BBSIZE_BB2K         EQU  H'3FFD'; 2048 words boot block size
-_BBSIZE_BB4K         EQU  H'3FFC'; 4096 word boot block size
-_BBSIZE_BB8K         EQU  H'3FFB'; 8192 word boot block size
-_BBSIZE_BB16K        EQU  H'3FFA'; 16384 word boot block size
+_BBSIZE_BB4K         EQU  H'3FFC'; * half of user program memory
+_BBSIZE_BB8K         EQU  H'3FFB'; * half of user program memory
+_BBSIZE_BB16K        EQU  H'3FFA'; * half of user program memory
 _BBSIZE_BB32K        EQU  H'3FF9'; * half of user program memory
 _BBSIZE_BB64K        EQU  H'3FF8'; * half of user program memory
 _BBEN_OFF            EQU  H'3FFF'; Boot Block disabled

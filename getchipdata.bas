@@ -4301,7 +4301,7 @@ Sub ReadMPASMInfo
                   case 1:
 
                     CurrSettingVal = Mid(CurrSettingVal, InStrRev(CurrSettingVal, "_") + 1)
-                  case 2:
+                  case 2,3:
 'print ConfigOption(CurrOption).Name,
 'print CurrSettingVal +" = ",
                     if ChipFamily = 16 then
@@ -4316,7 +4316,7 @@ Sub ReadMPASMInfo
                             If ConfigOption(CurrOption).Name = ConfigOption(PD).Name then
                               dim tempstr as string
                               tempstr = trim(Mid(CurrSettingVal, FirstUnderscore + 1))
-'print "<"+tempstr+">",
+                              'print "<"+tempstr+">",
                               If instr( ConfigOption(PD).Choices, tempstr ) > 0 then
                                   'print "*"+ConfigOption(PD).Choices+"*",
                                   CurrSettingVal = tempstr
@@ -4335,10 +4335,13 @@ Sub ReadMPASMInfo
 'print ""
                     else
                        CurrSettingVal = Left(CurrSettingVal, InStrRev(CurrSettingVal, "_") - 1)+";1"
+
                     end if
                   case else
-
-                    CurrSettingVal  = CurrSettingVal + "' three underscores not handled in GetChipData.exe ..best fix"
+                    'print ConfigOption(CurrOption).Name,
+                    'print CurrSettingVal +" = ",
+                    'print
+                    CurrSettingVal  = CurrSettingVal + "' multiple underscores not handled in GetChipData.exe ..best fix"
                 end select
             end if
 
