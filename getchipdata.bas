@@ -1608,6 +1608,9 @@ FOR CurrentChip = StartChip to ChipIncCount
             Next
 
             ' PRINT #1, "'Standard Config Setting"
+            ' Kill some CONFIG things that are not supported by PICKPlus.. users can uncomment in the DAT file.
+            If Instr(Ucase(DefConfig(PD, 1)),"SAFLOCK") = 1 Then DefConfig(PD, 1) = "'"+DefConfig(PD, 1)
+            If Instr(Ucase(DefConfig(PD, 1)),"SAFSZ") = 1 Then DefConfig(PD, 1) = "'"+DefConfig(PD, 1)
             PRINT #1, DefConfig(PD, 1) + "=" + DefConfig(PD, 2)
         NEXT
 
