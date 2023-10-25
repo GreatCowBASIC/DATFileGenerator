@@ -4784,17 +4784,17 @@ WRTSAF=OFF
 XINST=OFF
 
 [ConfigMask]
-119
-239
-255
-251
-127
-63
-3
-255
-143
-1
-1
+ 255
+ 255
+ 255
+ 255
+ 255
+ 255
+ 255
+ 255
+ 255
+ 255
+ 255
 
 [ConfigOps]
 'For details of the config options see the microcontroller datasheet

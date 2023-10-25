@@ -282,6 +282,8 @@ IF INSTR(Command, "START") <> 0 THEN StartChip = VAL(Mid(Command, 6))
 if SilentRunning = false then Print "Processing ..."
 FOR CurrentChip = StartChip to ChipIncCount
 
+  SingleByteConfigElement = 0
+
   dim as Integer Reinit, Reinit2
   for Reinit = 0 to 1000
     DefConfig(Reinit, 0 ) =""
@@ -491,7 +493,6 @@ FOR CurrentChip = StartChip to ChipIncCount
         SEEK #1, 1
         COC = 0
         RC = 0
-        SingleByteConfigElement = 0
         DO WHILE NOT EOF(1)
             ReadIncFileLineIn
             
@@ -1640,8 +1641,13 @@ FOR CurrentChip = StartChip to ChipIncCount
         FOR PD = 1 to ConfMask
             TempData = Trim(Str(ConfigMask(PD)))
             IF TempData = "0" THEN TempData = "255"
-            IF Instr ( ChipName, "18F" ) > 0 and ( Instr ( ChipName, "Q83" ) > 0 or Instr ( ChipName, "Q84" ) > 0 or Instr ( ChipName, "Q71" ) > 0 ) Then TempData = "255"
-            PRINT #1, TempData
+            'IF Instr ( ChipName, "18F" ) > 0 and ( Instr ( ChipName, "Q83" ) > 0 or Instr ( ChipName, "Q84" ) > 0 or Instr ( ChipName, "Q71" ) > 0 ) Then TempData = "255"
+            If SingleByteConfigElement = 0 then
+              ' all the Chips that need the bytes converted to WORDS
+              PRINT #1, TempData
+            Else
+              PRINT #1, 255
+            End If
         NEXT
         Print #1, ""
     END IF
