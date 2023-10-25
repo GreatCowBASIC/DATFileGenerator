@@ -487,13 +487,14 @@ FOR CurrentChip = StartChip to ChipIncCount
     END IF
 
     IF ChipFamily = 16 THEN
+        Dim WriteConfig as Integer = -1
         SEEK #1, 1
         COC = 0
         RC = 0
         SingleByteConfigElement = 0
         DO WHILE NOT EOF(1)
             ReadIncFileLineIn
-
+            
             'LINE INPUT #1, DataSource
             Do While INSTR(DataSource, Chr(9)) <> 0: Replace DataSource, Chr(9), "": LOOP
             DataSource = Trim(UCase(DataSource))
@@ -547,12 +548,31 @@ FOR CurrentChip = StartChip to ChipIncCount
                     END IF
                 END IF
 
-                COC += 1
-                With Config(COC)
-                    .Name = TempData
-                    .Location = CW
-                    .Value = VAL("&H" + BitVal)
-                End With
+                
+
+                If Instr(chipname,"Q20") <> 0 then
+                      'Q20 dump config 11 or above as GCBASIC does not support
+                      If CW > 12 or WriteConfig = 0 Then
+                        WriteConfig = 0
+                        Print "18FxxQ20 - ignoring CONFIG "+str(CW)+ " none contiguous config memory",
+                        Print DataSource
+                      End if
+                End IF
+
+                If WriteConfig = -1 then
+                  COC += 1
+                  With Config(COC)
+                      .Name = TempData
+                        If Instr(chipname,"Q20") <> 0 then
+                          'Q20 have non-contigous config memory... so, fix by delete the value by 1
+                          If CW > 9 Then
+                            CW = CW -1 
+                          End if
+                        End IF
+                      .Location = CW
+                      .Value = VAL("&H" + BitVal)
+                  End With
+                End If
 
             END IF
 
