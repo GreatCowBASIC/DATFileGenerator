@@ -6,10 +6,10 @@
 
 
 #include once "ext/xml/dom.bi"
-'#DEFINE kINDEX_IDX      "C:\Users\admin\.mchp_packs"
+#DEFINE kINDEX_IDX      "C:\Users\admin\.mchp_packs"
 
 
-#DEFINE kINDEX_IDX      "C:\Program Files\Microchip\MPLABX\v6.15\packs"
+'#DEFINE kINDEX_IDX      "C:\Program Files\Microchip\MPLABX\v6.15\packs"
 
 #DEFINE kUniqueBits "TMR10,TMR11,TMR12,TMR13,TMR14,TMR15,TMR16,TMR17,TMR18,TMR19,ON,OUT,GO,POL,C1OUT,C2OUT,SYNC,INTN,INTP,CKPS0,CKPS1,CKPS2,CS0,CS1,CS2"
 #DEFINE kKillRegister "W,DATA"
