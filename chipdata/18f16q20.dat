@@ -44,7 +44,10 @@ Family=16
 FamilyVariant=1
 
 'This constant is exposed as ChipSubFamily
-SubFamily=16109
+SubFamily=16110
+
+'This constant is exposed as ChipMemorylock
+MemoryLock=NVMLOCK
 
 'This constant is exposed as ChipPSP
 PSP=0
@@ -57,6 +60,9 @@ MaxAddress=5375
 
 ';Microcontroller specific configuration Constants used in specific libraries, compiler or user programs
 ';This section of constants is specific to a microcontroller, so the constants may not be present for all microcontrollers
+
+'ChipPWMTimerVariant constant is used in pwmh and provides information for the timer register used for PWM
+PWMTimerVariant=2
 
 'ChipSMTClockSourceVariant constant is used in smth and provides information for the register used for SMT
 SMTClockSourceVariant=4
@@ -81,6 +87,9 @@ WriteFlashBlockSize=256
 
 'EraseFlashBlockSize constant is used in user programs that write to flash memory in bytes
 EraseFlashBlockSize=256
+
+'ChipMinimumBankSelelect constant is used within the compiler to set the minimum BANKSELECT
+MinimumBankSelect=5
 
 'ChipSelfWrite constant is used within the compiler to indicate the chip is self write capable
 SelfWrite=1
@@ -4708,7 +4717,7 @@ CHS3,ADCON0,5
 CHS4,ADCON0,6
 
 [FreeRAM]
-0:FFF
+500:14FF
 
 [NoBankRAM]
 'NoBankRAM is somewhat misnamed - it is used for the defintion of (any) access bank locations
@@ -4771,7 +4780,7 @@ PWRTS=PWRT_OFF
 RSTOSC=HFINTOSC_1MHZ
 STVREN=OFF
 VDDIO2MD=STANDARD_RANGE
-VDDIO3MD=LOW_VOLTAGE_RANGE
+VDDIO3MD=STANDARD_RANGE
 WDTCCS=LFINTOSC
 WDTCPS=WDTCPS_0
 WDTCWS=WDTCWS_0

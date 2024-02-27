@@ -1267,6 +1267,11 @@ FOR CurrentChip = StartChip to ChipIncCount
 
 
     IF ChipFamily = 16 Then
+        If Instr(chipname,"Q20") <> 0 then
+            Print #1, ""
+            Print #1, "'This constant is exposed as ChipMemorylock"
+            Print #1, "MemoryLock=NVMLOCK"
+        End if    
         If Instr(chipname,"Q40") <> 0 then
             Print #1, ""
             Print #1, "'This constant is exposed as ChipMemorylock"
@@ -1715,7 +1720,7 @@ Sub AddMissingData
   ElseIf ChipFamily = 16 Then
     '18F chips with 4096 or more data addresses have movffl and different lfsr instruction
     If MaxChipAddress >= 4096 Then ChipFamilyVariant = 1
-    If ChipSubFamily = 16102 or ChipSubFamily = 16105  Then ChipFamilyVariant = 1  'Q40 and Q41
+    If ChipSubFamily = 16102 or ChipSubFamily = 16105 or ChipSubFamily = 16109 Then ChipFamilyVariant = 1  'Q40 and Q41 and Q20
   End If
 
   'Add debug bit to PICs where it doesn't exist
@@ -2437,7 +2442,7 @@ Sub CalcRamBlocks
       RBC = RBC + 1: RamBlock(RBC) = "0:FF"
       RBC = RBC + 1: RamBlock(RBC) = "200:2FF"
 
-    Elseif   Instr(UCase(ChipName),"Q43" ) <> 0 or Instr(UCase(ChipName),"Q41" ) <> 0 or Instr(UCase(ChipName),"Q40" ) <> 0 or Instr(UCase(ChipName),"Q83" ) <> 0 or Instr(UCase(ChipName),"Q84") <> 0 or Instr(UCase(ChipName),"Q71") <> 0 Then
+    Elseif  Instr(UCase(ChipName),"Q20" ) or  Instr(UCase(ChipName),"Q43" ) <> 0 or Instr(UCase(ChipName),"Q41" ) <> 0 or Instr(UCase(ChipName),"Q40" ) <> 0 or Instr(UCase(ChipName),"Q83" ) <> 0 or Instr(UCase(ChipName),"Q84") <> 0 or Instr(UCase(ChipName),"Q71") <> 0 Then
 
       ChipMinimumBankSel = 5
       'add 1280 for the base of 0x500
