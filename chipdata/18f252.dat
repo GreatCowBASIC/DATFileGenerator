@@ -11,7 +11,7 @@
 Prog=16384
 
 'This constant is exposed as ChipEEPROM
-EEPROM=0
+EEPROM=256
 
 'This constant is exposed as ChipRAM
 RAM=1536
@@ -23,7 +23,7 @@ I/O=0
 ADC=5
 
 'These constants are the valid ADC constants
-ADCConstants=AN{0..5} USAGE:AN0..AN5
+ADCConstants=AN{0..7} USAGE:AN0..AN7
 
 'This constant is exposed as ChipMhz
 MaxMHz=40
