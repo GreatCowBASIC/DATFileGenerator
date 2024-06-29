@@ -1,0 +1,2624 @@
+[DEVICE]
+; NOTE THAT YOU NEED THE XTINY ADD ON IN ORDER TO USE THIS DAT
+FILE=atXtiny1606.dat
+PDF=atxtiny804_806_807_1604_1606_1607.pdf
+atmelpdfurl=http://ww1.microchip.com/downloads/en/DeviceDoc/ATtiny806-1606-DataSheet-DS40002029B.pdf
+pdfurl=https://mcselec.com/atmelpdf/atxtiny804_806_807_1604_1606_1607.pdf
+device=ATtiny1606                                 ; device name for programming
+DEVID=1E9424                                      ; device ID
+UP=T1606                                          ; short name for processor
+_CHIP=1606                                        ; for compatibility
+EPROM_PAGESIZE=32                                 ; EPROM page size
+EPROM_START=$1400                                 ; EPROM start address
+E2END=$00FF                                       ; eeprom end aadress
+EEPROM=256                                        ; in bytes
+RAMSTART=$03C00                                   ; start of SRAM
+RAMEND=$3FFF                                      ; highest internal data memory address
+SRAM=1024                                         ; in bytes
+FLASHEND=$01FFF                                   ; highest program memory when addressed as 16 bit word
+FlashSizeText=16 KB                               ; flash size in text
+ROMSIZE=16384                                     ; ROM size in bytes
+PAGESIZE=64                                       ; flash page size
+HWMUL=1                                           ; this processor has the MUL HW instruction
+TINY=0                                            ; this is NOT a normal TINY
+MOVW=1                                            ; processor has MOVW instruction
+XRAMINDEX=0                                       ; NO XRAM available thus index 0
+XRAM=0                                            ; NO XRAM available
+XTINY=1                                           ; xtiny processor
+WRAP=0                                            ; no wrap possible
+MEGAJMP=1                                         ; jump behaviour for big memory
+INTADR=2                                          ; vector table increase by 2
+Powermodes=3
+Pm1=Idle,SLPCTRL_CTRLA.SMODE1-0,SLPCTRL_CTRLA.SMODE2-0
+Pm2=Standby,SLPCTRL_CTRLA.SMODE1-1,SLPCTRL_CTRLA.SMODE2-0
+Pm3=PowerDown,SLPCTRL_CTRLA.SMODE1-0,SLPCTRL_CTRLA.SMODE2-1
+uarts=1                                           ; 1 uart in this chip
+uart1=8                                           ; Xtiny uart
+
+[PROG]
+chipname=ATtiny1606
+
+[UPDI]
+eeprom_address=$1400
+eeprom_size=$100
+eeprom_pagesize=32
+fuses_address=$1280
+fuses_size=$00A
+fuses_pagesize=32
+lockbits_address=$128A
+lockbits_size=$001
+lockbits_pagesize=32
+flash_address=$8000
+flash_size=$4000
+flash_pagesize=64
+prodsig_address=$1100
+prodsig_size=$03D
+prodsig_pagesize=64
+sigrow_address=$1100
+sigrow_size=$003
+sigrow_pagesize=64
+userrow_address=$1300
+userrow_size=$020
+userrow_pagesize=32
+syscfg_address=$0F00
+nvmctrl_address=$1000
+fuses=7
+fuse1=Application Code Section End@1@$7@RW@0
+fuse2=BOD Configuration@1@$1@RW@4
+fuse2s1=BOD Operation in Active Mode@RW@$c@FUSE_ACTIVE@4
+fuse2s1v1=Disabled@$00
+fuse2s1v2=Enabled@$01
+fuse2s1v3=Sampled@$02
+fuse2s1v4=Enabled with wake-up halted until BOD is ready@$03
+fuse2s2=BOD Level@RW@$e0@FUSE_LVL@3
+fuse2s2v1=1.8 V@$00
+fuse2s2v2=2.6 V@$02
+fuse2s2v3=4.2 V@$07
+fuse2s3=BOD Sample Frequency@RW@$10@FUSE_SAMPFREQ@2
+fuse2s3v1=1kHz sampling frequency@$0
+fuse2s3v2=125Hz sampling frequency@$1
+fuse2s4=BOD Operation in Sleep Mode@RW@$3@FUSE_SLEEP@3
+fuse2s4v1=Disabled@$00
+fuse2s4v2=Enabled@$01
+fuse2s4v3=Sampled@$02
+fuse3=Boot Section End@1@$8@RW@0
+fuse4=Oscillator Configuration@1@$2@RW@2
+fuse4s1=Frequency Select@RW@$3@FUSE_FREQSEL@2
+fuse4s1v1=16 MHz@$1
+fuse4s1v2=20 MHz@$2
+fuse4s2=Oscillator Lock@RW@$80@@0
+fuse5=System Configuration 0@1@$5@RW@3
+fuse5s1=CRC Source@RW@$c0@FUSE_CRCSRC@4
+fuse5s1v1=The CRC is performed on the entire Flash (boot, application code and application data section).@$0
+fuse5s1v2=The CRC is performed on the boot section of Flash@$1
+fuse5s1v3=The CRC is performed on the boot and application code section of Flash@$2
+fuse5s1v4=Disable CRC.@$3
+fuse5s2=EEPROM Save@RW@$1@@0
+fuse5s3=Reset Pin Configuration@RW@$c@FUSE_RSTPINCFG@3
+fuse5s3v1=GPIO mode@$0
+fuse5s3v2=UPDI mode@$1
+fuse5s3v3=Reset mode@$2
+fuse6=System Configuration 1@1@$6@RW@1
+fuse6s1=Startup Time@RW@$7@FUSE_SUT@8
+fuse6s1v1=0 ms@$00
+fuse6s1v2=1 ms@$01
+fuse6s1v3=2 ms@$02
+fuse6s1v4=4 ms@$03
+fuse6s1v5=8 ms@$04
+fuse6s1v6=16 ms@$05
+fuse6s1v7=32 ms@$06
+fuse6s1v8=64 ms@$07
+fuse7=Watchdog Configuration@1@$0@RW@2
+fuse7s1=Watchdog Timeout Period@RW@$f@FUSE_PERIOD@12
+fuse7s1v1=Off@$00
+fuse7s1v2=8 cycles (8ms)@$01
+fuse7s1v3=16 cycles (16ms)@$02
+fuse7s1v4=32 cycles (32ms)@$03
+fuse7s1v5=64 cycles (64ms)@$04
+fuse7s1v6=128 cycles (0.128s)@$05
+fuse7s1v7=256 cycles (0.256s)@$06
+fuse7s1v8=512 cycles (0.512s)@$07
+fuse7s1v9=1K cycles (1.0s)@$08
+fuse7s1v10=2K cycles (2.0s)@$09
+fuse7s1v11=4K cycles (4.1s)@$0A
+fuse7s1v12=8K cycles (8.2s)@$0B
+fuse7s2=Watchdog Window Timeout Period@RW@$f0@FUSE_WINDOW@12
+fuse7s2v1=Off@$00
+fuse7s2v2=8 cycles (8ms)@$01
+fuse7s2v3=16 cycles (16ms)@$02
+fuse7s2v4=32 cycles (32ms)@$03
+fuse7s2v5=64 cycles (64ms)@$04
+fuse7s2v6=128 cycles (0.128s)@$05
+fuse7s2v7=256 cycles (0.256s)@$06
+fuse7s2v8=512 cycles (0.512s)@$07
+fuse7s2v9=1K cycles (1.0s)@$08
+fuse7s2v10=2K cycles (2.0s)@$09
+fuse7s2v11=4K cycles (4.1s)@$0A
+fuse7s2v12=8K cycles (8.2s)@$0B
+lockbits=1
+lockbits1=Lock bits@1@$0@RW@1
+lockbits1s1=Lock Bits@RW@$ff@LOCKBIT_LB@2
+lockbits1s1v1=Read and write lock@$3A
+lockbits1s1v2=No locks@$C5
+prodsig=19
+prodsig1=Device ID Byte 0@1@$00@R@0
+prodsig2=Device ID Byte 1@1@$01@R@0
+prodsig3=Device ID Byte 2@1@$02@R@0
+prodsig4=OSC16 error at 3V@1@$22@R@0
+prodsig5=OSC16 error at 5V@1@$23@R@0
+prodsig6=OSC20 error at 3V@1@$24@R@0
+prodsig7=OSC20 error at 5V@1@$25@R@0
+prodsig8=Serial Number Byte 0@1@$03@R@0
+prodsig9=Serial Number Byte 1@1@$04@R@0
+prodsig10=Serial Number Byte 2@1@$05@R@0
+prodsig11=Serial Number Byte 3@1@$06@R@0
+prodsig12=Serial Number Byte 4@1@$07@R@0
+prodsig13=Serial Number Byte 5@1@$08@R@0
+prodsig14=Serial Number Byte 6@1@$09@R@0
+prodsig15=Serial Number Byte 7@1@$0A@R@0
+prodsig16=Serial Number Byte 8@1@$0B@R@0
+prodsig17=Serial Number Byte 9@1@$0C@R@0
+prodsig18=Temperature Sensor Calibration Byte 0@1@$20@R@0
+prodsig19=Temperature Sensor Calibration Byte 1@1@$21@R@0
+userrow=32
+userrow1=User Row Byte 0@1@$00@RW@0
+userrow2=User Row Byte 1@1@$01@RW@0
+userrow3=User Row Byte 2@1@$02@RW@0
+userrow4=User Row Byte 3@1@$03@RW@0
+userrow5=User Row Byte 4@1@$04@RW@0
+userrow6=User Row Byte 5@1@$05@RW@0
+userrow7=User Row Byte 6@1@$06@RW@0
+userrow8=User Row Byte 7@1@$07@RW@0
+userrow9=User Row Byte 8@1@$08@RW@0
+userrow10=User Row Byte 9@1@$09@RW@0
+userrow11=User Row Byte 10@1@$0A@RW@0
+userrow12=User Row Byte 11@1@$0B@RW@0
+userrow13=User Row Byte 12@1@$0C@RW@0
+userrow14=User Row Byte 13@1@$0D@RW@0
+userrow15=User Row Byte 14@1@$0E@RW@0
+userrow16=User Row Byte 15@1@$0F@RW@0
+userrow17=User Row Byte 16@1@$10@RW@0
+userrow18=User Row Byte 17@1@$11@RW@0
+userrow19=User Row Byte 18@1@$12@RW@0
+userrow20=User Row Byte 19@1@$13@RW@0
+userrow21=User Row Byte 20@1@$14@RW@0
+userrow22=User Row Byte 21@1@$15@RW@0
+userrow23=User Row Byte 22@1@$16@RW@0
+userrow24=User Row Byte 23@1@$17@RW@0
+userrow25=User Row Byte 24@1@$18@RW@0
+userrow26=User Row Byte 25@1@$19@RW@0
+userrow27=User Row Byte 26@1@$1A@RW@0
+userrow28=User Row Byte 27@1@$1B@RW@0
+userrow29=User Row Byte 28@1@$1C@RW@0
+userrow30=User Row Byte 29@1@$1D@RW@0
+userrow31=User Row Byte 30@1@$1E@RW@0
+userrow32=User Row Byte 31@1@$1F@RW@0
+
+[IO]
+VPORTA_DIR=0                                      ; 0000
+DDRA=0                                          ; 0000 alias
+VPORTA_OUT=1                                      ; 0001
+PORTA=1                                         ; 0001 alias
+VPORTA_IN=2                                       ; 0002
+PINA=2                                          ; 0002 alias
+VPORTA_INTFLAGS=3                                 ; 0003
+VPORTB_DIR=4                                      ; 0004
+DDRB=4                                          ; 0004 alias
+VPORTB_OUT=5                                      ; 0005
+PORTB=5                                         ; 0005 alias
+VPORTB_IN=6                                       ; 0006
+PINB=6                                          ; 0006 alias
+VPORTB_INTFLAGS=7                                 ; 0007
+VPORTC_DIR=8                                      ; 0008
+DDRC=8                                          ; 0008 alias
+VPORTC_OUT=9                                      ; 0009
+PORTC=9                                         ; 0009 alias
+VPORTC_IN=10                                      ; 000A
+PINC=10                                         ; 000A alias
+VPORTC_INTFLAGS=11                                ; 000B
+GPIO_GPIOR0=28                                    ; 001C
+GPIO_GPIOR1=29                                    ; 001D
+GPIO_GPIOR2=30                                    ; 001E
+GPIO_GPIOR3=31                                    ; 001F
+CPU_CCP=52                                        ; 0034
+CPU_SPL=61                                        ; 003D
+SPL=61                                            ; 003D alias
+CPU_SPH=62                                        ; 003E
+SPH=62                                            ; 003E alias
+CPU_SREG=63                                       ; 003F
+SREG=63                                           ; 003F alias
+
+[IOEXT]
+RSTCTRL_RSTFR=64                                  ; 0040
+RSTCTRL_SWRR=65                                   ; 0041
+SLPCTRL_CTRLA=80                                  ; 0050
+CLKCTRL_MCLKCTRLA=96                              ; 0060
+CLKCTRL_MCLKCTRLB=97                              ; 0061
+CLKCTRL_MCLKLOCK=98                               ; 0062
+CLKCTRL_MCLKSTATUS=99                             ; 0063
+CLKCTRL_OSC20MCTRLA=112                           ; 0070
+CLKCTRL_OSC20MCALIBA=113                          ; 0071
+CLKCTRL_OSC20MCALIBB=114                          ; 0072
+CLKCTRL_OSC32KCTRLA=120                           ; 0078
+BOD_CTRLA=128                                     ; 0080
+BOD_CTRLB=129                                     ; 0081
+BOD_VLMCTRLA=136                                  ; 0088
+BOD_INTCTRL=137                                   ; 0089
+BOD_INTFLAGS=138                                  ; 008A
+BOD_STATUS=139                                    ; 008B
+VREF_CTRLA=160                                    ; 00A0
+VREF_CTRLB=161                                    ; 00A1
+WDT_CTRLA=256                                     ; 0100
+WDT_STATUS=257                                    ; 0101
+CPUINT_CTRLA=272                                  ; 0110
+CPUINT_STATUS=273                                 ; 0111
+CPUINT_LVL0PRI=274                                ; 0112
+CPUINT_LVL1VEC=275                                ; 0113
+CRCSCAN_CTRLA=288                                 ; 0120
+CRCSCAN_CTRLB=289                                 ; 0121
+CRCSCAN_STATUS=290                                ; 0122
+RTC_CTRLA=320                                     ; 0140
+RTC_STATUS=321                                    ; 0141
+RTC_INTCTRL=322                                   ; 0142
+RTC_INTFLAGS=323                                  ; 0143
+RTC_TEMP=324                                      ; 0144
+RTC_DBGCTRL=325                                   ; 0145
+RTC_CLKSEL=327                                    ; 0147
+RTC_CNTL=328                                      ; 0148 byte alias LSB see WIO
+RTC_CNTH=329                                      ; 0149 byte alias MSB see WIO
+RTC_PERL=330                                      ; 014A byte alias LSB see WIO
+RTC_PERH=331                                      ; 014B byte alias MSB see WIO
+RTC_CMPL=332                                      ; 014C byte alias LSB see WIO
+RTC_CMPH=333                                      ; 014D byte alias MSB see WIO
+RTC_PITCTRLA=336                                  ; 0150
+RTC_PITSTATUS=337                                 ; 0151
+RTC_PITINTCTRL=338                                ; 0152
+RTC_PITINTFLAGS=339                               ; 0153
+RTC_PITDBGCTRL=341                                ; 0155
+EVSYS_ASYNCSTROBE=384                             ; 0180
+EVSYS_SYNCSTROBE=385                              ; 0181
+EVSYS_ASYNCCH0=386                                ; 0182
+EVSYS_ASYNCCH1=387                                ; 0183
+EVSYS_SYNCCH0=394                                 ; 018A
+EVSYS_ASYNCUSER0=402                              ; 0192
+EVSYS_ASYNCUSER1=403                              ; 0193
+EVSYS_ASYNCUSER2=404                              ; 0194
+EVSYS_ASYNCUSER3=405                              ; 0195
+EVSYS_ASYNCUSER4=406                              ; 0196
+EVSYS_ASYNCUSER5=407                              ; 0197
+EVSYS_ASYNCUSER6=408                              ; 0198
+EVSYS_ASYNCUSER7=409                              ; 0199
+EVSYS_ASYNCUSER8=410                              ; 019A
+EVSYS_ASYNCUSER9=411                              ; 019B
+EVSYS_ASYNCUSER10=412                             ; 019C
+EVSYS_ASYNCUSER11=413                             ; 019D
+EVSYS_ASYNCUSER12=414                             ; 019E
+EVSYS_SYNCUSER0=418                               ; 01A2
+EVSYS_SYNCUSER1=419                               ; 01A3
+CCL_CTRLA=448                                     ; 01C0
+CCL_SEQCTRL0=449                                  ; 01C1
+CCL_LUT0CTRLA=453                                 ; 01C5
+CCL_LUT0CTRLB=454                                 ; 01C6
+CCL_LUT0CTRLC=455                                 ; 01C7
+CCL_TRUTH0=456                                    ; 01C8
+CCL_LUT1CTRLA=457                                 ; 01C9
+CCL_LUT1CTRLB=458                                 ; 01CA
+CCL_LUT1CTRLC=459                                 ; 01CB
+CCL_TRUTH1=460                                    ; 01CC
+PORTMUX_CTRLA=512                                 ; 0200
+PORTMUX_CTRLB=513                                 ; 0201
+PORTMUX_CTRLC=514                                 ; 0202
+PORTMUX_CTRLD=515                                 ; 0203
+PORTA_DIR=1024                                    ; 0400
+PORTA_DIRSET=1025                                 ; 0401
+PORTA_DIRCLR=1026                                 ; 0402
+PORTA_DIRTGL=1027                                 ; 0403
+PORTA_OUT=1028                                    ; 0404
+PORTA_OUTSET=1029                                 ; 0405
+PORTA_OUTCLR=1030                                 ; 0406
+PORTA_OUTTGL=1031                                 ; 0407
+PORTA_IN=1032                                     ; 0408
+PORTA_INTFLAGS=1033                               ; 0409
+PORTA_PIN0CTRL=1040                               ; 0410
+PORTA_PIN1CTRL=1041                               ; 0411
+PORTA_PIN2CTRL=1042                               ; 0412
+PORTA_PIN3CTRL=1043                               ; 0413
+PORTA_PIN4CTRL=1044                               ; 0414
+PORTA_PIN5CTRL=1045                               ; 0415
+PORTA_PIN6CTRL=1046                               ; 0416
+PORTA_PIN7CTRL=1047                               ; 0417
+PORTB_DIR=1056                                    ; 0420
+PORTB_DIRSET=1057                                 ; 0421
+PORTB_DIRCLR=1058                                 ; 0422
+PORTB_DIRTGL=1059                                 ; 0423
+PORTB_OUT=1060                                    ; 0424
+PORTB_OUTSET=1061                                 ; 0425
+PORTB_OUTCLR=1062                                 ; 0426
+PORTB_OUTTGL=1063                                 ; 0427
+PORTB_IN=1064                                     ; 0428
+PORTB_INTFLAGS=1065                               ; 0429
+PORTB_PIN0CTRL=1072                               ; 0430
+PORTB_PIN1CTRL=1073                               ; 0431
+PORTB_PIN2CTRL=1074                               ; 0432
+PORTB_PIN3CTRL=1075                               ; 0433
+PORTB_PIN4CTRL=1076                               ; 0434
+PORTB_PIN5CTRL=1077                               ; 0435
+PORTB_PIN6CTRL=1078                               ; 0436
+PORTB_PIN7CTRL=1079                               ; 0437
+PORTC_DIR=1088                                    ; 0440
+PORTC_DIRSET=1089                                 ; 0441
+PORTC_DIRCLR=1090                                 ; 0442
+PORTC_DIRTGL=1091                                 ; 0443
+PORTC_OUT=1092                                    ; 0444
+PORTC_OUTSET=1093                                 ; 0445
+PORTC_OUTCLR=1094                                 ; 0446
+PORTC_OUTTGL=1095                                 ; 0447
+PORTC_IN=1096                                     ; 0448
+PORTC_INTFLAGS=1097                               ; 0449
+PORTC_PIN0CTRL=1104                               ; 0450
+PORTC_PIN1CTRL=1105                               ; 0451
+PORTC_PIN2CTRL=1106                               ; 0452
+PORTC_PIN3CTRL=1107                               ; 0453
+PORTC_PIN4CTRL=1108                               ; 0454
+PORTC_PIN5CTRL=1109                               ; 0455
+PORTC_PIN6CTRL=1110                               ; 0456
+PORTC_PIN7CTRL=1111                               ; 0457
+ADC0_CTRLA=1536                                   ; 0600
+ADC0_CTRLB=1537                                   ; 0601
+ADC0_CTRLC=1538                                   ; 0602
+ADC0_CTRLD=1539                                   ; 0603
+ADC0_CTRLE=1540                                   ; 0604
+ADC0_SAMPCTRL=1541                                ; 0605
+ADC0_MUXPOS=1542                                  ; 0606
+ADC0_COMMAND=1544                                 ; 0608
+ADC0_EVCTRL=1545                                  ; 0609
+ADC0_INTCTRL=1546                                 ; 060A
+ADC0_INTFLAGS=1547                                ; 060B
+ADC0_DBGCTRL=1548                                 ; 060C
+ADC0_TEMP=1549                                    ; 060D
+ADC0_RESL=1552                                    ; 0610 byte alias LSB see WIO
+ADC0_RESH=1553                                    ; 0611 byte alias MSB see WIO
+ADC0_WINLTL=1554                                  ; 0612 byte alias LSB see WIO
+ADC0_WINLTH=1555                                  ; 0613 byte alias MSB see WIO
+ADC0_WINHTL=1556                                  ; 0614 byte alias LSB see WIO
+ADC0_WINHTH=1557                                  ; 0615 byte alias MSB see WIO
+ADC0_CALIB=1558                                   ; 0616
+AC0_CTRLA=1664                                    ; 0680
+AC0_MUXCTRLA=1666                                 ; 0682
+AC0_INTCTRL=1670                                  ; 0686
+AC0_STATUS=1671                                   ; 0687
+USART0_RXDATAL=2048                               ; 0800
+UDRR=2048                                         ; 0800 alias
+USART0_RXDATAH=2049                               ; 0801
+USART0_TXDATAL=2050                               ; 0802
+UDRW=2050                                         ; 0802 alias
+USART0_TXDATAH=2051                               ; 0803
+USART0_STATUS=2052                                ; 0804
+USR=2052                                          ; 0804 alias
+USART0_CTRLA=2053                                 ; 0805
+USART0_CTRLB=2054                                 ; 0806
+UCR=2054                                          ; 0806 alias
+USART0_CTRLC=2055                                 ; 0807
+USART0_BAUDL=2056                                 ; 0808 byte alias LSB see WIO
+USART0_BAUDH=2057                                 ; 0809 byte alias MSB see WIO
+USART0_DBGCTRL=2059                               ; 080B
+USART0_EVCTRL=2060                                ; 080C
+USART0_TXPLCTRL=2061                              ; 080D
+USART0_RXPLCTRL=2062                              ; 080E
+TWI0_CTRLA=2064                                   ; 0810
+TWI0_DBGCTRL=2066                                 ; 0812
+TWI0_MCTRLA=2067                                  ; 0813
+TWI0_MCTRLB=2068                                  ; 0814
+TWI0_MSTATUS=2069                                 ; 0815
+TWI0_MBAUD=2070                                   ; 0816
+TWI0_MADDR=2071                                   ; 0817
+TWI0_MDATA=2072                                   ; 0818
+TWI0_SCTRLA=2073                                  ; 0819
+TWI0_SCTRLB=2074                                  ; 081A
+TWI0_SSTATUS=2075                                 ; 081B
+TWI0_SADDR=2076                                   ; 081C
+TWI0_SDATA=2077                                   ; 081D
+TWI0_SADDRMASK=2078                               ; 081E
+SPI0_CTRLA=2080                                   ; 0820
+SPI0_CTRLB=2081                                   ; 0821
+SPI0_INTCTRL=2082                                 ; 0822
+SPI0_INTFLAGS=2083                                ; 0823
+SPI0_DATA=2084                                    ; 0824
+TCA0_CTRLA=2560                                   ; 0A00
+TCA0_SPLIT_CTRLA=2560                             ; 0A00 alias
+TCA0_CTRLB=2561                                   ; 0A01
+TCA0_SPLIT_CTRLB=2561                             ; 0A01 alias
+TCA0_CTRLC=2562                                   ; 0A02
+TCA0_SPLIT_CTRLC=2562                             ; 0A02 alias
+TCA0_CTRLD=2563                                   ; 0A03
+TCA0_SPLIT_CTRLD=2563                             ; 0A03 alias
+TCA0_CTRLECLR=2564                                ; 0A04
+TCA0_SPLIT_CTRLECLR=2564                          ; 0A04 alias
+TCA0_CTRLESET=2565                                ; 0A05
+TCA0_SPLIT_CTRLESET=2565                          ; 0A05 alias
+TCA0_CTRLFCLR=2566                                ; 0A06
+TCA0_SPLIT_CTRLFCLR=2566                          ; 0A06 alias
+TCA0_CTRLFSET=2567                                ; 0A07
+TCA0_SPLIT_CTRLFSET=2567                          ; 0A07 alias
+TCA0_EVCTRL=2569                                  ; 0A09
+TCA0_SPLIT_EVCTRL=2569                            ; 0A09 alias
+TCA0_INTCTRL=2570                                 ; 0A0A
+TCA0_SPLIT_INTCTRL=2570                           ; 0A0A alias
+TCA0_INTFLAGS=2571                                ; 0A0B
+TCA0_SPLIT_INTFLAGS=2571                          ; 0A0B alias
+TCA0_DBGCTRL=2574                                 ; 0A0E
+TCA0_SPLIT_DBGCTRL=2574                           ; 0A0E alias
+TCA0_TEMP=2575                                    ; 0A0F
+TCA0_CNTL=2592                                    ; 0A20 byte alias LSB see WIO
+TCA0_CNTH=2593                                    ; 0A21 byte alias MSB see WIO
+TCA0_PERL=2598                                    ; 0A26 byte alias LSB see WIO
+TCA0_PERH=2599                                    ; 0A27 byte alias MSB see WIO
+TCA0_CMP0L=2600                                   ; 0A28 byte alias LSB see WIO
+TCA0_CMP0H=2601                                   ; 0A29 byte alias MSB see WIO
+TCA0_CMP1L=2602                                   ; 0A2A byte alias LSB see WIO
+TCA0_CMP1H=2603                                   ; 0A2B byte alias MSB see WIO
+TCA0_CMP2L=2604                                   ; 0A2C byte alias LSB see WIO
+TCA0_CMP2H=2605                                   ; 0A2D byte alias MSB see WIO
+TCA0_PERBUFL=2614                                 ; 0A36 byte alias LSB see WIO
+TCA0_PERBUFH=2615                                 ; 0A37 byte alias MSB see WIO
+TCA0_CMP0BUFL=2616                                ; 0A38 byte alias LSB see WIO
+TCA0_CMP0BUFH=2617                                ; 0A39 byte alias MSB see WIO
+TCA0_CMP1BUFL=2618                                ; 0A3A byte alias LSB see WIO
+TCA0_CMP1BUFH=2619                                ; 0A3B byte alias MSB see WIO
+TCA0_CMP2BUFL=2620                                ; 0A3C byte alias LSB see WIO
+TCA0_CMP2BUFH=2621                                ; 0A3D byte alias MSB see WIO
+TCB0_CTRLA=2624                                   ; 0A40
+TCB0_CTRLB=2625                                   ; 0A41
+TCB0_EVCTRL=2628                                  ; 0A44
+TCB0_INTCTRL=2629                                 ; 0A45
+TCB0_INTFLAGS=2630                                ; 0A46
+TCB0_STATUS=2631                                  ; 0A47
+TCB0_DBGCTRL=2632                                 ; 0A48
+TCB0_TEMP=2633                                    ; 0A49
+TCB0_CNTL=2634                                    ; 0A4A byte alias LSB see WIO
+TCB0_CNTH=2635                                    ; 0A4B byte alias MSB see WIO
+TCB0_CCMPL=2636                                   ; 0A4C byte alias LSB see WIO
+TCB0_CCMPH=2637                                   ; 0A4D byte alias MSB see WIO
+SYSCFG_REVID=3841                                 ; 0F01
+SYSCFG_EXTBRK=3842                                ; 0F02
+NVMCTRL_CTRLA=4096                                ; 1000
+NVMCTRL_CTRLB=4097                                ; 1001
+NVMCTRL_STATUS=4098                               ; 1002
+NVMCTRL_INTCTRL=4099                              ; 1003
+NVMCTRL_INTFLAGS=4100                             ; 1004
+NVMCTRL_DATAL=4102                                ; 1006 byte alias LSB see WIO
+NVMCTRL_DATAH=4103                                ; 1007 byte alias MSB see WIO
+NVMCTRL_ADDRL=4104                                ; 1008 byte alias LSB see WIO
+NVMCTRL_ADDRH=4105                                ; 1009 byte alias MSB see WIO
+SIGROW_DEVICEID0=4352                             ; 1100
+SIGROW_DEVICEID1=4353                             ; 1101
+SIGROW_DEVICEID2=4354                             ; 1102
+SIGROW_SERNUM0=4355                               ; 1103
+SIGROW_SERNUM1=4356                               ; 1104
+SIGROW_SERNUM2=4357                               ; 1105
+SIGROW_SERNUM3=4358                               ; 1106
+SIGROW_SERNUM4=4359                               ; 1107
+SIGROW_SERNUM5=4360                               ; 1108
+SIGROW_SERNUM6=4361                               ; 1109
+SIGROW_SERNUM7=4362                               ; 110A
+SIGROW_SERNUM8=4363                               ; 110B
+SIGROW_SERNUM9=4364                               ; 110C
+SIGROW_TEMPSENSE0=4384                            ; 1120
+SIGROW_TEMPSENSE1=4385                            ; 1121
+SIGROW_OSC16ERR3V=4386                            ; 1122
+SIGROW_OSC16ERR5V=4387                            ; 1123
+SIGROW_OSC20ERR3V=4388                            ; 1124
+SIGROW_OSC20ERR5V=4389                            ; 1125
+FUSE_WDTCFG=4736                                  ; 1280
+FUSE_BODCFG=4737                                  ; 1281
+FUSE_OSCCFG=4738                                  ; 1282
+FUSE_SYSCFG0=4741                                 ; 1285
+FUSE_SYSCFG1=4742                                 ; 1286
+FUSE_APPEND=4743                                  ; 1287
+FUSE_BOOTEND=4744                                 ; 1288
+LOCKBIT_LOCKBIT=4746                              ; 128A
+USERROW_USERROW0=4864                             ; 1300
+USERROW_USERROW1=4865                             ; 1301
+USERROW_USERROW2=4866                             ; 1302
+USERROW_USERROW3=4867                             ; 1303
+USERROW_USERROW4=4868                             ; 1304
+USERROW_USERROW5=4869                             ; 1305
+USERROW_USERROW6=4870                             ; 1306
+USERROW_USERROW7=4871                             ; 1307
+USERROW_USERROW8=4872                             ; 1308
+USERROW_USERROW9=4873                             ; 1309
+USERROW_USERROW10=4874                            ; 130A
+USERROW_USERROW11=4875                            ; 130B
+USERROW_USERROW12=4876                            ; 130C
+USERROW_USERROW13=4877                            ; 130D
+USERROW_USERROW14=4878                            ; 130E
+USERROW_USERROW15=4879                            ; 130F
+USERROW_USERROW16=4880                            ; 1310
+USERROW_USERROW17=4881                            ; 1311
+USERROW_USERROW18=4882                            ; 1312
+USERROW_USERROW19=4883                            ; 1313
+USERROW_USERROW20=4884                            ; 1314
+USERROW_USERROW21=4885                            ; 1315
+USERROW_USERROW22=4886                            ; 1316
+USERROW_USERROW23=4887                            ; 1317
+USERROW_USERROW24=4888                            ; 1318
+USERROW_USERROW25=4889                            ; 1319
+USERROW_USERROW26=4890                            ; 131A
+USERROW_USERROW27=4891                            ; 131B
+USERROW_USERROW28=4892                            ; 131C
+USERROW_USERROW29=4893                            ; 131D
+USERROW_USERROW30=4894                            ; 131E
+USERROW_USERROW31=4895                            ; 131F
+
+[WIO]
+RTC_CNT=328                                       ; 0148 word
+RTC_PER=330                                       ; 014A word
+RTC_CMP=332                                       ; 014C word
+ADC0_RES=1552                                     ; 0610 word
+ADC0_WINLT=1554                                   ; 0612 word
+ADC0_WINHT=1556                                   ; 0614 word
+USART0_BAUD=2056                                  ; 0808 word
+TCA0_CNT=2592                                     ; 0A20 word
+TCA0_PER=2598                                     ; 0A26 word
+TCA0_CMP0=2600                                    ; 0A28 word
+TCA0_CMP1=2602                                    ; 0A2A word
+TCA0_CMP2=2604                                    ; 0A2C word
+TCA0_PERBUF=2614                                  ; 0A36 word
+TCA0_CMP0BUF=2616                                 ; 0A38 word
+TCA0_CMP1BUF=2618                                 ; 0A3A word
+TCA0_CMP2BUF=2620                                 ; 0A3C word
+TCB0_CNT=2634                                     ; 0A4A word
+TCB0_CCMP=2636                                    ; 0A4C word
+NVMCTRL_DATA=4102                                 ; 1006 word
+NVMCTRL_ADDR=4104                                 ; 1008 word
+
+[FLAG]
+VPORTA_INTFLAGS
+VPORTB_INTFLAGS
+VPORTC_INTFLAGS
+BOD_INTFLAGS
+RTC_INTFLAGS
+PORTA_INTFLAGS
+PORTB_INTFLAGS
+PORTC_INTFLAGS
+ADC0_INTFLAGS
+SPI0_INTFLAGS
+TCA0_INTFLAGS
+TCB0_INTFLAGS
+NVMCTRL_INTFLAGS
+
+[CONST]
+_ROMSIZE=16384
+_CHIP=1606
+SMODE1=1
+SMODE2=2
+
+AC_ENABLE_bp = 0                                  ; Enable bit position
+AC_HYSMODE0_bp = 1                                ; Hysteresis Mode bit 0 position
+AC_HYSMODE1_bp = 2                                ; Hysteresis Mode bit 1 position
+AC_INTMODE0_bp = 4                                ; Interrupt Mode bit 0 position
+AC_INTMODE1_bp = 5                                ; Interrupt Mode bit 1 position
+AC_OUTEN_bp = 6                                   ; Output Buffer Enable bit position
+AC_RUNSTDBY_bp = 7                                ; Run in Standby Mode bit position
+AC_CMP_bp = 0                                     ; Analog Comparator 0 Interrupt Enable bit position
+AC_INVERT_bp = 7                                  ; Invert AC Output bit position
+AC_MUXNEG0_bp = 0                                 ; Negative Input MUX Selection bit 0 position
+AC_MUXNEG1_bp = 1                                 ; Negative Input MUX Selection bit 1 position
+AC_MUXPOS0_bp = 3                                 ; Positive Input MUX Selection bit 0 position
+AC_MUXPOS1_bp = 4                                 ; Positive Input MUX Selection bit 1 position
+AC_STATE_bp = 4                                   ; Analog Comparator State bit position
+ADC_DUTYCYC_bp = 0                                ; Duty Cycle bit position
+ADC_STCONV_bp = 0                                 ; Start Conversion Operation bit position
+ADC_ENABLE_bp = 0                                 ; ADC Enable bit position
+ADC_FREERUN_bp = 1                                ; ADC Freerun mode bit position
+ADC_RESSEL_bp = 2                                 ; ADC Resolution bit position
+ADC_RUNSTBY_bp = 7                                ; Run standby mode bit position
+ADC_SAMPNUM0_bp = 0                               ; Accumulation Samples bit 0 position
+ADC_SAMPNUM1_bp = 1                               ; Accumulation Samples bit 1 position
+ADC_SAMPNUM2_bp = 2                               ; Accumulation Samples bit 2 position
+ADC_PRESC0_bp = 0                                 ; Clock Pre-scaler bit 0 position
+ADC_PRESC1_bp = 1                                 ; Clock Pre-scaler bit 1 position
+ADC_PRESC2_bp = 2                                 ; Clock Pre-scaler bit 2 position
+ADC_REFSEL0_bp = 4                                ; Reference Selection bit 0 position
+ADC_REFSEL1_bp = 5                                ; Reference Selection bit 1 position
+ADC_SAMPCAP_bp = 6                                ; Sample Capacitance Selection bit position
+ADC_ASDV_bp = 4                                   ; Automatic Sampling Delay Variation bit position
+ADC_INITDLY0_bp = 5                               ; Initial Delay Selection bit 0 position
+ADC_INITDLY1_bp = 6                               ; Initial Delay Selection bit 1 position
+ADC_INITDLY2_bp = 7                               ; Initial Delay Selection bit 2 position
+ADC_SAMPDLY0_bp = 0                               ; Sampling Delay Selection bit 0 position
+ADC_SAMPDLY1_bp = 1                               ; Sampling Delay Selection bit 1 position
+ADC_SAMPDLY2_bp = 2                               ; Sampling Delay Selection bit 2 position
+ADC_SAMPDLY3_bp = 3                               ; Sampling Delay Selection bit 3 position
+ADC_WINCM0_bp = 0                                 ; Window Comparator Mode bit 0 position
+ADC_WINCM1_bp = 1                                 ; Window Comparator Mode bit 1 position
+ADC_WINCM2_bp = 2                                 ; Window Comparator Mode bit 2 position
+ADC_DBGRUN_bp = 0                                 ; Debug run bit position
+ADC_STARTEI_bp = 0                                ; Start Event Input Enable bit position
+ADC_RESRDY_bp = 0                                 ; Result Ready Interrupt Enable bit position
+ADC_WCMP_bp = 1                                   ; Window Comparator Interrupt Enable bit position
+ADC_MUXPOS0_bp = 0                                ; Analog Channel Selection Bits bit 0 position
+ADC_MUXPOS1_bp = 1                                ; Analog Channel Selection Bits bit 1 position
+ADC_MUXPOS2_bp = 2                                ; Analog Channel Selection Bits bit 2 position
+ADC_MUXPOS3_bp = 3                                ; Analog Channel Selection Bits bit 3 position
+ADC_MUXPOS4_bp = 4                                ; Analog Channel Selection Bits bit 4 position
+ADC_SAMPLEN0_bp = 0                               ; Sample lenght bit 0 position
+ADC_SAMPLEN1_bp = 1                               ; Sample lenght bit 1 position
+ADC_SAMPLEN2_bp = 2                               ; Sample lenght bit 2 position
+ADC_SAMPLEN3_bp = 3                               ; Sample lenght bit 3 position
+ADC_SAMPLEN4_bp = 4                               ; Sample lenght bit 4 position
+ADC_TEMP0_bp = 0                                  ; Temporary bit 0 position
+ADC_TEMP1_bp = 1                                  ; Temporary bit 1 position
+ADC_TEMP2_bp = 2                                  ; Temporary bit 2 position
+ADC_TEMP3_bp = 3                                  ; Temporary bit 3 position
+ADC_TEMP4_bp = 4                                  ; Temporary bit 4 position
+ADC_TEMP5_bp = 5                                  ; Temporary bit 5 position
+ADC_TEMP6_bp = 6                                  ; Temporary bit 6 position
+ADC_TEMP7_bp = 7                                  ; Temporary bit 7 position
+BOD_ACTIVE0_bp = 2                                ; Operation in active mode bit 0 position
+BOD_ACTIVE1_bp = 3                                ; Operation in active mode bit 1 position
+BOD_SAMPFREQ_bp = 4                               ; Sample frequency bit position
+BOD_SLEEP0_bp = 0                                 ; Operation in sleep mode bit 0 position
+BOD_SLEEP1_bp = 1                                 ; Operation in sleep mode bit 1 position
+BOD_LVL0_bp = 0                                   ; Bod level bit 0 position
+BOD_LVL1_bp = 1                                   ; Bod level bit 1 position
+BOD_LVL2_bp = 2                                   ; Bod level bit 2 position
+BOD_VLMCFG0_bp = 1                                ; Configuration bit 0 position
+BOD_VLMCFG1_bp = 2                                ; Configuration bit 1 position
+BOD_VLMIE_bp = 0                                  ; voltage level monitor interrrupt enable bit position
+BOD_VLMIF_bp = 0                                  ; Voltage level monitor interrupt flag bit position
+BOD_VLMS_bp = 0                                   ; Voltage level monitor status bit position
+BOD_VLMLVL0_bp = 0                                ; voltage level monitor level bit 0 position
+BOD_VLMLVL1_bp = 1                                ; voltage level monitor level bit 1 position
+CCL_ENABLE_bp = 0                                 ; Enable bit position
+CCL_RUNSTDBY_bp = 6                               ; Run in Standby bit position
+CCL_CLKSRC_bp = 6                                 ; Clock Source Selection bit position
+CCL_EDGEDET_bp = 7                                ; Edge Detection Enable bit position
+CCL_FILTSEL0_bp = 4                               ; Filter Selection bit 0 position
+CCL_FILTSEL1_bp = 5                               ; Filter Selection bit 1 position
+CCL_OUTEN_bp = 3                                  ; Output Enable bit position
+CCL_INSEL00_bp = 0                                ; LUT Input 0 Source Selection bit 0 position
+CCL_INSEL01_bp = 1                                ; LUT Input 0 Source Selection bit 1 position
+CCL_INSEL02_bp = 2                                ; LUT Input 0 Source Selection bit 2 position
+CCL_INSEL03_bp = 3                                ; LUT Input 0 Source Selection bit 3 position
+CCL_INSEL10_bp = 4                                ; LUT Input 1 Source Selection bit 0 position
+CCL_INSEL11_bp = 5                                ; LUT Input 1 Source Selection bit 1 position
+CCL_INSEL12_bp = 6                                ; LUT Input 1 Source Selection bit 2 position
+CCL_INSEL13_bp = 7                                ; LUT Input 1 Source Selection bit 3 position
+CCL_INSEL20_bp = 0                                ; LUT Input 2 Source Selection bit 0 position
+CCL_INSEL21_bp = 1                                ; LUT Input 2 Source Selection bit 1 position
+CCL_INSEL22_bp = 2                                ; LUT Input 2 Source Selection bit 2 position
+CCL_INSEL23_bp = 3                                ; LUT Input 2 Source Selection bit 3 position
+CCL_SEQSEL0_bp = 0                                ; Sequential Selection bit 0 position
+CCL_SEQSEL1_bp = 1                                ; Sequential Selection bit 1 position
+CCL_SEQSEL2_bp = 2                                ; Sequential Selection bit 2 position
+CLKCTRL_CLKOUT_bp = 7                             ; System clock out bit position
+CLKCTRL_CLKSEL0_bp = 0                            ; clock select bit 0 position
+CLKCTRL_CLKSEL1_bp = 1                            ; clock select bit 1 position
+CLKCTRL_PDIV0_bp = 1                              ; Prescaler division bit 0 position
+CLKCTRL_PDIV1_bp = 2                              ; Prescaler division bit 1 position
+CLKCTRL_PDIV2_bp = 3                              ; Prescaler division bit 2 position
+CLKCTRL_PDIV3_bp = 4                              ; Prescaler division bit 3 position
+CLKCTRL_PEN_bp = 0                                ; Prescaler enable bit position
+CLKCTRL_LOCKEN_bp = 0                             ; lock ebable bit position
+CLKCTRL_EXTS_bp = 7                               ; External Clock status bit position
+CLKCTRL_OSC20MS_bp = 4                            ; 20MHz oscillator status bit position
+CLKCTRL_OSC32KS_bp = 5                            ; 32KHz oscillator status bit position
+CLKCTRL_SOSC_bp = 0                               ; System Oscillator changing bit position
+CLKCTRL_XOSC32KS_bp = 6                           ; 32.768 kHz Crystal Oscillator status bit position
+CLKCTRL_CAL20M0_bp = 0                            ; Calibration bit 0 position
+CLKCTRL_CAL20M1_bp = 1                            ; Calibration bit 1 position
+CLKCTRL_CAL20M2_bp = 2                            ; Calibration bit 2 position
+CLKCTRL_CAL20M3_bp = 3                            ; Calibration bit 3 position
+CLKCTRL_CAL20M4_bp = 4                            ; Calibration bit 4 position
+CLKCTRL_CAL20M5_bp = 5                            ; Calibration bit 5 position
+CLKCTRL_LOCK_bp = 7                               ; Lock bit position
+CLKCTRL_TEMPCAL20M0_bp = 0                        ; Oscillator temperature coefficient bit 0 position
+CLKCTRL_TEMPCAL20M1_bp = 1                        ; Oscillator temperature coefficient bit 1 position
+CLKCTRL_TEMPCAL20M2_bp = 2                        ; Oscillator temperature coefficient bit 2 position
+CLKCTRL_TEMPCAL20M3_bp = 3                        ; Oscillator temperature coefficient bit 3 position
+CLKCTRL_RUNSTDBY_bp = 1                           ; Run standby bit position
+CPU_CCP0_bp = 0                                   ; CCP signature bit 0 position
+CPU_CCP1_bp = 1                                   ; CCP signature bit 1 position
+CPU_CCP2_bp = 2                                   ; CCP signature bit 2 position
+CPU_CCP3_bp = 3                                   ; CCP signature bit 3 position
+CPU_CCP4_bp = 4                                   ; CCP signature bit 4 position
+CPU_CCP5_bp = 5                                   ; CCP signature bit 5 position
+CPU_CCP6_bp = 6                                   ; CCP signature bit 6 position
+CPU_CCP7_bp = 7                                   ; CCP signature bit 7 position
+CPU_C_bp = 0                                      ; Carry Flag bit position
+CPU_H_bp = 5                                      ; Half Carry Flag bit position
+CPU_I_bp = 7                                      ; Global Interrupt Enable Flag bit position
+CPU_N_bp = 2                                      ; Negative Flag bit position
+CPU_S_bp = 4                                      ; N Exclusive Or V Flag bit position
+CPU_T_bp = 6                                      ; Transfer Bit bit position
+CPU_V_bp = 3                                      ; Two's Complement Overflow Flag bit position
+CPU_Z_bp = 1                                      ; Zero Flag bit position
+CPUINT_CVT_bp = 5                                 ; Compact Vector Table bit position
+CPUINT_IVSEL_bp = 6                               ; Interrupt Vector Select bit position
+CPUINT_LVL0RR_bp = 0                              ; Round-robin Scheduling Enable bit position
+CPUINT_LVL0PRI0_bp = 0                            ; Interrupt Level Priority bit 0 position
+CPUINT_LVL0PRI1_bp = 1                            ; Interrupt Level Priority bit 1 position
+CPUINT_LVL0PRI2_bp = 2                            ; Interrupt Level Priority bit 2 position
+CPUINT_LVL0PRI3_bp = 3                            ; Interrupt Level Priority bit 3 position
+CPUINT_LVL0PRI4_bp = 4                            ; Interrupt Level Priority bit 4 position
+CPUINT_LVL0PRI5_bp = 5                            ; Interrupt Level Priority bit 5 position
+CPUINT_LVL0PRI6_bp = 6                            ; Interrupt Level Priority bit 6 position
+CPUINT_LVL0PRI7_bp = 7                            ; Interrupt Level Priority bit 7 position
+CPUINT_LVL1VEC0_bp = 0                            ; Interrupt Vector with High Priority bit 0 position
+CPUINT_LVL1VEC1_bp = 1                            ; Interrupt Vector with High Priority bit 1 position
+CPUINT_LVL1VEC2_bp = 2                            ; Interrupt Vector with High Priority bit 2 position
+CPUINT_LVL1VEC3_bp = 3                            ; Interrupt Vector with High Priority bit 3 position
+CPUINT_LVL1VEC4_bp = 4                            ; Interrupt Vector with High Priority bit 4 position
+CPUINT_LVL1VEC5_bp = 5                            ; Interrupt Vector with High Priority bit 5 position
+CPUINT_LVL1VEC6_bp = 6                            ; Interrupt Vector with High Priority bit 6 position
+CPUINT_LVL1VEC7_bp = 7                            ; Interrupt Vector with High Priority bit 7 position
+CPUINT_LVL0EX_bp = 0                              ; Level 0 Interrupt Executing bit position
+CPUINT_LVL1EX_bp = 1                              ; Level 1 Interrupt Executing bit position
+CPUINT_NMIEX_bp = 7                               ; Non-maskable Interrupt Executing bit position
+CRCSCAN_ENABLE_bp = 0                             ; Enable CRC scan bit position
+CRCSCAN_NMIEN_bp = 1                              ; Enable NMI Trigger bit position
+CRCSCAN_RESET_bp = 7                              ; Reset CRC scan bit position
+CRCSCAN_SRC0_bp = 0                               ; CRC Source bit 0 position
+CRCSCAN_SRC1_bp = 1                               ; CRC Source bit 1 position
+CRCSCAN_BUSY_bp = 0                               ; CRC Busy bit position
+CRCSCAN_OK_bp = 1                                 ; CRC Ok bit position
+EVSYS_ASYNCCH00_bp = 0                            ; Asynchronous Channel 0 Generator Selection bit 0 position
+EVSYS_ASYNCCH01_bp = 1                            ; Asynchronous Channel 0 Generator Selection bit 1 position
+EVSYS_ASYNCCH02_bp = 2                            ; Asynchronous Channel 0 Generator Selection bit 2 position
+EVSYS_ASYNCCH03_bp = 3                            ; Asynchronous Channel 0 Generator Selection bit 3 position
+EVSYS_ASYNCCH04_bp = 4                            ; Asynchronous Channel 0 Generator Selection bit 4 position
+EVSYS_ASYNCCH05_bp = 5                            ; Asynchronous Channel 0 Generator Selection bit 5 position
+EVSYS_ASYNCCH06_bp = 6                            ; Asynchronous Channel 0 Generator Selection bit 6 position
+EVSYS_ASYNCCH07_bp = 7                            ; Asynchronous Channel 0 Generator Selection bit 7 position
+EVSYS_ASYNCCH10_bp = 0                            ; Asynchronous Channel 1 Generator Selection bit 0 position
+EVSYS_ASYNCCH11_bp = 1                            ; Asynchronous Channel 1 Generator Selection bit 1 position
+EVSYS_ASYNCCH12_bp = 2                            ; Asynchronous Channel 1 Generator Selection bit 2 position
+EVSYS_ASYNCCH13_bp = 3                            ; Asynchronous Channel 1 Generator Selection bit 3 position
+EVSYS_ASYNCCH14_bp = 4                            ; Asynchronous Channel 1 Generator Selection bit 4 position
+EVSYS_ASYNCCH15_bp = 5                            ; Asynchronous Channel 1 Generator Selection bit 5 position
+EVSYS_ASYNCCH16_bp = 6                            ; Asynchronous Channel 1 Generator Selection bit 6 position
+EVSYS_ASYNCCH17_bp = 7                            ; Asynchronous Channel 1 Generator Selection bit 7 position
+EVSYS_ASYNCUSER00_bp = 0                          ; Asynchronous User Ch 0 Input Selection - TCB0 bit 0 position
+EVSYS_ASYNCUSER01_bp = 1                          ; Asynchronous User Ch 0 Input Selection - TCB0 bit 1 position
+EVSYS_ASYNCUSER02_bp = 2                          ; Asynchronous User Ch 0 Input Selection - TCB0 bit 2 position
+EVSYS_ASYNCUSER03_bp = 3                          ; Asynchronous User Ch 0 Input Selection - TCB0 bit 3 position
+EVSYS_ASYNCUSER04_bp = 4                          ; Asynchronous User Ch 0 Input Selection - TCB0 bit 4 position
+EVSYS_ASYNCUSER05_bp = 5                          ; Asynchronous User Ch 0 Input Selection - TCB0 bit 5 position
+EVSYS_ASYNCUSER06_bp = 6                          ; Asynchronous User Ch 0 Input Selection - TCB0 bit 6 position
+EVSYS_ASYNCUSER07_bp = 7                          ; Asynchronous User Ch 0 Input Selection - TCB0 bit 7 position
+EVSYS_ASYNCUSER10_bp = 0                          ; Asynchronous User Ch 1 Input Selection - ADC0 bit 0 position
+EVSYS_ASYNCUSER11_bp = 1                          ; Asynchronous User Ch 1 Input Selection - ADC0 bit 1 position
+EVSYS_ASYNCUSER12_bp = 2                          ; Asynchronous User Ch 1 Input Selection - ADC0 bit 2 position
+EVSYS_ASYNCUSER13_bp = 3                          ; Asynchronous User Ch 1 Input Selection - ADC0 bit 3 position
+EVSYS_ASYNCUSER14_bp = 4                          ; Asynchronous User Ch 1 Input Selection - ADC0 bit 4 position
+EVSYS_ASYNCUSER15_bp = 5                          ; Asynchronous User Ch 1 Input Selection - ADC0 bit 5 position
+EVSYS_ASYNCUSER16_bp = 6                          ; Asynchronous User Ch 1 Input Selection - ADC0 bit 6 position
+EVSYS_ASYNCUSER17_bp = 7                          ; Asynchronous User Ch 1 Input Selection - ADC0 bit 7 position
+EVSYS_ASYNCUSER20_bp = 0                          ; Asynchronous User Ch 2 Input Selection - CCL LUT0 Event 0 bit 0 position
+EVSYS_ASYNCUSER21_bp = 1                          ; Asynchronous User Ch 2 Input Selection - CCL LUT0 Event 0 bit 1 position
+EVSYS_ASYNCUSER22_bp = 2                          ; Asynchronous User Ch 2 Input Selection - CCL LUT0 Event 0 bit 2 position
+EVSYS_ASYNCUSER23_bp = 3                          ; Asynchronous User Ch 2 Input Selection - CCL LUT0 Event 0 bit 3 position
+EVSYS_ASYNCUSER24_bp = 4                          ; Asynchronous User Ch 2 Input Selection - CCL LUT0 Event 0 bit 4 position
+EVSYS_ASYNCUSER25_bp = 5                          ; Asynchronous User Ch 2 Input Selection - CCL LUT0 Event 0 bit 5 position
+EVSYS_ASYNCUSER26_bp = 6                          ; Asynchronous User Ch 2 Input Selection - CCL LUT0 Event 0 bit 6 position
+EVSYS_ASYNCUSER27_bp = 7                          ; Asynchronous User Ch 2 Input Selection - CCL LUT0 Event 0 bit 7 position
+EVSYS_ASYNCUSER30_bp = 0                          ; Asynchronous User Ch 3 Input Selection - CCL LUT1 Event 0 bit 0 position
+EVSYS_ASYNCUSER31_bp = 1                          ; Asynchronous User Ch 3 Input Selection - CCL LUT1 Event 0 bit 1 position
+EVSYS_ASYNCUSER32_bp = 2                          ; Asynchronous User Ch 3 Input Selection - CCL LUT1 Event 0 bit 2 position
+EVSYS_ASYNCUSER33_bp = 3                          ; Asynchronous User Ch 3 Input Selection - CCL LUT1 Event 0 bit 3 position
+EVSYS_ASYNCUSER34_bp = 4                          ; Asynchronous User Ch 3 Input Selection - CCL LUT1 Event 0 bit 4 position
+EVSYS_ASYNCUSER35_bp = 5                          ; Asynchronous User Ch 3 Input Selection - CCL LUT1 Event 0 bit 5 position
+EVSYS_ASYNCUSER36_bp = 6                          ; Asynchronous User Ch 3 Input Selection - CCL LUT1 Event 0 bit 6 position
+EVSYS_ASYNCUSER37_bp = 7                          ; Asynchronous User Ch 3 Input Selection - CCL LUT1 Event 0 bit 7 position
+EVSYS_ASYNCUSER40_bp = 0                          ; Asynchronous User Ch 4 Input Selection - CCL LUT0 Event 1 bit 0 position
+EVSYS_ASYNCUSER41_bp = 1                          ; Asynchronous User Ch 4 Input Selection - CCL LUT0 Event 1 bit 1 position
+EVSYS_ASYNCUSER42_bp = 2                          ; Asynchronous User Ch 4 Input Selection - CCL LUT0 Event 1 bit 2 position
+EVSYS_ASYNCUSER43_bp = 3                          ; Asynchronous User Ch 4 Input Selection - CCL LUT0 Event 1 bit 3 position
+EVSYS_ASYNCUSER44_bp = 4                          ; Asynchronous User Ch 4 Input Selection - CCL LUT0 Event 1 bit 4 position
+EVSYS_ASYNCUSER45_bp = 5                          ; Asynchronous User Ch 4 Input Selection - CCL LUT0 Event 1 bit 5 position
+EVSYS_ASYNCUSER46_bp = 6                          ; Asynchronous User Ch 4 Input Selection - CCL LUT0 Event 1 bit 6 position
+EVSYS_ASYNCUSER47_bp = 7                          ; Asynchronous User Ch 4 Input Selection - CCL LUT0 Event 1 bit 7 position
+EVSYS_ASYNCUSER50_bp = 0                          ; Asynchronous User Ch 5 Input Selection - CCL LUT1 Event 1 bit 0 position
+EVSYS_ASYNCUSER51_bp = 1                          ; Asynchronous User Ch 5 Input Selection - CCL LUT1 Event 1 bit 1 position
+EVSYS_ASYNCUSER52_bp = 2                          ; Asynchronous User Ch 5 Input Selection - CCL LUT1 Event 1 bit 2 position
+EVSYS_ASYNCUSER53_bp = 3                          ; Asynchronous User Ch 5 Input Selection - CCL LUT1 Event 1 bit 3 position
+EVSYS_ASYNCUSER54_bp = 4                          ; Asynchronous User Ch 5 Input Selection - CCL LUT1 Event 1 bit 4 position
+EVSYS_ASYNCUSER55_bp = 5                          ; Asynchronous User Ch 5 Input Selection - CCL LUT1 Event 1 bit 5 position
+EVSYS_ASYNCUSER56_bp = 6                          ; Asynchronous User Ch 5 Input Selection - CCL LUT1 Event 1 bit 6 position
+EVSYS_ASYNCUSER57_bp = 7                          ; Asynchronous User Ch 5 Input Selection - CCL LUT1 Event 1 bit 7 position
+EVSYS_ASYNCUSER60_bp = 0                          ; Asynchronous User Ch 6 Input Selection - TCD0 Event 0 bit 0 position
+EVSYS_ASYNCUSER61_bp = 1                          ; Asynchronous User Ch 6 Input Selection - TCD0 Event 0 bit 1 position
+EVSYS_ASYNCUSER62_bp = 2                          ; Asynchronous User Ch 6 Input Selection - TCD0 Event 0 bit 2 position
+EVSYS_ASYNCUSER63_bp = 3                          ; Asynchronous User Ch 6 Input Selection - TCD0 Event 0 bit 3 position
+EVSYS_ASYNCUSER64_bp = 4                          ; Asynchronous User Ch 6 Input Selection - TCD0 Event 0 bit 4 position
+EVSYS_ASYNCUSER65_bp = 5                          ; Asynchronous User Ch 6 Input Selection - TCD0 Event 0 bit 5 position
+EVSYS_ASYNCUSER66_bp = 6                          ; Asynchronous User Ch 6 Input Selection - TCD0 Event 0 bit 6 position
+EVSYS_ASYNCUSER67_bp = 7                          ; Asynchronous User Ch 6 Input Selection - TCD0 Event 0 bit 7 position
+EVSYS_ASYNCUSER70_bp = 0                          ; Asynchronous User Ch 7 Input Selection - TCD0 Event 1 bit 0 position
+EVSYS_ASYNCUSER71_bp = 1                          ; Asynchronous User Ch 7 Input Selection - TCD0 Event 1 bit 1 position
+EVSYS_ASYNCUSER72_bp = 2                          ; Asynchronous User Ch 7 Input Selection - TCD0 Event 1 bit 2 position
+EVSYS_ASYNCUSER73_bp = 3                          ; Asynchronous User Ch 7 Input Selection - TCD0 Event 1 bit 3 position
+EVSYS_ASYNCUSER74_bp = 4                          ; Asynchronous User Ch 7 Input Selection - TCD0 Event 1 bit 4 position
+EVSYS_ASYNCUSER75_bp = 5                          ; Asynchronous User Ch 7 Input Selection - TCD0 Event 1 bit 5 position
+EVSYS_ASYNCUSER76_bp = 6                          ; Asynchronous User Ch 7 Input Selection - TCD0 Event 1 bit 6 position
+EVSYS_ASYNCUSER77_bp = 7                          ; Asynchronous User Ch 7 Input Selection - TCD0 Event 1 bit 7 position
+EVSYS_ASYNCUSER80_bp = 0                          ; Asynchronous User Ch 8 Input Selection - Event Out 0 bit 0 position
+EVSYS_ASYNCUSER81_bp = 1                          ; Asynchronous User Ch 8 Input Selection - Event Out 0 bit 1 position
+EVSYS_ASYNCUSER82_bp = 2                          ; Asynchronous User Ch 8 Input Selection - Event Out 0 bit 2 position
+EVSYS_ASYNCUSER83_bp = 3                          ; Asynchronous User Ch 8 Input Selection - Event Out 0 bit 3 position
+EVSYS_ASYNCUSER84_bp = 4                          ; Asynchronous User Ch 8 Input Selection - Event Out 0 bit 4 position
+EVSYS_ASYNCUSER85_bp = 5                          ; Asynchronous User Ch 8 Input Selection - Event Out 0 bit 5 position
+EVSYS_ASYNCUSER86_bp = 6                          ; Asynchronous User Ch 8 Input Selection - Event Out 0 bit 6 position
+EVSYS_ASYNCUSER87_bp = 7                          ; Asynchronous User Ch 8 Input Selection - Event Out 0 bit 7 position
+EVSYS_ASYNCUSER90_bp = 0                          ; Asynchronous User Ch 9 Input Selection - Event Out 1 bit 0 position
+EVSYS_ASYNCUSER91_bp = 1                          ; Asynchronous User Ch 9 Input Selection - Event Out 1 bit 1 position
+EVSYS_ASYNCUSER92_bp = 2                          ; Asynchronous User Ch 9 Input Selection - Event Out 1 bit 2 position
+EVSYS_ASYNCUSER93_bp = 3                          ; Asynchronous User Ch 9 Input Selection - Event Out 1 bit 3 position
+EVSYS_ASYNCUSER94_bp = 4                          ; Asynchronous User Ch 9 Input Selection - Event Out 1 bit 4 position
+EVSYS_ASYNCUSER95_bp = 5                          ; Asynchronous User Ch 9 Input Selection - Event Out 1 bit 5 position
+EVSYS_ASYNCUSER96_bp = 6                          ; Asynchronous User Ch 9 Input Selection - Event Out 1 bit 6 position
+EVSYS_ASYNCUSER97_bp = 7                          ; Asynchronous User Ch 9 Input Selection - Event Out 1 bit 7 position
+EVSYS_ASYNCUSER100_bp = 0                         ; Asynchronous User Ch 10 Input Selection - Event Out 2 bit 0 position
+EVSYS_ASYNCUSER101_bp = 1                         ; Asynchronous User Ch 10 Input Selection - Event Out 2 bit 1 position
+EVSYS_ASYNCUSER102_bp = 2                         ; Asynchronous User Ch 10 Input Selection - Event Out 2 bit 2 position
+EVSYS_ASYNCUSER103_bp = 3                         ; Asynchronous User Ch 10 Input Selection - Event Out 2 bit 3 position
+EVSYS_ASYNCUSER104_bp = 4                         ; Asynchronous User Ch 10 Input Selection - Event Out 2 bit 4 position
+EVSYS_ASYNCUSER105_bp = 5                         ; Asynchronous User Ch 10 Input Selection - Event Out 2 bit 5 position
+EVSYS_ASYNCUSER106_bp = 6                         ; Asynchronous User Ch 10 Input Selection - Event Out 2 bit 6 position
+EVSYS_ASYNCUSER107_bp = 7                         ; Asynchronous User Ch 10 Input Selection - Event Out 2 bit 7 position
+EVSYS_ASYNCUSER110_bp = 0                         ; Asynchronous User Ch 11 Input Selection - TCB1 bit 0 position
+EVSYS_ASYNCUSER111_bp = 1                         ; Asynchronous User Ch 11 Input Selection - TCB1 bit 1 position
+EVSYS_ASYNCUSER112_bp = 2                         ; Asynchronous User Ch 11 Input Selection - TCB1 bit 2 position
+EVSYS_ASYNCUSER113_bp = 3                         ; Asynchronous User Ch 11 Input Selection - TCB1 bit 3 position
+EVSYS_ASYNCUSER114_bp = 4                         ; Asynchronous User Ch 11 Input Selection - TCB1 bit 4 position
+EVSYS_ASYNCUSER115_bp = 5                         ; Asynchronous User Ch 11 Input Selection - TCB1 bit 5 position
+EVSYS_ASYNCUSER116_bp = 6                         ; Asynchronous User Ch 11 Input Selection - TCB1 bit 6 position
+EVSYS_ASYNCUSER117_bp = 7                         ; Asynchronous User Ch 11 Input Selection - TCB1 bit 7 position
+EVSYS_ASYNCUSER120_bp = 0                         ; Asynchronous User Ch 12 Input Selection - ADC0 bit 0 position
+EVSYS_ASYNCUSER121_bp = 1                         ; Asynchronous User Ch 12 Input Selection - ADC0 bit 1 position
+EVSYS_ASYNCUSER122_bp = 2                         ; Asynchronous User Ch 12 Input Selection - ADC0 bit 2 position
+EVSYS_ASYNCUSER123_bp = 3                         ; Asynchronous User Ch 12 Input Selection - ADC0 bit 3 position
+EVSYS_ASYNCUSER124_bp = 4                         ; Asynchronous User Ch 12 Input Selection - ADC0 bit 4 position
+EVSYS_ASYNCUSER125_bp = 5                         ; Asynchronous User Ch 12 Input Selection - ADC0 bit 5 position
+EVSYS_ASYNCUSER126_bp = 6                         ; Asynchronous User Ch 12 Input Selection - ADC0 bit 6 position
+EVSYS_ASYNCUSER127_bp = 7                         ; Asynchronous User Ch 12 Input Selection - ADC0 bit 7 position
+EVSYS_SYNCCH00_bp = 0                             ; Synchronous Channel 0 Generator Selection bit 0 position
+EVSYS_SYNCCH01_bp = 1                             ; Synchronous Channel 0 Generator Selection bit 1 position
+EVSYS_SYNCCH02_bp = 2                             ; Synchronous Channel 0 Generator Selection bit 2 position
+EVSYS_SYNCCH03_bp = 3                             ; Synchronous Channel 0 Generator Selection bit 3 position
+EVSYS_SYNCCH04_bp = 4                             ; Synchronous Channel 0 Generator Selection bit 4 position
+EVSYS_SYNCCH05_bp = 5                             ; Synchronous Channel 0 Generator Selection bit 5 position
+EVSYS_SYNCCH06_bp = 6                             ; Synchronous Channel 0 Generator Selection bit 6 position
+EVSYS_SYNCCH07_bp = 7                             ; Synchronous Channel 0 Generator Selection bit 7 position
+EVSYS_SYNCUSER00_bp = 0                           ; Synchronous User Ch 0 - TCA0 bit 0 position
+EVSYS_SYNCUSER01_bp = 1                           ; Synchronous User Ch 0 - TCA0 bit 1 position
+EVSYS_SYNCUSER02_bp = 2                           ; Synchronous User Ch 0 - TCA0 bit 2 position
+EVSYS_SYNCUSER03_bp = 3                           ; Synchronous User Ch 0 - TCA0 bit 3 position
+EVSYS_SYNCUSER04_bp = 4                           ; Synchronous User Ch 0 - TCA0 bit 4 position
+EVSYS_SYNCUSER05_bp = 5                           ; Synchronous User Ch 0 - TCA0 bit 5 position
+EVSYS_SYNCUSER06_bp = 6                           ; Synchronous User Ch 0 - TCA0 bit 6 position
+EVSYS_SYNCUSER07_bp = 7                           ; Synchronous User Ch 0 - TCA0 bit 7 position
+EVSYS_SYNCUSER10_bp = 0                           ; Synchronous User Ch 1 - USART0 bit 0 position
+EVSYS_SYNCUSER11_bp = 1                           ; Synchronous User Ch 1 - USART0 bit 1 position
+EVSYS_SYNCUSER12_bp = 2                           ; Synchronous User Ch 1 - USART0 bit 2 position
+EVSYS_SYNCUSER13_bp = 3                           ; Synchronous User Ch 1 - USART0 bit 3 position
+EVSYS_SYNCUSER14_bp = 4                           ; Synchronous User Ch 1 - USART0 bit 4 position
+EVSYS_SYNCUSER15_bp = 5                           ; Synchronous User Ch 1 - USART0 bit 5 position
+EVSYS_SYNCUSER16_bp = 6                           ; Synchronous User Ch 1 - USART0 bit 6 position
+EVSYS_SYNCUSER17_bp = 7                           ; Synchronous User Ch 1 - USART0 bit 7 position
+FUSE_ACTIVE0_bp = 2                               ; BOD Operation in Active Mode bit 0 position
+FUSE_ACTIVE1_bp = 3                               ; BOD Operation in Active Mode bit 1 position
+FUSE_LVL0_bp = 5                                  ; BOD Level bit 0 position
+FUSE_LVL1_bp = 6                                  ; BOD Level bit 1 position
+FUSE_LVL2_bp = 7                                  ; BOD Level bit 2 position
+FUSE_SAMPFREQ_bp = 4                              ; BOD Sample Frequency bit position
+FUSE_SLEEP0_bp = 0                                ; BOD Operation in Sleep Mode bit 0 position
+FUSE_SLEEP1_bp = 1                                ; BOD Operation in Sleep Mode bit 1 position
+FUSE_FREQSEL0_bp = 0                              ; Frequency Select bit 0 position
+FUSE_FREQSEL1_bp = 1                              ; Frequency Select bit 1 position
+FUSE_OSCLOCK_bp = 7                               ; Oscillator Lock bit position
+FUSE_CRCSRC0_bp = 6                               ; CRC Source bit 0 position
+FUSE_CRCSRC1_bp = 7                               ; CRC Source bit 1 position
+FUSE_EESAVE_bp = 0                                ; EEPROM Save bit position
+FUSE_RSTPINCFG0_bp = 2                            ; Reset Pin Configuration bit 0 position
+FUSE_RSTPINCFG1_bp = 3                            ; Reset Pin Configuration bit 1 position
+FUSE_SUT0_bp = 0                                  ; Startup Time bit 0 position
+FUSE_SUT1_bp = 1                                  ; Startup Time bit 1 position
+FUSE_SUT2_bp = 2                                  ; Startup Time bit 2 position
+FUSE_PERIOD0_bp = 0                               ; Watchdog Timeout Period bit 0 position
+FUSE_PERIOD1_bp = 1                               ; Watchdog Timeout Period bit 1 position
+FUSE_PERIOD2_bp = 2                               ; Watchdog Timeout Period bit 2 position
+FUSE_PERIOD3_bp = 3                               ; Watchdog Timeout Period bit 3 position
+FUSE_WINDOW0_bp = 4                               ; Watchdog Window Timeout Period bit 0 position
+FUSE_WINDOW1_bp = 5                               ; Watchdog Window Timeout Period bit 1 position
+FUSE_WINDOW2_bp = 6                               ; Watchdog Window Timeout Period bit 2 position
+FUSE_WINDOW3_bp = 7                               ; Watchdog Window Timeout Period bit 3 position
+LOCKBIT_LB0_bp = 0                                ; Lock Bits bit 0 position
+LOCKBIT_LB1_bp = 1                                ; Lock Bits bit 1 position
+LOCKBIT_LB2_bp = 2                                ; Lock Bits bit 2 position
+LOCKBIT_LB3_bp = 3                                ; Lock Bits bit 3 position
+LOCKBIT_LB4_bp = 4                                ; Lock Bits bit 4 position
+LOCKBIT_LB5_bp = 5                                ; Lock Bits bit 5 position
+LOCKBIT_LB6_bp = 6                                ; Lock Bits bit 6 position
+LOCKBIT_LB7_bp = 7                                ; Lock Bits bit 7 position
+NVMCTRL_CMD0_bp = 0                               ; Command bit 0 position
+NVMCTRL_CMD1_bp = 1                               ; Command bit 1 position
+NVMCTRL_CMD2_bp = 2                               ; Command bit 2 position
+NVMCTRL_APCWP_bp = 0                              ; Application code write protect bit position
+NVMCTRL_BOOTLOCK_bp = 1                           ; Boot Lock bit position
+NVMCTRL_EEREADY_bp = 0                            ; EEPROM Ready bit position
+NVMCTRL_EEBUSY_bp = 1                             ; EEPROM busy bit position
+NVMCTRL_FBUSY_bp = 0                              ; Flash busy bit position
+NVMCTRL_WRERROR_bp = 2                            ; Write error bit position
+PORT_INT0_bp = 0                                  ; Pin Interrupt bit 0 position
+PORT_INT1_bp = 1                                  ; Pin Interrupt bit 1 position
+PORT_INT2_bp = 2                                  ; Pin Interrupt bit 2 position
+PORT_INT3_bp = 3                                  ; Pin Interrupt bit 3 position
+PORT_INT4_bp = 4                                  ; Pin Interrupt bit 4 position
+PORT_INT5_bp = 5                                  ; Pin Interrupt bit 5 position
+PORT_INT6_bp = 6                                  ; Pin Interrupt bit 6 position
+PORT_INT7_bp = 7                                  ; Pin Interrupt bit 7 position
+PORT_INVEN_bp = 7                                 ; Inverted I/O Enable bit position
+PORT_ISC0_bp = 0                                  ; Input/Sense Configuration bit 0 position
+PORT_ISC1_bp = 1                                  ; Input/Sense Configuration bit 1 position
+PORT_ISC2_bp = 2                                  ; Input/Sense Configuration bit 2 position
+PORT_PULLUPEN_bp = 3                              ; Pullup enable bit position
+PORTMUX_EVOUT0_bp = 0                             ; Event Output 0 bit position
+PORTMUX_EVOUT1_bp = 1                             ; Event Output 1 bit position
+PORTMUX_EVOUT2_bp = 2                             ; Event Output 2 bit position
+PORTMUX_LUT0_bp = 4                               ; Configurable Custom Logic LUT0 bit position
+PORTMUX_LUT1_bp = 5                               ; Configurable Custom Logic LUT1 bit position
+PORTMUX_SPI0_bp = 2                               ; Port Multiplexer SPI0 bit position
+PORTMUX_USART0_bp = 0                             ; Port Multiplexer USART0 bit position
+PORTMUX_TCA00_bp = 0                              ; Port Multiplexer TCA0 Output 0 bit position
+PORTMUX_TCA01_bp = 1                              ; Port Multiplexer TCA0 Output 1 bit position
+PORTMUX_TCA02_bp = 2                              ; Port Multiplexer TCA0 Output 2 bit position
+PORTMUX_TCA03_bp = 3                              ; Port Multiplexer TCA0 Output 3 bit position
+PORTMUX_TCA04_bp = 4                              ; Port Multiplexer TCA0 Output 4 bit position
+PORTMUX_TCA05_bp = 5                              ; Port Multiplexer TCA0 Output 5 bit position
+PORTMUX_TCB0_bp = 0                               ; Port Multiplexer TCB bit position
+RSTCTRL_BORF_bp = 1                               ; Brown out detector Reset flag bit position
+RSTCTRL_EXTRF_bp = 2                              ; External Reset flag bit position
+RSTCTRL_PORF_bp = 0                               ; Power on Reset flag bit position
+RSTCTRL_SWRF_bp = 4                               ; Software Reset flag bit position
+RSTCTRL_UPDIRF_bp = 5                             ; UPDI Reset flag bit position
+RSTCTRL_WDRF_bp = 3                               ; Watch dog Reset flag bit position
+RSTCTRL_SWRE_bp = 0                               ; Software reset enable bit position
+RTC_CLKSEL0_bp = 0                                ; Clock Select bit 0 position
+RTC_CLKSEL1_bp = 1                                ; Clock Select bit 1 position
+RTC_PRESCALER0_bp = 3                             ; Prescaling Factor bit 0 position
+RTC_PRESCALER1_bp = 4                             ; Prescaling Factor bit 1 position
+RTC_PRESCALER2_bp = 5                             ; Prescaling Factor bit 2 position
+RTC_PRESCALER3_bp = 6                             ; Prescaling Factor bit 3 position
+RTC_RTCEN_bp = 0                                  ; Enable bit position
+RTC_RUNSTDBY_bp = 7                               ; Run In Standby bit position
+RTC_DBGRUN_bp = 0                                 ; Run in debug bit position
+RTC_CMP_bp = 1                                    ; Compare Match Interrupt enable bit position
+RTC_OVF_bp = 0                                    ; Overflow Interrupt enable bit position
+RTC_PERIOD0_bp = 3                                ; Period bit 0 position
+RTC_PERIOD1_bp = 4                                ; Period bit 1 position
+RTC_PERIOD2_bp = 5                                ; Period bit 2 position
+RTC_PERIOD3_bp = 6                                ; Period bit 3 position
+RTC_PITEN_bp = 0                                  ; Enable bit position
+RTC_PI_bp = 0                                     ; Periodic Interrupt bit position
+RTC_CTRLBUSY_bp = 0                               ; CTRLA Synchronization Busy Flag bit position
+RTC_CMPBUSY_bp = 3                                ; Comparator Synchronization Busy Flag bit position
+RTC_CNTBUSY_bp = 1                                ; Count Synchronization Busy Flag bit position
+RTC_CTRLABUSY_bp = 0                              ; CTRLA Synchronization Busy Flag bit position
+RTC_PERBUSY_bp = 2                                ; Period Synchronization Busy Flag bit position
+SLPCTRL_SEN_bp = 0                                ; Sleep enable bit position
+SLPCTRL_SMODE0_bp = 1                             ; Sleep mode bit 0 position
+SLPCTRL_SMODE1_bp = 2                             ; Sleep mode bit 1 position
+SPI_CLK2X_bp = 4                                  ; Enable Double Speed bit position
+SPI_DORD_bp = 6                                   ; Data Order Setting bit position
+SPI_ENABLE_bp = 0                                 ; Enable Module bit position
+SPI_MASTER_bp = 5                                 ; Master Operation Enable bit position
+SPI_PRESC0_bp = 1                                 ; Prescaler bit 0 position
+SPI_PRESC1_bp = 2                                 ; Prescaler bit 1 position
+SPI_BUFEN_bp = 7                                  ; Buffer Mode Enable bit position
+SPI_BUFWR_bp = 6                                  ; Buffer Write Mode bit position
+SPI_MODE0_bp = 0                                  ; SPI Mode bit 0 position
+SPI_MODE1_bp = 1                                  ; SPI Mode bit 1 position
+SPI_SSD_bp = 2                                    ; Slave Select Disable bit position
+SPI_DREIE_bp = 5                                  ; Data Register Empty Interrupt Enable bit position
+SPI_IE_bp = 0                                     ; Interrupt Enable bit position
+SPI_RXCIE_bp = 7                                  ; Receive Complete Interrupt Enable bit position
+SPI_SSIE_bp = 4                                   ; Slave Select Trigger Interrupt Enable bit position
+SPI_TXCIE_bp = 6                                  ; Transfer Complete Interrupt Enable bit position
+SPI_BUFOVF_bp = 0                                 ; Buffer Overflow bit position
+SPI_DREIF_bp = 5                                  ; Data Register Empty Interrupt Flag bit position
+SPI_RXCIF_bp = 7                                  ; Receive Complete Interrupt Flag bit position
+SPI_SSIF_bp = 4                                   ; Slave Select Trigger Interrupt Flag bit position
+SPI_TXCIF_bp = 6                                  ; Transfer Complete Interrupt Flag bit position
+SPI_IF_bp = 7                                     ; Interrupt Flag bit position
+SPI_WRCOL_bp = 6                                  ; Write Collision bit position
+SYSCFG_ENEXTBRK_bp = 0                            ; External break enable bit position
+TCA_SINGLE_CLKSEL0_bp = 1                         ; Clock Selection bit 0 position
+TCA_SINGLE_CLKSEL1_bp = 2                         ; Clock Selection bit 1 position
+TCA_SINGLE_CLKSEL2_bp = 3                         ; Clock Selection bit 2 position
+TCA_SINGLE_ENABLE_bp = 0                          ; Module Enable bit position
+TCA_SINGLE_ALUPD_bp = 3                           ; Auto Lock Update bit position
+TCA_SINGLE_CMP0EN_bp = 4                          ; Compare 0 Enable bit position
+TCA_SINGLE_CMP1EN_bp = 5                          ; Compare 1 Enable bit position
+TCA_SINGLE_CMP2EN_bp = 6                          ; Compare 2 Enable bit position
+TCA_SINGLE_WGMODE0_bp = 0                         ; Waveform generation mode bit 0 position
+TCA_SINGLE_WGMODE1_bp = 1                         ; Waveform generation mode bit 1 position
+TCA_SINGLE_WGMODE2_bp = 2                         ; Waveform generation mode bit 2 position
+TCA_SINGLE_CMP0OV_bp = 0                          ; Compare 0 Waveform Output Value bit position
+TCA_SINGLE_CMP1OV_bp = 1                          ; Compare 1 Waveform Output Value bit position
+TCA_SINGLE_CMP2OV_bp = 2                          ; Compare 2 Waveform Output Value bit position
+TCA_SINGLE_SPLITM_bp = 0                          ; Split Mode Enable bit position
+TCA_SINGLE_CMD0_bp = 2                            ; Command bit 0 position
+TCA_SINGLE_CMD1_bp = 3                            ; Command bit 1 position
+TCA_SINGLE_DIR_bp = 0                             ; Direction bit position
+TCA_SINGLE_LUPD_bp = 1                            ; Lock Update bit position
+TCA_SINGLE_CMP0BV_bp = 1                          ; Compare 0 Buffer Valid bit position
+TCA_SINGLE_CMP1BV_bp = 2                          ; Compare 1 Buffer Valid bit position
+TCA_SINGLE_CMP2BV_bp = 3                          ; Compare 2 Buffer Valid bit position
+TCA_SINGLE_PERBV_bp = 0                           ; Period Buffer Valid bit position
+TCA_SINGLE_DBGRUN_bp = 0                          ; Debug Run bit position
+TCA_SINGLE_CNTEI_bp = 0                           ; Count on Event Input bit position
+TCA_SINGLE_EVACT0_bp = 1                          ; Event Action bit 0 position
+TCA_SINGLE_EVACT1_bp = 2                          ; Event Action bit 1 position
+TCA_SINGLE_CMP0_bp = 4                            ; Compare 0 Interrupt bit position
+TCA_SINGLE_CMP1_bp = 5                            ; Compare 1 Interrupt bit position
+TCA_SINGLE_CMP2_bp = 6                            ; Compare 2 Interrupt bit position
+TCA_SINGLE_OVF_bp = 0                             ; Overflow Interrupt bit position
+TCA_SPLIT_CLKSEL0_bp = 1                          ; Clock Selection bit 0 position
+TCA_SPLIT_CLKSEL1_bp = 2                          ; Clock Selection bit 1 position
+TCA_SPLIT_CLKSEL2_bp = 3                          ; Clock Selection bit 2 position
+TCA_SPLIT_ENABLE_bp = 0                           ; Module Enable bit position
+TCA_SPLIT_HCMP0EN_bp = 4                          ; High Compare 0 Enable bit position
+TCA_SPLIT_HCMP1EN_bp = 5                          ; High Compare 1 Enable bit position
+TCA_SPLIT_HCMP2EN_bp = 6                          ; High Compare 2 Enable bit position
+TCA_SPLIT_LCMP0EN_bp = 0                          ; Low Compare 0 Enable bit position
+TCA_SPLIT_LCMP1EN_bp = 1                          ; Low Compare 1 Enable bit position
+TCA_SPLIT_LCMP2EN_bp = 2                          ; Low Compare 2 Enable bit position
+TCA_SPLIT_HCMP0OV_bp = 4                          ; High Compare 0 Output Value bit position
+TCA_SPLIT_HCMP1OV_bp = 5                          ; High Compare 1 Output Value bit position
+TCA_SPLIT_HCMP2OV_bp = 6                          ; High Compare 2 Output Value bit position
+TCA_SPLIT_LCMP0OV_bp = 0                          ; Low Compare 0 Output Value bit position
+TCA_SPLIT_LCMP1OV_bp = 1                          ; Low Compare 1 Output Value bit position
+TCA_SPLIT_LCMP2OV_bp = 2                          ; Low Compare 2 Output Value bit position
+TCA_SPLIT_SPLITM_bp = 0                           ; Split Mode Enable bit position
+TCA_SPLIT_CMD0_bp = 2                             ; Command bit 0 position
+TCA_SPLIT_CMD1_bp = 3                             ; Command bit 1 position
+TCA_SPLIT_DBGRUN_bp = 0                           ; Debug Run bit position
+TCA_SPLIT_HUNF_bp = 1                             ; High Underflow Interrupt Enable bit position
+TCA_SPLIT_LCMP0_bp = 4                            ; Low Compare 0 Interrupt Enable bit position
+TCA_SPLIT_LCMP1_bp = 5                            ; Low Compare 1 Interrupt Enable bit position
+TCA_SPLIT_LCMP2_bp = 6                            ; Low Compare 2 Interrupt Enable bit position
+TCA_SPLIT_LUNF_bp = 0                             ; Low Underflow Interrupt Enable bit position
+TCB_CLKSEL0_bp = 1                                ; Clock Select bit 0 position
+TCB_CLKSEL1_bp = 2                                ; Clock Select bit 1 position
+TCB_ENABLE_bp = 0                                 ; Enable bit position
+TCB_RUNSTDBY_bp = 6                               ; Run Standby bit position
+TCB_SYNCUPD_bp = 4                                ; Synchronize Update bit position
+TCB_ASYNC_bp = 6                                  ; Asynchronous Enable bit position
+TCB_CCMPEN_bp = 4                                 ; Pin Output Enable bit position
+TCB_CCMPINIT_bp = 5                               ; Pin Initial State bit position
+TCB_CNTMODE0_bp = 0                               ; Timer Mode bit 0 position
+TCB_CNTMODE1_bp = 1                               ; Timer Mode bit 1 position
+TCB_CNTMODE2_bp = 2                               ; Timer Mode bit 2 position
+TCB_DBGRUN_bp = 0                                 ; Debug Run bit position
+TCB_CAPTEI_bp = 0                                 ; Event Input Enable bit position
+TCB_EDGE_bp = 4                                   ; Event Edge bit position
+TCB_FILTER_bp = 6                                 ; Input Capture Noise Cancellation Filter bit position
+TCB_CAPT_bp = 0                                   ; Capture or Timeout bit position
+TCB_RUN_bp = 0                                    ; Run bit position
+TWI_FMPEN_bp = 1                                  ; FM Plus Enable bit position
+TWI_SDAHOLD0_bp = 2                               ; SDA Hold Time bit 0 position
+TWI_SDAHOLD1_bp = 3                               ; SDA Hold Time bit 1 position
+TWI_SDASETUP_bp = 4                               ; SDA Setup Time bit position
+TWI_DBGRUN_bp = 0                                 ; Debug Run bit position
+TWI_ENABLE_bp = 0                                 ; Enable TWI Master bit position
+TWI_QCEN_bp = 4                                   ; Quick Command Enable bit position
+TWI_RIEN_bp = 7                                   ; Read Interrupt Enable bit position
+TWI_SMEN_bp = 1                                   ; Smart Mode Enable bit position
+TWI_TIMEOUT0_bp = 2                               ; Inactive Bus Timeout bit 0 position
+TWI_TIMEOUT1_bp = 3                               ; Inactive Bus Timeout bit 1 position
+TWI_WIEN_bp = 6                                   ; Write Interrupt Enable bit position
+TWI_ACKACT_bp = 2                                 ; Acknowledge Action bit position
+TWI_FLUSH_bp = 3                                  ; Flush bit position
+TWI_MCMD0_bp = 0                                  ; Command bit 0 position
+TWI_MCMD1_bp = 1                                  ; Command bit 1 position
+TWI_ARBLOST_bp = 3                                ; Arbitration Lost bit position
+TWI_BUSERR_bp = 2                                 ; Bus Error bit position
+TWI_BUSSTATE0_bp = 0                              ; Bus State bit 0 position
+TWI_BUSSTATE1_bp = 1                              ; Bus State bit 1 position
+TWI_CLKHOLD_bp = 5                                ; Clock Hold bit position
+TWI_RIF_bp = 7                                    ; Read Interrupt Flag bit position
+TWI_RXACK_bp = 4                                  ; Received Acknowledge bit position
+TWI_WIF_bp = 6                                    ; Write Interrupt Flag bit position
+TWI_ADDREN_bp = 0                                 ; Address Enable bit position
+TWI_ADDRMASK0_bp = 1                              ; Address Mask bit 0 position
+TWI_ADDRMASK1_bp = 2                              ; Address Mask bit 1 position
+TWI_ADDRMASK2_bp = 3                              ; Address Mask bit 2 position
+TWI_ADDRMASK3_bp = 4                              ; Address Mask bit 3 position
+TWI_ADDRMASK4_bp = 5                              ; Address Mask bit 4 position
+TWI_ADDRMASK5_bp = 6                              ; Address Mask bit 5 position
+TWI_ADDRMASK6_bp = 7                              ; Address Mask bit 6 position
+TWI_APIEN_bp = 6                                  ; Address/Stop Interrupt Enable bit position
+TWI_DIEN_bp = 7                                   ; Data Interrupt Enable bit position
+TWI_PIEN_bp = 5                                   ; Stop Interrupt Enable bit position
+TWI_PMEN_bp = 2                                   ; Promiscuous Mode Enable bit position
+TWI_SCMD0_bp = 0                                  ; Command bit 0 position
+TWI_SCMD1_bp = 1                                  ; Command bit 1 position
+TWI_AP_bp = 0                                     ; Slave Address or Stop bit position
+TWI_APIF_bp = 6                                   ; Address/Stop Interrupt Flag bit position
+TWI_COLL_bp = 3                                   ; Collision bit position
+TWI_DIF_bp = 7                                    ; Data Interrupt Flag bit position
+TWI_DIR_bp = 1                                    ; Read/Write Direction bit position
+USART_ABEIE_bp = 2                                ; Auto-baud Error Interrupt Enable bit position
+USART_DREIE_bp = 5                                ; Data Register Empty Interrupt Enable bit position
+USART_LBME_bp = 3                                 ; Loop-back Mode Enable bit position
+USART_RS4850_bp = 0                               ; RS485 Mode internal transmitter bit 0 position
+USART_RS4851_bp = 1                               ; RS485 Mode internal transmitter bit 1 position
+USART_RXCIE_bp = 7                                ; Receive Complete Interrupt Enable bit position
+USART_RXSIE_bp = 4                                ; Receiver Start Frame Interrupt Enable bit position
+USART_TXCIE_bp = 6                                ; Transmit Complete Interrupt Enable bit position
+USART_MPCM_bp = 0                                 ; Multi-processor Communication Mode bit position
+USART_ODME_bp = 3                                 ; Open Drain Mode Enable bit position
+USART_RXEN_bp = 7                                 ; Reciever enable bit position
+USART_RXMODE0_bp = 1                              ; Receiver Mode bit 0 position
+USART_RXMODE1_bp = 2                              ; Receiver Mode bit 1 position
+USART_SFDEN_bp = 4                                ; Start Frame Detection Enable bit position
+USART_TXEN_bp = 6                                 ; Transmitter Enable bit position
+USART_CMODE0_bp = 6                               ; Communication Mode bit 0 position
+USART_CMODE1_bp = 7                               ; Communication Mode bit 1 position
+USART_UCPHA_bp = 1                                ; SPI Master Mode, Clock Phase bit position
+USART_UDORD_bp = 2                                ; SPI Master Mode, Data Order bit position
+USART_CHSIZE0_bp = 0                              ; Character Size bit 0 position
+USART_CHSIZE1_bp = 1                              ; Character Size bit 1 position
+USART_CHSIZE2_bp = 2                              ; Character Size bit 2 position
+USART_PMODE0_bp = 4                               ; Parity Mode bit 0 position
+USART_PMODE1_bp = 5                               ; Parity Mode bit 1 position
+USART_SBMODE_bp = 3                               ; Stop Bit Mode bit position
+USART_ABMBP_bp = 7                                ; Autobaud majority voter bypass bit position
+USART_DBGRUN_bp = 0                               ; Debug Run bit position
+USART_IREI_bp = 0                                 ; IrDA Event Input Enable bit position
+USART_BUFOVF_bp = 6                               ; Buffer Overflow bit position
+USART_DATA8_bp = 0                                ; Receiver Data Register bit position
+USART_FERR_bp = 2                                 ; Frame Error bit position
+USART_PERR_bp = 1                                 ; Parity Error bit position
+USART_RXCIF_bp = 7                                ; Receive Complete Interrupt Flag bit position
+USART_DATA0_bp = 0                                ; RX Data bit 0 position
+USART_DATA1_bp = 1                                ; RX Data bit 1 position
+USART_DATA2_bp = 2                                ; RX Data bit 2 position
+USART_DATA3_bp = 3                                ; RX Data bit 3 position
+USART_DATA4_bp = 4                                ; RX Data bit 4 position
+USART_DATA5_bp = 5                                ; RX Data bit 5 position
+USART_DATA6_bp = 6                                ; RX Data bit 6 position
+USART_DATA7_bp = 7                                ; RX Data bit 7 position
+USART_RXPL0_bp = 0                                ; Receiver Pulse Lenght bit 0 position
+USART_RXPL1_bp = 1                                ; Receiver Pulse Lenght bit 1 position
+USART_RXPL2_bp = 2                                ; Receiver Pulse Lenght bit 2 position
+USART_RXPL3_bp = 3                                ; Receiver Pulse Lenght bit 3 position
+USART_RXPL4_bp = 4                                ; Receiver Pulse Lenght bit 4 position
+USART_RXPL5_bp = 5                                ; Receiver Pulse Lenght bit 5 position
+USART_RXPL6_bp = 6                                ; Receiver Pulse Lenght bit 6 position
+USART_BDF_bp = 1                                  ; Break Detected Flag bit position
+USART_DREIF_bp = 5                                ; Data Register Empty Flag bit position
+USART_ISFIF_bp = 3                                ; Inconsistent Sync Field Interrupt Flag bit position
+USART_RXSIF_bp = 4                                ; Receive Start Interrupt bit position
+USART_TXCIF_bp = 6                                ; Transmit Interrupt Flag bit position
+USART_WFB_bp = 0                                  ; Wait For Break bit position
+USART_TXPL0_bp = 0                                ; Transmit pulse length bit 0 position
+USART_TXPL1_bp = 1                                ; Transmit pulse length bit 1 position
+USART_TXPL2_bp = 2                                ; Transmit pulse length bit 2 position
+USART_TXPL3_bp = 3                                ; Transmit pulse length bit 3 position
+USART_TXPL4_bp = 4                                ; Transmit pulse length bit 4 position
+USART_TXPL5_bp = 5                                ; Transmit pulse length bit 5 position
+USART_TXPL6_bp = 6                                ; Transmit pulse length bit 6 position
+USART_TXPL7_bp = 7                                ; Transmit pulse length bit 7 position
+VPORT_INT0_bp = 0                                 ; Pin Interrupt bit 0 position
+VPORT_INT1_bp = 1                                 ; Pin Interrupt bit 1 position
+VPORT_INT2_bp = 2                                 ; Pin Interrupt bit 2 position
+VPORT_INT3_bp = 3                                 ; Pin Interrupt bit 3 position
+VPORT_INT4_bp = 4                                 ; Pin Interrupt bit 4 position
+VPORT_INT5_bp = 5                                 ; Pin Interrupt bit 5 position
+VPORT_INT6_bp = 6                                 ; Pin Interrupt bit 6 position
+VPORT_INT7_bp = 7                                 ; Pin Interrupt bit 7 position
+VREF_ADC0REFSEL0_bp = 4                           ; ADC0 reference select bit 0 position
+VREF_ADC0REFSEL1_bp = 5                           ; ADC0 reference select bit 1 position
+VREF_ADC0REFSEL2_bp = 6                           ; ADC0 reference select bit 2 position
+VREF_DAC0REFSEL0_bp = 0                           ; DAC0/AC0 reference select bit 0 position
+VREF_DAC0REFSEL1_bp = 1                           ; DAC0/AC0 reference select bit 1 position
+VREF_DAC0REFSEL2_bp = 2                           ; DAC0/AC0 reference select bit 2 position
+VREF_ADC0REFEN_bp = 1                             ; ADC0 reference enable bit position
+VREF_DAC0REFEN_bp = 0                             ; DAC0/AC0 reference enable bit position
+WDT_PERIOD0_bp = 0                                ; Period bit 0 position
+WDT_PERIOD1_bp = 1                                ; Period bit 1 position
+WDT_PERIOD2_bp = 2                                ; Period bit 2 position
+WDT_PERIOD3_bp = 3                                ; Period bit 3 position
+WDT_WINDOW0_bp = 4                                ; Window bit 0 position
+WDT_WINDOW1_bp = 5                                ; Window bit 1 position
+WDT_WINDOW2_bp = 6                                ; Window bit 2 position
+WDT_WINDOW3_bp = 7                                ; Window bit 3 position
+WDT_LOCK_bp = 7                                   ; Lock enable bit position
+WDT_SYNCBUSY_bp = 0                               ; Syncronization busy bit position
+
+[DEF]
+XL	= r26                                          ; X pointer low
+XH	= r27                                          ; X pointer high
+YL	= r28                                          ; Y pointer low
+YH	= r29                                          ; Y pointer high
+ZL	= r30                                          ; Z pointer low
+ZH	= r31                                          ; Z pointer high
+
+[INTLIST]
+Count=30
+INTname1=NMI,$02,CRCSCAN_CTRLA.1,CRCSCAN_STATUS.1 ;NMI - Non-Maskable Interrupt from CRC
+INTname2=VLM,$04,BOD_INTCTRL.0,BOD_INTFLAGS.0 ;VLM - Voltage Level Monitor
+INTname3=PORTA_INT,$06,#PORTA_INTCTRL.0,#PORTA_INTFLAGS.0 ;PORTA - Port A
+INTname4=PORTB_INT,$08,#PORTB_INTCTRL.0,#PORTB_INTFLAGS.0 ;PORTB - Port B
+INTname5=PORTC_INT,$0A,#PORTC_INTCTRL.0,#PORTC_INTFLAGS.0 ;PORTC - Port C
+INTname6=RTC_OVF,$0C,RTC_INTCTRL.0,RTC_INTFLAGS.0 ;RTC - Real Time Counter
+INTname7=PIT_OVF,$0E,RTC_PITINTCTRL.0,RTC_PIT_INTFLAGS.0 ;PIT - Periodic Interrupt Timer (in RTC peripheral)
+INTname8=TCA0_LUNF@TCA0_OVF,$10,#TCA0_INTCTRL.0,#TCA0_INTFLAGS.0
+INTname9=TCA0_HUNF,$12,TCA0_INTCTRL.1,TCA0_INTFLAGS.1
+INTname10=TCA0_CMP0@TCA0_LCMP0,$14,#TCA0_INTCTRL.4,#TCA0_INTFLAGS.4
+INTname11=TCA0_CMP1@TCA0_LCMP1,$16,#TCA0_INTCTRL.5,#TCA0_INTFLAGS.5
+INTname12=TCA0_CMP2@TCA0_LCMP2,$18,#TCA0_INTCTRL.6,#TCA0_INTFLAGS.6
+INTname13=TCB0_INT,$1A,TCB0_INTCTRL.0,TCB0_INTFLAGS.0
+INTname14=RESERVED1,$1C,#,
+INTname15=RESERVED2,$1E,#,
+INTname16=RESERVED3,$20,#,
+INTname17=AC0_COMP0,$22,AC0_INTCTRL.0,AC0_STATUS.0 ;AC0 Analog Comparator
+INTname18=RESERVED4,$24,#,
+INTname19=RESERVED5,$26,#,
+INTname20=ADC0_RDY,$28,ADC0_INTCTRL.0,ADC0_INTFLAGS.0 ;ADC0 Analog-to-Digital Converter RESRDY
+INTname21=ADC0_WCOMP,$2A,ADC0_INTCTRL.1,ADC0_INTFLAGS.1 ;ADC0 Analog-to-Digital Converter WCOMP
+INTname22=RESERVED6,$2C,#,
+INTname23=RESERVED7,$2E,#,
+INTname24=TWI_SLAVE@TWI0_SLAVE,$30,#TWI0_SCTRLA.7,#TWI0_SSTATUS.7 ;TWI0 - Two Wire Interface / I2C SLAVE DIEN/DIF
+INTname25=TWI_MASTER,$32,#TWI0_SCTRLA.6,#TWI0_SSTATUS.6 ;TWI0 - Two Wire Interface / I2C MASTER APIEN/APIF
+INTname26=SPI_INT,$34,#SPI0_INTCTRL.0,#SPI0_INTFLAGS.0 ;SPI0 - Serial Peripheral Interface
+INTname27=USART0_RXC@URXC,$36,USART0_CTRLA.7,USART0_STATUS.7 ;USART0 - Universal Asynchronous Receiver-Transmitter RXC
+INTname28=USART0_DRE@UDRE,$38,USART0_CTRLA.5,USART0_STATUS.5 ;USART0 - Universal Asynchronous Receiver-Transmitter DRE
+INTname29=USART0_TXC,$3A,USART0_CTRLA.6,USART0_STATUS.6 ;USART0 - Universal Asynchronous Receiver-Transmitter TXC
+INTname30=NVM_EE,$3C,NVMCTRL_INTCTRL.0,NVMCTRL_INTSTATUS.0 ;NVM - Non Volatile Memory
+
+
+[STARTLIST]
+start1=ADC0
+start2=AC0
+start3=TCA0
+start4=TCB0
+
+[STATEMENT1]
+NAME=$Crystal
+CODE=CONST _XTAL=%1
+
+[STATEMENT2]
+NAME=$version
+CODE=CONST _VERSION_MAJOR=%1 : CONST _VERSION_MINOR=%2 : CONST _VERSION_BUILD=%3
+
+[STATEMENT3]
+NAME=$Resource
+CODE=Dim Language as Byte
+
+[STATEMENT4]
+NAME=$Regfile
+CODE=CONST _XMEGA=0 : CONST _XTINY=1
+
+[STATEMENT5]
+NAME=$SIM
+CODE=CONST _SIM = 1
+
+;configuration
+[CONFIG-1WIRE]
+SECTION=1WIRE
+OPTIONCOUNT=5
+OPTION1=1WIRE
+OPTION1VALUE=#PORT
+OPTION2=EXTENDED
+OPTION2VALUE=[0,1,2]
+OPTION3=DRIVE
+OPTION3VALUE=#PORT
+OPTION4=DPU
+OPTION4VALUE=#PORT
+OPTION5=SPU
+OPTION5VALUE=#PORT
+
+
+
+[CONFIG-AC0]
+SECTION=AC\AC0
+OPTIONCOUNT=10
+OPTION1=AC0
+OPTION1VALUE=[OFF,ON]
+OPTION1DATA=[AC0_CTRLA,,11111110,0,1]
+OPTION2=RUNMODE
+OPTION2VALUE=[DISABLED,ENABLED]
+OPTION2DATA=[AC0_CTRLA,,01111111,0,1]
+OPTION3=OUTPUT
+OPTION3VALUE=[DISABLED,ENABLED]
+OPTION3DATA=[AC0_CTRLA,,10111111,0,1]
+OPTION4=TRIGGER
+OPTION4VALUE=[BOTH,FALLING,RISING]
+OPTION4DATA=[AC0_CTRLA,,11001111,0,2,3]
+OPTION5=HYSMODE
+OPTION5VALUE=[OFF,10,25,50]
+OPTION5DATA=[AC0_CTRLA,,11111001,0,1,2,3]
+OPTION6=MUX_INVERT
+OPTION6VALUE=[DISABLED,ENABLED]
+OPTION6DATA=[AC0_MUXCTRLA,,01111111,0,1]
+OPTION7=MUX_POS
+OPTION7VALUE=[AINP0,AINP1]
+OPTION7DATA=[AC0_MUXCTRLA,,11110111,0,1]
+OPTION8=MUX_NEG
+OPTION8VALUE=[AINN0,AIIN1,VREF]
+OPTION8DATA=[AC0_MUXCTRLA,,11111100,0,1,2]
+OPTION9=INT
+OPTION9VALUE=[DISABLED,ENABLED]
+OPTION9DATA=[AC0_INTCTRL,,11111110,0,1]
+OPTION10=REGMODE
+OPTION10VALUE=[PRESERVE,OVERWRITE]
+
+
+
+
+[CONFIG-ADC0]
+SECTION=ADC0
+OPTIONCOUNT=18
+OPTION1=ADC0
+OPTION1VALUE=[SINGLE,FREE]
+OPTION1DATA=[ADC0_CTRLA,,11111101,0,1]
+OPTION2=RUNMODE
+OPTION2VALUE=[DISABLED,ENABLED]
+OPTION2DATA=[ADC0_CTRLA,,01111111,0,1]
+OPTION3=RESOLUTION
+OPTION3VALUE=[10BIT,8BIT]
+OPTION3DATA=[ADC0_CTRLA,,11111011,0,1]
+OPTION4=ADC
+OPTION4VALUE=[DISABLED,ENABLED]
+OPTION4DATA=[ADC0_CTRLA,,11111110,0,1]
+OPTION5=SAMPLE_ACCU
+OPTION5VALUE=[0,2,4,8,16,32,64]
+OPTION5DATA=[ADC0_CTRLB,,00000000,0,1,2,3,4,5,6]
+OPTION6=SAMPLE_CAP
+OPTION6VALUE=[BELOW_1V,ABOVE_1V]
+OPTION6DATA=[ADC0_CTRLC,,10111111,0,1]
+OPTION7=REFERENCE
+OPTION7VALUE=[INTERNAL,VDD,VREF]
+OPTION7DATA=[ADC0_CTRLC,,11001111,0,1,2]
+OPTION8=PRESCALER
+OPTION8VALUE=[2,4,8,16,32,64,128,256]
+OPTION8DATA=[ADC0_CTRLC,,11111000,0,1,2,3,4,5,6,7]
+OPTION9=INIT_DELAY
+OPTION9VALUE=[0,16,32,64,128,256]
+OPTION9DATA=[ADC0_CTRLD,,00011111,0,1,2,3,4,5]
+OPTION10=ASDV
+OPTION10VALUE=[DISABLED,ENABLED]
+OPTION10DATA=[ADC0_CTRLD,,11101111,0,1]
+OPTION11=SAMPLE_DELAY
+OPTION11VALUE=[0-15]
+OPTION11DATA=[ADC0_CTRLD,,11110000,#]
+OPTION12=WINDOW_COMP
+OPTION12VALUE=[NONE,BELOW,ABOVE,INSIDE,OUTSIDE]
+OPTION12DATA=[ADC0_CTRLE,,00000000,0,1,2,3,4]
+OPTION13=SAMPLE_LEN
+OPTION13VALUE=[0-31]
+OPTION13DATA=[ADC0_SAMPCTRL,,00000000,#]
+OPTION14=MUX
+OPTION14VALUE=[AIN0,AIN1,AIN2,AIN3,AIN4,AIN5,AIN6,AIN7,AIN8,AIN9,AIN10,AIN11,DAC0,INTREF,TEMPSENSE,GND,0-15]
+OPTION14DATA=[ADC0_MUXPOS,,00000000,0,1,2,3,4,5,6,7,8,9,$A,$B,$1C,$1D,$1E,$1F,#]
+OPTION15=ADC0_RDY_INT
+OPTION15VALUE=[DISABLED,ENABLED]
+OPTION15DATA=[ADC0_INTCTRL,,11111110,0,1]
+OPTION16=ADC0_WCOMP_INT
+OPTION16VALUE=[DISABLED,ENABLED]
+OPTION16DATA=[ADC0_INTCTRL,,11111101,0,1]
+OPTION17=DUTYCYCLE
+OPTION17VALUE=[50,25]
+OPTION17DATA=[ADC0_CALIB,,11111110,0,1]
+OPTION18=REGMODE
+OPTION18VALUE=[PRESERVE,OVERWRITE]
+
+
+
+[CONFIG-ATEMU]
+SECTION=ATEMU
+OPTIONCOUNT=4
+OPTION1=ATEMU
+OPTION1VALUE=[PORTA_INT,PORTB_INT,PORTC_INT]
+OPTION2=DATA
+OPTION2VALUE=#PIN
+OPTION3=CLOCK
+OPTION3VALUE=#PIN
+OPTION4=INIT
+OPTION4VALUE=[&HAB83]
+
+[CONFIG-BASE]
+SECTION=BASE
+OPTIONCOUNT=1
+OPTION1=BASE
+OPTION1VALUE=[0,1]
+OPTION1CODE=CONST _BASE=%1
+
+
+[CONFIG-BCCARD]
+SECTION=BCCARD
+OPTIONCOUNT=3
+OPTION1=BCCARD
+OPTION1VALUE=#PORTS
+OPTION1CODE=DIM _BC_PCB as byte,Sw1 As Byte,Sw2 As Byte
+OPTION2=IO
+OPTION2VALUE=[0,1,2,3,4,5,6,7]
+OPTION3=RESET
+OPTION3VALUE=[0,1,2,3,4,5,6,7]
+
+[CONFIG-CLOCK]
+SECTION=CLOCK
+OPTIONCOUNT=4
+OPTION1=CLOCK
+OPTION1VALUE=[SOFT,USER]
+OPTION1CODE=Dim _sec as byte, _min as byte, _hour as byte, _day as byte, _month as byte, _year as byte,Date$ As String * 8 , Time$ As String * 8
+OPTION2=GOSUB
+OPTION2VALUE=[SECTIC]
+OPTION3=RUNMODE
+OPTION3VALUE=[ENABLED,DISABLED]
+OPTION4=RTC
+OPTION4VALUE=[32KHZ_32KHZ_INTOSC,1KHZ_INT32KHZ_ULP,32KHZ_32KHZ_CRYSTOSC,EXT_OSC_TOSC1]
+
+
+
+[CONFIG-COM1]
+SECTION=COMMUNICATION\COM1
+OPTIONCOUNT=9
+OPTION1=COM1
+OPTION1VALUE=[75,150,300,600,1200,2400,4800,9600,19200,38400,57600,115200,250000,500000,0-1000000]
+OPTION2=MODE
+OPTION2VALUE=[0,1,ASYNCHRONEOUS,SYNCHRONEOUS,IRCOM,SPI]
+OPTION3=PARITY
+OPTION3VALUE=[DISABLED,NONE,EVEN,ODD]
+OPTION4=STOPBITS
+OPTION4VALUE=[1,2]
+OPTION5=DATABITS
+OPTION5VALUE=[5,6,7,8,9]
+OPTION6=BAUD_OFFSET
+OPTION6VALUE=[NONE,OSC16_3V3,OSC16_5V,OSC20_3V3,OSC20_5V]
+OPTION7=TX_RX_XC_XD_PIN
+OPTION7VALUE=[DEF_PB2_PB3_PB1_PB0,ALT1_PA1_PA2_PA3_PA4]
+OPTION7DATA=[PORTMUX_CTRLB,0,0,1]
+OPTION8=TX
+OPTION8VALUE=[ENABLED,DISABLED]
+OPTION9=RX
+OPTION9VALUE=[ENABLED,DISABLED]
+
+
+[CONFIG-DAC0]
+SECTION=DAC\DAC0
+OPTIONCOUNT=3
+OPTION1=DAC0
+OPTION1VALUE=[ENABLED,DISABLED]
+OPTION2=RUNMODE
+OPTION2VALUE=[ENABLED,DISABLED]
+OPTION3=OUT_ENABLE
+OPTION3VALUE=[ENABLED,DISABLED]
+
+
+[CONFIG-DATE]
+SECTION=DATE
+OPTIONCOUNT=2
+OPTION1=DATE
+OPTION1VALUE=[MDY,YMD,DMY]
+OPTION2=SEPARATOR
+OPTION2VALUE=[SLASH,MINUS,DOT]
+
+
+[CONFIG-DCF77]
+SECTION=DCF77
+OPTIONCOUNT=13
+OPTION1=DCF77
+OPTION1VALUE=#PIN
+OPTION1CODE=DIM Dcf_timercount AS BYTE,Dcf_sec AS BYTE,Dcf_min AS BYTE,Dcf_hour AS BYTE,Dcf_day AS BYTE,Dcf_month AS BYTE,Dcf_year AS BYTE,Dcf_weekday AS BYTE,Dcf_flags AS BYTE,Dcf_parity AS BYTE,Dcf_bits AS BYTE,Dcf_status AS BYTE,_weekday AS BYTE,Clock_secpart AS BYTE : Config Clock = User
+OPTION2=TIMER
+OPTION2VALUE=[TCA0,TCB0,TCD0]
+OPTION3=INVERTED
+OPTION3VALUE=[0,1]
+OPTION4=CHECK
+OPTION4VALUE=[0,1,2]
+OPTION5=UPDATE
+OPTION5VALUE=[0,1,2]
+OPTION6=UPDATETIME
+OPTION6VALUE=[0-59]
+OPTION7=TIMER1SEC
+OPTION7VALUE=[0,1]
+OPTION8=SWITCHPOWER
+OPTION8VALUE=[0,1]
+OPTION9=POWERPIN
+OPTION9VALUE=#PIN
+OPTION10=POWERLEVEL
+OPTION10VALUE=[0,1]
+OPTION11=SECONDTICKS
+OPTION11VALUE=[0-59]
+OPTION12=DEBUG
+OPTION12VALUE=[0,1]
+OPTION12CODE=DIM BDCF_IMPULS AS BYTE, BDCF_PAUSE AS BYTE
+OPTION13=GOSUB
+OPTION13VALUE=SECTIC
+
+
+[CONFIG-DEBOUNCE]
+SECTION=DEBOUNCE
+OPTIONCOUNT=1
+OPTION1=DEBOUNCE
+OPTION1VALUE=[1-65535]
+
+[CONFIG-DMXSLAVE]
+SECTION=DMXSLAVE
+OPTIONCOUNT=4
+OPTION1=DMXSLAVE
+OPTION1VALUE=[COM1]
+OPTION1CODE=Dim _dmxcount As Word,_dmx_address As Word,_dmx_stored_counter As Word,_dmx_channels_toget As Word,_dmx_sync As Byte,_dmx_received(%2) As Byte:Const _dmx_channels=%2
+OPTION2=CHANNELS
+OPTION2VALUE=[1-512]
+OPTION3=DMXSTART
+OPTION3VALUE=[1-512]
+OPTION4=STORE
+OPTION4VALUE=[1-512]
+
+[CONFIG-DP]
+SECTION=DP
+OPTIONCOUNT=1
+OPTION1=DP
+OPTION1VALUE=[DOT,COMMA]
+
+
+
+[CONFIG-EVENT_SYSTEM]
+SECTION=EVENT_SYSTEM
+OPTIONCOUNT=19
+OPTION1=EVENT_SYSTEM
+OPTION1VALUE=DUMMY
+OPTION2=CH0_ASYNC
+OPTION2VALUE=[OFF,CCL_LUT0,CCL_LUT1,AC0_OUT,TCD0_CMPBCLR,TCD0_CMPASET,TCD0_CMPBSET,TCD0_EVENT,RTC_OVF,RTC_CMP,PA0,PA1,PA2,PA3,PA4,PA5,PA6,PA7,UPDI,AC1_OUT,AC2_OUT]
+OPTION2DATA=[EVSYS_ASYNCCH0,,00000000,$00,$01,$02,$03,$04,$05,$06,$07,$08,$09,$0A,$0B,$0C,$0D,$0E,$0F,$10,$11,$12,$13,$14]
+OPTION3=CH1_ASYNC
+OPTION3VALUE=[OFF,CCL_LUT0,CCL_LUT1,AC0_OUT,TCD0_CMPBCLR,TCD0_CMPASET,TCD0_CMPBSET,TCD0_EVENT,RTC_OVF,RTC_CMP,PB0,PB1,PB2,PB3,PB4,PB5,PB6,PB7,AC1_OUT,AC2_OUT]
+OPTION3DATA=[EVSYS_ASYNCCH1,,00000000,$00,$01,$02,$03,$04,$05,$06,$07,$08,$09,$0A,$0B,$0C,$0D,$0E,$0F,$10,$11,$12,$13]
+OPTION4=USR0_ASYNC
+OPTION4VALUE=[OFF,TCB0_SYNCCH0,TCB0_ASYNCCH0,TCB0_ASYNCCH1]
+OPTION4DATA=[EVSYS_ASYNCUSER0,,00000000,$00,$01,$03,$04]
+OPTION5=USR1_ASYNC
+OPTION5VALUE=[OFF,ADC0_SYNCCH0,ADC0_ASYNCCH0,ADC0_ASYNCCH1]
+OPTION5DATA=[EVSYS_ASYNCUSER1,,00000000,$00,$01,$03,$04]
+OPTION6=USR2_ASYNC
+OPTION6VALUE=[OFF,CCL_LUT0EV0_SYNCCH0,CCL_LUT0EV0_ASYNCCH0,CCL_LUT0EV0_ASYNCCH1]
+OPTION6DATA=[EVSYS_ASYNCUSER2,,00000000,$00,$01,$03,$04]
+OPTION7=USR3_ASYNC
+OPTION7VALUE=[OFF,CCL_LUT1EV0_SYNCCH0,CCL_LUT1EV0_ASYNCCH0,CCL_LUT1EV0_ASYNCCH1]
+OPTION7DATA=[EVSYS_ASYNCUSER3,,00000000,$00,$01,$03,$04]
+OPTION8=USR4_ASYNC
+OPTION8VALUE=[OFF,CCL_LUT0EV1_SYNCCH0,CCL_LUT0EV1_ASYNCCH0,CCL_LUT0EV1_ASYNCCH1]
+OPTION8DATA=[EVSYS_ASYNCUSER4,,00000000,$00,$01,$03,$04]
+OPTION9=USR5_ASYNC
+OPTION9VALUE=[OFF,CCL_LUT1EV1_SYNCCH0,CCL_LUT1EV1_ASYNCCH0,CCL_LUT1EV1_ASYNCCH1]
+OPTION9DATA=[EVSYS_ASYNCUSER5,,00000000,$00,$01,$03,$04]
+OPTION10=USR6_ASYNC
+OPTION10VALUE=[OFF,TCD0_EV0_SYNCCH0,TCD0_EV0_ASYNCCH0,TCD0_EV0_ASYNCCH1]
+OPTION10DATA=[EVSYS_ASYNCUSER6,,00000000,$00,$01,$03,$04]
+OPTION11=USR7_ASYNC
+OPTION11VALUE=[OFF,TCD0_EV1_SYNCCH0,TCD0_EV1_ASYNCCH0,TCD0_EV1_ASYNCCH1]
+OPTION11DATA=[EVSYS_ASYNCUSER7,,00000000,$00,$01,$03,$04]
+OPTION12=USR8_ASYNC
+OPTION12VALUE=[OFF,EVENT_OUT0_SYNCCH0,EVENT_OUT0_ASYNCCH0,EVENT_OUT0_ASYNCCH1]
+OPTION12DATA=[EVSYS_ASYNCUSER8,,00000000,$00,$01,$03,$04]
+OPTION13=USR9_ASYNC
+OPTION13VALUE=[OFF,EVENT_OUT1_SYNCCH0,EVENT_OUT1_ASYNCCH0,EVENT_OUT1_ASYNCCH1]
+OPTION13DATA=[EVSYS_ASYNCUSER9,,00000000,$00,$01,$03,$04]
+OPTION14=USR10_ASYNC
+OPTION14VALUE=[OFF,EVENT_OUT2_SYNCCH0,EVENT_OUT2_ASYNCCH0,EVENT_OUT2_ASYNCCH1]
+OPTION14DATA=[EVSYS_ASYNCUSER10,,00000000,$00,$01,$03,$04]
+OPTION15=USR11_ASYNC
+OPTION15VALUE=[OFF,TCB1_SYNCCH0,TCB1_ASYNCCH0,TCB1_ASYNCCH1]
+OPTION15DATA=[EVSYS_ASYNCUSER11,,00000000,$00,$01,$03,$04]
+OPTION16=USR12_ASYNC
+OPTION16VALUE=[OFF,ADC1_SYNCCH0,ADC1_ASYNCCH0,ADC1_ASYNCCH1]
+OPTION16DATA=[EVSYS_ASYNCUSER12,,00000000,$00,$01,$03,$04]
+OPTION17=CH0_SYNC
+OPTION17VALUE=[OFF,TCB0,TCA0_OVF_LUNF,TCA0_HUNF,TCA0_CMP0,TCA0_CMP1,TCA0_CMP2,PC0,PC1,PC2,PC3,PC4,PC5,PA0,PA1,PA2,PA3,PA4,PA5,PA6,PA7,TCB1]
+OPTION17DATA=[EVSYS_SYNCCH0,,00000000,$00,$01,$02,$03,$04,$05,$06,$07,$08,$09,$0A,$0B,$0C,$0D,$0E,$0F,$10,$11,$12,$13,$14,$15]
+OPTION18=USR0_SYNC
+OPTION18VALUE=[OFF,TCA0_SYNCCH0]
+OPTION18DATA=[EVSYS_SYNCUSER0,,00000000,$00,$01]
+OPTION19=USR1_SYNC
+OPTION19VALUE=[OFF,USART0_SYNCCH0]
+OPTION19DATA=[EVSYS_SYNCUSER1,,00000000,$00,$01]
+
+
+
+
+
+[CONFIG-EXTENDED]
+SECTION=EXTENDED_PORT
+OPTIONCOUNT=1
+OPTION1=EXTENDED_PORT
+OPTION1VALUE=[WARNING,ERROR]
+
+
+[CONFIG-FT800]
+SECTION=FT800
+OPTIONCOUNT=10
+OPTION1=FT800
+OPTION1VALUE=[SPI0]
+OPTION2=FTCS
+OPTION2VALUE=#PORT
+OPTION3=FTPD
+OPTION3VALUE=#PORT
+OPTION4=FTSAVE
+OPTION4VALUE=[0,1]
+OPTION4CODE=CONST _FTSAVE=%FTSAVE
+OPTION5=FTDEBUG
+OPTION5VALUE=[0,1]
+OPTION5CODE=CONST _FTDEBUG=%FTDEBUG
+OPTION6=FTCHIP
+OPTION6VALUE=[800,801,810,811,812]
+OPTION6CODE=CONST FT_CHIP=%FTCHIP
+OPTION7=PLATFORM
+OPTION7VALUE=[EVE,GAMEDUINO2]
+OPTION7CODE=CONST FT_PLATFORM=%PLATFORM
+OPTION8=LCD_SCREEN
+OPTION8VALUE=[480272,320240,800480,800600]
+OPTION8CODE=CONST FT_LCDSCREEN=%LCD_SCREEN
+OPTION9=LCD_ROTATE
+OPTION9VALUE=[0,1]
+OPTION9CODE=CONST FT_ROTATEDISPLAY=[0,1]
+OPTION10=LCD_CALIBRATION
+OPTION10VALUE=[0,1]
+OPTION10CODE=CONST FT_LCDCAL=[0,1]
+
+
+[CONFIG-GRAPHLCD]
+SECTION=GRAPHLCD
+OPTIONCOUNT=28
+OPTION1=GRAPHLCD
+OPTION1VALUE=[240X64,128X128,128X64,160X48,240X128,192X64,SED180X32,128X64sed,120X64sed,Color,128X64EADOGM,122X32SED,320X240SED1330,192X64SED,320X240FSA506,96x64SSD1325,128x128SED,180x64SED,CUSTOM]
+OPTION2=DATAPORT
+OPTION2VALUE=#PORTS
+OPTION3=CONTROLPORT
+OPTION3VALUE=#PORTS
+OPTION4=CE
+OPTION4VALUE=[0-7]
+OPTION5=CD
+OPTION5VALUE=[0-7,#PORT]
+OPTION6=WR
+OPTION6VALUE=[0-7,#PORT]
+OPTION7=RD
+OPTION7VALUE=[0-7,#PORT]
+OPTION8=FS
+OPTION8VALUE=[0-7]
+OPTION9=RESET
+OPTION9VALUE=[0-7]
+OPTION10=MODE
+OPTION10VALUE=[6,8]
+OPTION11=CS1
+OPTION11ALIAS=CS
+OPTION11VALUE=[0-7,#PORT]
+OPTION12=A0
+OPTION12VALUE=[0-7,#PORT]
+OPTION13=SI
+OPTION13VALUE=[0-7,#PORT]
+OPTION14=SCLK
+OPTION14VALUE=[0-7,#PORT]
+OPTION15=CE2
+OPTION15VALUE=[0-7]
+OPTION16=ENABLE
+OPTION16VALUE=[0-7]
+OPTION17=C86
+OPTION17VALUE=#PORT
+OPTION18=PM
+OPTION18VALUE=#PORT
+OPTION19=RST
+OPTION19VALUE=#PORT
+OPTION20=COLS
+OPTION20VALUE=[1-4096]
+OPTION21=ROWS
+OPTION21VALUE=[1-4096]
+OPTION22=LCDNAME
+OPTION22VALUE=["SSD1306","EADOGXL240-7"]
+OPTION23=VCC
+OPTION23VALUE=#PORT
+OPTION24=RS
+OPTION24VALUE=[0-7]
+OPTION25=SCL
+OPTION25VALUE=[0-7]
+OPTION26=SDA
+OPTION26VALUE=[0-7]
+OPTION27=CE3
+OPTION27VALUE=[0-7]
+OPTION28=CE4
+OPTION28VALUE=[0-7]
+
+[CONFIG-HITAG]
+SECTION=HITAG
+OPTIONCOUNT=7
+OPTION1=HITAG
+OPTION1VALUE=64
+OPTION2=TYPE
+OPTION2VALUE=[HTRC110,EM4095]
+OPTION3=DOUT
+OPTION3VALUE=#PIN
+OPTION4=DIN
+OPTION4VALUE=#PIN
+OPTION5=CLOCK
+OPTION5VALUE=#PIN
+OPTION6=INT
+OPTION6VALUE=[PORTA_INT,PORTB_INT,PORTC_INT]
+OPTION7=DEMOD
+OPTION7VALUE=#PIN
+
+[CONFIG-I2CBUS]
+SECTION=I2C\I2CBUS
+OPTIONCOUNT=3
+OPTION1=I2CBUS
+OPTION1CODE=DIM I2CBUS AS BYTE
+OPTION1VALUE=[0-15]
+OPTION2=SCL
+OPTION2VALUE=#PORT
+OPTION3=SDA
+OPTION3VALUE=#PORT
+
+
+[CONFIG-I2CDELAY]
+SECTION=I2C\I2CDELAY
+OPTIONCOUNT=1
+OPTION1=I2CDELAY
+OPTION1VALUE=[1-255]
+
+
+[CONFIG-SCL]
+SECTION=I2C\SCL
+OPTIONCOUNT=1
+OPTION1=SCL
+OPTION1VALUE=#PORT
+
+[CONFIG-SDA]
+SECTION=I2C\SDA
+OPTIONCOUNT=1
+OPTION1=SDA
+OPTION1VALUE=#PORT
+
+
+
+[CONFIG-I2CSLAVE]
+SECTION=I2C\I2CSLAVE
+OPTIONCOUNT=3
+OPTION1=I2CSLAVE
+OPTION1VALUE=[0-255]
+OPTION2=INT
+OPTION2VALUE=[INT0,INT1]
+OPTION3=TIMER
+OPTION3VALUE=[0-2]
+
+[CONFIG-INPUT1]
+SECTION=COMMUNICATION\INPUT1
+OPTIONCOUNT=2
+OPTION1=INPUT1
+OPTION1ALIAS=INPUT
+OPTION1VALUE=[CR,LF,CRLF,LFCR]
+OPTION2=ECHO
+OPTION2VALUE=[CR,LF,CRLF,LFCR]
+
+[CONFIG-INTVECTORSELECTION]
+SECTION=INTERRUPTS\INTVECTORSELECTION
+OPTIONCOUNT=1
+OPTION1=INTVECTORSELECTION
+OPTION1VALUE=[BOOT,NORMAL]
+
+
+
+[CONFIG-KBD]
+SECTION=KBD
+OPTIONCOUNT=4
+OPTION1=KBD
+OPTION1VALUE=#PORTS
+OPTION2=DEBOUNCE
+OPTION2VALUE=[1-255]
+OPTION3=DELAY
+OPTION3VALUE=[1-255]
+OPTION4=COLS
+OPTION4VALUE=[2,3,4]
+
+[CONFIG-KEYBOARD]
+SECTION=KEYBOARD
+OPTIONCOUNT=3
+OPTION1=KEYBOARD
+OPTION1VALUE=#PIN
+OPTION2=DATA
+OPTION2VALUE=#PIN
+OPTION3=KEYDATA
+OPTION3VALUE=#LABEL
+
+[CONFIG-LCD]
+SECTION=LCD\LCD
+OPTIONCOUNT=3
+OPTION1=LCD
+OPTION1VALUE=[16x1,16x1a,16x2,16x3,16x4,20x2,20x4,20x4a,20x4VFD,40x2,40x4]
+OPTION2=CHIPSET
+OPTION2VALUE=[KS077,DOGM163V5,DOGM163V3,DOGM162V5,DOGM162V3,ST7032]
+OPTION3=CONTRAST
+OPTION3VALUE=[0-255]
+
+[CONFIG-LCDBUS]
+SECTION=LCD\LCDBUS
+OPTIONCOUNT=1
+OPTION1=LCDBUS
+OPTION1VALUE=[4,8]
+
+[CONFIG-LCDMODE]
+SECTION=LCD\LCDMODE
+OPTIONCOUNT=1
+OPTION1=LCDMODE
+OPTION1VALUE=[PORT,BUS]
+
+[CONFIG-LCDPIN]
+SECTION=LCD\LCDPIN
+OPTIONCOUNT=16
+OPTION1=LCDPIN
+OPTION1VALUE=[PIN]
+OPTION2=DB4
+OPTION2VALUE=#PORT
+OPTION3=DB5
+OPTION3VALUE=#PORT
+OPTION4=DB6
+OPTION4VALUE=#PORT
+OPTION5=DB7
+OPTION5VALUE=#PORT
+OPTION6=E
+OPTION6VALUE=#PORT
+OPTION7=E2
+OPTION7VALUE=#PORT
+OPTION8=RS
+OPTION8VALUE=#PORT
+OPTION9=WR
+OPTION9VALUE=#PORT
+OPTION10=BUSY
+OPTION10VALUE=#PIN
+OPTION11=RESET
+OPTION11VALUE=#PORT
+OPTION12=PORT
+OPTION12VALUE=#PORTS
+OPTION13=EDURATION
+OPTION13VALUE=[0-255]
+OPTION14=EDELAY
+OPTION14VALUE=[0-255]
+OPTION15=RESET
+OPTION15VALUE=#PORT
+OPTION16=MODE
+OPTION16VALUE=[0,1]
+
+[CONFIG-OSC]
+SECTION=OSC
+OPTIONCOUNT=9
+OPTION1=OSC
+OPTION1VALUE=[ENABLED]
+;the main osc is always enabled so this is a kind of dummy option
+OPTION2=RUNMODE
+OPTION2VALUE=[DISABLED,ENABLED]
+OPTION2DATA=[CLKCTRL_OSC20MCTRLA,#,11111101,0,1]
+OPTION3=OSC20M_CAL
+OPTION3VALUE=[0-63]
+OPTION3DATA=[CLKCTRL_OSC20MCALIBA,#%,00000000,#]
+OPTION4=OSC20M_TEMPCAL
+OPTION4VALUE=[0-15]
+OPTION4DATA=[CLKCTRL_OSC20MCALIBB,#%,11110000,#]
+OPTION5=XOSC32
+OPTION5VALUE=[DISABLED,ENABLED]
+OPTION5DATA=[CLKCTRL_XOSC32KCTRLA,#,11111110,0,1]
+OPTION6=XOSC32_RUNMODE
+OPTION6VALUE=[DISABLED,ENABLED]
+OPTION6DATA=[CLKCTRL_XOSC32KCTRLA,#,11111101,0,1]
+OPTION7=XOSC32_SEL_STARTUP
+OPTION7VALUE=[XTAL_1KCLK,XTAL_16KCLK,XTAL_32KCLK,XTAL_64KCLK]
+OPTION7DATA=[CLKCTRL_XOSC32KCTRLA,#,11001111,0,1,2,3]
+OPTION8=XOSC32_EXT_SRC
+OPTION8VALUE=[EXT_XTAL,EXT_CLOCK_TOSC1]
+OPTION8DATA=[CLKCTRL_XOSC32KCTRLA,#,11111011,0,1]
+OPTION9=OSC32_RUNMODE
+OPTION9VALUE=[DISABLED,ENABLED]
+OPTION9DATA=[CLKCTRL_OSC32KCTRLA,#,11111101,0,1]
+
+
+[CONFIG-ports]
+SECTION=PORTS\PORT#
+OPTIONCOUNT=1
+OPTION1=PORT#
+OPTION1VALUE=[INPUT,OUTPUT,0-255]
+
+[CONFIG-POWERMODE]
+SECTION=POWERMODE
+OPTIONCOUNT=1
+OPTION1=POWERMODE
+OPTION1VALUE=[Idle,Standby,PowerDown]
+
+
+[CONFIG-PRINT0]
+SECTION=COMMUNICATION\PRINT0
+OPTIONCOUNT=2
+OPTION1=PRINT0
+OPTION1VALUE=#PORT
+OPTION2=MODE
+OPTION2VALUE=[SET,RESET]
+
+[CONFIG-PRINTBIN]
+SECTION=COMMUNICATION\PRINTBIN
+OPTIONCOUNT=1
+OPTION1=PRINTBIN
+OPTION1VALUE=[NORMAL,EXTENDED]
+
+[CONFIG-INPUTBIN]
+SECTION=COMMUNICATION\INPUTBIN
+OPTIONCOUNT=1
+OPTION1=INPUTBIN
+OPTION1VALUE=[NORMAL,EXTENDED]
+
+
+
+[CONFIG-PRIORITY]
+SECTION=PRIORITY
+OPTIONCOUNT=4
+OPTION1=PRIORITY
+OPTION1VALUE=[STATIC,ROUNDROBIN]
+OPTION2=VECTOR
+OPTION2VALUE=[APPLICATION,BOOT]
+OPTION3=COMPACT
+OPTION3VALUE=[ENABLED,DISABLED]
+OPTION4=HI
+OPTION4VALUE=[NMI,VLM,PORTA_INT,PORTB_INT,PORTC_INT,RTC_OVF,PIT_OVF,TCA0_LUNF,TCA0_HUNF,TCA0_CMP0,TCA0_CMP1,TCA0_CMP2,TCB0_INT,TCD0_OVF,TCD0_TRIG,AC0_COMP0,ADC0_RDY,ADC0_WCOMP,TWI0_SLAVE,TWI0_MASTER,SPI0_INT,USART0_RXC,USART0_DRE,USART0_TXC,NVM_EE]
+
+
+
+[CONFIG-PS2EMU]
+SECTION=PS2EMU
+OPTIONCOUNT=3
+OPTION1=PS2EMU
+OPTION1VALUE=[PORTA_INT,PORTB_INT,PORTC_INT]
+OPTION2=DATA
+OPTION2VALUE=#PIN
+OPTION3=CLOCK
+OPTION3VALUE=#PIN
+
+[CONFIG-RAINBOW]
+SECTION=RAINBOW
+OPTIONCOUNT=26
+OPTION1=RAINBOW
+OPTION1VALUE=[1,2,3,4,5,6,7,8]
+OPTION2=RGB
+OPTION2VALUE=[3,4]
+OPTION3=RB0_LEN
+OPTION3VALUE=[1-65535]
+OPTION3CODE=CONST Rainbow0_Len=%RB0_LEN: CONST Rainbow0_size = Rainbow0_Len * 3 : Dim Rainbow0_(Rainbow0_size) as  byte : Const Rainbow0_adr = varptr(Rainbow0_(_base))
+OPTION4=RB0_PORT
+OPTION4VALUE=#PORTS
+OPTION4CODE=CONST Rainbow0_Port=%RB0_PORT
+OPTION5=RB0_PIN
+OPTION5VALUE=[0,1,2,3,4,5,6,7]
+OPTION5CODE=CONST Rainbow0_Pin=%RB0_PIN
+OPTION6=RB1_LEN
+OPTION6VALUE=[1-65535]
+OPTION6CODE=CONST Rainbow1_Len=%RB1_LEN: CONST Rainbow1_size = Rainbow1_Len * 3 : Dim Rainbow1_(Rainbow1_size) as  byte : Const Rainbow1_adr = varptr(Rainbow1_(_base))
+OPTION7=RB1_PORT
+OPTION7VALUE=#PORTS
+OPTION7CODE=CONST Rainbow1_Port=%RB1_PORT
+OPTION8=RB1_PIN
+OPTION8VALUE=[0,1,2,3,4,5,6,7]
+OPTION8CODE=CONST Rainbow1_Pin=%RB1_PIN
+OPTION9=RB2_LEN
+OPTION9VALUE=[1-65535]
+OPTION9CODE=CONST Rainbow2_Len=%RB2_LEN: CONST Rainbow2_size = Rainbow2_Len * 3 : Dim Rainbow2_(Rainbow2_size) as  byte : Const Rainbow2_adr = varptr(Rainbow2_(_base))
+OPTION10=RB2_PORT
+OPTION10VALUE=#PORTS
+OPTION10CODE=CONST Rainbow2_Port=%RB2_PORT
+OPTION11=RB2_PIN
+OPTION11VALUE=[0,1,2,3,4,5,6,7]
+OPTION11CODE=CONST Rainbow2_Pin=%RB2_PIN
+OPTION12=RB3_LEN
+OPTION12VALUE=[1-65535]
+OPTION12CODE=CONST Rainbow3_Len=%RB3_LEN: CONST Rainbow3_size = Rainbow3_Len * 3 : Dim Rainbow3_(Rainbow3_size) as  byte : Const Rainbow3_adr = varptr(Rainbow3_(_base))
+OPTION13=RB3_PORT
+OPTION13VALUE=#PORTS
+OPTION13CODE=CONST Rainbow3_Port=%RB3_PORT
+OPTION14=RB3_PIN
+OPTION14VALUE=[0,1,2,3,4,5,6,7]
+OPTION14CODE=CONST Rainbow3_Pin=%RB3_PIN
+OPTION15=RB4_LEN
+OPTION15VALUE=[1-65535]
+OPTION15CODE=CONST Rainbow4_Len=%RB4_LEN: CONST Rainbow4_size = Rainbow4_Len * 3 : Dim Rainbow4_(Rainbow4_size) as  byte : Const Rainbow4_adr = varptr(Rainbow4_(_base))
+OPTION16=RB4_PORT
+OPTION16VALUE=#PORTS
+OPTION16CODE=CONST Rainbow4_Port=%RB4_PORT
+OPTION17=RB4_PIN
+OPTION17VALUE=[0,1,2,3,4,5,6,7]
+OPTION17CODE=CONST Rainbow4_Pin=%RB4_PIN
+OPTION18=RB5_LEN
+OPTION18VALUE=[1-65535]
+OPTION18CODE=CONST Rainbow5_Len=%RB5_LEN: CONST Rainbow5_size = Rainbow5_Len * 3 : Dim Rainbow5_(Rainbow5_size) as  byte : Const Rainbow5_adr = varptr(Rainbow5_(_base))
+OPTION19=RB5_PORT
+OPTION19VALUE=#PORTS
+OPTION19CODE=CONST Rainbow5_Port=%RB5_PORT
+OPTION20=RB5_PIN
+OPTION20VALUE=[0,1,2,3,4,5,6,7]
+OPTION20CODE=CONST Rainbow5_Pin=%RB5_PIN
+OPTION21=RB6_LEN
+OPTION21VALUE=[1-65535]
+OPTION21CODE=CONST Rainbow6_Len=%RB6_LEN: CONST Rainbow6_size = Rainbow6_Len * 3 : Dim Rainbow6_(Rainbow6_size) as  byte : Const Rainbow6_adr = varptr(Rainbow6_(_base))
+OPTION22=RB6_PORT
+OPTION22VALUE=#PORTS
+OPTION22CODE=CONST Rainbow6_Port=%RB6_PORT
+OPTION23=RB6_PIN
+OPTION23VALUE=[0,1,2,3,4,5,6,7]
+OPTION23CODE=CONST Rainbow6_Pin=%RB6_PIN
+OPTION24=RB7_LEN
+OPTION24VALUE=[1-65535]
+OPTION24CODE=CONST Rainbow7_Len=%RB7_LEN: CONST Rainbow7_size = Rainbow7_Len * 3 : Dim Rainbow7_(Rainbow7_size) as  byte : Const Rainbow7_adr = varptr(Rainbow7_(_base))
+OPTION25=RB7_PORT
+OPTION25VALUE=#PORTS
+OPTION25CODE=CONST Rainbow7_Port=%RB7_PORT
+OPTION26=RB7_PIN
+OPTION26VALUE=[0,1,2,3,4,5,6,7]
+OPTION26CODE=CONST Rainbow7_Pin=%RB7_PIN
+
+[CONFIG-RC5]
+SECTION=RC5
+OPTIONCOUNT=5
+OPTION1=RC5
+OPTION1VALUE=#PIN
+OPTION2=MODE
+OPTION2VALUE=[NORMAL,BACKGROUND]
+OPTION3PARENT=OPTION2
+OPTION3PARENTVALUE=BACKGROUND
+OPTION3=TIMER
+OPTION3VALUE=[TCB0]
+OPTION3CODE=Dim _rc5_bits As Byte, _rc5_bit_nr As Byte,Rc5 As Word,Rc5_command As Byte At Rc5 Overlay,Rc5_address As Byte At Rc5 + 1 Overlay
+OPTION4=TIMER
+OPTION4PARENT=OPTION2
+OPTION4PARENTVALUE=NORMAL
+OPTION4VALUE=[TCA0,TCB0]
+OPTION5=WAIT
+OPTION5VALUE=[0-65535]
+
+[CONFIG-RC5SEND]
+SECTION=RC5
+OPTIONCOUNT=2
+OPTION1=RC5SEND
+OPTION1VALUE=[TCA0]
+OPTION2=WO
+OPTION2VALUE=[WO0,WO1,WO2]
+
+
+[CONFIG-RND]
+SECTION=RND
+OPTIONCOUNT=1
+OPTION1=RND
+OPTION1VALUE=[16,32]
+
+
+[CONFIG-SERIALIN0]
+SECTION=COMMUNICATION\SERIALIN0
+OPTIONCOUNT=7
+OPTION1=SERIALIN0
+OPTION1ALIAS=SERIALIN
+OPTION1VALUE=[BUFFERED]
+OPTION2=SIZE
+OPTION2VALUE=[2-255]
+OPTION3=BYTEMATCH
+OPTION3VALUE=[ALL,NONE,0-255]
+OPTION4=CTS
+OPTION4VALUE=#PIN
+OPTION5=RTS
+OPTION5VALUE=#PIN
+OPTION6=THRESHOLD_FULL
+OPTION6VALUE=[1-255]
+OPTION7=THRESHOLD_EMPTY
+OPTION7VALUE=[1-255]
+
+[CONFIG-SERIALOUT0]
+SECTION=COMMUNICATION\SERIALOUT0
+OPTIONCOUNT=2
+OPTION1=SERIALOUT0
+OPTION1ALIAS=SERIALOUT
+OPTION1VALUE=[BUFFERED]
+OPTION2=SIZE
+OPTION2VALUE=[1-255]
+
+[CONFIG-SERVOS]
+SECTION=SERVOS
+OPTIONCOUNT=14
+OPTION1=SERVOS
+OPTION1VALUE=[1-255]
+OPTION1CODE=DIM SERVO(%1) AS BYTE
+OPTION2=MODE
+OPTION2VALUE=[SERVO,PWM]
+OPTION3=RELOAD
+OPTION3VALUE=[1-255]
+OPTION4=INTERVAL
+OPTION4VALUE=[1-255]
+OPTION5=PRESCALE
+OPTION5VALUE=[0-65535]
+OPTION6=SERVO1
+OPTION6VALUE=#PORT
+OPTION7=SERVO2
+OPTION7VALUE=#PORT
+OPTION8=SERVO3
+OPTION8VALUE=#PORT
+OPTION9=SERVO4
+OPTION9VALUE=#PORT
+OPTION10=SERVO5
+OPTION10VALUE=#PORT
+OPTION11=SERVO6
+OPTION11VALUE=#PORT
+OPTION12=SERVO7
+OPTION12VALUE=#PORT
+OPTION13=SERVO8
+OPTION13VALUE=#PORT
+OPTION14=TIMER
+OPTION14VALUE=[TCA0,TCB0,TCD0]
+
+[CONFIG-SYSCLOCK]
+SECTION=SYSCLOCK
+OPTIONCOUNT=4
+OPTION1=SYSCLOCK
+OPTION1VALUE=[16_20MHZ,32KHZ_INT,32KHZ_EXT,EXTERNAL]
+OPTION2=CLOCKOUT
+OPTION2VALUE=[ENABLED,DISABLED]
+OPTION3=PRESCALE
+OPTION3VALUE=[1,2,4,6,8,10,12,16,24,32,48,64]
+OPTION4=CLOCKOUT_PIN
+OPTION4VALUE=[OUTPUT]
+
+
+[CONFIG-SUBMODE]
+SECTION=SUBMODE
+OPTIONCOUNT=1
+OPTION1=SUBMODE
+OPTION1VALUE=[NEW,OLD]
+
+[CONFIG-SHIFT]
+SECTION=SHIFTIN
+OPTIONCOUNT=1
+OPTION1=SHIFTIN
+OPTION1VALUE=[COMPATIBLE,NEW]
+
+[CONFIG-SINGLE]
+SECTION=SINGLE
+OPTIONCOUNT=2
+OPTION1=SINGLE
+OPTION1VALUE=[NORMAL,SCIENTIFIC]
+OPTION2=DIGITS
+OPTION2VALUE=[0,1,2,3,4,5,6,7]
+
+
+[CONFIG-SPISOFT]
+SECTION=SPI\SPISOFT
+OPTIONCOUNT=9
+OPTION1=SPISOFT
+OPTION1VALUE=[SOFT]
+OPTION2=DIN
+OPTION2VALUE=#PIN
+OPTION3=DOUT
+OPTION3VALUE=#PORT
+OPTION4=SS
+OPTION4VALUE=[NONE,#PORT]
+OPTION5=CLOCK
+OPTION5VALUE=#PORT
+OPTION6=SPIIN
+OPTION6VALUE=[0-255]
+OPTION7=MODE
+OPTION7VALUE=[0,1,2,3]
+OPTION8=SPEED
+OPTION8VALUE=[1-255]
+OPTION9=SETUP
+OPTION9VALUE=[1-255]
+
+[CONFIG-SPI0]
+SECTION=SPI\SPI0
+OPTIONCOUNT=8
+OPTION1=SPI0
+OPTION1VALUE=[HARD]
+OPTION2=MASTER
+OPTION2VALUE=[YES,NO]
+OPTION3=DATA_ORDER
+OPTION3VALUE=[LSB,MSB]
+OPTION4=MODE
+OPTION4VALUE=[0,1,2,3]
+OPTION5=CLOCKDIV
+OPTION5VALUE=[CLK2,CLK4,CLK8,CLK16,CLK32,CLK64,CLK128]
+OPTION6=SS
+OPTION6VALUE=[NONE,AUTO]
+OPTION7=EXTENDED
+OPTION7VALUE=[0,1]
+OPTION8=SPIPIN
+OPTION8VALUE=[DEF_PA1234,ALT1_PC2103]
+OPTION8DATA=[PORTMUX_CTRLB,2,0,1]
+
+
+
+[CONFIG-TCPIP]
+SECTION=TCPIP
+OPTIONCOUNT=36
+OPTION1=TCPIP
+OPTION1VALUE=[NOINT,PORTA_INT,PORTB_INT,PORTC_INT]
+OPTION1CODE=CONST Sel_control=0:CONST Sel_send=1:CONST Sel_recv=2:CONST Sock_stream=1:CONST Sock_dgram=2:CONST Sock_ipl_raw=3:CONST Sock_macl_raw=4
+OPTION2=MAC
+OPTION2VALUE=#ANY
+OPTION3=IP
+OPTION3VALUE=#ANY
+OPTION4=SUBMASK
+OPTION4VALUE=#ANY
+OPTION5=GATEWAY
+OPTION5VALUE=#ANY
+OPTION6=LOCALPORT
+OPTION6VALUE=[1-65535]
+OPTION7=NOINIT
+OPTION7VALUE=[0,1]
+OPTION8=TIMEOUT
+OPTION8CODE=DIM _TCP_TIMEOUT AS WORD : CONST C_TCPTIMEOUT=%TIMEOUT
+OPTION8VALUE=#ANY
+OPTION9=CHIP
+OPTION9VALUE=[W3100A,W5100,W5200,W5300,W5500]
+OPTION9CODE=const _TCPINC = _INCPATH + "%CHIP" + ".INC" : $INCLUDE _TCPINC
+OPTION10=TX
+OPTION10VALUE=[0-255]
+OPTION10PARENT=OPTION9
+OPTION10PARENTVALUE=W3100A|W5100
+OPTION11=RX
+OPTION11VALUE=[0-255]
+OPTION11PARENT=OPTION9
+OPTION11PARENTVALUE=W3100A|W5100
+OPTION12=TWI
+OPTION12VALUE=[0-255]
+OPTION12PARENT=OPTION9
+OPTION12PARENTVALUE=W3100A
+OPTION13=CLOCK
+OPTION13VALUE=[100000,400000]
+OPTION13PARENT=OPTION9
+OPTION13PARENTVALUE=W3100A
+OPTION14=BASEADDRESS
+OPTION14VALUE=#ANY
+OPTION14PARENT=OPTION9
+OPTION14PARENTVALUE=W3100A|W5100|W5300
+OPTION15=SPI
+OPTION15VALUE=[0,1,SPI0]
+OPTION15PARENT=OPTION9
+OPTION15PARENTVALUE=W5100|W5200|W5500
+OPTION16=NOUDP
+OPTION16VALUE=[0,1]
+OPTION16CODE=CONST _TCP_INT=%NOUDP
+OPTION16PARENT=OPTION9
+OPTION16PARENTVALUE=W5100|W5200|W5300|W5500
+OPTION17=INT
+OPTION17VALUE=[0,1]
+OPTION17PARENT=OPTION9
+OPTION17PARENTVALUE=W5100|W5200|W5300
+OPTION18=ALIGN
+OPTION18VALUE=[0,1,2]
+OPTION18PARENT=OPTION9
+OPTION18PARENTVALUE=W5300
+OPTION19=SOCKMEM
+OPTION19VALUE=#WORD
+OPTION19PARENT=OPTION9
+OPTION19PARENTVALUE=W5300
+OPTION20=CS
+OPTION20VALUE=#PORT
+OPTION20PARENT=OPTION9
+OPTION20PARENTVALUE=W5100|W5200|W5500
+OPTION21=TX1
+OPTION21VALUE=[0,1,2,4,8,15]
+OPTION21PARENT=OPTION9
+OPTION21PARENTVALUE=W5200|W5300|W5500
+OPTION22=TX2
+OPTION22VALUE=[0,1,2,4,8,15]
+OPTION22PARENT=OPTION9
+OPTION22PARENTVALUE=W5200|W5300|W5500
+OPTION23=TX3
+OPTION23VALUE=[0,1,2,4,8,15]
+OPTION23PARENT=OPTION9
+OPTION23PARENTVALUE=W5200|W5300|W5500
+OPTION24=TX4
+OPTION24VALUE=[0,1,2,4,8,15]
+OPTION24PARENT=OPTION9
+OPTION24PARENTVALUE=W5200|W5300|W5500
+OPTION25=TX5
+OPTION25VALUE=[0,1,2,4,8,15]
+OPTION25PARENT=OPTION9
+OPTION25PARENTVALUE=W5200|W5300|W5500
+OPTION26=TX6
+OPTION26VALUE=[0,1,2,4,8,15]
+OPTION26PARENT=OPTION9
+OPTION26PARENTVALUE=W5200|W5300|W5500
+OPTION27=TX7
+OPTION27VALUE=[0,1,2,4,8,15]
+OPTION27PARENT=OPTION9
+OPTION27PARENTVALUE=W5200|W5300|W5500
+OPTION28=TX8
+OPTION28VALUE=[0,1,2,4,8,15]
+OPTION28PARENT=OPTION9
+OPTION28PARENTVALUE=W5200|W5300|W5500
+OPTION29=RX1
+OPTION29VALUE=[0,1,2,4,8,15]
+OPTION29PARENT=OPTION9
+OPTION29PARENTVALUE=W5200|W5300|W5500
+OPTION30=RX2
+OPTION30VALUE=[0,1,2,4,8,15]
+OPTION30PARENT=OPTION9
+OPTION30PARENTVALUE=W5200|W5300|W5500
+OPTION31=RX3
+OPTION31VALUE=[0,1,2,4,8,15]
+OPTION31PARENT=OPTION9
+OPTION31PARENTVALUE=W5200|W5300|W5500
+OPTION32=RX4
+OPTION32VALUE=[0,1,2,4,8,15]
+OPTION32PARENT=OPTION9
+OPTION32PARENTVALUE=W5200|W5300|W5500
+OPTION33=RX5
+OPTION33VALUE=[0,1,2,4,8,15]
+OPTION33PARENT=OPTION9
+OPTION33PARENTVALUE=W5200|W5300|W5500
+OPTION34=RX6
+OPTION34VALUE=[0,1,2,4,8,15]
+OPTION34PARENT=OPTION9
+OPTION34PARENTVALUE=W5200|W5300|W5500
+OPTION35=RX7
+OPTION35VALUE=[0,1,2,4,8,15]
+OPTION35PARENT=OPTION9
+OPTION35PARENTVALUE=W5200|W5300|W5500
+OPTION36=RX8
+OPTION36VALUE=[0,1,2,4,8,15]
+OPTION36PARENT=OPTION9
+OPTION36PARENTVALUE=W5200|W5300|W5500
+
+[CONFIG-TCA0]
+SECTION=TIMERS\TCA0
+OPTIONCOUNT=26
+OPTION1=TCA0
+OPTION1VALUE=[NORMAL,FREQ,PWM,PWM_TOP,PWM_BOT,PWM_TOPBOT,0,1,2,3,4,5,6,7]
+OPTION2=RUN
+OPTION2VALUE=[ON,OFF]
+OPTION3=PRESCALE
+OPTION3VALUE=[OFF,1,2,4,8,16,64,256,1024,0-7]
+OPTION4=LUPD
+OPTION4VALUE=[AUTO,MANUAL]
+OPTION5=RESOLUTION
+OPTION5VALUE=[NORMAL,BYTE]
+OPTION6=EVENT_ACTIONA
+OPTION6VALUE=[DISABLED,ENABLED,COUNT_POS_EDGE,COUNT_ANY_EDGE,COUNT_HIGH_LVL,COUNT_UPDOWN]
+OPTION6PARENT=OPTION5
+OPTION6PARENTVALUE=NORMAL
+
+OPTION7=EVENT_ACTIONB
+OPTION7VALUE=[DISABLED,ENABLED,UPDOWN,RESTART_POS_EDGE,RESTART_ANY_EDGE,RESTART_HIGH_LVL]
+OPTION7PARENT=OPTION5
+OPTION7PARENTVALUE=NORMAL
+
+OPTION8=COMPARE0
+OPTION8VALUE=[ENABLED,DISABLED]
+OPTION8PARENT=OPTION5
+OPTION8PARENTVALUE=NORMAL
+OPTION9=COMPARE1
+OPTION9VALUE=[ENABLED,DISABLED]
+OPTION9PARENT=OPTION5
+OPTION9PARENTVALUE=NORMAL
+OPTION10=COMPARE2
+OPTION10VALUE=[ENABLED,DISABLED]
+OPTION10PARENT=OPTION5
+OPTION10PARENTVALUE=NORMAL
+
+
+OPTION11=COMPARE0L
+OPTION11VALUE=[ENABLED,DISABLED]
+OPTION11PARENT=OPTION5
+OPTION11PARENTVALUE=BYTE
+OPTION12=COMPARE0H
+OPTION12VALUE=[ENABLED,DISABLED]
+OPTION12PARENT=OPTION5
+OPTION12PARENTVALUE=BYTE
+
+OPTION13=COMPARE1L
+OPTION13VALUE=[ENABLED,DISABLED]
+OPTION13PARENT=OPTION5
+OPTION13PARENTVALUE=BYTE
+OPTION14=COMPARE1H
+OPTION14VALUE=[ENABLED,DISABLED]
+OPTION14PARENT=OPTION5
+OPTION14PARENTVALUE=BYTE
+
+OPTION15=COMPARE2L
+OPTION15VALUE=[ENABLED,DISABLED]
+OPTION15PARENT=OPTION5
+OPTION15PARENTVALUE=BYTE
+OPTION16=COMPARE2H
+OPTION16VALUE=[ENABLED,DISABLED]
+OPTION16PARENT=OPTION5
+OPTION16PARENTVALUE=BYTE
+
+OPTION17=OVF_INT
+OPTION17VALUE=[ENABLED,DISABLED]
+OPTION18=CMP0_INT
+OPTION18VALUE=[ENABLED,DISABLED]
+OPTION19=CMP1_INT
+OPTION19VALUE=[ENABLED,DISABLED]
+OPTION20=CMP2_INT
+OPTION20VALUE=[ENABLED,DISABLED]
+
+OPTION21=LUNF_INT
+OPTION21VALUE=[ENABLED,DISABLED]
+OPTION21PARENT=OPTION5
+OPTION21PARENTVALUE=BYTE
+
+OPTION22=HUNF_INT
+OPTION22VALUE=[ENABLED,DISABLED]
+OPTION22PARENT=OPTION5
+OPTION22PARENTVALUE=BYTE
+
+OPTION23=LCMP0_INT
+OPTION23VALUE=[ENABLED,DISABLED]
+OPTION23PARENT=OPTION5
+OPTION23PARENTVALUE=BYTE
+
+OPTION24=LCMP1_INT
+OPTION24VALUE=[ENABLED,DISABLED]
+OPTION24PARENT=OPTION5
+OPTION24PARENTVALUE=BYTE
+
+OPTION25=LCMP2_INT
+OPTION25VALUE=[ENABLED,DISABLED]
+OPTION25PARENT=OPTION5
+OPTION25PARENTVALUE=BYTE
+
+OPTION26=RUNMODE
+OPTION26VALUE=[ENABLED,DISABLED]
+
+
+[CONFIG-TCB0]
+SECTION=TIMERS\TCB0
+OPTIONCOUNT=12
+OPTION1=TCB0
+OPTION1VALUE=[PERIODIC_INT,TIME_OUT_CHECK,INP_CAP_EVENT,INP_CAP_FREQ,INP_CAP_PWM,INP_CAP_FREQ_PWM,SINGLE_SHOT,PWM,0,1,2,3,4,5,6,7]
+OPTION2=RUN
+OPTION2VALUE=[ON,OFF]
+OPTION3=RUNMODE
+OPTION3VALUE=[ENABLED,DISABLED]
+OPTION4=PRESCALE
+OPTION4VALUE=[OFF,1,2,TCA0]
+OPTION5=SYNCUPDATE
+OPTION5VALUE=[NONE,TCA0]
+OPTION6=ASYNC
+OPTION6VALUE=[ENABLED,DISABLED]
+OPTION7=CCMP_INIT
+OPTION7VALUE=[LOW,HIGH]
+OPTION8=CCMP_OUTPUT
+OPTION8VALUE=[ENABLED,DISABLED]
+OPTION9=FILTER
+OPTION9VALUE=[ENABLED,DISABLED]
+OPTION10=EDGE
+OPTION10VALUE=[0,1]
+OPTION11=CAPT_EVENT
+OPTION11VALUE=[ENABLED,DISABLED]
+OPTION12=CAPT_INT
+OPTION12VALUE=[ENABLED,DISABLED]
+
+
+
+
+[CONFIG-TWI0]
+SECTION=I2C\TWI0
+OPTIONCOUNT=1
+OPTION1=TWI0
+OPTION1VALUE=[1-1000000]
+
+[CONFIG-TWI0SLAVE]
+SECTION=I2C\TWI0SLAVE
+OPTIONCOUNT=3
+OPTION1=TWI0SLAVE
+OPTION1VALUE=[0,2-254]
+OPTION1CODE=Dim TWI0 As Byte,TWI0_BTR As BYTE,TWI0_BTW As BYTE,TWI0_CBTR As Byte
+OPTION2=BTR
+OPTION2VALUE=[1-255]
+OPTION3=GENCALL
+OPTION3VALUE=[0,1]
+
+
+[CONFIG-VREF]
+SECTION=VREF
+OPTIONCOUNT=5
+OPTION1=VREF
+OPTION1VALUE=[DUMMY]
+OPTION2=ADC0
+OPTION2VALUE=[0V55,1V1,2V5,4V3,1V5]
+OPTION3=DAC0
+OPTION3VALUE=[0V55,1V1,2V5,4V3,1V5]
+OPTION4=FORCE_ADC0
+OPTION4VALUE=[ENABLED,DISABLED]
+OPTION5=FORCE_DAC0
+OPTION5VALUE=[ENABLED,DISABLED]
+
+
+
+[CONFIG-WAITSUART]
+SECTION=WAITSUART
+OPTIONCOUNT=1
+OPTION1=WAITUSART
+OPTION1VALUE=[1-255]
+
+[CONFIG-WD]
+SECTION=WATCHDOG
+OPTIONCOUNT=2
+OPTION1=WATCHDOG
+OPTION1VALUE=[0,8,16,32,64,125,250,500,1000,2000,4000,8000]
+OPTION2=WINDOW
+OPTION2VALUE=[0,8,16,32,64,125,250,500,1000,2000,4000,8000]
+
+
+[CONFIG-X10]
+SECTION=X10
+OPTIONCOUNT=2
+OPTION1=X10
+OPTION1VALUE=#PIN
+OPTION2=TX
+OPTION2VALUE=#PORT
+
+[CONFIG-XPIN]
+SECTION=XPIN
+OPTIONCOUNT=4
+OPTION1=XPIN
+OPTION1VALUE=[#PORTS,#PORT]
+OPTION2=OUTPULL
+OPTION2VALUE=[OFF,DISABLED,PULLUP]
+OPTION3=SENSE
+OPTION3VALUE=[INT_DISABLED,BOTH,RISING,FALLING,INP_DISABLED,LOW_LEVEL]
+OPTION4=INVERTIO
+OPTION4VALUE=[ENABLED,DISABLED]
+
+
+
+[CONFIG-PORTMUX]
+SECTION=PORTS\PORT_MUX
+OPTIONCOUNT=15
+OPTION1=PORT_MUX
+OPTION1VALUE=[PRESERVE,OVERWRITE]
+OPTION2=EVOUT0
+OPTION2VALUE=[DISABLED,ENABLED]
+OPTION2DATA=[PORTMUX_CTRLA,0,xx11x110,0,1]
+OPTION3=EVOUT1
+OPTION3VALUE=[DISABLED,ENABLED]
+OPTION3DATA=[PORTMUX_CTRLA,0,xx11x101,0,1]
+OPTION4=EVOUT2
+OPTION4VALUE=[DISABLED,ENABLED]
+OPTION4DATA=[PORTMUX_CTRLA,0,xx11x011,0,1]
+OPTION5=LUT0_OUT
+OPTION5VALUE=[DEF_PA4,ALT1_PB4]
+OPTION5DATA=[PORTMUX_CTRLA,0,xx10x111,0,1]
+OPTION6=LUT1_OUT
+OPTION6VALUE=[DEF_PA7,ALT1_PC1]
+OPTION6DATA=[PORTMUX_CTRLA,0,xx01x111,0,1]
+OPTION7=USART0
+OPTION7VALUE=[DEF_PB0PB3,ALT1_PA1PA4]
+OPTION7DATA=[PORTMUX_CTRLB,1,xxxxx1x0,0,1]
+OPTION8=SPI0
+OPTION8VALUE=[DEF_PA1PA4,ALT1_PC0PC3]
+OPTION8DATA=[PORTMUX_CTRLB,1,xxxxx0x1,0,1]
+OPTION9=TCA0_WO0
+OPTION9VALUE=[DEF_PB0,ALT1_PB3]
+OPTION9DATA=[PORTMUX_CTRLC,2,xx111110,0,1]
+OPTION10=TCA0_WO1
+OPTION10VALUE=[DEF_PB1,ALT1_PB4]
+OPTION10DATA=[PORTMUX_CTRLC,2,xx111101,0,1]
+OPTION11=TCA0_WO2
+OPTION11VALUE=[DEF_PB2,ALT1_PB5]
+OPTION11DATA=[PORTMUX_CTRLC,2,xx111011,0,1]
+OPTION12=TCA0_WO3
+OPTION12VALUE=[DEF_PA3,ALT1_PC3]
+OPTION12DATA=[PORTMUX_CTRLC,2,xx110111,0,1]
+OPTION13=TCA0_WO4
+OPTION13VALUE=[DISABLED,ALT1_PA4]
+OPTION13DATA=[PORTMUX_CTRLC,2,xx101111,0,1]
+OPTION14=TCA0_WO5
+OPTION14VALUE=[DISABLED,ALT1_PA5]
+OPTION14DATA=[PORTMUX_CTRLC,2,xx011111,0,1]
+OPTION15=TCB0_WO0
+OPTION15VALUE=[DEF_PA5,ALT1_PC0]
+OPTION15DATA=[PORTMUX_CTRLD,3,xxxxxxx0,0,1]
