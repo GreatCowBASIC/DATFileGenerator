@@ -11,6 +11,7 @@
   #DEFINE kKillBits ""
   #DEFINE kXLScs "avr chipdata.csv"
 
+    'These are the columns in the XLS
     #Define XLSchip       1
     #Define XLSNotTested  2
     #Define XLSKbytes	    3
@@ -32,7 +33,6 @@
     #Define XLSAVRAlias	          19
     #Define XLSCompiler	          20
     #Define XLSPackages           21
-
 
   Type SFR
     RegisterName as String
@@ -964,6 +964,7 @@ Sub InitAndGetFiles
     Next
 
     If COMMAND(CD) = "" then
+        Print "MPLAB-IDE version " + kIDEVersion
         'Display the contents of the kINDEX_IDX to the console... essentially shows SourceFileArray()
         Dim loopcounter as Integer
         for loopcounter = 0 to SourceFileArrayPointer - 1
