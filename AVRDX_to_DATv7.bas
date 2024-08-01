@@ -12,27 +12,26 @@
   #DEFINE kXLScs "avr chipdata.csv"
 
     'These are the columns in the XLS
-    #Define XLSchip       1
-    #Define XLSNotTested  2
-    #Define XLSKbytes	    3
-    #Define XLSData       4
-    #Define XLSEEPROM	    5
-    #Define XLSRAM	      6
-    #Define XLSIO	        7
-    #Define XLSADCChannels  8	
-    #Define XLSMaxSpeedMHz	9
-    #Define XLSADC	        10
-    #Define XLSGPR	        11
-    #Define XLSPINS	        12
-    #Define XLSUSART	      13
-    #Define XLSChipFamilyOverride 14	
-    #Define XLSChipSubFamily	    15
-    #Define XLSAVRFamily	        16
-    #Define XLSAVRGCC	            17
-    #Define XLSAVRDX	            18
-    #Define XLSAVRAlias	          19
-    #Define XLSCompiler	          20
-    #Define XLSPackages           21
+    #Define XLSchip       0
+    #Define XLSNotTested  1
+    #Define XLSKbytes	    2
+    #Define XLSEEPROM	    3
+    #Define XLSRAM	      4
+    #Define XLSIO	        5
+    #Define XLSADCChannels  6	
+    #Define XLSMaxSpeedMHz	7
+    #Define XLSADC	        8
+    #Define XLSGPR	        9
+    #Define XLSPINS	        10
+    #Define XLSUSART	      11
+    #Define XLSChipFamilyOverride 12	
+    #Define XLSChipSubFamily	    13
+    #Define XLSAVRFamily	        14
+    #Define XLSAVRGCC	            15
+    #Define XLSAVRDX	            16
+    #Define XLSAVRAlias	          17
+    #Define XLSCompiler	          18
+    #Define XLSPackages           19
 
   Type SFR
     RegisterName as String
@@ -128,7 +127,7 @@
   Declare Sub PrintChipData
   Declare Sub PrintFooter
   Declare Sub PrintFreeRam
-  Declare Function GetValue (  searchString as String ) as String
+  Declare Function GetValue (  searchString as String, errorhandler as Integer = -1 ) as String
   Declare Function GetCSVValue (  searchString as String, returnParameter as Byte ) As String
 
 '*******************************
@@ -194,11 +193,11 @@ Sub PrintChipData
   Print "RAM="+Str(Val("&h"+GetValue ("INT_SRAM SIZE")))
 
     Print
-    Print "'This constant is exposed as ChipIO"
+    Print "'This constant is exposed as ChipIO - sourced from `" + kXLScs +"`"
   Print "I/O=" + GetCSVValue ( targetchip, XLSIO )
 
     Print
-    Print "'This constant is exposed as ChipADC"
+    Print "'This constant is exposed as ChipADC - sourced from `" + kXLScs +"`"
   Print "ADC=" + GetCSVValue ( targetchip, XLSADCChannels )
 
     Print
@@ -214,19 +213,20 @@ Sub PrintChipData
     Print "IntOsc=16"
 
   Else
+      Print "This constant is exposed as ChipMaxMhz  - sourced from `" + kXLScs +"`"
     Print "MaxMHz="  + GetCSVValue ( targetchip, XLSMaxSpeedMHz )
   End If
 
     Print
-    Print "'This constant is exposed as ChipPins"
+    Print "'This constant is exposed as ChipPins - sourced from `" + kXLScs +"`"
   Print "Pins=" + GetCSVValue ( targetchip, XLSPINS )
 
     Print
-    Print "'This constant is exposed as ChipUSART"
+    Print "'This constant is exposed as ChipUSART - sourced from `" + kXLScs +"`"
   Print "USART=" + GetCSVValue ( targetchip, XLSUSART )
 
     Print
-    Print "'This constant is exposed as ChipFamily"
+    Print "'This constant is exposed as ChipFamily - sourced from `" + kXLScs +"`"
   Print "Family="+ GetCSVValue ( targetchip, XLSChipFamilyOverride )
   
     Print
@@ -246,15 +246,21 @@ Sub PrintChipData
   Print "HardwareMult=y"
   if Val("&h"+GetValue ("VPORTA_OUT")) > 0 then
       Print
-      Print "'This constant is exposed as ChipAVRFamily"
+      Print "'This constant is exposed as ChipAVRFamily - sourced from `" + kXLScs +"`"
     Print "AVRFamily=" + GetCSVValue ( targetchip, XLSAVRFamily )
       Print
-      Print "'This constant is exposed as ChipAVRGCC"
+      Print "'This constant is exposed as ChipAVRGCC - sourced from `" + kXLScs +"`"
     Print "AVRGCC="+ GetCSVValue ( targetchip, XLSAVRGCC )
       Print
-      Print "'This constant is exposed as ChipAVRDX"
+      Print "'This constant is exposed as ChipAVRDX - sourced from `" + kXLScs +"`"
     Print "AVRDX=" + GetCSVValue ( targetchip, XLSAVRDX )
   End If
+
+  IF val(GetCSVValue ( targetchip, XLSNotTested ))= 1 then
+      Print
+      Print "'This constant is exposed as ChipNotTested - sourced from `" + kXLScs +"`"
+      print "NotTested=1"
+  End If 
 End Sub
 
 
@@ -295,7 +301,7 @@ Sub PrintAliases
   print "  ' So, the compiler knows that DDRA for this specific chip and all AVRDX chips that DDRA is actually to be transformed to an AVRDX set of instructiions."
   print 
 
-  if Val("&h"+GetValue ("PORTA_OUT")) > 0 then
+  if Val("&h"+GetValue ("PORTA_OUT", 0)) > 0 then
     print "'PortA"
     print "ALIAS_PORTA_DIR=0                                      ; 0000             "
     print "DDRA=0                                          ; 0000 alias"
@@ -307,7 +313,7 @@ Sub PrintAliases
   End if
 
 
-  if Val("&h"+GetValue ("PORTB_OUT")) > 0 then
+  if Val("&h"+GetValue ("PORTB_OUT", 0)) > 0 then
     print "'PortB"
     print "ALIAS_PORTB_DIR=4                                      ; 0004            "
     print "DDRB=4                                          ; 0004 alias"
@@ -318,7 +324,7 @@ Sub PrintAliases
     print ""
   End If
 
-  if Val("&h"+GetValue ("PORTC_OUT")) > 0 then
+  if Val("&h"+GetValue ("PORTC_OUT", 0)) > 0 then
     print "'PortC"
     print "ALIAS_PORTC_DIR=8                                      ; 0008          "
     print "DDRC=8                                          ; 0008 alias"
@@ -329,7 +335,7 @@ Sub PrintAliases
     print ""
   End if
 
-  if Val("&h"+GetValue ("PORTD_OUT")) > 0 then  
+  if Val("&h"+GetValue ("PORTD_OUT", 0)) > 0 then  
     print "'PortD"
     print "ALIAS_PORTD_DIR=11"
     print "DDRD=11"
@@ -340,7 +346,7 @@ Sub PrintAliases
     print ""
   end if
 
-  if Val("&h"+GetValue ("PORTE_OUT")) > 0 then
+  if Val("&h"+GetValue ("PORTE_OUT", 0)) > 0 then
     print "'PortE"
     print "ALIAS_PORTE_DIR=14"
     print "DDRE=14"
@@ -351,7 +357,7 @@ Sub PrintAliases
     print ""
   end if
 
-  if Val("&h"+GetValue ("PORTF_OUT")) > 0 then
+  if Val("&h"+GetValue ("PORTF_OUT", 0)) > 0 then
     print "'PortF"
     print "ALIAS_PORTF_DIR=17"
     print "DDRF=17"
@@ -1295,7 +1301,7 @@ Sub PrintBits
 End Sub
 
 
-Function GetValue (  searchString as String ) As String
+Function GetValue (  searchString as String, errorhandler as Integer = -1 ) As String
 
     open fsp_ini for input as #1
     If Err>0 Then Print "Error opening the file "+chr(34)+fsp_ini+chr(34):Print "Update MPLKAB-IDE DFP Pack with pack version " +chipparameters(1) :End
@@ -1304,10 +1310,15 @@ Function GetValue (  searchString as String ) As String
         Line input #1, DataSource
     loop while not eof(1) and instr( ucase(DataSource), Ucase(searchString)) = 0
 
-    If eof(1) then
-      Close
-      Print "Unexpected end of file "+chr(34)+fsp_ini+chr(34):Print "Search string `" + searchString + "` not found"
-      End
+    If eof(1) Then
+        Close
+        If errorhandler = -1 then
+            
+            Print "Unexpected end of file "+chr(34)+fsp_ini+chr(34):Print "Search string `" + searchString + "` not found"
+            End
+        Else
+            Return ""
+        End If
     End If
 
 
@@ -1340,5 +1351,5 @@ Function GetCSVValue (  searchString as String, returnParameter as Byte ) As Str
     close   ' close all open files
     Split ( DataSource, ",", 99, ParamMeters() )
     'send back the parameter from the XLS
-    return ParamMeters(returnParameter-2)
+    return ParamMeters(returnParameter)
 End Function
