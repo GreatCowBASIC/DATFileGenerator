@@ -256,10 +256,13 @@ Sub PrintChipData
     Print "AVRDX=" + GetCSVValue ( targetchip, XLSAVRDX )
   End If
 
-  IF val(GetCSVValue ( targetchip, XLSNotTested ))= 1 then
+  IF val(GetCSVValue ( targetchip, XLSNotTested ))> 0 then
       Print
       Print "'This constant is exposed as ChipNotTested - sourced from `" + kXLScs +"`"
-      print "NotTested=1"
+      print "' NotTested is a numeric bitwise value"
+      Print "' 1 = Chip DAT file not tested and therefore no validated"
+      Print "' 2 = Chip DAT file has an [interrupt] section that is incomplete"
+      print "NotTested="+str(val(GetCSVValue ( targetchip, XLSNotTested )))
   End If 
 End Sub
 
