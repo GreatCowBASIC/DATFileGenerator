@@ -8,7 +8,7 @@
   #DEFINE kIDEVersion "6.05"
   #DEFINE kUniqueBits ""
   #DEFINE kKillRegister "RTC_CMP, SREG"
-  #DEFINE kKillBits ""
+  #DEFINE kKillBits "CPU_RAMPZ"
   #DEFINE kXLScs "avr chipdata.csv"
 
     'These are the columns in the XLS
@@ -202,12 +202,12 @@ Sub PrintChipData
 
     Print
     Print "'This constant is exposed as ChipMhz"
-  If Val("&h"+GetValue ("FUSE_FREQSEL_20MHZ_gc")) > 0 then
+  If Val("&h"+GetValue ("FUSE_FREQSEL_20MHZ_gc", 0 )) > 0 then
     Print "MaxMHz=20"
     Print  "'This constant is exposed with only the first parameter (if more than one)"
     Print "IntOsc=20, 10, 5, 2.5, 1.25, 0.625, 0.3125, 3.3333333, 2, 1.6666667, 0.8333333, 0.4166667"
 
-  ElseIf Val("&h"+GetValue ("FUSE_FREQSEL_16MHZ_gc")) > 0 then
+  ElseIf Val("&h"+GetValue ("FUSE_FREQSEL_16MHZ_gc", 0 )) > 0 then
     Print "MaxMHz=16"
     Print  "'This constant is exposed with only the first parameter (if more than one)"
     Print "IntOsc=16"
@@ -486,7 +486,6 @@ End function
 
 
 Function FindChip ( chiptofind as string, ignore as string ) as string
-
     Dim PotentialMatches( 100 ) as Integer
     Dim PotentialMatch as Integer = 0
     Dim loopcounter as Integer
@@ -1002,9 +1001,13 @@ Sub InitAndGetFiles
     ParamUpper = Ucase(COMMAND(CD))
 
     targetchip = ParamUpper
-    If left(targetchip,2) <> "AT" then
-        targetchip = "AT"+targetchip
-    End if
+    If left(targetchip,3) <> "AVR" then
+
+      If left(targetchip,2) <> "AT" then
+          targetchip = "AT"+targetchip
+      End if
+
+    End If
 
     if ShowDebug = -1 then print ";Debug: kINDEX_IDX directory location is: "+UserProfile+kINDEX_IDX
     if ShowDebug = -1 then print ";Debug: targetchip is: "+targetchip
@@ -1023,6 +1026,7 @@ Sub InitAndGetFiles
             if left(chipdetails,6) = "NOCHIP" or  chipdetails = "" then
               if forindex = 2 then 
                 print "Not a valid chip, or no DFP files .. ", chipdetails
+                print fsp_ini
                 End
               End if
               exit do
@@ -1052,10 +1056,15 @@ Sub InitAndGetFiles
                 chiphsource = "iotn"+chiphsource
             End if
 
+            If left( ucase(chipincsource), 3) = "AVR" then
+                chipincsource = chipincsource+"def"
+            End if
+
 
             split( chipdetails, ",",-1,chipparameters() )
 
             fsp_ini = UserProfile+kINDEX_IDX+"\Microchip\"+chipparameters(3)+"_DFP\"+chipparameters(1)+"\avrasm\inc\"+ chipincsource  +".inc"
+
 
             if dir(fsp_ini) <> "" then
               Exit Sub
@@ -1181,6 +1190,8 @@ End Sub
 
 Sub PrintBits
 
+        Dim killIndex as Integer
+
         if instr(kKillBits,",") <> 0 then
           Split ( kKillBits, ",", -1, BitsToBeIgnored() )
         else
@@ -1278,7 +1289,19 @@ Sub PrintBits
                               SFRBits(SFRBitsArrayPointer).RegisterBitAddress = trim( Mid( DataSource, EqualPosition+2, SemiColonPosition-EqualPosition-1 ) )
                               SFRBits(SFRBitsArrayPointer).Count=SFRBitsArrayPointer
 
-                              Print trim(SFRBits(SFRBitsArrayPointer).RegisterBitName)+","+NewRegister+","+SFRBits(SFRBitsArrayPointer).RegisterBitAddress + chr(9)+ chr(9)+ chr(9) + "' " + mid( Orgline, Instr( OrgLine, "; ")+1)
+                              'KILL bits
+                              Dim BitPrint as Integer = -1
+                              For killIndex = 0 to ubound(  BitsToBeIgnored ) -1
+                                  if Instr( ucase(trim(SFRBits(SFRBitsArrayPointer).RegisterBitName))  , Ucase(BitsToBeIgnored(killIndex)))  Then
+                                    BitPrint = 0
+                                  End If
+                              next
+
+                              If BitPrint = -1 then
+                                Print trim(SFRBits(SFRBitsArrayPointer).RegisterBitName)+","+NewRegister+","+SFRBits(SFRBitsArrayPointer).RegisterBitAddress + chr(9)+ chr(9)+ chr(9) + "' " + mid( Orgline, Instr( OrgLine, "; ")+1)
+                              Else
+                                Print "'"  +  trim(SFRBits(SFRBitsArrayPointer).RegisterBitName)+","+NewRegister+","+SFRBits(SFRBitsArrayPointer).RegisterBitAddress + chr(9)+ chr(9)+ chr(9) + "' " + mid( Orgline, Instr( OrgLine, "; ")+1)   +  "           Removed as duplicate"
+                              End If
 
                               If instr( SFRBits(SFRBitsArrayPointer).RegisterBitName ,"SREG_" ) > 0 then
                                   replace (   SFRBits(SFRBitsArrayPointer).RegisterBitName, "SREG_","")
@@ -1313,7 +1336,7 @@ Function GetValue (  searchString as String, errorhandler as Integer = -1 ) As S
         Line input #1, DataSource
     loop while not eof(1) and instr( ucase(DataSource), Ucase(searchString)) = 0
 
-    If eof(1) Then
+    If eof(1) and instr( ucase(DataSource), Ucase(searchString)) = 0 Then
         Close
         If errorhandler = -1 then
             
@@ -1343,9 +1366,10 @@ Function GetCSVValue (  searchString as String, returnParameter as Byte ) As Str
 
     do
         Line input #1, DataSource
+        ' DEBUG print DataSource, Ucase(searchString), instr( ucase(DataSource), Ucase(searchString))
     loop while not eof(1) and instr( ucase(DataSource), Ucase(searchString)) = 0
 
-    If eof(1) then
+    If eof(1) and instr( ucase(DataSource), Ucase(searchString)) = 0 then
       Close
       Print "Unexpected end of file "+chr(34)+kXLScs+chr(34):Print "Search string `" + searchString + "` not found"
       End
