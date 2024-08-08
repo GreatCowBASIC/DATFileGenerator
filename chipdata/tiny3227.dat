@@ -1,7 +1,7 @@
 ;        .DAT sections
 ;==========================================================================
 ;
-;  Built by GcBASIC converter on : 08-02-2024
+;  Built by GcBASIC converter on : 08-08-2024
 ;  XC8 processor include for the chip shown below
 ;
 ; Microchip IDE version 6.05
@@ -11,7 +11,8 @@
 ; C:\Users\admin\.mchp_packs\Microchip\ATtiny_DFP\3.1.260\edc\ATTINY3227.PIC
 ; 
 ;
-; Registeres not processed: RTC_CMP, SREG
+; Registers not processed: RTC_CMP,SREG,CPU_SPL, CPU_SPH 
+; Bits not processed: CPU_RAMPZ
 ;==========================================================================
 ;==========================================================================
 ;
@@ -273,8 +274,8 @@ CLKCTRL_OSC32KCTRLA,120
 CLKCTRL_XOSC32KCTRLA,124
 CPU_CCP,52
 CPU_SP,61
-CPU_SPL,61
-CPU_SPH,62
+; .equ CPU_SPL = 0x003D                    ; Stack Pointer low byte a duplicate or resevered register or ALIAS_
+; .equ CPU_SPH = 0x003E                    ; Stack Pointer hi byte a duplicate or resevered register or ALIAS_
 CPU_SREG,63
 CPUINT_CTRLA,272
 CPUINT_STATUS,273
@@ -412,9 +413,9 @@ RTC_CNTH,329
 RTC_PER,330
 RTC_PERL,330
 RTC_PERH,331
-; .equ RTC_CMP = 0x014C                    ; Compare a duplicate or resevered register
-RTC_CMPL,332
-RTC_CMPH,333
+; .equ RTC_CMP = 0x014C                    ; Compare a duplicate or resevered register or ALIAS_
+; .equ RTC_CMPL = 0x014C                   ; Compare low byte a duplicate or resevered register or ALIAS_
+; .equ RTC_CMPH = 0x014D                   ; Compare hi byte a duplicate or resevered register or ALIAS_
 RTC_PITCTRLA,336
 RTC_PITSTATUS,337
 RTC_PITINTCTRL,338

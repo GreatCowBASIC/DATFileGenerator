@@ -4,10 +4,12 @@
 
 
   #include once "ext/xml/dom.bi"
+  #include "file.bi"
+
   #DEFINE kINDEX_IDX  ""    'UserProfile+kINDEX.IDX
   #DEFINE kIDEVersion "6.05"
   #DEFINE kUniqueBits ""
-  #DEFINE kKillRegister "RTC_CMP, SREG"
+  #DEFINE kKillRegister "RTC_CMP,SREG,CPU_SPL, CPU_SPH "
   #DEFINE kKillBits "CPU_RAMPZ"
   #DEFINE kXLScs "avr chipdata.csv"
 
@@ -62,6 +64,7 @@
     SourceFolder As String
     Version as string
     Pack as String
+    UserProfile As String
   End Type
 
   Dim Shared SourceFileArray(100000) As SourceFiles
@@ -214,7 +217,11 @@ Sub PrintChipData
 
   Else
       Print "This constant is exposed as ChipMaxMhz  - sourced from `" + kXLScs +"`"
-    Print "MaxMHz="  + GetCSVValue ( targetchip, XLSMaxSpeedMHz )
+      Print "MaxMHz="  + GetCSVValue ( targetchip, XLSMaxSpeedMHz )
+      If Val(GetCSVValue ( targetchip, XLSMaxSpeedMHz )) = 24 then
+        Print  "'This constant is exposed with only the first parameter (if more than one)"
+        Print "IntOsc=24, 20, 16, 12, 8, 4, 3, 2, 1"
+      End If
   End If
 
     Print
@@ -619,6 +626,7 @@ Sub PopulateSourceFilesLocation
                                 .Family = devices->Child( "atmel:device" , devicecounter )->Attribute("family")
                                 .Version = releases->Child("atmel:release", childenreleasecounter )->Attribute("version")
                                 .Pack = idx->Child("pdsc", childenpdsccounter )->Attribute("name")
+                                .UserProfile = UserProfile + kINDEX_IDX
                           end with
                           ' print devices->Child( "atmel:device" , devicecounter )->Attribute("name")
                           SourceFileArrayPointer = SourceFileArrayPointer + 1
@@ -976,8 +984,23 @@ Sub InitAndGetFiles
         'Display the contents of the kINDEX_IDX to the console... essentially shows SourceFileArray()
         Dim loopcounter as Integer
         for loopcounter = 0 to SourceFileArrayPointer - 1
+            Dim localpack as string
+            Dim localchipname as string
+
             with SourceFileArray( loopcounter )
-                print left(.Pack+"                              ",45)+ left(.ChipName+"                              ",25) +  left(.Version+"                              ",15)+.Core
+
+                localchipname = .chipname
+                replace ( localchipname, "attiny", "tn" )
+                'create a filename from the data
+                localpack = "\"+.Pack
+                replace(localpack, ".pdsc","")
+                replace(localpack, "Microchip.","Microchip\")
+                localpack = .UserProfile+localpack + "\" + .Version + "\avrasm\inc\"+localchipname+"def.inc" 
+                localpack = lcase(localpack)
+
+                print left(.Pack+"                              ",45)+ left(.ChipName+"                              ",25) +  left(.Version+"                              ",15)+.Core + "  " + _ 
+                right("   "+str(fileexists(localpack)),3) + " " + localpack
+
             end with
         next
         
@@ -1094,7 +1117,9 @@ Sub PrintHeader
     print "; " + UserProfile + kINDEX_IDX+"\Microchip\"+chipparameters(3)+"_DFP\"+chipparameters(1)+"\edc\AT"+ Chip  +".PIC"
     print "; " + ConfigFileName
     print ";"
-    print "; Registeres not processed: " + kKillRegister
+    print "; Registers not processed: " + kKillRegister
+    print "; Bits not processed: " + kKillBits
+    
     Print ";=========================================================================="
 
 
@@ -1151,9 +1176,9 @@ Sub Printregisters
             FoundRegistersToBeIgnored = 0
             for RegistersToBeIgnoredCounter = 0 to ubound( RegistersToBeIgnored )
               if trim(RegistersToBeIgnored ( RegistersToBeIgnoredCounter)) <> "" Then
-                  if  instr( trim(ucase( datasource)), ucase(RegistersToBeIgnored ( RegistersToBeIgnoredCounter)+" ")) = 6 then
+                  if  instr( trim(ucase( datasource)), trim(ucase(RegistersToBeIgnored ( RegistersToBeIgnoredCounter)+" "))) = 6 then
                       FoundRegistersToBeIgnored = 1
-                      print "; "+datasource + " a duplicate or resevered register"
+                      print "; "+datasource + " a duplicate or resevered register or ALIAS_"
                   end if
               End if
             next
