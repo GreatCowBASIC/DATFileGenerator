@@ -251,7 +251,7 @@ Sub PrintChipData
     getRamSizeInt = Val( getRamSizeStr)
 
     Print
-    Print "'This constant is exposed as ChipMaxAddress"
+    Print "'This constant is exposed as ChipMaxAddress. This value is the maximum address of the internal SRAM.  SRAM is used for data storage and stack."
   Print "MaxAddress=" + Str( getRamStartInt + getRamSizeInt )
 
     Print
