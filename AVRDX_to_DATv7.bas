@@ -244,9 +244,15 @@ Sub PrintChipData
     Print "'This constant is exposed as ChipGPR"
   Print "GPR=32"
 
+    getRamstartStr = "&h" + GetValue ( "INT_SRAM START_ADDR") 
+    getRamStartInt = Val (getRamstartStr)
+
+    getRamSizeStr = "&h" + GetValue ( "INT_SRAM SIZE")
+    getRamSizeInt = Val( getRamSizeStr)
+
     Print
     Print "'This constant is exposed as ChipMaxAddress"
-  Print "MaxAddress=" + Str(Val("&h"+GetValue ("MAPPED_PROGMEM_SIZE")))
+  Print "MaxAddress=" + Str( getRamStartInt + getRamSizeInt )
 
     Print
     Print "'This constant is exposed as ChipHardwareMult"
