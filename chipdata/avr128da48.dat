@@ -1,14 +1,14 @@
 ;        .DAT sections
 ;==========================================================================
 ;
-;  Built by GcBASIC converter on : 08-10-2024
+;  Built by GcBASIC converter on : 08-11-2024
 ;  XC8 processor include for the chip shown below
 ;
 ; Microchip IDE version 6.05
 ; C:\Users\admin\.mchp_packs\index.idx
-; C:\Users\admin\.mchp_packs\Microchip\AVR-Dx_DFP\2.4.286\avrasm\inc\AVR128DA48def.inc
+; C:\Users\admin\.mchp_packs\Microchip\AVR-Dx_DFP\2.5.294\avrasm\inc\AVR128DA48def.inc
 ; avr chipdata.csv
-; C:\Users\admin\.mchp_packs\Microchip\AVR-Dx_DFP\2.4.286\edc\ATAVR128DA48.PIC
+; C:\Users\admin\.mchp_packs\Microchip\AVR-Dx_DFP\2.5.294\edc\ATAVR128DA48.PIC
 ; 
 ;
 ; Registers not processed: RTC_CMP,SREG,CPU_SPL, CPU_SPH 
@@ -62,7 +62,7 @@ ConfigWords=0
 'This constant is exposed as ChipGPR
 GPR=32
 
-'This constant is exposed as ChipMaxAddress
+'This constant is exposed as ChipMaxAddress. This value is the maximum address of the internal SRAM.  SRAM is used for data storage and stack.
 MaxAddress=32768
 
 'This constant is exposed as ChipHardwareMult
