@@ -1,0 +1,1079 @@
+;        .DAT sections
+;==========================================================================
+;
+;  Built by GCBASIC converter on : 08-12-2024
+;  XC8 processor include for the chip shown below
+;
+; Microchip IDE version 6.05
+; C:\Users\admin\.mchp_packs\index.idx
+; C:\Users\admin\.mchp_packs\Microchip\AVR-Dx_DFP\2.6.303\avrasm\inc\AVR64DD14def.inc
+; avr chipdata.csv
+; C:\Users\admin\.mchp_packs\Microchip\AVR-Dx_DFP\2.6.303\edc\ATAVR64DD14.PIC
+; 
+;
+; Registers not processed: RTC_CMP,SREG,CPU_SPL, CPU_SPH 
+; Bits not processed: CPU_RAMPZ
+;==========================================================================
+;==========================================================================
+;
+;       Register Definitions
+;
+;==========================================================================
+
+;----- Register Files -----------------------------------------------------
+
+[ChipData]
+';All items in the ChipData section are available to user programs as constants
+';The constants have the prefix of Chip: See the details below
+
+'This constant is exposed as ChipWORDS
+Prog=32768
+
+'This constant is exposed as ChipEEPROM
+EEPROM=256
+
+'This constant is exposed as ChipRAM
+RAM=8192
+
+'This constant is exposed as ChipIO - sourced from `avr chipdata.csv`
+I/O=11
+
+'This constant is exposed as ChipADC - sourced from `avr chipdata.csv`
+ADC=7
+
+'This constant is exposed as ChipMhz
+This constant is exposed as ChipMaxMhz  - sourced from `avr chipdata.csv`
+MaxMHz=24
+'This constant is exposed with only the first parameter (if more than one)
+IntOsc=24, 20, 16, 12, 8, 4, 3, 2, 1
+
+'This constant is exposed as ChipPins - sourced from `avr chipdata.csv`
+Pins=14
+
+'This constant is exposed as ChipUSART - sourced from `avr chipdata.csv`
+USART=2
+
+'This constant is exposed as ChipFamily - sourced from `avr chipdata.csv`
+Family=140
+
+'This constant is exposed as ChipConfWords
+ConfigWords=0
+
+'This constant is exposed as ChipGPR
+GPR=32
+
+'This constant is exposed as ChipMaxAddress. This value is the maximum address of the internal SRAM.  SRAM is used for data storage and stack.
+MaxAddress=32768
+
+'This constant is exposed as ChipHardwareMult
+HardwareMult=y
+
+'This constant is exposed as ChipAVRFamily - sourced from `avr chipdata.csv`
+AVRFamily=AVRDD
+
+'This constant is exposed as ChipAVRGCC - sourced from `avr chipdata.csv`
+AVRGCC=avrxmega3
+
+'This constant is exposed as ChipAVRDX - sourced from `avr chipdata.csv`
+AVRDX=1
+
+'This constant is exposed as ChipNotTested - sourced from `avr chipdata.csv`
+' NotTested is a numeric bitwise value
+' 1 = Chip DAT file not tested and therefore no validated
+' 2 = Chip DAT file has an [interrupt] section that is incomplete
+NotTested=1
+
+[Pointers]
+'This section are the registers used by compilers
+XL:26
+XH:27
+YL:28
+YH:29
+ZL:30
+ZH:31
+
+[Interrupts]
+'For specific details of the interrupts see the microcontroller datasheet
+'The first parameter is the GCBASIC identifier used in user code to expose the specific interrupt
+; NMI interrupt vectors
+		NMI:NMI,2,,
+; BOD interrupt vectors
+	BOD_VLM:BOD_VLM,4,,
+; CLKCTRL interrupt vectors
+		CLKCTRL_CFD:CLKCTRL_CFD,6,,
+; MVIO interrupt vectors
+		MVIO_MVIO:MVIO_MVIO,8,,
+; RTC interrupt vectors
+		RTC_CNT:RTC_CNT,10,,
+		RTC_PIT:RTC_PIT,12,,
+; CCL interrupt vectors
+		CCL_CCL:CCL_CCL,14,,
+; PORTA interrupt vectors
+		PORTA_PORT:PORTA_PORT,16,,
+; TCA0 interrupt vectors
+		TCA0_LUNF:TCA0_LUNF,18,,
+		TCA0_HUNF:TCA0_HUNF,20,,
+		TCA0_CMP0:TCA0_CMP0,22,,
+		TCA0_CMP1:TCA0_CMP1,24,,
+		TCA0_CMP2:TCA0_CMP2,26,,
+; TCB0 interrupt vectors
+		TCB0_INT:TCB0_INT,28,,
+; TCB1 interrupt vectors
+		TCB1_INT:TCB1_INT,30,,
+; TCD0 interrupt vectors
+		TCD0_OVF:TCD0_OVF,32,,
+		TCD0_TRIG:TCD0_TRIG,34,,
+; TWI0 interrupt vectors
+		TWI0_TWIS:TWI0_TWIS,36,,
+		TWI0_TWIM:TWI0_TWIM,38,,
+; SPI0 interrupt vectors
+		SPI0_INT:SPI0_INT,40,,
+; USART0 interrupt vectors
+		USART0_RXC:USART0_RXC,42,,
+		USART0_DRE:USART0_DRE,44,,
+		USART0_TXC:USART0_TXC,46,,
+; PORTD interrupt vectors
+		PORTD_PORT:PORTD_PORT,48,,
+; AC0 interrupt vectors
+		AC0_AC:AC0_AC,50,,
+; ADC0 interrupt vectors
+		ADC0_RESRDY:ADC0_RESRDY,52,,
+		ADC0_WCMP:ADC0_WCMP,54,,
+; ZCD3 interrupt vectors
+		ZCD3_ZCD:ZCD3_ZCD,56,,
+; PORTC interrupt vectors
+		PORTC_PORT:PORTC_PORT,58,,
+; TCB2 interrupt vectors
+		TCB2_INT:TCB2_INT,60,,
+; USART1 interrupt vectors
+		USART1_RXC:USART1_RXC,62,,
+		USART1_DRE:USART1_DRE,64,,
+		USART1_TXC:USART1_TXC,66,,
+; PORTF interrupt vectors
+		PORTF_PORT:PORTF_PORT,68,,
+; NVMCTRL interrupt vectors
+		NVMCTRL_EE:NVMCTRL_EE,70,,
+
+[AVRAlias]
+  'This section is for the AVRDX support
+  'The aliasing is megaAVR register = value = AVRDX register
+  ' example:          ALIAS_PORTA_DIR = 0 = DDRA
+  '
+ 'Format is Strict: 
+  ' There must be two entries per alias, the order is not importand, the relatiionship as shown above is critical.
+  ' The value is NOT a register address value. The value MUST be unique
+  ' The assignment must be an equal sign `=`
+   '
+ 'How does this all work?
+  ' The compiler will look up a megaAVR register ( ignoring any register.bits), and, using the returned number, lookup the AVRDX alias.
+  ' DDRA = 0, lookup the AVRDX alias of 0, returns ALIAS_PORTA_DIR
+  ' the compiler strips off the `ALIAS_`PORTA_DIR prefix as the register to be used.
+  '
+ 'A deeper dive.
+  ' The compiler treats this list of AVRAlias(es) just like the [register] section of this file.
+  ' The compiler loads these AVRAlias(es) but with the attribute of .ALIAS set (true).
+  ' This means, using the example above, that DDRA is not a real register and it is has the .ALIAS attribute set. 
+  ' So, the compiler knows that DDRA for this specific chip and all AVRDX chips that DDRA is actually to be transformed to an AVRDX set of instructiions.
+
+'PortA
+ALIAS_PORTA_DIR=0                                      ; 0000             
+DDRA=0                                          ; 0000 alias
+ALIAS_PORTA_OUT=1                                      ; 0001             
+PORTA=1                                         ; 0001 alias         
+ALIAS_PORTA_IN=2                                       ; 0002   
+PINA=2                                          ; 0002 alias
+
+'PortC
+ALIAS_PORTC_DIR=8                                      ; 0008          
+DDRC=8                                          ; 0008 alias
+ALIAS_PORTC_OUT=9                                      ; 0009
+PORTC=9                                         ; 0009 alias
+ALIAS_PORTC_IN=10                                      ; 000A
+PINC=10                                         ; 000A alias
+
+'PortD
+ALIAS_PORTD_DIR=11
+DDRD=11
+ALIAS_PORTD_OUT=12
+PORTD=12
+ALIAS_PORTD_IN=13
+PIND=13
+
+'PortF
+ALIAS_PORTF_DIR=17
+DDRF=17
+ALIAS_PORTF_OUT=18
+PORTF=18
+ALIAS_PORTF_IN=19
+PINF=19
+
+'Additional Aliases are required
+ALIAS_CPU_SPL=61    
+CPU_SPL=61    
+ALIAS_CPU_SPH=62                                                                                     
+CPU_SPH=62 
+'Additional lock register alias
+ALIAS_CPU_CCP=52                                  ; 0034
+CPU_CCP=52                                        ; 0034
+'Required register
+SREG=63                                           ; 003F alias
+
+[Registers]
+'For specific details of the registers see the microcontroller datasheet
+'The first parameter is the GCBASIC register name used in user code to expose the specific register
+AC0_CTRLA,1664
+AC0_MUXCTRL,1666
+AC0_DACREF,1669
+AC0_INTCTRL,1670
+AC0_STATUS,1671
+ADC0_CTRLA,1536
+ADC0_CTRLB,1537
+ADC0_CTRLC,1538
+ADC0_CTRLD,1539
+ADC0_CTRLE,1540
+ADC0_SAMPCTRL,1541
+ADC0_MUXPOS,1544
+ADC0_MUXNEG,1545
+ADC0_COMMAND,1546
+ADC0_EVCTRL,1547
+ADC0_INTCTRL,1548
+ADC0_INTFLAGS,1549
+ADC0_DBGCTRL,1550
+ADC0_TEMP,1551
+ADC0_RES,1552
+ADC0_RESL,1552
+ADC0_RESH,1553
+ADC0_WINLT,1554
+ADC0_WINLTL,1554
+ADC0_WINLTH,1555
+ADC0_WINHT,1556
+ADC0_WINHTL,1556
+ADC0_WINHTH,1557
+BOD_CTRLA,160
+BOD_CTRLB,161
+BOD_VLMCTRLA,168
+BOD_INTCTRL,169
+BOD_INTFLAGS,170
+BOD_STATUS,171
+CCL_CTRLA,448
+CCL_SEQCTRL0,449
+CCL_SEQCTRL1,450
+CCL_INTCTRL0,453
+CCL_INTFLAGS,455
+CCL_LUT0CTRLA,456
+CCL_LUT0CTRLB,457
+CCL_LUT0CTRLC,458
+CCL_TRUTH0,459
+CCL_LUT1CTRLA,460
+CCL_LUT1CTRLB,461
+CCL_LUT1CTRLC,462
+CCL_TRUTH1,463
+CCL_LUT2CTRLA,464
+CCL_LUT2CTRLB,465
+CCL_LUT2CTRLC,466
+CCL_TRUTH2,467
+CCL_LUT3CTRLA,468
+CCL_LUT3CTRLB,469
+CCL_LUT3CTRLC,470
+CCL_TRUTH3,471
+CLKCTRL_MCLKCTRLA,96
+CLKCTRL_MCLKCTRLB,97
+CLKCTRL_MCLKCTRLC,98
+CLKCTRL_MCLKINTCTRL,99
+CLKCTRL_MCLKINTFLAGS,100
+CLKCTRL_MCLKSTATUS,101
+CLKCTRL_OSCHFCTRLA,104
+CLKCTRL_OSCHFTUNE,105
+CLKCTRL_PLLCTRLA,112
+CLKCTRL_OSC32KCTRLA,120
+CLKCTRL_XOSC32KCTRLA,124
+CLKCTRL_XOSCHFCTRLA,128
+CPU_CCP,52
+CPU_SP,61
+; .equ CPU_SPL = 0x003D                    ; Stack Pointer low byte a duplicate or resevered register or ALIAS_
+; .equ CPU_SPH = 0x003E                    ; Stack Pointer hi byte a duplicate or resevered register or ALIAS_
+CPU_SREG,63
+CPUINT_CTRLA,272
+CPUINT_STATUS,273
+CPUINT_LVL0PRI,274
+CPUINT_LVL1VEC,275
+CRCSCAN_CTRLA,288
+CRCSCAN_CTRLB,289
+CRCSCAN_STATUS,290
+DAC0_CTRLA,1696
+DAC0_DATA,1698
+DAC0_DATAL,1698
+DAC0_DATAH,1699
+EVSYS_SWEVENTA,512
+EVSYS_SWEVENTB,513
+EVSYS_CHANNEL0,528
+EVSYS_CHANNEL1,529
+EVSYS_CHANNEL2,530
+EVSYS_CHANNEL3,531
+EVSYS_CHANNEL4,532
+EVSYS_CHANNEL5,533
+EVSYS_USERCCLLUT0A,544
+EVSYS_USERCCLLUT0B,545
+EVSYS_USERCCLLUT1A,546
+EVSYS_USERCCLLUT1B,547
+EVSYS_USERCCLLUT2A,548
+EVSYS_USERCCLLUT2B,549
+EVSYS_USERCCLLUT3A,550
+EVSYS_USERCCLLUT3B,551
+EVSYS_USERADC0START,552
+EVSYS_USEREVSYSEVOUTA,553
+EVSYS_USEREVSYSEVOUTC,554
+EVSYS_USEREVSYSEVOUTD,555
+EVSYS_USEREVSYSEVOUTF,556
+EVSYS_USERUSART0IRDA,557
+EVSYS_USERUSART1IRDA,558
+EVSYS_USERTCA0CNTA,559
+EVSYS_USERTCA0CNTB,560
+EVSYS_USERTCB0CAPT,561
+EVSYS_USERTCB0COUNT,562
+EVSYS_USERTCB1CAPT,563
+EVSYS_USERTCB1COUNT,564
+EVSYS_USERTCB2CAPT,565
+EVSYS_USERTCB2COUNT,566
+EVSYS_USERTCD0INPUTA,567
+EVSYS_USERTCD0INPUTB,568
+FUSE_WDTCFG,4176
+FUSE_BODCFG,4177
+FUSE_OSCCFG,4178
+FUSE_SYSCFG0,4181
+FUSE_SYSCFG1,4182
+FUSE_CODESIZE,4183
+FUSE_BOOTSIZE,4184
+GPR_GPR0,28
+GPR_GPR1,29
+GPR_GPR2,30
+GPR_GPR3,31
+LOCK_KEY,4160
+LOCK_KEY0,4160
+LOCK_KEY1,4161
+LOCK_KEY2,4162
+LOCK_KEY3,4163
+MVIO_INTCTRL,192
+MVIO_INTFLAGS,193
+MVIO_STATUS,194
+NVMCTRL_CTRLA,4096
+NVMCTRL_CTRLB,4097
+NVMCTRL_STATUS,4098
+NVMCTRL_INTCTRL,4099
+NVMCTRL_INTFLAGS,4100
+NVMCTRL_DATA,4102
+NVMCTRL_DATAL,4102
+NVMCTRL_DATAH,4103
+NVMCTRL_ADDR,4104
+NVMCTRL_ADDR0,4104
+NVMCTRL_ADDR1,4105
+NVMCTRL_ADDR2,4106
+NVMCTRL_ADDR3,4107
+PORTA_DIR,1024
+PORTA_DIRSET,1025
+PORTA_DIRCLR,1026
+PORTA_DIRTGL,1027
+PORTA_OUT,1028
+PORTA_OUTSET,1029
+PORTA_OUTCLR,1030
+PORTA_OUTTGL,1031
+PORTA_IN,1032
+PORTA_INTFLAGS,1033
+PORTA_PORTCTRL,1034
+PORTA_PINCONFIG,1035
+PORTA_PINCTRLUPD,1036
+PORTA_PINCTRLSET,1037
+PORTA_PINCTRLCLR,1038
+PORTA_PIN0CTRL,1040
+PORTA_PIN1CTRL,1041
+PORTA_PIN2CTRL,1042
+PORTA_PIN3CTRL,1043
+PORTA_PIN4CTRL,1044
+PORTA_PIN5CTRL,1045
+PORTA_PIN6CTRL,1046
+PORTA_PIN7CTRL,1047
+PORTC_DIR,1088
+PORTC_DIRSET,1089
+PORTC_DIRCLR,1090
+PORTC_DIRTGL,1091
+PORTC_OUT,1092
+PORTC_OUTSET,1093
+PORTC_OUTCLR,1094
+PORTC_OUTTGL,1095
+PORTC_IN,1096
+PORTC_INTFLAGS,1097
+PORTC_PORTCTRL,1098
+PORTC_PINCONFIG,1099
+PORTC_PINCTRLUPD,1100
+PORTC_PINCTRLSET,1101
+PORTC_PINCTRLCLR,1102
+PORTC_PIN0CTRL,1104
+PORTC_PIN1CTRL,1105
+PORTC_PIN2CTRL,1106
+PORTC_PIN3CTRL,1107
+PORTC_PIN4CTRL,1108
+PORTC_PIN5CTRL,1109
+PORTC_PIN6CTRL,1110
+PORTC_PIN7CTRL,1111
+PORTD_DIR,1120
+PORTD_DIRSET,1121
+PORTD_DIRCLR,1122
+PORTD_DIRTGL,1123
+PORTD_OUT,1124
+PORTD_OUTSET,1125
+PORTD_OUTCLR,1126
+PORTD_OUTTGL,1127
+PORTD_IN,1128
+PORTD_INTFLAGS,1129
+PORTD_PORTCTRL,1130
+PORTD_PINCONFIG,1131
+PORTD_PINCTRLUPD,1132
+PORTD_PINCTRLSET,1133
+PORTD_PINCTRLCLR,1134
+PORTD_PIN0CTRL,1136
+PORTD_PIN1CTRL,1137
+PORTD_PIN2CTRL,1138
+PORTD_PIN3CTRL,1139
+PORTD_PIN4CTRL,1140
+PORTD_PIN5CTRL,1141
+PORTD_PIN6CTRL,1142
+PORTD_PIN7CTRL,1143
+PORTF_DIR,1184
+PORTF_DIRSET,1185
+PORTF_DIRCLR,1186
+PORTF_DIRTGL,1187
+PORTF_OUT,1188
+PORTF_OUTSET,1189
+PORTF_OUTCLR,1190
+PORTF_OUTTGL,1191
+PORTF_IN,1192
+PORTF_INTFLAGS,1193
+PORTF_PORTCTRL,1194
+PORTF_PINCONFIG,1195
+PORTF_PINCTRLUPD,1196
+PORTF_PINCTRLSET,1197
+PORTF_PINCTRLCLR,1198
+PORTF_PIN0CTRL,1200
+PORTF_PIN1CTRL,1201
+PORTF_PIN2CTRL,1202
+PORTF_PIN3CTRL,1203
+PORTF_PIN4CTRL,1204
+PORTF_PIN5CTRL,1205
+PORTF_PIN6CTRL,1206
+PORTF_PIN7CTRL,1207
+PORTMUX_EVSYSROUTEA,1504
+PORTMUX_CCLROUTEA,1505
+PORTMUX_USARTROUTEA,1506
+PORTMUX_SPIROUTEA,1509
+PORTMUX_TWIROUTEA,1510
+PORTMUX_TCAROUTEA,1511
+PORTMUX_TCBROUTEA,1512
+PORTMUX_TCDROUTEA,1513
+RSTCTRL_RSTFR,64
+RSTCTRL_SWRR,65
+RTC_CTRLA,320
+RTC_STATUS,321
+RTC_INTCTRL,322
+RTC_INTFLAGS,323
+RTC_TEMP,324
+RTC_DBGCTRL,325
+RTC_CALIB,326
+RTC_CLKSEL,327
+RTC_CNT,328
+RTC_CNTL,328
+RTC_CNTH,329
+RTC_PER,330
+RTC_PERL,330
+RTC_PERH,331
+; .equ RTC_CMP = 0x014C                    ; Compare a duplicate or resevered register or ALIAS_
+; .equ RTC_CMPL = 0x014C                   ; Compare low byte a duplicate or resevered register or ALIAS_
+; .equ RTC_CMPH = 0x014D                   ; Compare hi byte a duplicate or resevered register or ALIAS_
+RTC_PITCTRLA,336
+RTC_PITSTATUS,337
+RTC_PITINTCTRL,338
+RTC_PITINTFLAGS,339
+RTC_PITDBGCTRL,341
+SIGROW_DEVICEID0,4352
+SIGROW_DEVICEID1,4353
+SIGROW_DEVICEID2,4354
+SIGROW_TEMPSENSE0,4356
+SIGROW_TEMPSENSE0L,4356
+SIGROW_TEMPSENSE0H,4357
+SIGROW_TEMPSENSE1,4358
+SIGROW_TEMPSENSE1L,4358
+SIGROW_TEMPSENSE1H,4359
+SIGROW_SERNUM0,4368
+SIGROW_SERNUM1,4369
+SIGROW_SERNUM2,4370
+SIGROW_SERNUM3,4371
+SIGROW_SERNUM4,4372
+SIGROW_SERNUM5,4373
+SIGROW_SERNUM6,4374
+SIGROW_SERNUM7,4375
+SIGROW_SERNUM8,4376
+SIGROW_SERNUM9,4377
+SIGROW_SERNUM10,4378
+SIGROW_SERNUM11,4379
+SIGROW_SERNUM12,4380
+SIGROW_SERNUM13,4381
+SIGROW_SERNUM14,4382
+SIGROW_SERNUM15,4383
+SLPCTRL_CTRLA,80
+SLPCTRL_VREGCTRL,81
+SPI0_CTRLA,2368
+SPI0_CTRLB,2369
+SPI0_INTCTRL,2370
+SPI0_INTFLAGS,2371
+SPI0_DATA,2372
+SYSCFG_REVID,3841
+SYSCFG_OCDMCTRL,3844
+SYSCFG_OCDMSTATUS,3845
+TCA0_SINGLE_CTRLA,2560
+TCA0_SPLIT_CTRLA,2560
+TCA0_SINGLE_CTRLB,2561
+TCA0_SPLIT_CTRLB,2561
+TCA0_SINGLE_CTRLC,2562
+TCA0_SPLIT_CTRLC,2562
+TCA0_SINGLE_CTRLD,2563
+TCA0_SPLIT_CTRLD,2563
+TCA0_SINGLE_CTRLECLR,2564
+TCA0_SPLIT_CTRLECLR,2564
+TCA0_SINGLE_CTRLESET,2565
+TCA0_SPLIT_CTRLESET,2565
+TCA0_SINGLE_CTRLFCLR,2566
+TCA0_SINGLE_CTRLFSET,2567
+TCA0_SINGLE_EVCTRL,2569
+TCA0_SINGLE_INTCTRL,2570
+TCA0_SPLIT_INTCTRL,2570
+TCA0_SINGLE_INTFLAGS,2571
+TCA0_SPLIT_INTFLAGS,2571
+TCA0_SINGLE_DBGCTRL,2574
+TCA0_SPLIT_DBGCTRL,2574
+TCA0_SINGLE_TEMP,2575
+TCA0_SINGLE_CNT,2592
+TCA0_SINGLE_CNTL,2592
+TCA0_SINGLE_CNTH,2593
+TCA0_SPLIT_LCNT,2592
+TCA0_SPLIT_HCNT,2593
+TCA0_SINGLE_PER,2598
+TCA0_SINGLE_PERL,2598
+TCA0_SINGLE_PERH,2599
+TCA0_SPLIT_LPER,2598
+TCA0_SPLIT_HPER,2599
+TCA0_SINGLE_CMP0,2600
+TCA0_SINGLE_CMP0L,2600
+TCA0_SINGLE_CMP0H,2601
+TCA0_SPLIT_LCMP0,2600
+TCA0_SPLIT_HCMP0,2601
+TCA0_SINGLE_CMP1,2602
+TCA0_SINGLE_CMP1L,2602
+TCA0_SINGLE_CMP1H,2603
+TCA0_SPLIT_LCMP1,2602
+TCA0_SPLIT_HCMP1,2603
+TCA0_SINGLE_CMP2,2604
+TCA0_SINGLE_CMP2L,2604
+TCA0_SINGLE_CMP2H,2605
+TCA0_SPLIT_LCMP2,2604
+TCA0_SPLIT_HCMP2,2605
+TCA0_SINGLE_PERBUF,2614
+TCA0_SINGLE_PERBUFL,2614
+TCA0_SINGLE_PERBUFH,2615
+TCA0_SINGLE_CMP0BUF,2616
+TCA0_SINGLE_CMP0BUFL,2616
+TCA0_SINGLE_CMP0BUFH,2617
+TCA0_SINGLE_CMP1BUF,2618
+TCA0_SINGLE_CMP1BUFL,2618
+TCA0_SINGLE_CMP1BUFH,2619
+TCA0_SINGLE_CMP2BUF,2620
+TCA0_SINGLE_CMP2BUFL,2620
+TCA0_SINGLE_CMP2BUFH,2621
+TCB0_CTRLA,2816
+TCB0_CTRLB,2817
+TCB0_EVCTRL,2820
+TCB0_INTCTRL,2821
+TCB0_INTFLAGS,2822
+TCB0_STATUS,2823
+TCB0_DBGCTRL,2824
+TCB0_TEMP,2825
+TCB0_CNT,2826
+TCB0_CNTL,2826
+TCB0_CNTH,2827
+TCB0_CCMP,2828
+TCB0_CCMPL,2828
+TCB0_CCMPH,2829
+TCB1_CTRLA,2832
+TCB1_CTRLB,2833
+TCB1_EVCTRL,2836
+TCB1_INTCTRL,2837
+TCB1_INTFLAGS,2838
+TCB1_STATUS,2839
+TCB1_DBGCTRL,2840
+TCB1_TEMP,2841
+TCB1_CNT,2842
+TCB1_CNTL,2842
+TCB1_CNTH,2843
+TCB1_CCMP,2844
+TCB1_CCMPL,2844
+TCB1_CCMPH,2845
+TCB2_CTRLA,2848
+TCB2_CTRLB,2849
+TCB2_EVCTRL,2852
+TCB2_INTCTRL,2853
+TCB2_INTFLAGS,2854
+TCB2_STATUS,2855
+TCB2_DBGCTRL,2856
+TCB2_TEMP,2857
+TCB2_CNT,2858
+TCB2_CNTL,2858
+TCB2_CNTH,2859
+TCB2_CCMP,2860
+TCB2_CCMPL,2860
+TCB2_CCMPH,2861
+TCD0_CTRLA,2944
+TCD0_CTRLB,2945
+TCD0_CTRLC,2946
+TCD0_CTRLD,2947
+TCD0_CTRLE,2948
+TCD0_EVCTRLA,2952
+TCD0_EVCTRLB,2953
+TCD0_INTCTRL,2956
+TCD0_INTFLAGS,2957
+TCD0_STATUS,2958
+TCD0_INPUTCTRLA,2960
+TCD0_INPUTCTRLB,2961
+TCD0_FAULTCTRL,2962
+TCD0_DLYCTRL,2964
+TCD0_DLYVAL,2965
+TCD0_DITCTRL,2968
+TCD0_DITVAL,2969
+TCD0_DBGCTRL,2974
+TCD0_CAPTUREA,2978
+TCD0_CAPTUREAL,2978
+TCD0_CAPTUREAH,2979
+TCD0_CAPTUREB,2980
+TCD0_CAPTUREBL,2980
+TCD0_CAPTUREBH,2981
+TCD0_CMPASET,2984
+TCD0_CMPASETL,2984
+TCD0_CMPASETH,2985
+TCD0_CMPACLR,2986
+TCD0_CMPACLRL,2986
+TCD0_CMPACLRH,2987
+TCD0_CMPBSET,2988
+TCD0_CMPBSETL,2988
+TCD0_CMPBSETH,2989
+TCD0_CMPBCLR,2990
+TCD0_CMPBCLRL,2990
+TCD0_CMPBCLRH,2991
+TWI0_CTRLA,2304
+TWI0_DUALCTRL,2305
+TWI0_DBGCTRL,2306
+TWI0_MCTRLA,2307
+TWI0_MCTRLB,2308
+TWI0_MSTATUS,2309
+TWI0_MBAUD,2310
+TWI0_MADDR,2311
+TWI0_MDATA,2312
+TWI0_SCTRLA,2313
+TWI0_SCTRLB,2314
+TWI0_SSTATUS,2315
+TWI0_SADDR,2316
+TWI0_SDATA,2317
+TWI0_SADDRMASK,2318
+USART0_RXDATAL,2048
+USART0_RXDATAH,2049
+USART0_TXDATAL,2050
+USART0_TXDATAH,2051
+USART0_STATUS,2052
+USART0_CTRLA,2053
+USART0_CTRLB,2054
+USART0_CTRLC,2055
+USART0_BAUD,2056
+USART0_BAUDL,2056
+USART0_BAUDH,2057
+USART0_CTRLD,2058
+USART0_DBGCTRL,2059
+USART0_EVCTRL,2060
+USART0_TXPLCTRL,2061
+USART0_RXPLCTRL,2062
+USART1_RXDATAL,2080
+USART1_RXDATAH,2081
+USART1_TXDATAL,2082
+USART1_TXDATAH,2083
+USART1_STATUS,2084
+USART1_CTRLA,2085
+USART1_CTRLB,2086
+USART1_CTRLC,2087
+USART1_BAUD,2088
+USART1_BAUDL,2088
+USART1_BAUDH,2089
+USART1_CTRLD,2090
+USART1_DBGCTRL,2091
+USART1_EVCTRL,2092
+USART1_TXPLCTRL,2093
+USART1_RXPLCTRL,2094
+USERROW_USERROW0,4224
+USERROW_USERROW1,4225
+USERROW_USERROW2,4226
+USERROW_USERROW3,4227
+USERROW_USERROW4,4228
+USERROW_USERROW5,4229
+USERROW_USERROW6,4230
+USERROW_USERROW7,4231
+USERROW_USERROW8,4232
+USERROW_USERROW9,4233
+USERROW_USERROW10,4234
+USERROW_USERROW11,4235
+USERROW_USERROW12,4236
+USERROW_USERROW13,4237
+USERROW_USERROW14,4238
+USERROW_USERROW15,4239
+USERROW_USERROW16,4240
+USERROW_USERROW17,4241
+USERROW_USERROW18,4242
+USERROW_USERROW19,4243
+USERROW_USERROW20,4244
+USERROW_USERROW21,4245
+USERROW_USERROW22,4246
+USERROW_USERROW23,4247
+USERROW_USERROW24,4248
+USERROW_USERROW25,4249
+USERROW_USERROW26,4250
+USERROW_USERROW27,4251
+USERROW_USERROW28,4252
+USERROW_USERROW29,4253
+USERROW_USERROW30,4254
+USERROW_USERROW31,4255
+VPORTA_DIR,0
+VPORTA_OUT,1
+VPORTA_IN,2
+VPORTA_INTFLAGS,3
+VPORTC_DIR,8
+VPORTC_OUT,9
+VPORTC_IN,10
+VPORTC_INTFLAGS,11
+VPORTD_DIR,12
+VPORTD_OUT,13
+VPORTD_IN,14
+VPORTD_INTFLAGS,15
+VPORTF_DIR,20
+VPORTF_OUT,21
+VPORTF_IN,22
+VPORTF_INTFLAGS,23
+VREF_ADC0REF,176
+VREF_DAC0REF,178
+VREF_ACREF,180
+WDT_CTRLA,256
+WDT_STATUS,257
+ZCD3_CTRLA,1752
+ZCD3_INTCTRL,1754
+ZCD3_STATUS,1755
+
+[Bits]
+'For details of the bits (relative to a register in terms of registerbits) see the microcontroller datasheet
+'The first parameter is the GCBASIC bit name used in user code to expose the specific registerbit
+AC_ENABLE,AC,0			'  Enable bit position
+AC_OUTEN,AC,6			'  Output Pad Enable bit position
+AC_RUNSTDBY,AC,7			'  Run in Standby Mode bit position
+AC_INITVAL,AC,6			'  AC Output Initial Value bit position
+AC_INVERT,AC,7			'  Invert AC Output bit position
+AC_CMP,AC,0			'  Interrupt Enable bit position
+AC_CMPIF,AC,0			'  Analog Comparator Interrupt Flag bit position
+AC_CMPSTATE,AC,4			'  Analog Comparator State bit position
+ADC_ENABLE,ADC,0			'  ADC Enable bit position
+ADC_FREERUN,ADC,1			'  Free running mode bit position
+ADC_LEFTADJ,ADC,4			'  Left adjust result bit position
+ADC_CONVMODE,ADC,5			'  Conversion mode bit position
+ADC_RUNSTBY,ADC,7			'  Run standby mode bit position
+ADC_STCONV,ADC,0			'  Start Conversion bit position
+ADC_SPCONV,ADC,1			'  Stop Conversion bit position
+ADC_STARTEI,ADC,0			'  Start Event Input Enable bit position
+ADC_RESRDY,ADC,0			'  Result Ready Interrupt Enable bit position
+ADC_WCMP,ADC,1			'  Window Comparator Interrupt Enable bit position
+ADC_DBGRUN,ADC,0			'  Debug run bit position
+BOD_SAMPFREQ,BOD,4			'  Sample frequency bit position
+BOD_VLMIE,BOD,0			'  voltage level monitor interrrupt enable bit position
+BOD_VLMIF,BOD,0			'  Voltage level monitor interrupt flag bit position
+BOD_VLMS,BOD,0			'  Voltage level monitor status bit position
+CCL_ENABLE,CCL,0			'  Enable bit position
+CCL_RUNSTDBY,CCL,6			'  Run in Standby bit position
+CCL_OUTEN,CCL,6			'  Output Enable bit position
+CCL_EDGEDET,CCL,7			'  Edge Detection Enable bit position
+CLKCTRL_CLKOUT,CLKCTRL,7			'  System clock out bit position
+CLKCTRL_PEN,CLKCTRL,0			'  Prescaler enable bit position
+CLKCTRL_CFDEN,CLKCTRL,0			'  Clock Failure Detect Enable bit position
+CLKCTRL_CFDTST,CLKCTRL,1			'  Clock Failure Detect Test bit position
+CLKCTRL_CFD,CLKCTRL,0			'  Clock Failure Detect Interrupt Enable bit position
+CLKCTRL_INTTYPE,CLKCTRL,7			'  Interrupt type bit position
+CLKCTRL_SOSC,CLKCTRL,0			'  System Oscillator changing bit position
+CLKCTRL_OSCHFS,CLKCTRL,1			'  High frequency oscillator status bit position
+CLKCTRL_OSC32KS,CLKCTRL,2			'  32KHz oscillator status bit position
+CLKCTRL_XOSC32KS,CLKCTRL,3			'  32.768 kHz Crystal Oscillator status bit position
+CLKCTRL_EXTS,CLKCTRL,4			'  External Clock status bit position
+CLKCTRL_PLLS,CLKCTRL,5			'  PLL oscillator status bit position
+CLKCTRL_AUTOTUNE,CLKCTRL,0			'  Autotune bit position
+CLKCTRL_RUNSTDBY,CLKCTRL,7			'  Run standby bit position
+CLKCTRL_SOURCE,CLKCTRL,6			'  Source bit position
+CLKCTRL_ENABLE,CLKCTRL,0			'  Enable bit position
+CLKCTRL_LPMODE,CLKCTRL,1			'  Low power mode bit position
+CLKCTRL_SEL,CLKCTRL,2			'  Select bit position
+CLKCTRL_SELHF,CLKCTRL,1			'  External Source Select bit position
+CLKCTRL_RUNSTBY,CLKCTRL,7			'  Run Standby bit position
+CPU_C,CPU,0			'  Carry Flag bit position
+CPU_Z,CPU,1			'  Zero Flag bit position
+CPU_N,CPU,2			'  Negative Flag bit position
+CPU_V,CPU,3			'  Two's Complement Overflow Flag bit position
+CPU_S,CPU,4			'  N Exclusive Or V Flag bit position
+CPU_H,CPU,5			'  Half Carry Flag bit position
+CPU_T,CPU,6			'  Transfer Bit bit position
+CPU_I,CPU,7			'  Global Interrupt Enable Flag bit position
+CPUINT_LVL0RR,CPUINT,0			'  Round-robin Scheduling Enable bit position
+CPUINT_CVT,CPUINT,5			'  Compact Vector Table bit position
+CPUINT_IVSEL,CPUINT,6			'  Interrupt Vector Select bit position
+CPUINT_LVL0EX,CPUINT,0			'  Level 0 Interrupt Executing bit position
+CPUINT_LVL1EX,CPUINT,1			'  Level 1 Interrupt Executing bit position
+CPUINT_NMIEX,CPUINT,7			'  Non-maskable Interrupt Executing bit position
+CRCSCAN_ENABLE,CRCSCAN,0			'  Enable CRC scan bit position
+CRCSCAN_NMIEN,CRCSCAN,1			'  Enable NMI Trigger bit position
+CRCSCAN_RESET,CRCSCAN,7			'  Reset CRC scan bit position
+CRCSCAN_BUSY,CRCSCAN,0			'  CRC Busy bit position
+CRCSCAN_OK,CRCSCAN,1			'  CRC Ok bit position
+DAC_ENABLE,DAC,0			'  DAC Enable bit position
+DAC_OUTEN,DAC,6			'  Output Buffer Enable bit position
+DAC_RUNSTDBY,DAC,7			'  Run in Standby Mode bit position
+FUSE_SAMPFREQ,FUSE,4			'  BOD Sample Frequency bit position
+FUSE_EESAVE,FUSE,0			'  EEPROM Save bit position
+FUSE_RSTPINCFG,FUSE,3			'  Reset Pin Configuration bit position
+FUSE_UPDIPINCFG,FUSE,4			'  UPDI Pin Configuration bit position
+FUSE_CRCSEL,FUSE,5			'  CRC Select bit position
+MVIO_VDDIO2IE,MVIO,0			'  VDDIO2 Interrupt Enable bit position
+MVIO_VDDIO2IF,MVIO,0			'  VDDIO2 Interrupt Flag bit position
+MVIO_VDDIO2S,MVIO,0			'  VDDIO2 Status bit position
+NVMCTRL_APPCODEWP,NVMCTRL,0			'  Application Code Write Protect bit position
+NVMCTRL_BOOTRP,NVMCTRL,1			'  Boot Read Protect bit position
+NVMCTRL_APPDATAWP,NVMCTRL,2			'  Application Data Write Protect bit position
+NVMCTRL_FLMAPLOCK,NVMCTRL,7			'  Flash Mapping Lock bit position
+NVMCTRL_FBUSY,NVMCTRL,0			'  Flash busy bit position
+NVMCTRL_EEBUSY,NVMCTRL,1			'  EEPROM busy bit position
+NVMCTRL_EEREADY,NVMCTRL,0			'  EEPROM Ready bit position
+PORT_SRL,PORT,0			'  Slew Rate Limit Enable bit position
+PORT_PULLUPEN,PORT,3			'  Pullup enable bit position
+PORT_INLVL,PORT,6			'  Input level select bit position
+PORT_INVEN,PORT,7			'  Inverted I/O Enable bit position
+PORTMUX_EVOUTA,PORTMUX,0			'  Event Output A bit position
+PORTMUX_EVOUTC,PORTMUX,2			'  Event Output C bit position
+PORTMUX_EVOUTD,PORTMUX,3			'  Event Output D bit position
+PORTMUX_EVOUTF,PORTMUX,5			'  Event Output F bit position
+PORTMUX_LUT0,PORTMUX,0			'  CCL Look-Up Table 0 Signals bit position
+PORTMUX_LUT1,PORTMUX,1			'  CCL Look-Up Table 1 Signals bit position
+PORTMUX_LUT2,PORTMUX,2			'  CCL Look-Up Table 2 Signals bit position
+PORTMUX_LUT3,PORTMUX,3			'  CCL Look-Up Table 3 Signals bit position
+PORTMUX_TCB0,PORTMUX,0			'  TCB0 Output bit position
+PORTMUX_TCB1,PORTMUX,1			'  TCB1 Output bit position
+RSTCTRL_PORF,RSTCTRL,0			'  Power on Reset flag bit position
+RSTCTRL_BORF,RSTCTRL,1			'  Brown out detector Reset flag bit position
+RSTCTRL_EXTRF,RSTCTRL,2			'  External Reset flag bit position
+RSTCTRL_WDRF,RSTCTRL,3			'  Watch dog Reset flag bit position
+RSTCTRL_SWRF,RSTCTRL,4			'  Software Reset flag bit position
+RSTCTRL_UPDIRF,RSTCTRL,5			'  UPDI Reset flag bit position
+RSTCTRL_SWRST,RSTCTRL,0			'  Software reset enable bit position
+RTC_RTCEN,RTC,0			'  Enable bit position
+RTC_CORREN,RTC,2			'  Correction enable bit position
+RTC_RUNSTDBY,RTC,7			'  Run In Standby bit position
+RTC_CTRLABUSY,RTC,0			'  CTRLA Synchronization Busy Flag bit position
+RTC_CNTBUSY,RTC,1			'  Count Synchronization Busy Flag bit position
+RTC_PERBUSY,RTC,2			'  Period Synchronization Busy Flag bit position
+RTC_CMPBUSY,RTC,3			'  Comparator Synchronization Busy Flag bit position
+RTC_OVF,RTC,0			'  Overflow Interrupt enable bit position
+RTC_CMP,RTC,1			'  Compare Match Interrupt enable bit position
+RTC_DBGRUN,RTC,0			'  Run in debug bit position
+RTC_SIGN,RTC,7			'  Error Correction Sign Bit bit position
+RTC_PITEN,RTC,0			'  Enable bit position
+RTC_CTRLBUSY,RTC,0			'  CTRLA Synchronization Busy Flag bit position
+RTC_PI,RTC,0			'  Periodic Interrupt bit position
+SLPCTRL_SEN,SLPCTRL,0			'  Sleep enable bit position
+SLPCTRL_HTLLEN,SLPCTRL,4			'  High Temperature Low Leakage Enable bit position
+SPI_ENABLE,SPI,0			'  Enable Module bit position
+SPI_CLK2X,SPI,4			'  Enable Double Speed bit position
+SPI_MASTER,SPI,5			'  Host Operation Enable bit position
+SPI_DORD,SPI,6			'  Data Order Setting bit position
+SPI_SSD,SPI,2			'  SPI Select Disable bit position
+SPI_BUFWR,SPI,6			'  Buffer Mode Wait for Receive bit position
+SPI_BUFEN,SPI,7			'  Buffer Mode Enable bit position
+SPI_IE,SPI,0			'  Interrupt Enable bit position
+SPI_SSIE,SPI,4			'  SPI Select Trigger Interrupt Enable bit position
+SPI_DREIE,SPI,5			'  Data Register Empty Interrupt Enable bit position
+SPI_TXCIE,SPI,6			'  Transfer Complete Interrupt Enable bit position
+SPI_RXCIE,SPI,7			'  Receive Complete Interrupt Enable bit position
+SPI_BUFOVF,SPI,0			'  Buffer Overflow bit position
+SPI_SSIF,SPI,4			'  SPI Select Trigger Interrupt Flag bit position
+SPI_DREIF,SPI,5			'  Data Register Empty Interrupt Flag bit position
+SPI_TXCIF,SPI,6			'  Transfer Complete Interrupt Flag bit position
+SPI_WRCOL,SPI,6			'  Write Collision bit position
+SPI_RXCIF,SPI,7			'  Receive Complete Interrupt Flag bit position
+SPI_IF,SPI,7			'  Interrupt Flag bit position
+SYSCFG_VALID,SYSCFG,0			'  OCD Message Valid bit position
+TCA_SINGLE_ENABLE,TCA,0			'  Module Enable bit position
+TCA_SINGLE_RUNSTDBY,TCA,7			'  Run in Standby bit position
+TCA_SINGLE_ALUPD,TCA,3			'  Auto Lock Update bit position
+TCA_SINGLE_CMP0EN,TCA,4			'  Compare 0 Enable bit position
+TCA_SINGLE_CMP1EN,TCA,5			'  Compare 1 Enable bit position
+TCA_SINGLE_CMP2EN,TCA,6			'  Compare 2 Enable bit position
+TCA_SINGLE_CMP0OV,TCA,0			'  Compare 0 Waveform Output Value bit position
+TCA_SINGLE_CMP1OV,TCA,1			'  Compare 1 Waveform Output Value bit position
+TCA_SINGLE_CMP2OV,TCA,2			'  Compare 2 Waveform Output Value bit position
+TCA_SINGLE_SPLITM,TCA,0			'  Split Mode Enable bit position
+TCA_SINGLE_DIR,TCA,0			'  Direction bit position
+TCA_SINGLE_LUPD,TCA,1			'  Lock Update bit position
+TCA_SINGLE_PERBV,TCA,0			'  Period Buffer Valid bit position
+TCA_SINGLE_CMP0BV,TCA,1			'  Compare 0 Buffer Valid bit position
+TCA_SINGLE_CMP1BV,TCA,2			'  Compare 1 Buffer Valid bit position
+TCA_SINGLE_CMP2BV,TCA,3			'  Compare 2 Buffer Valid bit position
+TCA_SINGLE_CNTAEI,TCA,0			'  Count on Event Input A bit position
+TCA_SINGLE_CNTBEI,TCA,4			'  Count on Event Input B bit position
+TCA_SINGLE_OVF,TCA,0			'  Overflow Interrupt bit position
+TCA_SINGLE_CMP0,TCA,4			'  Compare 0 Interrupt bit position
+TCA_SINGLE_CMP1,TCA,5			'  Compare 1 Interrupt bit position
+TCA_SINGLE_CMP2,TCA,6			'  Compare 2 Interrupt bit position
+TCA_SINGLE_DBGRUN,TCA,0			'  Debug Run bit position
+TCA_SPLIT_ENABLE,for CTRLA already defined,0			'  Module Enable bit position
+TCA_SPLIT_RUNSTDBY,for CTRLA already defined,7			'  Run in Standby bit position
+TCA_SPLIT_LCMP0EN,TCA,0			'  Low Compare 0 Enable bit position
+TCA_SPLIT_LCMP1EN,TCA,1			'  Low Compare 1 Enable bit position
+TCA_SPLIT_LCMP2EN,TCA,2			'  Low Compare 2 Enable bit position
+TCA_SPLIT_HCMP0EN,TCA,4			'  High Compare 0 Enable bit position
+TCA_SPLIT_HCMP1EN,TCA,5			'  High Compare 1 Enable bit position
+TCA_SPLIT_HCMP2EN,TCA,6			'  High Compare 2 Enable bit position
+TCA_SPLIT_LCMP0OV,TCA,0			'  Low Compare 0 Output Value bit position
+TCA_SPLIT_LCMP1OV,TCA,1			'  Low Compare 1 Output Value bit position
+TCA_SPLIT_LCMP2OV,TCA,2			'  Low Compare 2 Output Value bit position
+TCA_SPLIT_HCMP0OV,TCA,4			'  High Compare 0 Output Value bit position
+TCA_SPLIT_HCMP1OV,TCA,5			'  High Compare 1 Output Value bit position
+TCA_SPLIT_HCMP2OV,TCA,6			'  High Compare 2 Output Value bit position
+TCA_SPLIT_SPLITM,TCA,0			'  Split Mode Enable bit position
+TCA_SPLIT_LUNF,TCA,0			'  Low Underflow Interrupt Enable bit position
+TCA_SPLIT_HUNF,TCA,1			'  High Underflow Interrupt Enable bit position
+TCA_SPLIT_LCMP0,TCA,4			'  Low Compare 0 Interrupt Enable bit position
+TCA_SPLIT_LCMP1,TCA,5			'  Low Compare 1 Interrupt Enable bit position
+TCA_SPLIT_LCMP2,TCA,6			'  Low Compare 2 Interrupt Enable bit position
+TCA_SPLIT_DBGRUN,TCA,0			'  Debug Run bit position
+TCB_ENABLE,TCB,0			'  Enable bit position
+TCB_SYNCUPD,TCB,4			'  Synchronize Update bit position
+TCB_CASCADE,TCB,5			'  Cascade two timers bit position
+TCB_RUNSTDBY,TCB,6			'  Run Standby bit position
+TCB_CCMPEN,TCB,4			'  Pin Output Enable bit position
+TCB_CCMPINIT,TCB,5			'  Pin Initial State bit position
+TCB_ASYNC,TCB,6			'  Asynchronous Enable bit position
+TCB_CAPTEI,TCB,0			'  Event Input Enable bit position
+TCB_EDGE,TCB,4			'  Event Edge bit position
+TCB_FILTER,TCB,6			'  Input Capture Noise Cancellation Filter bit position
+TCB_CAPT,TCB,0			'  Capture or Timeout bit position
+TCB_OVF,TCB,1			'  Overflow bit position
+TCB_RUN,TCB,0			'  Run bit position
+TCB_DBGRUN,TCB,0			'  Debug Run bit position
+TCD_ENABLE,TCD,0			'  Enable bit position
+TCD_CMPOVR,TCD,0			'  Compare output value override bit position
+TCD_AUPDATE,TCD,1			'  Auto update bit position
+TCD_FIFTY,TCD,3			'  Fifty percent waveform bit position
+TCD_CMPCSEL,TCD,6			'  Compare C output select bit position
+TCD_CMPDSEL,TCD,7			'  Compare D output select bit position
+TCD_SYNCEOC,TCD,0			'  Synchronize end of cycle strobe bit position
+TCD_SYNC,TCD,1			'  synchronize strobe bit position
+TCD_RESTART,TCD,2			'  Restart strobe bit position
+TCD_SCAPTUREA,TCD,3			'  Software Capture A Strobe bit position
+TCD_SCAPTUREB,TCD,4			'  Software Capture B Strobe bit position
+TCD_DISEOC,TCD,7			'  Disable at end of cycle bit position
+TCD_TRIGEI,TCD,0			'  Trigger event enable bit position
+TCD_ACTION,TCD,2			'  Event action bit position
+TCD_EDGE,TCD,4			'  Edge select bit position
+TCD_OVF,TCD,0			'  Overflow interrupt enable bit position
+TCD_TRIGA,TCD,2			'  Trigger A interrupt enable bit position
+TCD_TRIGB,TCD,3			'  Trigger B interrupt enable bit position
+TCD_ENRDY,TCD,0			'  Enable ready bit position
+TCD_CMDRDY,TCD,1			'  Command ready bit position
+TCD_PWMACTA,TCD,6			'  PWM activity on A bit position
+TCD_PWMACTB,TCD,7			'  PWM activity on B bit position
+TCD_CMPA,TCD,0			'  Compare A value bit position
+TCD_CMPB,TCD,1			'  Compare B value bit position
+TCD_CMPC,TCD,2			'  Compare C value bit position
+TCD_CMPD,TCD,3			'  Compare D vaule bit position
+TCD_CMPAEN,TCD,4			'  Compare A enable bit position
+TCD_CMPBEN,TCD,5			'  Compare B enable bit position
+TCD_CMPCEN,TCD,6			'  Compare C enable bit position
+TCD_CMPDEN,TCD,7			'  Compare D enable bit position
+TCD_DBGRUN,TCD,0			'  Debug run bit position
+TCD_FAULTDET,TCD,2			'  Fault detection bit position
+TWI_FMPEN,TWI,1			'  Fast-mode Plus Enable bit position
+TWI_SDASETUP,TWI,4			'  SDA Setup Time bit position
+TWI_INPUTLVL,TWI,6			'  Input voltage transition level bit position
+TWI_ENABLE,TWI,0			'  Enable bit position
+TWI_DBGRUN,TWI,0			'  Debug Run bit position
+TWI_SMEN,TWI,1			'  Smart Mode Enable bit position
+TWI_QCEN,TWI,4			'  Quick Command Enable bit position
+TWI_WIEN,TWI,6			'  Write Interrupt Enable bit position
+TWI_RIEN,TWI,7			'  Read Interrupt Enable bit position
+TWI_ACKACT,TWI,2			'  Acknowledge Action bit position
+TWI_FLUSH,TWI,3			'  Flush bit position
+TWI_BUSERR,TWI,2			'  Bus Error bit position
+TWI_ARBLOST,TWI,3			'  Arbitration Lost bit position
+TWI_RXACK,TWI,4			'  Received Acknowledge bit position
+TWI_CLKHOLD,TWI,5			'  Clock Hold bit position
+TWI_WIF,TWI,6			'  Write Interrupt Flag bit position
+TWI_RIF,TWI,7			'  Read Interrupt Flag bit position
+TWI_PMEN,TWI,2			'  Address Recognition Mode bit position
+TWI_PIEN,TWI,5			'  Stop Interrupt Enable bit position
+TWI_APIEN,TWI,6			'  Address or Stop Interrupt Enable bit position
+TWI_DIEN,TWI,7			'  Data Interrupt Enable bit position
+TWI_AP,TWI,0			'  Address or Stop bit position
+TWI_DIR,TWI,1			'  Read/Write Direction bit position
+TWI_COLL,TWI,3			'  Collision bit position
+TWI_APIF,TWI,6			'  Address or Stop Interrupt Flag bit position
+TWI_DIF,TWI,7			'  Data Interrupt Flag bit position
+TWI_ADDREN,TWI,0			'  Address Mask Enable bit position
+USART_DATA8,USART,0			'  Receiver Data Register bit position
+USART_PERR,USART,1			'  Parity Error bit position
+USART_FERR,USART,2			'  Frame Error bit position
+USART_BUFOVF,USART,6			'  Buffer Overflow bit position
+USART_RXCIF,USART,7			'  Receive Complete Interrupt Flag bit position
+USART_WFB,USART,0			'  Wait For Break bit position
+USART_BDF,USART,1			'  Break Detected Flag bit position
+USART_ISFIF,USART,3			'  Inconsistent Sync Field Interrupt Flag bit position
+USART_RXSIF,USART,4			'  Receive Start Interrupt bit position
+USART_DREIF,USART,5			'  Data Register Empty Flag bit position
+USART_TXCIF,USART,6			'  Transmit Interrupt Flag bit position
+USART_RS485,USART,0			'  RS485 Mode internal transmitter bit position
+USART_ABEIE,USART,2			'  Auto-baud Error Interrupt Enable bit position
+USART_LBME,USART,3			'  Loop-back Mode Enable bit position
+USART_RXSIE,USART,4			'  Receiver Start Frame Interrupt Enable bit position
+USART_DREIE,USART,5			'  Data Register Empty Interrupt Enable bit position
+USART_TXCIE,USART,6			'  Transmit Complete Interrupt Enable bit position
+USART_RXCIE,USART,7			'  Receive Complete Interrupt Enable bit position
+USART_MPCM,USART,0			'  Multi-processor Communication Mode bit position
+USART_ODME,USART,3			'  Open Drain Mode Enable bit position
+USART_SFDEN,USART,4			'  Start Frame Detection Enable bit position
+USART_TXEN,USART,6			'  Transmitter Enable bit position
+USART_RXEN,USART,7			'  Reciever enable bit position
+USART_UCPHA,USART,1			'  SPI Host Mode, Clock Phase bit position
+USART_UDORD,USART,2			'  SPI Host Mode, Data Order bit position
+USART_SBMODE,USART,3			'  Stop Bit Mode bit position
+USART_DBGRUN,USART,0			'  Debug Run bit position
+USART_IREI,USART,0			'  IrDA Event Input Enable bit position
+VREF_ALWAYSON,VREF,7			'  Always on bit position
+WDT_SYNCBUSY,WDT,0			'  Syncronization busy bit position
+WDT_LOCK,WDT,7			'  Lock enable bit position
+ZCD_ENABLE,ZCD,0			'  Enable bit position
+ZCD_INVERT,ZCD,3			'  Invert signal from pin bit position
+ZCD_OUTEN,ZCD,6			'  Output Pad Enable bit position
+ZCD_RUNSTDBY,ZCD,7			'  Run in Standby Mode bit position
+ZCD_CROSSIF,ZCD,0			'  ZCD Interrupt Flag bit position
+ZCD_STATE,ZCD,4			'  ZCD State bit position
+
+[FreeRAM]
+'This is the extent of the RAM.  Inclusive of start and end address
+6000:8000
+
+[ConfigOps]
+NoConfig-PRG
+
+[Config]
+NoConfig-PRG

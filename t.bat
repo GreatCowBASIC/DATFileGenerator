@@ -45,7 +45,6 @@ call do ATmega1609 mega1609
 call do ATmega3209 mega3209
 call do ATmega4809 mega4809
 
-:new
 call do avr128da28 	avr128da28	
 call do avr64da28 	avr64da28
 call do avr32da28	avr32da28
@@ -68,3 +67,17 @@ call do avr64db48	avr64db48
 call do avr32db48	avr32db48
 call do avr128db64	avr128db64
 call do avr64db64	avr64db64
+
+:new
+call do avr16dd14
+call do avr16dd20
+call do avr16dd28
+call do avr16dd32
+call do avr32dd14
+call do avr32dd20
+call do avr32dd28
+call do avr32dd32
+call do avr64dd14
+call do avr64dd20
+call do avr64dd28
+call do avr64dd32

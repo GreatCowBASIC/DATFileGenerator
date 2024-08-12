@@ -1113,7 +1113,7 @@ Sub PrintHeader
     Print ";        .DAT sections"
     Print ";=========================================================================="
     Print ";"
-    Print ";  Built by GcBASIC converter on : " + DATE
+    Print ";  Built by GCBASIC converter on : " + DATE
     Print ";  XC8 processor include for the chip shown below"
     Print ";"
     print "; Microchip IDE version " + kIDEVersion
