@@ -6,9 +6,9 @@
 ;
 ; Microchip IDE version 6.05
 ; C:\Users\admin\.mchp_packs\index.idx
-; C:\Users\admin\.mchp_packs\Microchip\AVR-Dx_DFP\2.6.303\avrasm\inc\AVR128DA48def.inc
+; C:\Users\admin\.mchp_packs\Microchip\AVR-Dx_DFP\2.6.303\avrasm\inc\AVR64DA64def.inc
 ; avr chipdata.csv
-; C:\Users\admin\.mchp_packs\Microchip\AVR-Dx_DFP\2.6.303\edc\ATAVR128DA48.PIC
+; C:\Users\admin\.mchp_packs\Microchip\AVR-Dx_DFP\2.6.303\edc\ATAVR64DA64.PIC
 ; 
 ;
 ; Registers not processed: RTC_CMP,SREG,CPU_SPL, CPU_SPH 
@@ -33,13 +33,13 @@ Prog=32768
 EEPROM=512
 
 'This constant is exposed as ChipRAM
-RAM=16384
+RAM=8192
 
 'This constant is exposed as ChipIO - sourced from `avr chipdata.csv`
-I/O=41
+I/O=55
 
 'This constant is exposed as ChipADC - sourced from `avr chipdata.csv`
-ADC=18
+ADC=22
 
 'This constant is exposed as ChipMhz
 This constant is exposed as ChipMaxMhz  - sourced from `avr chipdata.csv`
@@ -48,10 +48,10 @@ MaxMHz=24
 IntOsc=24, 20, 16, 12, 8, 4, 3, 2, 1
 
 'This constant is exposed as ChipPins - sourced from `avr chipdata.csv`
-Pins=48
+Pins=64
 
 'This constant is exposed as ChipUSART - sourced from `avr chipdata.csv`
-USART=4
+USART=5
 
 'This constant is exposed as ChipFamily - sourced from `avr chipdata.csv`
 Family=140
@@ -186,6 +186,16 @@ ZH:31
 		USART4_RXC:USART4_RXC,110,,
 		USART4_DRE:USART4_DRE,112,,
 		USART4_TXC:USART4_TXC,114,,
+; PORTG interrupt vectors
+		PORTG_PORT:PORTG_PORT,116,,
+; ZCD2 interrupt vectors
+		ZCD2_ZCD:ZCD2_ZCD,118,,
+; TCB4 interrupt vectors
+		TCB4_INT:TCB4_INT,120,,
+; USART5 interrupt vectors
+		USART5_RXC:USART5_RXC,122,,
+		USART5_DRE:USART5_DRE,124,,
+		USART5_TXC:USART5_TXC,126,,
 
 [AVRAlias]
   'This section is for the AVRDX support
@@ -406,11 +416,13 @@ EVSYS_USEREVSYSEVOUTC,560
 EVSYS_USEREVSYSEVOUTD,561
 EVSYS_USEREVSYSEVOUTE,562
 EVSYS_USEREVSYSEVOUTF,563
+EVSYS_USEREVSYSEVOUTG,564
 EVSYS_USERUSART0IRDA,565
 EVSYS_USERUSART1IRDA,566
 EVSYS_USERUSART2IRDA,567
 EVSYS_USERUSART3IRDA,568
 EVSYS_USERUSART4IRDA,569
+EVSYS_USERUSART5IRDA,570
 EVSYS_USERTCA0CNTA,571
 EVSYS_USERTCA0CNTB,572
 EVSYS_USERTCA1CNTA,573
@@ -423,6 +435,8 @@ EVSYS_USERTCB2CAPT,579
 EVSYS_USERTCB2COUNT,580
 EVSYS_USERTCB3CAPT,581
 EVSYS_USERTCB3COUNT,582
+EVSYS_USERTCB4CAPT,583
+EVSYS_USERTCB4COUNT,584
 EVSYS_USERTCD0INPUTA,585
 EVSYS_USERTCD0INPUTB,586
 FUSE_WDTCFG,4176
@@ -592,6 +606,29 @@ PORTF_PIN4CTRL,1204
 PORTF_PIN5CTRL,1205
 PORTF_PIN6CTRL,1206
 PORTF_PIN7CTRL,1207
+PORTG_DIR,1216
+PORTG_DIRSET,1217
+PORTG_DIRCLR,1218
+PORTG_DIRTGL,1219
+PORTG_OUT,1220
+PORTG_OUTSET,1221
+PORTG_OUTCLR,1222
+PORTG_OUTTGL,1223
+PORTG_IN,1224
+PORTG_INTFLAGS,1225
+PORTG_PORTCTRL,1226
+PORTG_PINCONFIG,1227
+PORTG_PINCTRLUPD,1228
+PORTG_PINCTRLSET,1229
+PORTG_PINCTRLCLR,1230
+PORTG_PIN0CTRL,1232
+PORTG_PIN1CTRL,1233
+PORTG_PIN2CTRL,1234
+PORTG_PIN3CTRL,1235
+PORTG_PIN4CTRL,1236
+PORTG_PIN5CTRL,1237
+PORTG_PIN6CTRL,1238
+PORTG_PIN7CTRL,1239
 PORTMUX_EVSYSROUTEA,1504
 PORTMUX_CCLROUTEA,1505
 PORTMUX_USARTROUTEA,1506
@@ -841,6 +878,20 @@ TCB3_CNTH,2875
 TCB3_CCMP,2876
 TCB3_CCMPL,2876
 TCB3_CCMPH,2877
+TCB4_CTRLA,2880
+TCB4_CTRLB,2881
+TCB4_EVCTRL,2884
+TCB4_INTCTRL,2885
+TCB4_INTFLAGS,2886
+TCB4_STATUS,2887
+TCB4_DBGCTRL,2888
+TCB4_TEMP,2889
+TCB4_CNT,2890
+TCB4_CNTL,2890
+TCB4_CNTH,2891
+TCB4_CCMP,2892
+TCB4_CCMPL,2892
+TCB4_CCMPH,2893
 TCD0_CTRLA,2944
 TCD0_CTRLB,2945
 TCD0_CTRLC,2946
@@ -987,6 +1038,22 @@ USART4_DBGCTRL,2187
 USART4_EVCTRL,2188
 USART4_TXPLCTRL,2189
 USART4_RXPLCTRL,2190
+USART5_RXDATAL,2208
+USART5_RXDATAH,2209
+USART5_TXDATAL,2210
+USART5_TXDATAH,2211
+USART5_STATUS,2212
+USART5_CTRLA,2213
+USART5_CTRLB,2214
+USART5_CTRLC,2215
+USART5_BAUD,2216
+USART5_BAUDL,2216
+USART5_BAUDH,2217
+USART5_CTRLD,2218
+USART5_DBGCTRL,2219
+USART5_EVCTRL,2220
+USART5_TXPLCTRL,2221
+USART5_RXPLCTRL,2222
 USERROW_USERROW0,4224
 USERROW_USERROW1,4225
 USERROW_USERROW2,4226
@@ -1043,6 +1110,10 @@ VPORTF_DIR,20
 VPORTF_OUT,21
 VPORTF_IN,22
 VPORTF_INTFLAGS,23
+VPORTG_DIR,24
+VPORTG_OUT,25
+VPORTG_IN,26
+VPORTG_INTFLAGS,27
 VREF_ADC0REF,160
 VREF_DAC0REF,162
 VREF_ACREF,164
@@ -1054,6 +1125,9 @@ ZCD0_STATUS,1731
 ZCD1_CTRLA,1736
 ZCD1_INTCTRL,1738
 ZCD1_STATUS,1739
+ZCD2_CTRLA,1744
+ZCD2_INTCTRL,1746
+ZCD2_STATUS,1747
 
 [Bits]
 'For details of the bits (relative to a register in terms of registerbits) see the microcontroller datasheet
@@ -1100,7 +1174,6 @@ CLKCTRL_SOURCE,CLKCTRL,6			'  Source bit position
 CLKCTRL_ENABLE,CLKCTRL,0			'  Enable bit position
 CLKCTRL_LPMODE,CLKCTRL,1			'  Low power mode bit position
 CLKCTRL_SEL,CLKCTRL,2			'  Select bit position
-'CPU_RAMPZ,CPU,0			'  Extended Z-Pointer Address bits bit position           Removed as duplicate
 CPU_C,CPU,0			'  Carry Flag bit position
 CPU_Z,CPU,1			'  Zero Flag bit position
 CPU_N,CPU,2			'  Negative Flag bit position
@@ -1142,20 +1215,24 @@ PORTMUX_EVOUTC,PORTMUX,2			'  Event Output C bit position
 PORTMUX_EVOUTD,PORTMUX,3			'  Event Output D bit position
 PORTMUX_EVOUTE,PORTMUX,4			'  Event Output E bit position
 PORTMUX_EVOUTF,PORTMUX,5			'  Event Output F bit position
+PORTMUX_EVOUTG,PORTMUX,6			'  Event Output G bit position
 PORTMUX_LUT0,PORTMUX,0			'  CCL Look-Up Table 0 Signals bit position
 PORTMUX_LUT1,PORTMUX,1			'  CCL Look-Up Table 1 Signals bit position
 PORTMUX_LUT2,PORTMUX,2			'  CCL Look-Up Table 2 Signals bit position
 PORTMUX_LUT3,PORTMUX,3			'  CCL Look-Up Table 3 Signals bit position
 PORTMUX_LUT4,PORTMUX,4			'  CCL Look-Up Table 4 Signals bit position
+PORTMUX_LUT5,PORTMUX,5			'  CCL Look-Up Table 5 Signals bit position
 PORTMUX_TCB0,PORTMUX,0			'  TCB0 Output bit position
 PORTMUX_TCB1,PORTMUX,1			'  TCB1 Output bit position
 PORTMUX_TCB2,PORTMUX,2			'  TCB2 Output bit position
 PORTMUX_TCB3,PORTMUX,3			'  TCB3 Output bit position
+PORTMUX_TCB4,PORTMUX,4			'  TCB4 Output bit position
 PORTMUX_AC0,PORTMUX,0			'  Analog Comparator 0 Output bit position
 PORTMUX_AC1,PORTMUX,1			'  Analog Comparator 1 Output bit position
 PORTMUX_AC2,PORTMUX,2			'  Analog Comparator 2 Output bit position
 PORTMUX_ZCD0,PORTMUX,0			'  Zero Cross Detector 0 Output bit position
 PORTMUX_ZCD1,PORTMUX,1			'  Zero Cross Detector 1 Output bit position
+PORTMUX_ZCD2,PORTMUX,2			'  Zero Cross Detector 2 Output bit position
 RSTCTRL_PORF,RSTCTRL,0			'  Power on Reset flag bit position
 RSTCTRL_BORF,RSTCTRL,1			'  Brown out detector Reset flag bit position
 RSTCTRL_EXTRF,RSTCTRL,2			'  External Reset flag bit position
@@ -1356,7 +1433,7 @@ ZCD_STATE,ZCD,4			'  ZCD State bit position
 
 [FreeRAM]
 'This is the extent of the RAM.  Inclusive of start and end address
-4000:8000
+6000:8000
 
 [ConfigOps]
 NoConfig-PRG

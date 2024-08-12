@@ -6,9 +6,9 @@
 ;
 ; Microchip IDE version 6.05
 ; C:\Users\admin\.mchp_packs\index.idx
-; C:\Users\admin\.mchp_packs\Microchip\AVR-Dx_DFP\2.6.303\avrasm\inc\AVR128DA48def.inc
+; C:\Users\admin\.mchp_packs\Microchip\AVR-Dx_DFP\2.6.303\avrasm\inc\AVR32DA48def.inc
 ; avr chipdata.csv
-; C:\Users\admin\.mchp_packs\Microchip\AVR-Dx_DFP\2.6.303\edc\ATAVR128DA48.PIC
+; C:\Users\admin\.mchp_packs\Microchip\AVR-Dx_DFP\2.6.303\edc\ATAVR32DA48.PIC
 ; 
 ;
 ; Registers not processed: RTC_CMP,SREG,CPU_SPL, CPU_SPH 
@@ -33,7 +33,7 @@ Prog=32768
 EEPROM=512
 
 'This constant is exposed as ChipRAM
-RAM=16384
+RAM=4096
 
 'This constant is exposed as ChipIO - sourced from `avr chipdata.csv`
 I/O=41
@@ -186,6 +186,8 @@ ZH:31
 		USART4_RXC:USART4_RXC,110,,
 		USART4_DRE:USART4_DRE,112,,
 		USART4_TXC:USART4_TXC,114,,
+; TCB4 interrupt vectors
+		TCB4_INT:TCB4_INT,120,,
 
 [AVRAlias]
   'This section is for the AVRDX support
@@ -358,7 +360,6 @@ CLKCTRL_PLLCTRLA,112
 CLKCTRL_OSC32KCTRLA,120
 CLKCTRL_XOSC32KCTRLA,124
 CPU_CCP,52
-CPU_RAMPZ,59
 CPU_SP,61
 ; .equ CPU_SPL = 0x003D                    ; Stack Pointer low byte a duplicate or resevered register or ALIAS_
 ; .equ CPU_SPH = 0x003E                    ; Stack Pointer hi byte a duplicate or resevered register or ALIAS_
@@ -841,6 +842,20 @@ TCB3_CNTH,2875
 TCB3_CCMP,2876
 TCB3_CCMPL,2876
 TCB3_CCMPH,2877
+TCB4_CTRLA,2880
+TCB4_CTRLB,2881
+TCB4_EVCTRL,2884
+TCB4_INTCTRL,2885
+TCB4_INTFLAGS,2886
+TCB4_STATUS,2887
+TCB4_DBGCTRL,2888
+TCB4_TEMP,2889
+TCB4_CNT,2890
+TCB4_CNTL,2890
+TCB4_CNTH,2891
+TCB4_CCMP,2892
+TCB4_CCMPL,2892
+TCB4_CCMPH,2893
 TCD0_CTRLA,2944
 TCD0_CTRLB,2945
 TCD0_CTRLC,2946
@@ -1100,7 +1115,6 @@ CLKCTRL_SOURCE,CLKCTRL,6			'  Source bit position
 CLKCTRL_ENABLE,CLKCTRL,0			'  Enable bit position
 CLKCTRL_LPMODE,CLKCTRL,1			'  Low power mode bit position
 CLKCTRL_SEL,CLKCTRL,2			'  Select bit position
-'CPU_RAMPZ,CPU,0			'  Extended Z-Pointer Address bits bit position           Removed as duplicate
 CPU_C,CPU,0			'  Carry Flag bit position
 CPU_Z,CPU,1			'  Zero Flag bit position
 CPU_N,CPU,2			'  Negative Flag bit position
@@ -1356,7 +1370,7 @@ ZCD_STATE,ZCD,4			'  ZCD State bit position
 
 [FreeRAM]
 'This is the extent of the RAM.  Inclusive of start and end address
-4000:8000
+7000:8000
 
 [ConfigOps]
 NoConfig-PRG

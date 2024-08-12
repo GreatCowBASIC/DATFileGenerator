@@ -6,9 +6,9 @@
 ;
 ; Microchip IDE version 6.05
 ; C:\Users\admin\.mchp_packs\index.idx
-; C:\Users\admin\.mchp_packs\Microchip\AVR-Dx_DFP\2.6.303\avrasm\inc\AVR128DA48def.inc
+; C:\Users\admin\.mchp_packs\Microchip\AVR-Dx_DFP\2.6.303\avrasm\inc\AVR64DA48def.inc
 ; avr chipdata.csv
-; C:\Users\admin\.mchp_packs\Microchip\AVR-Dx_DFP\2.6.303\edc\ATAVR128DA48.PIC
+; C:\Users\admin\.mchp_packs\Microchip\AVR-Dx_DFP\2.6.303\edc\ATAVR64DA48.PIC
 ; 
 ;
 ; Registers not processed: RTC_CMP,SREG,CPU_SPL, CPU_SPH 
@@ -33,7 +33,7 @@ Prog=32768
 EEPROM=512
 
 'This constant is exposed as ChipRAM
-RAM=16384
+RAM=8192
 
 'This constant is exposed as ChipIO - sourced from `avr chipdata.csv`
 I/O=41
@@ -1100,7 +1100,6 @@ CLKCTRL_SOURCE,CLKCTRL,6			'  Source bit position
 CLKCTRL_ENABLE,CLKCTRL,0			'  Enable bit position
 CLKCTRL_LPMODE,CLKCTRL,1			'  Low power mode bit position
 CLKCTRL_SEL,CLKCTRL,2			'  Select bit position
-'CPU_RAMPZ,CPU,0			'  Extended Z-Pointer Address bits bit position           Removed as duplicate
 CPU_C,CPU,0			'  Carry Flag bit position
 CPU_Z,CPU,1			'  Zero Flag bit position
 CPU_N,CPU,2			'  Negative Flag bit position
@@ -1356,7 +1355,7 @@ ZCD_STATE,ZCD,4			'  ZCD State bit position
 
 [FreeRAM]
 'This is the extent of the RAM.  Inclusive of start and end address
-4000:8000
+6000:8000
 
 [ConfigOps]
 NoConfig-PRG

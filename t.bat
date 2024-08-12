@@ -1,3 +1,4 @@
+goto new
 call do ATtiny1604 tiny1604
 call do ATtiny1606 tiny1606
 call do ATtiny1607 tiny1607
@@ -43,4 +44,27 @@ call do ATmega809 mega809
 call do ATmega1609 mega1609
 call do ATmega3209 mega3209
 call do ATmega4809 mega4809
-call do AVR128DA48 AVR128DA48
+
+:new
+call do avr128da28 	avr128da28	
+call do avr64da28 	avr64da28
+call do avr32da28	avr32da28
+call do avr128da32	avr128da32
+call do avr64da32	avr64da32
+call do avr32da32	avr32da32
+call do avr128da48	avr128da48
+call do avr64da48	avr64da48
+call do avr32da48	avr32da48
+call do avr128da64	avr128da64
+call do avr64da64	avr64da64
+call do avr128db28	avr128db28
+call do avr64db28	avr64db28
+call do avr32db28	avr32db28
+call do avr128db32	avr128db32
+call do avr64db32	avr64db32
+call do avr32db32	avr32db32
+call do avr128db48	avr128db48
+call do avr64db48	avr64db48
+call do avr32db48	avr32db48
+call do avr128db64	avr128db64
+call do avr64db64	avr64db64
