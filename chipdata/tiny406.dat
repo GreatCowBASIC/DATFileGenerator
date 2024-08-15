@@ -1,7 +1,7 @@
 ;        .DAT sections
 ;==========================================================================
 ;
-;  Built by GcBASIC converter on : 08-11-2024
+;  Built by GCBASIC converter
 ;  XC8 processor include for the chip shown below
 ;
 ; Microchip IDE version 6.05
@@ -27,7 +27,7 @@
 ';The constants have the prefix of Chip: See the details below
 
 'This constant is exposed as ChipWORDS
-Prog=4096
+Prog=2048
 
 'This constant is exposed as ChipEEPROM
 EEPROM=128

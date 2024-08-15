@@ -185,7 +185,7 @@ Sub PrintChipData
     Print "';The constants have the prefix of Chip: See the details below"
     Print
     Print "'This constant is exposed as ChipWORDS"
-  Print "Prog="+Str(Val("&h"+GetValue ("MAPPED_PROGMEM_SIZE")))
+  Print "Prog="+Str(Val("&h"+GetValue ("MAPPED_PROGMEM_SIZE")) /2 )
 
     Print
     Print "'This constant is exposed as ChipEEPROM"
@@ -1113,7 +1113,7 @@ Sub PrintHeader
     Print ";        .DAT sections"
     Print ";=========================================================================="
     Print ";"
-    Print ";  Built by GCBASIC converter on : " + DATE
+    Print ";  Built by GCBASIC converter"
     Print ";  XC8 processor include for the chip shown below"
     Print ";"
     print "; Microchip IDE version " + kIDEVersion

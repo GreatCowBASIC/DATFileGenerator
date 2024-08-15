@@ -1,4 +1,4 @@
-goto new
+rem goto new
 call do ATtiny1604 tiny1604
 call do ATtiny1606 tiny1606
 call do ATtiny1607 tiny1607
@@ -69,15 +69,15 @@ call do avr128db64	avr128db64
 call do avr64db64	avr64db64
 
 :new
-call do avr16dd14
-call do avr16dd20
-call do avr16dd28
-call do avr16dd32
-call do avr32dd14
-call do avr32dd20
-call do avr32dd28
-call do avr32dd32
-call do avr64dd14
-call do avr64dd20
-call do avr64dd28
-call do avr64dd32
+call do avr16dd14	avr16dd14
+call do avr16dd20	avr16dd20
+call do avr16dd28	avr16dd28
+call do avr16dd32	avr16dd32
+call do avr32dd14	avr32dd14
+call do avr32dd20	avr32dd20
+call do avr32dd28	avr32dd28
+call do avr32dd32	avr32dd32
+call do avr64dd14	avr64dd14
+call do avr64dd20	avr64dd20
+call do avr64dd28	avr64dd28
+call do avr64dd32	avr64dd32
