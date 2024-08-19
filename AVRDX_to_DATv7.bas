@@ -34,6 +34,7 @@
     #Define XLSAVRAlias	          17
     #Define XLSCompiler	          18
     #Define XLSPackages           19
+    #Define XLSUSARTConfig        20
 
   Type SFR
     RegisterName as String
@@ -130,6 +131,7 @@
   Declare Sub PrintChipData
   Declare Sub PrintFooter
   Declare Sub PrintFreeRam
+  Declare Sub PrintAVRMasks
   Declare Function GetValue (  searchString as String, errorhandler as Integer = -1 ) as String
   Declare Function GetCSVValue (  searchString as String, returnParameter as Byte ) As String
 
@@ -142,10 +144,12 @@ PrintChipData
 PrintPointers
 PrintInterrupts
 PrintAliases
+PrintAVRMasks
 Printregisters
 PrintBits
 PrintFreeRam
 PrintFooter
+
 
 Sub PrintFreeRam
     
@@ -176,7 +180,9 @@ End Sub
 
 Sub PrintChipData
 
-
+  Dim cacheString as String
+  Dim cacheArray() as String
+  Dim cacheCount as Integer
 
   Print ""
   Print "[ChipData]"
@@ -232,6 +238,14 @@ Sub PrintChipData
     Print "'This constant is exposed as ChipUSART - sourced from `" + kXLScs +"`"
   Print "USART=" + GetCSVValue ( targetchip, XLSUSART )
 
+    Print
+    Print "'These USART constants are exposed with the prefix of CHIP - sourced from `" + kXLScs +"`"
+      cacheString = GetCSVValue ( targetchip, XLSUSARTConfig )
+    Split( cacheString, "|",0, cacheArray())
+    For cacheCount = 0 to ubound(cacheArray)
+      If Trim(cacheArray(cacheCount)) <> "" Then Print cacheArray(cacheCount)
+    Next
+    
     Print
     Print "'This constant is exposed as ChipFamily - sourced from `" + kXLScs +"`"
   Print "Family="+ GetCSVValue ( targetchip, XLSChipFamilyOverride )
@@ -396,6 +410,7 @@ Sub PrintAliases
 
   print "'Required register"
   print "SREG=63                                           ; 003F alias"
+  print "ALIAS_SREG=63"
 
 End Sub
 
@@ -1205,7 +1220,7 @@ Sub Printregisters
                 with SFRData(SFRDataCount)
                     .RegisterAddresss = "&H00"+trim(mid(DataSource, instr( DataSource,"=" )+4 , instr( DataSource,")")-instr( DataSource,";")-1  ))
                     'Output register
-                    print .RegisterName+","+str(val(.RegisterAddresss))
+                    print " "+.RegisterName+","+str(val(.RegisterAddresss))
                 end with
             end if
         end if
@@ -1215,6 +1230,62 @@ Sub Printregisters
         End if
     loop
     close   ' close all open files
+
+End Sub
+
+Sub PrintAVRMasks
+
+        Dim killIndex as Integer
+
+        if instr(kKillBits,",") <> 0 then
+          Split ( kKillBits, ",", -1, BitsToBeIgnored() )
+        else
+          redim BitsToBeIgnored(1)
+          BitsToBeIgnored(0) = trim(kKillBits)
+        endif
+
+
+        open fsp_ini for input as #1
+        If Err>0 Then
+          Print "Error re-opening the file "+chr(34)+fsp_ini+chr(34):Print "Update MPLKAB-IDE DFP Pack with pack version " +chipparameters(1) :End
+        End if
+
+
+        ' print "read down to `* BIT AND VALUE DEFINITIONS * - `"
+
+        do
+            Line input #1, DataSource
+        loop while not eof(1) and instr( ucase(DataSource),"* BIT AND VALUE DEFINITIONS *") = 0
+
+        If eof(1) then
+          Close
+          Print "Unexpected end of file "+chr(34)+fsp_ini+chr(34):Print "`* BIT AND VALUE DEFINITIONS * - ` text not found"
+          End
+        End If
+
+        Print ""
+        Print "[AVRMASKS]"
+          print "'For details of the see the microcontroller datasheet"
+
+        SFRBitsArrayPointer = 0
+
+        do while not eof(1)
+            
+            if readNextLine = -1 then Line input #1, DataSource
+
+            if instr( Datasource, "* CPU REGISTER DEFINITIONS *" ) > 0 then 
+              exit do
+            End If
+            
+            DataSource = trim( DataSource )
+
+            replace ( DataSource , ".equ", "" )
+            DataSource = trim( DataSource )
+            print "  " + DataSource
+
+        loop
+
+        Close
 
 End Sub
 
@@ -1253,7 +1324,16 @@ Sub PrintBits
         Print "[Bits]"
           print "'For details of the bits (relative to a register in terms of registerbits) see the microcontroller datasheet"
           print "'The first parameter is the GCBASIC bit name used in user code to expose the specific registerbit"
-        
+            print " ' Required for GCBASIC operations"          
+            print "  I,SREG,7"
+            print "  T,SREG,6"
+            print "  H,SREG,5"
+            print "  S,SREG,4"
+            print "  V,SREG,3"
+            print "  N,SREG,2"
+            print "  Z,SREG,1"
+            print "  C,SREG,0"
+
         SFRBitsArrayPointer = 0
 
         do while not eof(1)
@@ -1407,6 +1487,7 @@ Function GetCSVValue (  searchString as String, returnParameter as Byte ) As Str
     End If
 
     close   ' close all open files
+
     Split ( DataSource, ",", 99, ParamMeters() )
     'send back the parameter from the XLS
     return ParamMeters(returnParameter)
