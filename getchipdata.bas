@@ -2438,9 +2438,13 @@ Sub CalcRamBlocks
   Else
 
     '18F13K50 has weird layout
-    If UCase(ChipName) = "18F13K50" Or UCase(ChipName) = "18LF13K50" Then
-      RBC = RBC + 1: RamBlock(RBC) = "0:FF"
-      RBC = RBC + 1: RamBlock(RBC) = "200:2FF"
+    If ( Instr(ChipName ,"18F1" ) > 0  Or Instr(ChipName ,"18LF1") > 0 ) and Right( ChipName, 3) = "K50" Then
+      If  Instr(ChipName ,"13" ) > 0 Then
+        RBC = RBC + 1: RamBlock(RBC) = "0:FF"
+      Else
+        RBC = RBC + 1: RamBlock(RBC) = "0:1FF"
+      End If
+      RBC = RBC + 1: RamBlock(RBC) = "200:2FF ' USB Shared RAM Buffer"
 
     Elseif  Instr(UCase(ChipName),"Q20" ) or  Instr(UCase(ChipName),"Q43" ) <> 0 or Instr(UCase(ChipName),"Q41" ) <> 0 or Instr(UCase(ChipName),"Q40" ) <> 0 or Instr(UCase(ChipName),"Q83" ) <> 0 or Instr(UCase(ChipName),"Q84") <> 0 or Instr(UCase(ChipName),"Q71") <> 0 Then
 
@@ -2498,9 +2502,25 @@ Sub CalcRamBlocks
         end if
 
     Else
-      'default operation
-      RBC = RBC + 1: RamBlock(RBC) = "0:" + HEX(ChipRAM - 1)
+      ' resolve USB memory addressing.  Try to limit to 18F, chips that end with 50
+      If CheckBit("USBIF") <> 0 and Right(ChipName,2) = "50" Then 'USB CHIP
+        IF ChipRAM - 256 < 1024 then
+          RBC = RBC + 1: RamBlock(RBC) = "0:" + HEX(ChipRAM - 1 - 256 )
 
+          IF Instr( Ucase(ChipName) , "F1") > 0 Then
+            RBC = RBC + 1: RamBlock(RBC) = "200:2FF ' USB Shared RAM Buffer"
+          Else
+            RBC = RBC + 1: RamBlock(RBC) = "400:4FF ' USB Shared RAM Buffer"
+          End IF
+        
+        Else
+          'default operation
+          RBC = RBC + 1: RamBlock(RBC) = "0:" + HEX(ChipRAM - 1)
+        End If
+      Else
+        'default operation
+        RBC = RBC + 1: RamBlock(RBC) = "0:" + HEX(ChipRAM - 1)
+      End If
       'added to handle 18f NoBankRAM June 2019
       if len( NoBankRAMStr ) <> 0 then
       'erv

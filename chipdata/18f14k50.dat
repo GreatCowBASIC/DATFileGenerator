@@ -883,7 +883,8 @@ SP4,STKPTR,4
 STKOVF,STKPTR,7
 
 [FreeRAM]
-0:2FF
+0:1FF
+200:2FF ' USB Shared RAM Buffer
 
 [NoBankRAM]
 'NoBankRAM is somewhat misnamed - it is used for the defintion of (any) access bank locations
@@ -897,8 +898,6 @@ STKOVF,STKPTR,7
 'If there are no ranges defined in NoBankRAM, the compiler will try to guess them.
 'On 18Fs, it will guess based on where the lowest SFR is, and from what the total RAM on the chip is. If there's only one range defined
 'in the NoBankRAM locations, the compiler will assume that is the range for the RAM, and then will guess where the range for the access bank SFRs is.
-0:5F
-F60:FFF
 
 [Pins-DIP]
 4,RA3(IO)

@@ -887,7 +887,7 @@ STKOVF,STKPTR,7
 
 [FreeRAM]
 0:FF
-200:2FF
+200:2FF ' USB Shared RAM Buffer
 
 [NoBankRAM]
 'NoBankRAM is somewhat misnamed - it is used for the defintion of (any) access bank locations

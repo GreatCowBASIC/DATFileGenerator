@@ -7,9 +7,6 @@
 ';All items in the ChipData section are available to user programs as constants
 ';The constants have the prefix of Chip: See the examples below
 
-'This chip has not been tested or validated.  This is a development DAT file
-NotTested=1
-
 'This constant is exposed as ChipWORDS
 Prog=12288
 
