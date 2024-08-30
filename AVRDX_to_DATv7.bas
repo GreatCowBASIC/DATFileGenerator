@@ -470,7 +470,27 @@ Sub PrintInterrupts
                 
                   Case "BOD_VLM":
                     print chr(9);"BOD_VLM:BOD_VLM,"+ str(val(Vector)) + ",,"
-                            
+                  Case "RTC_CNT"
+                    print chr(9);"RTCOverflow:RTC_CNT,6,RTC_INTCTRL.RTC_OVF_bp,RTC_INTFLAGS.RTC_OVF_bp"
+                  Case "USART0_RXC"
+                    print chr(9);"Usart0RXReady:USART0_RXC, 34, USART0_CTRLA.USART_RXCIE_bp, USART0_STATUS.USART_RXCIF_bp"
+                  Case "USART1_RXC"
+                    print chr(9);"Usart1RXReady:USART1_RXC,52,USART1_CTRLA.USART_RXCIE_bp,USART1_STATUS.USART_RXCIF_bp"
+                  Case "USART2_RXC"
+                    print chr(9);"Usart2RXReady:USART2_RXC,62,USART2_CTRLA.USART_RXCIE_bp,USART2_STATUS.USART_RXCIF_bp"
+                  Case "USART3_RXC"
+                    print chr(9);"Usart3RXReady:USART3_RXC,74,USART3_CTRLA.USART_RXCIE_bp,USART3_STATUS.USART_RXCIF_bp"
+                  Case "TCA0_LUNF"
+                  	print chr(9);"Timer0Overflow:TCA0_LUNF,14,TCA0_SINGLE_INTCTRL.TCA_SINGLE_OVF_bp,!TCA0_SINGLE_INTFLAGS.TCA_SINGLE_OVF_bp"
+                  Case "TCA0_CMP0"
+                    print chr(9);"Timer0Match0:TCA0_CMP0,18,,"
+                  Case "TCA0_CMP1"
+                    print chr(9);"Timer0Match1:TCA0_CMP1,20,,"
+                  Case "TCA0_CMP2"
+                    print chr(9);"Timer0Match2:TCA0_CMP2,22,,"
+                  Case ""
+                    print chr(9);
+
                 Case Else
                   print chr(9)+chr(9)+Trim(Left( DataSource, Instr(DataSource, "=")-1)) + ":" + Trim(Left( DataSource, Instr(DataSource, "=")-1)) + "," +  str(val(Vector)) + ",,"
 

@@ -6,9 +6,9 @@
 ;
 ; Microchip IDE version 6.05
 ; C:\Users\admin\.mchp_packs\index.idx
-; C:\Users\admin\.mchp_packs\Microchip\AVR-Dx_DFP\2.6.303\avrasm\inc\AVR32DA48def.inc
+; C:\Users\admin\.mchp_packs\Microchip\AVR-Dx_DFP\2.5.294\avrasm\inc\AVR32DA48def.inc
 ; avr chipdata.csv
-; C:\Users\admin\.mchp_packs\Microchip\AVR-Dx_DFP\2.6.303\edc\ATAVR32DA48.PIC
+; C:\Users\admin\.mchp_packs\Microchip\AVR-Dx_DFP\2.5.294\edc\ATAVR32DA48.PIC
 ; 
 ;
 ; Registers not processed: RTC_CMP,SREG,CPU_SPL, CPU_SPH 
@@ -112,18 +112,18 @@ ZH:31
 ; BOD interrupt vectors
 	BOD_VLM:BOD_VLM,4,,
 ; RTC interrupt vectors
-		RTC_CNT:RTC_CNT,6,,
+	RTCOverflow:RTC_CNT,6,RTC_INTCTRL.RTC_OVF_bp,RTC_INTFLAGS.RTC_OVF_bp
 		RTC_PIT:RTC_PIT,8,,
 ; CCL interrupt vectors
 		CCL_CCL:CCL_CCL,10,,
 ; PORTA interrupt vectors
 		PORTA_PORT:PORTA_PORT,12,,
 ; TCA0 interrupt vectors
-		TCA0_LUNF:TCA0_LUNF,14,,
+	Timer0Overflow:TCA0_LUNF,14,TCA0_SINGLE_INTCTRL.TCA_SINGLE_OVF_bp,!TCA0_SINGLE_INTFLAGS.TCA_SINGLE_OVF_bp
 		TCA0_HUNF:TCA0_HUNF,16,,
-		TCA0_CMP0:TCA0_CMP0,18,,
-		TCA0_CMP1:TCA0_CMP1,20,,
-		TCA0_CMP2:TCA0_CMP2,22,,
+	Timer0Match0:TCA0_CMP0,18,,
+	Timer0Match1:TCA0_CMP1,20,,
+	Timer0Match2:TCA0_CMP2,22,,
 ; TCB0 interrupt vectors
 		TCB0_INT:TCB0_INT,24,,
 ; TCB1 interrupt vectors
@@ -137,7 +137,7 @@ ZH:31
 ; SPI0 interrupt vectors
 		SPI0_INT:SPI0_INT,36,,
 ; USART0 interrupt vectors
-		USART0_RXC:USART0_RXC,38,,
+	Usart0RXReady:USART0_RXC, 34, USART0_CTRLA.USART_RXCIE_bp, USART0_STATUS.USART_RXCIF_bp
 		USART0_DRE:USART0_DRE,40,,
 		USART0_TXC:USART0_TXC,42,,
 ; PORTD interrupt vectors
@@ -158,7 +158,7 @@ ZH:31
 ; TCB2 interrupt vectors
 		TCB2_INT:TCB2_INT,60,,
 ; USART1 interrupt vectors
-		USART1_RXC:USART1_RXC,62,,
+	Usart1RXReady:USART1_RXC,52,USART1_CTRLA.USART_RXCIE_bp,USART1_STATUS.USART_RXCIF_bp
 		USART1_DRE:USART1_DRE,64,,
 		USART1_TXC:USART1_TXC,66,,
 ; PORTF interrupt vectors
@@ -168,7 +168,7 @@ ZH:31
 ; SPI1 interrupt vectors
 		SPI1_INT:SPI1_INT,72,,
 ; USART2 interrupt vectors
-		USART2_RXC:USART2_RXC,74,,
+	Usart2RXReady:USART2_RXC,62,USART2_CTRLA.USART_RXCIE_bp,USART2_STATUS.USART_RXCIF_bp
 		USART2_DRE:USART2_DRE,76,,
 		USART2_TXC:USART2_TXC,78,,
 ; AC2 interrupt vectors
@@ -191,15 +191,13 @@ ZH:31
 ; ZCD1 interrupt vectors
 		ZCD1_ZCD:ZCD1_ZCD,102,,
 ; USART3 interrupt vectors
-		USART3_RXC:USART3_RXC,104,,
+	Usart3RXReady:USART3_RXC,74,USART3_CTRLA.USART_RXCIE_bp,USART3_STATUS.USART_RXCIF_bp
 		USART3_DRE:USART3_DRE,106,,
 		USART3_TXC:USART3_TXC,108,,
 ; USART4 interrupt vectors
 		USART4_RXC:USART4_RXC,110,,
 		USART4_DRE:USART4_DRE,112,,
 		USART4_TXC:USART4_TXC,114,,
-; TCB4 interrupt vectors
-		TCB4_INT:TCB4_INT,120,,
 
 [AVRAlias]
   'This section is for the AVRDX support
@@ -3126,142 +3124,139 @@ ALIAS_SREG=63
   PORTMUX_ZCD1_bp = 1                 ; Zero Cross Detector 1 Output bit position
   
   ; Analog Comparator 0 Output select
-  PORTMUX_AC0_DEFAULT_gc = (0x00<<0)  ; OUT: PA7
-  PORTMUX_AC0_ALT1_gc = (0x01<<0)     ; OUT: PC6
+  PORTMUX_AC0_DEFAULT_gc = (0x00<<0)  ; OUT on PA7
+  PORTMUX_AC0_ALT1_gc = (0x01<<0)     ; OUT on PC6
   
   ; Analog Comparator 1 Output select
-  PORTMUX_AC1_DEFAULT_gc = (0x00<<1)  ; OUT: PA7
-  PORTMUX_AC1_ALT1_gc = (0x01<<1)     ; OUT: PC6
+  PORTMUX_AC1_DEFAULT_gc = (0x00<<1)  ; OUT on PA7
+  PORTMUX_AC1_ALT1_gc = (0x01<<1)     ; OUT on PC6
   
   ; Analog Comparator 2 Output select
-  PORTMUX_AC2_DEFAULT_gc = (0x00<<2)  ; OUT: PA7
-  PORTMUX_AC2_ALT1_gc = (0x01<<2)     ; OUT: PC6
+  PORTMUX_AC2_DEFAULT_gc = (0x00<<2)  ; OUT on PA7
+  PORTMUX_AC2_ALT1_gc = (0x01<<2)     ; OUT on PC6
   
   ; CCL Look-Up Table 0 Signals select
-  PORTMUX_LUT0_DEFAULT_gc = (0x00<<0) ; In: PA0, PA1, PA2 Out: PA3
-  PORTMUX_LUT0_ALT1_gc = (0x01<<0)    ; In: PA0, PA1, PA2 Out: PA6
+  PORTMUX_LUT0_DEFAULT_gc = (0x00<<0) ; Out: PA3 In: PA0, PA1, PA2
+  PORTMUX_LUT0_ALT1_gc = (0x01<<0)    ; Out: PA6 In: PA0, PA1, PA2
   
   ; CCL Look-Up Table 1 Signals select
-  PORTMUX_LUT1_DEFAULT_gc = (0x00<<1) ; In: PC0, PC1, PC2 Out: PC3
-  PORTMUX_LUT1_ALT1_gc = (0x01<<1)    ; In: PC0, PC1, PC2 Out: PC6
+  PORTMUX_LUT1_DEFAULT_gc = (0x00<<1) ; Out: PC3 In: PC0, PC1, PC2
+  PORTMUX_LUT1_ALT1_gc = (0x01<<1)    ; Out: PC6 In: PC0, PC1, PC2
   
   ; CCL Look-Up Table 2 Signals select
-  PORTMUX_LUT2_DEFAULT_gc = (0x00<<2) ; In: PD0, PD1, PD2 Out: PD3
-  PORTMUX_LUT2_ALT1_gc = (0x01<<2)    ; In: PD0, PD1, PD2 Out: PD6
+  PORTMUX_LUT2_DEFAULT_gc = (0x00<<2) ; Out: PD3 In: PD0, PD1, PD2
+  PORTMUX_LUT2_ALT1_gc = (0x01<<2)    ; Out: PD6 In: PD0, PD1, PD2
   
   ; CCL Look-Up Table 3 Signals select
-  PORTMUX_LUT3_DEFAULT_gc = (0x00<<3) ; In: PF0, PF1, PF2 Out: PF3
+  PORTMUX_LUT3_DEFAULT_gc = (0x00<<3) ; Out: PF3 In: PF0, PF1, PF2
   
   ; CCL Look-Up Table 4 Signals select
-  PORTMUX_LUT4_DEFAULT_gc = (0x00<<4) ; In: PB0, PB1, PB2 Out: PB3
-  PORTMUX_LUT4_ALT1_gc = (0x01<<4)    ; In: PB0, PB1, PB2 Out: -
+  PORTMUX_LUT4_DEFAULT_gc = (0x00<<4) ; Out: PB3 In: PB0, PB1, PB2
   
   ; Event Output A select
-  PORTMUX_EVOUTA_DEFAULT_gc = (0x00<<0) ; EVOUT: PA2
-  PORTMUX_EVOUTA_ALT1_gc = (0x01<<0)  ; EVOUT: PA7
+  PORTMUX_EVOUTA_DEFAULT_gc = (0x00<<0) ; EVOUT on PA2
+  PORTMUX_EVOUTA_ALT1_gc = (0x01<<0)  ; EVOUT on PA7
   
   ; Event Output B select
-  PORTMUX_EVOUTB_DEFAULT_gc = (0x00<<1) ; EVOUT: PB2
+  PORTMUX_EVOUTB_DEFAULT_gc = (0x00<<1) ; EVOUT on PB2
   
   ; Event Output C select
-  PORTMUX_EVOUTC_DEFAULT_gc = (0x00<<2) ; EVOUT: PC2
-  PORTMUX_EVOUTC_ALT1_gc = (0x01<<2)  ; EVOUT: PC7
+  PORTMUX_EVOUTC_DEFAULT_gc = (0x00<<2) ; EVOUT on PC2
+  PORTMUX_EVOUTC_ALT1_gc = (0x01<<2)  ; EVOUT on PC7
   
   ; Event Output D select
-  PORTMUX_EVOUTD_DEFAULT_gc = (0x00<<3) ; EVOUT: PD2
-  PORTMUX_EVOUTD_ALT1_gc = (0x01<<3)  ; EVOUT: PD7
+  PORTMUX_EVOUTD_DEFAULT_gc = (0x00<<3) ; EVOUT on PD2
+  PORTMUX_EVOUTD_ALT1_gc = (0x01<<3)  ; EVOUT on PD7
   
   ; Event Output E select
-  PORTMUX_EVOUTE_DEFAULT_gc = (0x00<<4) ; EVOUT: PE2
+  PORTMUX_EVOUTE_DEFAULT_gc = (0x00<<4) ; EVOUT on PE2
   
   ; Event Output F select
-  PORTMUX_EVOUTF_DEFAULT_gc = (0x00<<5) ; EVOUT: PF2
+  PORTMUX_EVOUTF_DEFAULT_gc = (0x00<<5) ; EVOUT on PF2
   
   ; SPI0 Signals select
-  PORTMUX_SPI0_DEFAULT_gc = (0x00<<0) ; MOSI: PA4, MISO: PA5, SCK: PA6, SS: PA7
-  PORTMUX_SPI0_ALT1_gc = (0x01<<0)    ; MOSI: PE0, MISO: PE1, SCK: PE2, SS: PE3
+  PORTMUX_SPI0_DEFAULT_gc = (0x00<<0) ; PA4, PA5, PA6, PA7
+  PORTMUX_SPI0_ALT1_gc = (0x01<<0)    ; PE0, PE1, PE2, PE3
   PORTMUX_SPI0_NONE_gc = (0x03<<0)    ; Not connected to any pins
   
   ; SPI1 Signals select
-  PORTMUX_SPI1_DEFAULT_gc = (0x00<<2) ; MOSI: PC0, MISO: PC1, SCK: PC2, SS: PC3
-  PORTMUX_SPI1_ALT1_gc = (0x01<<2)    ; MOSI: PC4, MISO: PC5, SCK: PC6, SS: PC7
-  PORTMUX_SPI1_ALT2_gc = (0x02<<2)    ; MOSI: PB4, MISO: PB5, SCK: -, SS: -
+  PORTMUX_SPI1_DEFAULT_gc = (0x00<<2) ; PC0, PC1, PC2, PC3
+  PORTMUX_SPI1_ALT1_gc = (0x01<<2)    ; PC4, PC5, PC6, PC7
   PORTMUX_SPI1_NONE_gc = (0x03<<2)    ; Not connected to any pins
   
   ; TCA0 Signals select
-  PORTMUX_TCA0_PORTA_gc = (0x00<<0)   ; WOn: PA0, PA1, PA2, PA3, PA4, PA5
-  PORTMUX_TCA0_PORTB_gc = (0x01<<0)   ; WOn: PB0, PB1, PB2, PB3, PB4, PB5
-  PORTMUX_TCA0_PORTC_gc = (0x02<<0)   ; WOn: PC0, PC1, PC2, PC3, PC4, PC5
-  PORTMUX_TCA0_PORTD_gc = (0x03<<0)   ; WOn: PD0, PD1, PD2, PD3, PD4, PD5
-  PORTMUX_TCA0_PORTE_gc = (0x04<<0)   ; WOn: PE0, PE1, PE2, PE3, -, -
-  PORTMUX_TCA0_PORTF_gc = (0x05<<0)   ; WOn: PF0, PF1, PF2, PF3, PF4, PF5
+  PORTMUX_TCA0_PORTA_gc = (0x00<<0)   ; PA0, PA1, PA2, PA3, PA4, PA5
+  PORTMUX_TCA0_PORTB_gc = (0x01<<0)   ; PB0, PB1, PB2, PB3, PB4, PB5
+  PORTMUX_TCA0_PORTC_gc = (0x02<<0)   ; PC0, PC1, PC2, PC3, PC4, PC5
+  PORTMUX_TCA0_PORTD_gc = (0x03<<0)   ; PD0, PD1, PD2, PD3, PD4, PD5
+  PORTMUX_TCA0_PORTE_gc = (0x04<<0)   ; PE0, PE1, PE2, PE3, PE4, PE5
+  PORTMUX_TCA0_PORTF_gc = (0x05<<0)   ; PF0, PF1, PF2, PF3, PF4, PF5
   
   ; TCA1 Signals select
-  PORTMUX_TCA1_PORTB_gc = (0x00<<3)   ; WOn: PB0, PB1, PB2, PB3, PB4, PB5
-  PORTMUX_TCA1_PORTC_gc = (0x01<<3)   ; WOn: PC4, PC5, PC6, -, -, -
+  PORTMUX_TCA1_PORTB_gc = (0x00<<3)   ; PB0, PB1, PB2, PB3, PB4, PB5
+  PORTMUX_TCA1_PORTC_gc = (0x01<<3)   ; PC4, PC5, PC6
   
   ; TCB0 Output select
-  PORTMUX_TCB0_DEFAULT_gc = (0x00<<0) ; WO: PA2
-  PORTMUX_TCB0_ALT1_gc = (0x01<<0)    ; WO: PF4
+  PORTMUX_TCB0_DEFAULT_gc = (0x00<<0) ; WO on PA2
+  PORTMUX_TCB0_ALT1_gc = (0x01<<0)    ; WO on PF4
   
   ; TCB1 Output select
-  PORTMUX_TCB1_DEFAULT_gc = (0x00<<1) ; WO: PA3
-  PORTMUX_TCB1_ALT1_gc = (0x01<<1)    ; WO: PF5
+  PORTMUX_TCB1_DEFAULT_gc = (0x00<<1) ; WO on PA3
+  PORTMUX_TCB1_ALT1_gc = (0x01<<1)    ; WO on PF5
   
   ; TCB2 Output select
-  PORTMUX_TCB2_DEFAULT_gc = (0x00<<2) ; WO: PC0
-  PORTMUX_TCB2_ALT1_gc = (0x01<<2)    ; WO: PB4
+  PORTMUX_TCB2_DEFAULT_gc = (0x00<<2) ; WO on PC0
+  PORTMUX_TCB2_ALT1_gc = (0x01<<2)    ; WO on PB4
   
   ; TCB3 Output select
-  PORTMUX_TCB3_DEFAULT_gc = (0x00<<3) ; WO: PB5
-  PORTMUX_TCB3_ALT1_gc = (0x01<<3)    ; WO: PC1
+  PORTMUX_TCB3_DEFAULT_gc = (0x00<<3) ; WO on PB5
+  PORTMUX_TCB3_ALT1_gc = (0x01<<3)    ; WO on PC1
   
   ; TCD0 Signals select
-  PORTMUX_TCD0_DEFAULT_gc = (0x00<<0) ; WOx: PA4, PA5, PA6, PA7
-  PORTMUX_TCD0_ALT1_gc = (0x01<<0)    ; WOx: PB4, PB5, -, -
-  PORTMUX_TCD0_ALT2_gc = (0x02<<0)    ; WOx: PF0, PF1, PF2, PF3
+  PORTMUX_TCD0_DEFAULT_gc = (0x00<<0) ; PA4, PA5, PA6, PA7
+  PORTMUX_TCD0_ALT1_gc = (0x01<<0)    ; PB4, PB5, PB6, PB7
+  PORTMUX_TCD0_ALT2_gc = (0x02<<0)    ; PF0, PF1, PF2, PF3
   
   ; TWI0 Signals select
-  PORTMUX_TWI0_DEFAULT_gc = (0x00<<0) ; SDA: PA2, SCL: PA3. Dual mode: SDA: PC2, SCL: PC3.
-  PORTMUX_TWI0_ALT1_gc = (0x01<<0)    ; SDA: PA2, SCL: PA3. Dual mode: SDA: PC6, SCL: PC7.
-  PORTMUX_TWI0_ALT2_gc = (0x02<<0)    ; SDA: PC2, SCL: PC3. Dual mode: SDA: PC6, SCL: PC7.
+  PORTMUX_TWI0_DEFAULT_gc = (0x00<<0) ; PA2, PA3, PC2, PC3
+  PORTMUX_TWI0_ALT1_gc = (0x01<<0)    ; PA2, PA3, PC6, PC7
+  PORTMUX_TWI0_ALT2_gc = (0x02<<0)    ; PC2, PC3, PC6, PC7
   
   ; TWI1 Signals select
-  PORTMUX_TWI1_DEFAULT_gc = (0x00<<2) ; SDA: PF2, SCL: PF3. Dual mode: SDA: PB2, SCL: PB3.
-  PORTMUX_TWI1_ALT1_gc = (0x01<<2)    ; SDA: PF2, SCL: PF3. Dual mode: SDA: -, SCL: -.
-  PORTMUX_TWI1_ALT2_gc = (0x02<<2)    ; SDA: PB2, SCL: PB3. Dual mode: SDA: -, SCL: -.
+  PORTMUX_TWI1_DEFAULT_gc = (0x00<<2) ; PF2, PF3, PB2, PB3
+  PORTMUX_TWI1_ALT2_gc = (0x02<<2)    ; PB2, PB3, PB6, PB7
   
   ; USART0 Signals select
-  PORTMUX_USART0_DEFAULT_gc = (0x00<<0) ; TxD: PA0, RxD: PA1, XCK: PA2, XDIR: PA3
-  PORTMUX_USART0_ALT1_gc = (0x01<<0)  ; TxD: PA4, RxD: PA5, XCK: PA6, XDIR: PA7
+  PORTMUX_USART0_DEFAULT_gc = (0x00<<0) ; PA0, PA1, PA2, PA3
+  PORTMUX_USART0_ALT1_gc = (0x01<<0)  ; PA4, PA5, PA6, PA7
   PORTMUX_USART0_NONE_gc = (0x03<<0)  ; Not connected to any pins
   
   ; USART1 Signals select
-  PORTMUX_USART1_DEFAULT_gc = (0x00<<2) ; TxD: PC0, RxD: PC1, XCK: PC2, XDIR: PC3
-  PORTMUX_USART1_ALT1_gc = (0x01<<2)  ; TxD: PC4, RxD: PC5, XCK: PC6, XDIR: PC7
+  PORTMUX_USART1_DEFAULT_gc = (0x00<<2) ; PC0, PC1, PC2, PC3
+  PORTMUX_USART1_ALT1_gc = (0x01<<2)  ; PC4, PC5, PC6, PC7
   PORTMUX_USART1_NONE_gc = (0x03<<2)  ; Not connected to any pins
   
   ; USART2 Signals select
-  PORTMUX_USART2_DEFAULT_gc = (0x00<<4) ; TxD: PF0, RxD: PF1, XCK: PF2, XDIR: PF3
-  PORTMUX_USART2_ALT1_gc = (0x01<<4)  ; TxD: PF4, RxD: PF5, XCK: -, XDIR: -
+  PORTMUX_USART2_DEFAULT_gc = (0x00<<4) ; PF0, PF1, PF2, PF3
+  PORTMUX_USART2_ALT1_gc = (0x01<<4)  ; PF4, PF5
   PORTMUX_USART2_NONE_gc = (0x03<<4)  ; Not connected to any pins
   
   ; USART3  Signals select
-  PORTMUX_USART3_DEFAULT_gc = (0x00<<6) ; TxD: PB0, RxD: PB1, XCK: PB2, XDIR: PB3
-  PORTMUX_USART3_ALT1_gc = (0x01<<6)  ; TxD: PB4, RxD: PB5, XCK: -, XDIR: -
+  PORTMUX_USART3_DEFAULT_gc = (0x00<<6) ; PB0, PB1, PB2, PB3
+  PORTMUX_USART3_ALT1_gc = (0x01<<6)  ; PB4, PB5, PB6, PB7
   PORTMUX_USART3_NONE_gc = (0x03<<6)  ; Not connected to any pins
   
   ; USART4 Signals select
-  PORTMUX_USART4_DEFAULT_gc = (0x00<<0) ; TxD: PE0, RxD: PE1, XCK: PE2, XDIR: PE3
+  PORTMUX_USART4_DEFAULT_gc = (0x00<<0) ; PE0, PE1, PE2, PE3
   PORTMUX_USART4_NONE_gc = (0x03<<0)  ; Not connected to any pins
   
   ; Zero Cross Detector 0 Output select
-  PORTMUX_ZCD0_DEFAULT_gc = (0x00<<0) ; OUT: PA7
-  PORTMUX_ZCD0_ALT1_gc = (0x01<<0)    ; OUT: PC7
+  PORTMUX_ZCD0_DEFAULT_gc = (0x00<<0) ; OUT on PA7
+  PORTMUX_ZCD0_ALT1_gc = (0x01<<0)    ; OUT on PC7
   
   ; Zero Cross Detector 1 Output select
-  PORTMUX_ZCD1_DEFAULT_gc = (0x00<<1) ; OUT: PA7
-  PORTMUX_ZCD1_ALT1_gc = (0x01<<1)    ; OUT: PC7
+  PORTMUX_ZCD1_DEFAULT_gc = (0x00<<1) ; OUT on PA7
+  PORTMUX_ZCD1_ALT1_gc = (0x01<<1)    ; OUT on PC7
   
   
   ;*************************************************************************
@@ -5441,20 +5436,6 @@ ALIAS_SREG=63
  TCB3_CCMP,2876
  TCB3_CCMPL,2876
  TCB3_CCMPH,2877
- TCB4_CTRLA,2880
- TCB4_CTRLB,2881
- TCB4_EVCTRL,2884
- TCB4_INTCTRL,2885
- TCB4_INTFLAGS,2886
- TCB4_STATUS,2887
- TCB4_DBGCTRL,2888
- TCB4_TEMP,2889
- TCB4_CNT,2890
- TCB4_CNTL,2890
- TCB4_CNTH,2891
- TCB4_CCMP,2892
- TCB4_CCMPL,2892
- TCB4_CCMPH,2893
  TCD0_CTRLA,2944
  TCD0_CTRLB,2945
  TCD0_CTRLC,2946

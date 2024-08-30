@@ -6,9 +6,9 @@
 ;
 ; Microchip IDE version 6.05
 ; C:\Users\admin\.mchp_packs\index.idx
-; C:\Users\admin\.mchp_packs\Microchip\AVR-Dx_DFP\2.6.303\avrasm\inc\AVR128DB64def.inc
+; C:\Users\admin\.mchp_packs\Microchip\AVR-Dx_DFP\2.5.294\avrasm\inc\AVR128DB64def.inc
 ; avr chipdata.csv
-; C:\Users\admin\.mchp_packs\Microchip\AVR-Dx_DFP\2.6.303\edc\ATAVR128DB64.PIC
+; C:\Users\admin\.mchp_packs\Microchip\AVR-Dx_DFP\2.5.294\edc\ATAVR128DB64.PIC
 ; 
 ;
 ; Registers not processed: RTC_CMP,SREG,CPU_SPL, CPU_SPH 
@@ -116,18 +116,18 @@ ZH:31
 ; MVIO interrupt vectors
 		MVIO_MVIO:MVIO_MVIO,8,,
 ; RTC interrupt vectors
-		RTC_CNT:RTC_CNT,10,,
+	RTCOverflow:RTC_CNT,6,RTC_INTCTRL.RTC_OVF_bp,RTC_INTFLAGS.RTC_OVF_bp
 		RTC_PIT:RTC_PIT,12,,
 ; CCL interrupt vectors
 		CCL_CCL:CCL_CCL,14,,
 ; PORTA interrupt vectors
 		PORTA_PORT:PORTA_PORT,16,,
 ; TCA0 interrupt vectors
-		TCA0_LUNF:TCA0_LUNF,18,,
+	Timer0Overflow:TCA0_LUNF,14,TCA0_SINGLE_INTCTRL.TCA_SINGLE_OVF_bp,!TCA0_SINGLE_INTFLAGS.TCA_SINGLE_OVF_bp
 		TCA0_HUNF:TCA0_HUNF,20,,
-		TCA0_CMP0:TCA0_CMP0,22,,
-		TCA0_CMP1:TCA0_CMP1,24,,
-		TCA0_CMP2:TCA0_CMP2,26,,
+	Timer0Match0:TCA0_CMP0,18,,
+	Timer0Match1:TCA0_CMP1,20,,
+	Timer0Match2:TCA0_CMP2,22,,
 ; TCB0 interrupt vectors
 		TCB0_INT:TCB0_INT,28,,
 ; TCB1 interrupt vectors
@@ -141,7 +141,7 @@ ZH:31
 ; SPI0 interrupt vectors
 		SPI0_INT:SPI0_INT,40,,
 ; USART0 interrupt vectors
-		USART0_RXC:USART0_RXC,42,,
+	Usart0RXReady:USART0_RXC, 34, USART0_CTRLA.USART_RXCIE_bp, USART0_STATUS.USART_RXCIF_bp
 		USART0_DRE:USART0_DRE,44,,
 		USART0_TXC:USART0_TXC,46,,
 ; PORTD interrupt vectors
@@ -160,7 +160,7 @@ ZH:31
 ; TCB2 interrupt vectors
 		TCB2_INT:TCB2_INT,62,,
 ; USART1 interrupt vectors
-		USART1_RXC:USART1_RXC,64,,
+	Usart1RXReady:USART1_RXC,52,USART1_CTRLA.USART_RXCIE_bp,USART1_STATUS.USART_RXCIF_bp
 		USART1_DRE:USART1_DRE,66,,
 		USART1_TXC:USART1_TXC,68,,
 ; PORTF interrupt vectors
@@ -170,7 +170,7 @@ ZH:31
 ; SPI1 interrupt vectors
 		SPI1_INT:SPI1_INT,74,,
 ; USART2 interrupt vectors
-		USART2_RXC:USART2_RXC,76,,
+	Usart2RXReady:USART2_RXC,62,USART2_CTRLA.USART_RXCIE_bp,USART2_STATUS.USART_RXCIF_bp
 		USART2_DRE:USART2_DRE,78,,
 		USART2_TXC:USART2_TXC,80,,
 ; AC2 interrupt vectors
@@ -193,7 +193,7 @@ ZH:31
 ; ZCD1 interrupt vectors
 		ZCD1_ZCD:ZCD1_ZCD,104,,
 ; USART3 interrupt vectors
-		USART3_RXC:USART3_RXC,106,,
+	Usart3RXReady:USART3_RXC,74,USART3_CTRLA.USART_RXCIE_bp,USART3_STATUS.USART_RXCIF_bp
 		USART3_DRE:USART3_DRE,108,,
 		USART3_TXC:USART3_TXC,110,,
 ; USART4 interrupt vectors
