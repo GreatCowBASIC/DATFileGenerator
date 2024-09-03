@@ -53,8 +53,8 @@ Pins=14
 USART=2
 
 'These USART constants are exposed with the prefix of CHIP - sourced from `avr chipdata.csv`
-USART0TXDefault=PORTA.0
-USART0RXDefault=PORTA.1
+USART0TXDefault=PORTB.2
+USART0RXDefault=PORTB.3
 
 'This constant is exposed as ChipFamily - sourced from `avr chipdata.csv`
 Family=140
