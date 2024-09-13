@@ -6,9 +6,9 @@
 ;
 ; Microchip IDE version 6.05
 ; C:\Users\admin\.mchp_packs\index.idx
-; C:\Users\admin\.mchp_packs\Microchip\AVR-Dx_DFP\2.6.303\avrasm\inc\AVR128DB64def.inc
+; C:\Users\admin\.mchp_packs\Microchip\AVR-Dx_DFP\2.5.294\avrasm\inc\AVR128DB64def.inc
 ; avr chipdata.csv
-; C:\Users\admin\.mchp_packs\Microchip\AVR-Dx_DFP\2.6.303\edc\ATAVR128DB64.PIC
+; C:\Users\admin\.mchp_packs\Microchip\AVR-Dx_DFP\2.5.294\edc\ATAVR128DB64.PIC
 ; 
 ;
 ; Registers not processed: RTC_CMP,SREG,CPU_SPL, CPU_SPH 
@@ -94,6 +94,49 @@ AVRDX=1
 ' 1 = Chip DAT file not tested and therefore no validated
 ' 2 = Chip DAT file has an [interrupt] section that is incomplete
 NotTested=1
+
+'For details of microcontroller specifications see the microcontroller datasheet
+_DATAMEM_START = 0x0000
+_DATAMEM_SIZE = 0x10000
+_DATAMEM_END = (0x0000 + 0x10000 - 1)
+_IO_START = 0x0000
+_IO_SIZE = 0x103F
+_IO_END = (0x0000 + 0x103F - 1)
+_LOCKBITS_START = 0x1040
+_LOCKBITS_SIZE = 0x0004
+_LOCKBITS_END = (0x1040 + 0x0004 - 1)
+_LOCKBITS_PAGE_SIZE = 0x01
+_FUSES_START = 0x1050
+_FUSES_SIZE = 0x0010
+_FUSES_END = (0x1050 + 0x0010 - 1)
+_FUSES_PAGE_SIZE = 0x01
+_USER_SIGNATURES_START = 0x1080
+_USER_SIGNATURES_SIZE = 0x0020
+_USER_SIGNATURES_END = (0x1080 + 0x0020 - 1)
+_USER_SIGNATURES_PAGE_SIZE = 0x20
+_SIGNATURES_START = 0x1100
+_SIGNATURES_SIZE = 0x0003
+_SIGNATURES_END = (0x1100 + 0x0003 - 1)
+_SIGNATURES_PAGE_SIZE = 0x80
+_PROD_SIGNATURES_START = 0x1103
+_PROD_SIGNATURES_SIZE = 0x007D
+_PROD_SIGNATURES_END = (0x1103 + 0x007D - 1)
+_PROD_SIGNATURES_PAGE_SIZE = 0x80
+_EEPROM_START = 0x1400
+_EEPROM_SIZE = 0x0200
+_EEPROM_END = (0x1400 + 0x0200 - 1)
+_EEPROM_PAGE_SIZE = 0x01
+_INTERNAL_SRAM_START = 0x4000
+_INTERNAL_SRAM_SIZE = 0x4000
+_INTERNAL_SRAM_END = (0x4000 + 0x4000 - 1)
+_MAPPED_PROGMEM_START = 0x8000
+_MAPPED_PROGMEM_SIZE = 0x8000
+_MAPPED_PROGMEM_END = (0x8000 + 0x8000 - 1)
+_MAPPED_PROGMEM_PAGE_SIZE = 0x200
+_PROGMEM_START = 0x0000
+_PROGMEM_SIZE = 0x20000
+_PROGMEM_END = (0x0000 + 0x20000 - 1)
+_PROGMEM_PAGE_SIZE = 0x200
 
 [Pointers]
 'This section are the registers used by compilers

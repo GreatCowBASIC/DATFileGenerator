@@ -132,6 +132,7 @@
   Declare Sub PrintFooter
   Declare Sub PrintFreeRam
   Declare Sub PrintAVRMasks
+  Declare Sub PrintAVRChipSpecifics
   Declare Function GetValue (  searchString as String, errorhandler as Integer = -1 ) as String
   Declare Function GetCSVValue (  searchString as String, returnParameter as Byte ) As String
 
@@ -140,7 +141,7 @@ InitAndGetFiles
 
 
 PrintHeader
-PrintChipData
+PrintChipData: PrintAVRChipSpecifics  
 PrintPointers
 PrintInterrupts
 PrintAliases
@@ -1303,6 +1304,59 @@ Sub PrintAVRMasks
             DataSource = trim( DataSource )
             print "  " + DataSource
 
+        loop
+
+        Close
+
+End Sub
+
+Sub PrintAVRChipSpecifics
+
+        Dim killIndex as Integer
+
+        if instr(kKillBits,",") <> 0 then
+          Split ( kKillBits, ",", -1, BitsToBeIgnored() )
+        else
+          redim BitsToBeIgnored(1)
+          BitsToBeIgnored(0) = trim(kKillBits)
+        endif
+
+
+        open fsp_ini for input as #1
+        If Err>0 Then
+          Print "Error re-opening the file "+chr(34)+fsp_ini+chr(34):Print "Update MPLKAB-IDE DFP Pack with pack version " +chipparameters(1) :End
+        End if
+
+        do
+            Line input #1, DataSource
+        loop while not eof(1) and instr( ucase(DataSource),"* DATA MEMORY DECLARATIONS *") = 0
+
+        If eof(1) then
+          Close
+          Print "Unexpected end of file "+chr(34)+fsp_ini+chr(34):Print "`* DATA MEMORY DECLARATIONS *` text not found"
+          End
+        End If
+
+        Print ""
+          print "'For details of microcontroller specifications see the microcontroller datasheet"
+
+        SFRBitsArrayPointer = 0
+
+        do while not eof(1)
+            
+            if readNextLine = -1 then Line input #1, DataSource
+
+            if instr( Datasource, "; Legacy definitions" ) > 0 then 
+              exit do
+            End If
+            
+            DataSource = trim( DataSource )
+            If DataSource <> "" Then
+              replace ( DataSource , "#DEFINE", "" )
+              DataSource = trim( DataSource )
+              replace ( DataSource, " ", " = ")
+              print "_" + DataSource
+            End If
         loop
 
         Close
