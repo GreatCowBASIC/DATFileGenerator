@@ -80,12 +80,6 @@ AVRGCC=avrxmega3
 'This constant is exposed as ChipAVRDX - sourced from `avr chipdata.csv`
 AVRDX=1
 
-'This constant is exposed as ChipNotTested - sourced from `avr chipdata.csv`
-' NotTested is a numeric bitwise value
-' 1 = Chip DAT file not tested and therefore no validated
-' 2 = Chip DAT file has an [interrupt] section that is incomplete
-NotTested=2
-
 'For details of microcontroller specifications see the microcontroller datasheet
 _DATAMEM_START = 0x0000
 _DATAMEM_SIZE = 0x10000
@@ -141,6 +135,16 @@ ZH:31
 [Interrupts]
 'For specific details of the interrupts see the microcontroller datasheet
 'The first parameter is the GCBASIC identifier used in user code to expose the specific interrupt
+'
+' Specific to AVRDX chips - an explaination - the entries
+' GCBASIC friendly name:Source Interrupt Name,vector,register.bit to enable the interrupt,register.bit or !register.bit to clear the interrupt
+'   name     interrupt   #    enable reg.bit(s)                  clear reg.bit(s)
+' NMIfromCRC:CRCSCAN_NMI,2,CRCSCAN_CTRLA.CRCSCAN_NMIEN_bp,!CRCSCAN_CTRLA.CRCSCAN_RESET_bp
+'
+' The enable reg.bit(s) can be a single bit or bits will be used to set the register
+' The clear reg.bit(s) can be a single bit or bits will be used to set the register
+' ! (eqautes to NOT ) inverts the bit
+'
 ; CRCSCAN interrupt vectors
 	NMIfromCRC:CRCSCAN_NMI,1,CRCSCAN_CTRLA.CRCSCAN_NMIEN_bp,!CRCSCAN_CTRLA.CRCSCAN_RESET_bp
 ; BOD interrupt vectors

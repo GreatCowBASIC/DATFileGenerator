@@ -422,8 +422,17 @@ Sub PrintInterrupts
 
           Print "'For specific details of the interrupts see the microcontroller datasheet"
           Print "'The first parameter is the GCBASIC identifier used in user code to expose the specific interrupt"
-
-
+          Print "'"
+          Print "' Specific to AVRDX chips - an explaination - the entries"
+          print "' GCBASIC friendly name:Source Interrupt Name,vector,register.bit to enable the interrupt,register.bit or !register.bit to clear the interrupt"
+          print "'   name     interrupt   #    enable reg.bit(s)                  clear reg.bit(s)"
+          print "' NMIfromCRC:CRCSCAN_NMI,2,CRCSCAN_CTRLA.CRCSCAN_NMIEN_bp,!CRCSCAN_CTRLA.CRCSCAN_RESET_bp"
+          print "'"
+          print "' The enable reg.bit(s) can be a single bit or bits will be used to set the register"
+          print "' The clear reg.bit(s) can be a single bit or bits will be used to set the register"
+          print "' ! (eqautes to NOT ) inverts the bit"
+          print "'"
+          
         open fsp_ini for input as #1
         If Err>0 Then
           Print "Error opening the file "+chr(34)+fsp_ini_h+chr(34):Print "Update MPLKAB-IDE DFP Pack with pack version " +chipparameters(1) :End
