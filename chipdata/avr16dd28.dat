@@ -40,6 +40,7 @@ I/O=19
 
 'This constant is exposed as ChipADC - sourced from `avr chipdata.csv`
 ADC=19
+ADCPPORTMAP=AVRDxADC19Type2Lookup
 
 'This constant is exposed as ChipMhz
 This constant is exposed as ChipMaxMhz  - sourced from `avr chipdata.csv`
@@ -668,28 +669,51 @@ ALIAS_SREG=63
   
   ; Analog Channel Selection Bits
   ADC_MUXPOS_AIN1_gc = (0x01<<0)      ; ADC input pin 1
+  AIN1 = (0x01<<0)      ; ADC input pin 1
   ADC_MUXPOS_AIN2_gc = (0x02<<0)      ; ADC input pin 2
+  AIN2 = (0x02<<0)      ; ADC input pin 2
   ADC_MUXPOS_AIN3_gc = (0x03<<0)      ; ADC input pin 3
+  AIN3 = (0x03<<0)      ; ADC input pin 3
   ADC_MUXPOS_AIN4_gc = (0x04<<0)      ; ADC input pin 4
+  AIN4 = (0x04<<0)      ; ADC input pin 4
   ADC_MUXPOS_AIN5_gc = (0x05<<0)      ; ADC input pin 5
+  AIN5 = (0x05<<0)      ; ADC input pin 5
   ADC_MUXPOS_AIN6_gc = (0x06<<0)      ; ADC input pin 6
+  AIN6 = (0x06<<0)      ; ADC input pin 6
   ADC_MUXPOS_AIN7_gc = (0x07<<0)      ; ADC input pin 7
+  AIN7 = (0x07<<0)      ; ADC input pin 7
   ADC_MUXPOS_AIN16_gc = (0x10<<0)     ; ADC input pin 16
+  AIN16 = (0x10<<0)     ; ADC input pin 16
   ADC_MUXPOS_AIN17_gc = (0x11<<0)     ; ADC input pin 17
+  AIN17 = (0x11<<0)     ; ADC input pin 17
   ADC_MUXPOS_AIN18_gc = (0x12<<0)     ; ADC input pin 18
+  AIN18 = (0x12<<0)     ; ADC input pin 18
   ADC_MUXPOS_AIN19_gc = (0x13<<0)     ; ADC input pin 19
+  AIN19 = (0x13<<0)     ; ADC input pin 19
   ADC_MUXPOS_AIN20_gc = (0x14<<0)     ; ADC input pin 20
+  AIN20 = (0x14<<0)     ; ADC input pin 20
   ADC_MUXPOS_AIN21_gc = (0x15<<0)     ; ADC input pin 21
+  AIN21 = (0x15<<0)     ; ADC input pin 21
   ADC_MUXPOS_AIN22_gc = (0x16<<0)     ; ADC input pin 22
+  AIN22 = (0x16<<0)     ; ADC input pin 22
   ADC_MUXPOS_AIN23_gc = (0x17<<0)     ; ADC input pin 23
+  AIN23 = (0x17<<0)     ; ADC input pin 23
   ADC_MUXPOS_AIN24_gc = (0x18<<0)     ; ADC input pin 24
+  AIN24 = (0x18<<0)     ; ADC input pin 24
   ADC_MUXPOS_AIN25_gc = (0x19<<0)     ; ADC input pin 25
+  AIN25 = (0x19<<0)     ; ADC input pin 25
   ADC_MUXPOS_AIN26_gc = (0x1A<<0)     ; ADC input pin 26
+  AIN26 = (0x1A<<0)     ; ADC input pin 26
   ADC_MUXPOS_AIN27_gc = (0x1B<<0)     ; ADC input pin 27
+  AIN27 = (0x1B<<0)     ; ADC input pin 27
   ADC_MUXPOS_AIN28_gc = (0x1C<<0)     ; ADC input pin 28
+  AIN28 = (0x1C<<0)     ; ADC input pin 28
   ADC_MUXPOS_AIN29_gc = (0x1D<<0)     ; ADC input pin 29
+  AIN29 = (0x1D<<0)     ; ADC input pin 29
   ADC_MUXPOS_AIN30_gc = (0x1E<<0)     ; ADC input pin 30
+  AIN30 = (0x1E<<0)     ; ADC input pin 30
   ADC_MUXPOS_AIN31_gc = (0x1F<<0)     ; ADC input pin 31
+  AIN31 = (0x1F<<0)     ; ADC input pin 31
   ADC_MUXPOS_GND_gc = (0x40<<0)       ; Ground
   ADC_MUXPOS_TEMPSENSE_gc = (0x42<<0) ; Temperature sensor
   ADC_MUXPOS_VDDDIV10_gc = (0x44<<0)  ; VDD/10

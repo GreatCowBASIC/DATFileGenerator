@@ -40,6 +40,7 @@ I/O=12
 
 'This constant is exposed as ChipADC - sourced from `avr chipdata.csv`
 ADC=9
+ADCPPORTMAP=AVRDxADC9Type4Lookup
 
 'This constant is exposed as ChipMhz
 MaxMHz=20
@@ -666,14 +667,23 @@ ALIAS_SREG=63
   
   ; Analog Channel Selection Bits
   ADC_MUXPOS_AIN1_gc = (0x01<<0)      ; ADC input pin 1
+  AIN1 = (0x01<<0)      ; ADC input pin 1
   ADC_MUXPOS_AIN2_gc = (0x02<<0)      ; ADC input pin 2
+  AIN2 = (0x02<<0)      ; ADC input pin 2
   ADC_MUXPOS_AIN3_gc = (0x03<<0)      ; ADC input pin 3
+  AIN3 = (0x03<<0)      ; ADC input pin 3
   ADC_MUXPOS_AIN4_gc = (0x04<<0)      ; ADC input pin 4
+  AIN4 = (0x04<<0)      ; ADC input pin 4
   ADC_MUXPOS_AIN5_gc = (0x05<<0)      ; ADC input pin 5
+  AIN5 = (0x05<<0)      ; ADC input pin 5
   ADC_MUXPOS_AIN6_gc = (0x06<<0)      ; ADC input pin 6
+  AIN6 = (0x06<<0)      ; ADC input pin 6
   ADC_MUXPOS_AIN7_gc = (0x07<<0)      ; ADC input pin 7
+  AIN7 = (0x07<<0)      ; ADC input pin 7
   ADC_MUXPOS_AIN10_gc = (0x0A<<0)     ; ADC input pin 10
+  AIN10 = (0x0A<<0)     ; ADC input pin 10
   ADC_MUXPOS_AIN11_gc = (0x0B<<0)     ; ADC input pin 11
+  AIN11 = (0x0B<<0)     ; ADC input pin 11
   ADC_MUXPOS_GND_gc = (0x30<<0)       ; Ground
   ADC_MUXPOS_VDDDIV10_gc = (0x31<<0)  ; VDD/10
   ADC_MUXPOS_TEMPSENSE_gc = (0x32<<0) ; Temperature sensor

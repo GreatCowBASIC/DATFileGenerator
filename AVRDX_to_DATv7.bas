@@ -35,6 +35,8 @@
     #Define XLSCompiler	          18
     #Define XLSPackages           19
     #Define XLSUSARTConfig        20
+    #Define ADCMapType            21
+
 
   Type SFR
     RegisterName as String
@@ -209,6 +211,7 @@ Sub PrintChipData
     Print
     Print "'This constant is exposed as ChipADC - sourced from `" + kXLScs +"`"
   Print "ADC=" + GetCSVValue ( targetchip, XLSADCChannels )
+  Print "ADCPPORTMAP=" + GetCSVValue ( targetchip, ADCMapType )
 
     Print
     Print "'This constant is exposed as ChipMhz"
@@ -1372,6 +1375,11 @@ Sub PrintAVRMasks
             replace ( DataSource , ".equ", "" )
             DataSource = trim( DataSource )
             print "  " + DataSource
+            If Instr( DataSource, "ADC_MUXPOS_AIN" ) > 0 then
+                replace ( DataSource, "ADC_MUXPOS_", "" )
+                replace ( DataSource, "_gc", "")
+                print "  " + DataSource
+            End if
 
         loop
 
