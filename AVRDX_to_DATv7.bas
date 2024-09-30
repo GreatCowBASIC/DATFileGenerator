@@ -173,10 +173,14 @@ End Sub
 Sub PrintFooter
   Print ""
   Print "[ConfigOps]"
+  Print "'For details of the config options see the microcontroller datasheet"
+  Print "'The first parameter is the configuration field that can be used to expose specific configuration bits"
+  Print "'The other parameters are the configuration field options that can be set"
   Print "NoConfig-PRG"
 
   Print ""
   Print "[Config]"
+  Print "'For details of the config addresses see the microcontroller datasheet"
   Print "NoConfig-PRG"
 End Sub
 
@@ -301,7 +305,7 @@ End Sub
 Sub PrintPointers
         Print ""
         Print "[Pointers]"
-          Print "'This section are the registers used by compilers"
+        Print "'This section are the registers used by compilers"
         Print "XL:26"
         Print "XH:27"
         Print "YL:28"
@@ -1277,7 +1281,6 @@ Sub Printregisters
 
     Print ""
     Print "[Registers]"
-
       print "'For specific details of the registers see the microcontroller datasheet"
       print "'The first parameter is the GCBASIC register name used in user code to expose the specific register"
 
@@ -1359,8 +1362,30 @@ Sub PrintAVRMasks
         Print ""
         Print "[AVRMASKS]"
           print "'For details of the see the microcontroller datasheet"
+          print "'"
 
         SFRBitsArrayPointer = 0
+        print ""
+        print "  PIN0_bm =  1                  ; port.pin bit mask"
+        print "  PIN1_bm =  2                  ; port.pin bit mask"
+        print "  PIN2_bm =  4                  ; port.pin bit mask"
+        print "  PIN3_bm =  8                  ; port.pin bit mask"
+        print "  PIN4_bm =  16                 ; port.pin bit mask"
+        print "  PIN5_bm =  32                 ; port.pin bit mask"
+        print "  PIN6_bm =  64                 ; port.pin bit mask"
+        print "  PIN7_bm =  128                ; port.pin bit mask"
+        print ""
+
+        print ""
+        print "  PIN0_bp =  0                  ; port.pin bit position"
+        print "  PIN1_bp =  1                  ; port.pin bit position"
+        print "  PIN2_bp =  2                  ; port.pin bit position"
+        print "  PIN3_bp =  3                  ; port.pin bit position"
+        print "  PIN4_bp =  4                  ; port.pin bit position"
+        print "  PIN5_bp =  5                  ; port.pin bit position"
+        print "  PIN6_bp =  6                  ; port.pin bit position"
+        print "  PIN7_bp =  7                  ; port.pin bit position"
+        print ""
 
         do while not eof(1)
             

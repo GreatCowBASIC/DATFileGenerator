@@ -292,6 +292,27 @@ ALIAS_SREG=63
 
 [AVRMASKS]
 'For details of the see the microcontroller datasheet
+'
+
+  PIN0_bm =  1                  ; port.pin bit mask
+  PIN1_bm =  2                  ; port.pin bit mask
+  PIN2_bm =  4                  ; port.pin bit mask
+  PIN3_bm =  8                  ; port.pin bit mask
+  PIN4_bm =  16                 ; port.pin bit mask
+  PIN5_bm =  32                 ; port.pin bit mask
+  PIN6_bm =  64                 ; port.pin bit mask
+  PIN7_bm =  128                ; port.pin bit mask
+
+
+  PIN0_bp =  0                  ; port.pin bit position
+  PIN1_bp =  1                  ; port.pin bit position
+  PIN2_bp =  2                  ; port.pin bit position
+  PIN3_bp =  3                  ; port.pin bit position
+  PIN4_bp =  4                  ; port.pin bit position
+  PIN5_bp =  5                  ; port.pin bit position
+  PIN6_bp =  6                  ; port.pin bit position
+  PIN7_bp =  7                  ; port.pin bit position
+
   
   
   ;*************************************************************************
@@ -3917,7 +3938,11 @@ WDT_LOCK,WDT,7			'  Lock enable bit position
 2800:4000
 
 [ConfigOps]
+'For details of the config options see the microcontroller datasheet
+'The first parameter is the configuration field that can be used to expose specific configuration bits
+'The other parameters are the configuration field options that can be set
 NoConfig-PRG
 
 [Config]
+'For details of the config addresses see the microcontroller datasheet
 NoConfig-PRG
