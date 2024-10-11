@@ -7,8 +7,9 @@
   #include once "ext/xml/dom.bi"
   #include "file.bi"
 
+  #DEFINE kVERSION  "1.09"
+
   #DEFINE kINDEX_IDX  ""    'UserProfile+kINDEX.IDX
-  #DEFINE kIDEVersion "6.05"
   #DEFINE kUniqueBits ""
   #DEFINE kKillRegister "RTC_CMP,SREG,CPU_SPL, CPU_SPH "
   #DEFINE kKillBits "CPU_RAMPZ"
@@ -71,6 +72,7 @@
     UserProfile As String
   End Type
 
+  Dim Shared kIDEVersion as String
   Dim Shared SourceFileArray(100000) As SourceFiles
   Dim Shared SourceFileArrayPointer as Integer = 0
   Dim Shared SFRBitsArrayPointer as Integer = 0
@@ -83,14 +85,21 @@
   Dim Shared BadRamPointer as Integer = 0
   Dim Shared ConfigFilename as string
   Dim Shared ShowDebug as Integer = 0
+  Dim Shared ShowIncludeLocation as Integer = 0
   Dim Shared UserProfile as String
+  Dim Shared GCBASICConverterCall as Integer = 0
 
   Dim Shared ParamUpper as string
   Dim Shared targetchip as string
   Dim Shared As String chip, chipdetails, chiphsource, chipincsource
   Dim Shared chipparameters() as string
+  Dim Shared fsp_incfile as string
+  Dim Shared fsp_incfile_h as string
   Dim Shared fsp_ini as string
-  Dim Shared fsp_ini_h as string
+  Dim Shared partname as String
+  Dim Shared converterprogname as String
+  
+
   Dim Shared folder_DFP as string
 
   Dim Shared SFRRegister() as string
@@ -113,6 +122,8 @@
 
   Dim Shared getRamSizeStr as String
   Dim Shared getRamSizeInt as Integer
+
+  Dim Shared missingIDXFile as Integer = 0
 
   Dim Shared ParamMeters() as String
   Declare Sub PopulateSourceFilesLocation
@@ -141,7 +152,7 @@
 
 '*******************************
 InitAndGetFiles
-
+  if missingIDXFile <> 0 Then End
 
 PrintHeader
 PrintChipData: PrintAVRChipSpecifics  
@@ -441,9 +452,9 @@ Sub PrintInterrupts
           print "' ! (eqautes to NOT ) inverts the bit"
           print "'"
           
-        open fsp_ini for input as #1
+        open fsp_incfile for input as #1
         If Err>0 Then
-          Print "Error opening the file "+chr(34)+fsp_ini_h+chr(34):Print "Update MPLKAB-IDE DFP Pack with pack version " +chipparameters(1) :End
+          Print "Error opening the file "+chr(34)+fsp_incfile_h+chr(34):Print "Update MPLKAB-IDE DFP Pack with pack version " +chipparameters(1) :End
         End if
 
         ' print "INTERRUPT VECTORS, ABSOLUTE ADDRESSES"
@@ -670,7 +681,12 @@ Sub PopulateSourceFilesLocation
 
   Var xmldoc = new ext.xml.tree
 
+  If dir(UserProfile + kINDEX_IDX+"\index.idx") = "" then
+    missingIDXFile = 1
+    exit sub
+  End If
 
+  'proceed
   xmldoc->load( UserProfile + kINDEX_IDX+"\index.idx" )
 
 
@@ -1086,6 +1102,29 @@ Sub InitAndGetFiles
   Dim CD as integer = 1
   Dim forIndex as Integer
   
+  'Open ini file
+    fsp_ini = Exepath+"\avrchipdata.ini"
+      if dir(fsp_ini) = "" then
+        Print "Error - Missing `avrchipdata.ini` file: " + fsp_ini
+        Print "  avrchipdata.ini must contain the following"
+        Print "  MPLABXVersion=6.05"
+        end
+      else
+        Dim checkparameter as String
+        kIDEVersion = ""
+        open fsp_ini for input as #1
+        If Err>0 Then Print "Error opening the file "+chr(34)+fsp_ini+chr(34):End
+        'read parameters
+        Line input #1, DataSource
+        if Instr( uCase(DataSource), "MPLABXVERSION") > 0 then 
+          checkparameter = Trim(Mid( DataSource, InStr( DataSource, "=")+1))
+          if left( checkparameter, 1 ) = "v" then replace( checkparameter, "v", "" )
+          kIDEVersion = checkparameter
+        End if
+        close #1
+      End if  
+
+
   UserProfile = ENVIRON("Userprofile")
   UserProfile = UserProfile + "\.mchp_packs"
 
@@ -1094,11 +1133,28 @@ Sub InitAndGetFiles
         'read the kINDEX_IDX to populate SourceFileArray()
         PopulateSourceFilesLocation
 
-        UserProfile = "C:\Program Files\Microchip\MPLABX\v"+kIDEVersion+"\packs"
+        'Crude error handler
+        If missingIDXFile > 0 and forIndex = 1 then 
+          print "Missing IDX file from : " + ENVIRON("Userprofile")+ "\.mchp_packs"
+          print ""
+        end if
 
+        UserProfile = "C:\Program Files\Microchip\MPLABX\v"+kIDEVersion+"\packs"
+  
     Next
 
+    'Crude error handler
+    If missingIDXFile > 0 And forIndex <> 1 then 
+      print "Missing IDX file from : " + UserProfile
+      print ""
+      Close
+      Exit Sub
+    end if
+
+
+
     If COMMAND(CD) = "" then
+        'dump the list of IDX
         Print "MPLAB-IDE version " + kIDEVersion
         'Display the contents of the kINDEX_IDX to the console... essentially shows SourceFileArray()
         Dim loopcounter as Integer
@@ -1126,8 +1182,8 @@ Sub InitAndGetFiles
     End If
 
 
-    If COMMAND(CD) = "?" then
-        Print "No help available"
+    If COMMAND(CD) = "?" or COMMAND(CD) = "-h" or COMMAND(CD) = "--h" or COMMAND(CD) = "help" then
+        Print "[DEBUG] [[INCLUDELOCATION] chip]"
         End
     End if
 
@@ -1137,10 +1193,36 @@ Sub InitAndGetFiles
         print ";Debug:  Second command line parameter is: "+trim(COMMAND(CD))
     End if
 
-    
+    If instr(UCase(COMMAND(CD)), ".INC" ) > 0   then
+      'passed from GCBASIC
+
+      Dim partnamepos as Integer
+
+      partnamepos = InstrRev ( COMMAND(CD), "\" )
+      partname = Mid ( COMMAND(CD), partnamepos )
+      Replace partname, "\", ""
+      Replace partname, ".inc", ""
+      ShowIncludeLocation = -1
+
+      converterprogname = Ucase(COMMAND(CD))
+      Replace converterprogname, ".INC", ".GCB"
+      Print "Determining: AVRASM2 INC file location. GCBASIC utility " + kVersion
+      GCBASICConverterCall = - 1
+      ParamUpper = partname
+      ShowIncludeLocation = -1
+      CD = CD + 1
+    End If
+
+    If Ucase(COMMAND(CD)) = "INCLUDELOCATION" then
+        ShowIncludeLocation = -1
+        CD = CD + 1
+    End if    
+
     'Process the command line
     
-    ParamUpper = Ucase(COMMAND(CD))
+    If GCBASICConverterCall = 0 Then
+      ParamUpper = Ucase(COMMAND(CD))
+    End If
 
     targetchip = ParamUpper
     If left(targetchip,3) <> "AVR" then
@@ -1168,7 +1250,7 @@ Sub InitAndGetFiles
             if left(chipdetails,6) = "NOCHIP" or  chipdetails = "" then
               if forindex = 2 then 
                 print "Not a valid chip, or no DFP files .. ", chipdetails
-                print fsp_ini
+                print fsp_incfile
                 End
               End if
               exit do
@@ -1205,10 +1287,10 @@ Sub InitAndGetFiles
 
             split( chipdetails, ",",-1,chipparameters() )
 
-            fsp_ini = UserProfile+kINDEX_IDX+"\Microchip\"+chipparameters(3)+"_DFP\"+chipparameters(1)+"\avrasm\inc\"+ chipincsource  +".inc"
+            fsp_incfile = UserProfile+kINDEX_IDX+"\Microchip\"+chipparameters(3)+"_DFP\"+chipparameters(1)+"\avrasm\inc\"+ chipincsource  +".inc"
 
 
-            if dir(fsp_ini) <> "" then
+            if dir(fsp_incfile) <> "" then
               Exit Sub
             End if  
 
@@ -1223,15 +1305,35 @@ End Sub
 
 Sub PrintHeader
 
-    Print ";        .DAT sections"
-    Print ";=========================================================================="
-    Print ";"
-    Print ";  Built by GCBASIC converter"
-    Print ";  XC8 processor include for the chip shown below"
-    Print ";"
-    print "; Microchip IDE version " + kIDEVersion
-    Print "; " + UserProfile + kINDEX_IDX+"\index.idx"
-    Print "; " + fsp_ini
+    If ShowIncludeLocation = 0 then
+      Print ";        .DAT sections"
+      Print ";=========================================================================="
+      Print ";"
+      Print ";  Built by GCBASIC converter"
+      Print ";  XC8 processor include for the chip shown below"
+      Print ";"
+      print "; Microchip IDE version " + kIDEVersion
+      Print "; " + UserProfile + kINDEX_IDX+"\index.idx"
+    End If
+    If ShowIncludeLocation = 0 then
+      Print "; " + fsp_incfile
+    Else
+      If GCBASICConverterCall = 0 Then 
+        Print fsp_incfile  
+      End If
+
+      'Create ouput file
+      ' write name to file
+      Open converterprogname For Output As #2
+      Print #2, "#STARTUP ADD_AVRASM2_INCLUDE_CONSTANT"
+      Print #2, "Sub ADD_AVRASM2_INCLUDE_CONSTANT"
+      Print #2, " #DEFINE AVRASM2_INCLUDE_LOCATION " + fsp_incfile
+      Print #2, "End Sub "
+      Close #2
+
+      Close #
+      End
+    End If
     Print "; " + kXLScs
     print "; " + UserProfile + kINDEX_IDX+"\Microchip\"+chipparameters(3)+"_DFP\"+chipparameters(1)+"\edc\AT"+ Chip  +".PIC"
     print "; " + ConfigFileName
@@ -1265,8 +1367,8 @@ Sub Printregisters
 
     CurrentBank = -1
 
-    open fsp_ini for input as #1
-    If Err>0 Then Print "Error opening the file "+chr(34)+fsp_ini+chr(34):Print "Update MPLKAB-IDE DFP Pack with pack version " +chipparameters(1) :End
+    open fsp_incfile for input as #1
+    If Err>0 Then Print "Error opening the file "+chr(34)+fsp_incfile+chr(34):Print "Update MPLKAB-IDE DFP Pack with pack version " +chipparameters(1) :End
 
     'read down to "ABSOLUTE I/O REGISTER LOCATIONS"
 
@@ -1276,7 +1378,7 @@ Sub Printregisters
 
     If eof(1) then
       Close
-      Print "Unexpected end of file "+chr(34)+fsp_ini+chr(34):Print "I/O REGISTER DEFINITIONS text not found"
+      Print "Unexpected end of file "+chr(34)+fsp_incfile+chr(34):Print "I/O REGISTER DEFINITIONS text not found"
       End
     End If
 
@@ -1342,9 +1444,9 @@ Sub PrintAVRMasks
         endif
 
 
-        open fsp_ini for input as #1
+        open fsp_incfile for input as #1
         If Err>0 Then
-          Print "Error re-opening the file "+chr(34)+fsp_ini+chr(34):Print "Update MPLKAB-IDE DFP Pack with pack version " +chipparameters(1) :End
+          Print "Error re-opening the file "+chr(34)+fsp_incfile+chr(34):Print "Update MPLKAB-IDE DFP Pack with pack version " +chipparameters(1) :End
         End if
 
 
@@ -1356,7 +1458,7 @@ Sub PrintAVRMasks
 
         If eof(1) then
           Close
-          Print "Unexpected end of file "+chr(34)+fsp_ini+chr(34):Print "`* BIT AND VALUE DEFINITIONS * - ` text not found"
+          Print "Unexpected end of file "+chr(34)+fsp_incfile+chr(34):Print "`* BIT AND VALUE DEFINITIONS * - ` text not found"
           End
         End If
 
@@ -1425,9 +1527,9 @@ Sub PrintAVRChipSpecifics
         endif
 
 
-        open fsp_ini for input as #1
+        open fsp_incfile for input as #1
         If Err>0 Then
-          Print "Error re-opening the file "+chr(34)+fsp_ini+chr(34):Print "Update MPLKAB-IDE DFP Pack with pack version " +chipparameters(1) :End
+          Print "Error re-opening the file "+chr(34)+fsp_incfile+chr(34):Print "Update MPLKAB-IDE DFP Pack with pack version " +chipparameters(1) :End
         End if
 
         do
@@ -1436,7 +1538,7 @@ Sub PrintAVRChipSpecifics
 
         If eof(1) then
           Close
-          Print "Unexpected end of file "+chr(34)+fsp_ini+chr(34):Print "`* DATA MEMORY DECLARATIONS *` text not found"
+          Print "Unexpected end of file "+chr(34)+fsp_incfile+chr(34):Print "`* DATA MEMORY DECLARATIONS *` text not found"
           End
         End If
 
@@ -1479,9 +1581,9 @@ Sub PrintBits
         endif
 
 
-        open fsp_ini for input as #1
+        open fsp_incfile for input as #1
         If Err>0 Then
-          Print "Error re-opening the file "+chr(34)+fsp_ini+chr(34):Print "Update MPLKAB-IDE DFP Pack with pack version " +chipparameters(1) :End
+          Print "Error re-opening the file "+chr(34)+fsp_incfile+chr(34):Print "Update MPLKAB-IDE DFP Pack with pack version " +chipparameters(1) :End
         End if
 
 
@@ -1493,7 +1595,7 @@ Sub PrintBits
 
         If eof(1) then
           Close
-          Print "Unexpected end of file "+chr(34)+fsp_ini+chr(34):Print "`* BIT AND VALUE DEFINITIONS * - ` text not found"
+          Print "Unexpected end of file "+chr(34)+fsp_incfile+chr(34):Print "`* BIT AND VALUE DEFINITIONS * - ` text not found"
           End
         End If
 
@@ -1617,8 +1719,8 @@ End Sub
 
 Function GetValue (  searchString as String, errorhandler as Integer = -1 ) As String
 
-    open fsp_ini for input as #1
-    If Err>0 Then Print "Error opening the file "+chr(34)+fsp_ini+chr(34):Print "Update MPLKAB-IDE DFP Pack with pack version " +chipparameters(1) :End
+    open fsp_incfile for input as #1
+    If Err>0 Then Print "Error opening the file "+chr(34)+fsp_incfile+chr(34):Print "Update MPLKAB-IDE DFP Pack with pack version " +chipparameters(1) :End
 
     do
         Line input #1, DataSource
@@ -1628,7 +1730,7 @@ Function GetValue (  searchString as String, errorhandler as Integer = -1 ) As S
         Close
         If errorhandler = -1 then
             
-            Print "Unexpected end of file "+chr(34)+fsp_ini+chr(34):Print "Search string `" + searchString + "` not found"
+            Print "Unexpected end of file "+chr(34)+fsp_incfile+chr(34):Print "Search string `" + searchString + "` not found"
             End
         Else
             Return ""
