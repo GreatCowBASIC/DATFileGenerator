@@ -7,7 +7,7 @@
   #include once "ext/xml/dom.bi"
   #include "file.bi"
 
-  #DEFINE kVERSION  "1.09"
+  #DEFINE kVERSION  "1.10"
 
   #DEFINE kINDEX_IDX  ""    'UserProfile+kINDEX.IDX
   #DEFINE kUniqueBits ""
@@ -1182,8 +1182,19 @@ Sub InitAndGetFiles
     End If
 
 
-    If COMMAND(CD) = "?" or COMMAND(CD) = "-h" or COMMAND(CD) = "--h" or COMMAND(CD) = "help" then
-        Print "[DEBUG] [[INCLUDELOCATION] chip]"
+    If COMMAND(CD) = "?" or COMMAND(CD) = "-h" or COMMAND(CD) = "--h" or COMMAND(CD) = "help"  or COMMAND(CD) = "-help" then
+        Print ""
+        Print "This tool version " + kVersion + ":"
+        Print "       converts from Microchip DFP/XML files to GCBASIC DAT file"
+        Print "       extracts the latest version of DFP for a specific microncontroller"
+        Print "       creates an include file for use with GCBASIC for a specific microncontroller"
+        Print "       creates an include file for use with GCBASIC for a specific microncontroller"        
+        Print ""
+        Print "  [DEBUG] [[INCLUDELOCATION] {chip}]"
+        Print "    or,"
+        Print "  `..\{chip}.dfp` creates ..\chip.gcb for GCBASIC include usage"
+        Print ""
+        
         End
     End if
 
@@ -1193,20 +1204,20 @@ Sub InitAndGetFiles
         print ";Debug:  Second command line parameter is: "+trim(COMMAND(CD))
     End if
 
-    If instr(UCase(COMMAND(CD)), ".INC" ) > 0   then
+    If instr(UCase(COMMAND(CD)), ".DFP" ) > 0   then
       'passed from GCBASIC
 
       Dim partnamepos as Integer
 
       partnamepos = InstrRev ( COMMAND(CD), "\" )
-      partname = Mid ( COMMAND(CD), partnamepos )
+      partname = Ucase(Mid ( COMMAND(CD), partnamepos ))
       Replace partname, "\", ""
-      Replace partname, ".inc", ""
+      Replace partname, ".DFP", ""
       ShowIncludeLocation = -1
 
       converterprogname = Ucase(COMMAND(CD))
-      Replace converterprogname, ".INC", ".GCB"
-      Print "Determining: AVRASM2 INC file location. GCBASIC utility " + kVersion
+      Replace converterprogname, ".DFP", ".gcb"
+      Print "Determining: AVRASM2 DFP & INC file location. GCBASIC utility " + kVersion
       GCBASICConverterCall = - 1
       ParamUpper = partname
       ShowIncludeLocation = -1
@@ -1248,7 +1259,7 @@ Sub InitAndGetFiles
             chipdetails = FindChip ( targetchip , ignoreversion )
             
             if left(chipdetails,6) = "NOCHIP" or  chipdetails = "" then
-              if forindex = 2 then 
+              if forindex = 2 and ShowIncludeLocation = 0 then 
                 print "Not a valid chip, or no DFP files .. ", chipdetails
                 print fsp_incfile
                 End
