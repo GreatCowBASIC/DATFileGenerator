@@ -1,4 +1,4 @@
-' change kIDEVersion to ini / parameter
+' change gIDEVersion to ini / parameter
 ' add to new application search for INC file
 
 'This examines the INDEX_IDX file in the MPLAB-X directory and returns the version etc for a specific Chip
@@ -7,13 +7,13 @@
   #include once "ext/xml/dom.bi"
   #include "file.bi"
 
-  #DEFINE kVERSION  "1.10"
+  #DEFINE kVERSION  "1.11"
 
   #DEFINE kINDEX_IDX  ""    'UserProfile+kINDEX.IDX
   #DEFINE kUniqueBits ""
   #DEFINE kKillRegister "RTC_CMP,SREG,CPU_SPL, CPU_SPH "
   #DEFINE kKillBits "CPU_RAMPZ"
-  #DEFINE kXLScs "avr chipdata.csv"
+
 
     'These are the columns in the XLS
     #Define XLSchip       0
@@ -72,7 +72,8 @@
     UserProfile As String
   End Type
 
-  Dim Shared kIDEVersion as String
+  Dim Shared gIDEVersion as String
+  Dim Shared gXLScs as String: gXLScs = "avr chipdata.csv"
   Dim Shared SourceFileArray(100000) As SourceFiles
   Dim Shared SourceFileArrayPointer as Integer = 0
   Dim Shared SFRBitsArrayPointer as Integer = 0
@@ -221,11 +222,11 @@ Sub PrintChipData
   Print "RAM="+Str(Val("&h"+GetValue ("INT_SRAM SIZE")))
 
     Print
-    Print "'This constant is exposed as ChipIO - sourced from `" + kXLScs +"`"
+    Print "'This constant is exposed as ChipIO - sourced from `" + gXLScs +"`"
   Print "I/O=" + GetCSVValue ( targetchip, XLSIO )
 
     Print
-    Print "'This constant is exposed as ChipADC - sourced from `" + kXLScs +"`"
+    Print "'This constant is exposed as ChipADC - sourced from `" + gXLScs +"`"
   Print "ADC=" + GetCSVValue ( targetchip, XLSADCChannels )
   Print "ADCPPORTMAP=" + GetCSVValue ( targetchip, ADCMapType )
 
@@ -242,7 +243,7 @@ Sub PrintChipData
     Print "IntOsc=16"
 
   Else
-      Print "This constant is exposed as ChipMaxMhz  - sourced from `" + kXLScs +"`"
+      Print "This constant is exposed as ChipMaxMhz  - sourced from `" + gXLScs +"`"
       Print "MaxMHz="  + GetCSVValue ( targetchip, XLSMaxSpeedMHz )
       If Val(GetCSVValue ( targetchip, XLSMaxSpeedMHz )) = 24 then
         Print  "'This constant is exposed with only the first parameter (if more than one)"
@@ -251,15 +252,15 @@ Sub PrintChipData
   End If
 
     Print
-    Print "'This constant is exposed as ChipPins - sourced from `" + kXLScs +"`"
+    Print "'This constant is exposed as ChipPins - sourced from `" + gXLScs +"`"
   Print "Pins=" + GetCSVValue ( targetchip, XLSPINS )
 
     Print
-    Print "'This constant is exposed as ChipUSART - sourced from `" + kXLScs +"`"
+    Print "'This constant is exposed as ChipUSART - sourced from `" + gXLScs +"`"
   Print "USART=" + GetCSVValue ( targetchip, XLSUSART )
 
     Print
-    Print "'These USART constants are exposed with the prefix of CHIP - sourced from `" + kXLScs +"`"
+    Print "'These USART constants are exposed with the prefix of CHIP - sourced from `" + gXLScs +"`"
       cacheString = GetCSVValue ( targetchip, XLSUSARTConfig )
     Split( cacheString, "|",0, cacheArray())
     For cacheCount = 0 to ubound(cacheArray)
@@ -267,7 +268,7 @@ Sub PrintChipData
     Next
     
     Print
-    Print "'This constant is exposed as ChipFamily - sourced from `" + kXLScs +"`"
+    Print "'This constant is exposed as ChipFamily - sourced from `" + gXLScs +"`"
   Print "Family="+ GetCSVValue ( targetchip, XLSChipFamilyOverride )
   
     Print
@@ -293,19 +294,19 @@ Sub PrintChipData
   Print "HardwareMult=y"
   if Val("&h"+GetValue ("VPORTA_OUT")) > 0 then
       Print
-      Print "'This constant is exposed as ChipAVRFamily - sourced from `" + kXLScs +"`"
+      Print "'This constant is exposed as ChipAVRFamily - sourced from `" + gXLScs +"`"
     Print "AVRFamily=" + GetCSVValue ( targetchip, XLSAVRFamily )
       Print
-      Print "'This constant is exposed as ChipAVRGCC - sourced from `" + kXLScs +"`"
+      Print "'This constant is exposed as ChipAVRGCC - sourced from `" + gXLScs +"`"
     Print "AVRGCC="+ GetCSVValue ( targetchip, XLSAVRGCC )
       Print
-      Print "'This constant is exposed as ChipAVRDX - sourced from `" + kXLScs +"`"
+      Print "'This constant is exposed as ChipAVRDX - sourced from `" + gXLScs +"`"
     Print "AVRDX=" + GetCSVValue ( targetchip, XLSAVRDX )
   End If
 
   IF val(GetCSVValue ( targetchip, XLSNotTested ))> 0 then
       Print
-      Print "'This constant is exposed as ChipNotTested - sourced from `" + kXLScs +"`"
+      Print "'This constant is exposed as ChipNotTested - sourced from `" + gXLScs +"`"
       print "' NotTested is a numeric bitwise value"
       Print "' 1 = Chip DAT file not tested and therefore no validated"
       Print "' 2 = Chip DAT file has an [interrupt] section that is incomplete"
@@ -1107,20 +1108,27 @@ Sub InitAndGetFiles
       if dir(fsp_ini) = "" then
         Print "Error - Missing `avrchipdata.ini` file: " + fsp_ini
         Print "  avrchipdata.ini must contain the following"
-        Print "  MPLABXVersion=6.05"
+        Print "  MPLABXVersion=6.20"
         end
       else
         Dim checkparameter as String
-        kIDEVersion = ""
+        gIDEVersion = ""
         open fsp_ini for input as #1
         If Err>0 Then Print "Error opening the file "+chr(34)+fsp_ini+chr(34):End
         'read parameters
-        Line input #1, DataSource
-        if Instr( uCase(DataSource), "MPLABXVERSION") > 0 then 
-          checkparameter = Trim(Mid( DataSource, InStr( DataSource, "=")+1))
-          if left( checkparameter, 1 ) = "v" then replace( checkparameter, "v", "" )
-          kIDEVersion = checkparameter
-        End if
+        Do
+          Line input #1, DataSource
+          if Instr( uCase(DataSource), "MPLABXVERSION") > 0 then 
+            checkparameter = Trim(Mid( DataSource, InStr( DataSource, "=")+1))
+            if left( checkparameter, 1 ) = "v" then replace( checkparameter, "v", "" )
+            gIDEVersion = checkparameter
+          End if
+          if Instr( uCase(DataSource), "DEFAULTCSVLOCATION") > 0 then 
+            checkparameter = Trim(Mid( DataSource, InStr( DataSource, "=")+1))
+            gXLScs = checkparameter + gXLScs
+          End if
+
+        loop while not eof(1)
         close #1
       End if  
 
@@ -1139,7 +1147,7 @@ Sub InitAndGetFiles
           print ""
         end if
 
-        UserProfile = "C:\Program Files\Microchip\MPLABX\v"+kIDEVersion+"\packs"
+        UserProfile = "C:\Program Files\Microchip\MPLABX\v"+gIDEVersion+"\packs"
   
     Next
 
@@ -1155,7 +1163,7 @@ Sub InitAndGetFiles
 
     If COMMAND(CD) = "" then
         'dump the list of IDX
-        Print "MPLAB-IDE version " + kIDEVersion
+        Print "MPLAB-IDE version " + gIDEVersion
         'Display the contents of the kINDEX_IDX to the console... essentially shows SourceFileArray()
         Dim loopcounter as Integer
         for loopcounter = 0 to SourceFileArrayPointer - 1
@@ -1183,6 +1191,7 @@ Sub InitAndGetFiles
 
 
     If COMMAND(CD) = "?" or COMMAND(CD) = "-h" or COMMAND(CD) = "--h" or COMMAND(CD) = "help"  or COMMAND(CD) = "-help" then
+        'Help section
         Print ""
         Print "This tool version " + kVersion + ":"
         Print "       converts from Microchip DFP/XML files to GCBASIC DAT file"
@@ -1193,6 +1202,15 @@ Sub InitAndGetFiles
         Print "  [DEBUG] [[INCLUDELOCATION] {chip}]"
         Print "    or,"
         Print "  `..\{chip}.dfp` creates ..\chip.gcb for GCBASIC include usage"
+        Print ""
+
+        Print "An ini control file called `avrchipdata.ini` can control aspects of this application."
+        Print "An example `avrchipdata.ini` follows:"
+        Print ""
+        Print "'The `MPLABXVersion` value needs to be a valid MPLAB installation"
+        print "MPLABXVersion=6.20"
+        Print "'This 'defaultCSVlocation' parameter is the location of the GCBASIC CSV file"
+        Print "defaultCSVlocation=d:"
         Print ""
         
         End
@@ -1308,7 +1326,7 @@ Sub InitAndGetFiles
             ignoreversion = chipparameters(1)
           
           Loop
-          UserProfile = "C:\Program Files\Microchip\MPLABX\v"+kIDEVersion+"\packs"
+          UserProfile = "C:\Program Files\Microchip\MPLABX\v"+gIDEVersion+"\packs"
 
       Next
 
@@ -1317,13 +1335,18 @@ End Sub
 Sub PrintHeader
 
     If ShowIncludeLocation = 0 then
+
+    open gXLScs for input as #99
+    If Err>0 Then Print "Error opening required GBCASIC support file "+chr(34)+gXLScs+chr(34):Print  chipparameters(1) :End
+    close #99
+
       Print ";        .DAT sections"
       Print ";=========================================================================="
       Print ";"
       Print ";  Built by GCBASIC converter"
       Print ";  XC8 processor include for the chip shown below"
       Print ";"
-      print "; Microchip IDE version " + kIDEVersion
+      print "; Microchip IDE version " + gIDEVersion
       Print "; " + UserProfile + kINDEX_IDX+"\index.idx"
     End If
     If ShowIncludeLocation = 0 then
@@ -1345,7 +1368,7 @@ Sub PrintHeader
       Close #
       End
     End If
-    Print "; " + kXLScs
+    Print "; " + gXLScs
     print "; " + UserProfile + kINDEX_IDX+"\Microchip\"+chipparameters(3)+"_DFP\"+chipparameters(1)+"\edc\AT"+ Chip  +".PIC"
     print "; " + ConfigFileName
     print ";"
@@ -1762,8 +1785,8 @@ Function GetCSVValue (  searchString as String, returnParameter as Byte ) As Str
     Dim RetString as String 
     returnParameter = returnParameter * 1 
 
-    open kXLScs for input as #1
-    If Err>0 Then Print "Error opening the file "+chr(34)+kXLScs+chr(34):Print  chipparameters(1) :End
+    open gXLScs for input as #1
+    If Err>0 Then Print "Error opening the file "+chr(34)+gXLScs+chr(34):Print  chipparameters(1) :End
 
     do
         Line input #1, DataSource
@@ -1772,7 +1795,7 @@ Function GetCSVValue (  searchString as String, returnParameter as Byte ) As Str
 
     If eof(1) and instr( ucase(DataSource), Ucase(searchString)) = 0 then
       Close
-      Print "Unexpected end of file "+chr(34)+kXLScs+chr(34):Print "Search string `" + searchString + "` not found"
+      Print "Unexpected end of file "+chr(34)+gXLScs+chr(34):Print "Search string `" + searchString + "` not found"
       End
     End If
 
