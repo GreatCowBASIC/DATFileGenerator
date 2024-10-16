@@ -7,7 +7,7 @@
   #include once "ext/xml/dom.bi"
   #include "file.bi"
 
-  #DEFINE kVERSION  "1.11"
+  #DEFINE kVERSION  "1.12"
 
   #DEFINE kINDEX_IDX  ""    'UserProfile+kINDEX.IDX
   #DEFINE kUniqueBits ""
@@ -89,6 +89,9 @@
   Dim Shared ShowIncludeLocation as Integer = 0
   Dim Shared UserProfile as String
   Dim Shared GCBASICConverterCall as Integer = 0
+  Dim Shared DFPVersion as String
+  Dim Shared DFPFamily as String
+  
 
   Dim Shared ParamUpper as string
   Dim Shared targetchip as string
@@ -208,30 +211,30 @@ Sub PrintChipData
   Print "[ChipData]"
   
     Print "';All items in the ChipData section are available to user programs as constants"
-    Print "';The constants have the prefix of Chip: See the details below"
+    Print "';The constants have the prefix of CHIP: See the details below"
     Print
-    Print "'This constant is exposed as ChipWORDS"
+    Print "'This constant is exposed as CHIPWORDS"
   Print "Prog="+Str(Val("&h"+GetValue ("MAPPED_PROGMEM_SIZE")) /2 )
 
     Print
-    Print "'This constant is exposed as ChipEEPROM"
+    Print "'This constant is exposed as CHIPEEPROM"
   Print "EEPROM="+Str(Val("&h"+GetValue ("EEPROM_SIZE")))
   
     Print
-    Print "'This constant is exposed as ChipRAM"
+    Print "'This constant is exposed as CHIPRAM"
   Print "RAM="+Str(Val("&h"+GetValue ("INT_SRAM SIZE")))
 
     Print
-    Print "'This constant is exposed as ChipIO - sourced from `" + gXLScs +"`"
+    Print "'This constant is exposed as CHIPIO - sourced from `" + gXLScs +"`"
   Print "I/O=" + GetCSVValue ( targetchip, XLSIO )
 
     Print
-    Print "'This constant is exposed as ChipADC - sourced from `" + gXLScs +"`"
+    Print "'This constant is exposed as CHIPADC - sourced from `" + gXLScs +"`"
   Print "ADC=" + GetCSVValue ( targetchip, XLSADCChannels )
   Print "ADCPPORTMAP=" + GetCSVValue ( targetchip, ADCMapType )
 
     Print
-    Print "'This constant is exposed as ChipMhz"
+    Print "'This constant is exposed as CHIPMhz"
   If Val("&h"+GetValue ("FUSE_FREQSEL_20MHZ_gc", 0 )) > 0 then
     Print "MaxMHz=20"
     Print  "'This constant is exposed with only the first parameter (if more than one)"
@@ -243,7 +246,7 @@ Sub PrintChipData
     Print "IntOsc=16"
 
   Else
-      Print "This constant is exposed as ChipMaxMhz  - sourced from `" + gXLScs +"`"
+      Print "This constant is exposed as CHIPMAXMHZ  - sourced from `" + gXLScs +"`"
       Print "MaxMHz="  + GetCSVValue ( targetchip, XLSMaxSpeedMHz )
       If Val(GetCSVValue ( targetchip, XLSMaxSpeedMHz )) = 24 then
         Print  "'This constant is exposed with only the first parameter (if more than one)"
@@ -252,11 +255,11 @@ Sub PrintChipData
   End If
 
     Print
-    Print "'This constant is exposed as ChipPins - sourced from `" + gXLScs +"`"
+    Print "'This constant is exposed as CHIPPINS - sourced from `" + gXLScs +"`"
   Print "Pins=" + GetCSVValue ( targetchip, XLSPINS )
 
     Print
-    Print "'This constant is exposed as ChipUSART - sourced from `" + gXLScs +"`"
+    Print "'This constant is exposed as CHIPUSART - sourced from `" + gXLScs +"`"
   Print "USART=" + GetCSVValue ( targetchip, XLSUSART )
 
     Print
@@ -268,15 +271,15 @@ Sub PrintChipData
     Next
     
     Print
-    Print "'This constant is exposed as ChipFamily - sourced from `" + gXLScs +"`"
+    Print "'This constant is exposed as CHIPFamily - sourced from `" + gXLScs +"`"
   Print "Family="+ GetCSVValue ( targetchip, XLSChipFamilyOverride )
   
     Print
-    Print "'This constant is exposed as ChipConfWords"
+    Print "'This constant is exposed as CHIPCONFWORDS"
   Print "ConfigWords=0"
 
     Print
-    Print "'This constant is exposed as ChipGPR"
+    Print "'This constant is exposed as CHIPGPR"
   Print "GPR=32"
 
     getRamstartStr = "&h" + GetValue ( "INT_SRAM START_ADDR") 
@@ -286,32 +289,39 @@ Sub PrintChipData
     getRamSizeInt = Val( getRamSizeStr)
 
     Print
-    Print "'This constant is exposed as ChipMaxAddress. This value is the maximum address of the internal SRAM.  SRAM is used for data storage and stack."
+    Print "'This constant is exposed as CHIPMAXADDRESS. This value is the maximum address of the internal SRAM.  SRAM is used for data storage and stack."
   Print "MaxAddress=" + Str( getRamStartInt + getRamSizeInt )
 
     Print
-    Print "'This constant is exposed as ChipHardwareMult"
+    Print "'This constant is exposed as CHIPHARDWAREMULT"
   Print "HardwareMult=y"
   if Val("&h"+GetValue ("VPORTA_OUT")) > 0 then
       Print
-      Print "'This constant is exposed as ChipAVRFamily - sourced from `" + gXLScs +"`"
+      Print "'This constant is exposed as CHIPAVRFAMILY - sourced from `" + gXLScs +"`"
     Print "AVRFamily=" + GetCSVValue ( targetchip, XLSAVRFamily )
       Print
-      Print "'This constant is exposed as ChipAVRGCC - sourced from `" + gXLScs +"`"
+      Print "'This constant is exposed as CHIPAVRGCC - sourced from `" + gXLScs +"`"
     Print "AVRGCC="+ GetCSVValue ( targetchip, XLSAVRGCC )
       Print
-      Print "'This constant is exposed as ChipAVRDX - sourced from `" + gXLScs +"`"
+      Print "'This constant is exposed as CHIPAVRDX - sourced from `" + gXLScs +"`"
     Print "AVRDX=" + GetCSVValue ( targetchip, XLSAVRDX )
   End If
 
   IF val(GetCSVValue ( targetchip, XLSNotTested ))> 0 then
       Print
-      Print "'This constant is exposed as ChipNotTested - sourced from `" + gXLScs +"`"
+      Print "'This constant is exposed as CHIPNOTTESTED - sourced from `" + gXLScs +"`"
       print "' NotTested is a numeric bitwise value"
       Print "' 1 = Chip DAT file not tested and therefore no validated"
       Print "' 2 = Chip DAT file has an [interrupt] section that is incomplete"
       print "NotTested="+str(val(GetCSVValue ( targetchip, XLSNotTested )))
   End If 
+
+  Print ""
+  Print "'DFP version and family"
+  Print "DFPFamily="+ DFPFamily
+  Print "DFPVersion="+ DFPVersion
+  
+
 End Sub
 
 
@@ -1318,6 +1328,8 @@ Sub InitAndGetFiles
 
             fsp_incfile = UserProfile+kINDEX_IDX+"\Microchip\"+chipparameters(3)+"_DFP\"+chipparameters(1)+"\avrasm\inc\"+ chipincsource  +".inc"
 
+            DFPFamily = chipparameters(3)+"_DFP"
+            DFPVersion = chipparameters(1)
 
             if dir(fsp_incfile) <> "" then
               Exit Sub

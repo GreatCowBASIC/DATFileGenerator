@@ -4,10 +4,10 @@
 ;  Built by GCBASIC converter
 ;  XC8 processor include for the chip shown below
 ;
-; Microchip IDE version 6.05
+; Microchip IDE version 6.20
 ; C:\Users\admin\.mchp_packs\index.idx
 ; C:\Users\admin\.mchp_packs\Microchip\AVR-Dx_DFP\2.6.303\avrasm\inc\AVR32DD32def.inc
-; avr chipdata.csv
+; d:avr chipdata.csv
 ; C:\Users\admin\.mchp_packs\Microchip\AVR-Dx_DFP\2.6.303\edc\ATAVR32DD32.PIC
 ; 
 ;
@@ -24,37 +24,37 @@
 
 [ChipData]
 ';All items in the ChipData section are available to user programs as constants
-';The constants have the prefix of Chip: See the details below
+';The constants have the prefix of CHIP: See the details below
 
-'This constant is exposed as ChipWORDS
+'This constant is exposed as CHIPWORDS
 Prog=16384
 
-'This constant is exposed as ChipEEPROM
+'This constant is exposed as CHIPEEPROM
 EEPROM=256
 
-'This constant is exposed as ChipRAM
+'This constant is exposed as CHIPRAM
 RAM=4096
 
-'This constant is exposed as ChipIO - sourced from `avr chipdata.csv`
+'This constant is exposed as CHIPIO - sourced from `d:avr chipdata.csv`
 I/O=23
 
-'This constant is exposed as ChipADC - sourced from `avr chipdata.csv`
+'This constant is exposed as CHIPADC - sourced from `d:avr chipdata.csv`
 ADC=23
 ADCPPORTMAP=AVRDxADC23Type2Lookup
 
-'This constant is exposed as ChipMhz
-This constant is exposed as ChipMaxMhz  - sourced from `avr chipdata.csv`
+'This constant is exposed as CHIPMhz
+This constant is exposed as CHIPMAXMHZ  - sourced from `d:avr chipdata.csv`
 MaxMHz=24
 'This constant is exposed with only the first parameter (if more than one)
 IntOsc=24, 20, 16, 12, 8, 4, 3, 2, 1
 
-'This constant is exposed as ChipPins - sourced from `avr chipdata.csv`
+'This constant is exposed as CHIPPINS - sourced from `d:avr chipdata.csv`
 Pins=32
 
-'This constant is exposed as ChipUSART - sourced from `avr chipdata.csv`
+'This constant is exposed as CHIPUSART - sourced from `d:avr chipdata.csv`
 USART=2
 
-'These USART constants are exposed with the prefix of CHIP - sourced from `avr chipdata.csv`
+'These USART constants are exposed with the prefix of CHIP - sourced from `d:avr chipdata.csv`
 USART0TXDefault=PORTA.0
 USART1TXDefault=PORTC.0
 USART2TXDefault=PORTF.0
@@ -66,29 +66,33 @@ USART2RXDefault=PORTF.1
 USART3RXDefault=PORTB.1
 USART4RXDefault=PORTE.1
 
-'This constant is exposed as ChipFamily - sourced from `avr chipdata.csv`
+'This constant is exposed as CHIPFamily - sourced from `d:avr chipdata.csv`
 Family=140
 
-'This constant is exposed as ChipConfWords
+'This constant is exposed as CHIPCONFWORDS
 ConfigWords=0
 
-'This constant is exposed as ChipGPR
+'This constant is exposed as CHIPGPR
 GPR=32
 
-'This constant is exposed as ChipMaxAddress. This value is the maximum address of the internal SRAM.  SRAM is used for data storage and stack.
+'This constant is exposed as CHIPMAXADDRESS. This value is the maximum address of the internal SRAM.  SRAM is used for data storage and stack.
 MaxAddress=32768
 
-'This constant is exposed as ChipHardwareMult
+'This constant is exposed as CHIPHARDWAREMULT
 HardwareMult=y
 
-'This constant is exposed as ChipAVRFamily - sourced from `avr chipdata.csv`
+'This constant is exposed as CHIPAVRFAMILY - sourced from `d:avr chipdata.csv`
 AVRFamily=AVRDD
 
-'This constant is exposed as ChipAVRGCC - sourced from `avr chipdata.csv`
+'This constant is exposed as CHIPAVRGCC - sourced from `d:avr chipdata.csv`
 AVRGCC=avrxmega3
 
-'This constant is exposed as ChipAVRDX - sourced from `avr chipdata.csv`
+'This constant is exposed as CHIPAVRDX - sourced from `d:avr chipdata.csv`
 AVRDX=1
+
+'DFP version and family
+DFPFamily=AVR-Dx_DFP
+DFPVersion=2.6.303
 
 'For details of microcontroller specifications see the microcontroller datasheet
 _DATAMEM_START = 0x0000

@@ -1,0 +1,6 @@
+
+{
+FS=","
+# print "AVRDX_to_DATv8 INCLUDELOCATION "$1
+system ("AVRDX_to_DATv8 INCLUDELOCATION "$1)
+}
