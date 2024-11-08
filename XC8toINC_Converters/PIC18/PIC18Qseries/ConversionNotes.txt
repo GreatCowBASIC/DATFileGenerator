@@ -1,4 +1,4 @@
-This uses MPLAB-X 5.5
+This uses MPLAB-X 6.xx
 However, the source files for the CONFIG have incorrect masks, and, therefore the INC file produced has the incorrect bit values.
 
 Example
