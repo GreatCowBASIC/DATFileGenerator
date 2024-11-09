@@ -1,13 +1,13 @@
         LIST
 ;==========================================================================
 ;
-;  Built by GCBASIC convertor : 18F_PIC_to_INCv6_15a
+;  Built by GCBASIC convertor : 18F_PIC_to_INCv6_20
 ;  MPASM processor include for the chip shown below
 ;
-; C:\Program Files\Microchip\MPLABX\v6.15\packs\index.idx
-; C:\Program Files\Microchip\MPLABX\v6.15\packs\Microchip\PIC18F-Q_DFP\1.20.405\xc8\pic\dat\ini\18F57Q84.ini
-; C:\Program Files\Microchip\MPLABX\v6.15\packs\Microchip\PIC18F-Q_DFP\1.20.405\edc\18F57Q84.PIC
-; C:\Program Files\Microchip\MPLABX\v6.15\packs\Microchip\PIC18F-Q_DFP\1.20.405\xc8\pic\dat\cfgdata\18F57Q84.cfgdata
+; C:\Program Files\Microchip\MPLABX\v6.20\packs\index.idx
+; C:\Program Files\Microchip\MPLABX\v6.20\packs\Microchip\PIC18F-Q_DFP\1.24.430\xc8\pic\dat\ini\18F57Q84.ini
+; C:\Program Files\Microchip\MPLABX\v6.20\packs\Microchip\PIC18F-Q_DFP\1.24.430\edc\18F57Q84.PIC
+; C:\Program Files\Microchip\MPLABX\v6.20\packs\Microchip\PIC18F-Q_DFP\1.24.430\xc8\pic\dat\cfgdata\18F57Q84.cfgdata
 ;
 ;==========================================================================
         NOLIST

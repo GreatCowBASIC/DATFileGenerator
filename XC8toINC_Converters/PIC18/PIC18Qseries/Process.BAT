@@ -1,6 +1,6 @@
 cd D:\GreatCowBASICGits\DATFileGenerator\XC8toINC_Converters\PIC18
 
-18F_PIC_to_INCv6_15a PIC%1  > D:\GreatCowBASICGits\DATFileGenerator\incfiles\OrgFiles\p%1.inc
+18F_PIC_to_INCv6_20 PIC%1  > D:\GreatCowBASICGits\DATFileGenerator\incfiles\OrgFiles\p%1.inc
 
 D:\GreatCowBASICGits\DATFileGenerator\gawk -f D:\GreatCowBASICGits\DATFileGenerator\PreProcessIncFile.awk D:\GreatCowBASICGits\DATFileGenerator\incfiles\OrgFiles\p%1.inc > D:\GreatCowBASICGits\DATFileGenerator\incfiles\p%1.inc
 

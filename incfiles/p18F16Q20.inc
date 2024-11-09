@@ -1,13 +1,13 @@
         LIST
 ;==========================================================================
 ;
-;  Built by GCBASIC convertor : 18F_PIC_to_INCv6_15a
+;  Built by GCBASIC convertor : 18F_PIC_to_INCv6_20
 ;  MPASM processor include for the chip shown below
 ;
-; C:\Program Files\Microchip\MPLABX\v6.15\packs\index.idx
-; C:\Program Files\Microchip\MPLABX\v6.15\packs\Microchip\PIC18F-Q_DFP\1.20.405\xc8\pic\dat\ini\18F16Q20.ini
-; C:\Program Files\Microchip\MPLABX\v6.15\packs\Microchip\PIC18F-Q_DFP\1.20.405\edc\18F16Q20.PIC
-; C:\Program Files\Microchip\MPLABX\v6.15\packs\Microchip\PIC18F-Q_DFP\1.20.405\xc8\pic\dat\cfgdata\18F16Q20.cfgdata
+; C:\Program Files\Microchip\MPLABX\v6.20\packs\index.idx
+; C:\Program Files\Microchip\MPLABX\v6.20\packs\Microchip\PIC18F-Q_DFP\1.24.430\xc8\pic\dat\ini\18F16Q20.ini
+; C:\Program Files\Microchip\MPLABX\v6.20\packs\Microchip\PIC18F-Q_DFP\1.24.430\edc\18F16Q20.PIC
+; C:\Program Files\Microchip\MPLABX\v6.20\packs\Microchip\PIC18F-Q_DFP\1.24.430\xc8\pic\dat\cfgdata\18F16Q20.cfgdata
 ;
 ;==========================================================================
         NOLIST
@@ -4450,7 +4450,6 @@ CLC4OUT          EQU  H'0003'
 ;----- CLCSELECT Bits -----------------------------------------------------
 SLCT0            EQU  H'0000'
 SLCT1            EQU  H'0001'
-SLCT2            EQU  H'0002'
 
 
 ;----- CLCNCON Bits -----------------------------------------------------
