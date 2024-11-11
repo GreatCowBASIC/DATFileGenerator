@@ -4,10 +4,10 @@
 ;  Built by GCBASIC convertor : 18F_PIC_to_INCv6_20
 ;  MPASM processor include for the chip shown below
 ;
-; C:\Program Files\Microchip\MPLABX\v6.20\packs\index.idx
-; C:\Program Files\Microchip\MPLABX\v6.20\packs\Microchip\PIC18F-Q_DFP\1.24.430\xc8\pic\dat\ini\18F16Q20.ini
-; C:\Program Files\Microchip\MPLABX\v6.20\packs\Microchip\PIC18F-Q_DFP\1.24.430\edc\18F16Q20.PIC
-; C:\Program Files\Microchip\MPLABX\v6.20\packs\Microchip\PIC18F-Q_DFP\1.24.430\xc8\pic\dat\cfgdata\18F16Q20.cfgdata
+; C:\Users\admin\.mchp_packs\index.idx
+; C:\Users\admin\.mchp_packs\Microchip\PIC18F-Q_DFP\1.25.433\xc8\pic\dat\ini\18F16Q20.ini
+; C:\Users\admin\.mchp_packs\Microchip\PIC18F-Q_DFP\1.25.433\edc\18F16Q20.PIC
+; C:\Users\admin\.mchp_packs\Microchip\PIC18F-Q_DFP\1.25.433\xc8\pic\dat\cfgdata\18F16Q20.cfgdata
 ;
 ;==========================================================================
         NOLIST
@@ -1756,6 +1756,7 @@ EN               EQU  H'0007'
 ACKPOS           EQU  H'0000'
 SASDRMD          EQU  H'0001'
 FHDRE            EQU  H'0002'
+BERRDET          EQU  H'0003'
 
 
 ;----- I3C1RXB Bits -----------------------------------------------------
@@ -2144,6 +2145,7 @@ EN               EQU  H'0007'
 ACKPOS           EQU  H'0000'
 SASDRMD          EQU  H'0001'
 FHDRE            EQU  H'0002'
+BERRDET          EQU  H'0003'
 
 
 ;----- I3C2RXB Bits -----------------------------------------------------

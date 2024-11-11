@@ -8,7 +8,7 @@
 #include once "ext/xml/dom.bi"
 #include "windows.bi"
 
-#DEFINE kINDEX_IDX  "C:\Program Files\Microchip\MPLABX\v6.20\packs"  ' Environ( "USERPROFILE" )+"\.mchp_packs"
+#DEFINE kINDEX_IDX  Environ( "USERPROFILE" )+"\.mchp_packs"
 
                      'the version may need changing 
 #DEFINE kINDEX_IDX2  "C:\Program Files\Microchip\MPLABX\v6.20\packs"

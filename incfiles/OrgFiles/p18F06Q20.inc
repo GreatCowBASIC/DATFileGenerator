@@ -1,13 +1,13 @@
         LIST
 ;==========================================================================
 ;
-;  Built by GCBASIC convertor : 18F_PIC_to_INCv6_15a
+;  Built by GCBASIC convertor : 18F_PIC_to_INCv6_20
 ;  MPASM processor include for the chip shown below
 ;
-; C:\Program Files\Microchip\MPLABX\v6.15\packs\index.idx
-; C:\Program Files\Microchip\MPLABX\v6.15\packs\Microchip\PIC18F-Q_DFP\1.20.405\xc8\pic\dat\ini\18F06Q20.ini
-; C:\Program Files\Microchip\MPLABX\v6.15\packs\Microchip\PIC18F-Q_DFP\1.20.405\edc\18F06Q20.PIC
-; C:\Program Files\Microchip\MPLABX\v6.15\packs\Microchip\PIC18F-Q_DFP\1.20.405\xc8\pic\dat\cfgdata\18F06Q20.cfgdata
+; C:\Users\admin\.mchp_packs\index.idx
+; C:\Users\admin\.mchp_packs\Microchip\PIC18F-Q_DFP\1.25.433\xc8\pic\dat\ini\18F06Q20.ini
+; C:\Users\admin\.mchp_packs\Microchip\PIC18F-Q_DFP\1.25.433\edc\18F06Q20.PIC
+; C:\Users\admin\.mchp_packs\Microchip\PIC18F-Q_DFP\1.25.433\xc8\pic\dat\cfgdata\18F06Q20.cfgdata
 ;
 ;==========================================================================
         NOLIST
@@ -486,16 +486,11 @@ RA1PPS           EQU  H'031A'
 RA2PPS           EQU  H'031B'
 RA4PPS           EQU  H'031D'
 RA5PPS           EQU  H'031E'
-RB5PPS           EQU  H'0326'
-RB6PPS           EQU  H'0327'
-RB7PPS           EQU  H'0328'
 RC0PPS           EQU  H'0329'
 RC1PPS           EQU  H'032A'
 RC3PPS           EQU  H'032C'
 RC4PPS           EQU  H'032D'
 RC5PPS           EQU  H'032E'
-RC6PPS           EQU  H'032F'
-RC7PPS           EQU  H'0330'
 PPSLOCK          EQU  H'0351'
 INT0PPS          EQU  H'0352'
 INT1PPS          EQU  H'0353'
@@ -1686,6 +1681,7 @@ EN               EQU  H'0007'
 ACKPOS           EQU  H'0000'
 SASDRMD          EQU  H'0001'
 FHDRE            EQU  H'0002'
+BERRDET          EQU  H'0003'
 
 
 ;----- I3C1RXB Bits -----------------------------------------------------
@@ -3556,7 +3552,6 @@ CLC4OUT          EQU  H'0003'
 ;----- CLCSELECT Bits -----------------------------------------------------
 SLCT0            EQU  H'0000'
 SLCT1            EQU  H'0001'
-SLCT2            EQU  H'0002'
 
 
 ;----- CLCNCON Bits -----------------------------------------------------
@@ -5172,30 +5167,6 @@ RA5PPS3          EQU  H'0003'
 RA5PPS4          EQU  H'0004'
 
 
-;----- RB5PPS Bits -----------------------------------------------------
-RB5PPS0          EQU  H'0000'
-RB5PPS1          EQU  H'0001'
-RB5PPS2          EQU  H'0002'
-RB5PPS3          EQU  H'0003'
-RB5PPS4          EQU  H'0004'
-
-
-;----- RB6PPS Bits -----------------------------------------------------
-RB6PPS0          EQU  H'0000'
-RB6PPS1          EQU  H'0001'
-RB6PPS2          EQU  H'0002'
-RB6PPS3          EQU  H'0003'
-RB6PPS4          EQU  H'0004'
-
-
-;----- RB7PPS Bits -----------------------------------------------------
-RB7PPS0          EQU  H'0000'
-RB7PPS1          EQU  H'0001'
-RB7PPS2          EQU  H'0002'
-RB7PPS3          EQU  H'0003'
-RB7PPS4          EQU  H'0004'
-
-
 ;----- RC0PPS Bits -----------------------------------------------------
 RC0PPS0          EQU  H'0000'
 RC0PPS1          EQU  H'0001'
@@ -5234,22 +5205,6 @@ RC5PPS1          EQU  H'0001'
 RC5PPS2          EQU  H'0002'
 RC5PPS3          EQU  H'0003'
 RC5PPS4          EQU  H'0004'
-
-
-;----- RC6PPS Bits -----------------------------------------------------
-RC6PPS0          EQU  H'0000'
-RC6PPS1          EQU  H'0001'
-RC6PPS2          EQU  H'0002'
-RC6PPS3          EQU  H'0003'
-RC6PPS4          EQU  H'0004'
-
-
-;----- RC7PPS Bits -----------------------------------------------------
-RC7PPS0          EQU  H'0000'
-RC7PPS1          EQU  H'0001'
-RC7PPS2          EQU  H'0002'
-RC7PPS3          EQU  H'0003'
-RC7PPS4          EQU  H'0004'
 
 
 ;----- PPSLOCK Bits -----------------------------------------------------
@@ -6809,7 +6764,12 @@ __BADRAM  H'0322'
 __BADRAM  H'0323'
 __BADRAM  H'0324'
 __BADRAM  H'0325'
+__BADRAM  H'0326'
+__BADRAM  H'0327'
+__BADRAM  H'0328'
 __BADRAM  H'032B'
+__BADRAM  H'032F'
+__BADRAM  H'0330'
 __BADRAM  H'0331'-H'0350'
 __BADRAM  H'0358'-H'035F'
 __BADRAM  H'0362'-H'0364'
