@@ -7,9 +7,6 @@
 ';All items in the ChipData section are available to user programs as constants
 ';The constants have the prefix of Chip: See the examples below
 
-'This chip has not been tested or validated.  This is a development DAT file
-NotTested=1
-
 'This constant is exposed as ChipWORDS
 Prog=32768
 
@@ -48,6 +45,9 @@ FamilyVariant=1
 
 'This constant is exposed as ChipSubFamily
 SubFamily=16111
+
+'This constant is exposed as ChipMemorylock
+MemoryLock=NVMLOCK
 
 'This constant is exposed as ChipPSP
 PSP=0
@@ -90,6 +90,9 @@ WriteFlashBlockSize=256
 
 'EraseFlashBlockSize constant is used in user programs that write to flash memory in bytes
 EraseFlashBlockSize=256
+
+'ChipMinimumBankSelelect constant is used within the compiler to set the minimum BANKSELECT
+MinimumBankSelect=5
 
 'ChipSelfWrite constant is used within the compiler to indicate the chip is self write capable
 SelfWrite=1
@@ -6938,7 +6941,7 @@ CHS3,ADCON0,5
 CHS4,ADCON0,6
 
 [FreeRAM]
-0:FFF
+500:14FF
 
 [NoBankRAM]
 'NoBankRAM is somewhat misnamed - it is used for the defintion of (any) access bank locations
@@ -6972,7 +6975,6 @@ FCMEN=OFF
 FCMENP=OFF
 FCMENS=OFF
 FEXTOSC=ECH
-ICSPDIS=ON
 IVT1WAY=OFF
 LPBOREN=OFF
 LVP=ON
@@ -6982,8 +6984,6 @@ PPS1WAY=OFF
 PR1WAY=OFF
 PWRTS=PWRT_OFF
 RSTOSC=HFINTOSC_1MHZ
-'SAFLOCK=ON
-'SAFSZ=SAFSZ_NONE
 STVREN=OFF
 WDTCCS=LFINTOSC
 WDTCPS=WDTCPS_0
@@ -6999,9 +6999,6 @@ ZCD1=ON
 ZCD2=ON
 
 [ConfigMask]
- 255
- 255
- 255
  255
  255
  255
@@ -7052,9 +7049,6 @@ WRTSAF=OFF,ON
 WRTAPP=OFF,ON
 CP=OFF,ON
 CPD=OFF,ON
-SAFLOCK=OFF,ON
-SAFSZ=SAFSZ_NONE,SAFSZ_128,SAFSZ_256,SAFSZ_384,SAFSZ_512,SAFSZ_640,SAFSZ_768,SAFSZ_896,SAFSZ_1024
-ICSPDIS=OFF,ON
 
 [Config]
 'For details of the config addresses see the microcontroller datasheet
@@ -7437,21 +7431,8 @@ WRTSAF_OFF,9,255
 WRTSAF_ON,9,247
 WRTAPP_OFF,9,255
 WRTAPP_ON,9,127
-CP_OFF,10,255
-CP_ON,10,254
-CPD_OFF,11,255
-CPD_ON,11,254
-SAFLOCK_OFF,13,255
-SAFLOCK_ON,13,254
-SAFSZ_SAFSZ_NONE,8,255
-SAFSZ_SAFSZ_128,8,254
-SAFSZ_SAFSZ_256,8,252
-SAFSZ_SAFSZ_384,8,248
-SAFSZ_SAFSZ_512,8,240
-SAFSZ_SAFSZ_640,8,224
-SAFSZ_SAFSZ_768,8,192
-SAFSZ_SAFSZ_896,8,128
-SAFSZ_SAFSZ_1024,8,0
-ICSPDIS_OFF,12,255
-ICSPDIS_ON,12,254
+CP_OFF,9,255
+CP_ON,9,254
+CPD_OFF,10,255
+CPD_ON,10,254
 

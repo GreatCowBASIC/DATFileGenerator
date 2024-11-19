@@ -551,11 +551,11 @@ FOR CurrentChip = StartChip to ChipIncCount
 
                 
 
-                If Instr(chipname,"Q20") <> 0 then
+                If Instr(chipname,"Q2") <> 0 then
                       'Q20 dump config 11 or above as GCBASIC does not support
                       If CW > 12 or WriteConfig = 0 Then
                         WriteConfig = 0
-                        Print "18FxxQ20 - ignoring CONFIG "+str(CW)+ " none contiguous config memory",
+                        Print "18FxxQ2x - ignoring CONFIG "+str(CW)+ " none contiguous config memory",
                         Print DataSource
                       End if
                 End IF
@@ -564,7 +564,7 @@ FOR CurrentChip = StartChip to ChipIncCount
                   COC += 1
                   With Config(COC)
                       .Name = TempData
-                        If Instr(chipname,"Q20") <> 0 then
+                        If Instr(chipname,"Q2") <> 0 then
                           'Q20 have non-contigous config memory... so, fix by delete the value by 1
                           If CW > 9 Then
                             CW = CW -1 
@@ -1271,7 +1271,12 @@ FOR CurrentChip = StartChip to ChipIncCount
             Print #1, ""
             Print #1, "'This constant is exposed as ChipMemorylock"
             Print #1, "MemoryLock=NVMLOCK"
-        End if    
+        End if 
+        If Instr(chipname,"Q24") <> 0 then
+            Print #1, ""
+            Print #1, "'This constant is exposed as ChipMemorylock"
+            Print #1, "MemoryLock=NVMLOCK"
+        End if            
         If Instr(chipname,"Q40") <> 0 then
             Print #1, ""
             Print #1, "'This constant is exposed as ChipMemorylock"
@@ -1720,7 +1725,7 @@ Sub AddMissingData
   ElseIf ChipFamily = 16 Then
     '18F chips with 4096 or more data addresses have movffl and different lfsr instruction
     If MaxChipAddress >= 4096 Then ChipFamilyVariant = 1
-    If ChipSubFamily = 16102 or ChipSubFamily = 16105 or ChipSubFamily = 16109 Then ChipFamilyVariant = 1  'Q40 and Q41 and Q20
+    If ChipSubFamily = 16102 or ChipSubFamily = 16105 or ChipSubFamily = 16109 or ChipSubFamily = 16111 Then ChipFamilyVariant = 1  'Q40 and Q41 and Q2x  
   End If
 
   'Add debug bit to PICs where it doesn't exist
@@ -2446,7 +2451,7 @@ Sub CalcRamBlocks
       End If
       RBC = RBC + 1: RamBlock(RBC) = "200:2FF ' USB Shared RAM Buffer"
 
-    Elseif  Instr(UCase(ChipName),"Q20" ) or  Instr(UCase(ChipName),"Q43" ) <> 0 or Instr(UCase(ChipName),"Q41" ) <> 0 or Instr(UCase(ChipName),"Q40" ) <> 0 or Instr(UCase(ChipName),"Q83" ) <> 0 or Instr(UCase(ChipName),"Q84") <> 0 or Instr(UCase(ChipName),"Q71") <> 0 Then
+    Elseif Instr(UCase(ChipName),"Q24" ) or Instr(UCase(ChipName),"Q20" ) or  Instr(UCase(ChipName),"Q43" ) <> 0 or Instr(UCase(ChipName),"Q41" ) <> 0 or Instr(UCase(ChipName),"Q40" ) <> 0 or Instr(UCase(ChipName),"Q83" ) <> 0 or Instr(UCase(ChipName),"Q84") <> 0 or Instr(UCase(ChipName),"Q71") <> 0 Then
 
       ChipMinimumBankSel = 5
       'add 1280 for the base of 0x500
