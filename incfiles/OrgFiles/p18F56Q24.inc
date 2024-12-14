@@ -1,13 +1,13 @@
         LIST
 ;==========================================================================
 ;
-;  Built by GCBASIC convertor : 18F_PIC_to_INCv6_15a
+;  Built by GCBASIC convertor : 18F_PIC_to_INCv6_20
 ;  MPASM processor include for the chip shown below
 ;
-; C:\Program Files\Microchip\MPLABX\v6.15\packs\index.idx
-; C:\Program Files\Microchip\MPLABX\v6.15\packs\Microchip\PIC18F-Q_DFP\1.20.405\xc8\pic\dat\ini\18F56Q24.ini
-; C:\Program Files\Microchip\MPLABX\v6.15\packs\Microchip\PIC18F-Q_DFP\1.20.405\edc\18F56Q24.PIC
-; C:\Program Files\Microchip\MPLABX\v6.15\packs\Microchip\PIC18F-Q_DFP\1.20.405\xc8\pic\dat\cfgdata\18F56Q24.cfgdata
+; C:\Users\admin\.mchp_packs\index.idx
+; C:\Users\admin\.mchp_packs\Microchip\PIC18F-Q_DFP\1.26.442\xc8\pic\dat\ini\18F56Q24.ini
+; C:\Users\admin\.mchp_packs\Microchip\PIC18F-Q_DFP\1.26.442\edc\18F56Q24.PIC
+; C:\Users\admin\.mchp_packs\Microchip\PIC18F-Q_DFP\1.26.442\xc8\pic\dat\cfgdata\18F56Q24.cfgdata
 ;
 ;==========================================================================
         NOLIST
@@ -2295,12 +2295,15 @@ SEL1             EQU  H'0001'
 SEL2             EQU  H'0002'
 SEL3             EQU  H'0003'
 NOT_HYS          EQU  H'0004'
-MD               EQU  H'0007'
+RDY_VDDIO2CON    EQU  H'0005'
+LVDSTAT          EQU  H'0006'
+NOT_IOMON        EQU  H'0007'
 SEL0             EQU  H'0000'
 SEL1             EQU  H'0001'
 SEL2             EQU  H'0002'
 SEL3             EQU  H'0003'
 NHYS             EQU  H'0004'
+NIOMON           EQU  H'0007'
 
 
 ;----- ADCG1A Bits -----------------------------------------------------
@@ -2348,6 +2351,11 @@ CGE7             EQU  H'0007'
 CGF0             EQU  H'0000'
 CGF1             EQU  H'0001'
 CGF2             EQU  H'0002'
+CGF3             EQU  H'0003'
+CGF4             EQU  H'0004'
+CGF5             EQU  H'0005'
+CGF6             EQU  H'0006'
+CGF7             EQU  H'0007'
 
 
 ;----- LATA Bits -----------------------------------------------------
@@ -3855,18 +3863,18 @@ PIN2             EQU  H'0002'
 PORT0            EQU  H'0003'
 PORT1            EQU  H'0004'
 PORT2            EQU  H'0005'
-PORTWIN00        EQU  H'0000'
-PORTWIN01        EQU  H'0001'
-PORTWIN02        EQU  H'0002'
-PORTWIN03        EQU  H'0003'
-PORTWIN04        EQU  H'0004'
-PORTWIN05        EQU  H'0005'
-PORTWIN00        EQU  H'0000'
-PORTWIN01        EQU  H'0001'
-PORTWIN02        EQU  H'0002'
-PORTWIN03        EQU  H'0003'
-PORTWIN04        EQU  H'0004'
-PORTWIN05        EQU  H'0005'
+PORTWIN0PPS0     EQU  H'0000'
+PORTWIN0PPS1     EQU  H'0001'
+PORTWIN0PPS2     EQU  H'0002'
+PORTWIN0PPS3     EQU  H'0003'
+PORTWIN0PPS4     EQU  H'0004'
+PORTWIN0PPS5     EQU  H'0005'
+PORTWIN0PPS0     EQU  H'0000'
+PORTWIN0PPS1     EQU  H'0001'
+PORTWIN0PPS2     EQU  H'0002'
+PORTWIN0PPS3     EQU  H'0003'
+PORTWIN0PPS4     EQU  H'0004'
+PORTWIN0PPS5     EQU  H'0005'
 
 
 ;----- PORTWIN1PPS Bits -----------------------------------------------------
@@ -3876,18 +3884,18 @@ PIN2             EQU  H'0002'
 PORT0            EQU  H'0003'
 PORT1            EQU  H'0004'
 PORT2            EQU  H'0005'
-PORTWIN10        EQU  H'0000'
-PORTWIN11        EQU  H'0001'
-PORTWIN12        EQU  H'0002'
-PORTWIN13        EQU  H'0003'
-PORTWIN14        EQU  H'0004'
-PORTWIN15        EQU  H'0005'
-PORTWIN10        EQU  H'0000'
-PORTWIN11        EQU  H'0001'
-PORTWIN12        EQU  H'0002'
-PORTWIN13        EQU  H'0003'
-PORTWIN14        EQU  H'0004'
-PORTWIN15        EQU  H'0005'
+PORTWIN1PPS0     EQU  H'0000'
+PORTWIN1PPS1     EQU  H'0001'
+PORTWIN1PPS2     EQU  H'0002'
+PORTWIN1PPS3     EQU  H'0003'
+PORTWIN1PPS4     EQU  H'0004'
+PORTWIN1PPS5     EQU  H'0005'
+PORTWIN1PPS0     EQU  H'0000'
+PORTWIN1PPS1     EQU  H'0001'
+PORTWIN1PPS2     EQU  H'0002'
+PORTWIN1PPS3     EQU  H'0003'
+PORTWIN1PPS4     EQU  H'0004'
+PORTWIN1PPS5     EQU  H'0005'
 
 
 ;----- PORTWCLKPPS Bits -----------------------------------------------------
@@ -3897,18 +3905,18 @@ PIN2             EQU  H'0002'
 PORT0            EQU  H'0003'
 PORT1            EQU  H'0004'
 PORT2            EQU  H'0005'
-PORTWCLK0        EQU  H'0000'
-PORTWCLK1        EQU  H'0001'
-PORTWCLK2        EQU  H'0002'
-PORTWCLK3        EQU  H'0003'
-PORTWCLK4        EQU  H'0004'
-PORTWCLK5        EQU  H'0005'
-PORTWCLK0        EQU  H'0000'
-PORTWCLK1        EQU  H'0001'
-PORTWCLK2        EQU  H'0002'
-PORTWCLK3        EQU  H'0003'
-PORTWCLK4        EQU  H'0004'
-PORTWCLK5        EQU  H'0005'
+PORTWCLKPPS0     EQU  H'0000'
+PORTWCLKPPS1     EQU  H'0001'
+PORTWCLKPPS2     EQU  H'0002'
+PORTWCLKPPS3     EQU  H'0003'
+PORTWCLKPPS4     EQU  H'0004'
+PORTWCLKPPS5     EQU  H'0005'
+PORTWCLKPPS0     EQU  H'0000'
+PORTWCLKPPS1     EQU  H'0001'
+PORTWCLKPPS2     EQU  H'0002'
+PORTWCLKPPS3     EQU  H'0003'
+PORTWCLKPPS4     EQU  H'0004'
+PORTWCLKPPS5     EQU  H'0005'
 
 
 ;----- RD0I2C Bits -----------------------------------------------------
@@ -8614,7 +8622,6 @@ SPI2TXIP         EQU  H'0001'
 SPI2IP           EQU  H'0002'
 VDDIO2LVDIP      EQU  H'0003'
 VDDIO2NRDYIP     EQU  H'0004'
-VDDIO2PORIP      EQU  H'0005'
 
 
 ;----- PIE0 Bits -----------------------------------------------------
@@ -8738,7 +8745,6 @@ SPI2TXIE         EQU  H'0001'
 SPI2IE           EQU  H'0002'
 VDDIO2LVDIE      EQU  H'0003'
 VDDIO2NRDYIE     EQU  H'0004'
-VDDIO2PORIE      EQU  H'0005'
 
 
 ;----- PIR0 Bits -----------------------------------------------------
@@ -8862,7 +8868,6 @@ SPI2TXIF         EQU  H'0001'
 SPI2IF           EQU  H'0002'
 VDDIO2LVDIF      EQU  H'0003'
 VDDIO2NRDYIF     EQU  H'0004'
-VDDIO2PORIF      EQU  H'0005'
 
 
 ;----- INTCON0 Bits -----------------------------------------------------
@@ -9344,134 +9349,6 @@ _WDTCCS_SOSC_6       EQU  H'D7'; WDT reference clock is SOSC
 _WDTCCS_SC_6         EQU  H'FF'; Software Control
 
 ;----- CONFIG7 Options --------------------------------------------------
-_BBSIZE_BBSIZE_32768_7 EQU  H'FF'; Boot Block size is 32768 words
-_BBSIZE_BBSIZE_32640_7 EQU  H'FE'; Boot Block size is 32640 words
-_BBSIZE_BBSIZE_32512_7 EQU  H'FD'; Boot Block size is 32512 words
-_BBSIZE_BBSIZE_32384_7 EQU  H'FC'; Boot Block size is 32384 words
-_BBSIZE_BBSIZE_32256_7 EQU  H'FB'; Boot Block size is 32256 words
-_BBSIZE_BBSIZE_32128_7 EQU  H'FA'; Boot Block size is 32128 words
-_BBSIZE_BBSIZE_32000_7 EQU  H'F9'; Boot Block size is 32000 words
-_BBSIZE_BBSIZE_31872_7 EQU  H'F8'; Boot Block size is 31872 words
-_BBSIZE_BBSIZE_31744_7 EQU  H'F7'; Boot Block size is 31744 words
-_BBSIZE_BBSIZE_31616_7 EQU  H'F6'; Boot Block size is 31616 words
-_BBSIZE_BBSIZE_31488_7 EQU  H'F5'; Boot Block size is 31488 words
-_BBSIZE_BBSIZE_31360_7 EQU  H'F4'; Boot Block size is 31360 words
-_BBSIZE_BBSIZE_31232_7 EQU  H'F3'; Boot Block size is 31232 words
-_BBSIZE_BBSIZE_31104_7 EQU  H'F2'; Boot Block size is 31104 words
-_BBSIZE_BBSIZE_30976_7 EQU  H'F1'; Boot Block size is 30976 words
-_BBSIZE_BBSIZE_30848_7 EQU  H'F0'; Boot Block size is 30848 words
-_BBSIZE_BBSIZE_30720_7 EQU  H'EF'; Boot Block size is 30720 words
-_BBSIZE_BBSIZE_30592_7 EQU  H'EE'; Boot Block size is 30592 words
-_BBSIZE_BBSIZE_30464_7 EQU  H'ED'; Boot Block size is 30464 words
-_BBSIZE_BBSIZE_30336_7 EQU  H'EC'; Boot Block size is 30336 words
-_BBSIZE_BBSIZE_30208_7 EQU  H'EB'; Boot Block size is 30208 words
-_BBSIZE_BBSIZE_30080_7 EQU  H'EA'; Boot Block size is 30080 words
-_BBSIZE_BBSIZE_29952_7 EQU  H'E9'; Boot Block size is 29952 words
-_BBSIZE_BBSIZE_29824_7 EQU  H'E8'; Boot Block size is 29824 words
-_BBSIZE_BBSIZE_29696_7 EQU  H'E7'; Boot Block size is 29696 words
-_BBSIZE_BBSIZE_29568_7 EQU  H'E6'; Boot Block size is 29568 words
-_BBSIZE_BBSIZE_29440_7 EQU  H'E5'; Boot Block size is 29440 words
-_BBSIZE_BBSIZE_29312_7 EQU  H'E4'; Boot Block size is 29312 words
-_BBSIZE_BBSIZE_29184_7 EQU  H'E3'; Boot Block size is 29184 words
-_BBSIZE_BBSIZE_29056_7 EQU  H'E2'; Boot Block size is 29056 words
-_BBSIZE_BBSIZE_28928_7 EQU  H'E1'; Boot Block size is 28928 words
-_BBSIZE_BBSIZE_28800_7 EQU  H'E0'; Boot Block size is 28800 words
-_BBSIZE_BBSIZE_28672_7 EQU  H'DF'; Boot Block size is 28672 words
-_BBSIZE_BBSIZE_28544_7 EQU  H'DE'; Boot Block size is 28544 words
-_BBSIZE_BBSIZE_28416_7 EQU  H'DD'; Boot Block size is 28416 words
-_BBSIZE_BBSIZE_28288_7 EQU  H'DC'; Boot Block size is 28288 words
-_BBSIZE_BBSIZE_28160_7 EQU  H'DB'; Boot Block size is 28160 words
-_BBSIZE_BBSIZE_28032_7 EQU  H'DA'; Boot Block size is 28032 words
-_BBSIZE_BBSIZE_27904_7 EQU  H'D9'; Boot Block size is 27904 words
-_BBSIZE_BBSIZE_27776_7 EQU  H'D8'; Boot Block size is 27776 words
-_BBSIZE_BBSIZE_27648_7 EQU  H'D7'; Boot Block size is 27648 words
-_BBSIZE_BBSIZE_27520_7 EQU  H'D6'; Boot Block size is 27520 words
-_BBSIZE_BBSIZE_27392_7 EQU  H'D5'; Boot Block size is 27392 words
-_BBSIZE_BBSIZE_27264_7 EQU  H'D4'; Boot Block size is 27264 words
-_BBSIZE_BBSIZE_27136_7 EQU  H'D3'; Boot Block size is 27136 words
-_BBSIZE_BBSIZE_27008_7 EQU  H'D2'; Boot Block size is 27008 words
-_BBSIZE_BBSIZE_26880_7 EQU  H'D1'; Boot Block size is 26880 words
-_BBSIZE_BBSIZE_26752_7 EQU  H'D0'; Boot Block size is 26752 words
-_BBSIZE_BBSIZE_26624_7 EQU  H'CF'; Boot Block size is 26624 words
-_BBSIZE_BBSIZE_26496_7 EQU  H'CE'; Boot Block size is 26496 words
-_BBSIZE_BBSIZE_26368_7 EQU  H'CD'; Boot Block size is 26368 words
-_BBSIZE_BBSIZE_26240_7 EQU  H'CC'; Boot Block size is 26240 words
-_BBSIZE_BBSIZE_26112_7 EQU  H'CB'; Boot Block size is 26112 words
-_BBSIZE_BBSIZE_25984_7 EQU  H'CA'; Boot Block size is 25984 words
-_BBSIZE_BBSIZE_25856_7 EQU  H'C9'; Boot Block size is 25856 words
-_BBSIZE_BBSIZE_25728_7 EQU  H'C8'; Boot Block size is 25728 words
-_BBSIZE_BBSIZE_25600_7 EQU  H'C7'; Boot Block size is 25600 words
-_BBSIZE_BBSIZE_25472_7 EQU  H'C6'; Boot Block size is 25472 words
-_BBSIZE_BBSIZE_25344_7 EQU  H'C5'; Boot Block size is 25344 words
-_BBSIZE_BBSIZE_25216_7 EQU  H'C4'; Boot Block size is 25216 words
-_BBSIZE_BBSIZE_25088_7 EQU  H'C3'; Boot Block size is 25088 words
-_BBSIZE_BBSIZE_24960_7 EQU  H'C2'; Boot Block size is 24960 words
-_BBSIZE_BBSIZE_24832_7 EQU  H'C1'; Boot Block size is 24832 words
-_BBSIZE_BBSIZE_24704_7 EQU  H'C0'; Boot Block size is 24704 words
-_BBSIZE_BBSIZE_24576_7 EQU  H'BF'; Boot Block size is 24576 words
-_BBSIZE_BBSIZE_24448_7 EQU  H'BE'; Boot Block size is 24448 words
-_BBSIZE_BBSIZE_24320_7 EQU  H'BD'; Boot Block size is 24320 words
-_BBSIZE_BBSIZE_24192_7 EQU  H'BC'; Boot Block size is 24192 words
-_BBSIZE_BBSIZE_24064_7 EQU  H'BB'; Boot Block size is 24064 words
-_BBSIZE_BBSIZE_23936_7 EQU  H'BA'; Boot Block size is 23936 words
-_BBSIZE_BBSIZE_23808_7 EQU  H'B9'; Boot Block size is 23808 words
-_BBSIZE_BBSIZE_23680_7 EQU  H'B8'; Boot Block size is 23680 words
-_BBSIZE_BBSIZE_23552_7 EQU  H'B7'; Boot Block size is 23552 words
-_BBSIZE_BBSIZE_23424_7 EQU  H'B6'; Boot Block size is 23424 words
-_BBSIZE_BBSIZE_23296_7 EQU  H'B5'; Boot Block size is 23296 words
-_BBSIZE_BBSIZE_23168_7 EQU  H'B4'; Boot Block size is 23168 words
-_BBSIZE_BBSIZE_23040_7 EQU  H'B3'; Boot Block size is 23040 words
-_BBSIZE_BBSIZE_22912_7 EQU  H'B2'; Boot Block size is 22912 words
-_BBSIZE_BBSIZE_22784_7 EQU  H'B1'; Boot Block size is 22784 words
-_BBSIZE_BBSIZE_22656_7 EQU  H'B0'; Boot Block size is 22656 words
-_BBSIZE_BBSIZE_22528_7 EQU  H'AF'; Boot Block size is 22528 words
-_BBSIZE_BBSIZE_22400_7 EQU  H'AE'; Boot Block size is 22400 words
-_BBSIZE_BBSIZE_22272_7 EQU  H'AD'; Boot Block size is 22272 words
-_BBSIZE_BBSIZE_22144_7 EQU  H'AC'; Boot Block size is 22144 words
-_BBSIZE_BBSIZE_22016_7 EQU  H'AB'; Boot Block size is 22016 words
-_BBSIZE_BBSIZE_21888_7 EQU  H'AA'; Boot Block size is 21888 words
-_BBSIZE_BBSIZE_21760_7 EQU  H'A9'; Boot Block size is 21760 words
-_BBSIZE_BBSIZE_21632_7 EQU  H'A8'; Boot Block size is 21632 words
-_BBSIZE_BBSIZE_21504_7 EQU  H'A7'; Boot Block size is 21504 words
-_BBSIZE_BBSIZE_21376_7 EQU  H'A6'; Boot Block size is 21376 words
-_BBSIZE_BBSIZE_21248_7 EQU  H'A5'; Boot Block size is 21248 words
-_BBSIZE_BBSIZE_21120_7 EQU  H'A4'; Boot Block size is 21120 words
-_BBSIZE_BBSIZE_20992_7 EQU  H'A3'; Boot Block size is 20992 words
-_BBSIZE_BBSIZE_20864_7 EQU  H'A2'; Boot Block size is 20864 words
-_BBSIZE_BBSIZE_20736_7 EQU  H'A1'; Boot Block size is 20736 words
-_BBSIZE_BBSIZE_20608_7 EQU  H'A0'; Boot Block size is 20608 words
-_BBSIZE_BBSIZE_20480_7 EQU  H'9F'; Boot Block size is 20480 words
-_BBSIZE_BBSIZE_20352_7 EQU  H'9E'; Boot Block size is 20352 words
-_BBSIZE_BBSIZE_20224_7 EQU  H'9D'; Boot Block size is 20224 words
-_BBSIZE_BBSIZE_20096_7 EQU  H'9C'; Boot Block size is 20096 words
-_BBSIZE_BBSIZE_19968_7 EQU  H'9B'; Boot Block size is 19968 words
-_BBSIZE_BBSIZE_19840_7 EQU  H'9A'; Boot Block size is 19840 words
-_BBSIZE_BBSIZE_19712_7 EQU  H'99'; Boot Block size is 19712 words
-_BBSIZE_BBSIZE_19584_7 EQU  H'98'; Boot Block size is 19584 words
-_BBSIZE_BBSIZE_19456_7 EQU  H'97'; Boot Block size is 19456 words
-_BBSIZE_BBSIZE_19328_7 EQU  H'96'; Boot Block size is 19328 words
-_BBSIZE_BBSIZE_19200_7 EQU  H'95'; Boot Block size is 19200 words
-_BBSIZE_BBSIZE_19072_7 EQU  H'94'; Boot Block size is 19072 words
-_BBSIZE_BBSIZE_18944_7 EQU  H'93'; Boot Block size is 18944 words
-_BBSIZE_BBSIZE_18816_7 EQU  H'92'; Boot Block size is 18816 words
-_BBSIZE_BBSIZE_18688_7 EQU  H'91'; Boot Block size is 18688 words
-_BBSIZE_BBSIZE_18560_7 EQU  H'90'; Boot Block size is 18560 words
-_BBSIZE_BBSIZE_18432_7 EQU  H'8F'; Boot Block size is 18432 words
-_BBSIZE_BBSIZE_18304_7 EQU  H'8E'; Boot Block size is 18304 words
-_BBSIZE_BBSIZE_18176_7 EQU  H'8D'; Boot Block size is 18176 words
-_BBSIZE_BBSIZE_18048_7 EQU  H'8C'; Boot Block size is 18048 words
-_BBSIZE_BBSIZE_17920_7 EQU  H'8B'; Boot Block size is 17920 words
-_BBSIZE_BBSIZE_17792_7 EQU  H'8A'; Boot Block size is 17792 words
-_BBSIZE_BBSIZE_17664_7 EQU  H'89'; Boot Block size is 17664 words
-_BBSIZE_BBSIZE_17536_7 EQU  H'88'; Boot Block size is 17536 words
-_BBSIZE_BBSIZE_17408_7 EQU  H'87'; Boot Block size is 17408 words
-_BBSIZE_BBSIZE_17280_7 EQU  H'86'; Boot Block size is 17280 words
-_BBSIZE_BBSIZE_17152_7 EQU  H'85'; Boot Block size is 17152 words
-_BBSIZE_BBSIZE_17024_7 EQU  H'84'; Boot Block size is 17024 words
-_BBSIZE_BBSIZE_16896_7 EQU  H'83'; Boot Block size is 16896 words
-_BBSIZE_BBSIZE_16768_7 EQU  H'82'; Boot Block size is 16768 words
-_BBSIZE_BBSIZE_16640_7 EQU  H'81'; Boot Block size is 16640 words
-_BBSIZE_BBSIZE_16512_7 EQU  H'80'; Boot Block size is 16512 words
 _BBSIZE_BBSIZE_16384_7 EQU  H'7F'; Boot Block size is 16384 words
 _BBSIZE_BBSIZE_16256_7 EQU  H'7E'; Boot Block size is 16256 words
 _BBSIZE_BBSIZE_16128_7 EQU  H'7D'; Boot Block size is 16128 words
@@ -9626,7 +9503,7 @@ _SAFLOCK_OFF_13      EQU  H'FF'; SAF Lock disabled
 _SAFLOCK_ON_13       EQU  H'FE'; SAF Lock enabled, SAF areas are locked and SAFSZ bits cannot be erased
 
 ;----- CONFIG8 Options --------------------------------------------------
-_SAFSZ_SAFSZ_NONE_8  EQU  H'FF'; NONE
+_SAFSZ_SAFSZ_DIS_8   EQU  H'FF'; Disabled
 _SAFSZ_SAFSZ_128_8   EQU  H'FE'; Last 128 words of PFM; self write operation depends on WRTSAF bit in CONFIG9
 _SAFSZ_SAFSZ_256_8   EQU  H'FC'; Last 256 words of PFM; self write operation depends on WRTSAF bit in CONFIG9
 _SAFSZ_SAFSZ_384_8   EQU  H'F8'; Last 384 words of PFM; self write operation depends on WRTSAF bit in CONFIG9
@@ -9638,7 +9515,7 @@ _SAFSZ_SAFSZ_1024_8  EQU  H'00'; Last 1024 words of PFM; self write operation de
 
 ;----- CONFIG12 Options --------------------------------------------------
 _ICSPDIS_OFF_12      EQU  H'FF'; ICSP and ICD interface fully enabled
-_ICSPDIS_ON_12       EQU  H'FE'; ICSP and ICD interface to Flash memory disabled
+_ICSPDIS_ON_12       EQU  H'FE'; ICSP and ICD interface fully disabled
 
 ;----- DEVID Equates --------------------------------------------------
 _IDLOC0            EQU  H'200000'
