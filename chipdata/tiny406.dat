@@ -48,7 +48,7 @@ MaxMHz=20
 IntOsc=20, 10, 5, 2.5, 1.25, 0.625, 0.3125, 3.3333333, 2, 1.6666667, 0.8333333, 0.4166667
 
 'This constant is exposed as CHIPPINS - sourced from `d:avr chipdata.csv`
-Pins=8
+Pins=20
 
 'This constant is exposed as CHIPUSART - sourced from `d:avr chipdata.csv`
 USART=1
