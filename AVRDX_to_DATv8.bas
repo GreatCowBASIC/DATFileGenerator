@@ -72,6 +72,25 @@
     UserProfile As String
   End Type
 
+  Type PortPin
+    Number as Integer
+    Name as String
+    OrgName as String
+  End Type
+
+  Type ChipPin
+      'PinName As String
+      Number As Integer
+      FunctionList(20, 2) As String
+      FunctionCount As Integer
+  End Type
+
+  Type PinOut
+    Name As String
+    PinCount As Integer
+    PinList(100) As ChipPin
+  End Type
+
   Dim Shared gIDEVersion as String
   Dim Shared gXLScs as String: gXLScs = "avr chipdata.csv"
   Dim Shared SourceFileArray(100000) As SourceFiles
@@ -91,7 +110,8 @@
   Dim Shared GCBASICConverterCall as Integer = 0
   Dim Shared DFPVersion as String
   Dim Shared DFPFamily as String
-  
+  Dim Shared Pinouts(5) As Pinout  
+  Dim Shared PortPins() As PortPin
 
   Dim Shared ParamUpper as string
   Dim Shared targetchip as string
@@ -120,6 +140,8 @@
   Dim Shared NewRegister as string: NewRegister = ""
   Dim Shared EqualPosition as Integer
   Dim Shared SemiColonPosition as Integer
+  Dim Shared PinoutCount as Integer
+  Dim Shared ChipPackageList as String
 
   Dim Shared getRamstartStr as String
   Dim Shared getRamStartInt as Integer
@@ -130,13 +152,22 @@
   Dim Shared missingIDXFile as Integer = 0
 
   Dim Shared ParamMeters() as String
+
+  Declare Sub AddIOPin(PinList() As ChipPin, PinNumber As Integer, PinName As String)
+  Declare Sub AddPinFunction(Pin As Integer, Port As String, Direction As String)
+  Declare Function HasSFR(SFRName As String) As Integer
   Declare Sub PopulateSourceFilesLocation
+  Declare Sub PopulatePinDefinitions
+  Declare Function PortExists ( instring as string ) as Integer
+
   Declare Function FindChip ( chiptofind as string, ignore as string ) as string
   Declare SUB Replace (DataVar As String, Find As String, Rep As String)
   Declare Sub Split(Text As String, Delim As String = " ", Count As Long = -1, Ret() As String)
   Declare Function RegisterString( chipstringtofind as string ) as string
-  Declare Sub PopulateRAMDefinitions ( SourceFolder as string, Version as string, Chip as string )
-  Declare Sub PopulateConfig ( SourceFolder as string, Version as string, Chip as string )
+  Declare Sub printPinDefinitions
+  Declare Sub PopulateRAMDefinitions ( SourceFolder as string, Version as string, Chip as string ) 
+  'Declare Sub PopulateConfig ( SourceFolder as string, Version as string, Chip as string )
+  Declare Sub GuessPinouts (PinoutString As String)
   
 
   Declare Sub InitAndGetFiles
@@ -158,6 +189,8 @@
 InitAndGetFiles
   if missingIDXFile <> 0 Then End
 
+PopulatePinDefinitions
+
 PrintHeader
 PrintChipData: PrintAVRChipSpecifics  
 PrintPointers
@@ -167,6 +200,13 @@ PrintAVRMasks
 Printregisters
 PrintBits
 PrintFreeRam
+    'If no pinout found, invent one so that GCGB will show pins
+    'If PinoutCount = 0 Then
+    '  ChipPackageList = GetCSVValue ( targetchip, XLSPackages )
+    '  GuessPinouts (ChipPackageList)
+    'End If
+    PrintPinDefinitions
+
 PrintFooter
 
 
@@ -362,72 +402,83 @@ Sub PrintAliases
   print "  ' So, the compiler knows that DDRA for this specific chip and all AVRDX chips that DDRA is actually to be transformed to an AVRDX set of instructiions."
   print 
 
-  if Val("&h"+GetValue ("PORTA_OUT", 0)) > 0 then
-    print "'PortA"
-    print "ALIAS_PORTA_DIR=0                                      ; 0000             "
-    print "DDRA=0                                          ; 0000 alias"
-    print "ALIAS_PORTA_OUT=1                                      ; 0001             "
-    print "PORTA=1                                         ; 0001 alias         "
-    print "ALIAS_PORTA_IN=2                                       ; 0002   "
-    print "PINA=2                                          ; 0002 alias"
-    print ""
-  End if
-
-
-  if Val("&h"+GetValue ("PORTB_OUT", 0)) > 0 then
-    print "'PortB"
-    print "ALIAS_PORTB_DIR=4                                      ; 0004            "
-    print "DDRB=4                                          ; 0004 alias"
-    print "ALIAS_PORTB_OUT=5                                      ; 0005              "
-    print "PORTB=5                                         ; 0005 alias"
-    print "ALIAS_PORTB_IN=6                                       ; 0006"
-    print "PINB=6                                          ; 0006 alias"
-    print ""
+  If PortExists( "PORTA" ) Then
+    if Val("&h"+GetValue ("PORTA_OUT", 0)) > 0 then
+      print "'PortA"
+      print "ALIAS_PORTA_DIR=0                                      ; 0000             "
+      print "DDRA=0                                          ; 0000 alias"
+      print "ALIAS_PORTA_OUT=1                                      ; 0001             "
+      print "PORTA=1                                         ; 0001 alias         "
+      print "ALIAS_PORTA_IN=2                                       ; 0002   "
+      print "PINA=2                                          ; 0002 alias"
+      print ""
+    End if
   End If
 
-  if Val("&h"+GetValue ("PORTC_OUT", 0)) > 0 then
-    print "'PortC"
-    print "ALIAS_PORTC_DIR=8                                      ; 0008          "
-    print "DDRC=8                                          ; 0008 alias"
-    print "ALIAS_PORTC_OUT=9                                      ; 0009"
-    print "PORTC=9                                         ; 0009 alias"
-    print "ALIAS_PORTC_IN=10                                      ; 000A"
-    print "PINC=10                                         ; 000A alias"
-    print ""
-  End if
+  If PortExists( "PORTB" ) Then
+    if Val("&h"+GetValue ("PORTB_OUT", 0)) > 0 then
+      print "'PortB"
+      print "ALIAS_PORTB_DIR=4                                      ; 0004            "
+      print "DDRB=4                                          ; 0004 alias"
+      print "ALIAS_PORTB_OUT=5                                      ; 0005              "
+      print "PORTB=5                                         ; 0005 alias"
+      print "ALIAS_PORTB_IN=6                                       ; 0006"
+      print "PINB=6                                          ; 0006 alias"
+      print ""
+    End If
+  End If
 
-  if Val("&h"+GetValue ("PORTD_OUT", 0)) > 0 then  
-    print "'PortD"
-    print "ALIAS_PORTD_DIR=11"
-    print "DDRD=11"
-    print "ALIAS_PORTD_OUT=12"
-    print "PORTD=12"
-    print "ALIAS_PORTD_IN=13"
-    print "PIND=13"
-    print ""
-  end if
+  If PortExists( "PORTC" ) Then
+    if Val("&h"+GetValue ("PORTC_OUT", 0)) > 0 then
+      print "'PortC"
+      print "ALIAS_PORTC_DIR=8                                      ; 0008          "
+      print "DDRC=8                                          ; 0008 alias"
+      print "ALIAS_PORTC_OUT=9                                      ; 0009"
+      print "PORTC=9                                         ; 0009 alias"
+      print "ALIAS_PORTC_IN=10                                      ; 000A"
+      print "PINC=10                                         ; 000A alias"
+      print ""
+    End if
+  End If
 
-  if Val("&h"+GetValue ("PORTE_OUT", 0)) > 0 then
-    print "'PortE"
-    print "ALIAS_PORTE_DIR=14"
-    print "DDRE=14"
-    print "ALIAS_PORTE_OUT=15"
-    print "PORTE=15"
-    print "ALIAS_PORTE_IN=16"
-    print "PINE=16"
-    print ""
-  end if
+  If PortExists( "PORTD" ) Then
+    if Val("&h"+GetValue ("PORTD_OUT", 0)) > 0 then  
+      print "'PortD"
+      print "ALIAS_PORTD_DIR=11"
+      print "DDRD=11"
+      print "ALIAS_PORTD_OUT=12"
+      print "PORTD=12"
+      print "ALIAS_PORTD_IN=13"
+      print "PIND=13"
+      print ""
+    end if
+  End If
 
-  if Val("&h"+GetValue ("PORTF_OUT", 0)) > 0 then
-    print "'PortF"
-    print "ALIAS_PORTF_DIR=17"
-    print "DDRF=17"
-    print "ALIAS_PORTF_OUT=18"
-    print "PORTF=18"
-    print "ALIAS_PORTF_IN=19"
-    print "PINF=19"
-    print ""
-  end if
+  If PortExists( "PORTE" ) Then
+    if Val("&h"+GetValue ("PORTE_OUT", 0)) > 0 then
+      print "'PortE"
+      print "ALIAS_PORTE_DIR=14"
+      print "DDRE=14"
+      print "ALIAS_PORTE_OUT=15"
+      print "PORTE=15"
+      print "ALIAS_PORTE_IN=16"
+      print "PINE=16"
+      print ""
+    end If
+  End If
+
+  If PortExists( "PORTF" ) Then
+    if Val("&h"+GetValue ("PORTF_OUT", 0)) > 0 then
+      print "'PortF"
+      print "ALIAS_PORTF_DIR=17"
+      print "DDRF=17"
+      print "ALIAS_PORTF_OUT=18"
+      print "PORTF=18"
+      print "ALIAS_PORTF_IN=19"
+      print "PINF=19"
+      print ""
+    end if
+  End If
 
   print "'Additional Aliases are required"
   print "ALIAS_CPU_SPL=61    "
@@ -521,15 +572,25 @@ Sub PrintInterrupts
                   Case "PORTB_PORT"
                     print chr(9);"PORTBChange:PORTB_PORT,"+ str(val(Vector))+",PORTB_PORTCTRL.PORT_INT_gm,PORTB_INTFLAGS.PORT_INT_gm"
                   Case "PORTC_PORT"
-                    print chr(9);"PORTCChange:PORTC_PORT,"+ str(val(Vector))+",PORTC_PORTCTRL.PORT_INT_gm,PORTC_INTFLAGS.PORT_INT_gm"
+                    If PortExists( "PORTC" ) Then
+                      print chr(9);"PORTCChange:PORTC_PORT,"+ str(val(Vector))+",PORTC_PORTCTRL.PORT_INT_gm,PORTC_INTFLAGS.PORT_INT_gm"
+                    End If
                   Case "PORTD_PORT"
-                    print chr(9);"PORTDChange:PORTD_PORT,"+ str(val(Vector))+",PORTD_PORTCTRL.PORT_INT_gm,PORTD_INTFLAGS.PORT_INT_gm"
+                    If PortExists( "PORTD" ) Then
+                      print chr(9);"PORTDChange:PORTD_PORT,"+ str(val(Vector))+",PORTD_PORTCTRL.PORT_INT_gm,PORTD_INTFLAGS.PORT_INT_gm"
+                    End If
                   Case "PORTE_PORT"
-                    print chr(9);"PORTEChange:PORTE_PORT,"+ str(val(Vector))+",PORTE_PORTCTRL.PORT_INT_gm,PORTE_INTFLAGS.PORT_INT_gm"
+                    If PortExists( "PORTE" ) Then
+                      print chr(9);"PORTEChange:PORTE_PORT,"+ str(val(Vector))+",PORTE_PORTCTRL.PORT_INT_gm,PORTE_INTFLAGS.PORT_INT_gm"
+                    End If
                   Case "PORTF_PORT"
-                    print chr(9);"PORTFChange:PORTF_PORT,"+ str(val(Vector))+",PORTF_PORTCTRL.PORT_INT_gm,PORTF_INTFLAGS.PORT_INT_gm"
+                    If PortExists( "PORTF" ) Then
+                      print chr(9);"PORTFChange:PORTF_PORT,"+ str(val(Vector))+",PORTF_PORTCTRL.PORT_INT_gm,PORTF_INTFLAGS.PORT_INT_gm"
+                    End if
                   Case "PORTG_PORT"
-                    print chr(9);"PORTGChange:PORTG_PORT,"+ str(val(Vector))+",PORTG_PORTCTRL.PORT_INT_gm,PORTG_INTFLAGS.PORT_INT_gm"
+                    If PortExists( "PORTG" ) Then
+                      print chr(9);"PORTGChange:PORTG_PORT,"+ str(val(Vector))+",PORTG_PORTCTRL.PORT_INT_gm,PORTG_INTFLAGS.PORT_INT_gm"
+                    End If
                   Case "ADC0_READY"
                     print chr(9);"ADCReady:ADC0_READY,"+ str(val(Vector))+ ",ADC0_INTCTRL.ADC_RESRDY_bp,ADC0_INTFLAGS.ADC_RESRDY_bp"
                   Case "USART0_RXC"
@@ -929,17 +990,149 @@ Sub PopulateRAMDefinitions ( SourceFolder as string, Version as string, Chip as 
 
 
    else
-      Print "XML read error"
-
+      Print "XML read error - PopulateRAMDefinitions"
   end if
 
-FinishReadRAM:
+  FinishReadRAM:
+
+End Sub
+
+Sub PrintPinDefinitions 
+
+  'reads Chip  +.PIC file. 
+
+  Dim As ext.xml.node Ptr xmlroot
+  Dim As ext.xml.node Ptr PIC, DataSpace, RegardlessOfMode, SFRDataSector
+
+  Var xmldoc = new ext.xml.tree
+  If Dir ( UserProfile + kINDEX_IDX+"\Microchip\"+chipparameters(3)+"_DFP\"+chipparameters(1)+"\edc\"+ Chip  +".PIC" ) <> "" Then
+    xmldoc->load( UserProfile + kINDEX_IDX+"\Microchip\"+chipparameters(3)+"_DFP\"+chipparameters(1)+"\edc\"+ Chip  +".PIC" )
+  ElseIf Dir ( UserProfile + kINDEX_IDX+"\Microchip\"+chipparameters(3)+"_DFP\"+chipparameters(1)+"\edc\AT"+ Chip  +".PIC" ) <> "" Then
+    xmldoc->load( UserProfile + kINDEX_IDX+"\Microchip\"+chipparameters(3)+"_DFP\"+chipparameters(1)+"\edc\AT"+ Chip  +".PIC" )
+  End If
+
+  If xmldoc = 0 Then
+    Print "XML file seems empty"
+    GoTo FinishPrintPinDefinitions
+  End If
+  xmlroot = xmldoc->root
+
+  If xmlroot = 0 Then
+    Print "Missing root node"
+    GoTo FinishPrintPinDefinitions
+  End If
+  PIC=xmlroot->Child("edc:PIC")
+
+  if PIC <> 0 then
+
+    DataSpace = PIC->Child("edc:PinList")
+
+    Print ""
+    Print "[Pins]"
+        
+    dim childenpdsccounter as Integer
+    for childenpdsccounter = 0 to DataSpace->Children("edc:Pin")  - 1
+      dim outline as string = ""
+      dim childenparameters as Integer
+
+        outline = str(childenpdsccounter+1)+","
+        For childenparameters = 0 to DataSpace->Child("edc:Pin", childenpdsccounter )->Children("edc:VirtualPin") - 1
+          ' print str(childenpdsccounter+1)+": "+ DataSpace->Child("edc:Pin", childenpdsccounter )->Child("edc:VirtualPin", childenparameters )->Attribute("edc:name")
+          Dim attribname as String = DataSpace->Child("edc:Pin", childenpdsccounter )->Child("edc:VirtualPin", childenparameters )->Attribute("edc:name")
+          Dim attribpps as String = DataSpace->Child("edc:Pin", childenpdsccounter )->Child("edc:VirtualPin", childenparameters )->Attribute("edc:ppsfunction")
+          
+          If attribpps <> "" Then
+            outline = outline + attribname+":"+attribpps
+          Else
+            outline = outline + attribname
+          End If
+          If Instr( attribname, "PIN") = 1 Then 
+            outline = outline + "(IO),"
+          Elseif Instr( attribname, "AIN") = 1 Then 
+            outline = outline + "(I),"
+          else
+            outline = outline + ","
+          end if
+        Next
+        if right(outline, 1) = "," then outline = mid( outline, 1, Len(outline)-1)
+        print outline
+      Next    
+
+  else
+    Print "XML read error - PrintPinDefinitions"
+  end if
+
+  FinishPrintPinDefinitions:
+
+End Sub
+
+Sub PopulatePinDefinitions 
+
+  'reads Chip  +.PIC file. 
+
+  Dim As ext.xml.node Ptr xmlroot
+  Dim As ext.xml.node Ptr PIC, DataSpace, RegardlessOfMode, SFRDataSector
+
+  Var xmldoc = new ext.xml.tree
+  If Dir ( UserProfile + kINDEX_IDX+"\Microchip\"+chipparameters(3)+"_DFP\"+chipparameters(1)+"\edc\"+ Chip  +".PIC" ) <> "" Then
+    xmldoc->load( UserProfile + kINDEX_IDX+"\Microchip\"+chipparameters(3)+"_DFP\"+chipparameters(1)+"\edc\"+ Chip  +".PIC" )
+  ElseIf Dir ( UserProfile + kINDEX_IDX+"\Microchip\"+chipparameters(3)+"_DFP\"+chipparameters(1)+"\edc\AT"+ Chip  +".PIC" ) <> "" Then
+    xmldoc->load( UserProfile + kINDEX_IDX+"\Microchip\"+chipparameters(3)+"_DFP\"+chipparameters(1)+"\edc\AT"+ Chip  +".PIC" )
+  End If
+
+
+  If xmldoc = 0 Then
+    Print "XML file seems empty"
+    GoTo FinishPopulatePinDefinitions
+  End If
+  xmlroot = xmldoc->root
+
+  If xmlroot = 0 Then
+    Print "Missing root node"
+    GoTo FinishPopulatePinDefinitions
+  End If
+  PIC=xmlroot->Child("edc:PIC")
+
+  if PIC <> 0 then
+
+    DataSpace = PIC->Child("edc:PinList")
+
+    dim pincounter as Integer = 0
+    dim childenpdsccounter as Integer
+    for childenpdsccounter = 0 to DataSpace->Children("edc:Pin")  - 1
+      dim outline as string = ""
+      dim childenparameters as Integer
+
+        outline = str(childenpdsccounter+1)+","
+        For childenparameters = 0 to DataSpace->Child("edc:Pin", childenpdsccounter )->Children("edc:VirtualPin") - 1
+          ' print str(childenpdsccounter+1)+": "+ DataSpace->Child("edc:Pin", childenpdsccounter )->Child("edc:VirtualPin", childenparameters )->Attribute("edc:name")
+          Dim attribname as String = DataSpace->Child("edc:Pin", childenpdsccounter )->Child("edc:VirtualPin", childenparameters )->Attribute("edc:name")
+          If left(attribname, 1) = "P" then
+            If  instr("ABCDEFGH", mid(attribname, 2,1)) <> 0 Then
+              If  instr("01234567", mid(attribname, 3,1)) <> 0 Then
+                pincounter = pincounter + 1
+                ' Add a new element to the array
+                ReDim Preserve PortPins(pincounter)
+                PortPins(pincounter).name = "PORT"+MID( attribname,2, 1)+"."+Right(attribname, 1)
+                PortPins(pincounter).number = pincounter
+                PortPins(pincounter).OrgName = attribname
+                ' print PortPins(pincounter).name
+              End If
+            End If
+          End If
+        Next
+      Next    
+
+  else
+    Print "XML read error - PopulatePinDefinitions"
+  end if
+
+  FinishPopulatePinDefinitions:
 
 End Sub
 
 
-
-Sub PopulateConfig( SourceFolder as string, Version as string, Chip as string )
+Sub xPopulateConfig( SourceFolder as string, Version as string, Chip as string )
 
     Dim DataSource as string
     Dim ConfigAddress() as string
@@ -973,36 +1166,36 @@ Sub PopulateConfig( SourceFolder as string, Version as string, Chip as string )
 
     'reread file now extracting options
 
-'      #     CWORD:<address>:<mask>:<default value>[:<name>[,<alias list>]]
-'      #
-'      # for each CWORD the configuration settings are listed as
-'      #
-'      #     CSETTING:<mask>:<name>[,<alias list>]:<description>
-'      #
-'      # lastly for each CSETTING all possible values are listed as
-'      #
-'      #     CVALUE:<value>:<name>[,<alias list>]:<description>
+  '      #     CWORD:<address>:<mask>:<default value>[:<name>[,<alias list>]]
+  '      #
+  '      # for each CWORD the configuration settings are listed as
+  '      #
+  '      #     CSETTING:<mask>:<name>[,<alias list>]:<description>
+  '      #
+  '      # lastly for each CSETTING all possible values are listed as
+  '      #
+  '      #     CVALUE:<value>:<name>[,<alias list>]:<description>
 
     Dim configloop as Integer
 
 
 
-'      CWORD:300000:77:FF:CONFIG1L
-'        CSETTING:7:FEXTOSC:External Oscillator Selection
-'            CVALUE:0:LP:LP (crystal oscillator) optimized for 32.768 kHz; PFM set to low power
-'            CVALUE:1:XT:XT (crystal oscillator) above 100 kHz, below 8 MHz; PFM set to medium power
-'            CVALUE:2:HS:HS (crystal oscillator) above 8 MHz; PFM set to high power
-'            CVALUE:4:OFF:Oscillator not enabled
-'            CVALUE:5:ECL:EC (external clock) below 100 kHz; PFM set to low power
-'            CVALUE:6:ECM:EC (external clock) for 500 kHz to 8 MHz; PFM set to medium power
-'            CVALUE:7:ECH:EC (external clock) above 8 MHz; PFM set to high power
-'        CSETTING:70:RSTOSC:Reset Oscillator Selection
-'            CVALUE:0:HFINTOSC_64MHZ:HFINTOSC with HFFRQ = 64 MHz and CDIV = 1:1
-'            CVALUE:20:EXTOSC_4PLL:EXTOSC with 4x PLL, with EXTOSC operating per FEXTOSC bits
-'            CVALUE:40:SOSC:Secondary Oscillator
-'            CVALUE:50:LFINTOSC:Low-Frequency Oscillator
-'            CVALUE:60:HFINTOSC_1MHZ:HFINTOSC with HFFRQ = 4 MHz and CDIV = 4:1
-'            CVALUE:70:EXTOSC:EXTOSC operating per FEXTOSC bits (device manufacturing default)
+  '      CWORD:300000:77:FF:CONFIG1L
+  '        CSETTING:7:FEXTOSC:External Oscillator Selection
+  '            CVALUE:0:LP:LP (crystal oscillator) optimized for 32.768 kHz; PFM set to low power
+  '            CVALUE:1:XT:XT (crystal oscillator) above 100 kHz, below 8 MHz; PFM set to medium power
+  '            CVALUE:2:HS:HS (crystal oscillator) above 8 MHz; PFM set to high power
+  '            CVALUE:4:OFF:Oscillator not enabled
+  '            CVALUE:5:ECL:EC (external clock) below 100 kHz; PFM set to low power
+  '            CVALUE:6:ECM:EC (external clock) for 500 kHz to 8 MHz; PFM set to medium power
+  '            CVALUE:7:ECH:EC (external clock) above 8 MHz; PFM set to high power
+  '        CSETTING:70:RSTOSC:Reset Oscillator Selection
+  '            CVALUE:0:HFINTOSC_64MHZ:HFINTOSC with HFFRQ = 64 MHz and CDIV = 1:1
+  '            CVALUE:20:EXTOSC_4PLL:EXTOSC with 4x PLL, with EXTOSC operating per FEXTOSC bits
+  '            CVALUE:40:SOSC:Secondary Oscillator
+  '            CVALUE:50:LFINTOSC:Low-Frequency Oscillator
+  '            CVALUE:60:HFINTOSC_1MHZ:HFINTOSC with HFFRQ = 4 MHz and CDIV = 4:1
+  '            CVALUE:70:EXTOSC:EXTOSC operating per FEXTOSC bits (device manufacturing default)
 
 
     open fsp_config for input as #1
@@ -1087,7 +1280,7 @@ Sub PopulateConfig( SourceFolder as string, Version as string, Chip as string )
 
 
           elseif left(ucase(datasource),6)="CWORD:" and instr(datasource,"IDLOC")<>0  then
-'          CWORD:20000E:FFF:FFF:IDLOC7
+  '          CWORD:20000E:FFF:FFF:IDLOC7
             if idlocsuffix = 0 then
                 print ""
                 print ";----- DEVID Equates --------------------------------------------------"
@@ -1816,4 +2009,17 @@ Function GetCSVValue (  searchString as String, returnParameter as Byte ) As Str
     Split ( DataSource, ",", 99, ParamMeters() )
     'send back the parameter from the XLS
     return ParamMeters(returnParameter)
+End Function
+
+
+Function PortExists ( instring as string )  as Integer
+
+  Dim pincounter as Integer = ubound(PortPins)
+  Dim pinindex as Integer
+
+
+  For pinindex = 1 to pincounter
+    If Instr( UCase(PortPins(pinindex).name), UCase(instring) ) <> 0 Then Return -1
+  Next
+  Return 0
 End Function

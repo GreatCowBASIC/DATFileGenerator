@@ -6,9 +6,9 @@
 ;
 ; Microchip IDE version 6.20
 ; C:\Users\admin\.mchp_packs\index.idx
-; C:\Users\admin\.mchp_packs\Microchip\ATtiny_DFP\3.1.260\avrasm\inc\tn402def.inc
+; C:\Users\admin\.mchp_packs\Microchip\ATtiny_DFP\3.2.268\avrasm\inc\tn402def.inc
 ; d:avr chipdata.csv
-; C:\Users\admin\.mchp_packs\Microchip\ATtiny_DFP\3.1.260\edc\ATTINY402.PIC
+; C:\Users\admin\.mchp_packs\Microchip\ATtiny_DFP\3.2.268\edc\ATTINY402.PIC
 ; 
 ;
 ; Registers not processed: RTC_CMP,SREG,CPU_SPL, CPU_SPH 
@@ -83,7 +83,7 @@ AVRDX=1
 
 'DFP version and family
 DFPFamily=ATtiny_DFP
-DFPVersion=3.1.260
+DFPVersion=3.2.268
 
 'For details of microcontroller specifications see the microcontroller datasheet
 _DATAMEM_START = 0x0000
@@ -213,22 +213,6 @@ ALIAS_PORTA_OUT=1                                      ; 0001
 PORTA=1                                         ; 0001 alias         
 ALIAS_PORTA_IN=2                                       ; 0002   
 PINA=2                                          ; 0002 alias
-
-'PortB
-ALIAS_PORTB_DIR=4                                      ; 0004            
-DDRB=4                                          ; 0004 alias
-ALIAS_PORTB_OUT=5                                      ; 0005              
-PORTB=5                                         ; 0005 alias
-ALIAS_PORTB_IN=6                                       ; 0006
-PINB=6                                          ; 0006 alias
-
-'PortC
-ALIAS_PORTC_DIR=8                                      ; 0008          
-DDRC=8                                          ; 0008 alias
-ALIAS_PORTC_OUT=9                                      ; 0009
-PORTC=9                                         ; 0009 alias
-ALIAS_PORTC_IN=10                                      ; 000A
-PINC=10                                         ; 000A alias
 
 'Additional Aliases are required
 ALIAS_CPU_SPL=61    
@@ -3619,6 +3603,16 @@ WDT_LOCK,WDT,7			'  Lock enable bit position
 [FreeRAM]
 'This is the extent of the RAM.  Inclusive of start and end address
 3F00:4000
+
+[Pins]
+1,VDD
+2,PA6,AIN6:AIN0(I),EVAPA6:EVAINCH0,EVSPA6:EVSINCH0,LUT0_OUT0:CCL,MOSI:SPI0_ALT,N0:AC0,PIN6:IOPORT(IO),TXD:USART0,WOB0:TCB0
+3,PA7,AIN7:AIN0(I),EVAPA7:EVAINCH0,EVSPA7:EVSINCH0,LUT1_OUT0:CCL,MISO:SPI0_ALT,P0:AC0,PIN7:IOPORT(IO),RXD:USART0,WO0A0:TCA0_ALT
+4,PA1,AIN1:AIN0(I),BREAK:OTHER,EVAPA1:EVAINCH0,EVSPA1:EVSINCH0,LUT0_IN1:CCL,MOSI:SPI0,PIN1:IOPORT(IO),SDA:TWI0,TXD:USART0_ALT,WO1A0:TCA0
+5,PA2,AIN2:AIN0(I),EVAPA2:EVAINCH0,EVOUT0:EVSYS,EVSPA2:EVSINCH0,LUT0_IN2:CCL,MISO:SPI0,PIN2:IOPORT(IO),RXD:USART0_ALT,SCL:TWI0,WO2A0:TCA0
+6,PA0,AIN0:AIN0(I),EVAPA0:EVAINCH0,EVSPA0:EVSINCH0,LUT0_IN0:CCL,PIN0:IOPORT(IO),RESET:OTHER,SS:SPI0,UPDI:OTHER,XDIR:USART0
+7,PA3,AIN3:AIN0(I),CLKI:CLKCTRL,EVAPA3:EVAINCH0,EVSPA3:EVSINCH0,OUT:AC0,PIN3:IOPORT(IO),SCK:SPI0,WO0A0:TCA0,WO3A0:TCA0,XCK:USART0
+8,GND
 
 [ConfigOps]
 'For details of the config options see the microcontroller datasheet
