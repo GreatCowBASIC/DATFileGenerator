@@ -1028,7 +1028,7 @@ Sub PrintPinDefinitions
     DataSpace = PIC->Child("edc:PinList")
 
     Print ""
-    Print "[Pins]"
+    Print "[Pins-]"
         
     dim childenpdsccounter as Integer
     for childenpdsccounter = 0 to DataSpace->Children("edc:Pin")  - 1
@@ -1041,6 +1041,10 @@ Sub PrintPinDefinitions
           Dim attribname as String = DataSpace->Child("edc:Pin", childenpdsccounter )->Child("edc:VirtualPin", childenparameters )->Attribute("edc:name")
           Dim attribpps as String = DataSpace->Child("edc:Pin", childenpdsccounter )->Child("edc:VirtualPin", childenparameters )->Attribute("edc:ppsfunction")
           
+          if childenparameters = 0 and Instr( "PR", Left(attribname,1) ) Then
+            attribname = attribname +"(IO)"
+          End If
+
           If attribpps <> "" Then
             outline = outline + attribname+":"+attribpps
           Else
