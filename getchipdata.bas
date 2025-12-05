@@ -1496,7 +1496,7 @@ FOR CurrentChip = StartChip to ChipIncCount
     Print #1, "'For specific details of the registers see the microcontroller datasheet"
     Print #1, "'The first parameter is the GCBASIC register name used in user code to expose the specific register"
     FOR PD = 1 to SVC
-        If Val("&H" + SysVars(PD, 2)) <= MaxChipAddress or ( ( instr(ucase(chipname),"16F152")<>0  or instr(ucase(chipname),"16F180")<>0  or instr(ucase(chipname),"16F171")<>0  or instr(ucase(chipname),"16F181")<>0 or instr(ucase(chipname),"16F131")<>0  ) and len(chipname)= 8) Then  'PIC16F15213
+        If Val("&H" + SysVars(PD, 2)) <= MaxChipAddress or ( ( instr(ucase(chipname),"16F152")<>0  or instr(ucase(chipname),"16F180")<>0  or instr(ucase(chipname),"16F171")<>0  or instr(ucase(chipname),"16F181")<>0 or instr(ucase(chipname),"16F131")<>0 or instr(ucase(chipname),"16F175")<>0  ) and len(chipname)= 8) Then  'PIC16F15213
             TempData = SysVars(PD, 1) + "," + Str(Val("&H" + SysVars(PD, 2)))
             PRINT #1, TempData
         Else
@@ -3192,8 +3192,18 @@ Function GetIntName (IntVect As String) As String
         IntName ="16bitUniversalTimerAInterrupt"
     Case "TU16BIE"
         IntName ="16bitUniversalTimerBInterrupt"
-
-
+    Case "CMLP1IE"
+        IntName ="LowPowerComparator"
+    Case "IOCSRIE"
+        IntName = "SignalRoutingPortIOC"
+    Case "OPA1CIE"
+        IntName = "OPA1SelfCalibration"
+    Case "OPA2CIE"    
+        IntName = "OPA2SelfCalibration"
+    Case "OPA3CIE"
+        IntName = "OPA3SelfCalibration"
+    Case "OPA4CIE"    
+        IntName = "OPA4SelfCalibration"
     Case Else:
             If Instr(IntVect, "_") <> 0 Then
                 IntName = GetIntName(Mid(IntVect, Instr(IntVect, "_") + 1))
