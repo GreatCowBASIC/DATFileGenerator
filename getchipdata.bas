@@ -2006,7 +2006,12 @@ Sub CalcIntOscSpeeds
       Select Case ChipIntOsc
         Case 32: ChipIntOscSpeeds = "32, 16, 8, 4, 2, 1"'chips like 16f15214 class Family 15001
         Case 0.16125:  ChipIntOscSpeeds = "16, 8, 4, 2, 1, 0.5, 0.25, 0.125"
-        Case 16: ChipIntOscSpeeds = "16, 8, 4, 2"
+        Case 16: 
+          If ( InStr(LCase(chipname), "16f7") and Len(chipname) = 6 ) or  ( InStr(LCase(chipname), "16lf7") and Len(chipname) = 7 ) Then
+            ChipIntOscSpeeds = "16, 8, 4, 2, 0.5, 0.25, 0.125, 0.0625"
+          Else
+            ChipIntOscSpeeds = "16, 8, 4, 2"
+          End If
         Case 8: ChipIntOscSpeeds = "8, 4, 2, 1, 0.5, 0.25, 0.125"
         Case 0.032: ChipIntOscSpeeds = Str(ChipIntOsc)
         Case 0: ChipIntOscSpeeds = "0"

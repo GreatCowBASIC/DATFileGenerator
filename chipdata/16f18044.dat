@@ -35,7 +35,7 @@ IntOsc=32, 16, 8, 4, 2, 1
 31kSupport=LFINTOSC,OSCCON2,80
 
 'This constant is exposed as ChipPins
-Pins=18
+Pins=20
 
 'This constant is exposed as ChipFamily
 Family=15
@@ -2505,20 +2505,26 @@ A0:EF
 70:7F
 
 [Pins-DIP]
-17,RA0(IO)
+19,RA0(IO)
 18,RA1(IO)
-1,RA2(IO)
-2,RA3(IO)
+17,RA2(IO)
+4,RA3(IO)
 3,RA4(IO)
-4,RA5(I),MCLR
-10,RB4(IO)
-11,RB5(IO)
-12,RB6(IO)
-13,RB7(IO)
-16,OSC1
-15,OSC2
-5,Vss
-14,Vdd
+2,RA5(IO)
+13,RB4(IO)
+12,RB5(IO)
+11,RB6(IO)
+10,RB7(IO)
+16,RC0(IO)
+15,RC1(IO)
+14,RC2(IO)
+7,RC3(IO)
+6,RC4(IO)
+5,RC5(IO)
+8,RC6(IO)
+9,RC7(IO)
+20,Vss
+1,Vdd
 
 [ConfigOps]
 'For details of the config options see the microcontroller datasheet

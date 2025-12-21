@@ -29,7 +29,7 @@ ADCConstants=AN{0..11} USAGE:AN0..AN11
 MaxMHz=20
 
 'This constant is exposed with only the first parameter (if more than one)
-IntOsc=16, 8, 4, 2
+IntOsc=16, 8, 4, 2, 0.5, 0.25, 0.125, 0.0625
 
 'This constant is exposed as ChipPins
 Pins=28
