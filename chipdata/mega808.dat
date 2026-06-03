@@ -1,14 +1,15 @@
+ATMEGA808
 ;        .DAT sections
 ;==========================================================================
 ;
 ;  Built by GCBASIC converter
 ;  XC8 processor include for the chip shown below
 ;
-; Microchip IDE version 6.20
+; Microchip IDE version 6.25
 ; C:\Users\admin\.mchp_packs\index.idx
-; C:\Users\admin\.mchp_packs\Microchip\ATmega_DFP\3.2.269\avrasm\inc\m808def.inc
+; C:\Users\admin\.mchp_packs\Microchip\ATmega_DFP\3.6.299\avrasm\inc\m808def.inc
 ; d:avr chipdata.csv
-; C:\Users\admin\.mchp_packs\Microchip\ATmega_DFP\3.2.269\edc\ATMEGA808.PIC
+; C:\Users\admin\.mchp_packs\Microchip\ATmega_DFP\3.6.299\edc\ATMEGA808.PIC
 ; 
 ;
 ; Registers not processed: RTC_CMP,SREG,CPU_SPL, CPU_SPH 
@@ -82,12 +83,9 @@ AVRFamily=megaAVRSeries0
 'This constant is exposed as CHIPAVRGCC - sourced from `d:avr chipdata.csv`
 AVRGCC=
 
-'This constant is exposed as CHIPAVRDX - sourced from `d:avr chipdata.csv`
-AVRDX=1
-
 'DFP version and family
 DFPFamily=ATmega_DFP
-DFPVersion=3.2.269
+DFPVersion=3.6.299
 
 'For details of microcontroller specifications see the microcontroller datasheet
 _DATAMEM_START = 0x0000

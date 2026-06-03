@@ -1,14 +1,15 @@
+ATTINY1616
 ;        .DAT sections
 ;==========================================================================
 ;
 ;  Built by GCBASIC converter
 ;  XC8 processor include for the chip shown below
 ;
-; Microchip IDE version 6.20
+; Microchip IDE version 6.25
 ; C:\Users\admin\.mchp_packs\index.idx
-; C:\Users\admin\.mchp_packs\Microchip\ATtiny_DFP\3.2.268\avrasm\inc\tn1616def.inc
+; C:\Users\admin\.mchp_packs\Microchip\ATtiny_DFP\3.4.278\avrasm\inc\tn1616def.inc
 ; d:avr chipdata.csv
-; C:\Users\admin\.mchp_packs\Microchip\ATtiny_DFP\3.2.268\edc\ATTINY1616.PIC
+; C:\Users\admin\.mchp_packs\Microchip\ATtiny_DFP\3.4.278\edc\ATTINY1616.PIC
 ; 
 ;
 ; Registers not processed: RTC_CMP,SREG,CPU_SPL, CPU_SPH 
@@ -78,12 +79,9 @@ AVRFamily=tinyAVRSeries2
 'This constant is exposed as CHIPAVRGCC - sourced from `d:avr chipdata.csv`
 AVRGCC=avrxmega3
 
-'This constant is exposed as CHIPAVRDX - sourced from `d:avr chipdata.csv`
-AVRDX=1
-
 'DFP version and family
 DFPFamily=ATtiny_DFP
-DFPVersion=3.2.268
+DFPVersion=3.4.278
 
 'For details of microcontroller specifications see the microcontroller datasheet
 _DATAMEM_START = 0x0000
@@ -150,8 +148,8 @@ ZH:31
 ' The clear reg.bit(s) can be a single bit or bits will be used to set the register
 ' ! (eqautes to NOT ) inverts the bit
 '
-; CRCSCAN interrupt vectors
-	NMIfromCRC:CRCSCAN_NMI,2,CRCSCAN_CTRLA.CRCSCAN_NMIEN_bp,!CRCSCAN_CTRLA.CRCSCAN_RESET_bp
+; NMI interrupt vectors
+		NMI:NMI,2,,
 ; BOD interrupt vectors
 	BOD_VLM:BOD_VLM,4,BOD_INTCTRL.BOD_VLMIE_bp,!BOD_INTFLAGS.BOD_VLMIF_bp
 ; PORTA interrupt vectors

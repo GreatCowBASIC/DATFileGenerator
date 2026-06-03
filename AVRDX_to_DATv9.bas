@@ -352,9 +352,12 @@ Sub PrintChipData
       Print
       Print "'This constant is exposed as CHIPAVRGCC - sourced from `" + gXLScs +"`"
     Print "AVRGCC="+ GetCSVValue ( targetchip, XLSAVRGCC )
-      Print
-      Print "'This constant is exposed as CHIPAVRDX - sourced from `" + gXLScs +"`"
-    Print "AVRDX=" + GetCSVValue ( targetchip, XLSAVRDX )
+
+      If val(GetCSVValue ( targetchip, XLSAVRDX ) ) = 1 then
+          Print
+          Print "'This constant is exposed as CHIPAVRDX - sourced from `" + gXLScs +"`"
+          Print "AVRDX=" + GetCSVValue ( targetchip, XLSAVRDX )
+      End If
   End If
 
   IF val(GetCSVValue ( targetchip, XLSNotTested ))> 0 then
@@ -1327,7 +1330,7 @@ Sub InitAndGetFiles
       if dir(fsp_ini) = "" then
         Print "Error - Missing `avrchipdata.ini` file: " + fsp_ini
         Print "  avrchipdata.ini must contain the following"
-        Print "  MPLABXVersion=6.20"
+        Print "  MPLABXVersion=6.25"
         end
       else
         Dim checkparameter as String
@@ -1426,7 +1429,7 @@ Sub InitAndGetFiles
         Print "An example `avrchipdata.ini` follows:"
         Print ""
         Print "'The `MPLABXVersion` value needs to be a valid MPLAB installation"
-        print "MPLABXVersion=6.20"
+        print "MPLABXVersion=6.25"
         Print "'This 'defaultCSVlocation' parameter is the location of the GCBASIC CSV file"
         Print "defaultCSVlocation=d:"
         Print ""

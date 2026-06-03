@@ -1,14 +1,15 @@
+ATTINY827
 ;        .DAT sections
 ;==========================================================================
 ;
 ;  Built by GCBASIC converter
 ;  XC8 processor include for the chip shown below
 ;
-; Microchip IDE version 6.20
+; Microchip IDE version 6.25
 ; C:\Users\admin\.mchp_packs\index.idx
-; C:\Users\admin\.mchp_packs\Microchip\ATtiny_DFP\3.2.268\avrasm\inc\tn827def.inc
+; C:\Users\admin\.mchp_packs\Microchip\ATtiny_DFP\3.4.278\avrasm\inc\tn827def.inc
 ; d:avr chipdata.csv
-; C:\Users\admin\.mchp_packs\Microchip\ATtiny_DFP\3.2.268\edc\ATTINY827.PIC
+; C:\Users\admin\.mchp_packs\Microchip\ATtiny_DFP\3.4.278\edc\ATTINY827.PIC
 ; 
 ;
 ; Registers not processed: RTC_CMP,SREG,CPU_SPL, CPU_SPH 
@@ -78,12 +79,9 @@ AVRFamily=tinyAVRSeries2
 'This constant is exposed as CHIPAVRGCC - sourced from `d:avr chipdata.csv`
 AVRGCC=avrxmega3
 
-'This constant is exposed as CHIPAVRDX - sourced from `d:avr chipdata.csv`
-AVRDX=1
-
 'DFP version and family
 DFPFamily=ATtiny_DFP
-DFPVersion=3.2.268
+DFPVersion=3.4.278
 
 'For details of microcontroller specifications see the microcontroller datasheet
 _DATAMEM_START = 0x0000
@@ -150,8 +148,8 @@ ZH:31
 ' The clear reg.bit(s) can be a single bit or bits will be used to set the register
 ' ! (eqautes to NOT ) inverts the bit
 '
-; CRCSCAN interrupt vectors
-	NMIfromCRC:CRCSCAN_NMI,1,CRCSCAN_CTRLA.CRCSCAN_NMIEN_bp,!CRCSCAN_CTRLA.CRCSCAN_RESET_bp
+; NMI interrupt vectors
+		NMI:NMI,1,,
 ; BOD interrupt vectors
 	BOD_VLM:BOD_VLM,2,BOD_INTCTRL.BOD_VLMIE_bp,!BOD_INTFLAGS.BOD_VLMIF_bp
 ; RTC interrupt vectors
@@ -846,7 +844,7 @@ ALIAS_SREG=63
   CCL_RUNSTDBY_bp = 6                 ; Run in Standby bit position
   
   ; CCL_SEQCTRL0 masks
-  CCL_SEQSEL_gm = 0x07                ; Sequential Selection group mask
+  CCL_SEQSEL_gm = 0x0F                ; Sequential Selection group mask
   CCL_SEQSEL_gp = 0                   ; Sequential Selection group position
   CCL_SEQSEL_0_bm = (1<<0)            ; Sequential Selection bit 0 mask
   CCL_SEQSEL_0_bp = 0                 ; Sequential Selection bit 0 position
@@ -854,6 +852,8 @@ ALIAS_SREG=63
   CCL_SEQSEL_1_bp = 1                 ; Sequential Selection bit 1 position
   CCL_SEQSEL_2_bm = (1<<2)            ; Sequential Selection bit 2 mask
   CCL_SEQSEL_2_bp = 2                 ; Sequential Selection bit 2 position
+  CCL_SEQSEL_3_bm = (1<<3)            ; Sequential Selection bit 3 mask
+  CCL_SEQSEL_3_bp = 3                 ; Sequential Selection bit 3 position
   
   ; CCL_SEQCTRL1 masks
   ; Masks for CCL_SEQSEL already defined
@@ -1356,21 +1356,12 @@ ALIAS_SREG=63
   CRCSCAN_SRC_0_bp = 0                ; CRC Source bit 0 position
   CRCSCAN_SRC_1_bm = (1<<1)           ; CRC Source bit 1 mask
   CRCSCAN_SRC_1_bp = 1                ; CRC Source bit 1 position
-  CRCSCAN_MODE_gm = 0x30              ; CRC Flash Access Mode group mask
-  CRCSCAN_MODE_gp = 4                 ; CRC Flash Access Mode group position
-  CRCSCAN_MODE_0_bm = (1<<4)          ; CRC Flash Access Mode bit 0 mask
-  CRCSCAN_MODE_0_bp = 4               ; CRC Flash Access Mode bit 0 position
-  CRCSCAN_MODE_1_bm = (1<<5)          ; CRC Flash Access Mode bit 1 mask
-  CRCSCAN_MODE_1_bp = 5               ; CRC Flash Access Mode bit 1 position
   
   ; CRCSCAN_STATUS masks
   CRCSCAN_BUSY_bm = 0x01              ; CRC Busy bit mask
   CRCSCAN_BUSY_bp = 0                 ; CRC Busy bit position
   CRCSCAN_OK_bm = 0x02                ; CRC Ok bit mask
   CRCSCAN_OK_bp = 1                   ; CRC Ok bit position
-  
-  ; CRC Flash Access Mode select
-  CRCSCAN_MODE_PRIORITY_gc = (0x00<<4) ; Priority to flash
   
   ; CRC Source select
   CRCSCAN_SRC_FLASH_gc = (0x00<<0)    ; CRC on entire flash
@@ -2279,77 +2270,77 @@ ALIAS_SREG=63
   PORTMUX_TCB1_bp = 1                 ; Port Multiplexer TCB1 bit position
   
   ; CCL LUT0 select
-  PORTMUX_LUT0_DEFAULT_gc = (0x00<<0) ; Out: PA4 In: PA0, PA1, PA2
-  PORTMUX_LUT0_ALT1_gc = (0x01<<0)    ; Out: PB4 In: PA0, PA1, PA2
+  PORTMUX_LUT0_DEFAULT_gc = (0x00<<0) ; INn: PA0, PA1, PA2. OUT: PA4.
+  PORTMUX_LUT0_ALT1_gc = (0x01<<0)    ; INn: PA0, PA1, PA2. OUT: PB4.
   
   ; CCL LUT1 select
-  PORTMUX_LUT1_DEFAULT_gc = (0x00<<1) ; Out: PA7 In: PC3, PC4, PC5
-  PORTMUX_LUT1_ALT1_gc = (0x01<<1)    ; Out: PC1 In: PC3, PC4, PC5
+  PORTMUX_LUT1_DEFAULT_gc = (0x00<<1) ; INn: PC3, PC4, PC5. OUT: PA7.
+  PORTMUX_LUT1_ALT1_gc = (0x01<<1)    ; INn: PC3, PC4, PC5. OUT: PC1.
   
   ; CCL LUT2 select
-  PORTMUX_LUT2_DEFAULT_gc = (0x00<<2) ; Out: PB3 In: PB0, PB1, PB2
-  PORTMUX_LUT2_ALT1_gc = (0x01<<2)    ; Out: PB6 In: PB0, PB1, PB2
+  PORTMUX_LUT2_DEFAULT_gc = (0x00<<2) ; INn: PB0, PB1, PB2. OUT: PB3.
+  PORTMUX_LUT2_ALT1_gc = (0x01<<2)    ; INn: PB0, PB1, PB2. OUT: PB6.
   
   ; CCL LUT3 select
-  PORTMUX_LUT3_DEFAULT_gc = (0x00<<3) ; Out: PC4 In: PC0, PC1, PC2
-  PORTMUX_LUT3_ALT1_gc = (0x01<<3)    ; Out: PA5 In: PC0, PC1, PC2
+  PORTMUX_LUT3_DEFAULT_gc = (0x00<<3) ; INn: PC0, PC1, PC2. OUT: PC4.
+  PORTMUX_LUT3_ALT1_gc = (0x01<<3)    ; INn: PC0, PC1, PC2. OUT: PA5.
   
   ; Event Output A select
-  PORTMUX_EVOUTA_DEFAULT_gc = (0x00<<0) ; EVOUT on PA2
-  PORTMUX_EVOUTA_ALT1_gc = (0x01<<0)  ; EVOUT on PA7
+  PORTMUX_EVOUTA_DEFAULT_gc = (0x00<<0) ; EVOUTA: PA2
+  PORTMUX_EVOUTA_ALT1_gc = (0x01<<0)  ; EVOUTA: PA7
   
   ; Event Output B select
-  PORTMUX_EVOUTB_DEFAULT_gc = (0x00<<1) ; EVOUT on PB2
-  PORTMUX_EVOUTB_ALT1_gc = (0x01<<1)  ; EVOUT on PB7
+  PORTMUX_EVOUTB_DEFAULT_gc = (0x00<<1) ; EVOUTB: PB2
+  PORTMUX_EVOUTB_ALT1_gc = (0x01<<1)  ; EVOUTB: PB7
   
   ; Event Output C select
-  PORTMUX_EVOUTC_DEFAULT_gc = (0x00<<2) ; EVOUT on PC2
+  PORTMUX_EVOUTC_DEFAULT_gc = (0x00<<2) ; EVOUTC: PC2
   
   ; Port Multiplexer SPI0 select
-  PORTMUX_SPI0_DEFAULT_gc = (0x00<<0) ; PA0, PA1, PA2, PA3
-  PORTMUX_SPI0_ALT1_gc = (0x01<<0)    ; PC2, PC1, PC0, PC3
+  PORTMUX_SPI0_DEFAULT_gc = (0x00<<0) ; MOSI: PA1, MISO: PA2, SCK: PA3, SS: PA4
+  PORTMUX_SPI0_ALT1_gc = (0x01<<0)    ; MOSI: PC2, MISO: PC1, SCK: PC0, SS: PC3
   PORTMUX_SPI0_NONE_gc = (0x03<<0)    ; Not connected to any pins
   
   ; Port Multiplexer TCA0 Output 0 select
-  PORTMUX_TCA00_DEFAULT_gc = (0x00<<0) ; WO0 on PB0
-  PORTMUX_TCA00_ALT1_gc = (0x01<<0)   ; WO0 on PB3
+  PORTMUX_TCA00_DEFAULT_gc = (0x00<<0) ; WO0: PB0
+  PORTMUX_TCA00_ALT1_gc = (0x01<<0)   ; WO0: PB3
   
   ; Port Multiplexer TCA0 Output 1 select
-  PORTMUX_TCA01_DEFAULT_gc = (0x00<<1) ; WO1 on PB1
-  PORTMUX_TCA01_ALT1_gc = (0x01<<1)   ; WO1 on PB4
+  PORTMUX_TCA01_DEFAULT_gc = (0x00<<1) ; WO1: PB1
+  PORTMUX_TCA01_ALT1_gc = (0x01<<1)   ; WO1: PB4
   
   ; Port Multiplexer TCA0 Output 2 select
-  PORTMUX_TCA02_DEFAULT_gc = (0x00<<2) ; WO2 on PB2
-  PORTMUX_TCA02_ALT1_gc = (0x01<<2)   ; WO2 on PB5
+  PORTMUX_TCA02_DEFAULT_gc = (0x00<<2) ; WO2: PB2
+  PORTMUX_TCA02_ALT1_gc = (0x01<<2)   ; WO2: PB5
   
   ; Port Multiplexer TCA0 Output 3 select
-  PORTMUX_TCA03_DEFAULT_gc = (0x00<<3) ; WO3 on PA3
-  PORTMUX_TCA03_ALT1_gc = (0x01<<3)   ; WO3 on PC3
+  PORTMUX_TCA03_DEFAULT_gc = (0x00<<3) ; WO3: PA3
+  PORTMUX_TCA03_ALT1_gc = (0x01<<3)   ; WO3: PC3
   
   ; Port Multiplexer TCA0 Output 4 select
-  PORTMUX_TCA04_DEFAULT_gc = (0x00<<4) ; WO4 on PA4
-  PORTMUX_TCA04_ALT1_gc = (0x01<<4)   ; WO4 on PC4
+  PORTMUX_TCA04_DEFAULT_gc = (0x00<<4) ; WO4: PA4
+  PORTMUX_TCA04_ALT1_gc = (0x01<<4)   ; WO4: PC4
   
   ; Port Multiplexer TCA0 Output 5 select
-  PORTMUX_TCA05_DEFAULT_gc = (0x00<<5) ; WO5 on PA5
-  PORTMUX_TCA05_ALT1_gc = (0x01<<5)   ; WO5 on PC5
+  PORTMUX_TCA05_DEFAULT_gc = (0x00<<5) ; WO5: PA5
+  PORTMUX_TCA05_ALT1_gc = (0x01<<5)   ; WO5: PC5
   
   ; Port Multiplexer TCB0 select
-  PORTMUX_TCB0_DEFAULT_gc = (0x00<<0) ; WO on PA5
-  PORTMUX_TCB0_ALT1_gc = (0x01<<0)    ; WO on PC0
+  PORTMUX_TCB0_DEFAULT_gc = (0x00<<0) ; WO: PA5
+  PORTMUX_TCB0_ALT1_gc = (0x01<<0)    ; WO: PC0
   
   ; Port Multiplexer TCB1 select
-  PORTMUX_TCB1_DEFAULT_gc = (0x00<<1) ; WO on PA3
-  PORTMUX_TCB1_ALT1_gc = (0x01<<1)    ; WO on PC4
+  PORTMUX_TCB1_DEFAULT_gc = (0x00<<1) ; WO: PA3
+  PORTMUX_TCB1_ALT1_gc = (0x01<<1)    ; WO: PC4
   
   ; Port Multiplexer USART0 select
-  PORTMUX_USART0_DEFAULT_gc = (0x00<<0) ; USART0 on PB[3:0]
-  PORTMUX_USART0_ALT1_gc = (0x01<<0)  ; USART0 on PA[4:1]
+  PORTMUX_USART0_DEFAULT_gc = (0x00<<0) ; TxD: PB2, RxD: PB3, XCK: PB1, XDIR: PB0
+  PORTMUX_USART0_ALT1_gc = (0x01<<0)  ; TxD: PA1, RxD: PA2, XCK: PA3, XDIR: PA4
   PORTMUX_USART0_NONE_gc = (0x03<<0)  ; Not connected to any pins
   
   ; Port Multiplexer USART1 select
-  PORTMUX_USART1_DEFAULT_gc = (0x00<<2) ; USART1 on PA[4:1]
-  PORTMUX_USART1_ALT1_gc = (0x01<<2)  ; USART1 on PC[3:0]
+  PORTMUX_USART1_DEFAULT_gc = (0x00<<2) ; TxD: PA1, RxD: PA2, XCK: PA3, XDIR: PA4
+  PORTMUX_USART1_ALT1_gc = (0x01<<2)  ; TxD: PC2, RxD: PC1, XCK: PC0, XDIR: PC3
   PORTMUX_USART1_NONE_gc = (0x03<<2)  ; Not connected to any pins
   
   
@@ -2608,10 +2599,10 @@ ALIAS_SREG=63
   SPI_IF_bp = 7                       ; Interrupt Flag bit position
   
   ; Prescaler select
-  SPI_PRESC_DIV4_gc = (0x00<<1)       ; System Clock / 4
-  SPI_PRESC_DIV16_gc = (0x01<<1)      ; System Clock / 16
-  SPI_PRESC_DIV64_gc = (0x02<<1)      ; System Clock / 64
-  SPI_PRESC_DIV128_gc = (0x03<<1)     ; System Clock / 128
+  SPI_PRESC_DIV4_gc = (0x00<<1)       ; CLK_PER / 4
+  SPI_PRESC_DIV16_gc = (0x01<<1)      ; CLK_PER / 16
+  SPI_PRESC_DIV64_gc = (0x02<<1)      ; CLK_PER / 64
+  SPI_PRESC_DIV128_gc = (0x03<<1)     ; CLK_PER / 128
   
   ; SPI Mode select
   SPI_MODE_0_gc = (0x00<<0)           ; SPI Mode 0
@@ -2845,14 +2836,14 @@ ALIAS_SREG=63
   TCA_SPLIT_DBGRUN_bp = 0             ; Debug Run bit position
   
   ; Clock Selection
-  TCA_SINGLE_CLKSEL_DIV1_gc = (0x00<<1) ; System Clock
-  TCA_SINGLE_CLKSEL_DIV2_gc = (0x01<<1) ; System Clock / 2
-  TCA_SINGLE_CLKSEL_DIV4_gc = (0x02<<1) ; System Clock / 4
-  TCA_SINGLE_CLKSEL_DIV8_gc = (0x03<<1) ; System Clock / 8
-  TCA_SINGLE_CLKSEL_DIV16_gc = (0x04<<1) ; System Clock / 16
-  TCA_SINGLE_CLKSEL_DIV64_gc = (0x05<<1) ; System Clock / 64
-  TCA_SINGLE_CLKSEL_DIV256_gc = (0x06<<1) ; System Clock / 256
-  TCA_SINGLE_CLKSEL_DIV1024_gc = (0x07<<1) ; System Clock / 1024
+  TCA_SINGLE_CLKSEL_DIV1_gc = (0x00<<1) ; CLK_PER
+  TCA_SINGLE_CLKSEL_DIV2_gc = (0x01<<1) ; CLK_PER / 2
+  TCA_SINGLE_CLKSEL_DIV4_gc = (0x02<<1) ; CLK_PER / 4
+  TCA_SINGLE_CLKSEL_DIV8_gc = (0x03<<1) ; CLK_PER / 8
+  TCA_SINGLE_CLKSEL_DIV16_gc = (0x04<<1) ; CLK_PER / 16
+  TCA_SINGLE_CLKSEL_DIV64_gc = (0x05<<1) ; CLK_PER / 64
+  TCA_SINGLE_CLKSEL_DIV256_gc = (0x06<<1) ; CLK_PER / 256
+  TCA_SINGLE_CLKSEL_DIV1024_gc = (0x07<<1) ; CLK_PER / 1024
   
   ; Waveform generation mode select
   TCA_SINGLE_WGMODE_NORMAL_gc = (0x00<<0) ; Normal Mode
@@ -2886,18 +2877,17 @@ ALIAS_SREG=63
   TCA_SINGLE_EVACTB_RESTART_HIGHLVL_gc = (0x06<<5) ; Restart counter while event line is 1.
   
   ; Clock Selection
-  TCA_SPLIT_CLKSEL_DIV1_gc = (0x00<<1) ; System Clock
-  TCA_SPLIT_CLKSEL_DIV2_gc = (0x01<<1) ; System Clock / 2
-  TCA_SPLIT_CLKSEL_DIV4_gc = (0x02<<1) ; System Clock / 4
-  TCA_SPLIT_CLKSEL_DIV8_gc = (0x03<<1) ; System Clock / 8
-  TCA_SPLIT_CLKSEL_DIV16_gc = (0x04<<1) ; System Clock / 16
-  TCA_SPLIT_CLKSEL_DIV64_gc = (0x05<<1) ; System Clock / 64
-  TCA_SPLIT_CLKSEL_DIV256_gc = (0x06<<1) ; System Clock / 256
-  TCA_SPLIT_CLKSEL_DIV1024_gc = (0x07<<1) ; System Clock / 1024
+  TCA_SPLIT_CLKSEL_DIV1_gc = (0x00<<1) ; CLK_PER
+  TCA_SPLIT_CLKSEL_DIV2_gc = (0x01<<1) ; CLK_PER / 2
+  TCA_SPLIT_CLKSEL_DIV4_gc = (0x02<<1) ; CLK_PER / 4
+  TCA_SPLIT_CLKSEL_DIV8_gc = (0x03<<1) ; CLK_PER / 8
+  TCA_SPLIT_CLKSEL_DIV16_gc = (0x04<<1) ; CLK_PER / 16
+  TCA_SPLIT_CLKSEL_DIV64_gc = (0x05<<1) ; CLK_PER / 64
+  TCA_SPLIT_CLKSEL_DIV256_gc = (0x06<<1) ; CLK_PER / 256
+  TCA_SPLIT_CLKSEL_DIV1024_gc = (0x07<<1) ; CLK_PER / 1024
   
   ; Command select
   TCA_SPLIT_CMD_NONE_gc = (0x00<<2)   ; No Command
-  TCA_SPLIT_CMD_UPDATE_gc = (0x01<<2) ; Force Update
   TCA_SPLIT_CMD_RESTART_gc = (0x02<<2) ; Force Restart
   TCA_SPLIT_CMD_RESET_gc = (0x03<<2)  ; Force Hard Reset
   
@@ -4191,26 +4181,26 @@ WDT_LOCK,WDT,7			'  Lock enable bit position
 
 [Pins-]
 1,PA2(IO),AIN2:AIN0(I),EVOUT0:EVSYS,LUT0_IN2:CCL_IN,MISO:SPI,PIN2:IOPORT(IO),RXD:USART0_ALT,RXD:USART1
-2,PA3(IO),AIN3:AIN0(I),CLKI:CLKCTRL,PIN3:IOPORT(IO),SCK:SPI,WO0B1:TCB1,WO3A0:TCA,XCK:USART0_ALT,XCK:USART1
-3,GND1
-4,VCC
-5,PA4(IO),AIN4:AIN0(I),LUT0_OUT0:CCL,PIN4:IOPORT(IO),SS:SPI,WO4A0:TCA,XDIR:USART0_ALT,XDIR:USART1
-6,PA5(IO),AIN5:AIN0(I),LUT3_OUT0:CCL_ALT,OUT0:AC0,PIN5:IOPORT(IO),WO0B0:TCB0,WO5A0:TCA
+2,PA3(IO),AIN3:AIN0(I),CLKI:CLKCTRL,PIN3:IOPORT(IO),SCK:SPI,WO3A0:TCA,WOB1:TCB1,XCK:USART0_ALT,XCK:USART1
+3,GND
+4,VDD
+5,PA4(IO),AIN4:AIN0(I),LUT0_OUT:CCL,PIN4:IOPORT(IO),SS:SPI,WO4A0:TCA,XDIR:USART0_ALT,XDIR:USART1
+6,PA5(IO),AIN5:AIN0(I),LUT3_OUT:CCL_ALT,OUT0:AC0,PIN5:IOPORT(IO),WO5A0:TCA,WOB0:TCB0
 7,PA6(IO),AIN6:AIN0(I),N0:AC0,PIN6:IOPORT(IO)
-8,PA7(IO),AIN7:AIN0(I),EVOUT0:EVSYS_ALT,LUT1_OUT0:CCL,P0:AC0,PIN7:IOPORT(IO)
+8,PA7(IO),AIN7:AIN0(I),EVOUT0:EVSYS_ALT,LUT1_OUT:CCL,P0:AC0,PIN7:IOPORT(IO)
 9,PB7(IO),EVOUT1:EVSYS_ALT,PIN7:IOPORT(IO)
-10,PB6(IO),LUT2_OUT0:CCL_ALT,P3:AC0,PIN6:IOPORT(IO)
+10,PB6(IO),LUT2_OUT:CCL_ALT,P3:AC0,PIN6:IOPORT(IO)
 11,PB5(IO),AIN8:AIN0(I),CLKO:CLKCTRL,P1:AC0,PIN5:IOPORT(IO),WO2A0:TCA_ALT
-12,PB4(IO),AIN9:AIN0(I),LUT0_OUT0:CCL_ALT,N1:AC0,PIN4:IOPORT(IO),RESET_ALT:OTHER,WO1A0:TCA_ALT
-13,PB3(IO),LUT2_OUT0:CCL,PIN3:IOPORT(IO),RXD:USART0,TOSC1:CLKCTRL,WO0A0:TCA_ALT
+12,PB4(IO),AIN9:AIN0(I),LUT0_OUT:CCL_ALT,N1:AC0,PIN4:IOPORT(IO),RESET_ALT:OTHER,WO1A0:TCA_ALT
+13,PB3(IO),LUT2_OUT:CCL,PIN3:IOPORT(IO),RXD:USART0,TOSC1:CLKCTRL,WO0A0:TCA_ALT
 14,PB2(IO),EVOUT1:EVSYS,LUT2_IN2:CCL_IN,PIN2:IOPORT(IO),TOSC2:CLKCTRL,TXD:USART0,WO2A0:TCA
 15,PB1(IO),AIN10:AIN0(I),LUT2_IN1:CCL_IN,P2:AC0,PIN1:IOPORT(IO),SDA:I2C,WO1A0:TCA,XCK:USART0
 16,PB0(IO),AIN11:AIN0(I),LUT2_IN0:CCL_IN,N2:AC0,PIN0:IOPORT(IO),SCL:I2C,WO0A0:TCA,XDIR:USART0
-17,PC0(IO),AIN12:AIN0(I),LUT3_IN0:CCL_IN,PIN0:IOPORT(IO),SCK:SPI_ALT,WO0B0:TCB0_ALT,XCK:USART1_ALT
-18,PC1(IO),AIN13:AIN0(I),LUT1_OUT0:CCL_ALT,LUT3_IN1:CCL_IN,MISO:SPI_ALT,PIN1:IOPORT(IO),RXD:USART1_ALT
+17,PC0(IO),AIN12:AIN0(I),LUT3_IN0:CCL_IN,PIN0:IOPORT(IO),SCK:SPI_ALT,WOB0:TCB0_ALT,XCK:USART1_ALT
+18,PC1(IO),AIN13:AIN0(I),LUT1_OUT:CCL_ALT,LUT3_IN1:CCL_IN,MISO:SPI_ALT,PIN1:IOPORT(IO),RXD:USART1_ALT
 19,PC2(IO),AIN14:AIN0(I),EVOUT2:EVSYS,LUT3_IN2:CCL_IN,MOSI:SPI_ALT,PIN2:IOPORT(IO),TXD:USART1_ALT
 20,PC3(IO),AIN15:AIN0(I),LUT1_IN0:CCL_IN,PIN3:IOPORT(IO),SS:SPI_ALT,WO3A0:TCA_ALT,XDIR:USART1_ALT
-21,PC4(IO),BREAK_ALT:OTHER,LUT1_IN1:CCL_IN,LUT3_OUT0:CCL,PIN4:IOPORT(IO),WO0B1:TCB1_ALT,WO4A0:TCA_ALT
+21,PC4(IO),BREAK_ALT:OTHER,LUT1_IN1:CCL_IN,LUT3_OUT:CCL,PIN4:IOPORT(IO),WO4A0:TCA_ALT,WOB1:TCB1_ALT
 22,PC5(IO),LUT1_IN2:CCL_IN,PIN5:IOPORT(IO),WO5A0:TCA_ALT
 23,PA0(IO),LUT0_IN0:CCL_IN,PIN0:IOPORT(IO),RESET:OTHER,UPDI:PDI
 24,PA1(IO),AIN1:AIN0(I),BREAK:OTHER,LUT0_IN1:CCL_IN,MOSI:SPI,PIN1:IOPORT(IO),TXD:USART0_ALT,TXD:USART1
