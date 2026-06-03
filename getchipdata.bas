@@ -549,9 +549,18 @@ FOR CurrentChip = StartChip to ChipIncCount
                     END IF
                 END IF
 
-                
+                If Instr(chipname,"Q35") <> 0 then
+                      'Q20 dump config 11 or above as GCBASIC does not support
+                      If CW > 14 or WriteConfig = 0 Then
+                        WriteConfig = 0
+                        Print "18FxxQ35 - ignoring CONFIG "+str(CW),
+                        Print DataSource
+                      End if
+                End IF
 
-                If Instr(chipname,"Q2") <> 0 then
+
+
+                If Instr(chipname,"Q20") <> 0 then
                       'Q20 dump config 11 or above as GCBASIC does not support
                       If CW > 12 or WriteConfig = 0 Then
                         WriteConfig = 0
@@ -564,7 +573,7 @@ FOR CurrentChip = StartChip to ChipIncCount
                   COC += 1
                   With Config(COC)
                       .Name = TempData
-                        If Instr(chipname,"Q2") <> 0 then
+                        If Instr(chipname,"Q2") <> 0  or Instr(chipname,"Q35")  then
                           'Q20 have non-contigous config memory... so, fix by delete the value by 1
                           If CW > 9 Then
                             CW = CW -1 
@@ -1317,7 +1326,11 @@ FOR CurrentChip = StartChip to ChipIncCount
             Print #1, "'This constant is exposed as ChipMemorylock"
             Print #1, "MemoryLock=NVMLOCK"
         End if
-
+        If Instr(chipname,"Q35") <> 0 then
+            Print #1, ""
+            Print #1, "'This constant is exposed as ChipMemorylock"
+            Print #1, "MemoryLock=NVMLOCK"
+        End if
 
     End if
 
@@ -2456,7 +2469,7 @@ Sub CalcRamBlocks
       End If
       RBC = RBC + 1: RamBlock(RBC) = "200:2FF ' USB Shared RAM Buffer"
 
-    Elseif Instr(UCase(ChipName),"Q24" ) or Instr(UCase(ChipName),"Q20" ) or  Instr(UCase(ChipName),"Q43" ) <> 0 or Instr(UCase(ChipName),"Q41" ) <> 0 or Instr(UCase(ChipName),"Q40" ) <> 0 or Instr(UCase(ChipName),"Q83" ) <> 0 or Instr(UCase(ChipName),"Q84") <> 0 or Instr(UCase(ChipName),"Q71") <> 0 Then
+    Elseif Instr(UCase(ChipName),"Q24" ) or Instr(UCase(ChipName),"Q20" ) or  Instr(UCase(ChipName),"Q43" ) <> 0 or Instr(UCase(ChipName),"Q41" ) <> 0 or Instr(UCase(ChipName),"Q40" ) <> 0 or Instr(UCase(ChipName),"Q83" ) <> 0 or Instr(UCase(ChipName),"Q84") <> 0 or Instr(UCase(ChipName),"Q71") <> 0 or Instr(UCase(ChipName),"Q35") <> 0 Then
 
       ChipMinimumBankSel = 5
       'add 1280 for the base of 0x500
