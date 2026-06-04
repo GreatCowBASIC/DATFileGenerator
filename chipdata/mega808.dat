@@ -83,6 +83,9 @@ AVRFamily=megaAVRSeries0
 'This constant is exposed as CHIPAVRGCC - sourced from `d:avr chipdata.csv`
 AVRGCC=
 
+'This constant is exposed as CHIPAVRDX - sourced from `d:avr chipdata.csv`
+AVRDX=1
+
 'DFP version and family
 DFPFamily=ATmega_DFP
 DFPVersion=3.6.299

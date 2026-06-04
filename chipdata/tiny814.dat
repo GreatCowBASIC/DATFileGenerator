@@ -79,6 +79,9 @@ AVRFamily=tinyAVRSeries1
 'This constant is exposed as CHIPAVRGCC - sourced from `d:avr chipdata.csv`
 AVRGCC=avrxmega3
 
+'This constant is exposed as CHIPAVRDX - sourced from `d:avr chipdata.csv`
+AVRDX=1
+
 'DFP version and family
 DFPFamily=ATtiny_DFP
 DFPVersion=3.4.278
