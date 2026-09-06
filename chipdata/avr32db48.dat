@@ -1,14 +1,15 @@
+AVR32DB48
 ;        .DAT sections
 ;==========================================================================
 ;
 ;  Built by GCBASIC converter
 ;  XC8 processor include for the chip shown below
 ;
-; Microchip IDE version 6.20
+; Microchip IDE version 6.35
 ; C:\Users\admin\.mchp_packs\index.idx
-; C:\Users\admin\.mchp_packs\Microchip\AVR-Dx_DFP\2.6.303\avrasm\inc\AVR32DB48def.inc
+; C:\Users\admin\.mchp_packs\Microchip\AVR-Dx_DFP\2.7.321\avrasm\inc\AVR32DB48def.inc
 ; d:avr chipdata.csv
-; C:\Users\admin\.mchp_packs\Microchip\AVR-Dx_DFP\2.6.303\edc\ATAVR32DB48.PIC
+; C:\Users\admin\.mchp_packs\Microchip\AVR-Dx_DFP\2.7.321\edc\ATAVR32DB48.PIC
 ; 
 ;
 ; Registers not processed: RTC_CMP,SREG,CPU_SPL, CPU_SPH 
@@ -92,7 +93,7 @@ AVRDX=1
 
 'DFP version and family
 DFPFamily=AVR-Dx_DFP
-DFPVersion=2.6.303
+DFPVersion=2.7.321
 
 'For details of microcontroller specifications see the microcontroller datasheet
 _DATAMEM_START = 0x0000
@@ -933,7 +934,7 @@ ALIAS_SREG=63
   CCL_RUNSTDBY_bp = 6                 ; Run in Standby bit position
   
   ; CCL_SEQCTRL0 masks
-  CCL_SEQSEL_gm = 0x07                ; Sequential Selection group mask
+  CCL_SEQSEL_gm = 0x0F                ; Sequential Selection group mask
   CCL_SEQSEL_gp = 0                   ; Sequential Selection group position
   CCL_SEQSEL_0_bm = (1<<0)            ; Sequential Selection bit 0 mask
   CCL_SEQSEL_0_bp = 0                 ; Sequential Selection bit 0 position
@@ -941,6 +942,8 @@ ALIAS_SREG=63
   CCL_SEQSEL_1_bp = 1                 ; Sequential Selection bit 1 position
   CCL_SEQSEL_2_bm = (1<<2)            ; Sequential Selection bit 2 mask
   CCL_SEQSEL_2_bp = 2                 ; Sequential Selection bit 2 position
+  CCL_SEQSEL_3_bm = (1<<3)            ; Sequential Selection bit 3 mask
+  CCL_SEQSEL_3_bp = 3                 ; Sequential Selection bit 3 position
   
   ; CCL_SEQCTRL1 masks
   ; Masks for CCL_SEQSEL already defined
@@ -4427,7 +4430,6 @@ ALIAS_SREG=63
   
   ; Command select
   TCA_SPLIT_CMD_NONE_gc = (0x00<<2)   ; No Command
-  TCA_SPLIT_CMD_UPDATE_gc = (0x01<<2) ; Force Update
   TCA_SPLIT_CMD_RESTART_gc = (0x02<<2) ; Force Restart
   TCA_SPLIT_CMD_RESET_gc = (0x03<<2)  ; Force Hard Reset
   
@@ -4742,6 +4744,174 @@ ALIAS_SREG=63
   TCD_FAULTDET_bm = 0x04              ; Fault detection bit mask
   TCD_FAULTDET_bp = 2                 ; Fault detection bit position
   
+  ; TCD_CAPTUREA masks
+  TCD_CAPTUREA_gm = 0xFFF             ; Capture A group mask
+  TCD_CAPTUREA_gp = 0                 ; Capture A group position
+  TCD_CAPTUREA_0_bm = (1<<0)          ; Capture A bit 0 mask
+  TCD_CAPTUREA_0_bp = 0               ; Capture A bit 0 position
+  TCD_CAPTUREA_1_bm = (1<<1)          ; Capture A bit 1 mask
+  TCD_CAPTUREA_1_bp = 1               ; Capture A bit 1 position
+  TCD_CAPTUREA_2_bm = (1<<2)          ; Capture A bit 2 mask
+  TCD_CAPTUREA_2_bp = 2               ; Capture A bit 2 position
+  TCD_CAPTUREA_3_bm = (1<<3)          ; Capture A bit 3 mask
+  TCD_CAPTUREA_3_bp = 3               ; Capture A bit 3 position
+  TCD_CAPTUREA_4_bm = (1<<4)          ; Capture A bit 4 mask
+  TCD_CAPTUREA_4_bp = 4               ; Capture A bit 4 position
+  TCD_CAPTUREA_5_bm = (1<<5)          ; Capture A bit 5 mask
+  TCD_CAPTUREA_5_bp = 5               ; Capture A bit 5 position
+  TCD_CAPTUREA_6_bm = (1<<6)          ; Capture A bit 6 mask
+  TCD_CAPTUREA_6_bp = 6               ; Capture A bit 6 position
+  TCD_CAPTUREA_7_bm = (1<<7)          ; Capture A bit 7 mask
+  TCD_CAPTUREA_7_bp = 7               ; Capture A bit 7 position
+  TCD_CAPTUREA_8_bm = (1<<8)          ; Capture A bit 8 mask
+  TCD_CAPTUREA_8_bp = 8               ; Capture A bit 8 position
+  TCD_CAPTUREA_9_bm = (1<<9)          ; Capture A bit 9 mask
+  TCD_CAPTUREA_9_bp = 9               ; Capture A bit 9 position
+  TCD_CAPTUREA_10_bm = (1<<10)        ; Capture A bit 10 mask
+  TCD_CAPTUREA_10_bp = 10             ; Capture A bit 10 position
+  TCD_CAPTUREA_11_bm = (1<<11)        ; Capture A bit 11 mask
+  TCD_CAPTUREA_11_bp = 11             ; Capture A bit 11 position
+  
+  ; TCD_CAPTUREB masks
+  TCD_CAPTUREB_gm = 0xFFF             ; Capture B group mask
+  TCD_CAPTUREB_gp = 0                 ; Capture B group position
+  TCD_CAPTUREB_0_bm = (1<<0)          ; Capture B bit 0 mask
+  TCD_CAPTUREB_0_bp = 0               ; Capture B bit 0 position
+  TCD_CAPTUREB_1_bm = (1<<1)          ; Capture B bit 1 mask
+  TCD_CAPTUREB_1_bp = 1               ; Capture B bit 1 position
+  TCD_CAPTUREB_2_bm = (1<<2)          ; Capture B bit 2 mask
+  TCD_CAPTUREB_2_bp = 2               ; Capture B bit 2 position
+  TCD_CAPTUREB_3_bm = (1<<3)          ; Capture B bit 3 mask
+  TCD_CAPTUREB_3_bp = 3               ; Capture B bit 3 position
+  TCD_CAPTUREB_4_bm = (1<<4)          ; Capture B bit 4 mask
+  TCD_CAPTUREB_4_bp = 4               ; Capture B bit 4 position
+  TCD_CAPTUREB_5_bm = (1<<5)          ; Capture B bit 5 mask
+  TCD_CAPTUREB_5_bp = 5               ; Capture B bit 5 position
+  TCD_CAPTUREB_6_bm = (1<<6)          ; Capture B bit 6 mask
+  TCD_CAPTUREB_6_bp = 6               ; Capture B bit 6 position
+  TCD_CAPTUREB_7_bm = (1<<7)          ; Capture B bit 7 mask
+  TCD_CAPTUREB_7_bp = 7               ; Capture B bit 7 position
+  TCD_CAPTUREB_8_bm = (1<<8)          ; Capture B bit 8 mask
+  TCD_CAPTUREB_8_bp = 8               ; Capture B bit 8 position
+  TCD_CAPTUREB_9_bm = (1<<9)          ; Capture B bit 9 mask
+  TCD_CAPTUREB_9_bp = 9               ; Capture B bit 9 position
+  TCD_CAPTUREB_10_bm = (1<<10)        ; Capture B bit 10 mask
+  TCD_CAPTUREB_10_bp = 10             ; Capture B bit 10 position
+  TCD_CAPTUREB_11_bm = (1<<11)        ; Capture B bit 11 mask
+  TCD_CAPTUREB_11_bp = 11             ; Capture B bit 11 position
+  
+  ; TCD_CMPASET masks
+  TCD_CMPASET_gm = 0xFFF              ; Compare A Set group mask
+  TCD_CMPASET_gp = 0                  ; Compare A Set group position
+  TCD_CMPASET_0_bm = (1<<0)           ; Compare A Set bit 0 mask
+  TCD_CMPASET_0_bp = 0                ; Compare A Set bit 0 position
+  TCD_CMPASET_1_bm = (1<<1)           ; Compare A Set bit 1 mask
+  TCD_CMPASET_1_bp = 1                ; Compare A Set bit 1 position
+  TCD_CMPASET_2_bm = (1<<2)           ; Compare A Set bit 2 mask
+  TCD_CMPASET_2_bp = 2                ; Compare A Set bit 2 position
+  TCD_CMPASET_3_bm = (1<<3)           ; Compare A Set bit 3 mask
+  TCD_CMPASET_3_bp = 3                ; Compare A Set bit 3 position
+  TCD_CMPASET_4_bm = (1<<4)           ; Compare A Set bit 4 mask
+  TCD_CMPASET_4_bp = 4                ; Compare A Set bit 4 position
+  TCD_CMPASET_5_bm = (1<<5)           ; Compare A Set bit 5 mask
+  TCD_CMPASET_5_bp = 5                ; Compare A Set bit 5 position
+  TCD_CMPASET_6_bm = (1<<6)           ; Compare A Set bit 6 mask
+  TCD_CMPASET_6_bp = 6                ; Compare A Set bit 6 position
+  TCD_CMPASET_7_bm = (1<<7)           ; Compare A Set bit 7 mask
+  TCD_CMPASET_7_bp = 7                ; Compare A Set bit 7 position
+  TCD_CMPASET_8_bm = (1<<8)           ; Compare A Set bit 8 mask
+  TCD_CMPASET_8_bp = 8                ; Compare A Set bit 8 position
+  TCD_CMPASET_9_bm = (1<<9)           ; Compare A Set bit 9 mask
+  TCD_CMPASET_9_bp = 9                ; Compare A Set bit 9 position
+  TCD_CMPASET_10_bm = (1<<10)         ; Compare A Set bit 10 mask
+  TCD_CMPASET_10_bp = 10              ; Compare A Set bit 10 position
+  TCD_CMPASET_11_bm = (1<<11)         ; Compare A Set bit 11 mask
+  TCD_CMPASET_11_bp = 11              ; Compare A Set bit 11 position
+  
+  ; TCD_CMPACLR masks
+  TCD_CMPACLR_gm = 0xFFF              ; Compare A Clear group mask
+  TCD_CMPACLR_gp = 0                  ; Compare A Clear group position
+  TCD_CMPACLR_0_bm = (1<<0)           ; Compare A Clear bit 0 mask
+  TCD_CMPACLR_0_bp = 0                ; Compare A Clear bit 0 position
+  TCD_CMPACLR_1_bm = (1<<1)           ; Compare A Clear bit 1 mask
+  TCD_CMPACLR_1_bp = 1                ; Compare A Clear bit 1 position
+  TCD_CMPACLR_2_bm = (1<<2)           ; Compare A Clear bit 2 mask
+  TCD_CMPACLR_2_bp = 2                ; Compare A Clear bit 2 position
+  TCD_CMPACLR_3_bm = (1<<3)           ; Compare A Clear bit 3 mask
+  TCD_CMPACLR_3_bp = 3                ; Compare A Clear bit 3 position
+  TCD_CMPACLR_4_bm = (1<<4)           ; Compare A Clear bit 4 mask
+  TCD_CMPACLR_4_bp = 4                ; Compare A Clear bit 4 position
+  TCD_CMPACLR_5_bm = (1<<5)           ; Compare A Clear bit 5 mask
+  TCD_CMPACLR_5_bp = 5                ; Compare A Clear bit 5 position
+  TCD_CMPACLR_6_bm = (1<<6)           ; Compare A Clear bit 6 mask
+  TCD_CMPACLR_6_bp = 6                ; Compare A Clear bit 6 position
+  TCD_CMPACLR_7_bm = (1<<7)           ; Compare A Clear bit 7 mask
+  TCD_CMPACLR_7_bp = 7                ; Compare A Clear bit 7 position
+  TCD_CMPACLR_8_bm = (1<<8)           ; Compare A Clear bit 8 mask
+  TCD_CMPACLR_8_bp = 8                ; Compare A Clear bit 8 position
+  TCD_CMPACLR_9_bm = (1<<9)           ; Compare A Clear bit 9 mask
+  TCD_CMPACLR_9_bp = 9                ; Compare A Clear bit 9 position
+  TCD_CMPACLR_10_bm = (1<<10)         ; Compare A Clear bit 10 mask
+  TCD_CMPACLR_10_bp = 10              ; Compare A Clear bit 10 position
+  TCD_CMPACLR_11_bm = (1<<11)         ; Compare A Clear bit 11 mask
+  TCD_CMPACLR_11_bp = 11              ; Compare A Clear bit 11 position
+  
+  ; TCD_CMPBSET masks
+  TCD_CMPBSET_gm = 0xFFF              ; Compare B Set group mask
+  TCD_CMPBSET_gp = 0                  ; Compare B Set group position
+  TCD_CMPBSET_0_bm = (1<<0)           ; Compare B Set bit 0 mask
+  TCD_CMPBSET_0_bp = 0                ; Compare B Set bit 0 position
+  TCD_CMPBSET_1_bm = (1<<1)           ; Compare B Set bit 1 mask
+  TCD_CMPBSET_1_bp = 1                ; Compare B Set bit 1 position
+  TCD_CMPBSET_2_bm = (1<<2)           ; Compare B Set bit 2 mask
+  TCD_CMPBSET_2_bp = 2                ; Compare B Set bit 2 position
+  TCD_CMPBSET_3_bm = (1<<3)           ; Compare B Set bit 3 mask
+  TCD_CMPBSET_3_bp = 3                ; Compare B Set bit 3 position
+  TCD_CMPBSET_4_bm = (1<<4)           ; Compare B Set bit 4 mask
+  TCD_CMPBSET_4_bp = 4                ; Compare B Set bit 4 position
+  TCD_CMPBSET_5_bm = (1<<5)           ; Compare B Set bit 5 mask
+  TCD_CMPBSET_5_bp = 5                ; Compare B Set bit 5 position
+  TCD_CMPBSET_6_bm = (1<<6)           ; Compare B Set bit 6 mask
+  TCD_CMPBSET_6_bp = 6                ; Compare B Set bit 6 position
+  TCD_CMPBSET_7_bm = (1<<7)           ; Compare B Set bit 7 mask
+  TCD_CMPBSET_7_bp = 7                ; Compare B Set bit 7 position
+  TCD_CMPBSET_8_bm = (1<<8)           ; Compare B Set bit 8 mask
+  TCD_CMPBSET_8_bp = 8                ; Compare B Set bit 8 position
+  TCD_CMPBSET_9_bm = (1<<9)           ; Compare B Set bit 9 mask
+  TCD_CMPBSET_9_bp = 9                ; Compare B Set bit 9 position
+  TCD_CMPBSET_10_bm = (1<<10)         ; Compare B Set bit 10 mask
+  TCD_CMPBSET_10_bp = 10              ; Compare B Set bit 10 position
+  TCD_CMPBSET_11_bm = (1<<11)         ; Compare B Set bit 11 mask
+  TCD_CMPBSET_11_bp = 11              ; Compare B Set bit 11 position
+  
+  ; TCD_CMPBCLR masks
+  TCD_COMPBCLR_gm = 0xFFF             ; Compare B Clear group mask
+  TCD_COMPBCLR_gp = 0                 ; Compare B Clear group position
+  TCD_COMPBCLR_0_bm = (1<<0)          ; Compare B Clear bit 0 mask
+  TCD_COMPBCLR_0_bp = 0               ; Compare B Clear bit 0 position
+  TCD_COMPBCLR_1_bm = (1<<1)          ; Compare B Clear bit 1 mask
+  TCD_COMPBCLR_1_bp = 1               ; Compare B Clear bit 1 position
+  TCD_COMPBCLR_2_bm = (1<<2)          ; Compare B Clear bit 2 mask
+  TCD_COMPBCLR_2_bp = 2               ; Compare B Clear bit 2 position
+  TCD_COMPBCLR_3_bm = (1<<3)          ; Compare B Clear bit 3 mask
+  TCD_COMPBCLR_3_bp = 3               ; Compare B Clear bit 3 position
+  TCD_COMPBCLR_4_bm = (1<<4)          ; Compare B Clear bit 4 mask
+  TCD_COMPBCLR_4_bp = 4               ; Compare B Clear bit 4 position
+  TCD_COMPBCLR_5_bm = (1<<5)          ; Compare B Clear bit 5 mask
+  TCD_COMPBCLR_5_bp = 5               ; Compare B Clear bit 5 position
+  TCD_COMPBCLR_6_bm = (1<<6)          ; Compare B Clear bit 6 mask
+  TCD_COMPBCLR_6_bp = 6               ; Compare B Clear bit 6 position
+  TCD_COMPBCLR_7_bm = (1<<7)          ; Compare B Clear bit 7 mask
+  TCD_COMPBCLR_7_bp = 7               ; Compare B Clear bit 7 position
+  TCD_COMPBCLR_8_bm = (1<<8)          ; Compare B Clear bit 8 mask
+  TCD_COMPBCLR_8_bp = 8               ; Compare B Clear bit 8 position
+  TCD_COMPBCLR_9_bm = (1<<9)          ; Compare B Clear bit 9 mask
+  TCD_COMPBCLR_9_bp = 9               ; Compare B Clear bit 9 position
+  TCD_COMPBCLR_10_bm = (1<<10)        ; Compare B Clear bit 10 mask
+  TCD_COMPBCLR_10_bp = 10             ; Compare B Clear bit 10 position
+  TCD_COMPBCLR_11_bm = (1<<11)        ; Compare B Clear bit 11 mask
+  TCD_COMPBCLR_11_bp = 11             ; Compare B Clear bit 11 position
+  
   ; Clock select
   TCD_CLKSEL_OSCHF_gc = (0x00<<5)     ; Internal High-Frequency oscillator
   TCD_CLKSEL_PLL_gc = (0x01<<5)       ; PLL
@@ -4901,6 +5071,66 @@ ALIAS_SREG=63
   TWI_RIF_bm = 0x80                   ; Read Interrupt Flag bit mask
   TWI_RIF_bp = 7                      ; Read Interrupt Flag bit position
   
+  ; TWI_MBAUD masks
+  TWI_BAUD_gm = 0xFF                  ; Baud group mask
+  TWI_BAUD_gp = 0                     ; Baud group position
+  TWI_BAUD_0_bm = (1<<0)              ; Baud bit 0 mask
+  TWI_BAUD_0_bp = 0                   ; Baud bit 0 position
+  TWI_BAUD_1_bm = (1<<1)              ; Baud bit 1 mask
+  TWI_BAUD_1_bp = 1                   ; Baud bit 1 position
+  TWI_BAUD_2_bm = (1<<2)              ; Baud bit 2 mask
+  TWI_BAUD_2_bp = 2                   ; Baud bit 2 position
+  TWI_BAUD_3_bm = (1<<3)              ; Baud bit 3 mask
+  TWI_BAUD_3_bp = 3                   ; Baud bit 3 position
+  TWI_BAUD_4_bm = (1<<4)              ; Baud bit 4 mask
+  TWI_BAUD_4_bp = 4                   ; Baud bit 4 position
+  TWI_BAUD_5_bm = (1<<5)              ; Baud bit 5 mask
+  TWI_BAUD_5_bp = 5                   ; Baud bit 5 position
+  TWI_BAUD_6_bm = (1<<6)              ; Baud bit 6 mask
+  TWI_BAUD_6_bp = 6                   ; Baud bit 6 position
+  TWI_BAUD_7_bm = (1<<7)              ; Baud bit 7 mask
+  TWI_BAUD_7_bp = 7                   ; Baud bit 7 position
+  
+  ; TWI_MADDR masks
+  TWI_ADDR_gm = 0xFF                  ; Address group mask
+  TWI_ADDR_gp = 0                     ; Address group position
+  TWI_ADDR_0_bm = (1<<0)              ; Address bit 0 mask
+  TWI_ADDR_0_bp = 0                   ; Address bit 0 position
+  TWI_ADDR_1_bm = (1<<1)              ; Address bit 1 mask
+  TWI_ADDR_1_bp = 1                   ; Address bit 1 position
+  TWI_ADDR_2_bm = (1<<2)              ; Address bit 2 mask
+  TWI_ADDR_2_bp = 2                   ; Address bit 2 position
+  TWI_ADDR_3_bm = (1<<3)              ; Address bit 3 mask
+  TWI_ADDR_3_bp = 3                   ; Address bit 3 position
+  TWI_ADDR_4_bm = (1<<4)              ; Address bit 4 mask
+  TWI_ADDR_4_bp = 4                   ; Address bit 4 position
+  TWI_ADDR_5_bm = (1<<5)              ; Address bit 5 mask
+  TWI_ADDR_5_bp = 5                   ; Address bit 5 position
+  TWI_ADDR_6_bm = (1<<6)              ; Address bit 6 mask
+  TWI_ADDR_6_bp = 6                   ; Address bit 6 position
+  TWI_ADDR_7_bm = (1<<7)              ; Address bit 7 mask
+  TWI_ADDR_7_bp = 7                   ; Address bit 7 position
+  
+  ; TWI_MDATA masks
+  TWI_DATA_gm = 0xFF                  ; Data group mask
+  TWI_DATA_gp = 0                     ; Data group position
+  TWI_DATA_0_bm = (1<<0)              ; Data bit 0 mask
+  TWI_DATA_0_bp = 0                   ; Data bit 0 position
+  TWI_DATA_1_bm = (1<<1)              ; Data bit 1 mask
+  TWI_DATA_1_bp = 1                   ; Data bit 1 position
+  TWI_DATA_2_bm = (1<<2)              ; Data bit 2 mask
+  TWI_DATA_2_bp = 2                   ; Data bit 2 position
+  TWI_DATA_3_bm = (1<<3)              ; Data bit 3 mask
+  TWI_DATA_3_bp = 3                   ; Data bit 3 position
+  TWI_DATA_4_bm = (1<<4)              ; Data bit 4 mask
+  TWI_DATA_4_bp = 4                   ; Data bit 4 position
+  TWI_DATA_5_bm = (1<<5)              ; Data bit 5 mask
+  TWI_DATA_5_bp = 5                   ; Data bit 5 position
+  TWI_DATA_6_bm = (1<<6)              ; Data bit 6 mask
+  TWI_DATA_6_bp = 6                   ; Data bit 6 position
+  TWI_DATA_7_bm = (1<<7)              ; Data bit 7 mask
+  TWI_DATA_7_bp = 7                   ; Data bit 7 position
+  
   ; TWI_SCTRLA masks
   ; Masks for TWI_ENABLE already defined
   ; Masks for TWI_SMEN already defined
@@ -4936,6 +5166,12 @@ ALIAS_SREG=63
   TWI_APIF_bp = 6                     ; Address/Stop Interrupt Flag bit position
   TWI_DIF_bm = 0x80                   ; Data Interrupt Flag bit mask
   TWI_DIF_bp = 7                      ; Data Interrupt Flag bit position
+  
+  ; TWI_SADDR masks
+  ; Masks for TWI_ADDR already defined
+  
+  ; TWI_SDATA masks
+  ; Masks for TWI_DATA already defined
   
   ; TWI_SADDRMASK masks
   TWI_ADDREN_bm = 0x01                ; Address Enable bit mask
@@ -5480,7 +5716,6 @@ ALIAS_SREG=63
  CLKCTRL_XOSC32KCTRLA,124
  CLKCTRL_XOSCHFCTRLA,128
  CPU_CCP,52
- CPU_RAMPZ,59
  CPU_SP,61
 ; .equ CPU_SPL = 0x003D                    ; Stack Pointer low byte a duplicate or resevered register or ALIAS_
 ; .equ CPU_SPH = 0x003E                    ; Stack Pointer hi byte a duplicate or resevered register or ALIAS_
@@ -6546,52 +6781,53 @@ ZCD_STATE,ZCD,4			'  ZCD State bit position
 
 [Pins-]
 1,PA5(IO),MISO:SPI0,PIN5:IOPORT(IO),RXD:USART0_ALT1,WO5A0:TCA0,WOB1D0:TCD0
-2,PA6(IO),LUT0_OUT0:CCL_ALT1,PIN6:IOPORT(IO),SCK:SPI0,WOC2D0:TCD0,XCK:USART0_ALT1
-3,PA7(IO),CLKOUT:CLKCTRL,EVOUT0:EVSYS_ALT1,OUT:ZCD0,OUT:ZCD1,OUT:ZCD2,OUT0:AC0,OUT0:AC1,OUT0:AC2,PIN7:IOPORT(IO),SS:SPI0,WOD3D0:TCD0,XDIR:USART0_ALT1
+2,PA6(IO),LUT0_OUT:CCL_ALT1,PIN6:IOPORT(IO),SCK:SPI0,WOC2D0:TCD0,XCK:USART0_ALT1
+3,PA7(IO),CLKOUT:CLKCTRL,EVOUT0:EVSYS_ALT1,OUT:AC0,OUT:AC1,OUT:AC2,OUT:ZCD0,OUT:ZCD1,OUT:ZCD2,PIN7:IOPORT(IO),SS:SPI0,WOD3D0:TCD0,XDIR:USART0_ALT1
 4,PB0(IO),LUT4_IN0:CCL_IN,PIN0:IOPORT(IO),TXD:USART3,WO0A0:TCA0_ALT1,WO0A1:TCA1
 5,PB1(IO),LUT4_IN1:CCL_IN,PIN1:IOPORT(IO),RXD:USART3,WO1A0:TCA0_ALT1,WO1A1:TCA1
 6,PB2(IO),EVOUT1:EVSYS,LUT4_IN2:CCL_IN,PIN2:IOPORT(IO),SDA:I2C1_ALT2,SDA_DUAL:I2C1,WO2A0:TCA0_ALT1,WO2A1:TCA1,XCK:USART3
-7,PB3(IO),LUT4_OUT0:CCL,PIN3:IOPORT(IO),SCL:I2C1_ALT2,SCL_DUAL:I2C1,WO3A0:TCA0_ALT1,WO3A1:TCA1,XDIR:USART3
-8,PB4(IO),MOSI:SPI1_ALT1,PIN4:IOPORT(IO),TXD:USART3_ALT1,WO0B2:TCB2_ALT1,WO4A0:TCA0_ALT1,WO4A1:TCA1,WOAD0:TCD0_ALT1
-9,PB5(IO),MISO:SPI1_ALT1,PIN5:IOPORT(IO),RXD:USART3_ALT1,WO0B3:TCB3,WO5A0:TCA0_ALT1,WO5A1:TCA1,WOB1D0:TCD0_ALT1
-10,PC0(IO),LUT1_IN0:CCL_IN,MOSI:SPI1,PIN0:IOPORT(IO),TXD:USART1,WO0A0:TCA0_ALT2,WO0B2:TCB2
-11,PC1(IO),LUT1_IN1:CCL_IN,MISO:SPI1,PIN1:IOPORT(IO),RXD:USART1,WO0B3:TCB3_ALT1,WO1A0:TCA0_ALT2
+7,PB3(IO),LUT4_OUT:CCL,PIN3:IOPORT(IO),SCL:I2C1_ALT2,SCL_DUAL:I2C1,WO3A0:TCA0_ALT1,WO3A1:TCA1,XDIR:USART3
+8,PB4(IO),MOSI:SPI1_ALT1,PIN4:IOPORT(IO),TXD:USART3_ALT1,WO4A0:TCA0_ALT1,WO4A1:TCA1,WOAD0:TCD0_ALT1,WOB2:TCB2_ALT1
+9,PB5(IO),MISO:SPI1_ALT1,PIN5:IOPORT(IO),RXD:USART3_ALT1,WO5A0:TCA0_ALT1,WO5A1:TCA1,WOB1D0:TCD0_ALT1,WOB3:TCB3
+10,PC0(IO),LUT1_IN0:CCL_IN,MOSI:SPI1,PIN0:IOPORT(IO),TXD:USART1,WO0A0:TCA0_ALT2,WOB2:TCB2
+11,PC1(IO),LUT1_IN1:CCL_IN,MISO:SPI1,PIN1:IOPORT(IO),RXD:USART1,WO1A0:TCA0_ALT2,WOB3:TCB3_ALT1
 12,PC2(IO),EVOUT2:EVSYS,LUT1_IN2:CCL_IN,PIN2:IOPORT(IO),SCK:SPI1,SDA:I2C0_ALT2,SDA_DUAL:I2C0,WO2A0:TCA0_ALT2,XCK:USART1
-13,PC3(IO),LUT1_OUT0:CCL,PIN3:IOPORT(IO),SCL:I2C0_ALT2,SCL_DUAL:I2C0,SS:SPI1,WO3A0:TCA0_ALT2,XDIR:USART1
+13,PC3(IO),LUT1_OUT:CCL,PIN3:IOPORT(IO),SCL:I2C0_ALT2,SCL_DUAL:I2C0,SS:SPI1,WO3A0:TCA0_ALT2,XDIR:USART1
 14,VDDIO2
 15,GND0
 16,PC4(IO),MOSI:SPI1_ALT2,PIN4:IOPORT(IO),TXD:USART1_ALT1,WO0A1:TCA1_ALT1,WO4A0:TCA0_ALT2
 17,PC5(IO),MISO:SPI1_ALT2,PIN5:IOPORT(IO),RXD:USART1_ALT1,WO1A1:TCA1_ALT1,WO5A0:TCA0_ALT2
-18,PC6(IO),LUT1_OUT0:CCL_ALT1,OUT0:AC0_ALT1,OUT0:AC1_ALT1,OUT0:AC2_ALT1,PIN6:IOPORT(IO),SCK:SPI1_ALT2,SDA_DUAL:I2C0_ALT1,SDA_DUAL:I2C0_ALT2,WO2A1:TCA1_ALT1,XCK:USART1_ALT1
+18,PC6(IO),LUT1_OUT:CCL_ALT1,OUT:AC0_ALT1,OUT:AC1_ALT1,OUT:AC2_ALT1,PIN6:IOPORT(IO),SCK:SPI1_ALT2,SDA_DUAL:I2C0_ALT1,SDA_DUAL:I2C0_ALT2,WO2A1:TCA1_ALT1,XCK:USART1_ALT1
 19,PC7(IO),EVOUT2:EVSYS_ALT1,OUT:ZCD0_ALT1,OUT:ZCD1_ALT1,OUT:ZCD2_ALT1,PIN7:IOPORT(IO),SCL_DUAL:I2C0_ALT,SCL_DUAL:I2C0_ALT2,SS:SPI1_ALT2,XDIR:USART1_ALT1
-20,PD0(IO),AIN0:AIN0(I),LUT2_IN0:CCL_IN,N1:AC0,N1:AC1,N1:AC2,PIN0:IOPORT(IO),WO0A0:TCA0_ALT3
-21,PD1(IO),AIN1:AIN0(I),IN:ZCD0,LUT2_IN1:CCL_IN,OP0INP:OPAMP,PIN1:IOPORT(IO),WO1A0:TCA0_ALT3
-22,PD2(IO),AIN2:AIN0(I),EVOUT3:EVSYS,LUT2_IN2:CCL_IN,OP0OUT:OPAMP,P0:AC0,P0:AC1,P0:AC2,PIN2:IOPORT(IO),WO2A0:TCA0_ALT3
-23,PD3(IO),AIN3:AIN0(I),LUT2_OUT0:CCL,N0:AC0,OP0INN:OPAMP,P1:AC1,PIN3:IOPORT(IO),WO3A0:TCA0_ALT3
-24,PD4(IO),AIN4:AIN0(I),OP1INP:OPAMP,P1:AC2,P2:AC1,PIN4:IOPORT(IO),WO4A0:TCA0_ALT3
-25,PD5(IO),AIN5:AIN0(I),N0:AC1,OP1OUT:OPAMP,PIN5:IOPORT(IO),WO5A0:TCA0_ALT3
-26,PD6(IO),AIN6:AIN0(I),LUT2_OUT0:CCL_ALT1,OUT0:DAC0,P3:AC0,P3:AC1,P3:AC2,PIN6:IOPORT(IO)
-27,PD7(IO),AIN7:AIN0(I),EVOUT3:EVSYS_ALT1,N0:AC2,N2:AC0,N2:AC1,N2:AC2,OP1INN:OPAMP,PIN7:IOPORT(IO)
+20,PD0(IO),AIN0:AIN0(I),AINN1:AC0(I),AINN1:AC1(I),AINN1:AC2(I),LUT2_IN0:CCL_IN,PIN0:IOPORT(IO),WO0A0:TCA0_ALT3
+21,PD1(IO),AIN1:AIN0(I),LUT2_IN1:CCL_IN,OP0INP:OPAMP,PIN1:IOPORT(IO),WO1A0:TCA0_ALT3,ZCIN:ZCD0
+22,PD2(IO),AIN2:AIN0(I),AINP0:AC0(I),AINP0:AC1(I),AINP0:AC2(I),EVOUT3:EVSYS,LUT2_IN2:CCL_IN,OP0OUT:OPAMP,PIN2:IOPORT(IO),WO2A0:TCA0_ALT3
+23,PD3(IO),AIN3:AIN0(I),AINN0:AC0(I),AINP1:AC1(I),LUT2_OUT:CCL,OP0INN:OPAMP,PIN3:IOPORT(IO),WO3A0:TCA0_ALT3
+24,PD4(IO),AIN4:AIN0(I),AINP1:AC2(I),AINP2:AC1(I),OP1INP:OPAMP,PIN4:IOPORT(IO),WO4A0:TCA0_ALT3
+25,PD5(IO),AIN5:AIN0(I),AINN0:AC1(I),OP1OUT:OPAMP,PIN5:IOPORT(IO),WO5A0:TCA0_ALT3
+26,PD6(IO),AIN6:AIN0(I),AINP3:AC0(I),AINP3:AC1(I),AINP3:AC2(I),LUT2_OUT:CCL_ALT1,OUT:DAC0,PIN6:IOPORT(IO)
+27,PD7(IO),AIN7:AIN0(I),AINN0:AC2(I),AINN2:AC0(I),AINN2:AC1(I),AINN2:AC2(I),EVOUT3:EVSYS_ALT1,OP1INN:OPAMP,PIN7:IOPORT(IO)
 28,AVDD
 29,AGND
-30,PE0(IO),AIN8:AIN0(I),MOSI:SPI0_ALT1,P1:AC0,PIN0:IOPORT(IO),TXD:USART4,WO0A0:TCA0_ALT4
-31,PE1(IO),AIN9:AIN0(I),MISO:SPI0_ALT1,OP2INP:OPAMP,P2:AC2,PIN1:IOPORT(IO),RXD:USART4,WO1A0:TCA0_ALT4
-32,PE2(IO),AIN10:AIN0(I),EVOUT4:EVSYS,OP2OUT:OPAMP,P2:AC0,PIN2:IOPORT(IO),SCK:SPI0_ALT1,WO2A0:TCA0_ALT4,XCK:USART4
-33,PE3(IO),AIN11:AIN0(I),IN:ZCD1,OP2INN:OPAMP,PIN3:IOPORT(IO),SS:SPI0_ALT1,WO3A0:TCA0_ALT4,XDIR:USART4
+30,PE0(IO),AIN8:AIN0(I),AINP1:AC0(I),MOSI:SPI0_ALT1,PIN0:IOPORT(IO),TXD:USART4,WO0A0:TCA0_ALT4
+31,PE1(IO),AIN9:AIN0(I),AINP2:AC2(I),MISO:SPI0_ALT1,OP2INP:OPAMP,PIN1:IOPORT(IO),RXD:USART4,WO1A0:TCA0_ALT4
+32,PE2(IO),AIN10:AIN0(I),AINP2:AC0(I),EVOUT4:EVSYS,OP2OUT:OPAMP,PIN2:IOPORT(IO),SCK:SPI0_ALT1,WO2A0:TCA0_ALT4,XCK:USART4
+33,PE3(IO),AIN11:AIN0(I),OP2INN:OPAMP,PIN3:IOPORT(IO),SS:SPI0_ALT1,WO3A0:TCA0_ALT4,XDIR:USART4,ZCIN:ZCD1
 34,PF0(IO),AIN16:AIN0(I),LUT3_IN0:CCL_IN,PIN0:IOPORT(IO),TXD:USART2,WO0A0:TCA0_ALT5,WOAD0:TCD0_ALT2,XTAL32K1:CLKCTRL
 35,PF1(IO),AIN17:AIN0(I),LUT3_IN1:CCL_IN,PIN1:IOPORT(IO),RXD:USART2,WO1A0:TCA0_ALT5,WOB1D0:TCD0_ALT2,XTAL32K2:CLKCTRL
 36,PF2(IO),AIN18:AIN0(I),EVOUT5:EVSYS,LUT3_IN2:CCL_IN,PIN2:IOPORT(IO),SDA:I2C1,SDA:I2C1_ALT1,WO2A0:TCA0_ALT5,WOC2D0:TCD0_ALT2,XCK:USART2
-37,PF3(IO),AIN19:AIN0(I),LUT3_OUT0:CCL,PIN3:IOPORT(IO),SCL:I2C1,SCL:I2C1_ALT1,WO3A0:TCA0_ALT5,WOD3D0:TCD0_ALT2,XDIR:USART2
-38,PF4(IO),AIN20:AIN0(I),PIN4:IOPORT(IO),TXD:USART2_ALT1,WO0B0:TCB0_ALT1,WO4A0:TCA0_ALT5
-39,PF5(IO),AIN21:AIN0(I),PIN5:IOPORT(IO),RXD:USART2_ALT1,WO0B1:TCB1_ALT1,WO5A0:TCA0_ALT5
+37,PF3(IO),AIN19:AIN0(I),LUT3_OUT:CCL,PIN3:IOPORT(IO),SCL:I2C1,SCL:I2C1_ALT1,WO3A0:TCA0_ALT5,WOD3D0:TCD0_ALT2,XDIR:USART2
+38,PF4(IO),AIN20:AIN0(I),PIN4:IOPORT(IO),TXD:USART2_ALT1,WO4A0:TCA0_ALT5,WOB0:TCB0_ALT1
+39,PF5(IO),AIN21:AIN0(I),PIN5:IOPORT(IO),RXD:USART2_ALT1,WO5A0:TCA0_ALT5,WOB1:TCB1_ALT1
 40,PF6(IO),PIN6:IOPORT(IO),RESET:OTHER
 41,UPDI
-42,GND2
-43,PA0(IO),EXTCLK:CLKCTRL,LUT0_IN0:CCL_IN,PIN0:IOPORT(IO),TXD:USART0,WO0A0:TCA0,XTALHF1:CLKCTRL
-44,PA1(IO),LUT0_IN1:CCL_IN,PIN1:IOPORT(IO),RXD:USART0,WO1A0:TCA0,XTALHF2:CLKCTRL
-45,PA2(IO),EVOUT0:EVSYS,LUT0_IN2:CCL_IN,PIN2:IOPORT(IO),SDA:I2C0,SDA:I2C0_ALT1,WO0B0:TCB0,WO2A0:TCA0,XCK:USART0
-46,PA3(IO),LUT0_OUT0:CCL,PIN3:IOPORT(IO),SCL:I2C0,SCL:I2C0_ALT1,WO0B1:TCB1,WO3A0:TCA0,XDIR:USART0
-47,PA4(IO),MOSI:SPI0,PIN4:IOPORT(IO),TXD:USART0_ALT1,WO4A0:TCA0,WOAD0:TCD0
+42,VDD2
+43,GND2
+44,PA0(IO),EXTCLK:CLKCTRL,LUT0_IN0:CCL_IN,PIN0:IOPORT(IO),TXD:USART0,WO0A0:TCA0,XTALHF1:CLKCTRL
+45,PA1(IO),LUT0_IN1:CCL_IN,PIN1:IOPORT(IO),RXD:USART0,WO1A0:TCA0,XTALHF2:CLKCTRL
+46,PA2(IO),EVOUT0:EVSYS,LUT0_IN2:CCL_IN,PIN2:IOPORT(IO),SDA:I2C0,SDA:I2C0_ALT1,WO2A0:TCA0,WOB0:TCB0,XCK:USART0
+47,PA3(IO),LUT0_OUT:CCL,PIN3:IOPORT(IO),SCL:I2C0,SCL:I2C0_ALT1,WO3A0:TCA0,WOB1:TCB1,XDIR:USART0
+48,PA4(IO),MOSI:SPI0,PIN4:IOPORT(IO),TXD:USART0_ALT1,WO4A0:TCA0,WOAD0:TCD0
 
 [ConfigOps]
 'For details of the config options see the microcontroller datasheet

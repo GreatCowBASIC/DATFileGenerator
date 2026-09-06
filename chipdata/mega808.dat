@@ -5,7 +5,7 @@ ATMEGA808
 ;  Built by GCBASIC converter
 ;  XC8 processor include for the chip shown below
 ;
-; Microchip IDE version 6.25
+; Microchip IDE version 6.35
 ; C:\Users\admin\.mchp_packs\index.idx
 ; C:\Users\admin\.mchp_packs\Microchip\ATmega_DFP\3.6.299\avrasm\inc\m808def.inc
 ; d:avr chipdata.csv

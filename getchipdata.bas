@@ -44,12 +44,19 @@ Declare Sub ReadMPASMInfo
 Declare Sub ReadXmlFiles (ChipName As String)
 DECLARE SUB Replace (DataVar As String, Find As String, Rep As String)
 Declare Function SplitInfoLine(DataIn As String, LineItem() As String) As Integer
+
 Declare Sub Split(Text As String, Delim As String = " ", Count As Long = -1, Ret() As String)
+Declare Function FindUnescapedDelim(ByVal Text As String, ByVal Delim As String, ByVal StartPos As Long) As Long
+Declare Function UnescapeDelim(ByVal Text As String, ByVal Delim As String) As String
+
+Declare Function StripWrapper(ByVal sPattern As String) As String
 DECLARE FUNCTION WholeINSTR (DataIn As String, FindIn As String) As Integer
 Declare Sub Read18FASMConfigFile
 Declare Sub ReadCriticalChanges
+Declare Sub CacheCriticalChangesForChip
 Declare Function CountUSART as string
 Declare Function TALLY(SomeString As String,PartString As String) As Long
+Declare Function WildcardMatch(ByVal sPattern As String, ByVal sText As String) As Integer
 
 Enum Boolean
     False = 0, True = Not False
@@ -149,6 +156,27 @@ Dim Shared as Integer SilentRunning
 
 Dim Shared As String ReadCriticalDatLine(2000)
 Dim Shared As Integer CriticalChangeIndex
+
+'Per-chip cache of CriticalChanges rows that WildcardMatch the current ChipName.
+'Built once per chip by CacheCriticalChangesForChip, then reused for every
+'line read by ReadIncFileLineIn instead of re-splitting/re-matching every row
+'of ReadCriticalDatLine() on every single line of the .inc file.
+Dim Shared As Integer CritMatchCount
+Dim Shared As String CritMatchType(200), CritMatchFind(200), CritMatchAdd(200)
+
+'Per-chip log of Critical Changes actually applied while reading this chip's
+'.inc file. Filled by ReadIncFileLineIn, reset once per chip by
+'CacheCriticalChangesForChip, and written out as comments at the bottom of
+'the chip's .dat file instead of being spammed to the terminal line-by-line.
+Dim Shared As Integer CritChangeLogCount, CritChangeNotified
+Dim Shared As String CritChangeLogSource(500), CritChangeLogChange(500)
+
+'Per-chip log of CONFIG lines that were ignored during generation (e.g. the
+'18FxxQ35/18FxxQ2x "unsupported by GCBASIC" cases). Filled where the ignore
+'decision is made, reset once per chip, and written as comments at the
+'bottom of the chip's .dat file instead of being printed to the terminal.
+Dim Shared As Integer IgnoredConfigLogCount
+Dim Shared As String IgnoredConfigLogSource(200), IgnoredConfigLogReason(200)
 
 InstDir = "."
 IncFileDir = InstDir + "\incfiles"
@@ -342,6 +370,11 @@ FOR CurrentChip = StartChip to ChipIncCount
   ChipName = Left(ChipName, INSTR(ChipName, ".") - 1)
   If Left(ChipName, 1) = "P" THEN ChipName = Mid(ChipName, 2)
   ChipName = Trim(ChipName)
+
+  'Build the small per-chip CriticalChanges cache once, here, rather than
+  'letting ReadIncFileLineIn re-derive it on every line it reads below.
+  CacheCriticalChangesForChip
+
   ChipFamily = 14
   If INSTR(ChipName, "C5") <> 0 OR INSTR(ChipName, "CR5") <> 0 Or InStr(ChipName, "F5") OR INSTR(ChipName, "10F") THEN ChipFamily = 12
   If INSTR(ChipName, "18F") <> 0 OR INSTR(ChipName, "18LF") <> 0 OR INSTR(ChipName, "18C") <> 0 THEN ChipFamily = 16
@@ -553,8 +586,11 @@ FOR CurrentChip = StartChip to ChipIncCount
                       'Q20 dump config 11 or above as GCBASIC does not support
                       If CW > 14 or WriteConfig = 0 Then
                         WriteConfig = 0
-                        Print "18FxxQ35 - ignoring CONFIG "+str(CW),
-                        Print DataSource
+                        If IgnoredConfigLogCount < Ubound(IgnoredConfigLogSource) Then
+                            IgnoredConfigLogCount += 1
+                            IgnoredConfigLogReason(IgnoredConfigLogCount) = "18FxxQ35 - ignoring CONFIG " + str(CW)
+                            IgnoredConfigLogSource(IgnoredConfigLogCount) = DataSource
+                        End If
                       End if
                 End IF
 
@@ -564,8 +600,11 @@ FOR CurrentChip = StartChip to ChipIncCount
                       'Q20 dump config 11 or above as GCBASIC does not support
                       If CW > 12 or WriteConfig = 0 Then
                         WriteConfig = 0
-                        Print "18FxxQ2x - ignoring CONFIG "+str(CW)+ " none contiguous config memory",
-                        Print DataSource
+                        If IgnoredConfigLogCount < Ubound(IgnoredConfigLogSource) Then
+                            IgnoredConfigLogCount += 1
+                            IgnoredConfigLogReason(IgnoredConfigLogCount) = "18FxxQ2x - ignoring CONFIG " + str(CW) + " none contiguous config memory"
+                            IgnoredConfigLogSource(IgnoredConfigLogCount) = DataSource
+                        End If
                       End if
                 End IF
 
@@ -1696,6 +1735,36 @@ FOR CurrentChip = StartChip to ChipIncCount
         End With
     NEXT
     Print #1, ""
+
+    'Record any Critical Changes that were applied to this chip's source
+    '.inc file while it was being read, as comments at the bottom of the
+    '.dat file, instead of printing each one out to the terminal.
+    If CritChangeLogCount > 0 Then
+        Print #1, "';------------------------------------------------------------------------"
+        Print #1, "';Critical Changes applied while reading this chip's .inc file"
+        Print #1, "';(see CriticalChanges.txt). Each entry shows the original source line"
+        Print #1, "';followed by the change that was applied (A=Appended, R=Replaced)."
+        Print #1, "';------------------------------------------------------------------------"
+        FOR PD = 1 TO CritChangeLogCount
+            Print #1, "'Source:     " + CritChangeLogSource(PD)
+            Print #1, "'Change: " + CritChangeLogChange(PD)
+        NEXT
+        Print #1, ""
+    End If
+
+    'Record any CONFIG lines that were ignored during generation (e.g.
+    'unsupported by GCBASIC), as comments at the bottom of the .dat file,
+    'instead of printing each one out to the terminal.
+    If IgnoredConfigLogCount > 0 Then
+        Print #1, "';------------------------------------------------------------------------"
+        Print #1, "';CONFIG lines ignored during generation (unsupported by GCBASIC)"
+        Print #1, "';------------------------------------------------------------------------"
+        FOR PD = 1 TO IgnoredConfigLogCount
+            Print #1, "'Reason: " + IgnoredConfigLogReason(PD)
+            Print #1, "'Source: " + IgnoredConfigLogSource(PD)
+        NEXT
+        Print #1, ""
+    End If
 
     Close
     Goto NotSkip
@@ -4380,6 +4449,9 @@ Sub ReadMPASMInfo
             CurrWordLoc = Config(CurrValue).Location
           ElseIf CurrWordLoc <> Config(CurrValue).Location Then
             Print "Config word for " + Config(CurrValue).Name + " is unclear"
+           ' Print CurrWordLoc , Config(CurrValue).Location 
+           ' Print Config(CurrValue).SettingName , ConfigOption(CurrOption).Name
+           ' print OptionMask, Config(CurrValue).Value
           End If
         End If
       Next
@@ -4733,7 +4805,98 @@ FUNCTION WholeINSTR (DataIn As String, FindIn As String) As Integer
 END FUNCTION
 
 
+
+
+Function FindUnescapedDelim(ByVal Text As String, ByVal Delim As String, ByVal StartPos As Long) As Long
+    Dim As Long p, q, bcount
+
+    p = StartPos
+    Do
+        p = InStr(p, Text, Delim)
+        If p = 0 Then Return 0
+
+        bcount = 0
+        q = p - 1
+        Do While q >= 1 AndAlso Mid(Text, q, 1) = "\"
+            bcount += 1
+            q -= 1
+        Loop
+
+        If (bcount Mod 2) = 0 Then
+            Return p   'not escaped - genuine delimiter
+        End If
+
+        p += 1   'escaped - keep looking further on
+    Loop
+End Function
+
+'Un-escapes a field pulled out by Split(): "\" & Delim becomes a literal
+'Delim, and "\\" becomes a literal "\". Any other backslash is left as-is.
+Function UnescapeDelim(ByVal Text As String, ByVal Delim As String) As String
+    Dim As String outp = ""
+    Dim As Long i = 1, L = Len(Text)
+    Dim As String c, nc
+
+    Do While i <= L
+        c = Mid(Text, i, 1)
+        If c = "\" AndAlso i < L Then
+            nc = Mid(Text, i + 1, 1)
+            If nc = "\" Then
+                outp += "\"
+                i += 2
+            ElseIf nc = Delim Then
+                outp += Delim
+                i += 2
+            Else
+                outp += c
+                i += 1
+            End If
+        Else
+            outp += c
+            i += 1
+        End If
+    Loop
+
+    Return outp
+End Function
+
+'supports \, escape character
 Sub Split(Text As String, Delim As String = " ", Count As Long = -1, Ret() As String)
+
+   Dim As Long x, p
+   If Count < 1 Then
+      Do
+         x = FindUnescapedDelim(Text, Delim, x + 1)
+         p += 1
+      Loop Until x = 0
+      Count = p - 1
+   ElseIf Count = 1 Then
+      ReDim Ret(Count - 1)
+      Ret(0) = UnescapeDelim(Text, Delim)
+      Exit Sub
+   Else
+      Count -= 1
+   End If
+   Dim RetVal(Count) As Long
+   x = 0
+   p = 0
+   Do Until p = Count
+      x = FindUnescapedDelim(Text, Delim, x + 1)
+      RetVal(p) = x
+      p += 1
+   Loop
+   ReDim Ret(Count)
+   Ret(0) = UnescapeDelim(Left(Text, RetVal(0) - 1 ), Delim)
+   p = 1
+   Do Until p = Count
+      Ret(p) = UnescapeDelim(Mid(Text, RetVal(p - 1) + 1, RetVal(p) - RetVal(p - 1) - 1 ), Delim)
+      p += 1
+   Loop
+   Ret(Count) = UnescapeDelim(Mid(Text, RetVal(Count - 1) + 1), Delim)
+
+End Sub
+
+Sub Original_Split(Text As String, Delim As String = " ", Count As Long = -1, Ret() As String)
 
    Dim As Long x, p
    If Count < 1 Then
@@ -4768,7 +4931,60 @@ Sub Split(Text As String, Delim As String = " ", Count As Long = -1, Ret() As St
 End Sub
 
 
+'Builds CritMatchCount / CritMatchType() / CritMatchFind() / CritMatchAdd()
+'for the CURRENT ChipName. Call this once per chip (right after ChipName is
+'finalized), not once per line. ReadIncFileLineIn then just walks this small
+'pre-filtered, pre-split cache for every line, instead of re-running Split()
+'and WildcardMatch() against all of ReadCriticalDatLine() every single line.
+Sub CacheCriticalChangesForChip
+
+    Dim As Integer i
+
+    CritMatchCount = 0
+
+    'Reset the per-chip Critical Changes log/notice for the new chip.
+    CritChangeLogCount = 0
+    CritChangeNotified = 0
+
+    'Reset the per-chip ignored-CONFIG log for the new chip.
+    IgnoredConfigLogCount = 0
+
+    For i = lbound(ReadCriticalDatLine) to CriticalChangeIndex
+        text = ReadCriticalDatLine(i)
+
+        If text <> "" Then
+            MaxCount = 4
+            Delimiter = ","
+            split ( text, Delimiter, MaxCount, s() )
+
+            if WildcardMatch ( s(0), ChipName ) then
+
+                If CritMatchCount < Ubound(CritMatchType) Then
+                    CritMatchCount += 1
+                    CritMatchType(CritMatchCount) = UCase(s(1))
+                    CritMatchFind(CritMatchCount) = s(2)
+                    CritMatchAdd(CritMatchCount)  = s(3)
+
+                    'For "R" rows, DataSource gets space-stripped before compare
+                    'in ReadIncFileLineIn - do that here ONCE instead of on every
+                    'line read for this chip.
+                    If CritMatchType(CritMatchCount) = "R" Then
+                        Do While Instr(CritMatchFind(CritMatchCount), " ") <> 0
+                            CritMatchFind(CritMatchCount) = ReplaceStr(CritMatchFind(CritMatchCount), " ", "")
+                        Loop
+                    End If
+                End If
+
+            end if
+        End If
+    Next
+
+End Sub
+
+
 sub ReadIncFileLineIn
+
+    Dim As String OldDataSource
 
     IF HandlingAddingLine = 0 then
         LINE INPUT #1, DataSource
@@ -4780,56 +4996,62 @@ sub ReadIncFileLineIn
         exit sub
     END IF
 
-    'check  is this a file we need to fix using CriticalChanges.txt
-    For CurrentChipCheck = lbound(ReadCriticalDatLine) to CriticalChangeIndex
-        'print ReadCriticalDatLine(CurrentChipCheck)
-        text = ReadCriticalDatLine(CurrentChipCheck)
-        MaxCount = 4
-        Delimiter = ","
-        split  ( text, Delimiter, MaxCount, s() )
+    'Use the small cache built once per chip by CacheCriticalChangesForChip
+    'instead of re-splitting/re-matching every CriticalChanges row here.
+    For CurrentChipCheck = 1 to CritMatchCount
 
-        if ucase(s(0)) = ucase("p"+ChipName+".inc")  then
+          if CritMatchType(CurrentChipCheck) = "A" THEN
 
-          if ucase(s(1)) = "A" THEN
+            if INSTR(ucase(DataSource),ucase(CritMatchFind(CurrentChipCheck))) <> 0 Then
 
-            if INSTR(ucase(DataSource),ucase(s(2))) <> 0 Then
                 'found a match
                     'append a Line
-                    LastLineRead = s(3)
+                    LastLineRead = CritMatchAdd(CurrentChipCheck)
                     HandlingAddingLine  = 1
-                    'DataSource =  s(3)
-	            Print SPC(5);DataSource		
-                    Print SPC(5);"(A)";s(3)
-                    'ReadCriticalDatLine(CurrentChipCheck)=""
+
+                    'Tell the user once per chip that something changed, then
+                    'log the detail (source line + change) to be appended as
+                    'comments at the bottom of the chip's .dat file, rather
+                    'than printing every line to the terminal.
+                    If CritChangeNotified = 0 Then
+                        Print SPC(5); "Critical Changes have happened"
+                        CritChangeNotified = -1
+                    End If
+
+                    If CritChangeLogCount < Ubound(CritChangeLogSource) Then
+                        CritChangeLogCount += 1
+                        CritChangeLogSource(CritChangeLogCount) = DataSource
+                        CritChangeLogChange(CritChangeLogCount) = "(A) " + CritMatchAdd(CurrentChipCheck)
+                    End If
                 end if
 
           END IF
 
-          if ucase(s(1)) = "R" THEN
-                do while instr(s(2)," ")<> 0
-                    s(2) = replacestr(s(2)," ","")
-                loop
-
+          if CritMatchType(CurrentChipCheck) = "R" THEN
                 text = DataSource
                 do while instr(text," ")<> 0
                     text = replacestr(text," ","")
                 loop
 
-                if s(2)=text Then
-                    DataSource = s(3)
-                    print SPC(5);"(R)";DataSource
+                if Instr(Ucase(CritMatchFind(CurrentChipCheck)), Ucase(text)) = 1 Then
+                    OldDataSource = DataSource
+                    DataSource = CritMatchAdd(CurrentChipCheck)
+
+                    If CritChangeNotified = 0 Then
+                        Print SPC(5); "Critical Changes have happened"
+                        CritChangeNotified = -1
+                    End If
+
+                    If CritChangeLogCount < Ubound(CritChangeLogSource) Then
+                        CritChangeLogCount += 1
+                        CritChangeLogSource(CritChangeLogCount) = OldDataSource
+                        CritChangeLogChange(CritChangeLogCount) = "(R) " + DataSource
+                    End If
                 end if
 
           END IF
-        end if
-
-
-
 
     Next
-
-
-
 
 end sub
 
@@ -4964,4 +5186,57 @@ dim lCountUSART as string
 
     Return lCountUSART
 
+End Function
+
+
+Function StripWrapper(ByVal sPattern As String) As String
+    Dim As String p = sPattern
+
+    ' Strip trailing ".inc" (case-insensitive) if present
+    If Len(p) >= 4 AndAlso UCase(Right(p, 4)) = ".INC" Then
+        p = Left(p, Len(p) - 4)
+    End If
+
+    ' Strip leading "p" (case-insensitive) if present
+    If Len(p) >= 1 AndAlso UCase(Left(p, 1)) = "P" Then
+        p = Mid(p, 2)
+    End If
+
+    Return p
+End Function
+
+Function WildcardMatch(ByVal sPattern As String, ByVal sText As String) As Integer
+    Dim As String pattern = UCase(StripWrapper(sPattern))
+    Dim As String text    = UCase(sText)
+    Dim As Integer plen = Len(pattern), tlen = Len(text)
+    Dim As Integer p = 1, t = 1
+    Dim As Integer starIdx = -1, matchIdx = 1
+
+    While t <= tlen
+        If p <= plen AndAlso (Mid(pattern, p, 1) = "?" OrElse Mid(pattern, p, 1) = Mid(text, t, 1)) Then
+            p += 1
+            t += 1
+        ElseIf p <= plen AndAlso Mid(pattern, p, 1) = "*" Then
+            starIdx = p
+            matchIdx = t
+            p += 1
+        ElseIf starIdx <> -1 Then
+            p = starIdx + 1
+            matchIdx += 1
+            t = matchIdx
+        Else
+            Return 0   ' no match
+        End If
+    Wend
+
+    ' consume any trailing stars in the pattern
+    While p <= plen AndAlso Mid(pattern, p, 1) = "*"
+        p += 1
+    Wend
+
+    If p > plen Then
+        Return -1  ' match (FB "true")
+    Else
+        Return 0
+    End If
 End Function

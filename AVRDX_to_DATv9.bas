@@ -264,7 +264,8 @@ Sub PrintChipData
     Print "';The constants have the prefix of CHIP: See the details below"
     Print
     Print "'This constant is exposed as CHIPWORDS"
-  Print "Prog="+Str(Val("&h"+GetValue ("MAPPED_PROGMEM_SIZE")) /2 )
+    ' the leading space is important!
+  Print "Prog="+Str(Val("&h"+GetValue (" PROGMEM_SIZE")) /2 )
 
     Print
     Print "'This constant is exposed as CHIPEEPROM"

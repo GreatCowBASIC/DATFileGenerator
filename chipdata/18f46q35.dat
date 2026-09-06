@@ -7,9 +7,6 @@
 ';All items in the ChipData section are available to user programs as constants
 ';The constants have the prefix of Chip: See the examples below
 
-'This chip has not been tested or validated.  This is a development DAT file
-NotTested=1
-
 'This constant is exposed as ChipWORDS
 Prog=32768
 
@@ -7110,7 +7107,7 @@ CLBSU=ON
 CLKOUTEN=OFF
 CP=OFF
 CPD=OFF
-CPUHALT=ON
+CPUHALT=OFF
 CSWEN=ON
 DEBUG=OFF
 FCMEN=OFF
@@ -7128,7 +7125,6 @@ PR1WAY=OFF
 PWRTS=PWRT_OFF
 RSTOSC=HFINTOSC_1MHZ
 'SAFLOCK=ON
-'SAFSZ=SAFSZ_NONE
 STVREN=OFF
 WDTCCS=LFINTOSC
 WDTCPS=WDTCPS_0
@@ -7200,7 +7196,6 @@ CP=OFF,ON
 CPD=OFF,ON
 ICSPDIS=OFF,ON
 SAFLOCK=OFF,ON
-SAFSZ=SAFSZ_DIS,SAFSZ_128,SAFSZ_256,SAFSZ_384,SAFSZ_512,SAFSZ_640,SAFSZ_768,SAFSZ_896,SAFSZ_1024
 
 [Config]
 'For details of the config addresses see the microcontroller datasheet
@@ -7461,21 +7456,176 @@ WRTSAF_OFF,9,255
 WRTSAF_ON,9,247
 WRTAPP_OFF,9,255
 WRTAPP_ON,9,127
-CP_OFF,9,255
-CP_ON,9,254
-CPD_OFF,10,255
-CPD_ON,10,254
-ICSPDIS_OFF,11,255
-ICSPDIS_ON,11,254
-SAFLOCK_OFF,12,255
-SAFLOCK_ON,12,254
-SAFSZ_SAFSZ_DIS,13,255
-SAFSZ_SAFSZ_128,13,254
-SAFSZ_SAFSZ_256,13,252
-SAFSZ_SAFSZ_384,13,248
-SAFSZ_SAFSZ_512,13,240
-SAFSZ_SAFSZ_640,13,224
-SAFSZ_SAFSZ_768,13,192
-SAFSZ_SAFSZ_896,13,128
-SAFSZ_SAFSZ_1024,13,0
+CP_OFF,11,255
+CP_ON,11,254
+CPD_OFF,11,255
+CPD_ON,11,254
+ICSPDIS_OFF,12,255
+ICSPDIS_ON,12,254
+SAFLOCK_OFF,13,255
+SAFLOCK_ON,13,254
+
+';------------------------------------------------------------------------
+';Critical Changes applied while reading this chip's .inc file
+';(see CriticalChanges.txt). Each entry shows the original source line
+';followed by the change that was applied (A=Appended, R=Replaced).
+';------------------------------------------------------------------------
+'Source:     _CP_OFF_10           EQU  H'FF'; PFM code protection disabled
+'Change: (R) _CP_OFF_12           EQU  H'FF'; PFM code protection disabled
+'Source:     _CP_ON_10            EQU  H'FE'; PFM code protection enabled
+'Change: (R) _CP_ON_12            EQU  H'FE'; PFM code protection enabled
+'Source:     _CPD_OFF_11          EQU  H'FF'; Data EEPROM code protection disabled
+'Change: (R) _CPD_OFF_12          EQU  H'FF'; Data EEPROM code protection disabled
+'Source:     _CPD_ON_11           EQU  H'FE'; Data EEPROM code protection enabled
+'Change: (R) _CPD_ON_12           EQU  H'FE'; Data EEPROM code protection enabled
+'Source:     _ICSPDIS_OFF_12      EQU  H'FF'; ICSP and ICD interface fully enabled
+'Change: (R)  _ICSPDIS_OFF_13      EQU  H'FF'; ICSP and ICD interface fully enabled
+'Source:     _ICSPDIS_ON_12       EQU  H'FE'; ICSP and ICD interface fully disabled
+'Change: (R)  _ICSPDIS_ON_13       EQU  H'FE'; ICSP and ICD interface fully disabled
+'Source:     _SAFLOCK_OFF_13      EQU  H'FF'; SAF Lock disabled
+'Change: (R)  _SAFLOCK_OFF_14      EQU  H'FF'; SAF Lock disabled
+'Source:     _SAFLOCK_ON_13       EQU  H'FE'; SAF Lock enabled, SAF areas are locked and SAFSZ bits cannot be erased
+'Change: (R)  _SAFLOCK_ON_14       EQU  H'FE'; SAF Lock enabled, SAF areas are locked and SAFSZ bits cannot be erased
+'Source:     _SAFSZ_SAFSZ_DIS_14  EQU  H'FF'; Disabled
+'Change: (R)  _SAFSZ_SAFSZ_DIS_15  EQU  H'FF'; Disabled,_SAFSZ_SAFSZ_DIS_15  EQU  H'FF'; Disabled, _SAFSZ_SAFSZ_DIS_15  EQU  H'FF'; Disabled
+'Source:     _SAFSZ_SAFSZ_128_14  EQU  H'FE'; Last 128 words of PFM; self write operation depends on WRTSAF bit in CONFIG9
+'Change: (R) _SAFSZ_SAFSZ_128_15  EQU  H'FE'; Last 128 words of PFM; self write operation depends on WRTSAF bit in CONFIG9
+'Source:     _SAFSZ_SAFSZ_256_14  EQU  H'FC'; Last 256 words of PFM; self write operation depends on WRTSAF bit in CONFIG9
+'Change: (R) _SAFSZ_SAFSZ_256_15  EQU  H'FC'; Last 256 words of PFM; self write operation depends on WRTSAF bit in CONFIG9
+'Source:     _SAFSZ_SAFSZ_384_14  EQU  H'F8'; Last 384 words of PFM; self write operation depends on WRTSAF bit in CONFIG9
+'Change: (R) _SAFSZ_SAFSZ_384_15  EQU  H'F8'; Last 384 words of PFM; self write operation depends on WRTSAF bit in CONFIG9
+'Source:     _SAFSZ_SAFSZ_512_14  EQU  H'F0'; Last 512 words of PFM; self write operation depends on WRTSAF bit in CONFIG9
+'Change: (R) _SAFSZ_SAFSZ_512_15  EQU  H'F0'; Last 512 words of PFM; self write operation depends on WRTSAF bit in CONFIG9
+'Source:     _SAFSZ_SAFSZ_640_14  EQU  H'E0'; Last 640 words of PFM; self write operation depends on WRTSAF bit in CONFIG9
+'Change: (R) _SAFSZ_SAFSZ_640_15  EQU  H'E0'; Last 640 words of PFM; self write operation depends on WRTSAF bit in CONFIG9
+'Source:     _SAFSZ_SAFSZ_768_14  EQU  H'C0'; Last 768 words of PFM; self write operation depends on WRTSAF bit in CONFIG9
+'Change: (R) _SAFSZ_SAFSZ_768_15  EQU  H'C0'; Last 768 words of PFM; self write operation depends on WRTSAF bit in CONFIG9
+'Source:     _SAFSZ_SAFSZ_896_14  EQU  H'80'; Last 896 words of PFM; self write operation depends on WRTSAF bit in CONFIG9
+'Change: (R) _SAFSZ_SAFSZ_896_15  EQU  H'80'; Last 896 words of PFM; self write operation depends on WRTSAF bit in CONFIG9
+'Source:     _SAFSZ_SAFSZ_1024_14 EQU  H'00'; Last 1024 words of PFM; self write operation depends on WRTSAF bit in CONFIG9
+'Change: (R) _SAFSZ_SAFSZ_1024_15 EQU  H'00'; Last 1024 words of PFM; self write operation depends on WRTSAF bit in CONFIG9
+'Source:     _CP_OFF_10           EQU  H'FF'; PFM code protection disabled
+'Change: (R) _CP_OFF_12           EQU  H'FF'; PFM code protection disabled
+'Source:     _CP_ON_10            EQU  H'FE'; PFM code protection enabled
+'Change: (R) _CP_ON_12            EQU  H'FE'; PFM code protection enabled
+'Source:     _CPD_OFF_11          EQU  H'FF'; Data EEPROM code protection disabled
+'Change: (R) _CPD_OFF_12          EQU  H'FF'; Data EEPROM code protection disabled
+'Source:     _CPD_ON_11           EQU  H'FE'; Data EEPROM code protection enabled
+'Change: (R) _CPD_ON_12           EQU  H'FE'; Data EEPROM code protection enabled
+'Source:     _ICSPDIS_OFF_12      EQU  H'FF'; ICSP and ICD interface fully enabled
+'Change: (R)  _ICSPDIS_OFF_13      EQU  H'FF'; ICSP and ICD interface fully enabled
+'Source:     _ICSPDIS_ON_12       EQU  H'FE'; ICSP and ICD interface fully disabled
+'Change: (R)  _ICSPDIS_ON_13       EQU  H'FE'; ICSP and ICD interface fully disabled
+'Source:     _SAFLOCK_OFF_13      EQU  H'FF'; SAF Lock disabled
+'Change: (R)  _SAFLOCK_OFF_14      EQU  H'FF'; SAF Lock disabled
+'Source:     _SAFLOCK_ON_13       EQU  H'FE'; SAF Lock enabled, SAF areas are locked and SAFSZ bits cannot be erased
+'Change: (R)  _SAFLOCK_ON_14       EQU  H'FE'; SAF Lock enabled, SAF areas are locked and SAFSZ bits cannot be erased
+'Source:     _SAFSZ_SAFSZ_DIS_14  EQU  H'FF'; Disabled
+'Change: (R)  _SAFSZ_SAFSZ_DIS_15  EQU  H'FF'; Disabled,_SAFSZ_SAFSZ_DIS_15  EQU  H'FF'; Disabled, _SAFSZ_SAFSZ_DIS_15  EQU  H'FF'; Disabled
+'Source:     _SAFSZ_SAFSZ_128_14  EQU  H'FE'; Last 128 words of PFM; self write operation depends on WRTSAF bit in CONFIG9
+'Change: (R) _SAFSZ_SAFSZ_128_15  EQU  H'FE'; Last 128 words of PFM; self write operation depends on WRTSAF bit in CONFIG9
+'Source:     _SAFSZ_SAFSZ_256_14  EQU  H'FC'; Last 256 words of PFM; self write operation depends on WRTSAF bit in CONFIG9
+'Change: (R) _SAFSZ_SAFSZ_256_15  EQU  H'FC'; Last 256 words of PFM; self write operation depends on WRTSAF bit in CONFIG9
+'Source:     _SAFSZ_SAFSZ_384_14  EQU  H'F8'; Last 384 words of PFM; self write operation depends on WRTSAF bit in CONFIG9
+'Change: (R) _SAFSZ_SAFSZ_384_15  EQU  H'F8'; Last 384 words of PFM; self write operation depends on WRTSAF bit in CONFIG9
+'Source:     _SAFSZ_SAFSZ_512_14  EQU  H'F0'; Last 512 words of PFM; self write operation depends on WRTSAF bit in CONFIG9
+'Change: (R) _SAFSZ_SAFSZ_512_15  EQU  H'F0'; Last 512 words of PFM; self write operation depends on WRTSAF bit in CONFIG9
+'Source:     _SAFSZ_SAFSZ_640_14  EQU  H'E0'; Last 640 words of PFM; self write operation depends on WRTSAF bit in CONFIG9
+'Change: (R) _SAFSZ_SAFSZ_640_15  EQU  H'E0'; Last 640 words of PFM; self write operation depends on WRTSAF bit in CONFIG9
+'Source:     _SAFSZ_SAFSZ_768_14  EQU  H'C0'; Last 768 words of PFM; self write operation depends on WRTSAF bit in CONFIG9
+'Change: (R) _SAFSZ_SAFSZ_768_15  EQU  H'C0'; Last 768 words of PFM; self write operation depends on WRTSAF bit in CONFIG9
+'Source:     _SAFSZ_SAFSZ_896_14  EQU  H'80'; Last 896 words of PFM; self write operation depends on WRTSAF bit in CONFIG9
+'Change: (R) _SAFSZ_SAFSZ_896_15  EQU  H'80'; Last 896 words of PFM; self write operation depends on WRTSAF bit in CONFIG9
+'Source:     _SAFSZ_SAFSZ_1024_14 EQU  H'00'; Last 1024 words of PFM; self write operation depends on WRTSAF bit in CONFIG9
+'Change: (R) _SAFSZ_SAFSZ_1024_15 EQU  H'00'; Last 1024 words of PFM; self write operation depends on WRTSAF bit in CONFIG9
+'Source:     _CP_OFF_10           EQU  H'FF'; PFM code protection disabled
+'Change: (R) _CP_OFF_12           EQU  H'FF'; PFM code protection disabled
+'Source:     _CP_ON_10            EQU  H'FE'; PFM code protection enabled
+'Change: (R) _CP_ON_12            EQU  H'FE'; PFM code protection enabled
+'Source:     _CPD_OFF_11          EQU  H'FF'; Data EEPROM code protection disabled
+'Change: (R) _CPD_OFF_12          EQU  H'FF'; Data EEPROM code protection disabled
+'Source:     _CPD_ON_11           EQU  H'FE'; Data EEPROM code protection enabled
+'Change: (R) _CPD_ON_12           EQU  H'FE'; Data EEPROM code protection enabled
+'Source:     _ICSPDIS_OFF_12      EQU  H'FF'; ICSP and ICD interface fully enabled
+'Change: (R)  _ICSPDIS_OFF_13      EQU  H'FF'; ICSP and ICD interface fully enabled
+'Source:     _ICSPDIS_ON_12       EQU  H'FE'; ICSP and ICD interface fully disabled
+'Change: (R)  _ICSPDIS_ON_13       EQU  H'FE'; ICSP and ICD interface fully disabled
+'Source:     _SAFLOCK_OFF_13      EQU  H'FF'; SAF Lock disabled
+'Change: (R)  _SAFLOCK_OFF_14      EQU  H'FF'; SAF Lock disabled
+'Source:     _SAFLOCK_ON_13       EQU  H'FE'; SAF Lock enabled, SAF areas are locked and SAFSZ bits cannot be erased
+'Change: (R)  _SAFLOCK_ON_14       EQU  H'FE'; SAF Lock enabled, SAF areas are locked and SAFSZ bits cannot be erased
+'Source:     _SAFSZ_SAFSZ_DIS_14  EQU  H'FF'; Disabled
+'Change: (R)  _SAFSZ_SAFSZ_DIS_15  EQU  H'FF'; Disabled,_SAFSZ_SAFSZ_DIS_15  EQU  H'FF'; Disabled, _SAFSZ_SAFSZ_DIS_15  EQU  H'FF'; Disabled
+'Source:     _SAFSZ_SAFSZ_128_14  EQU  H'FE'; Last 128 words of PFM; self write operation depends on WRTSAF bit in CONFIG9
+'Change: (R) _SAFSZ_SAFSZ_128_15  EQU  H'FE'; Last 128 words of PFM; self write operation depends on WRTSAF bit in CONFIG9
+'Source:     _SAFSZ_SAFSZ_256_14  EQU  H'FC'; Last 256 words of PFM; self write operation depends on WRTSAF bit in CONFIG9
+'Change: (R) _SAFSZ_SAFSZ_256_15  EQU  H'FC'; Last 256 words of PFM; self write operation depends on WRTSAF bit in CONFIG9
+'Source:     _SAFSZ_SAFSZ_384_14  EQU  H'F8'; Last 384 words of PFM; self write operation depends on WRTSAF bit in CONFIG9
+'Change: (R) _SAFSZ_SAFSZ_384_15  EQU  H'F8'; Last 384 words of PFM; self write operation depends on WRTSAF bit in CONFIG9
+'Source:     _SAFSZ_SAFSZ_512_14  EQU  H'F0'; Last 512 words of PFM; self write operation depends on WRTSAF bit in CONFIG9
+'Change: (R) _SAFSZ_SAFSZ_512_15  EQU  H'F0'; Last 512 words of PFM; self write operation depends on WRTSAF bit in CONFIG9
+'Source:     _SAFSZ_SAFSZ_640_14  EQU  H'E0'; Last 640 words of PFM; self write operation depends on WRTSAF bit in CONFIG9
+'Change: (R) _SAFSZ_SAFSZ_640_15  EQU  H'E0'; Last 640 words of PFM; self write operation depends on WRTSAF bit in CONFIG9
+'Source:     _SAFSZ_SAFSZ_768_14  EQU  H'C0'; Last 768 words of PFM; self write operation depends on WRTSAF bit in CONFIG9
+'Change: (R) _SAFSZ_SAFSZ_768_15  EQU  H'C0'; Last 768 words of PFM; self write operation depends on WRTSAF bit in CONFIG9
+'Source:     _SAFSZ_SAFSZ_896_14  EQU  H'80'; Last 896 words of PFM; self write operation depends on WRTSAF bit in CONFIG9
+'Change: (R) _SAFSZ_SAFSZ_896_15  EQU  H'80'; Last 896 words of PFM; self write operation depends on WRTSAF bit in CONFIG9
+'Source:     _SAFSZ_SAFSZ_1024_14 EQU  H'00'; Last 1024 words of PFM; self write operation depends on WRTSAF bit in CONFIG9
+'Change: (R) _SAFSZ_SAFSZ_1024_15 EQU  H'00'; Last 1024 words of PFM; self write operation depends on WRTSAF bit in CONFIG9
+'Source:     _CP_OFF_10           EQU  H'FF'; PFM code protection disabled
+'Change: (R) _CP_OFF_12           EQU  H'FF'; PFM code protection disabled
+'Source:     _CP_ON_10            EQU  H'FE'; PFM code protection enabled
+'Change: (R) _CP_ON_12            EQU  H'FE'; PFM code protection enabled
+'Source:     _CPD_OFF_11          EQU  H'FF'; Data EEPROM code protection disabled
+'Change: (R) _CPD_OFF_12          EQU  H'FF'; Data EEPROM code protection disabled
+'Source:     _CPD_ON_11           EQU  H'FE'; Data EEPROM code protection enabled
+'Change: (R) _CPD_ON_12           EQU  H'FE'; Data EEPROM code protection enabled
+'Source:     _ICSPDIS_OFF_12      EQU  H'FF'; ICSP and ICD interface fully enabled
+'Change: (R)  _ICSPDIS_OFF_13      EQU  H'FF'; ICSP and ICD interface fully enabled
+'Source:     _ICSPDIS_ON_12       EQU  H'FE'; ICSP and ICD interface fully disabled
+'Change: (R)  _ICSPDIS_ON_13       EQU  H'FE'; ICSP and ICD interface fully disabled
+'Source:     _SAFLOCK_OFF_13      EQU  H'FF'; SAF Lock disabled
+'Change: (R)  _SAFLOCK_OFF_14      EQU  H'FF'; SAF Lock disabled
+'Source:     _SAFLOCK_ON_13       EQU  H'FE'; SAF Lock enabled, SAF areas are locked and SAFSZ bits cannot be erased
+'Change: (R)  _SAFLOCK_ON_14       EQU  H'FE'; SAF Lock enabled, SAF areas are locked and SAFSZ bits cannot be erased
+'Source:     _SAFSZ_SAFSZ_DIS_14  EQU  H'FF'; Disabled
+'Change: (R)  _SAFSZ_SAFSZ_DIS_15  EQU  H'FF'; Disabled,_SAFSZ_SAFSZ_DIS_15  EQU  H'FF'; Disabled, _SAFSZ_SAFSZ_DIS_15  EQU  H'FF'; Disabled
+'Source:     _SAFSZ_SAFSZ_128_14  EQU  H'FE'; Last 128 words of PFM; self write operation depends on WRTSAF bit in CONFIG9
+'Change: (R) _SAFSZ_SAFSZ_128_15  EQU  H'FE'; Last 128 words of PFM; self write operation depends on WRTSAF bit in CONFIG9
+'Source:     _SAFSZ_SAFSZ_256_14  EQU  H'FC'; Last 256 words of PFM; self write operation depends on WRTSAF bit in CONFIG9
+'Change: (R) _SAFSZ_SAFSZ_256_15  EQU  H'FC'; Last 256 words of PFM; self write operation depends on WRTSAF bit in CONFIG9
+'Source:     _SAFSZ_SAFSZ_384_14  EQU  H'F8'; Last 384 words of PFM; self write operation depends on WRTSAF bit in CONFIG9
+'Change: (R) _SAFSZ_SAFSZ_384_15  EQU  H'F8'; Last 384 words of PFM; self write operation depends on WRTSAF bit in CONFIG9
+'Source:     _SAFSZ_SAFSZ_512_14  EQU  H'F0'; Last 512 words of PFM; self write operation depends on WRTSAF bit in CONFIG9
+'Change: (R) _SAFSZ_SAFSZ_512_15  EQU  H'F0'; Last 512 words of PFM; self write operation depends on WRTSAF bit in CONFIG9
+'Source:     _SAFSZ_SAFSZ_640_14  EQU  H'E0'; Last 640 words of PFM; self write operation depends on WRTSAF bit in CONFIG9
+'Change: (R) _SAFSZ_SAFSZ_640_15  EQU  H'E0'; Last 640 words of PFM; self write operation depends on WRTSAF bit in CONFIG9
+'Source:     _SAFSZ_SAFSZ_768_14  EQU  H'C0'; Last 768 words of PFM; self write operation depends on WRTSAF bit in CONFIG9
+'Change: (R) _SAFSZ_SAFSZ_768_15  EQU  H'C0'; Last 768 words of PFM; self write operation depends on WRTSAF bit in CONFIG9
+'Source:     _SAFSZ_SAFSZ_896_14  EQU  H'80'; Last 896 words of PFM; self write operation depends on WRTSAF bit in CONFIG9
+'Change: (R) _SAFSZ_SAFSZ_896_15  EQU  H'80'; Last 896 words of PFM; self write operation depends on WRTSAF bit in CONFIG9
+'Source:     _SAFSZ_SAFSZ_1024_14 EQU  H'00'; Last 1024 words of PFM; self write operation depends on WRTSAF bit in CONFIG9
+'Change: (R) _SAFSZ_SAFSZ_1024_15 EQU  H'00'; Last 1024 words of PFM; self write operation depends on WRTSAF bit in CONFIG9
+
+';------------------------------------------------------------------------
+';CONFIG lines ignored during generation (unsupported by GCBASIC)
+';------------------------------------------------------------------------
+'Reason: 18FxxQ35 - ignoring CONFIG 15
+'Source: _SAFSZ_SAFSZ_DIS_15
+'Reason: 18FxxQ35 - ignoring CONFIG 15
+'Source: _SAFSZ_SAFSZ_128_15
+'Reason: 18FxxQ35 - ignoring CONFIG 15
+'Source: _SAFSZ_SAFSZ_256_15
+'Reason: 18FxxQ35 - ignoring CONFIG 15
+'Source: _SAFSZ_SAFSZ_384_15
+'Reason: 18FxxQ35 - ignoring CONFIG 15
+'Source: _SAFSZ_SAFSZ_512_15
+'Reason: 18FxxQ35 - ignoring CONFIG 15
+'Source: _SAFSZ_SAFSZ_640_15
+'Reason: 18FxxQ35 - ignoring CONFIG 15
+'Source: _SAFSZ_SAFSZ_768_15
+'Reason: 18FxxQ35 - ignoring CONFIG 15
+'Source: _SAFSZ_SAFSZ_896_15
+'Reason: 18FxxQ35 - ignoring CONFIG 15
+'Source: _SAFSZ_SAFSZ_1024_15
 

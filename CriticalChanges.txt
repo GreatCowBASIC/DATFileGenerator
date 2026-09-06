@@ -126,3 +126,26 @@ p16F18074.inc,A,;----- SSP1CON2 Bits,SSP1CON2_SEN     EQU  H'0000'
 p16F18075.inc,A,;----- SSP1CON2 Bits,SSP1CON2_SEN     EQU  H'0000'
 p16F18076.inc,A,;----- SSP1CON2 Bits,SSP1CON2_SEN     EQU  H'0000'
 
+
+
+p18F**Q35.inc,R,_CP_OFF_10           EQU  H'FF'; PFM code protection disabled,_CP_OFF_12           EQU  H'FF'; PFM code protection disabled
+p18F**Q35.inc,R,_CP_ON_10            EQU  H'FE'; PFM code protection enabled,_CP_ON_12            EQU  H'FE'; PFM code protection enabled
+
+p18F**Q35.inc,R,_CPD_OFF_11          EQU  H'FF'; Data EEPROM code protection disabled,_CPD_OFF_12          EQU  H'FF'; Data EEPROM code protection disabled
+p18F**Q35.inc,R,_CPD_ON_11           EQU  H'FE'; Data EEPROM code protection enabled,_CPD_ON_12           EQU  H'FE'; Data EEPROM code protection enabled
+
+p18F**Q35.inc,R,_ICSPDIS_OFF_12      EQU  H'FF'; ICSP and ICD interface fully enabled, _ICSPDIS_OFF_13      EQU  H'FF'; ICSP and ICD interface fully enabled
+p18F**Q35.inc,R,_ICSPDIS_ON_12       EQU  H'FE'; ICSP and ICD interface fully disabled, _ICSPDIS_ON_13       EQU  H'FE'; ICSP and ICD interface fully disabled
+
+p18F**Q35.inc,R,_SAFLOCK_OFF_13      EQU  H'FF'; SAF Lock disabled, _SAFLOCK_OFF_14      EQU  H'FF'; SAF Lock disabled
+p18F**Q35.inc,R,_SAFLOCK_ON_13       EQU  H'FE'; SAF Lock enabled\, SAF areas are locked and SAFSZ bits cannot be erased, _SAFLOCK_ON_14       EQU  H'FE'; SAF Lock enabled\, SAF areas are locked and SAFSZ bits cannot be erased
+
+p18F**Q35.inc,R,_SAFSZ_SAFSZ_DIS_14  EQU  H'FF'; Disabled, _SAFSZ_SAFSZ_DIS_15  EQU  H'FF'; Disabled,_SAFSZ_SAFSZ_DIS_15  EQU  H'FF'; Disabled, _SAFSZ_SAFSZ_DIS_15  EQU  H'FF'; Disabled
+p18F**Q35.inc,R,_SAFSZ_SAFSZ_128_14  EQU  H'FE'; Last 128 words of PFM; self write operation depends on WRTSAF bit in CONFIG9,_SAFSZ_SAFSZ_128_15  EQU  H'FE'; Last 128 words of PFM; self write operation depends on WRTSAF bit in CONFIG9
+p18F**Q35.inc,R,_SAFSZ_SAFSZ_256_14  EQU  H'FC'; Last 256 words of PFM; self write operation depends on WRTSAF bit in CONFIG9,_SAFSZ_SAFSZ_256_15  EQU  H'FC'; Last 256 words of PFM; self write operation depends on WRTSAF bit in CONFIG9
+p18F**Q35.inc,R,_SAFSZ_SAFSZ_384_14  EQU  H'F8'; Last 384 words of PFM; self write operation depends on WRTSAF bit in CONFIG9,_SAFSZ_SAFSZ_384_15  EQU  H'F8'; Last 384 words of PFM; self write operation depends on WRTSAF bit in CONFIG9
+p18F**Q35.inc,R,_SAFSZ_SAFSZ_512_14  EQU  H'F0'; Last 512 words of PFM; self write operation depends on WRTSAF bit in CONFIG9,_SAFSZ_SAFSZ_512_15  EQU  H'F0'; Last 512 words of PFM; self write operation depends on WRTSAF bit in CONFIG9
+p18F**Q35.inc,R,_SAFSZ_SAFSZ_640_14  EQU  H'E0'; Last 640 words of PFM; self write operation depends on WRTSAF bit in CONFIG9,_SAFSZ_SAFSZ_640_15  EQU  H'E0'; Last 640 words of PFM; self write operation depends on WRTSAF bit in CONFIG9
+p18F**Q35.inc,R,_SAFSZ_SAFSZ_768_14  EQU  H'C0'; Last 768 words of PFM; self write operation depends on WRTSAF bit in CONFIG9,_SAFSZ_SAFSZ_768_15  EQU  H'C0'; Last 768 words of PFM; self write operation depends on WRTSAF bit in CONFIG9
+p18F**Q35.inc,R,_SAFSZ_SAFSZ_896_14  EQU  H'80'; Last 896 words of PFM; self write operation depends on WRTSAF bit in CONFIG9,_SAFSZ_SAFSZ_896_15  EQU  H'80'; Last 896 words of PFM; self write operation depends on WRTSAF bit in CONFIG9
+p18F**Q35.inc,R,_SAFSZ_SAFSZ_1024_14 EQU  H'00'; Last 1024 words of PFM; self write operation depends on WRTSAF bit in CONFIG9,_SAFSZ_SAFSZ_1024_15 EQU  H'00'; Last 1024 words of PFM; self write operation depends on WRTSAF bit in CONFIG9

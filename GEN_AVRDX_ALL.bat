@@ -1,4 +1,3 @@
-rem goto new
 call do ATtiny1604 tiny1604
 call do ATtiny1606 tiny1606
 call do ATtiny1607 tiny1607
@@ -44,6 +43,7 @@ call do ATmega809 mega809
 call do ATmega1609 mega1609
 call do ATmega3209 mega3209
 call do ATmega4809 mega4809
+
 
 call do avr128da28 	avr128da28	
 call do avr64da28 	avr64da28

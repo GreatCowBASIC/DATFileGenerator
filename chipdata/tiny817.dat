@@ -5,7 +5,7 @@ ATTINY817
 ;  Built by GCBASIC converter
 ;  XC8 processor include for the chip shown below
 ;
-; Microchip IDE version 6.25
+; Microchip IDE version 6.35
 ; C:\Users\admin\.mchp_packs\index.idx
 ; C:\Users\admin\.mchp_packs\Microchip\ATtiny_DFP\3.4.278\avrasm\inc\tn817def.inc
 ; d:avr chipdata.csv
