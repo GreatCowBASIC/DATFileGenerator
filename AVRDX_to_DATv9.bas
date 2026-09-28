@@ -1485,7 +1485,6 @@ Sub InitAndGetFiles
     If left(targetchip,3) = "PIC" then
       'do nothing
     Else
-      print targetchip
       If left(targetchip,3) <> "AVR" then
 
         If left(targetchip,2) <> "AT" then
@@ -1493,6 +1492,9 @@ Sub InitAndGetFiles
         End if
 
       End If
+      ' printed after the AT prefix is added, so the DAT file's first line
+      ' matches the AT<chip> form used by every other committed chipdata\*.dat
+      print targetchip
     End If
     
     if ShowDebug = -1 then print ";Debug: kINDEX_IDX directory location is: "+UserProfile+kINDEX_IDX

@@ -10,6 +10,7 @@ RAM=256
 I/O=6
 ADC=4
 MaxMHz=20
+IntOsc=16, 8, 2, 1.6, 1, 0.128, 0.016
 Pins=8
 USART=0
 Family=120

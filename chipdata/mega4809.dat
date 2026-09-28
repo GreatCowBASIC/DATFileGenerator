@@ -6,10 +6,10 @@ ATMEGA4809
 ;  XC8 processor include for the chip shown below
 ;
 ; Microchip IDE version 6.35
-; C:\Users\admin\.mchp_packs\index.idx
-; C:\Users\admin\.mchp_packs\Microchip\ATmega_DFP\3.6.299\avrasm\inc\m4809def.inc
+; C:\Program Files\Microchip\MPLABX\v6.35\packs\index.idx
+; C:\Program Files\Microchip\MPLABX\v6.35\packs\Microchip\ATmega_DFP\3.6.299\avrasm\inc\m4809def.inc
 ; d:avr chipdata.csv
-; C:\Users\admin\.mchp_packs\Microchip\ATmega_DFP\3.6.299\edc\ATMEGA4809.PIC
+; C:\Program Files\Microchip\MPLABX\v6.35\packs\Microchip\ATmega_DFP\3.6.299\edc\ATMEGA4809.PIC
 ; 
 ;
 ; Registers not processed: RTC_CMP,SREG,CPU_SPL, CPU_SPH 

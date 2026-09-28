@@ -6,10 +6,10 @@ ATTINY1624
 ;  XC8 processor include for the chip shown below
 ;
 ; Microchip IDE version 6.35
-; C:\Users\admin\.mchp_packs\index.idx
-; C:\Users\admin\.mchp_packs\Microchip\ATtiny_DFP\3.4.278\avrasm\inc\tn1624def.inc
+; C:\Program Files\Microchip\MPLABX\v6.35\packs\index.idx
+; C:\Program Files\Microchip\MPLABX\v6.35\packs\Microchip\ATtiny_DFP\3.4.278\avrasm\inc\tn1624def.inc
 ; d:avr chipdata.csv
-; C:\Users\admin\.mchp_packs\Microchip\ATtiny_DFP\3.4.278\edc\ATTINY1624.PIC
+; C:\Program Files\Microchip\MPLABX\v6.35\packs\Microchip\ATtiny_DFP\3.4.278\edc\ATTINY1624.PIC
 ; 
 ;
 ; Registers not processed: RTC_CMP,SREG,CPU_SPL, CPU_SPH 
