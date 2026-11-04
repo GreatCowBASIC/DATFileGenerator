@@ -1794,7 +1794,8 @@ SP3,STKPTR,3
 SP4,STKPTR,4
 
 [FreeRAM]
-0:EDF
+0:E7F        'J60 or J65 specific RAM configuration
+F00:F5F
 
 [NoBankRAM]
 'NoBankRAM is somewhat misnamed - it is used for the defintion of (any) access bank locations

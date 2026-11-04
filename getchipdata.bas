@@ -2217,7 +2217,7 @@ Sub CalcRamBlocks
       RBC = RBC + 1: RamBlock(RBC) = "30:3F"
       RBC = RBC + 1: RamBlock(RBC) = "50:5F"
       RBC = RBC + 1: RamBlock(RBC) = "70:7F"
-'      SRBC = SRBC + 1: SharedRamBlock(SRBC) = "0D:0F"
+      '      SRBC = SRBC + 1: SharedRamBlock(SRBC) = "0D:0F"
       If NoBankRAMStr = "" then
         SRBC = SRBC + 1: SharedRamBlock(SRBC) = "0D:0F"
       else
@@ -2246,7 +2246,7 @@ Sub CalcRamBlocks
     ElseIf ChipRAM = 128 THEN
       RBC = RBC + 1: RamBlock(RBC) = "20:7F"
       RBC = RBC + 1: RamBlock(RBC) = "A0:BF"
-'      SRBC = SRBC + 1: SharedRamBlock(SRBC) = "70:7F"
+    '      SRBC = SRBC + 1: SharedRamBlock(SRBC) = "70:7F"
       If NoBankRAMStr = "" then
         SRBC = SRBC + 1: SharedRamBlock(SRBC) = "70:7F"
       else
@@ -2290,7 +2290,7 @@ Sub CalcRamBlocks
       RBC = RBC + 1: RamBlock(RBC) = "20:7F"
       RBC = RBC + 1: RamBlock(RBC) = "A0:EF"
       RBC = RBC + 1: RamBlock(RBC) = "120:16F"
-'      SRBC = SRBC + 1: SharedRamBlock(SRBC) = "70:7F"
+    '      SRBC = SRBC + 1: SharedRamBlock(SRBC) = "70:7F"
       If NoBankRAMStr = "" then
         SRBC = SRBC + 1: SharedRamBlock(SRBC) = "70:7F"
       else
@@ -2320,7 +2320,7 @@ Sub CalcRamBlocks
       RBC = RBC + 1: RamBlock(RBC) = "120:16F"
       RBC = RBC + 1: RamBlock(RBC) = "1A0:1EF"
       RBC = RBC + 1: RamBlock(RBC) = "220:24F"
-'      SRBC = SRBC + 1: SharedRamBlock(SRBC) = "70:7F"
+    '      SRBC = SRBC + 1: SharedRamBlock(SRBC) = "70:7F"
       If NoBankRAMStr = "" then
         SRBC = SRBC + 1: SharedRamBlock(SRBC) = "70:7F"
       else
@@ -2334,7 +2334,7 @@ Sub CalcRamBlocks
       RBC = RBC + 1: RamBlock(RBC) = "220:26F"
       RBC = RBC + 1: RamBlock(RBC) = "2A0:2EF"
       RBC = RBC + 1: RamBlock(RBC) = "320:32F"
-'      SRBC = SRBC + 1: SharedRamBlock(SRBC) = "70:7F"
+    '      SRBC = SRBC + 1: SharedRamBlock(SRBC) = "70:7F"
       If NoBankRAMStr = "" then
         SRBC = SRBC + 1: SharedRamBlock(SRBC) = "70:7F"
       else
@@ -2351,7 +2351,7 @@ Sub CalcRamBlocks
       RBC = RBC + 1: RamBlock(RBC) = "3A0:3EF"
       RBC = RBC + 1: RamBlock(RBC) = "420:46F"
       RBC = RBC + 1: RamBlock(RBC) = "4A0:4BF"
-'      SRBC = SRBC + 1: SharedRamBlock(SRBC) = "70:7F"
+    '      SRBC = SRBC + 1: SharedRamBlock(SRBC) = "70:7F"
       If NoBankRAMStr = "" then
         SRBC = SRBC + 1: SharedRamBlock(SRBC) = "70:7F"
       else
@@ -2371,7 +2371,7 @@ Sub CalcRamBlocks
       RBC = RBC + 1: RamBlock(RBC) = "520:56F"
       RBC = RBC + 1: RamBlock(RBC) = "5A0:5EF"
       RBC = RBC + 1: RamBlock(RBC) = "620:64F"
-'      SRBC = SRBC + 1: SharedRamBlock(SRBC) = "70:7F"
+    '      SRBC = SRBC + 1: SharedRamBlock(SRBC) = "70:7F"
       If NoBankRAMStr = "" then
         SRBC = SRBC + 1: SharedRamBlock(SRBC) = "70:7F"
       else
@@ -2397,7 +2397,7 @@ Sub CalcRamBlocks
       RBC = RBC + 1: RamBlock(RBC) = "820:86F"
       RBC = RBC + 1: RamBlock(RBC) = "8A0:8EF"
       RBC = RBC + 1: RamBlock(RBC) = "920:96F"
-'      SRBC = SRBC + 1: SharedRamBlock(SRBC) = "70:7F"
+    '      SRBC = SRBC + 1: SharedRamBlock(SRBC) = "70:7F"
       If NoBankRAMStr = "" then
         SRBC = SRBC + 1: SharedRamBlock(SRBC) = "70:7F"
       else
@@ -2431,7 +2431,7 @@ Sub CalcRamBlocks
       RBC = RBC + 1: RamBlock(RBC) = "BA0:BEF"
       RBC = RBC + 1: RamBlock(RBC) = "C20:C6F"
       RBC = RBC + 1: RamBlock(RBC) = "CA0:CBF"
-'      SRBC = SRBC + 1: SharedRamBlock(SRBC) = "70:7F"
+      '      SRBC = SRBC + 1: SharedRamBlock(SRBC) = "70:7F"
       If NoBankRAMStr = "" then
         SRBC = SRBC + 1: SharedRamBlock(SRBC) = "70:7F"
       else
@@ -2439,12 +2439,12 @@ Sub CalcRamBlocks
       End if
 
     ElseIf ChipRAM = 4096 Then
-'
-'pragma  data               0x20-0x7F,0xA0-0xEF,0x120-0x16F,0x1A0-0x1EF,0x220-0x26F
-'pragma  data               0x2A0-0x2EF,0x320-0x36F,0x3A0-0x3EF,0x420-0x46F,0x4A0-0x4EF
-'pragma  data               0x520-0x56F,0x5A0-0x5EF,0x620-0x66F,0x6A0-0x6EF,0x720-0x76F
-'pragma  data               0x7A0-0x7EF,0x820-0x86F,0x8A0-0x8EF,0x920-0x96F,0x9A0-0x9EF
-'pragma  data               0xA20-0xA6F,0xAA0-0xAEF,0xB20-0xB6F,0xBA0-0xBEF,0xC20-0xC6F
+      '
+      'pragma  data               0x20-0x7F,0xA0-0xEF,0x120-0x16F,0x1A0-0x1EF,0x220-0x26F
+      'pragma  data               0x2A0-0x2EF,0x320-0x36F,0x3A0-0x3EF,0x420-0x46F,0x4A0-0x4EF
+      'pragma  data               0x520-0x56F,0x5A0-0x5EF,0x620-0x66F,0x6A0-0x6EF,0x720-0x76F
+      'pragma  data               0x7A0-0x7EF,0x820-0x86F,0x8A0-0x8EF,0x920-0x96F,0x9A0-0x9EF
+      'pragma  data               0xA20-0xA6F,0xAA0-0xAEF,0xB20-0xB6F,0xBA0-0xBEF,0xC20-0xC6F
 
       RBC = RBC + 1: RamBlock(RBC) = "20:7F"
       RBC = RBC + 1: RamBlock(RBC) = "A0:EF"
@@ -2476,12 +2476,12 @@ Sub CalcRamBlocks
       RBC = RBC + 1: RamBlock(RBC) = "BA0:BEF"
       RBC = RBC + 1: RamBlock(RBC) = "C20:C6F"
 
-'pragma  data               0xCA0-0xCEF,0xD20-0xD6F,0xDA0-0xDEF,0xE20-0xE6F,0xEA0-0xEEF
-'pragma  data               0xF20-0xF6F,0xFA0-0xFEF,0x1020-0x106F,0x10A0-0x10EF,0x1120-0x116F
-'pragma  data               0x11A0-0x11EF,0x1220-0x126F,0x12A0-0x12EF,0x1320-0x136F,0x13A0-0x13EF
-'pragma  data               0x1420-0x146F,0x14A0-0x14EF,0x1520-0x156F,0x15A0-0x15EF,0x1620-0x166F
-'pragma  data               0x16A0-0x16EF,0x1720-0x176F,0x17A0-0x17EF,0x1820-0x186F,0x18A0-0x18EF
-'pragma  data               0x1920-0x196F
+      'pragma  data               0xCA0-0xCEF,0xD20-0xD6F,0xDA0-0xDEF,0xE20-0xE6F,0xEA0-0xEEF
+      'pragma  data               0xF20-0xF6F,0xFA0-0xFEF,0x1020-0x106F,0x10A0-0x10EF,0x1120-0x116F
+      'pragma  data               0x11A0-0x11EF,0x1220-0x126F,0x12A0-0x12EF,0x1320-0x136F,0x13A0-0x13EF
+      'pragma  data               0x1420-0x146F,0x14A0-0x14EF,0x1520-0x156F,0x15A0-0x15EF,0x1620-0x166F
+      'pragma  data               0x16A0-0x16EF,0x1720-0x176F,0x17A0-0x17EF,0x1820-0x186F,0x18A0-0x18EF
+      'pragma  data               0x1920-0x196F
 
       RBC = RBC + 1: RamBlock(RBC) = "CA0:CEF"
       RBC = RBC + 1: RamBlock(RBC) = "D20:D6F"
@@ -2526,8 +2526,8 @@ Sub CalcRamBlocks
       ChipDataSuspect = -1
     End IF
 
-  '18F code
   Else
+'18F code
 
     '18F13K50 has weird layout
     If ( Instr(ChipName ,"18F1" ) > 0  Or Instr(ChipName ,"18LF1") > 0 ) and Right( ChipName, 3) = "K50" Then
@@ -2567,11 +2567,11 @@ Sub CalcRamBlocks
           Case 1024
               RBC = RBC + 1: RamBlock(RBC) = "0:3FF"
               RBC = RBC + 1: RamBlock(RBC) = "'400:4FF   Sector RAM. Excluded from RAM usage, and overall RAM reduced by 256 bytes.  Was " + str(ChipRAM) + " bytes now mofified to " + Str(ChipRAM-256) + " bytes"
-'              RBC = RBC + 1: RamBlock(RBC) = "500:" + HEX(ChipRAM - 1)
+              '              RBC = RBC + 1: RamBlock(RBC) = "500:" + HEX(ChipRAM - 1)
           Case 2048
               RBC = RBC + 1: RamBlock(RBC) = "0:7FF"
               RBC = RBC + 1: RamBlock(RBC) = "'800:8FF   Sector RAM. Excluded from RAM usage, and overall RAM reduced by 256 bytes.  Was " + str(ChipRAM) + " bytes now mofified to " + Str(ChipRAM-256) + " bytes"
-'              RBC = RBC + 1: RamBlock(RBC) = "900:" + HEX(ChipRAM - 1)
+              '              RBC = RBC + 1: RamBlock(RBC) = "900:" + HEX(ChipRAM - 1)
           Case 3615
               RBC = RBC + 1: RamBlock(RBC) = "0:CFF"
               RBC = RBC + 1: RamBlock(RBC) = "'D00:DFF   Sector RAM. Excluded from RAM usage, and overall RAM reduced by 256 bytes.  Was " + str(ChipRAM) + " bytes now mofified to " + Str(ChipRAM-256) + " bytes"
@@ -2593,6 +2593,23 @@ Sub CalcRamBlocks
         end if
         end if
 
+    Elseif Instr(UCase(ChipName),"J60" ) or Instr(UCase(ChipName),"J65" ) <> 0 Then
+      RBC = RBC + 1: RamBlock(RBC) = "0:E7F" + "        'J60 or J65 specific RAM configuration"                    
+      RBC = RBC + 1: RamBlock(RBC) = "F00:F5F"
+
+      'Access bank, as the other 18F chips: without it [NoBankRAM] is empty
+      if len( NoBankRAMStr ) <> 0 then
+        if instr(NoBankRAMStr, "|") = 0 then
+            SRBC = SRBC + 1: SharedRamBlock(SRBC) = NoBankRAMStr
+        else
+            NoBankRAMStr = NoBankRAMStr + "|"
+            do while instr(NoBankRAMStr, "|") <> 0
+                SRBC = SRBC + 1: SharedRamBlock(SRBC) = mid( NoBankRAMStr ,1, instr(NoBankRAMStr, "|") - 1 )
+                NoBankRAMStr =  mid( NoBankRAMStr , instr(NoBankRAMStr, "|") + 1 )
+            loop
+        end if
+      end if
+
     Else
       ' resolve USB memory addressing.  Try to limit to 18F, chips that end with 50
       If CheckBit("USBIF") <> 0 and Right(ChipName,2) = "50" Then 'USB CHIP
@@ -2607,11 +2624,11 @@ Sub CalcRamBlocks
         
         Else
           'default operation
-          RBC = RBC + 1: RamBlock(RBC) = "0:" + HEX(ChipRAM - 1)
+          RBC = RBC + 1: RamBlock(RBC) = "0:" + HEX(ChipRAM - 1)+"   ' Default Memory Allocation"
         End If
       Else
         'default operation
-        RBC = RBC + 1: RamBlock(RBC) = "0:" + HEX(ChipRAM - 1)
+        RBC = RBC + 1: RamBlock(RBC) = "0:" + HEX(ChipRAM - 1) +"   ' Default Memory Allocation."
       End If
       'added to handle 18f NoBankRAM June 2019
       if len( NoBankRAMStr ) <> 0 then
